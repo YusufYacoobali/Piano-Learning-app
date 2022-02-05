@@ -25,11 +25,11 @@ class SightReadingApp extends StatelessWidget {
       theme: ThemeData.dark(),
       initialRoute: MenuScreen.id,
       routes: {
-        MenuScreen.id: (context) => MenuScreen(),
-        LessonScreen.id: (context) => LessonScreen(),
-        PracticeScreen.id: (context) => PracticeScreen(),
-        AchievementsScreen.id: (context) => AchievementsScreen(),
-        SettingsScreen.id: (context) => SettingsScreen(),
+        MenuScreen.id: (context) => const MenuScreen(),
+        LessonScreen.id: (context) => const LessonScreen(),
+        PracticeScreen.id: (context) => const PracticeScreen(),
+        AchievementsScreen.id: (context) => const AchievementsScreen(),
+        SettingsScreen.id: (context) => const SettingsScreen(),
       },
     );
   }

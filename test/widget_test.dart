@@ -9,7 +9,7 @@ void main() {
     const testKey = Key('LessonButton');
 
     // Build a MaterialApp with the testKey.
-    await tester.pumpWidget(SightReadingApp());
+    await tester.pumpWidget(const SightReadingApp());
 
     // Find the MaterialApp widget using the testKey.
     expect(find.byKey(testKey), findsOneWidget);

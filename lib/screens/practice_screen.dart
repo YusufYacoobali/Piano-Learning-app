@@ -17,20 +17,21 @@ class _PracticeScreenState extends State<PracticeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Read That Sheet'),
+        title: const Text('Read That Sheet'),
       ),
       body: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'PRACTICE PAGE',
             ),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, LessonScreen.id);
-                },
-                child: Text('EMPTY')),
+              onPressed: () {
+                Navigator.pushNamed(context, LessonScreen.id);
+              },
+              child: const Text('EMPTY'),
+            ),
           ],
         ),
       ),
@@ -40,6 +41,8 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
 class PracticeScreen extends StatefulWidget {
   static const String id = 'practice_screen';
+
+  const PracticeScreen({Key? key}) : super(key: key);
 
   @override
   _PracticeScreenState createState() => _PracticeScreenState();

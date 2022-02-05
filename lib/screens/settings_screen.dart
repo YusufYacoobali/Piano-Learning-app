@@ -15,16 +15,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Read That Sheet'),
+        title: const Text('Read That Sheet'),
       ),
       body: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Settings PAGE',
             ),
-            ElevatedButton(onPressed: () {}, child: Text('BACK TO HOME')),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('BACK TO HOME'),
+            ),
           ],
         ),
       ),
@@ -34,6 +37,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
 class SettingsScreen extends StatefulWidget {
   static const String id = 'settings_screen';
+
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();

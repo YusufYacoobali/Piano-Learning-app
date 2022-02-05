@@ -20,39 +20,39 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Read That Sheet'),
+        title: const Text('Read That Sheet'),
       ),
       body: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'HOME PAGE',
             ),
             ElevatedButton(
-              key: Key('LessonButton'),
+              key: const Key('LessonButton'),
               onPressed: () {
                 Navigator.pushNamed(context, LessonScreen.id);
               },
-              child: Text('Lessons'),
+              child: const Text('Lessons'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, PracticeScreen.id);
               },
-              child: Text('Practice'),
+              child: const Text('Practice'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, AchievementsScreen.id);
               },
-              child: Text('Achievements'),
+              child: const Text('Achievements'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, SettingsScreen.id);
               },
-              child: Text('Settings'),
+              child: const Text('Settings'),
             ),
           ],
         ),
@@ -63,6 +63,8 @@ class _MenuScreenState extends State<MenuScreen> {
 
 class MenuScreen extends StatefulWidget {
   static const String id = 'menu_screen';
+
+  const MenuScreen({Key? key}) : super(key: key);
 
   @override
   _MenuScreenState createState() => _MenuScreenState();

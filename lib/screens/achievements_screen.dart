@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/screens/practice_screen.dart';
 
 import 'lesson_screen.dart';
 
@@ -18,20 +17,20 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Read That Sheet'),
+        title: const Text('Read That Sheet'),
       ),
       body: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'ACHIEVEMENTS PAGE',
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, LessonScreen.id);
               },
-              child: Text('EMPTY'),
+              child: const Text('EMPTY'),
             ),
           ],
         ),
@@ -42,6 +41,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
 class AchievementsScreen extends StatefulWidget {
   static const String id = 'achievements_screen';
+
+  const AchievementsScreen({Key? key}) : super(key: key);
 
   @override
   _AchievementsScreenState createState() => _AchievementsScreenState();

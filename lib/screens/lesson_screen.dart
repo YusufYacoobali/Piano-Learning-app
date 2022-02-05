@@ -15,16 +15,16 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Read That Sheet'),
+        title: const Text('Read That Sheet'),
       ),
       body: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'LESSON PAGE',
             ),
-            ElevatedButton(onPressed: () {}, child: Text('BACK TO HOME')),
+            ElevatedButton(onPressed: () {}, child: const Text('BACK TO HOME')),
           ],
         ),
       ),
@@ -34,6 +34,8 @@ class _LessonScreenState extends State<LessonScreen> {
 
 class LessonScreen extends StatefulWidget {
   static const String id = 'lesson_screen';
+
+  const LessonScreen({Key? key}) : super(key: key);
 
   @override
   _LessonScreenState createState() => _LessonScreenState();
