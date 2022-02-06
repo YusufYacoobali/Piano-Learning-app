@@ -1,9 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/screens/achievements_screen.dart';
-import 'package:sight_reading_app/screens/practice_screen.dart';
-import 'package:sight_reading_app/screens/settings_screen.dart';
-
+import 'achievements_screen.dart';
+import 'practice_screen.dart';
+import 'settings_screen.dart';
 import 'lesson_screen.dart';
+
+const String formattedAppName = 'Read\n That\n Sheet';
+final Color appNameBoxColour = Colors.indigo.shade300;
+final Color buttonBoxColour = Colors.indigo.shade400;
+const EdgeInsets boxMargin = EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 2.5);
+const double boxRadii = 10.0;
+final TextStyle appNameTextStyle = TextStyle(
+    fontSize: 100.0,
+    fontWeight: FontWeight.bold,
+    color: Colors.grey.shade300,
+    shadows: [
+      Shadow(
+        color: Colors.blueGrey.shade800,
+        offset: const Offset(5.0, 5.0),
+      ),
+    ]);
+final TextStyle buttonTextStyle = TextStyle(
+  fontSize: 40.0,
+  color: Colors.orange.shade500,
+  fontWeight: FontWeight.bold,
+);
+final Icon settingsIcon = Icon(
+  Icons.settings,
+  size: 75.0,
+  color: Colors.orange.shade300,
+);
 
 class _MenuScreenState extends State<MenuScreen> {
   @override
@@ -22,164 +47,51 @@ class _MenuScreenState extends State<MenuScreen> {
       body: SafeArea(
         child: Row(
           children: [
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 5.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.indigo.shade300,
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Read\n That\n Sheet',
-                        style: TextStyle(
-                            fontSize: 100.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey.shade300,
-                            shadows: [
-                              Shadow(
-                                color: Colors.blueGrey.shade800,
-                                offset: const Offset(5.0, 5.0),
-                              ),
-                            ]),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            const Expanded(
+              child: AppNameBox(),
             ),
             Expanded(
               child: Column(
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: MenuButton(
+                      buttonChild: const ButtonText(buttonText: 'Lessons'),
+                      onPress: () {
                         Navigator.pushNamed(context, LessonScreen.id);
                       },
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 2.5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.indigo.shade400,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Lessons',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 40.0,
-                                  color: Colors.orange.shade500,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: MenuButton(
+                      buttonChild: const ButtonText(buttonText: 'Practice'),
+                      onPress: () {
                         Navigator.pushNamed(context, PracticeScreen.id);
                       },
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.indigo.shade400,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Practice',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 40.0,
-                                  color: Colors.orange.shade500,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: MenuButton(
+                      buttonChild: const ButtonText(buttonText: 'Achievements'),
+                      onPress: () {
                         Navigator.pushNamed(context, AchievementsScreen.id);
                       },
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.indigo.shade400,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Achievements',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 40.0,
-                                    color: Colors.orange.shade500,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
                     ),
                   ),
                   Expanded(
                     child: Row(
                       children: [
                         Expanded(
-                          child: Container(),
                           flex: 4,
+                          child: Container(),
                         ),
                         Expanded(
-                          child: GestureDetector(
-                            onTap: () {
+                          flex: 2,
+                          child: MenuButton(
+                            buttonChild: settingsIcon,
+                            onPress: () {
                               Navigator.pushNamed(context, SettingsScreen.id);
                             },
-                            child: Container(
-                              margin:
-                                  const EdgeInsets.fromLTRB(0.0, 2.5, 5.0, 5.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.indigo.shade400,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.settings,
-                                    size: 75.0,
-                                    color: Colors.orange.shade300,
-                                  ),
-                                ],
-                              ),
-                            ),
                           ),
-                          flex: 2,
                         ),
                       ],
                     ),
@@ -201,4 +113,85 @@ class MenuScreen extends StatefulWidget {
 
   @override
   _MenuScreenState createState() => _MenuScreenState();
+}
+
+class AppNameBox extends StatelessWidget {
+  const AppNameBox({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: boxMargin,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(boxRadii),
+        color: appNameBoxColour,
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Text(
+              formattedAppName,
+              style: appNameTextStyle,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MenuButton extends StatelessWidget {
+  final Widget buttonChild;
+  final VoidCallback onPress;
+
+  const MenuButton({
+    Key? key,
+    required this.buttonChild,
+    required this.onPress,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+        margin: boxMargin,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(boxRadii),
+          color: buttonBoxColour,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: buttonChild,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ButtonText extends StatelessWidget {
+  final String buttonText;
+
+  const ButtonText({
+    Key? key,
+    required this.buttonText,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      buttonText,
+      textAlign: TextAlign.center,
+      style: buttonTextStyle,
+    );
+  }
 }
