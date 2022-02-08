@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:sight_reading_app/components/settings.dart';
+import 'package:sight_reading_app/settings.dart';
 
 class _SettingsScreenState extends State<SettingsScreen> {
 
