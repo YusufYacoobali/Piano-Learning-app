@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'achievements_in_progress.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class AchievementsCompleted extends StatelessWidget {
   const AchievementsCompleted({Key? key}) : super(key: key);
@@ -67,15 +66,24 @@ class CompletedCard extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
+        // Expanded(
+        //   child: Image.asset(
+        //     'assets/task_completed.png',
+        //   ),
+        // ),
         Expanded(
-          child: Image.asset(
-            'assets/task_completed.png',
+          child: CircularPercentIndicator(
+            radius: 140,
+            lineWidth: 16,
+            animation: true,
+            percent: 1,
+            center: const Text('100%'),
+            animationDuration: 1200,
+            circularStrokeCap: CircularStrokeCap.square,
+            backgroundColor: Colors.red,
+            progressColor: Colors.green,
           ),
         ),
-        Text(
-          target,
-          style: const TextStyle(fontSize: 30),
-        )
       ]),
     );
   }
