@@ -25,7 +25,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     super.dispose();
   }
 
-  final Color mainColor = Colors.orange;
+  final MaterialColor mainColor = Colors.orange;
 
   Expanded buildChoiceButton(String choice, MaterialColor color) {
     return Expanded(
@@ -35,9 +35,12 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
         child: TextButton(
           onPressed: () {},
           style: TextButton.styleFrom(
-            backgroundColor: mainColor,
+            backgroundColor: color,
           ),
-          child: Text(choice),
+          child: Text(
+            choice,
+            style: const TextStyle(fontSize: 20, color: Colors.black),
+          ),
         ),
       ),
     );
@@ -47,9 +50,9 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: const Text('Example Quiz'),
-      ),
+      ),*/
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(8.0),
@@ -59,7 +62,10 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
             children: <Widget>[
               //question number
               const Expanded(
-                child: Text('Question 1/1'),
+                child: Text(
+                  'Question 1 of 1',
+                  style: TextStyle(fontSize: 25),
+                ),
               ),
 
               //picture and question text
@@ -76,7 +82,9 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
                     child: Padding(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                          'Question 1: What is the letter that is used to represent "Do"?'),
+                        'Question 1: What is the letter that is used to represent "Do"?',
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
                   ),
                 ],
@@ -87,13 +95,13 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    buildChoiceButton('C', Colors.orange),
-                    buildChoiceButton('D', Colors.orange),
-                    buildChoiceButton('E', Colors.orange),
-                    buildChoiceButton('F', Colors.orange),
-                    buildChoiceButton('G', Colors.orange),
-                    buildChoiceButton('A', Colors.orange),
-                    buildChoiceButton('B', Colors.orange),
+                    buildChoiceButton('C', mainColor),
+                    buildChoiceButton('D', mainColor),
+                    buildChoiceButton('E', mainColor),
+                    buildChoiceButton('F', mainColor),
+                    buildChoiceButton('G', mainColor),
+                    buildChoiceButton('A', mainColor),
+                    buildChoiceButton('B', mainColor),
                   ],
                 ),
               ),
