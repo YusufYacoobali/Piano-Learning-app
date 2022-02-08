@@ -66,11 +66,6 @@ class CompletedCard extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        // Expanded(
-        //   child: Image.asset(
-        //     'assets/task_completed.png',
-        //   ),
-        // ),
         Expanded(
           child: CircularPercentIndicator(
             radius: 140,
