@@ -1,49 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/achievements_completed.dart';
+import 'package:sight_reading_app/components/achievements_in_progress.dart';
 
-import 'lesson_screen.dart';
+class AchievementsScreen extends StatelessWidget {
+  const AchievementsScreen({Key? key}) : super(key: key);
 
-class _AchievementsScreenState extends State<AchievementsScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  static const String id = 'achievements_screen';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Read That Sheet'),
-      ),
-      body: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'ACHIEVEMENTS PAGE',
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, LessonScreen.id);
-              },
-              child: const Text('EMPTY'),
-            ),
-          ],
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Achivements"),
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                text: 'To do',
+              ),
+              Tab(
+                text: 'Completed',
+              ),
+            ],
+          ),
         ),
+        body: const TabBarView(
+            children: [AchievementsInProgress(), AchievementsCompleted()]),
       ),
     );
   }
-}
-
-class AchievementsScreen extends StatefulWidget {
-  static const String id = 'achievements_screen';
-
-  const AchievementsScreen({Key? key}) : super(key: key);
-
-  @override
-  _AchievementsScreenState createState() => _AchievementsScreenState();
 }
