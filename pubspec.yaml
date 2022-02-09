@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  settings_ui: ^2.0.2
   percent_indicator: ^3.4.0
 
 
