@@ -18,6 +18,7 @@ class AchievementsScreen extends StatelessWidget {
           bottom: const TabBar(
             tabs: [
               Tab(
+                key: Key('to-do-tab'),
                 text: 'To do',
               ),
               Tab(

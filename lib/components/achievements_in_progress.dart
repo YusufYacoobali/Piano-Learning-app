@@ -35,15 +35,18 @@ class InProgressCard extends StatelessWidget {
   const InProgressCard({Key? key, required this.text, required this.target})
       : super(key: key);
 
+  static const double cardWidth = 230;
+  static const cardColour = Colors.grey;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(10),
-      width: 230,
+      width: cardWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.grey.shade800,
+        color: cardColour,
       ),
       child: Column(children: [
         Row(
