@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
 
-//fix later
-//watch a video on how to make an app have many pages
-//Do I have to add other pages such as
-// be careful about const
 class QuestionSkeleton extends StatefulWidget {
   static String id = 'question_skeleton';
 
   const QuestionSkeleton({Key? key}) : super(key: key);
 
-  //do I actually need a state
   @override
   _QuestionSkeletonState createState() => _QuestionSkeletonState();
 }
 
-//I got it from
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
-  //Not sure if I should keep it
   @override
   void initState() {
     super.initState();
