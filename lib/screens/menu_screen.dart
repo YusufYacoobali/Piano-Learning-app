@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/question_skeleton.dart';
 import 'achievements_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
@@ -122,21 +123,28 @@ class AppNameBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: boxMargin,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(boxRadii),
-        color: appNameBoxColour,
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            child: Text(
-              formattedAppName,
-              style: appNameTextStyle,
+    // Temporary GestureDetector to go to QuestionSkeleton screen
+    // TODO: Remove GestureDetector widget
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, QuestionSkeleton.id);
+      },
+      child: Container(
+        margin: boxMargin,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(boxRadii),
+          color: appNameBoxColour,
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: Text(
+                formattedAppName,
+                style: appNameTextStyle,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
