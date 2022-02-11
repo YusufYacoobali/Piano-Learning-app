@@ -1,18 +1,20 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+const List<Object> difficulties = ["Beginner", "Intermediate", "Expert"];
+const List<Object> themes = ["Dark", "Light", "Custom"];
+
 class Settings {
 
-  final List<Object> _difficulties = ["Beginner", "Intermediate", "Expert"];
-  final List<Object> _themes = ["Dark", "Light", "Custom"];
+  static const bool _defaultSoundToggle = true;
+  static const int _defaultVolumeLevel = 100;
+  static const String _defaultDifficultyLevel = "Beginner";
+  static const String _defaultTheme = "Dark";
 
   final Map _map = {};
 
   Settings() {
-    setDefaultValues();
+    _setDefaultValues();
   }
-
-  List<Object> getDifficulties() => _difficulties;
-  List<Object> getThemes() => _themes;
 
   Object getSetting(String setting) {
     return _map[setting];
@@ -31,27 +33,32 @@ class Settings {
     }
   }
 
-  void setDefaultValues() {
-    _map['sound'] = true;
-    _map['volume'] = 100;
-    _map['difficulty'] = _difficulties.first;
-    _map['theme'] = _themes.first;
+  void reset() {
+    _setDefaultValues();
+    _writeDefaultsToDisk();
   }
 
-  Future<void> _writeToDisk() async {
+  void _setDefaultValues() {
+    _map['sound'] = _defaultSoundToggle;
+    _map['volume'] = _defaultVolumeLevel;
+    _map['difficulty'] = _defaultDifficultyLevel;
+    _map['theme'] = _defaultTheme;
+  }
+
+  Future<void> _writeDefaultsToDisk() async {
     final pref = await SharedPreferences.getInstance();
-    pref.setBool('sound', true);
-    pref.setInt('volume', 100);
-    pref.setString('difficulty', _difficulties[0].toString());
-    pref.setString('theme', _themes[0].toString());
+    pref.setBool('sound', _defaultSoundToggle);
+    pref.setInt('volume', _defaultVolumeLevel);
+    pref.setString('difficulty', _defaultDifficultyLevel);
+    pref.setString('theme', _defaultTheme);
   }
 
   Future<void> loadSettingsFromDisk() async {
     final pref = await SharedPreferences.getInstance();
     bool? isOnDisk = pref.getBool('sound');
     if (isOnDisk == null) {
-      setDefaultValues();
-      await _writeToDisk();
+      _setDefaultValues();
+      await _writeDefaultsToDisk();
     }
     else {
       bool? sound = pref.getBool('sound');

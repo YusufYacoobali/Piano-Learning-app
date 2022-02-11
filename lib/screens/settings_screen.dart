@@ -28,7 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ElevatedButton resetButton = ElevatedButton(
       child: const Text("Confirm"),
       onPressed: () {
-        setState(() => settings.setDefaultValues());
+        setState(() => settings.reset());
         Navigator.of(context, rootNavigator: true).pop('dialog');
       },
     );
@@ -96,7 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   value: DropdownButton(
                       value: settings.getSetting('difficulty'),
                       key: const Key('difficulty selector'),
-                      items: settings.getDifficulties().map((option) {
+                      items: difficulties.map((option) {
                         return DropdownMenuItem(
                           child: Text(option.toString()),
                           value: option,
@@ -116,7 +116,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   key: const Key('theme selector'),
                   value: DropdownButton(
                       value: settings.getSetting('theme'),
-                      items: settings.getThemes().map((option) {
+                      items: themes.map((option) {
                         return DropdownMenuItem(
                           child: Text(option.toString()),
                           value: option,
