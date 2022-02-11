@@ -67,8 +67,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: const Text('Sound'),
                   key: const Key('sound toggle'),
                   leading: const Icon(Icons.music_note_outlined),
-                  initialValue: settings.getSound(),
-                  onToggle: (value) async => await settings.updateSound(value).then((v) => setState(() => {})),
+                  initialValue: settings.getSetting('sound') == true,
+                  onToggle: (value) async => await settings.updateSetting('sound', value).then((v) => setState(() => {})),
                 ),
 
                 SettingsTile.navigation(
@@ -79,12 +79,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Slider(
                         max: 100,
                         min: 0,
-                        value: settings.getVolume().toDouble(),
-                        onChanged: (vol) async => await settings.updateVolume(vol).then((v) => setState(() => {}),
+                        value: double.parse(settings.getSetting('volume').toString()),
+                        onChanged: (vol) async => await settings.updateSetting('volume', vol).then((v) => setState(() => {}),
                         ),
                       ),
                       Center(
-                        child: Text(settings.getVolume().toString()),
+                        child: Text(settings.getSetting('volume').toString()),
                       ),
                     ],
                   ),
@@ -94,7 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   leading: const Icon(Icons.signal_cellular_alt_rounded),
                   title: const Text('Difficulty'),
                   value: DropdownButton(
-                      value: settings.getCurrentDifficulty(),
+                      value: settings.getSetting('difficulty'),
                       key: const Key('difficulty selector'),
                       items: settings.getDifficulties().map((option) {
                         return DropdownMenuItem(
@@ -104,7 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       }).toList(),
                       onChanged: (level) async {
                         if (level != null) {
-                          await settings.updateDifficulty(level).then((v) => setState(() => {}));
+                          await settings.updateSetting('difficulty', level).then((v) => setState(() => {}));
                         }
                       }
                   ),
@@ -115,7 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   leading: const Icon(Icons.format_paint),
                   key: const Key('theme selector'),
                   value: DropdownButton(
-                      value: settings.getCurrentTheme(),
+                      value: settings.getSetting('theme'),
                       items: settings.getThemes().map((option) {
                         return DropdownMenuItem(
                           child: Text(option.toString()),
@@ -124,7 +124,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       }).toList(),
                       onChanged: (theme) async {
                         if (theme != null) {
-                          await settings.updateTheme(theme).then((v) => setState(() => {}));
+                          await settings.updateSetting('theme', theme).then((v) => setState(() => {}));
                         }
                       }
                   ),

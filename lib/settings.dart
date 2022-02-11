@@ -1,12 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings {
-  int _volume = 0;
-  bool _sound = false;
+
   final List<Object> _difficulties = ["Beginner", "Intermediate", "Expert"];
   final List<Object> _themes = ["Dark", "Light", "Custom"];
-  Object _currentDifficulty = "";
-  Object _currentTheme = "";
+
+  final Map _map = {};
 
   Settings() {
     setDefaultValues();
@@ -14,43 +13,32 @@ class Settings {
 
   List<Object> getDifficulties() => _difficulties;
   List<Object> getThemes() => _themes;
-  int getVolume() => _volume;
-  bool getSound() => _sound;
-  Object getCurrentDifficulty() => _currentDifficulty;
-  Object getCurrentTheme() => _currentTheme;
 
-  Future<void> updateSound(bool s) async {
-    _sound = s;
-    final pref = await SharedPreferences.getInstance();
-    await pref.setBool('sound', s);
+  Object getSetting(String setting) {
+    return _map[setting];
   }
 
-  Future<void> updateVolume(double vol) async {
-    _volume = vol.toInt();
+  Future<void> updateSetting(String name, Object value) async {
+    _map[name] = value;
     final pref = await SharedPreferences.getInstance();
-    await pref.setInt('volume', vol.toInt());
-  }
-
-  Future<void> updateDifficulty(Object difficulty) async {
-    _currentDifficulty = difficulty;
-    final pref = await SharedPreferences.getInstance();
-    await pref.setString('difficulty', difficulty.toString());
-  }
-
-  Future<void> updateTheme(Object theme) async {
-    _currentTheme = theme;
-    final pref = await SharedPreferences.getInstance();
-    await pref.setString('theme', theme.toString());
+    if (value.runtimeType == double) {
+      _map[name] = double.parse(value.toString()).toInt();
+      await pref.setInt(name, double.parse(value.toString()).toInt());
+    } else if (value.runtimeType == bool) {
+      await pref.setBool(name, value == true);
+    } else {
+      await pref.setString(name, value.toString());
+    }
   }
 
   void setDefaultValues() {
-    _volume = 100;
-    _sound = true;
-    _currentDifficulty = _difficulties.first;
-    _currentTheme = _themes.first;
+    _map['sound'] = true;
+    _map['volume'] = 100;
+    _map['difficulty'] = _difficulties.first;
+    _map['theme'] = _themes.first;
   }
 
-  Future<void> writeToDisk() async {
+  Future<void> _writeToDisk() async {
     final pref = await SharedPreferences.getInstance();
     pref.setBool('sound', true);
     pref.setInt('volume', 100);
@@ -63,17 +51,17 @@ class Settings {
     bool? isOnDisk = pref.getBool('sound');
     if (isOnDisk == null) {
       setDefaultValues();
-      await writeToDisk();
+      await _writeToDisk();
     }
     else {
       bool? sound = pref.getBool('sound');
       int? volume = pref.getInt('volume');
       String? difficulty = pref.getString('difficulty');
       String? theme = pref.getString('theme');
-      if (sound != null) _sound = sound;
-      if (volume != null) _volume = volume;
-      if (difficulty != null) _currentDifficulty = difficulty;
-      if (theme != null) _currentTheme = theme;
+      if (sound != null) _map['sound'] = sound;
+      if (volume != null) _map['volume'] = volume;
+      if (difficulty != null) _map['difficulty'] = difficulty;
+      if (theme != null) _map['theme'] = theme;
     }
   }
 }
