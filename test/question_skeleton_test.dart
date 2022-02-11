@@ -1,5 +1,6 @@
-//import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/components/question_skeleton.dart';
 
 void main() {
@@ -28,9 +29,53 @@ those widgets.
         findsOneWidget);
   });
 
-  /*testWidgets('check that the option button 1 is displayed',
+  testWidgets('check that the option button 1 is displayed',
       (WidgetTester tester) async {
+    //buttonOne = const Container(child: Text('C'));
+
     await tester.pumpWidget(const QuestionSkeleton());
-    expect(find.text('Practice'), findsOneWidget);
-  });*/
+    expect(find.text('C'), findsOneWidget);
+  });
+  testWidgets('check that the option button 2 is displayed',
+      (WidgetTester tester) async {
+    //buttonOne = const Container(child: Text('C'));
+
+    await tester.pumpWidget(const QuestionSkeleton());
+    expect(find.text('D'), findsOneWidget);
+  });
+  testWidgets('check that the option button 3 is displayed',
+      (WidgetTester tester) async {
+    //buttonOne = const Container(child: Text('C'));
+
+    await tester.pumpWidget(const QuestionSkeleton());
+    expect(find.text('E'), findsOneWidget);
+  });
+  testWidgets('check that the option button 4 is displayed',
+      (WidgetTester tester) async {
+    //buttonOne = const Container(child: Text('C'));
+
+    await tester.pumpWidget(const QuestionSkeleton());
+    expect(find.text('F'), findsOneWidget);
+  });
+  testWidgets('check that the option button 5 is displayed',
+      (WidgetTester tester) async {
+    //buttonOne = const Container(child: Text('C'));
+
+    await tester.pumpWidget(const QuestionSkeleton());
+    expect(find.text('G'), findsOneWidget);
+  });
+  testWidgets('check that the option button 6 is displayed',
+      (WidgetTester tester) async {
+    //buttonOne = const Container(child: Text('C'));
+
+    await tester.pumpWidget(const QuestionSkeleton());
+    expect(find.text('A'), findsOneWidget);
+  });
+  testWidgets('check that the option button 7 is displayed',
+      (WidgetTester tester) async {
+    //buttonOne = const Container(child: Text('C'));
+
+    await tester.pumpWidget(const QuestionSkeleton());
+    expect(find.text('B'), findsOneWidget);
+  });
 }
