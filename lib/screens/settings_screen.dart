@@ -9,6 +9,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
+    settings.loadSettingsFromDisk().then((value) => setState(() {}));
   }
 
   @override
@@ -25,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
 
     ElevatedButton resetButton = ElevatedButton(
-      child: const Text("Reset"),
+      child: const Text("Confirm"),
       onPressed: () {
         setState(() => settings.setDefaultValues());
         Navigator.of(context, rootNavigator: true).pop('dialog');
@@ -64,9 +65,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 SettingsTile.switchTile(
                   title: const Text('Sound'),
+                  key: const Key('sound toggle'),
                   leading: const Icon(Icons.music_note_outlined),
                   initialValue: settings.getSound(),
-                  onToggle: (value) => setState(() => settings.updateSound(value)),
+                  onToggle: (value) async => await settings.updateSound(value).then((v) => setState(() => {})),
                 ),
 
                 SettingsTile.navigation(
@@ -78,7 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         max: 100,
                         min: 0,
                         value: settings.getVolume().toDouble(),
-                        onChanged: (n) => setState(() => settings.updateVolume(n.toInt())
+                        onChanged: (vol) async => await settings.updateVolume(vol).then((v) => setState(() => {}),
                         ),
                       ),
                       Center(
@@ -92,31 +94,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   leading: const Icon(Icons.signal_cellular_alt_rounded),
                   title: const Text('Difficulty'),
                   value: DropdownButton(
-                    value: settings.getCurrentDifficulty(),
-                    items: settings.getDifficulties().map((option) {
-                      return DropdownMenuItem(
-                        child: Text(option.toString()),
-                        value: option,
-                      );
-                    }).toList(),
-                    onChanged: (level) =>
-                        setState(() => settings.updateCurrentDifficulty(level!)),
+                      value: settings.getCurrentDifficulty(),
+                      key: const Key('difficulty selector'),
+                      items: settings.getDifficulties().map((option) {
+                        return DropdownMenuItem(
+                          child: Text(option.toString()),
+                          value: option,
+                        );
+                      }).toList(),
+                      onChanged: (level) async {
+                        if (level != null) {
+                          await settings.updateDifficulty(level).then((v) => setState(() => {}));
+                        }
+                      }
                   ),
                 ),
 
                 SettingsTile.navigation(
-                    title: const Text('Theme'),
-                    leading: const Icon(Icons.format_paint),
-                    value: DropdownButton(
-                        value: settings.getCurrentTheme(),
-                        items: settings.getThemes().map((option) {
-                          return DropdownMenuItem(
-                            child: Text(option.toString()),
-                            value: option,
-                          );
-                        }).toList(),
-                        onChanged: (colour) => setState(() => settings.updateCurrentTheme(colour!))
-                    ),
+                  title: const Text('Theme'),
+                  leading: const Icon(Icons.format_paint),
+                  key: const Key('theme selector'),
+                  value: DropdownButton(
+                      value: settings.getCurrentTheme(),
+                      items: settings.getThemes().map((option) {
+                        return DropdownMenuItem(
+                          child: Text(option.toString()),
+                          value: option,
+                        );
+                      }).toList(),
+                      onChanged: (theme) async {
+                        if (theme != null) {
+                          await settings.updateTheme(theme).then((v) => setState(() => {}));
+                        }
+                      }
+                  ),
                 ),
 
                 SettingsTile.navigation(
