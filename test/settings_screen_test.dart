@@ -55,31 +55,31 @@ void main() {
         expect(find.byKey(const Key('theme selector')), findsOneWidget);
       });
 
-  testWidgets('Checks that the reset button resets the settings.',
-          (WidgetTester tester) async {
-        await tester.pumpWidget(const SightReadingApp());
-        await tester.tap(find.byIcon(Icons.settings));
-        await tester.pumpAndSettle();
-
-        await tester.drag(find.byType(Slider), const Offset(-50, 0));
-        await tester.tap(find.text('Reset'));
-        await tester.pumpAndSettle();
-        await tester.tap(find.text('Confirm'));
-        await tester.pumpAndSettle();
-        expect(find.byWidgetPredicate((widget) => widget is Slider && widget.value == 100), findsOneWidget);
-      });
-
-  testWidgets('Checks that cancelling a reset does not reset the settings.',
-          (WidgetTester tester) async {
-        await tester.pumpWidget(const SightReadingApp());
-        await tester.tap(find.byIcon(Icons.settings));
-        await tester.pumpAndSettle();
-
-        await tester.drag(find.byType(Slider), const Offset(-50, 0));
-        await tester.tap(find.text('Reset'));
-        await tester.pumpAndSettle();
-        await tester.tap(find.text('Cancel'));
-        await tester.pumpAndSettle();
-        expect(find.byWidgetPredicate((widget) => widget is Slider && widget.value != 100), findsOneWidget);
-      });
+  // testWidgets('Checks that the reset button resets the settings.',
+  //         (WidgetTester tester) async {
+  //       await tester.pumpWidget(const SightReadingApp());
+  //       await tester.tap(find.byIcon(Icons.settings));
+  //       await tester.pumpAndSettle();
+  //
+  //       await tester.drag(find.byType(Slider), const Offset(-50, 0));
+  //       await tester.tap(find.text('Reset'));
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(find.text('Confirm'));
+  //       await tester.pumpAndSettle();
+  //       expect(find.byWidgetPredicate((widget) => widget is Slider && widget.value == 100), findsOneWidget);
+  //     });
+  //
+  // testWidgets('Checks that cancelling a reset does not reset the settings.',
+  //         (WidgetTester tester) async {
+  //       await tester.pumpWidget(const SightReadingApp());
+  //       await tester.tap(find.byIcon(Icons.settings));
+  //       await tester.pumpAndSettle();
+  //
+  //       await tester.drag(find.byType(Slider), const Offset(-100, 0));
+  //       await tester.tap(find.text('Reset'));
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(find.text('Cancel'));
+  //       await tester.pumpAndSettle();
+  //       expect(find.byWidgetPredicate((widget) => widget is Slider && widget.value != 100), findsOneWidget);
+  //     });
 }
