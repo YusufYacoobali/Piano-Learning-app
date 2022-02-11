@@ -9,10 +9,12 @@ class QuestionSkeleton extends StatefulWidget {
 
   const QuestionSkeleton({Key? key}) : super(key: key);
 
+  //do I actually need a state
   @override
   _QuestionSkeletonState createState() => _QuestionSkeletonState();
 }
 
+//I got it from
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
   //Not sure if I should keep it
   @override
