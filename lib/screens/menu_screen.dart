@@ -88,7 +88,10 @@ class _MenuScreenState extends State<MenuScreen> {
                         Expanded(
                           flex: 2,
                           child: MenuButton(
-                            buttonChild: settingsIcon,
+                            buttonChild: Align(
+                              alignment: Alignment.center,
+                              child: settingsIcon,
+                            ),
                             onPress: () {
                               Navigator.pushNamed(context, SettingsScreen.id);
                             },
@@ -138,9 +141,11 @@ class AppNameBox extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Text(
-                formattedAppName,
-                style: appNameTextStyle,
+              child: Center(
+                child: Text(
+                  formattedAppName,
+                  style: appNameTextStyle,
+                ),
               ),
             ),
           ],
