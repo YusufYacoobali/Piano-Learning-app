@@ -44,67 +44,63 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   //create a method for button
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Question_skeleton',
-      theme: ThemeData.dark(),
-      home: Scaffold(
-        /*appBar: AppBar(
+    return Scaffold(
+      /*appBar: AppBar(
           title: const Text('Example Quiz'),
         ),*/
-        body: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                //question number
-                const Expanded(
-                  child: Text(
-                    'Question 1 of 1',
-                    style: TextStyle(fontSize: 25),
-                  ),
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              //question number
+              const Expanded(
+                child: Text(
+                  'Question 1 of 1',
+                  style: TextStyle(fontSize: 25),
                 ),
+              ),
 
-                //picture and question text
-                Row(
-                  children: const <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Text('Picture'),
+              //picture and question text
+              Row(
+                children: const <Widget>[
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('Picture'),
+                    ),
+                  ),
+                  //Add text size
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'Question 1: What is the letter that is used to represent "Do"?',
+                        style: TextStyle(fontSize: 18),
                       ),
                     ),
-                    //Add text size
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Text(
-                          'Question 1: What is the letter that is used to represent "Do"?',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-                    ),
+                  ),
+                ],
+              ),
+
+              //choices buttons
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    buildChoiceButton('C', mainColor),
+                    buildChoiceButton('D', mainColor),
+                    buildChoiceButton('E', mainColor),
+                    buildChoiceButton('F', mainColor),
+                    buildChoiceButton('G', mainColor),
+                    buildChoiceButton('A', mainColor),
+                    buildChoiceButton('B', mainColor),
                   ],
                 ),
-
-                //choices buttons
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      buildChoiceButton('C', mainColor),
-                      buildChoiceButton('D', mainColor),
-                      buildChoiceButton('E', mainColor),
-                      buildChoiceButton('F', mainColor),
-                      buildChoiceButton('G', mainColor),
-                      buildChoiceButton('A', mainColor),
-                      buildChoiceButton('B', mainColor),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
