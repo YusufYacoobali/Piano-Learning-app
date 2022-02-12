@@ -4,6 +4,7 @@ import 'package:sight_reading_app/settings.dart';
 
 import 'package:provider/provider.dart';
 import 'package:sight_reading_app/theme_listener.dart';
+import 'package:sight_reading_app/constants.dart' as constants ;
 
 class _SettingsScreenState extends State<SettingsScreen> {
 
@@ -20,7 +21,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.dispose();
   }
 
-  _confirmReset(BuildContext context) {
+  // Confirms if the settings should be reset
+  _confirmReset(BuildContext context, ThemeNotifier themeNotifier) {
     ElevatedButton cancelButton = ElevatedButton(
       child: const Text("Cancel"),
       onPressed: () {
@@ -33,6 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       onPressed: () {
         setState(() => settings.reset());
         Navigator.of(context, rootNavigator: true).pop('dialog');
+        themeNotifier.theme = constants.defaultTheme;
       },
     );
 
@@ -101,7 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     value: DropdownButton(
                         value: settings.getSetting('difficulty'),
                         key: const Key('difficulty selector'),
-                        items: difficulties.map((option) {
+                        items: constants.difficulties.map((option) {
                           return DropdownMenuItem(
                             child: Text(option.toString()),
                             value: option,
@@ -120,18 +123,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     leading: const Icon(Icons.format_paint),
                     key: const Key('theme selector'),
                     value: DropdownButton(
-                        value: settings.getSetting('theme'),
-                        items: themes.map((option) {
+                        items: constants.themeColors.keys.toList().map((option) {
                           return DropdownMenuItem(
                             child: Text(option.toString()),
                             value: option,
                           );
                         }).toList(),
+                        value: settings.getSetting('theme'),
                         onChanged: (theme) async {
                           if (theme != null) {
                             await settings.updateSetting('theme', theme).then((v) => setState(() => {}));
-                          }
-                          if (themeNotifier.theme != theme.toString()) {
                             themeNotifier.theme = theme.toString();
                           }
                         }
@@ -142,7 +143,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: Center(
                       child: ElevatedButton(
                         child: const Text("Reset"),
-                        onPressed: () => _confirmReset(context),
+                        onPressed: () => _confirmReset(context, themeNotifier),
                       ),
                     ),
                   ),

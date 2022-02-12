@@ -1,14 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-
-const List<Object> difficulties = ['Beginner', 'Intermediate', 'Expert'];
-const List<Object> themes = ['Dark', 'Light'];
+import 'package:sight_reading_app/constants.dart' as constants;
 
 class Settings {
-
-  static const bool _defaultSoundToggle = true;
-  static const int _defaultVolumeLevel = 100;
-  static const String _defaultDifficultyLevel = 'Beginner';
-  static const String _defaultTheme = 'Dark';
 
   final Map _map = {};
 
@@ -23,36 +16,43 @@ class Settings {
   Future<void> updateSetting(String name, Object value) async {
     _map[name] = value;
     final pref = await SharedPreferences.getInstance();
+
     if (value.runtimeType == double) {
       _map[name] = double.parse(value.toString()).toInt();
       await pref.setInt(name, double.parse(value.toString()).toInt());
-    } else if (value.runtimeType == bool) {
+    }
+    else if (value.runtimeType == bool) {
       await pref.setBool(name, value == true);
-    } else {
+    }
+    else {
       await pref.setString(name, value.toString());
     }
   }
 
+  // Resets the settings back to the defaults
   void reset() {
     _setDefaultValues();
     _writeDefaultsToDisk();
   }
 
+  // Puts default values into the map
   void _setDefaultValues() {
-    _map['sound'] = _defaultSoundToggle;
-    _map['volume'] = _defaultVolumeLevel;
-    _map['difficulty'] = _defaultDifficultyLevel;
-    _map['theme'] = _defaultTheme;
+    _map['sound'] = constants.defaultSoundToggle;
+    _map['volume'] = constants.defaultVolumeLevel;
+    _map['difficulty'] = constants.defaultDifficultyLevel;
+    _map['theme'] = constants.defaultTheme;
   }
 
+  // Writes the default settings values to Shared Preferences
   Future<void> _writeDefaultsToDisk() async {
     final pref = await SharedPreferences.getInstance();
-    pref.setBool('sound', _defaultSoundToggle);
-    pref.setInt('volume', _defaultVolumeLevel);
-    pref.setString('difficulty', _defaultDifficultyLevel);
-    pref.setString('theme', _defaultTheme);
+    pref.setBool('sound', constants.defaultSoundToggle);
+    pref.setInt('volume', constants.defaultVolumeLevel);
+    pref.setString('difficulty', constants.defaultDifficultyLevel);
+    pref.setString('theme', constants.defaultTheme);
   }
 
+  // Loads the settings from Shared Preferences
   Future<void> loadSettingsFromDisk() async {
     final pref = await SharedPreferences.getInstance();
     bool? isOnDisk = pref.getBool('sound');

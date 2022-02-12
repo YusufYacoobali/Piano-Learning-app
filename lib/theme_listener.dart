@@ -1,14 +1,16 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/constants.dart' as constants;
 
 class ThemeNotifier extends ChangeNotifier {
 
-  String _theme = 'Dark';
-  String get theme => _theme;
+  String _theme = constants.defaultTheme;
 
   ThemeNotifier() {
     getPreferences();
   }
+
+  String get theme => _theme;
 
   set theme(String value) {
     _theme = value;
@@ -25,10 +27,7 @@ class ThemeNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  ThemeData convertThemeToThemeData(ThemeNotifier themeNotifier) {
-    if (themeNotifier.theme == 'Light') {
-      return ThemeData.light();
-    }
-    return ThemeData.dark();
+  ThemeData? convertThemeToThemeData() {
+    return constants.themeColors[_theme];
   }
 }

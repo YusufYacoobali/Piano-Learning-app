@@ -30,7 +30,7 @@ class SightReadingApp extends StatelessWidget {
         builder: (context, ThemeNotifier themeNotifier, child) {
           return MaterialApp(
             title: 'SightReadingApp',
-            theme: themeNotifier.convertThemeToThemeData(themeNotifier),
+            theme: themeNotifier.convertThemeToThemeData(),
             debugShowCheckedModeBanner: false,
             initialRoute: MenuScreen.id,
             routes: {
