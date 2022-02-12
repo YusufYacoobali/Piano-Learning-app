@@ -8,7 +8,7 @@ import 'lesson_screen.dart';
 const String formattedAppName = 'Read\n That\n Sheet';
 final Color appNameBoxColour = Colors.indigo.shade300;
 final Color buttonBoxColour = Colors.indigo.shade400;
-const EdgeInsets boxMargin = EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 2.5);
+const EdgeInsets boxMargin = EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
 const double boxRadii = 10.0;
 final TextStyle appNameTextStyle = TextStyle(
     fontSize: 100.0,
@@ -17,17 +17,17 @@ final TextStyle appNameTextStyle = TextStyle(
     shadows: [
       Shadow(
         color: Colors.blueGrey.shade800,
-        offset: const Offset(5.0, 5.0),
+        offset: const Offset(4.0, 4.0),
       ),
     ]);
 final TextStyle buttonTextStyle = TextStyle(
-  fontSize: 40.0,
+  //fontSize: 40.0,
   color: Colors.orange.shade500,
   fontWeight: FontWeight.bold,
 );
 final Icon settingsIcon = Icon(
   Icons.settings,
-  size: 75.0,
+  //size: 75.0,
   color: Colors.orange.shade300,
 );
 
@@ -127,28 +127,26 @@ class AppNameBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Temporary GestureDetector to go to QuestionSkeleton screen
-    // TODO: Remove GestureDetector widget
+    // TODO: Remove GestureDetector widget when QuestionSkeleton properly linked up
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, QuestionSkeleton.id);
       },
       child: Container(
+        height: double.infinity,
         margin: boxMargin,
+        padding: const EdgeInsets.all(20.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(boxRadii),
           color: appNameBoxColour,
         ),
-        child: Column(
-          children: [
-            Expanded(
-              child: Center(
-                child: Text(
-                  formattedAppName,
-                  style: appNameTextStyle,
-                ),
-              ),
-            ),
-          ],
+        child: FittedBox(
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+          child: Text(
+            formattedAppName,
+            style: appNameTextStyle,
+          ),
         ),
       ),
     );
@@ -170,21 +168,17 @@ class MenuButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
+        height: double.infinity,
+        padding: const EdgeInsets.all(20.0),
         margin: boxMargin,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(boxRadii),
           color: buttonBoxColour,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: buttonChild,
-              ),
-            )
-          ],
+        child: FittedBox(
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+          child: buttonChild,
         ),
       ),
     );
@@ -201,6 +195,7 @@ class ButtonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Make all buttons have same font size
     return Text(
       buttonText,
       textAlign: TextAlign.center,
@@ -208,3 +203,31 @@ class ButtonText extends StatelessWidget {
     );
   }
 }
+
+// Old App name box stuff
+//
+// Column(
+// children: [
+// Expanded(
+// child: Center(
+// child: Text(
+// formattedAppName,
+// style: appNameTextStyle,
+// ),
+// ),
+// ),
+// ),
+// ],
+
+// Old Button boxes' stuff
+// Row(
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+// Expanded(
+// child: Padding(
+// padding: const EdgeInsets.all(8.0),
+// child: buttonChild,
+// ),
+// )
+// ],
+// ),
