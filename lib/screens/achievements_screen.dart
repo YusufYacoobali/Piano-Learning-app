@@ -15,13 +15,16 @@ class AchievementsScreen extends StatelessWidget {
     prefs.setInt('completed_quizzes', 1);
   }
 
-  void _getAchievementValues() async {
+  Future<List> _getAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
     int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
     print(completedLessons);
     print(completedQuizzes);
+    return [completedLessons, completedQuizzes];
   }
+
+  //Future<List> achievements = _getAchievementValues();
 
   @override
   Widget build(BuildContext context) {
