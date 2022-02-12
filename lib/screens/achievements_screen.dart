@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/components/achievements_completed.dart';
 import 'package:sight_reading_app/components/achievements_in_progress.dart';
 
@@ -7,8 +8,26 @@ class AchievementsScreen extends StatelessWidget {
 
   static const String id = 'achievements_screen';
 
+  //DUMMY DATA
+  void _setAchievementValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('completed_lessons', 3);
+    prefs.setInt('completed_quizzes', 1);
+  }
+
+  void _getAchievementValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
+    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+    print(completedLessons);
+    print(completedQuizzes);
+  }
+
   @override
   Widget build(BuildContext context) {
+    _setAchievementValues();
+    _getAchievementValues();
+
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
@@ -18,7 +37,6 @@ class AchievementsScreen extends StatelessWidget {
           bottom: const TabBar(
             tabs: [
               Tab(
-                key: Key('to-do-tab'),
                 text: 'To do',
               ),
               Tab(
