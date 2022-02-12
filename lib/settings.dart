@@ -1,14 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-const List<Object> difficulties = ["Beginner", "Intermediate", "Expert"];
-const List<Object> themes = ["Dark", "Light", "Custom"];
+const List<Object> difficulties = ['Beginner', 'Intermediate', 'Expert'];
+const List<Object> themes = ['Dark', 'Light'];
 
 class Settings {
 
   static const bool _defaultSoundToggle = true;
   static const int _defaultVolumeLevel = 100;
-  static const String _defaultDifficultyLevel = "Beginner";
-  static const String _defaultTheme = "Dark";
+  static const String _defaultDifficultyLevel = 'Beginner';
+  static const String _defaultTheme = 'Dark';
 
   final Map _map = {};
 

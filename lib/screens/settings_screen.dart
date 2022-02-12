@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:sight_reading_app/settings.dart';
 
+import 'package:provider/provider.dart';
+import 'package:sight_reading_app/theme_listener.dart';
+
 class _SettingsScreenState extends State<SettingsScreen> {
 
   Settings settings = Settings();
@@ -52,6 +55,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return Consumer<ThemeNotifier>(
+        builder: (context, ThemeNotifier themeNotifier, child) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -126,6 +131,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           if (theme != null) {
                             await settings.updateSetting('theme', theme).then((v) => setState(() => {}));
                           }
+                          if (themeNotifier.theme != theme.toString()) {
+                            themeNotifier.theme = theme.toString();
+                          }
                         }
                     ),
                   ),
@@ -144,6 +152,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
     );
+  });
   }
 }
 
