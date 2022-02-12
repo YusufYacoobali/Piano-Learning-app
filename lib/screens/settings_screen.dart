@@ -57,8 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: const Text('Settings'),
       ),
       body: SafeArea(
-        child: Expanded(
-          child: SettingsList(
+        child: SettingsList(
             sections: [
               SettingsSection(
                 title: const Text('General'),
@@ -144,7 +143,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 }
