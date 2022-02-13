@@ -5,6 +5,7 @@ import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/lesson_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
+import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
 
 void main() {
@@ -33,6 +34,8 @@ class SightReadingApp extends StatelessWidget {
         SettingsScreen.id: (context) => const SettingsScreen(),
         // Temporary route to QuestionSkeleton
         QuestionSkeleton.id: (context) => const QuestionSkeleton(),
+        // Temporary route to ResultsScreen
+        ResultsScreen.id: (context) => const ResultsScreen(),
       },
     );
   }
