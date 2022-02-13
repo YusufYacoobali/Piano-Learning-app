@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 
 class QuestionSkeleton extends StatefulWidget {
   static String id = 'question_skeleton';
@@ -48,8 +48,15 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
         content: Text(alertDesc),
         actions: <Widget>[
           TextButton(
-            onPressed: () => Navigator.pop(context, 'OK'),
-            child: const Text('OK'),
+            onPressed: () {
+              Navigator.pop(context, 'OK');
+              if (questionIndex < questions.length - 1) {
+                setState(() {
+                  questionIndex++;
+                });
+              }
+            },
+            child: const Text('NEXT QUESTION'),
           ),
         ]);
   }
@@ -81,14 +88,12 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     );
   }
 
-  //create result showModolbottomsheet
-
   //check answers
   bool checkAnswer(String userAnswer) {
     return userAnswer == answers[questionIndex];
   }
 
-  //create a method for button
+//question doesn't change
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,10 +108,13 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               //question number
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Question 1 of 1',
-                  style: TextStyle(fontSize: 25),
+                  'Question ' +
+                      (questionIndex + 1).toString() +
+                      ' of ' +
+                      questions.length.toString(),
+                  style: const TextStyle(fontSize: 25),
                 ),
               ),
 
