@@ -13,7 +13,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    settings.loadSettingsFromDisk().then((value) => setState(() {}));
+    settings.loadSettingsFromStorage().then((value) => setState(() {}));
   }
 
   @override
@@ -104,7 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     value: DropdownButton(
                         value: settings.getSetting('difficulty'),
                         key: const Key('difficulty selector'),
-                        items: constants.difficulties.map((option) {
+                        items: constants.difficultyList.map((option) {
                           return DropdownMenuItem(
                             child: Text(option.toString()),
                             value: option,
@@ -129,10 +129,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             value: option,
                           );
                         }).toList(),
-                        value: settings.getSetting('theme'),
+                        value: themeNotifier.theme,
                         onChanged: (theme) async {
                           if (theme != null) {
-                            await settings.updateSetting('theme', theme).then((v) => setState(() => {}));
                             themeNotifier.theme = theme.toString();
                           }
                         }

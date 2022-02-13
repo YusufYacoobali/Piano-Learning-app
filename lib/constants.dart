@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // List of the different difficulties
-const List<Object> difficulties = ['Beginner', 'Intermediate', 'Expert'];
+const List<Object> difficultyList = ['Beginner', 'Intermediate', 'Expert'];
 
 // Default values of individual settings
 const bool defaultSoundToggle = true;
@@ -17,7 +17,7 @@ final Map<String, ThemeData> themeColors = <String, ThemeData> {
     backgroundColor: const Color.fromARGB(255, 200, 130, 255),
     scaffoldBackgroundColor: const Color.fromARGB(255, 200, 130, 255),
     appBarTheme: const AppBarTheme(
-      color:   Color.fromARGB(250, 130, 100, 255),
+      color:   Color.fromARGB(255, 200, 100, 255),
     ),
   ),
 };

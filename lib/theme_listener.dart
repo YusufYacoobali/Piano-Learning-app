@@ -14,12 +14,23 @@ class ThemeNotifier extends ChangeNotifier {
 
   set theme(String value) {
     _theme = value;
+    _updateTheme(value);
     notifyListeners();
   }
 
   _getTheme() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString('theme');
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    String? theme = pref.getString('theme');
+    if (theme != null) {
+      return theme;
+    }
+    pref.setString('theme', constants.defaultTheme);
+    return constants.defaultTheme;
+  }
+
+  void _updateTheme(String value) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('theme', value);
   }
 
   getPreferences() async {
