@@ -35,7 +35,10 @@ class SightReadingApp extends StatelessWidget {
         // Temporary route to QuestionSkeleton
         QuestionSkeleton.id: (context) => const QuestionSkeleton(),
         // Temporary route to ResultsScreen
-        ResultsScreen.id: (context) => const ResultsScreen(),
+        ResultsScreen.id: (context) => const ResultsScreen(
+              title: 'Congratulations!',
+              score: 5,
+            ),
       },
     );
   }

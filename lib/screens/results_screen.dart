@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class _ResultsScreenState extends State<ResultsScreen> {
+  late String title;
+  late int score;
+
   @override
   void initState() {
     super.initState();
+    title = widget.title;
+    score = widget.score;
   }
 
   @override
@@ -11,21 +16,97 @@ class _ResultsScreenState extends State<ResultsScreen> {
     super.dispose();
   }
 
+  Widget getTitleWidget() {
+    return FittedBox(
+      fit: BoxFit.contain,
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 50.0,
+        ),
+      ),
+    );
+  }
+
+  Widget getScoreWidget() {
+    return FittedBox(
+      fit: BoxFit.contain,
+      child: Text(
+        'You got $score questions correct.',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontWeight: FontWeight.w200,
+          fontSize: 40.0,
+        ),
+      ),
+    );
+  }
+
+  Widget getEmptyExpanded() {
+    return Expanded(
+      flex: 1,
+      child: Container(),
+    );
+  }
+
+  Widget getIconWidget() {
+    // TODO: Make icon scale with screen size
+    return Icon(
+      getIcon(),
+      color: Colors.yellow,
+      size: 150.0,
+    );
+  }
+
+  IconData getIcon() {
+    if (score == 0) {
+      return Icons.cancel;
+    } else {
+      return Icons.check_circle;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'RESULTS PAGE',
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('EMPTY'),
-            ),
-          ],
+        child: Container(
+          color: Colors.lightGreen.shade500,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              getTitleWidget(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    getEmptyExpanded(),
+                    Expanded(
+                      flex: 1,
+                      child: getIconWidget(),
+                    ),
+                    getEmptyExpanded(),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Row(
+                  children: [
+                    getEmptyExpanded(),
+                    Expanded(
+                      flex: 2,
+                      child: getScoreWidget(),
+                    ),
+                    getEmptyExpanded(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -34,8 +115,11 @@ class _ResultsScreenState extends State<ResultsScreen> {
 
 class ResultsScreen extends StatefulWidget {
   static const String id = 'results_screen';
+  final String title;
+  final int score;
 
-  const ResultsScreen({Key? key}) : super(key: key);
+  const ResultsScreen({Key? key, required this.title, required this.score})
+      : super(key: key);
 
   @override
   _ResultsScreenState createState() => _ResultsScreenState();
