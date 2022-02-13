@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
+
+final whiteKeyButtonStyle = ElevatedButton.styleFrom(
+  primary: Colors.white,
+  minimumSize: const Size(double.infinity, double.infinity),
+  padding: const EdgeInsets.all(20.0),
+);
 
 class _KeyboardScreenState extends State<KeyboardScreen> {
+  final player = AudioCache();
+
+  void playSound(String noteName) => player.play('note_$noteName.wav');
+
   @override
   void initState() {
     super.initState();
@@ -11,29 +22,31 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     super.dispose();
   }
 
+  Widget getKeyChild(String buttonText) {
+    return Text(
+      buttonText,
+      style: const TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+        fontSize: 20.0,
+      ),
+      textAlign: TextAlign.right,
+    );
+  }
+
   Widget getWhiteKey(String buttonText) {
     return Expanded(
       child: ElevatedButton(
         child: Column(
           children: [
             const Spacer(),
-            Text(
-              buttonText,
-              style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0,
-              ),
-              textAlign: TextAlign.right,
-            ),
+            getKeyChild(buttonText),
           ],
         ),
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          minimumSize: const Size(double.infinity, double.infinity),
-          padding: const EdgeInsets.all(20.0),
-        ),
+        onPressed: () {
+          playSound(buttonText.toLowerCase());
+        },
+        style: whiteKeyButtonStyle,
       ),
     );
   }
