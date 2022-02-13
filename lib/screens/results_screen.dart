@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'keyboard_screen.dart';
+
 class _ResultsScreenState extends State<ResultsScreen> {
   late String title;
   late int score;
@@ -105,6 +107,13 @@ class _ResultsScreenState extends State<ResultsScreen> {
                   ],
                 ),
               ),
+              // TODO: Remove ElevatedButton once KeyboardScreen properly linked up
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, KeyboardScreen.id);
+                },
+                child: const Text('TEMPORARY: Go to keyboard screen'),
+              )
             ],
           ),
         ),
