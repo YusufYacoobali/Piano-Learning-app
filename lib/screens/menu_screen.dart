@@ -21,7 +21,7 @@ final TextStyle appNameTextStyle = TextStyle(
       ),
     ]);
 final TextStyle buttonTextStyle = TextStyle(
-  //fontSize: 40.0,
+  fontSize: 100.0,
   color: Colors.orange.shade500,
   fontWeight: FontWeight.bold,
 );
@@ -134,6 +134,7 @@ class AppNameBox extends StatelessWidget {
       },
       child: Container(
         height: double.infinity,
+        width: double.infinity,
         margin: boxMargin,
         padding: const EdgeInsets.all(20.0),
         decoration: BoxDecoration(
@@ -169,6 +170,7 @@ class MenuButton extends StatelessWidget {
       onTap: onPress,
       child: Container(
         height: double.infinity,
+        width: double.infinity,
         padding: const EdgeInsets.all(20.0),
         margin: boxMargin,
         decoration: BoxDecoration(
