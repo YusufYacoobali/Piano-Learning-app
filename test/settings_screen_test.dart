@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/main.dart';
 
 void main() {
@@ -55,31 +56,73 @@ void main() {
         expect(find.byKey(const Key('theme selector')), findsOneWidget);
       });
 
-  // testWidgets('Checks that the reset button resets the settings.',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byIcon(Icons.settings));
-  //       await tester.pumpAndSettle();
-  //
-  //       await tester.drag(find.byType(Slider), const Offset(-50, 0));
-  //       await tester.tap(find.text('Reset'));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.text('Confirm'));
-  //       await tester.pumpAndSettle();
-  //       expect(find.byWidgetPredicate((widget) => widget is Slider && widget.value == 100), findsOneWidget);
-  //     });
-  //
-  // testWidgets('Checks that cancelling a reset does not reset the settings.',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byIcon(Icons.settings));
-  //       await tester.pumpAndSettle();
-  //
-  //       await tester.drag(find.byType(Slider), const Offset(-100, 0));
-  //       await tester.tap(find.text('Reset'));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.text('Cancel'));
-  //       await tester.pumpAndSettle();
-  //       expect(find.byWidgetPredicate((widget) => widget is Slider && widget.value != 100), findsOneWidget);
-  //     });
+  testWidgets('Checks that toggling the sound button saves the correct value to storage.',
+          (WidgetTester tester) async {
+        SharedPreferences.setMockInitialValues({});
+        final SharedPreferences pref = await SharedPreferences.getInstance();
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byIcon(Icons.settings));
+        await tester.pumpAndSettle();
+
+        expect(pref.get('sound'), true);
+
+        await tester.tap(find.byKey(const Key('sound toggle')));
+        await tester.pumpAndSettle();
+
+        expect(pref.get('sound'), false);
+      });
+
+  testWidgets('Checks that changing the volume saves the correct value to storage.',
+          (WidgetTester tester) async {
+        SharedPreferences.setMockInitialValues({});
+        final SharedPreferences pref = await SharedPreferences.getInstance();
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byIcon(Icons.settings));
+        await tester.pumpAndSettle();
+
+        expect(pref.get('volume'), 100);
+
+        await tester.drag(find.byType(Slider), const Offset(-100, 0));
+        await tester.pumpAndSettle();
+
+        if (pref.get('volume') == 100) {
+            fail("The volume should not be 100");
+        }
+      });
+
+  testWidgets('Checks that changing the difficulty saves the correct value to storage.',
+          (WidgetTester tester) async {
+        SharedPreferences.setMockInitialValues({});
+        final SharedPreferences pref = await SharedPreferences.getInstance();
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byIcon(Icons.settings));
+        await tester.pumpAndSettle();
+
+        expect(pref.get('difficulty'), 'Beginner');
+
+        await tester.tap(find.byKey(const Key('difficulty selector')));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Expert').last);
+        await tester.pumpAndSettle();
+
+        expect(pref.get('difficulty'), 'Expert');
+      });
+
+  testWidgets('Checks that changing the theme saves the correct value to storage.',
+          (WidgetTester tester) async {
+        SharedPreferences.setMockInitialValues({});
+        final SharedPreferences pref = await SharedPreferences.getInstance();
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byIcon(Icons.settings));
+        await tester.pumpAndSettle();
+
+        expect(pref.get('theme'), 'Dark');
+
+        await tester.tap(find.text('Dark'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Light').last);
+        await tester.pumpAndSettle();
+
+        expect(pref.get('theme'), 'Light');
+      });
 }
