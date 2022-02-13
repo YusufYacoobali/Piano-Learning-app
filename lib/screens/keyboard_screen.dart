@@ -111,7 +111,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
   }
 
   List<Widget> getBlackKeys() {
-    List<String> notes = ['C#', 'D#', 'F#', 'G#', 'A#'];
+    List<String> notes = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
     List<Widget> blackKeys = [
       getBlackKeySpace(4),
       Expanded(
@@ -196,17 +196,3 @@ class KeyboardScreen extends StatefulWidget {
   @override
   _KeyboardScreenState createState() => _KeyboardScreenState();
 }
-
-// Old template code
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// const Text(
-// 'KEYBOARD PAGE',
-// ),
-// ElevatedButton(
-// onPressed: () {},
-// child: const Text('EMPTY'),
-// ),
-// ],
-// )
