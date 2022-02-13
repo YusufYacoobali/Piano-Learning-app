@@ -88,6 +88,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           max: 100,
                           min: 0,
                           value: double.parse(settings.getSetting('volume').toString()),
+                          divisions: 20,
                           onChanged: (vol) async => await settings.updateSetting('volume', vol).then((v) => setState(() => {}),
                           ),
                         ),

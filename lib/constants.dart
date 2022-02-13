@@ -17,7 +17,7 @@ final Map<String, ThemeData> themeColors = <String, ThemeData> {
     backgroundColor: const Color.fromARGB(255, 200, 130, 255),
     scaffoldBackgroundColor: const Color.fromARGB(255, 200, 130, 255),
     appBarTheme: const AppBarTheme(
-      color:   Color.fromARGB(255, 200, 100, 255),
+      color:   Color.fromARGB(255, 200, 110, 255),
     ),
   ),
 };
