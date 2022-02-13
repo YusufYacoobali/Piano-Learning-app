@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+/// This makes the card which is shown in both tab screens
+/// plan is that the card class receieves a achievement object and use the attributes to make the cards
+
 const double cardWidth = 230;
 final Color cardColour = Colors.indigo.shade400;
 
