@@ -1,3 +1,5 @@
+//potentially dont need
+
 class Achievement {
   late final String text;
   final int completed;
@@ -5,6 +7,6 @@ class Achievement {
   late final bool achieved;
 
   Achievement(this.text, this.completed, this.target) {
-    achieved = (completed == target) ? true : false;
+    achieved = (completed / target >= 1) ? true : false;
   }
 }

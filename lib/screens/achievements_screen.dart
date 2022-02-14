@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/achievement_components/achievement_making.dart';
 import 'package:sight_reading_app/components/achievement_components/achievements_completed.dart';
 import 'package:sight_reading_app/components/achievement_components/achievements_in_progress.dart';
 
@@ -9,26 +10,10 @@ class AchievementsScreen extends StatelessWidget {
 
   static const String id = 'achievements_screen';
 
-  // //DUMMY DATA
-  // void _setAchievementValues() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   prefs.setInt('completed_lessons', 3);
-  //   prefs.setInt('completed_quizzes', 1);
-  // }
-
-  // Future<List> getAchievementValues() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
-  //   int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
-  //   print(completedLessons);
-  //   print(completedQuizzes);
-  //   return [completedLessons, completedQuizzes];
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // _setAchievementValues();
-    //Future<List<dynamic>> cards = getAchievementValues();
+    AchievementMaker maker = AchievementMaker();
+    var values = maker.getValues();
 
     return DefaultTabController(
       initialIndex: 0,
