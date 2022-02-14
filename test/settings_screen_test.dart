@@ -126,7 +126,7 @@ void main() {
         expect(pref.get('theme'), 'Light');
       });
 
-  testWidgets('Checks that resetting the settings sets their values to default..',
+  testWidgets('Checks that resetting the settings sets their values to default.',
           (WidgetTester tester) async {
         SharedPreferences.setMockInitialValues({});
         final SharedPreferences pref = await SharedPreferences.getInstance();
@@ -168,7 +168,7 @@ void main() {
         expect(pref.get('theme'), 'Dark');
       });
 
-  testWidgets('Checks that resetting the settings sets their values to default..',
+  testWidgets('Checks that cancelling a reset keeps the values the same.',
           (WidgetTester tester) async {
         SharedPreferences.setMockInitialValues({});
         final SharedPreferences pref = await SharedPreferences.getInstance();
