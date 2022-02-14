@@ -67,7 +67,7 @@ void main() {
         expect(pref.get('sound'), true);
 
         await tester.tap(find.byKey(const Key('sound toggle')));
-        await tester.pumpAndSettle();
+        await tester.pump();
 
         expect(pref.get('sound'), false);
       });
@@ -83,7 +83,7 @@ void main() {
         expect(pref.get('volume'), 100);
 
         await tester.drag(find.byType(Slider), const Offset(-100, 0));
-        await tester.pumpAndSettle();
+        await tester.pump();
 
         if (pref.get('volume') == 100) {
             fail("The volume should not be 100");
@@ -101,9 +101,9 @@ void main() {
         expect(pref.get('difficulty'), 'Beginner');
 
         await tester.tap(find.byKey(const Key('difficulty selector')));
-        await tester.pumpAndSettle();
+        await tester.pump();
         await tester.tap(find.text('Expert').last);
-        await tester.pumpAndSettle();
+        await tester.pump();
 
         expect(pref.get('difficulty'), 'Expert');
       });
@@ -119,10 +119,94 @@ void main() {
         expect(pref.get('theme'), 'Dark');
 
         await tester.tap(find.text('Dark'));
-        await tester.pumpAndSettle();
+        await tester.pump();
         await tester.tap(find.text('Light').last);
+        await tester.pump();
+
+        expect(pref.get('theme'), 'Light');
+      });
+
+  testWidgets('Checks that resetting the settings sets their values to default..',
+          (WidgetTester tester) async {
+        SharedPreferences.setMockInitialValues({});
+        final SharedPreferences pref = await SharedPreferences.getInstance();
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byIcon(Icons.settings));
         await tester.pumpAndSettle();
 
+        expect(pref.get('sound'), true);
+        expect(pref.get('volume'), 100);
+        expect(pref.get('difficulty'), 'Beginner');
+        expect(pref.get('theme'), 'Dark');
+
+        await tester.tap(find.byKey(const Key('sound toggle')));
+        await tester.pump();
+        await tester.drag(find.byType(Slider), const Offset(-100, 0));
+        await tester.pump();
+        await tester.tap(find.text('Beginner'));
+        await tester.pump();
+        await tester.tap(find.text('Expert').last);
+        await tester.pump();
+        await tester.tap(find.text('Dark'));
+        await tester.pump();
+        await tester.tap(find.text('Light').last);
+        await tester.pump();
+
+        expect(pref.get('sound'), false);
+        if (pref.get('volume') == 100) fail("The volume should not be 100");
+        expect(pref.get('difficulty'), 'Expert');
+        expect(pref.get('theme'), 'Light');
+
+        await tester.tap(find.text('Reset'));
+        await tester.pump();
+        await tester.tap(find.text('Confirm'));
+        await tester.pump();
+
+        expect(pref.get('sound'), true);
+        expect(pref.get('volume'), 100);
+        expect(pref.get('difficulty'), 'Beginner');
+        expect(pref.get('theme'), 'Dark');
+      });
+
+  testWidgets('Checks that resetting the settings sets their values to default..',
+          (WidgetTester tester) async {
+        SharedPreferences.setMockInitialValues({});
+        final SharedPreferences pref = await SharedPreferences.getInstance();
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byIcon(Icons.settings));
+        await tester.pumpAndSettle();
+
+        expect(pref.get('sound'), true);
+        expect(pref.get('volume'), 100);
+        expect(pref.get('difficulty'), 'Beginner');
+        expect(pref.get('theme'), 'Dark');
+
+        await tester.tap(find.byKey(const Key('sound toggle')));
+        await tester.pump();
+        await tester.drag(find.byType(Slider), const Offset(-100, 0));
+        await tester.pump();
+        await tester.tap(find.text('Beginner'));
+        await tester.pump();
+        await tester.tap(find.text('Expert').last);
+        await tester.pump();
+        await tester.tap(find.text('Dark'));
+        await tester.pump();
+        await tester.tap(find.text('Light').last);
+        await tester.pump();
+
+        expect(pref.get('sound'), false);
+        if (pref.get('volume') == 100) fail("The volume should not be 100");
+        expect(pref.get('difficulty'), 'Expert');
+        expect(pref.get('theme'), 'Light');
+
+        await tester.tap(find.text('Reset'));
+        await tester.pump();
+        await tester.tap(find.text('Cancel'));
+        await tester.pump();
+
+        expect(pref.get('sound'), false);
+        if (pref.get('volume') == 100) fail("The volume should not be 100");
+        expect(pref.get('difficulty'), 'Expert');
         expect(pref.get('theme'), 'Light');
       });
 }
