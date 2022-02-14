@@ -12,7 +12,7 @@ void main() {
         expect(find.text('Settings'), findsOneWidget);
       });
 
-  testWidgets('Checks that the sound toggle displays on the screen.',
+  testWidgets('Check that the sound toggle displays on the screen.',
           (WidgetTester tester) async {
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
@@ -23,7 +23,7 @@ void main() {
         expect(find.byKey(const Key('sound toggle')), findsOneWidget);
       });
 
-  testWidgets('Checks that the volume slider displays on the screen.',
+  testWidgets('Check that the volume slider displays on the screen.',
           (WidgetTester tester) async {
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
@@ -34,7 +34,7 @@ void main() {
         expect(find.byType(Slider), findsOneWidget);
       });
 
-  testWidgets('Checks that the difficulty selector displays on the screen.',
+  testWidgets('Check that the difficulty selector displays on the screen.',
           (WidgetTester tester) async {
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
@@ -45,7 +45,7 @@ void main() {
         expect(find.byKey(const Key('difficulty selector')), findsOneWidget);
       });
 
-  testWidgets('Checks that the theme selector displays on the screen.',
+  testWidgets('Check that the theme selector displays on the screen.',
           (WidgetTester tester) async {
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
@@ -56,10 +56,12 @@ void main() {
         expect(find.byKey(const Key('theme selector')), findsOneWidget);
       });
 
-  testWidgets('Checks that toggling the sound button saves the correct value to storage.',
+  testWidgets('Check that toggling the sound button saves the correct value to storage.',
           (WidgetTester tester) async {
+        
         SharedPreferences.setMockInitialValues({});
         final SharedPreferences pref = await SharedPreferences.getInstance();
+        
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
         await tester.pumpAndSettle();
@@ -72,10 +74,12 @@ void main() {
         expect(pref.get('sound'), false);
       });
 
-  testWidgets('Checks that changing the volume saves the correct value to storage.',
+  testWidgets('Check that changing the volume saves the correct value to storage.',
           (WidgetTester tester) async {
+        
         SharedPreferences.setMockInitialValues({});
         final SharedPreferences pref = await SharedPreferences.getInstance();
+        
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
         await tester.pumpAndSettle();
@@ -86,14 +90,16 @@ void main() {
         await tester.pump();
 
         if (pref.get('volume') == 100) {
-            fail("The volume should not be 100");
+            fail('The volume should not be 100');
         }
       });
 
-  testWidgets('Checks that changing the difficulty saves the correct value to storage.',
+  testWidgets('Check that changing the difficulty saves the correct value to storage.',
           (WidgetTester tester) async {
+        
         SharedPreferences.setMockInitialValues({});
         final SharedPreferences pref = await SharedPreferences.getInstance();
+        
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
         await tester.pumpAndSettle();
@@ -108,28 +114,38 @@ void main() {
         expect(pref.get('difficulty'), 'Expert');
       });
 
-  testWidgets('Checks that changing the theme saves the correct value to storage.',
+  testWidgets('Check that changing the theme saves the correct value to storage.',
           (WidgetTester tester) async {
+        
         SharedPreferences.setMockInitialValues({});
         final SharedPreferences pref = await SharedPreferences.getInstance();
+        
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
         await tester.pumpAndSettle();
 
         expect(pref.get('theme'), 'Dark');
 
+        // Check that the initial theme of the app is dark
+        expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
+
         await tester.tap(find.text('Dark'));
         await tester.pump();
         await tester.tap(find.text('Light').last);
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         expect(pref.get('theme'), 'Light');
+
+        // Check that the theme has changed
+        expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
       });
 
-  testWidgets('Checks that resetting the settings sets their values to default.',
+  testWidgets('Check that resetting the settings sets their values to default.',
           (WidgetTester tester) async {
+
         SharedPreferences.setMockInitialValues({});
         final SharedPreferences pref = await SharedPreferences.getInstance();
+
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
         await tester.pumpAndSettle();
@@ -138,6 +154,9 @@ void main() {
         expect(pref.get('volume'), 100);
         expect(pref.get('difficulty'), 'Beginner');
         expect(pref.get('theme'), 'Dark');
+
+        // Check that the initial theme of the app is dark
+        expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
 
         await tester.tap(find.byKey(const Key('sound toggle')));
         await tester.pump();
@@ -150,28 +169,36 @@ void main() {
         await tester.tap(find.text('Dark'));
         await tester.pump();
         await tester.tap(find.text('Light').last);
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         expect(pref.get('sound'), false);
-        if (pref.get('volume') == 100) fail("The volume should not be 100");
+        if (pref.get('volume') == 100) fail('The volume should not be 100');
         expect(pref.get('difficulty'), 'Expert');
         expect(pref.get('theme'), 'Light');
+
+        // Check that the theme changes
+        expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
 
         await tester.tap(find.text('Reset'));
         await tester.pump();
         await tester.tap(find.text('Confirm'));
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         expect(pref.get('sound'), true);
         expect(pref.get('volume'), 100);
         expect(pref.get('difficulty'), 'Beginner');
         expect(pref.get('theme'), 'Dark');
+
+        // Check that the theme changes
+        expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
       });
 
-  testWidgets('Checks that cancelling a reset keeps the values the same.',
+  testWidgets('Check that cancelling a reset keeps the values the same.',
           (WidgetTester tester) async {
+
         SharedPreferences.setMockInitialValues({});
         final SharedPreferences pref = await SharedPreferences.getInstance();
+
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byIcon(Icons.settings));
         await tester.pumpAndSettle();
@@ -180,6 +207,9 @@ void main() {
         expect(pref.get('volume'), 100);
         expect(pref.get('difficulty'), 'Beginner');
         expect(pref.get('theme'), 'Dark');
+
+        // Check that the initial theme of the app is dark
+        expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
 
         await tester.tap(find.byKey(const Key('sound toggle')));
         await tester.pump();
@@ -192,12 +222,15 @@ void main() {
         await tester.tap(find.text('Dark'));
         await tester.pump();
         await tester.tap(find.text('Light').last);
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         expect(pref.get('sound'), false);
-        if (pref.get('volume') == 100) fail("The volume should not be 100");
+        if (pref.get('volume') == 100) fail('The volume should not be 100');
         expect(pref.get('difficulty'), 'Expert');
         expect(pref.get('theme'), 'Light');
+
+        // Check that the theme changes
+        expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
 
         await tester.tap(find.text('Reset'));
         await tester.pump();
@@ -205,8 +238,11 @@ void main() {
         await tester.pump();
 
         expect(pref.get('sound'), false);
-        if (pref.get('volume') == 100) fail("The volume should not be 100");
+        if (pref.get('volume') == 100) fail('The volume should not be 100');
         expect(pref.get('difficulty'), 'Expert');
         expect(pref.get('theme'), 'Light');
+
+        // Check that the theme stays the same
+        expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
       });
 }
