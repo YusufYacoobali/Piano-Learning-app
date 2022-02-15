@@ -1,14 +1,12 @@
-import 'dart:io';
-
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/components/achievement_components/achievement_card.dart';
-import 'package:sight_reading_app/model/achievement.dart';
-import 'package:flutter/material.dart';
 
 /// This file reads the values from storage and makes the achievement cards which is used for both tabs
 
 class AchievementMaker {
-  List<int> achieveValues = [];
+  int numOfLessons = 10;
+  int numOfquizzes = 10;
+
+  //List<int> achieveValues = [];
 
   //DUMMY DATA
   // void setAchievementValues() async {
@@ -18,14 +16,14 @@ class AchievementMaker {
   //   prefs.setInt('completed_quizzes', 1);
   // }
 
-  void getAchievementValues() async {
-    final prefs = await SharedPreferences.getInstance();
-    int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
-    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
-    print(completedLessons);
-    print(completedQuizzes);
-    achieveValues.addAll([completedLessons, completedQuizzes]);
-  }
+  // void getAchievementValues() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
+  //   int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+  //   print(completedLessons);
+  //   print(completedQuizzes);
+  //   achieveValues.addAll([completedLessons, completedQuizzes]);
+  // }
 
   // getValues() async {
   //   setAchievementValues();
@@ -51,25 +49,23 @@ class AchievementMaker {
   //     },
   //   );
   // }
-  void initialise() {
-    //setAchievementValues();
-    getAchievementValues();
-  }
+  // void initialise() {
+  //   //setAchievementValues();
+  //   getAchievementValues();
+  // }
 
-  List<AchievementCard>? makeAchievements(achieveValues) {
-    print('these are values recieved $achieveValues');
-
-    if (achieveValues.isEmpty) {
-      print('no values found yet');
-      return null;
-    }
+  List<AchievementCard> makeAchievements(achieveValues) {
+    //print('these are values recieved $achieveValues');
 
     List<AchievementCard> achievements = [
-      AchievementCard('Complete the 1st lesson', 1, achieveValues[0])
-
-      //just make it directly into cards
+      AchievementCard('Complete the 1st lesson', 1, achieveValues[0]),
+      AchievementCard('Complete 5 lessons', 5, achieveValues[0]),
+      AchievementCard('Complete all lessons', numOfLessons, achieveValues[0]),
+      AchievementCard('Complete your 1st quiz', 1, achieveValues[1]),
+      AchievementCard('Complete 5 quizzes', 5, achieveValues[1]),
+      AchievementCard('Complete all quizzes', numOfquizzes, achieveValues[1]),
     ];
-    print(achievements);
+    //print(achievements);
     return achievements;
   }
 }

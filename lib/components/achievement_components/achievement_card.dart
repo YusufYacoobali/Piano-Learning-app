@@ -73,7 +73,10 @@ class AchievementCard extends StatelessWidget {
             animation: true,
             percent: (achieved == true) ? 1 : complete / target,
             center: (achieved == true)
-                ? (Text('$target/$target'))
+                ? (Text(
+                    '$target/$target',
+                    style: const TextStyle(fontSize: 20),
+                  ))
                 : Text(
                     '$complete/$target',
                     style: const TextStyle(fontSize: 20),

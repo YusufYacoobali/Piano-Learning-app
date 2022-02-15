@@ -1,4 +1,4 @@
-//potentially dont need
+//dont need
 
 class Achievement {
   late final String text;
