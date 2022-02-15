@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/main.dart';
 
 void main() {
@@ -17,8 +18,8 @@ void main() {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Achievements'));
     await tester.pumpAndSettle();
-    expect(find.text('blahhhh'), findsOneWidget);
-    expect(find.text('Complete the 1st lesson'), findsOneWidget);
+    //expect(find.text('Complete all lessons'), findsOneWidget);
+    //expect(find.text('Complete all quizzes'), findsOneWidget);
   });
 
   testWidgets('Check that tabs can be changed', (WidgetTester tester) async {
@@ -27,24 +28,23 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Completed'));
     await tester.pumpAndSettle();
-    expect(find.text('Open the app once'), findsOneWidget);
+    //expect(find.text('Complete your 1st lesson'), findsOneWidget);
+    //expect(find.text('Complete your 1st quiz'), findsOneWidget);
   });
 
-  // testWidgets('Check that the achievements are scrollable',
-  //     (WidgetTester tester) async {
-  //   await tester.pumpWidget(const SightReadingApp());
-  //   await tester.tap(find.text('Achievements'));
-  //   await tester.pumpAndSettle();
+  testWidgets('Check that the correct values from storage are retrieved',
+      (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({});
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  //   final itemFinder = find.text('blaj');
+    await tester.pumpWidget(const SightReadingApp());
+    await tester.tap(find.text('Achievements'));
+    await tester.pumpAndSettle();
 
-  //   await tester.scrollUntilVisible(
-  //     itemFinder,
-  //     1000.0,
-  //     scrollable: find.byType(Scrollable),
-  //   );
+    prefs.setInt('completed_lessons', 3);
+    prefs.setInt('completed_quizzes', 1);
 
-  //   // Verify that the item contains the correct text.
-  //   expect(itemFinder, findsOneWidget);
-  // });
+    expect(prefs.get('completed_lessons'), 3);
+    expect(prefs.get('completed_quizzes'), 1);
+  });
 }

@@ -17,18 +17,21 @@ class AchievementsScreen extends StatefulWidget {
 }
 
 class _AchievementsScreenState extends State<AchievementsScreen> {
+  //maker which will make all achievement cards
   AchievementMaker maker = AchievementMaker();
+  //lists to seperate which cards go to which tabs
   List achieveValues = [];
   List<AchievementCard> achieved = [];
   List<AchievementCard> inProgress = [];
 
+  // when screen is initiated it gets values from storage
   @override
   void initState() {
     super.initState();
     _loadValues();
   }
 
-  //Loading counter value on start
+  //Loading values from storage on start
   void _loadValues() async {
     final prefs = await SharedPreferences.getInstance();
     int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
@@ -36,6 +39,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     //print(completedLessons);
     //print(completedQuizzes);
 
+    //states changes when values are fetched
     setState(() {
       achieveValues.addAll([completedLessons, completedQuizzes]);
     });
@@ -43,6 +47,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     makeLists(achieveValues);
   }
 
+  //lists of achievement cards are made for each tab
   void makeLists(allValues) {
     //print(achieveValues);
     List<AchievementCard> achieveObjects =
@@ -79,7 +84,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
             ],
           ),
         ),
-        // Tab bar which displays these two widgets
+        // Tab bar which displays these two widgets, each tab bar recieves its corresponding achievements
         body: TabBarView(children: [
           AchievementsInProgress(cards: inProgress),
           AchievementsCompleted(cards: achieved)
