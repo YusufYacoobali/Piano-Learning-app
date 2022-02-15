@@ -56,7 +56,7 @@ class AchievementMaker {
     getAchievementValues();
   }
 
-  List<Achievement>? makeAchievements(achieveValues) {
+  List<AchievementCard>? makeAchievements(achieveValues) {
     print('these are values recieved $achieveValues');
 
     if (achieveValues.isEmpty) {
@@ -64,8 +64,8 @@ class AchievementMaker {
       return null;
     }
 
-    List<Achievement> achievements = [
-      Achievement('Complete the 1st lesson', achieveValues[0], 1)
+    List<AchievementCard> achievements = [
+      AchievementCard('Complete the 1st lesson', 1, achieveValues[0])
 
       //just make it directly into cards
     ];

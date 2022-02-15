@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/components/achievement_components/achievement_card.dart';
 import 'package:sight_reading_app/components/achievement_components/achievement_making.dart';
 import 'package:sight_reading_app/components/achievement_components/achievements_completed.dart';
 import 'package:sight_reading_app/components/achievement_components/achievements_in_progress.dart';
@@ -19,6 +20,8 @@ class AchievementsScreen extends StatefulWidget {
 class _AchievementsScreenState extends State<AchievementsScreen> {
   AchievementMaker maker = AchievementMaker();
   List achieveValues = [];
+  List<AchievementCard> achieved = [];
+  List<AchievementCard> inProgress = [];
 
   // @override
   // void initState() {
@@ -45,14 +48,26 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     });
 
     print(achieveValues);
-    List<Achievement>? achieveObjects = maker.makeAchievements(achieveValues);
+    List<AchievementCard>? achieveObjects =
+        maker.makeAchievements(achieveValues);
     print(achieveObjects);
+
+    if (achieveObjects != null) {
+      for (AchievementCard card in achieveObjects) {
+        if (card.complete >= card.target) {
+          achieved.add(card);
+        } else {
+          inProgress.add(card);
+        }
+      }
+    }
+
+    print(achieved);
+    print(inProgress);
   }
 
   @override
   Widget build(BuildContext context) {
-    //maker.makeAchievements();
-
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
@@ -71,8 +86,10 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
           ),
         ),
         // Tab bar which displays these two widgets
-        body: const TabBarView(
-            children: [AchievementsInProgress(), AchievementsCompleted()]),
+        body: TabBarView(children: [
+          AchievementsInProgress(cards: inProgress),
+          AchievementsCompleted(cards: achieved)
+        ]),
       ),
     );
   }

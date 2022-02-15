@@ -22,13 +22,22 @@ class AchievementCard extends StatelessWidget {
   final String text;
   final int complete;
   final int target;
+  late final bool achieved;
 
-  const AchievementCard(
-      {Key? key,
-      required this.text,
-      required this.target,
-      required this.complete})
-      : super(key: key);
+  //  AchievementCard(
+  //     {Key? key,
+  //     required this.text,
+  //     required this.target,
+  //     required this.complete, required this.achieved})
+  //     : super(key: key);
+
+  AchievementCard(
+    this.text,
+    this.target,
+    this.complete,
+  ) {
+    achieved = (complete / target >= 1) ? true : false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +71,13 @@ class AchievementCard extends StatelessWidget {
             radius: circularIndicatorRadius,
             lineWidth: indicatorLineWidth,
             animation: true,
-            percent: complete / target,
-            center: Text(
-              '$complete/$target',
-              style: const TextStyle(fontSize: 20),
-            ),
+            percent: (achieved == true) ? 1 : complete / target,
+            center: (achieved == true)
+                ? (Text('$target/$target'))
+                : Text(
+                    '$complete/$target',
+                    style: const TextStyle(fontSize: 20),
+                  ),
             animationDuration: 1200,
             circularStrokeCap: CircularStrokeCap.square,
             backgroundColor: indicatorBackground,
