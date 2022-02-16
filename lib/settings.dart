@@ -1,32 +1,70 @@
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/constants.dart' as constants;
 
 class Settings {
-  int _volume = 0;
-  bool _sound = false;
-  final List<Object> _difficulties = ["Beginner", "Intermediate", "Expert"];
-  final List<Object> _themes = ["Dark", "Light", "Custom"];
-  Object _currentDifficulty = "";
-  Object _currentTheme = "";
+
+  final Map _map = {};
 
   Settings() {
-    setDefaultValues();
+    _setDefaultValues();
   }
 
-  List<Object> getDifficulties() => _difficulties;
-  List<Object> getThemes() => _themes;
-  int getVolume() => _volume;
-  bool getSound() => _sound;
-  Object getCurrentDifficulty() => _currentDifficulty;
-  Object getCurrentTheme() => _currentTheme;
+  Object getSetting(String setting) {
+    return _map[setting];
+  }
 
-  void updateCurrentTheme(Object theme) => _currentTheme = theme;
-  void updateCurrentDifficulty(Object difficulty) => _currentDifficulty = difficulty;
-  void updateVolume(int v) => _volume = v;
-  void updateSound(bool s) => _sound = s;
+  Future<void> updateSetting(String name, Object value) async {
+    _map[name] = value;
+    final SharedPreferences pref = await SharedPreferences.getInstance();
 
-  void setDefaultValues() {
-    _volume = 100;
-    _sound = true;
-    _currentDifficulty = _difficulties.first;
-    _currentTheme = _themes.first;
+    if (value.runtimeType == double) {
+      _map[name] = double.parse(value.toString()).toInt();
+      await pref.setInt(name, double.parse(value.toString()).toInt());
+    }
+    else if (value.runtimeType == bool) {
+      await pref.setBool(name, value == true);
+    }
+    else {
+      await pref.setString(name, value.toString());
+    }
+  }
+
+  // Resets the settings back to the defaults
+  void reset() {
+    _setDefaultValues();
+    _writeDefaultsToStorage();
+  }
+
+  // Puts default values into the map
+  void _setDefaultValues() {
+    _map['sound'] = constants.defaultSoundToggle;
+    _map['volume'] = constants.defaultVolumeLevel;
+    _map['difficulty'] = constants.defaultDifficultyLevel;
+  }
+
+  // Writes the default settings values to Shared Preferences
+  Future<void> _writeDefaultsToStorage() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool('sound', constants.defaultSoundToggle);
+    pref.setInt('volume', constants.defaultVolumeLevel);
+    pref.setString('difficulty', constants.defaultDifficultyLevel);
+  }
+
+  // Loads the settings from Shared Preferences
+  Future<void> loadSettingsFromStorage() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    bool? isOnDisk = pref.getBool('sound');
+    if (isOnDisk == null) {
+      _setDefaultValues();
+      await _writeDefaultsToStorage();
+    }
+    else {
+      bool? sound = pref.getBool('sound');
+      int? volume = pref.getInt('volume');
+      String? difficulty = pref.getString('difficulty');
+      if (sound != null) _map['sound'] = sound;
+      if (volume != null) _map['volume'] = volume;
+      if (difficulty != null) _map['difficulty'] = difficulty;
+    }
   }
 }
