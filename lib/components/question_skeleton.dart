@@ -11,6 +11,7 @@ class QuestionSkeleton extends StatefulWidget {
 }
 
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
+
   int questionIndex = 0;
 
   static const List<String> questions = [
@@ -98,8 +99,8 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   Widget build(BuildContext context) {
     return Scaffold(
       /*appBar: AppBar(
-        title: const Text('Example Quiz'),
-      ),*/
+          title: const Text('Example Quiz'),
+        ),*/
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(8.0),
