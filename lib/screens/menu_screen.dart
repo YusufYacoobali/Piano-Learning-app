@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/question_skeleton.dart';
+import 'package:sight_reading_app/screens/results_screen.dart';
 import 'achievements_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
@@ -7,7 +9,7 @@ import 'lesson_screen.dart';
 const String formattedAppName = 'Read\n That\n Sheet';
 final Color appNameBoxColour = Colors.indigo.shade300;
 final Color buttonBoxColour = Colors.indigo.shade400;
-const EdgeInsets boxMargin = EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 2.5);
+const EdgeInsets boxMargin = EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
 const double boxRadii = 10.0;
 final TextStyle appNameTextStyle = TextStyle(
     fontSize: 100.0,
@@ -16,17 +18,17 @@ final TextStyle appNameTextStyle = TextStyle(
     shadows: [
       Shadow(
         color: Colors.blueGrey.shade800,
-        offset: const Offset(5.0, 5.0),
+        offset: const Offset(4.0, 4.0),
       ),
     ]);
 final TextStyle buttonTextStyle = TextStyle(
-  fontSize: 40.0,
+  fontSize: 100.0,
   color: Colors.orange.shade500,
   fontWeight: FontWeight.bold,
 );
 final Icon settingsIcon = Icon(
   Icons.settings,
-  size: 75.0,
+  //size: 75.0,
   color: Colors.orange.shade300,
 );
 
@@ -82,12 +84,26 @@ class _MenuScreenState extends State<MenuScreen> {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: Container(),
+                          // TODO: Remove GestureDetector widget when ResultsScreen properly linked up
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, ResultsScreen.id);
+                            },
+                            child: Container(
+                              // TODO: Remove colour and child properties when ResultsScreen properly linked up
+                              color: Colors.red,
+                              child: const Text(
+                                  'TEMPORARY Click to go to Results Screen'),
+                            ),
+                          ),
                         ),
                         Expanded(
                           flex: 2,
                           child: MenuButton(
-                            buttonChild: settingsIcon,
+                            buttonChild: Align(
+                              alignment: Alignment.center,
+                              child: settingsIcon,
+                            ),
                             onPress: () {
                               Navigator.pushNamed(context, SettingsScreen.id);
                             },
@@ -122,21 +138,29 @@ class AppNameBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: boxMargin,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(boxRadii),
-        color: appNameBoxColour,
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            child: Text(
-              formattedAppName,
-              style: appNameTextStyle,
-            ),
+    // Temporary GestureDetector to go to QuestionSkeleton screen
+    // TODO: Remove GestureDetector widget when QuestionSkeleton properly linked up
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, QuestionSkeleton.id);
+      },
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        margin: boxMargin,
+        padding: const EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(boxRadii),
+          color: appNameBoxColour,
+        ),
+        child: FittedBox(
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+          child: Text(
+            formattedAppName,
+            style: appNameTextStyle,
           ),
-        ],
+        ),
       ),
     );
   }
@@ -157,21 +181,18 @@ class MenuButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        padding: const EdgeInsets.all(20.0),
         margin: boxMargin,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(boxRadii),
           color: buttonBoxColour,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: buttonChild,
-              ),
-            )
-          ],
+        child: FittedBox(
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+          child: buttonChild,
         ),
       ),
     );
@@ -188,6 +209,7 @@ class ButtonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Make all buttons have same font size
     return Text(
       buttonText,
       textAlign: TextAlign.center,
@@ -195,3 +217,31 @@ class ButtonText extends StatelessWidget {
     );
   }
 }
+
+// Old App name box stuff
+//
+// Column(
+// children: [
+// Expanded(
+// child: Center(
+// child: Text(
+// formattedAppName,
+// style: appNameTextStyle,
+// ),
+// ),
+// ),
+// ),
+// ],
+
+// Old Button boxes' stuff
+// Row(
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+// Expanded(
+// child: Padding(
+// padding: const EdgeInsets.all(8.0),
+// child: buttonChild,
+// ),
+// )
+// ],
+// ),

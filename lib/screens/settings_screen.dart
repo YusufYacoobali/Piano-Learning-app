@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:sight_reading_app/settings.dart';
 
+import 'package:provider/provider.dart';
+import 'package:sight_reading_app/theme_listener.dart';
+import 'package:sight_reading_app/constants.dart' as constants ;
+
 class _SettingsScreenState extends State<SettingsScreen> {
 
   Settings settings = Settings();
@@ -9,6 +13,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
+    settings.loadSettingsFromStorage().then((value) => setState(() {}));
   }
 
   @override
@@ -16,7 +21,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.dispose();
   }
 
-  _confirmReset(BuildContext context) {
+  // Confirms if the settings should be reset
+  _confirmReset(BuildContext context, ThemeNotifier themeNotifier) {
     ElevatedButton cancelButton = ElevatedButton(
       child: const Text("Cancel"),
       onPressed: () {
@@ -25,10 +31,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
 
     ElevatedButton resetButton = ElevatedButton(
-      child: const Text("Reset"),
+      child: const Text("Confirm"),
       onPressed: () {
-        setState(() => settings.setDefaultValues());
+        setState(() => settings.reset());
         Navigator.of(context, rootNavigator: true).pop('dialog');
+        themeNotifier.theme = constants.defaultTheme;
       },
     );
 
@@ -51,88 +58,108 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
-      body: SafeArea(
-        child: SettingsList(
-          sections: [
-            SettingsSection(
-              title: const Text('General'),
-              tiles: <SettingsTile>[
-
-                SettingsTile.switchTile(
-                  title: const Text('Sound'),
-                  leading: const Icon(Icons.music_note_outlined),
-                  initialValue: settings.getSound(),
-                  onToggle: (value) => setState(() => settings.updateSound(value)),
-                ),
-
-                SettingsTile.navigation(
-                  title: const Text('Volume'),
-                  leading: const Icon(Icons.volume_up),
-                  value: Column(
-                    children: [
-                      Slider(
-                        max: 100,
-                        min: 0,
-                        value: settings.getVolume().toDouble(),
-                        onChanged: (n) => setState(() => settings.updateVolume(n.toInt())
-                        ),
-                      ),
-                      Center(
-                        child: Text(settings.getVolume().toString()),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SettingsTile.navigation(
-                  leading: const Icon(Icons.signal_cellular_alt_rounded),
-                  title: const Text('Difficulty'),
-                  value: DropdownButton(
-                    value: settings.getCurrentDifficulty(),
-                    items: settings.getDifficulties().map((option) {
-                      return DropdownMenuItem(
-                        child: Text(option.toString()),
-                        value: option,
-                      );
-                    }).toList(),
-                    onChanged: (level) =>
-                        setState(() => settings.updateCurrentDifficulty(level!)),
-                  ),
-                ),
-
-                SettingsTile.navigation(
-                    title: const Text('Theme'),
-                    leading: const Icon(Icons.format_paint),
-                    value: DropdownButton(
-                        value: settings.getCurrentTheme(),
-                        items: settings.getThemes().map((option) {
-                          return DropdownMenuItem(
-                            child: Text(option.toString()),
-                            value: option,
-                          );
-                        }).toList(),
-                        onChanged: (colour) => setState(() => settings.updateCurrentTheme(colour!))
-                    ),
-                ),
-
-                SettingsTile.navigation(
-                  title: Center(
-                    child: ElevatedButton(
-                      child: const Text("Reset"),
-                      onPressed: () => _confirmReset(context),
-                    ),
-                  ),
-                ),
-              ],
+    return Consumer<ThemeNotifier>(
+        builder: (context, ThemeNotifier themeNotifier, child) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Settings'),
             ),
-          ],
-        ),
-      ),
-    );
+            body: SafeArea(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SettingsList(
+                      sections: [
+                        SettingsSection(
+                          title: const Text('General'),
+                          tiles: <SettingsTile>[
+
+                            SettingsTile.switchTile(
+                              title: const Text('Sound'),
+                              key: const Key('sound toggle'),
+                              leading: const Icon(Icons.music_note_outlined),
+                              initialValue: settings.getSetting('sound') == true,
+                              onToggle: (value) async => await settings.updateSetting('sound', value).then((v) => setState(() => {})),
+                            ),
+
+                            SettingsTile.navigation(
+                              title: const Text('Volume'),
+                              leading: const Icon(Icons.volume_up),
+                              value: Column(
+                                children: [
+                                  Slider(
+                                    max: 100,
+                                    min: 0,
+                                    value: double.parse(settings.getSetting('volume').toString()),
+                                    divisions: 20,
+                                    onChanged: (vol) async => await settings.updateSetting('volume', vol).then((v) => setState(() => {}),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Text(settings.getSetting('volume').toString()),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            SettingsTile.navigation(
+                              leading: const Icon(Icons.signal_cellular_alt_rounded),
+                              title: const Text('Difficulty'),
+                              value: DropdownButton(
+                                  value: settings.getSetting('difficulty'),
+                                  key: const Key('difficulty selector'),
+                                  items: constants.difficultyList.map((option) {
+                                    return DropdownMenuItem(
+                                      child: Text(option.toString()),
+                                      value: option,
+                                    );
+                                  }).toList(),
+                                  onChanged: (level) async {
+                                    if (level != null) {
+                                      await settings.updateSetting('difficulty', level).then((v) => setState(() => {}));
+                                    }
+                                  }
+                              ),
+                            ),
+
+                            SettingsTile.navigation(
+                              title: const Text('Theme'),
+                              leading: const Icon(Icons.format_paint),
+                              key: const Key('theme selector'),
+                              value: DropdownButton(
+                                  items: constants.themeColors.keys.toList().map((option) {
+                                    return DropdownMenuItem(
+                                      child: Text(option.toString()),
+                                      value: option,
+                                    );
+                                  }).toList(),
+                                  value: themeNotifier.theme,
+                                  onChanged: (theme) async {
+                                    if (theme != null) {
+                                      themeNotifier.theme = theme.toString();
+                                    }
+                                  }
+                              ),
+                            ),
+
+                            SettingsTile.navigation(
+                              title: Center(
+                                child: ElevatedButton(
+                                  child: const Text("Reset"),
+                                  onPressed: () => _confirmReset(context, themeNotifier),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
 
