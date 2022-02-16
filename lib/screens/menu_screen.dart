@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/question_skeleton.dart';
+import 'package:sight_reading_app/screens/results_screen.dart';
 import 'achievements_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
@@ -83,7 +84,18 @@ class _MenuScreenState extends State<MenuScreen> {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: Container(),
+                          // TODO: Remove GestureDetector widget when ResultsScreen properly linked up
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, ResultsScreen.id);
+                            },
+                            child: Container(
+                              // TODO: Remove colour and child properties when ResultsScreen properly linked up
+                              color: Colors.red,
+                              child: const Text(
+                                  'TEMPORARY Click to go to Results Screen'),
+                            ),
+                          ),
                         ),
                         Expanded(
                           flex: 2,
