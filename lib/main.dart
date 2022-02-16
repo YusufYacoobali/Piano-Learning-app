@@ -15,7 +15,7 @@ void main() {
   // Starting the app in landscape orientation
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft])
+          [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft])
       .then((value) => runApp(const SightReadingApp()));
 }
 
@@ -25,7 +25,6 @@ class SightReadingApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     // Changes the theme
     return ChangeNotifierProvider(
       create: (_) => ThemeNotifier(),
@@ -45,12 +44,10 @@ class SightReadingApp extends StatelessWidget {
               // Temporary route to QuestionSkeleton
               QuestionSkeleton.id: (context) => const QuestionSkeleton(),
               ResultsScreen.id: (context) => const ResultsScreen(
-              title: 'Congratulations!',
-              score: 5,
-            ),
-        KeyboardScreen.id: (context) => const KeyboardScreen(),
-      },
-
+                    title: 'Congratulations!',
+                    score: 5,
+                  ),
+              KeyboardScreen.id: (context) => const KeyboardScreen(),
             },
           );
         },
