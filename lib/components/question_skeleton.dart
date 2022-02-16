@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-//fix later
-//watch a video on how to make an app have many pages
-//Do I have to add other pages such as
-// be careful about const
 class QuestionSkeleton extends StatefulWidget {
   static String id = 'question_skeleton';
 
@@ -14,7 +10,6 @@ class QuestionSkeleton extends StatefulWidget {
 }
 
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
-  //Not sure if I should keep it
   @override
   void initState() {
     super.initState();
@@ -51,8 +46,8 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   Widget build(BuildContext context) {
     return Scaffold(
       /*appBar: AppBar(
-        title: const Text('Example Quiz'),
-      ),*/
+          title: const Text('Example Quiz'),
+        ),*/
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(8.0),
