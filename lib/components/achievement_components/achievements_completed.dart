@@ -5,6 +5,8 @@ import 'package:sight_reading_app/components/achievement_components/achievement_
 /// (plan is to recieve the correct achievement cards in a list and simply display them)
 /// currently it makes the cards and displays them
 
+// TODO display something if no cards are in list
+
 class AchievementsCompleted extends StatelessWidget {
   final List<AchievementCard> cards;
   const AchievementsCompleted({Key? key, required this.cards})
