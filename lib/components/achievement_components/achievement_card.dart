@@ -31,6 +31,8 @@ class AchievementCard extends StatelessWidget {
   //     required this.complete, required this.achieved})
   //     : super(key: key);
 
+  //TODO: fix this constructor key thing
+
   AchievementCard(
     this.text,
     this.target,
