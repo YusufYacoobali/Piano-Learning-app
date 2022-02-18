@@ -36,6 +36,8 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   }
 
   final MaterialColor mainColor = Colors.orange;
+  //make button visible
+  bool isVisible = true;
 
 // show result and take to next question
   AlertDialog createResultAlert(bool result) {
@@ -68,6 +70,8 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
             },
             child: const Text('NEXT QUESTION'),
           ),
+
+          //End button testing
           TextButton(
             onPressed: () {
               Navigator.push(
@@ -75,13 +79,6 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
                   MaterialPageRoute(
                       builder: (context) =>
                           const ResultsScreen(score: 5, title: 'result')));
-              /* //go to result screen
-              if (questions.getCurrentQuestionNum() ==
-                  questions.getTotalQuestionLength()) {
-                setState(() {
-                  
-                });
-              } */
             },
             child: const Text('END'),
           ),
