@@ -53,7 +53,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
           'Wrong answer, the correct answer is ' + questions.getCorrectAnswer();
     }
 
-    String buttonText = 'NEXT QUESTION';
+    String buttonText = 'NEXT';
 
     return AlertDialog(
         title: Text(alertTitle),
@@ -65,7 +65,6 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
             onPressed: () {
               Navigator.pop(context, 'OK');
               //go next if it is not the last question
-              //buttonText = 'TEST';
               if (questions.getCurrentQuestionNum() <
                   questions.getTotalQuestionLength() - 1) {
                 setState(() {
