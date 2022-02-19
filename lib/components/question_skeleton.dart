@@ -52,36 +52,50 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
       alertDesc =
           'Wrong answer, the correct answer is ' + questions.getCorrectAnswer();
     }
+
+    String buttonText = 'NEXT QUESTION';
+
     return AlertDialog(
         title: Text(alertTitle),
         content: Text(alertDesc),
         actions: <Widget>[
           //go to next question
           TextButton(
+            child: Text(buttonText),
             onPressed: () {
               Navigator.pop(context, 'OK');
               //go next if it is not the last question
+              //buttonText = 'TEST';
               if (questions.getCurrentQuestionNum() <
                   questions.getTotalQuestionLength() - 1) {
                 setState(() {
                   questions.goToNextQuestion();
                 });
+              } else {
+                //make the text "end" when it comes up to the last quiz
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            // score number
+                            const ResultsScreen(score: 5, title: 'result')));
               }
             },
-            child: const Text('NEXT QUESTION'),
+            //text is not const anymore
           ),
 
           //End button testing
-          TextButton(
+          /* TextButton(
             onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
+                          // score number
                           const ResultsScreen(score: 5, title: 'result')));
             },
             child: const Text('END'),
-          ),
+          ), */
         ]);
   }
 
