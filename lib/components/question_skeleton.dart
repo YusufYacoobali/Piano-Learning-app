@@ -11,7 +11,6 @@ class QuestionSkeleton extends StatefulWidget {
 }
 
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
-
   int questionIndex = 0;
 
   static const List<String> questions = [
@@ -94,7 +93,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     return userAnswer == answers[questionIndex];
   }
 
-//question doesn't change
+  //main part of the screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,6 +109,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
             children: <Widget>[
               //question number
               Expanded(
+                key: const Key('question number'),
                 child: Text(
                   'Question ' +
                       (questionIndex + 1).toString() +
@@ -130,6 +130,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
                   ),
                   //Add text size
                   Expanded(
+                    key: const Key('question text'),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(

@@ -24,20 +24,8 @@ class AchievementCard extends StatelessWidget {
   final int target;
   late final bool achieved;
 
-  //  AchievementCard(
-  //     {Key? key,
-  //     required this.text,
-  //     required this.target,
-  //     required this.complete, required this.achieved})
-  //     : super(key: key);
-
-  //TODO: fix this constructor key thing
-
-  AchievementCard(
-    this.text,
-    this.target,
-    this.complete,
-  ) {
+  AchievementCard(this.text, this.target, this.complete, {Key? key})
+      : super(key: key) {
     achieved = (complete / target >= 1) ? true : false;
   }
 
