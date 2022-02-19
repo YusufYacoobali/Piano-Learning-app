@@ -179,7 +179,7 @@ void main() {
         // Check that the theme changes
         expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
 
-        await tester.tap(find.text('Reset'));
+        await tester.tap(find.text('Reset Progress'));
         await tester.pump();
         await tester.tap(find.text('Confirm'));
         await tester.pumpAndSettle();
@@ -232,7 +232,7 @@ void main() {
         // Check that the theme changes
         expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
 
-        await tester.tap(find.text('Reset'));
+        await tester.tap(find.text('Reset Progress'));
         await tester.pump();
         await tester.tap(find.text('Cancel'));
         await tester.pump();
