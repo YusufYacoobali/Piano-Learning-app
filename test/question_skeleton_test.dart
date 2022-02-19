@@ -13,11 +13,11 @@ void main() {
   });
 
   testWidgets('check that picture is displayed', (WidgetTester tester) async {
+    const testKey = Key('question image');
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Read\n That\n Sheet'));
     await tester.pumpAndSettle();
-
-    expect(find.text('Picture'), findsOneWidget);
+    expect(find.byKey(testKey), findsOneWidget);
   });
 
   testWidgets('check that the question text is displayed',
