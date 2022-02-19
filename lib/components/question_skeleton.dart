@@ -148,6 +148,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
             children: <Widget>[
               //question number
               Expanded(
+                key: const Key('question number'),
                 child: Text(
                   //change this a bit
                   'Question ' +
@@ -162,6 +163,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
               Row(
                 children: <Widget>[
                   Expanded(
+                    key: const Key('question image'),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       //show image here
@@ -174,6 +176,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
                   ),
                   //Add text size
                   Expanded(
+                    key: const Key('question text'),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
