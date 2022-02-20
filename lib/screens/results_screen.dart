@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'keyboard_screen.dart';
+import '../constants.dart';
 
 class _ResultsScreenState extends State<ResultsScreen> {
   late String title;
@@ -19,46 +19,50 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   Widget getTitleWidget() {
-    return FittedBox(
-      fit: BoxFit.contain,
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 50.0,
+    return Expanded(
+      flex: 1,
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: titleWidgetTextStyle,
+          ),
         ),
       ),
     );
   }
 
   Widget getScoreWidget() {
-    return FittedBox(
-      fit: BoxFit.contain,
-      child: Text(
-        'You got $score questions correct.',
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontWeight: FontWeight.w200,
-          fontSize: 40.0,
+    return Expanded(
+      flex: 1,
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            'You got $score questions correct.',
+            textAlign: TextAlign.center,
+            style: scoreWidgetTextStyle,
+          ),
         ),
       ),
     );
   }
 
-  Widget getEmptyExpanded() {
-    return Expanded(
-      flex: 1,
-      child: Container(),
-    );
-  }
-
   Widget getIconWidget() {
-    // TODO: Make icon scale with screen size
-    return Icon(
-      getIcon(),
-      color: Colors.yellow,
-      size: 150.0,
+    return Expanded(
+      flex: 2,
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Icon(
+          getIcon(),
+          color: Colors.yellow,
+          size: 150.0,
+        ),
+      ),
     );
   }
 
@@ -81,39 +85,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               getTitleWidget(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    getEmptyExpanded(),
-                    Expanded(
-                      flex: 1,
-                      child: getIconWidget(),
-                    ),
-                    getEmptyExpanded(),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Row(
-                  children: [
-                    getEmptyExpanded(),
-                    Expanded(
-                      flex: 2,
-                      child: getScoreWidget(),
-                    ),
-                    getEmptyExpanded(),
-                  ],
-                ),
-              ),
-              // TODO: Remove ElevatedButton once KeyboardScreen properly linked up
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, KeyboardScreen.id);
-                },
-                child: const Text('TEMPORARY: Go to keyboard screen'),
-              )
+              getIconWidget(),
+              getScoreWidget(),
             ],
           ),
         ),
