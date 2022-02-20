@@ -57,3 +57,27 @@ final Icon settingsIcon = Icon(
   //size: 75.0,
   color: Colors.orange.shade300,
 );
+
+final whiteKeyButtonStyle = ElevatedButton.styleFrom(
+  primary: Colors.white,
+  minimumSize: const Size(double.infinity, double.infinity),
+  padding: const EdgeInsets.all(20.0),
+);
+
+const whiteKeyTextStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+  fontSize: 30.0,
+);
+
+final blackKeyButtonStyle = ElevatedButton.styleFrom(
+  primary: Colors.black,
+  minimumSize: const Size(double.infinity, double.infinity),
+  padding: const EdgeInsets.all(10.0),
+);
+
+const blackKeyTextStyle = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontSize: 30.0,
+);
