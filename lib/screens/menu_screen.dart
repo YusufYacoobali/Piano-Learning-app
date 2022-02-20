@@ -1,6 +1,8 @@
+import 'package:audioplayers/notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/question_skeleton.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import '../components/notification_service.dart';
 import 'achievements_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
@@ -36,6 +38,15 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     super.initState();
+
+    NotificationAPI.init(initScheduled: true);
+    //ListenNotifications();
+    NotificationAPI.showScheduledNotification(
+      title: 'Piano',
+      body: 'do more',
+      payload: 'extra info',
+      //scheduledDate: DateTime.now().add(const Duration(seconds: 10)),
+    );
   }
 
   @override
