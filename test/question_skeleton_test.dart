@@ -7,7 +7,7 @@ void main() {
       (WidgetTester tester) async {
     const testKey = Key('question number');
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.byKey(testKey), findsOneWidget);
   });
@@ -15,7 +15,7 @@ void main() {
   testWidgets('check that picture is displayed', (WidgetTester tester) async {
     const testKey = Key('question image');
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.byKey(testKey), findsOneWidget);
   });
@@ -24,7 +24,7 @@ void main() {
       (WidgetTester tester) async {
     const testKey = Key('question text');
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.byKey(testKey), findsOneWidget);
   });
@@ -35,7 +35,7 @@ void main() {
   testWidgets('check that the option button 1 is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.text('C'), findsOneWidget);
   });
@@ -43,7 +43,7 @@ void main() {
   testWidgets('check that the option button 2 is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.text('D'), findsOneWidget);
   });
@@ -51,7 +51,7 @@ void main() {
   testWidgets('check that the option button 3 is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.text('E'), findsOneWidget);
   });
@@ -59,7 +59,7 @@ void main() {
   testWidgets('check that the option button 4 is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.text('F'), findsOneWidget);
   });
@@ -67,7 +67,7 @@ void main() {
   testWidgets('check that the option button 5 is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.text('G'), findsOneWidget);
   });
@@ -75,7 +75,7 @@ void main() {
   testWidgets('check that the option button 6 is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.text('A'), findsOneWidget);
   });
@@ -83,7 +83,7 @@ void main() {
   testWidgets('check that the option button 7 is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
-    await tester.tap(find.text('Read\n That\n Sheet'));
+    await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
     expect(find.text('B'), findsOneWidget);
   });

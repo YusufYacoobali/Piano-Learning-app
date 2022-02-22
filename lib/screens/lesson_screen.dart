@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/question_skeleton.dart';
+
 class _LessonScreenState extends State<LessonScreen> {
   @override
   void initState() {
@@ -17,16 +19,8 @@ class _LessonScreenState extends State<LessonScreen> {
       appBar: AppBar(
         title: const Text('Read That Sheet'),
       ),
-      body: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'LESSON PAGE',
-            ),
-            ElevatedButton(onPressed: () {}, child: const Text('BACK TO HOME')),
-          ],
-        ),
+      body: const SafeArea(
+        child: QuestionSkeleton(),
       ),
     );
   }
@@ -40,3 +34,14 @@ class LessonScreen extends StatefulWidget {
   @override
   _LessonScreenState createState() => _LessonScreenState();
 }
+
+// Old template code
+// Row(
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+// const Text(
+// 'LESSON PAGE',
+// ),
+// ElevatedButton(onPressed: () {}, child: const Text('BACK TO HOME')),
+// ],
+// )
