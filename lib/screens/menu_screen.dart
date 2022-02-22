@@ -7,6 +7,8 @@ import 'practice_screen.dart';
 import 'settings_screen.dart';
 import 'lesson_screen.dart';
 
+const navigateToPracticeMainMenuButtonKey = Key('navigateToPracticeMainMenu');
+
 class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
@@ -44,6 +46,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       onPress: () {
                         Navigator.pushNamed(context, PracticeScreen.id);
                       },
+                      key: navigateToPracticeMainMenuButtonKey,
                     ),
                   ),
                   Expanded(
