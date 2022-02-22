@@ -41,7 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     AlertDialog alert = AlertDialog(
       title: const Text("Warning"),
-      content: const Text("Resetting will delete all progress."),
+      content: const Text("Resetting will delete all progress and settings."),
       actions: [
         cancelButton,
         resetButton,
@@ -73,16 +73,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         SettingsSection(
                           title: const Text('General'),
                           tiles: <SettingsTile>[
-
-                            SettingsTile.switchTile(
-                              title: const Text('Sound'),
-                              key: const Key('sound toggle'),
-                              leading: const Icon(Icons.music_note_outlined),
-                              initialValue: settings.getSetting('sound') == true,
-                              onToggle: (value) async => await settings.updateSetting('sound', value).then((v) => setState(() => {})),
-                            ),
-
-                            SettingsTile.navigation(
+                            SettingsTile(
                               title: const Text('Volume'),
                               leading: const Icon(Icons.volume_up),
                               value: Column(
@@ -102,7 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ),
 
-                            SettingsTile.navigation(
+                            SettingsTile(
                               leading: const Icon(Icons.signal_cellular_alt_rounded),
                               title: const Text('Difficulty'),
                               value: DropdownButton(
@@ -122,7 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ),
 
-                            SettingsTile.navigation(
+                            SettingsTile(
                               title: const Text('Theme'),
                               leading: const Icon(Icons.format_paint),
                               key: const Key('theme selector'),
@@ -142,10 +133,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ),
 
-                            SettingsTile.navigation(
+                            SettingsTile(
                               title: Center(
                                 child: ElevatedButton(
-                                  child: const Text("Reset"),
+                                  child: const Text("Reset Progress"),
                                   onPressed: () => _confirmReset(context, themeNotifier),
                                 ),
                               ),
