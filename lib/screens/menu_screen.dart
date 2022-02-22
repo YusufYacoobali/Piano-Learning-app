@@ -1,36 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/question_skeleton.dart';
-import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/screens/keyboard_screen.dart';
+import '../constants.dart';
 import 'achievements_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
 import 'lesson_screen.dart';
-
-const String formattedAppName = 'Read\n That\n Sheet';
-final Color appNameBoxColour = Colors.indigo.shade300;
-final Color buttonBoxColour = Colors.indigo.shade400;
-const EdgeInsets boxMargin = EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
-const double boxRadii = 10.0;
-final TextStyle appNameTextStyle = TextStyle(
-    fontSize: 100.0,
-    fontWeight: FontWeight.bold,
-    color: Colors.grey.shade300,
-    shadows: [
-      Shadow(
-        color: Colors.blueGrey.shade800,
-        offset: const Offset(4.0, 4.0),
-      ),
-    ]);
-final TextStyle buttonTextStyle = TextStyle(
-  fontSize: 100.0,
-  color: Colors.orange.shade500,
-  fontWeight: FontWeight.bold,
-);
-final Icon settingsIcon = Icon(
-  Icons.settings,
-  //size: 75.0,
-  color: Colors.orange.shade300,
-);
 
 class _MenuScreenState extends State<MenuScreen> {
   @override
@@ -87,13 +62,13 @@ class _MenuScreenState extends State<MenuScreen> {
                           // TODO: Remove GestureDetector widget when ResultsScreen properly linked up
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, ResultsScreen.id);
+                              Navigator.pushNamed(context, KeyboardScreen.id);
                             },
                             child: Container(
                               // TODO: Remove colour and child properties when ResultsScreen properly linked up
                               color: Colors.red,
                               child: const Text(
-                                  'TEMPORARY Click to go to Results Screen'),
+                                  'TEMPORARY Click to go to Keyboard Screen'),
                             ),
                           ),
                         ),

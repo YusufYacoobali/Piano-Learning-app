@@ -1,29 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-
-final whiteKeyButtonStyle = ElevatedButton.styleFrom(
-  primary: Colors.white,
-  minimumSize: const Size(double.infinity, double.infinity),
-  padding: const EdgeInsets.all(20.0),
-);
-
-const whiteKeyTextStyle = TextStyle(
-  color: Colors.black,
-  fontWeight: FontWeight.bold,
-  fontSize: 30.0,
-);
-
-final blackKeyButtonStyle = ElevatedButton.styleFrom(
-  primary: Colors.black,
-  minimumSize: const Size(double.infinity, double.infinity),
-  padding: const EdgeInsets.all(10.0),
-);
-
-const blackKeyTextStyle = TextStyle(
-  color: Colors.white,
-  fontWeight: FontWeight.bold,
-  fontSize: 30.0,
-);
+import '../constants.dart';
 
 class _KeyboardScreenState extends State<KeyboardScreen> {
   final player = AudioCache();
@@ -40,6 +17,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     super.dispose();
   }
 
+  // Returns the text displayed on the white keys
   Widget getWhiteKeyChild(String buttonText) {
     return FittedBox(
       fit: BoxFit.fitWidth,
@@ -51,6 +29,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     );
   }
 
+  // Returns the text displayed on the black keys
   Widget getBlackKeyChild(String buttonText) {
     return FittedBox(
       fit: BoxFit.fitWidth,
@@ -62,11 +41,13 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     );
   }
 
+  // Returns the buttons for the white keys
   Widget getWhiteKey(String buttonText) {
     return Expanded(
       child: ElevatedButton(
         child: Column(
           children: [
+            // Ensures the name of the key is at the bottom
             const Spacer(),
             getWhiteKeyChild(buttonText),
           ],
@@ -79,10 +60,12 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     );
   }
 
+  // Returns the buttons for the black keys
   Widget getBlackKey(String buttonText) {
     return ElevatedButton(
       child: Column(
         children: [
+          // Ensures the name of the key is at the bottom
           const Spacer(),
           getBlackKeyChild(buttonText),
         ],
@@ -94,6 +77,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     );
   }
 
+  // Returns the list of white keys
   List<Widget> getWhiteKeys() {
     List<Widget> whiteKeys = [];
     List<String> notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
@@ -103,6 +87,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     return whiteKeys;
   }
 
+  // Returns an empty expanded used to create a gap between the black keys
   Widget getBlackKeySpace(int flex) {
     return Expanded(
       flex: flex,
@@ -110,30 +95,36 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     );
   }
 
+  // Returns the list of black keys with the gaps in between them
   List<Widget> getBlackKeys() {
     List<String> notes = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
     List<Widget> blackKeys = [
       getBlackKeySpace(4),
+      // C# or Db key
       Expanded(
         flex: 3,
         child: getBlackKey(notes[0]),
       ),
       getBlackKeySpace(3),
+      // D# or Eb key
       Expanded(
         flex: 3,
         child: getBlackKey(notes[1]),
       ),
       getBlackKeySpace(8),
+      // F# or Gb key
       Expanded(
         flex: 3,
         child: getBlackKey(notes[2]),
       ),
       getBlackKeySpace(3),
+      // G# or Ab key
       Expanded(
         flex: 3,
         child: getBlackKey(notes[3]),
       ),
       getBlackKeySpace(3),
+      // A# or Bb key
       Expanded(
         flex: 3,
         child: getBlackKey(notes[4]),
@@ -158,6 +149,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
               flex: 3,
               child: Container(
                 color: Colors.black,
+                // The black keys are stacked on top of the white keys
                 child: Stack(
                   children: [
                     Row(
