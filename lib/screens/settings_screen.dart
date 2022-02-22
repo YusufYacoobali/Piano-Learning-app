@@ -73,15 +73,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         SettingsSection(
                           title: const Text('General'),
                           tiles: <SettingsTile>[
-
-                            SettingsTile.switchTile(
-                              title: const Text('Sound'),
-                              key: const Key('sound toggle'),
-                              leading: const Icon(Icons.music_note_outlined),
-                              initialValue: settings.getSetting('sound') == true,
-                              onToggle: (value) async => await settings.updateSetting('sound', value).then((v) => setState(() => {})),
-                            ),
-
                             SettingsTile(
                               title: const Text('Volume'),
                               leading: const Icon(Icons.volume_up),
