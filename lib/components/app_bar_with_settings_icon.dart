@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
 
+double appBarHeight = 60.0; //Default value
+
 /// The AppBar contained at the top of multiple practice menu screens.
 ///
 /// It contains the relevant screen's title text as a parameter to the class,
@@ -23,6 +25,7 @@ class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWid
   ///Builds the AppBar onto the screen it is being used in.
   @override
   Widget build(BuildContext context) {
+    appBarHeight = MediaQuery.of(context).size.height / 7;
     return AppBar(
       title: titleText,
       centerTitle: true,
@@ -37,7 +40,7 @@ class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWid
         )
       ],
       //Controls the size of the app bar relative to screen size.
-      toolbarHeight: MediaQuery.of(context).size.height / 7,
+      toolbarHeight: appBarHeight,
     );
   }
 }

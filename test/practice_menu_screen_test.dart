@@ -17,45 +17,45 @@ void main() {
       }
   );
 
-  // testWidgets(
-  //     'Check that the ${"Play Along"} button is present on the practice menu screen',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       expect(find.byKey(PracticeScreen.navigateToPlayAlongMenuButtonKey), findsOneWidget);
-  //     }
-  // );
-  //
-  // testWidgets(
-  //     'Check that the ${"Speedrun"} button is present on the practice menu screen',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       expect(find.byKey(PracticeScreen.navigateToSpeedrunMenuButtonKey), findsOneWidget);
-  //     }
-  // );
-  //
-  // testWidgets(
-  //     'Check that the ${"Take a Quiz"} button is present on the practice menu screen',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       expect(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey), findsOneWidget);
-  //     }
-  // );
-  //
-  // testWidgets(
-  //     'Check that the ${"Endless"} button is present on the practice menu screen',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       expect(find.byKey(PracticeScreen.navigateToEndlessModeButtonKey), findsOneWidget);
-  //     }
-  // );
+  testWidgets(
+      'Check that the ${"Play Along"} button is present on the practice menu screen',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        expect(find.byKey(PracticeScreen.navigateToPlayAlongMenuButtonKey), findsOneWidget);
+      }
+  );
+
+  testWidgets(
+      'Check that the ${"Speedrun"} button is present on the practice menu screen',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        expect(find.byKey(PracticeScreen.navigateToSpeedrunMenuButtonKey), findsOneWidget);
+      }
+  );
+
+  testWidgets(
+      'Check that the ${"Take a Quiz"} button is present on the practice menu screen',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        expect(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey), findsOneWidget);
+      }
+  );
+
+  testWidgets(
+      'Check that the ${"Endless"} button is present on the practice menu screen',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        expect(find.byKey(PracticeScreen.navigateToEndlessModeButtonKey), findsOneWidget);
+      }
+  );
 
   testWidgets(
       'Check that the settings icon is present on the practice menu screen',
