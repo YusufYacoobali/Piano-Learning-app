@@ -69,8 +69,9 @@ class NotificationAPI {
       time.second,
     );
 
-    return scheduleData.isBefore(now)
-        ? scheduleData.add(const Duration(days: 1))
-        : scheduleData;
+    // return scheduleData.isBefore(now)
+    //     ? scheduleData.add(const Duration(days: 1))
+    //     : scheduleData;
+    return scheduleData;
   }
 }
