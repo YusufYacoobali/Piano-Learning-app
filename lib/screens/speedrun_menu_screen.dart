@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'menu_screen.dart'; //For MenuButton
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
+import 'package:sight_reading_app/screens/menu_screen.dart';
 
 ///A list containing the various speedrun mode options.
 List<String> modes = <String>[];
@@ -54,9 +54,39 @@ class SpeedrunMenuScreen extends StatelessWidget {
     for (String mode in modes) {
       modeButtonKeys.add(Key('modeSelected:$mode'));
     }
-
-    return const Scaffold(
-      appBar: AppBarWithSettingsIcon(Text('Choose a duration:')),
+    return Scaffold(
+      appBar: const AppBarWithSettingsIcon(Text('Choose a duration:')),
+        body: SafeArea(
+        //Uses an itemBuilder to generate a button for each mode, using the names, records and keys generated earlier.
+          child: ListView.separated(
+            padding: const EdgeInsets.all(8),
+            itemCount: modes.length,
+            itemBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                height: 100, //Fixes the button height
+                width: MediaQuery.of(context).size.width,
+                child: MenuButton(
+                  buttonChild: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(modes[index], textAlign: TextAlign.left),
+                      SizedBox(width: MediaQuery.of(context).size.width / 4), //Adds space between Text
+                      Text('Record: ${modeRecords[index]}', textAlign: TextAlign.right),
+                      ],
+                    ),
+                  onPress: () {
+                    Navigator.pushNamed(
+                        context, MenuScreen.id); //TODO: Replace with relevant
+                  },
+                ),
+              );
+            },
+          separatorBuilder: (BuildContext context, int index) =>
+            const SizedBox(
+              height: 8,
+            ),
+          ),
+        )
     );
   }
 }
