@@ -3,11 +3,11 @@ import 'package:sight_reading_app/components/lessons_and_quizzes/question_list.d
 //import 'package:flutter/services.dart';
 //import 'package:sight_reading_app/questions.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
-import 'package:sight_reading_app/components/lessons_and_quizzes/lessonOne.dart';
+import 'package:sight_reading_app/components/lessons_and_quizzes/lessonFour.dart';
 
 //Questions questions = Questions();
 
-QuestionList questions = LessonOneQuestions().getQuestions();
+QuestionList questions = LessonFourQuestions().getQuestions();
 
 class QuestionSkeleton extends StatefulWidget {
   static String id = 'question_skeleton';

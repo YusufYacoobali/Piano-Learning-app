@@ -29,7 +29,7 @@ class LessonFourQuestions {
       image: 'Bs_F.jpeg',
       question:
           'This is F (Fa) on the Base clef. Now press E in the option box.',
-      correctAnswer: 'E',
+      correctAnswer: 'F',
     ),
     //start questions
     Question(
@@ -42,6 +42,11 @@ class LessonFourQuestions {
       image: 'Bs_D.jpeg',
       question: 'What note is this?',
       correctAnswer: 'D',
+    ),
+    Question(
+      image: 'Bs_F.jpeg',
+      question: 'What note is this?',
+      correctAnswer: 'F',
     ),
     Question(
       image: 'Bs_C.jpeg',
@@ -59,9 +64,9 @@ class LessonFourQuestions {
       correctAnswer: 'E',
     ),
     Question(
-      image: 'Bs_F.jpeg',
+      image: 'Bs_C.jpeg',
       question: 'What note is this?',
-      correctAnswer: 'F',
+      correctAnswer: 'C',
     ),
     Question(
       image: 'Bs_F.jpeg',

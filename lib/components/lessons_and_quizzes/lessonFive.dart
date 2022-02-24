@@ -39,6 +39,11 @@ class LessonFourQuestions {
       correctAnswer: 'B',
     ),
     Question(
+      image: 'Bs_G.jpeg',
+      question: 'What note is this?',
+      correctAnswer: 'G',
+    ),
+    Question(
       image: 'Bs_C.jpeg',
       question: 'What note is this?',
       correctAnswer: 'C',

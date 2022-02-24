@@ -19,9 +19,14 @@ class LessonThreeQuestions {
     ),
     //Lesson questions
     Question(
-      image: 'Tr_A.jpeg',
+      image: 'Tr_B.jpeg',
       question:
           'Try answer these questions on your own with a combination of the previous notes.',
+      correctAnswer: 'B',
+    ),
+    Question(
+      image: 'Tr_A.jpeg',
+      question: 'What note is this?',
       correctAnswer: 'A',
     ),
     Question(
