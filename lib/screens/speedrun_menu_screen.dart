@@ -64,7 +64,6 @@ class SpeedrunMenuScreen extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return SizedBox(
                 height: 100, //Fixes the button height
-                width: MediaQuery.of(context).size.width,
                 child: MenuButton(
                   buttonChild: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -76,14 +75,15 @@ class SpeedrunMenuScreen extends StatelessWidget {
                     ),
                   onPress: () {
                     Navigator.pushNamed(
-                        context, MenuScreen.id); //TODO: Replace with relevant
+                        context, MenuScreen.id); //TODO: Replace with relevant screen
                   },
+                  key: modeButtonKeys[index],
                 ),
               );
             },
           separatorBuilder: (BuildContext context, int index) =>
             const SizedBox(
-              height: 8,
+              height: 10,
             ),
           ),
         )

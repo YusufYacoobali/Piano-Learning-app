@@ -1,4 +1,4 @@
-//import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
@@ -57,86 +57,86 @@ void main() {
         expect(find.byType(SettingsScreen), findsOneWidget);
       }
   );
-  //
-  // testWidgets(
-  //     'Check that all the ListView quiz buttons are generated',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
-  //       await tester.pumpAndSettle();
-  //       for (Key quizButtonKey in quizButtonKeys) {
-  //         await tester.scrollUntilVisible(
-  //           find.byKey(quizButtonKey),
-  //           500.0,
-  //           scrollable: find.byType(Scrollable),
-  //         );
-  //         expect(find.byKey(quizButtonKey), findsOneWidget);
-  //       }
-  //     }
-  // );
-  //
-  // testWidgets(
-  //     'Check that the quiz buttons display the correct text',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
-  //       await tester.pumpAndSettle();
-  //       for (var i = 0; i < quizButtonKeys.length; i++) {
-  //         await tester.scrollUntilVisible(
-  //           find.byKey(quizButtonKeys[i]),
-  //           500.0,
-  //           scrollable: find.byType(Scrollable),
-  //         );
-  //         expect(find.text(quizzes[i]), findsWidgets);
-  //         expect(find.text('Record: ${quizRecords[i]}'), findsWidgets);
-  //       }
-  //     }
-  // );
-  //
-  // testWidgets(
-  //     'Check that the ${"random quiz button"} is displayed on screen.',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
-  //       await tester.pumpAndSettle();
-  //       expect(find.byKey(QuizSelectionScreen.randomQuizSelectedKey), findsOneWidget);
-  //     }
-  // );
-  //
-  // testWidgets(
-  //     'Check that the ${"random quiz button"} displays the correct text',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
-  //       await tester.pumpAndSettle();
-  //       expect(find.text('Random mixed quiz'), findsOneWidget);
-  //     }
-  // );
-  //
-  // testWidgets(
-  //     'Check that scrolling does not move the random quiz button',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
-  //       await tester.pumpAndSettle();
-  //       final buttonFinder = find.byKey(QuizSelectionScreen.randomQuizSelectedKey);
-  //       final startPos = tester.getCenter(buttonFinder);
-  //       final gesture = await tester.startGesture(const Offset(0, 300));
-  //       await gesture.moveBy(const Offset(0, -300)); //Scrolls the screen
-  //       await tester.pumpAndSettle();
-  //       expect(startPos, equals(tester.getCenter(buttonFinder))); //Checks that the position of the button has not changed.
-  //     }
-  // );
+
+  testWidgets(
+      'Check that all the ListView quiz buttons are generated',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
+        await tester.pumpAndSettle();
+        for (Key quizButtonKey in quizButtonKeys) {
+          await tester.scrollUntilVisible(
+            find.byKey(quizButtonKey),
+            500.0,
+            scrollable: find.byType(Scrollable),
+          );
+          expect(find.byKey(quizButtonKey), findsOneWidget);
+        }
+      }
+  );
+
+  testWidgets(
+      'Check that the quiz buttons display the correct text',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
+        await tester.pumpAndSettle();
+        for (var i = 0; i < quizButtonKeys.length; i++) {
+          await tester.scrollUntilVisible(
+            find.byKey(quizButtonKeys[i]),
+            500.0,
+            scrollable: find.byType(Scrollable),
+          );
+          expect(find.text(quizzes[i]), findsWidgets);
+          expect(find.text('Record: ${quizRecords[i]}'), findsWidgets);
+        }
+      }
+  );
+
+  testWidgets(
+      'Check that the ${"random quiz button"} is displayed on screen.',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
+        await tester.pumpAndSettle();
+        expect(find.byKey(QuizSelectionScreen.randomQuizSelectedKey), findsOneWidget);
+      }
+  );
+
+  testWidgets(
+      'Check that the ${"random quiz button"} displays the correct text',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
+        await tester.pumpAndSettle();
+        expect(find.text('Random mixed quiz'), findsOneWidget);
+      }
+  );
+
+  testWidgets(
+      'Check that scrolling does not move the random quiz button',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
+        await tester.pumpAndSettle();
+        final buttonFinder = find.byKey(QuizSelectionScreen.randomQuizSelectedKey);
+        final startPos = tester.getCenter(buttonFinder);
+        final gesture = await tester.startGesture(const Offset(0, 300));
+        await gesture.moveBy(const Offset(0, -300)); //Scrolls the screen
+        await tester.pumpAndSettle();
+        expect(startPos, equals(tester.getCenter(buttonFinder))); //Checks that the position of the button has not changed.
+      }
+  );
   //TODO: Create tests to make sure correct context data is passed in for each quiz button
   //Will need to do once we figure out how data is stored / retrieved / sent across the program etc
 }

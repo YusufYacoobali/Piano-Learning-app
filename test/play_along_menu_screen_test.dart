@@ -1,4 +1,4 @@
-//import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
@@ -58,43 +58,43 @@ void main() {
       }
   );
 
-  // testWidgets(
-  //     'Check that all the track buttons are generated',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.byKey(PracticeScreen.navigateToPlayAlongMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       for (Key trackButtonKey in trackButtonKeys) {
-  //         await tester.scrollUntilVisible(
-  //           find.byKey(trackButtonKey),
-  //           500.0,
-  //           scrollable: find.byType(Scrollable),
-  //         );
-  //         expect(find.byKey(trackButtonKey), findsOneWidget);
-  //       }
-  //     }
-  // );
-  //
-  // testWidgets(
-  //     'Check that the track buttons display the correct Text',
-  //         (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.byKey(PracticeScreen.navigateToPlayAlongMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       for (var i = 0; i < trackButtonKeys.length; i++) {
-  //         await tester.scrollUntilVisible(
-  //             find.byKey(trackButtonKeys[i]),
-  //             500.0,
-  //             scrollable: find.byType(Scrollable)
-  //         );
-  //         expect(find.text(tracks[i]), findsWidgets);
-  //         expect(find.text('Record: ${trackRecords[i]}'), findsWidgets);
-  //       }
-  //     }
-  // );
+  testWidgets(
+      'Check that all the track buttons are generated',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(PracticeScreen.navigateToPlayAlongMenuButtonKey));
+        await tester.pumpAndSettle();
+        for (Key trackButtonKey in trackButtonKeys) {
+          await tester.scrollUntilVisible(
+            find.byKey(trackButtonKey),
+            500.0,
+            scrollable: find.byType(Scrollable),
+          );
+          expect(find.byKey(trackButtonKey), findsOneWidget);
+        }
+      }
+  );
+
+  testWidgets(
+      'Check that the track buttons display the correct Text',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(PracticeScreen.navigateToPlayAlongMenuButtonKey));
+        await tester.pumpAndSettle();
+        for (var i = 0; i < trackButtonKeys.length; i++) {
+          await tester.scrollUntilVisible(
+              find.byKey(trackButtonKeys[i]),
+              500.0,
+              scrollable: find.byType(Scrollable)
+          );
+          expect(find.text(tracks[i]), findsWidgets);
+          expect(find.text('Record: ${trackRecords[i]}'), findsWidgets);
+        }
+      }
+  );
   //TODO: Create tests to make sure correct context data is passed in for each quiz button
 }

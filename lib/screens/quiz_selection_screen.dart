@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'menu_screen.dart'; //For MenuButton
-//import 'settings_screen.dart';
+import 'menu_screen.dart'; //For MenuButton
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 
 /// A list containing the names of each quiz.
@@ -67,8 +66,62 @@ class QuizSelectionScreen extends StatelessWidget {
       quizButtonKeys.add(Key('quizSelected:$quiz'));
     }
 
-    return const Scaffold(
-      appBar: AppBarWithSettingsIcon(Text('Choose a quiz:')),
+    return Scaffold(
+      appBar: const AppBarWithSettingsIcon(Text('Choose a quiz:')),
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              //Uses an itemBuilder to generate a button for each quiz, using the names, records and keys generated earlier.
+              child: ListView.separated(
+                padding: const EdgeInsets.all(8),
+                itemCount: quizzes.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: 100.0,
+                    child: MenuButton(
+                      buttonChild: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Text(quizzes[index], textAlign: TextAlign.left),
+                          SizedBox(width: MediaQuery.of(context).size.width / 4), //Adds space between Text
+                          Text('Record: ${quizRecords[index]}', textAlign: TextAlign.right),
+                        ],
+                      ),
+                      onPress: () {
+                        Navigator.pushNamed(
+                            context, MenuScreen.id); //TODO: Replace with instruction screen template
+                      },
+                      key: quizButtonKeys[index],
+                    ),
+                  );
+                },
+                //Adds blank spaces between each button
+                separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(
+                  height: 10,
+                ),
+              ),
+            ),
+            //Adds the random mixed quiz button to the bottom of the screen.
+            //As this is not part of the ListView, it is not moved by scrolling.
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  height: 80.0,
+                  child: MenuButton(
+                    buttonChild: const Center(child: Text("Random mixed quiz")),
+                    onPress: () {
+                      Navigator.pushNamed(
+                          context, MenuScreen.id); //TODO: Replace with Random quiz screen (instruction screen instead too?)
+                    },
+                    key: randomQuizSelectedKey,
+                  ),
+                )
+            )
+          ],
+        ),
+      ),
     );
   }
 }
