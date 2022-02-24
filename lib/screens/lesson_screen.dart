@@ -19,7 +19,7 @@ class _LessonScreenState extends State<LessonScreen> {
       appBar: AppBar(
         title: const Text('Read That Sheet'),
       ),
-      body: const SafeArea(
+      body: SafeArea(
         child: QuestionSkeleton(),
       ),
     );
