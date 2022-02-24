@@ -41,7 +41,7 @@ class SightReadingApp extends StatelessWidget {
               AchievementsScreen.id: (context) => const AchievementsScreen(),
               SettingsScreen.id: (context) => const SettingsScreen(),
               // Temporary route to QuestionSkeleton
-              QuestionSkeleton.id: (context) => const QuestionSkeleton(),
+              QuestionSkeleton.id: (context) => QuestionSkeleton(),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
             },
           );
