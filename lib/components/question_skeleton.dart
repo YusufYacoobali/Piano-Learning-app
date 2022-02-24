@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 //import 'package:flutter/services.dart';
-import 'package:sight_reading_app/questions.dart';
+//import 'package:sight_reading_app/questions.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson.dart';
 
-Questions questions = Questions();
+//Questions questions = Questions();
+Lesson currentLesson = Lesson();
+late QuestionList questions;
 
 class QuestionSkeleton extends StatefulWidget {
   static String id = 'question_skeleton';
 
-  const QuestionSkeleton({Key? key}) : super(key: key);
+  QuestionSkeleton({Key? key}) : super(key: key) {
+    currentLesson.setQuestions('LessonOne');
+    questions = currentLesson.getQuestions();
+  }
 
   @override
   _QuestionSkeletonState createState() => _QuestionSkeletonState();
@@ -49,8 +56,8 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
       alertDesc = 'You got the correct answer!';
     } else {
       alertTitle = 'Incorrect!';
-      alertDesc =
-          'Wrong answer, the correct answer is ' + questions.getCorrectAnswer();
+      alertDesc = 'Wrong answer, the correct answer is ' +
+          currentLesson.getQuestions().getCorrectAnswer();
     }
 
     String buttonText = 'NEXT';
