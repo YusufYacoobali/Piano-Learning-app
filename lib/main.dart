@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sight_reading_app/components/question_skeleton.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import 'package:sight_reading_app/screens/lesson_screen.dart';
@@ -40,8 +39,6 @@ class SightReadingApp extends StatelessWidget {
               PracticeScreen.id: (context) => const PracticeScreen(),
               AchievementsScreen.id: (context) => const AchievementsScreen(),
               SettingsScreen.id: (context) => const SettingsScreen(),
-              // Temporary route to QuestionSkeleton
-              QuestionSkeleton.id: (context) => QuestionSkeleton(),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
             },
           );
