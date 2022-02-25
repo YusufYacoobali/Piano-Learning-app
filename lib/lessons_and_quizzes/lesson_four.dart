@@ -1,10 +1,10 @@
-import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
+import 'package:sight_reading_app/question_brain.dart';
 import 'package:sight_reading_app/question.dart';
 
 //List of questions
 //Teaches how to read Do Re Mi Fa on base clef
 class LessonFourQuestions {
-  final QuestionList _questions = QuestionList(questionList: [
+  final QuestionBrain _questions = QuestionBrain(questionList: [
     //Tutorial
     //Read C to F with the base clef
     Question(
@@ -80,7 +80,7 @@ class LessonFourQuestions {
     ),
   ]);
 
-  QuestionList getQuestions() {
+  QuestionBrain getQuestions() {
     return _questions;
   }
 }

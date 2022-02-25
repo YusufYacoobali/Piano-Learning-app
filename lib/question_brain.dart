@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:sight_reading_app/question.dart';
 
 //List of questions
-class QuestionList {
+class QuestionBrain {
   int _questionNum = 0;
 
   final List<Question> questionList;
 
-  QuestionList({
+  QuestionBrain({
     required this.questionList,
   });
 
@@ -15,12 +16,16 @@ class QuestionList {
   }
 
   String getImagePath() {
-    String path = 'assets/NoteImages/';
+    String path = 'assets/note_images/';
     String fullImagePath = path + getImageName();
     return fullImagePath;
   }
 
-  String getQuestionsText() {
+  AssetImage getImage() {
+    return AssetImage(getImagePath());
+  }
+
+  String getQuestionText() {
     return questionList[_questionNum].question;
   }
 
@@ -30,15 +35,24 @@ class QuestionList {
 
   void goToNextQuestion() {
     if (_questionNum < questionList.length - 1) {
-      _questionNum++;
+      ++_questionNum;
     }
   }
 
-  int getCurrentQuestionNum() {
-    return _questionNum;
+  int getQuestionNum() {
+    return (_questionNum + 1);
   }
 
-  int getTotalQuestionLength() {
+  int getTotalNumberOfQuestions() {
     return questionList.length;
+  }
+
+  //check answers
+  bool checkAnswer(String userAnswer) {
+    return userAnswer == getCorrectAnswer();
+  }
+
+  bool isLastQuestion() {
+    return _questionNum == questionList.length - 1;
   }
 }

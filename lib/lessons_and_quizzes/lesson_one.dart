@@ -1,10 +1,9 @@
-import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
 //List of questions
 //Teaches how to read Do Re Mi
 
-final QuestionList lessonOneQuestions = QuestionList(questionList: [
+final List<Question> lessonOneQuestions = [
   //Tutorial
   Question(
     image: 'Tr_MidC.jpeg',
@@ -66,4 +65,4 @@ final QuestionList lessonOneQuestions = QuestionList(questionList: [
     question: 'What note is this?',
     correctAnswer: 'C',
   ),
-]);
+];

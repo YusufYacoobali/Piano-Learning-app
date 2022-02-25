@@ -1,10 +1,10 @@
-import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
+import 'package:sight_reading_app/question_brain.dart';
 import 'package:sight_reading_app/question.dart';
 
 //List of questions
 //Teaches how to read Do Re Mi
 class LessonTwoQuestions {
-  final QuestionList _questions = QuestionList(questionList: [
+  final QuestionBrain _questions = QuestionBrain(questionList: [
     //Tutorial
     Question(
       image: 'Tr_F.jpeg',
@@ -82,7 +82,7 @@ class LessonTwoQuestions {
     //maybe add more pictures with 2 notes or more and ask to read the second note.
   ]);
 
-  QuestionList getQuestions() {
+  QuestionBrain getQuestions() {
     return _questions;
   }
 }

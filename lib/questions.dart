@@ -137,7 +137,7 @@ class Questions {
   }
 
   String getImagePath() {
-    String path = 'assets/NoteImages/';
+    String path = 'assets/note_images/';
     String fullImagePath = path + getImageName();
     return fullImagePath;
   }
