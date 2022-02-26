@@ -9,6 +9,9 @@ import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/theme_listener.dart';
 import 'package:provider/provider.dart';
+import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
+import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
+import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 
 void main() {
   // Starting the app in landscape orientation
@@ -38,6 +41,9 @@ class SightReadingApp extends StatelessWidget {
               MenuScreen.id: (context) => const MenuScreen(),
               LessonScreen.id: (context) => const LessonScreen(),
               PracticeScreen.id: (context) => const PracticeScreen(),
+              PlayAlongMenuScreen.id: (context) => const PlayAlongMenuScreen(),
+              SpeedrunMenuScreen.id: (context) => const SpeedrunMenuScreen(),
+              QuizSelectionScreen.id: (context) => const QuizSelectionScreen(),
               AchievementsScreen.id: (context) => const AchievementsScreen(),
               SettingsScreen.id: (context) => const SettingsScreen(),
               // Temporary route to QuestionSkeleton
