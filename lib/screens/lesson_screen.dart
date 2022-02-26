@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/notification_service.dart';
 
 class _LessonScreenState extends State<LessonScreen> {
   @override

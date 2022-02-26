@@ -1,7 +1,5 @@
-import 'package:audioplayers/notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/question_skeleton.dart';
-import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/notification_service.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import '../constants.dart';
