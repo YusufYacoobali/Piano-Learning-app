@@ -73,11 +73,15 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
               } else {
                 //make the text "end" when it comes up to the last quiz
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            // score number
-                            const ResultsScreen(score: 5, title: 'result')));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        // score number
+                        const ResultsScreen(
+                            score: 5, title: 'Congratulations!'),
+                  ),
+                );
+                // Navigator.pushNamed(context, ResultsScreen.id);
               }
             },
             //text is not const anymore

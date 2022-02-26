@@ -6,7 +6,6 @@ import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import 'package:sight_reading_app/screens/lesson_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
-import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/theme_listener.dart';
 import 'package:provider/provider.dart';
@@ -43,10 +42,6 @@ class SightReadingApp extends StatelessWidget {
               SettingsScreen.id: (context) => const SettingsScreen(),
               // Temporary route to QuestionSkeleton
               QuestionSkeleton.id: (context) => const QuestionSkeleton(),
-              ResultsScreen.id: (context) => const ResultsScreen(
-                    title: 'Congratulations!',
-                    score: 5,
-                  ),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
             },
           );
