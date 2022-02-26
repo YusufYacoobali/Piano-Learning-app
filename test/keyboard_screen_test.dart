@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
+import 'package:flutter/services.dart';
 
 // TODO: Add tests for music sheet to play
 
@@ -13,6 +14,18 @@ void main() {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('TEMPORARY Click to go to Keyboard Screen'));
     await tester.pumpAndSettle();
+  }
+
+  Future<void> _checkKeyboardPressMakesSound(WidgetTester tester, String key) async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final List<MethodCall> log = <MethodCall>[];
+    TestDefaultBinaryMessengerBinding.instance!.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
+      log.add(methodCall);
+      return null;
+    });
+    await tester.tap(find.text(key));
+    expect(log, hasLength(1));
+    expect(log.single, isMethodCall('SystemSound.play', arguments: 'SystemSoundType.click'));
   }
 
   testWidgets('Check that there are a total of 12 keys',
@@ -79,5 +92,65 @@ void main() {
   testWidgets('Check that there is a B key', (WidgetTester tester) async {
     await _navigateToKeyboardScreen(tester);
     expect(find.text('B'), findsOneWidget);
+  });
+
+  testWidgets('Check that pressing C makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'C');
+  });
+
+  testWidgets('Check that pressing Db makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'Db');
+  });
+
+  testWidgets('Check that pressing D makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'D');
+  });
+
+  testWidgets('Check that pressing Eb makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'Eb');
+  });
+
+  testWidgets('Check that pressing E makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'E');
+  });
+
+  testWidgets('Check that pressing F makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'F');
+  });
+
+  testWidgets('Check that pressing Gb makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'Gb');
+  });
+
+  testWidgets('Check that pressing G makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'G');
+  });
+
+  testWidgets('Check that pressing Ab makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'Ab');
+  });
+
+  testWidgets('Check that pressing A makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'A');
+  });
+
+  testWidgets('Check that pressing B makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'B');
+  });
+
+  testWidgets('Check that pressing Bb makes a sound', (WidgetTester tester) async {
+    await _navigateToKeyboardScreen(tester);
+    await _checkKeyboardPressMakesSound(tester, 'Bb');
   });
 }
