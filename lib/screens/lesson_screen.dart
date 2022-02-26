@@ -24,6 +24,7 @@ class _LessonScreenState extends State<LessonScreen> {
             const Text(
               'LESSON PAGE',
             ),
+            //testing notification here
             ElevatedButton(onPressed: () {}, child: const Text('BACK TO HOME')),
           ],
         ),
