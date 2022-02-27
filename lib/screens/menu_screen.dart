@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/notification_service.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import '../constants.dart';
 import 'achievements_screen.dart';
@@ -6,10 +7,21 @@ import 'practice_screen.dart';
 import 'settings_screen.dart';
 import 'lesson_screen.dart';
 
+const navigateToPracticeMainMenuButtonKey = Key('navigateToPracticeMainMenu');
+
 class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     super.initState();
+
+    NotificationAPI.init(initScheduled: true);
+    //ListenNotifications();
+    NotificationAPI.showScheduledNotification(
+      title: 'Piano',
+      body: 'do more',
+      payload: 'extra info',
+      //scheduledDate: DateTime.now().add(const Duration(seconds: 10)),
+    );
   }
 
   @override
@@ -43,6 +55,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       onPress: () {
                         Navigator.pushNamed(context, PracticeScreen.id);
                       },
+                      key: navigateToPracticeMainMenuButtonKey,
                     ),
                   ),
                   Expanded(
