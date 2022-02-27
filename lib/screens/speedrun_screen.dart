@@ -1,5 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/question_skeleton.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 
 class SpeedrunScreen extends StatelessWidget {
@@ -16,6 +17,7 @@ class SpeedrunScreen extends StatelessWidget {
       body: SafeArea(
           child: Stack(
         children: [
+          const QuestionSkeleton(),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
             child: Align(
@@ -23,7 +25,7 @@ class SpeedrunScreen extends StatelessWidget {
               child: CircularCountDownTimer(
                 width: 60,
                 height: 60,
-                duration: 10,
+                duration: timerDuration,
                 backgroundColor: Colors.purple[500],
                 fillColor: Colors.red,
                 ringColor: Colors.grey,
@@ -39,12 +41,6 @@ class SpeedrunScreen extends StatelessWidget {
                   //print('Countdown Started');
                 },
                 onComplete: () {
-                  //print('Countdown Ended');
-                  // MaterialPageRoute(
-                  //   builder: (context) =>
-                  //       // score number
-                  //       const ResultsScreen(score: 5, title: 'Congratulations!'),
-                  // );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -55,7 +51,7 @@ class SpeedrunScreen extends StatelessWidget {
                 },
               ),
             ),
-          )
+          ),
         ],
       )),
     );

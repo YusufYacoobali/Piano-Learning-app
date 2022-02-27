@@ -24,16 +24,17 @@ class SpeedrunMenuScreen extends StatelessWidget {
   ///The names of the available speedrun modes.
   //May combine with getRecords() depending on how data is stored.
   //TODO: Add ability to get mode names from storage.
-  List<String> getModes() {
-    return <String>[
-      '10 Seconds',
-      '20 seconds',
-      '30 seconds',
-      '40 seconds',
-      '50 seconds',
-      '60 seconds'
-    ];
-  }
+  // List<String> getModes() {
+  //   return <String>[
+  //     '10 Seconds',
+  //     '20 seconds',
+  //     '30 seconds',
+  //     '40 seconds',
+  //     '50 seconds',
+  //     '60 seconds'
+  //   ];
+  // }
+  static const List<int> modes = [10, 20, 30, 40, 50, 60];
 
   ///The user records for each of the available speedrun modes.
   //May combine with getModes() depending on how data is stored.
@@ -44,11 +45,11 @@ class SpeedrunMenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    modes = getModes();
+    //modes = getModes();
     modeRecords = getRecords();
     modeButtonKeys = <Key>[]; //Resets key list
     //Generates the keys for the quiz buttons based on quiz names, with the exception of the random mixed quiz.
-    for (String mode in modes) {
+    for (int mode in modes) {
       modeButtonKeys.add(Key('modeSelected:$mode'));
     }
     return Scaffold(
@@ -65,7 +66,8 @@ class SpeedrunMenuScreen extends StatelessWidget {
                   buttonChild: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Text(modes[index], textAlign: TextAlign.left),
+                      Text(modes[index].toString() + " seconds",
+                          textAlign: TextAlign.left),
                       SizedBox(
                           width: MediaQuery.of(context).size.width /
                               4), //Adds space between Text
@@ -77,8 +79,8 @@ class SpeedrunMenuScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SpeedrunScreen(
-                          timerDuration: 10,
+                        builder: (context) => SpeedrunScreen(
+                          timerDuration: modes[index],
                         ),
                       ),
                     );
