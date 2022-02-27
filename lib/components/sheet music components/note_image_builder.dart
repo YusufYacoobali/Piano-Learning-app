@@ -9,7 +9,7 @@ class NoteImageBuilder {
   static bool _isOnLine (String note) {
     List<String> notes = <String>['C4', 'E4', 'G4', 'B4', 'D5'];
     for (String n in notes) {
-      if (note == n) return true;
+      if (note[0] == n[0] && note[note.length - 1] == n[n.length - 1]) return true;
     }
     return false;
   }
@@ -25,6 +25,31 @@ class NoteImageBuilder {
 
     Offset point = Offset(note.pos + 32, pos);
     canvas.drawPoints(PointMode.points, <Offset>[point], paint);
+  }
+
+  static void _drawSymbol(NoteOnStave note, Canvas canvas, double baseLine, bool isFlat) {
+    String symbol = '♯';
+    double x = note.pos - 27;
+    double y = baseLine - note.height - 20;
+    double size = 30;
+    if (isFlat) {
+      symbol = '♭';
+      x = note.pos - 25;
+      y = baseLine - note.height - 35;
+      size = 45;
+    }
+
+    TextPainter textPainter = TextPainter(
+
+        text: TextSpan(
+            text: symbol,
+            style: TextStyle(
+                fontSize: size, color: Colors.black)),
+        textDirection: TextDirection.ltr
+    )
+      ..layout();
+
+    textPainter.paint(canvas, Offset(x, y), );
   }
 
   static void _drawTail(NoteOnStave note, Canvas canvas, double baseLine) {
@@ -64,6 +89,10 @@ class NoteImageBuilder {
       Offset startingPoint1 = Offset(note.pos - 5, baseLine - note.height + 8);
       Offset endingPoint1 = Offset(note.pos + 27, baseLine - note.height  + 8);
       canvas.drawLine(startingPoint1, endingPoint1, paint);
+    }
+
+    if (note.note.name.length == 3) {
+      _drawSymbol(note, canvas, baseLine, note.note.name[1] == 'b');
     }
   }
 

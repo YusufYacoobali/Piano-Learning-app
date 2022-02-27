@@ -35,10 +35,10 @@ class MusicSheet extends CustomPainter {
   final double _noteSpacing = 50;
 
   final Map<int, Note> _map = <int, Note>{
-    0: Note('C4', 0, 1),
+    0: Note('Cb4', 0, 1),
     2: Note('D4', 2, 1.5),
     5: Note('E4', 5, 1.5),
-    8: Note('F4', 8, 2),
+    8: Note('Fb4', 8, 2),
     13: Note('G4', 15, 3),
     18: Note('A4', 20, 3),
     23: Note('B4', 25, 4),
@@ -127,7 +127,7 @@ class MusicSheet extends CustomPainter {
 
     Note? n = _map[_time];
     if (n != null) {
-      int? i = _notes[n.name];
+      int? i = _notes[n.name[0] + n.name[n.name.length - 1]];
       if (i != null) {
         NoteOnStave note = NoteOnStave(n, _startLine, i.toDouble());
         _notesOnStaves.add(note);
