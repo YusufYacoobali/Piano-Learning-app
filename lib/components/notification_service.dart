@@ -21,7 +21,7 @@ class NotificationAPI {
         title,
         body,
         //tz.TZDateTime.from(scheduledDate, tz.local),
-        _scheduleDaily(const Time(9, 00, 00)),
+        _scheduleDaily(const Time(12, 23, 00)),
         await _notificationDetails(),
         payload: payload,
         androidAllowWhileIdle: true,
