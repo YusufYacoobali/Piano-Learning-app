@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
+import 'package:sight_reading_app/screens/sheet_music_screen.dart';
 
 void main() {
   // Starting the app in landscape orientation
@@ -49,6 +50,7 @@ class SightReadingApp extends StatelessWidget {
               // Temporary route to QuestionSkeleton
               QuestionSkeleton.id: (context) => const QuestionSkeleton(),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
+              SheetMusicScreen.id: (context) => const SheetMusicScreen(),
             },
           );
         },

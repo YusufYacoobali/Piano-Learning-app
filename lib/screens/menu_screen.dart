@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/question_skeleton.dart';
+import 'package:sight_reading_app/screens/sheet_music_screen.dart';
 import '../components/notification_service.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import '../constants.dart';
@@ -85,6 +86,21 @@ class _MenuScreenState extends State<MenuScreen> {
                             ),
                           ),
                         ),
+                              Expanded(
+                                flex: 4,
+                                // TODO: Remove GestureDetector widget when SheetMusicScreen properly linked up
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, SheetMusicScreen.id);
+                                  },
+                                  child: Container(
+                                    // TODO: Remove colour and child properties when SheetMusicScreen properly linked up
+                                    color: Colors.red,
+                                    child: const Text(
+                                        'TEMPORARY Go to Sheet Music Screen'),
+                                  ),
+                                ),
+                              ),
                         Expanded(
                           flex: 2,
                           child: MenuButton(
@@ -93,6 +109,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               child: settingsIcon,
                             ),
                             onPress: () {
+                              //Navigator.pushNamed(context, SettingsScreen.id);
                               Navigator.pushNamed(context, SettingsScreen.id);
                             },
                           ),
