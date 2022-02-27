@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
-import 'package:flutter/material.dart';
 
 void main() {
   // TODO: Test for buttons should be updated to not depend on text on buttons
