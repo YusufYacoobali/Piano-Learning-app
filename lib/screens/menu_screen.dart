@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/question_skeleton.dart';
-import 'package:sight_reading_app/screens/sheet_music_screen.dart';
 import '../components/notification_service.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import '../constants.dart';
 import 'achievements_screen.dart';
+import 'keyboard_sheet_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
 import 'lesson_screen.dart';
@@ -91,7 +91,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 // TODO: Remove GestureDetector widget when SheetMusicScreen properly linked up
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.pushNamed(context, SheetMusicScreen.id);
+                                    Navigator.pushNamed(context, KeyboardSheetScreen.id);
                                   },
                                   child: Container(
                                     // TODO: Remove colour and child properties when SheetMusicScreen properly linked up

@@ -14,6 +14,8 @@ import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/sheet_music_screen.dart';
 
+import 'package:sight_reading_app/screens/keyboard_sheet_screen.dart';
+
 void main() {
   // Starting the app in landscape orientation
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +53,7 @@ class SightReadingApp extends StatelessWidget {
               QuestionSkeleton.id: (context) => const QuestionSkeleton(),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
               SheetMusicScreen.id: (context) => const SheetMusicScreen(),
+              KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
             },
           );
         },
