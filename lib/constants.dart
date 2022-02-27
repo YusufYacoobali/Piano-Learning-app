@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Settings Screen
 // List of the different difficulties
 const List<Object> difficultyList = ['Beginner', 'Intermediate', 'Expert'];
 
@@ -21,6 +22,7 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
   ),
 };
 
+// Results Screen
 const titleWidgetTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 50.0,
@@ -31,6 +33,7 @@ const scoreWidgetTextStyle = TextStyle(
   fontSize: 40.0,
 );
 
+// Menu Screen
 const String formattedAppName = 'Read\n That\n Sheet';
 final Color appNameBoxColour = Colors.indigo.shade300;
 final Color buttonBoxColour = Colors.indigo.shade400;
@@ -57,6 +60,7 @@ final Icon settingsIcon = Icon(
   color: Colors.orange.shade300,
 );
 
+// Keyboard Screen
 final whiteKeyButtonStyle = ElevatedButton.styleFrom(
   primary: Colors.white,
   minimumSize: const Size(double.infinity, double.infinity),
@@ -80,3 +84,14 @@ const blackKeyTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 30.0,
 );
+
+// Lesson Screen
+const Color optionButtonColour = Colors.orange;
+const TextStyle optionButtonTextStyle =
+    TextStyle(fontSize: 20, color: Colors.black);
+
+// Question Skeleton
+const TextStyle questionTrackerTextStyle = TextStyle(fontSize: 25);
+
+// Marking Criteria
+const double failThreshold = 0.4;

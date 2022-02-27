@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/constants.dart';
 
 class QuestionSkeleton extends StatefulWidget {
   static String id = 'question_skeleton';
@@ -30,6 +31,45 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     super.dispose();
   }
 
+  Widget getQuestionNumberTrackerWidget() {
+    return Expanded(
+      key: const Key('question number'),
+      child: Text(
+        'Question ${widget.questionNum} of ${widget.totalNumOfQuestions}',
+        style: questionTrackerTextStyle,
+      ),
+    );
+  }
+
+  Widget getQuestionImage() {
+    return Expanded(
+      key: const Key('question image'),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        //show image here
+        child: Image(
+          height: 150,
+          width: 150,
+          image: widget.image,
+        ),
+      ),
+    );
+  }
+
+  Widget getQuestionText() {
+    return Expanded(
+      key: const Key('question text'),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Text(
+          //show question text
+          widget.questionText,
+          style: const TextStyle(fontSize: 18),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -40,42 +80,11 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            //question number
-            Expanded(
-              key: const Key('question number'),
-              child: Text(
-                'Question ${widget.questionNum} of ${widget.totalNumOfQuestions}',
-                style: const TextStyle(fontSize: 25),
-              ),
-            ),
-
-            //picture and question text
+            getQuestionNumberTrackerWidget(),
             Row(
               children: <Widget>[
-                Expanded(
-                  key: const Key('question image'),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    //show image here
-                    child: Image(
-                      height: 150,
-                      width: 150,
-                      image: widget.image,
-                    ),
-                  ),
-                ),
-                //Add text size
-                Expanded(
-                  key: const Key('question text'),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      //show question text
-                      widget.questionText,
-                      style: const TextStyle(fontSize: 18),
-                    ),
-                  ),
-                ),
+                getQuestionImage(),
+                getQuestionText(),
               ],
             ),
           ],

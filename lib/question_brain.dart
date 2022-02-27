@@ -4,6 +4,7 @@ import 'package:sight_reading_app/question.dart';
 //List of questions
 class QuestionBrain {
   int _questionNum = 0;
+  int _score = 0;
 
   final List<Question> questionList;
 
@@ -16,9 +17,8 @@ class QuestionBrain {
   }
 
   String getImagePath() {
-    String path = 'assets/note_images/';
-    String fullImagePath = path + getImageName();
-    return fullImagePath;
+    String path = 'assets/note_images/${getImageName()}';
+    return path;
   }
 
   AssetImage getImage() {
@@ -45,6 +45,16 @@ class QuestionBrain {
 
   int getTotalNumberOfQuestions() {
     return questionList.length;
+  }
+
+  void setAnswer(String userAnswer) {
+    if (checkAnswer(userAnswer)) {
+      ++_score;
+    }
+  }
+
+  int getScore() {
+    return _score;
   }
 
   //check answers

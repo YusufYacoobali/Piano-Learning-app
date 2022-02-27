@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
-
-const Color buttonColour = Colors.orange;
 
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
@@ -36,21 +35,23 @@ class _LessonScreenState extends State<LessonScreen> {
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  buildChoiceButton('C'),
-                  buildChoiceButton('D'),
-                  buildChoiceButton('E'),
-                  buildChoiceButton('F'),
-                  buildChoiceButton('G'),
-                  buildChoiceButton('A'),
-                  buildChoiceButton('B'),
-                ],
+                children: getOptionButtons(),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  List<Widget> getOptionButtons() {
+    // TODO: Beginners see less options and experts see all options
+    List<Widget> optionButtons = [];
+    List<String> notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+    for (int i = 0; i < notes.length; ++i) {
+      optionButtons.add(buildOptionButton(notes[i]));
+    }
+    return optionButtons;
   }
 
   void setScreenWidget() {
@@ -72,8 +73,7 @@ class _LessonScreenState extends State<LessonScreen> {
     String alertTitle = '';
     String alertDesc = '';
     //show result
-    bool result = questionBrain.checkAnswer(choice);
-    if (result) {
+    if (questionBrain.checkAnswer(choice)) {
       alertTitle = 'Correct!';
       alertDesc = 'You got the correct answer!';
     } else {
@@ -82,11 +82,31 @@ class _LessonScreenState extends State<LessonScreen> {
           questionBrain.getCorrectAnswer();
     }
 
+    displayDialog(alertTitle, alertDesc);
+  }
+
+  void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
-        context: context,
-        builder: (context) {
-          return createResultAlert(alertTitle, alertDesc);
-        });
+      context: context,
+      builder: (context) {
+        return createResultAlert(alertTitle, alertDesc);
+      },
+    );
+  }
+
+  Widget getResultsScreen() {
+    String title = '';
+    double percentage =
+        questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
+    if (percentage < failThreshold) {
+      title = "Aww, better luck next time!";
+    } else {
+      title = "Congratulations!";
+    }
+    return ResultsScreen(
+      score: percentage,
+      title: title,
+    );
   }
 
   AlertDialog createResultAlert(String alertTitle, String alertDesc) {
@@ -95,50 +115,55 @@ class _LessonScreenState extends State<LessonScreen> {
       content: Text(alertDesc),
       actions: <Widget>[
         //go to next question
-        TextButton(
-          child: const Text("NEXT"),
-          onPressed: () {
-            Navigator.pop(context, 'OK');
-            //go next if it is not the last question
-            if (!questionBrain.isLastQuestion()) {
-              setState(() {
-                questionBrain.goToNextQuestion();
-                setScreenWidget();
-              });
-            } else {
-              //make the text "end" when it comes up to the last quiz
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      // score number
-                      const ResultsScreen(score: 5, title: 'Congratulations!'),
-                ),
-              );
-            }
-          },
-        ),
+        getNextButton(),
       ],
     );
   }
 
+  Widget getNextButton() {
+    return TextButton(
+      child: Text(getNextButtonText()),
+      onPressed: () {
+        Navigator.pop(context, 'OK');
+        //go next if it is not the last question
+        if (!questionBrain.isLastQuestion()) {
+          setState(() {
+            questionBrain.goToNextQuestion();
+            setScreenWidget();
+          });
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return getResultsScreen();
+            }),
+          );
+        }
+      },
+    );
+  }
+
+  String getNextButtonText() {
+    return questionBrain.isLastQuestion() ? "Finish" : "Next";
+  }
+
 // build button for choice
 //add value of answer in button
-  Widget buildChoiceButton(String choice) {
+  Widget buildOptionButton(String buttonText) {
     return Expanded(
-      flex: 1,
       child: Container(
         margin: const EdgeInsets.all(15.0),
         child: TextButton(
           onPressed: () {
-            showResultAlert(choice);
+            questionBrain.setAnswer(buttonText);
+            showResultAlert(buttonText);
           },
           style: TextButton.styleFrom(
-            backgroundColor: buttonColour,
+            backgroundColor: optionButtonColour,
           ),
           child: Text(
-            choice,
-            style: const TextStyle(fontSize: 20, color: Colors.black),
+            buttonText,
+            style: optionButtonTextStyle,
           ),
         ),
       ),
@@ -154,14 +179,3 @@ class LessonScreen extends StatefulWidget {
   @override
   _LessonScreenState createState() => _LessonScreenState();
 }
-
-// Old template code
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// const Text(
-// 'LESSON PAGE',
-// ),
-// ElevatedButton(onPressed: () {}, child: const Text('BACK TO HOME')),
-// ],
-// )
