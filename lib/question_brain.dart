@@ -57,7 +57,6 @@ class QuestionBrain {
     return _score;
   }
 
-  //check answers
   bool checkAnswer(String userAnswer) {
     return userAnswer == getCorrectAnswer();
   }
