@@ -50,13 +50,16 @@ class NoteOnStave {
 
 class Sheet extends CustomPainter {
 
+  // The place where the notes appear
   late double _startLine;
 
+  // THe place where the notes disappear
   late double _endLine;
 
   // The first line of the stave
   late double _baseLine;
 
+  // The offset from baseline of the notes
   final Map<String, int> _notes = <String, int>{
     'C4': -10,
     'D4': 0,
@@ -72,6 +75,7 @@ class Sheet extends CustomPainter {
 
   int _time = 0;
 
+  // How far each note should be spaced
   final double _noteSpacing = 50;
 
   final Map<int, Note> _map = <int, Note>{
@@ -88,12 +92,18 @@ class Sheet extends CustomPainter {
 
   bool _increment = false;
 
-  void _drawStaves(Canvas canvas, Size size) {
+  /// Sets up the stave
+  void _drawStave(Canvas canvas, Size size) {
+
+    // Draws the white background
+    canvas.drawRect(Offset(0, size.height ~/ 2 - 100) & Size(size.width, 170), Paint() ..color = Colors.white);
 
     Paint paint = Paint()
       ..color = Colors.black
       ..strokeWidth = 5
       ..strokeCap = StrokeCap.round;
+
+    // Draws the lines
 
     Offset startingPoint = Offset(0, _baseLine);
     Offset endingPoint = Offset(size.width, _baseLine);
@@ -115,6 +125,7 @@ class Sheet extends CustomPainter {
     Offset endingPoint4 = Offset(size.width, _baseLine - 80);
     canvas.drawLine(startingPoint4, endingPoint4, paint);
 
+    // Draws on the Clef
     TextPainter textPainter = TextPainter(
         text: const TextSpan(
             text: '𝄞',
@@ -126,6 +137,7 @@ class Sheet extends CustomPainter {
     textPainter.paint(canvas, Offset(20, _baseLine - 80));
   }
 
+  /// Draws the note on the screen
   void drawNote(NoteOnStave note, Canvas canvas) {
 
     Paint paint = Paint()
@@ -166,9 +178,7 @@ class Sheet extends CustomPainter {
 
     _endLine = 100;
 
-    canvas.drawRect(Offset(0, size.height ~/ 2 - 100) & Size(size.width, 170), Paint() ..color = Colors.white);
-
-    _drawStaves(canvas, size);
+    _drawStave(canvas, size);
 
     for (int count = 0; count < _notesOnStaves.length; count++)  {
       if (_notesOnStaves[count].pos < _endLine) {
