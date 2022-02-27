@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class _ResultsScreenState extends State<ResultsScreen> {
-  late String title;
-  late int score;
-
   @override
   void initState() {
     super.initState();
-    title = widget.title;
-    score = widget.score;
   }
 
   @override
@@ -26,7 +21,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
         child: Padding(
           padding: const EdgeInsets.all(2.0),
           child: Text(
-            title,
+            widget.title,
             textAlign: TextAlign.center,
             style: titleWidgetTextStyle,
           ),
@@ -43,13 +38,18 @@ class _ResultsScreenState extends State<ResultsScreen> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Text(
-            'You got $score questions correct.',
+            'You got ${getPercentage()}%',
             textAlign: TextAlign.center,
             style: scoreWidgetTextStyle,
           ),
         ),
       ),
     );
+  }
+
+  String getPercentage() {
+    double unroundedPercentage = widget.score * 100;
+    return unroundedPercentage.toStringAsFixed(1);
   }
 
   Widget getIconWidget() {
@@ -67,7 +67,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   IconData getIcon() {
-    if (score == 0) {
+    if (widget.score < failThreshold) {
       return Icons.cancel;
     } else {
       return Icons.check_circle;
@@ -98,7 +98,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
 class ResultsScreen extends StatefulWidget {
   static const String id = 'results_screen';
   final String title;
-  final int score;
+  final double score;
 
   const ResultsScreen({Key? key, required this.title, required this.score})
       : super(key: key);
