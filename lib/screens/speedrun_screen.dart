@@ -36,7 +36,7 @@ class SpeedrunScreen extends StatelessWidget {
                 isTimerTextShown: true,
                 autoStart: true,
                 onStart: () {
-                  print('Countdown Started');
+                  //print('Countdown Started');
                 },
                 onComplete: () {
                   //print('Countdown Ended');
