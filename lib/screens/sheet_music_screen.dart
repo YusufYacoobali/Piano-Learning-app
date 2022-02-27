@@ -239,7 +239,7 @@ class _SheetMusicScreenState extends State<SheetMusicScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lines'),
+        title: const Text('Sheet Music'),
         actions: [
           ElevatedButton(child: const Text('Start'), onPressed: () {
             if (!_isStarted) {
