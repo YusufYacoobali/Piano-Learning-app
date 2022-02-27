@@ -7,6 +7,7 @@ import 'package:sight_reading_app/screens/lesson_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
+import 'package:sight_reading_app/screens/speedrun_screen.dart';
 import 'package:sight_reading_app/theme_listener.dart';
 import 'package:provider/provider.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
@@ -49,6 +50,9 @@ class SightReadingApp extends StatelessWidget {
               // Temporary route to QuestionSkeleton
               QuestionSkeleton.id: (context) => const QuestionSkeleton(),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
+              // SpeedrunScreen.id: (context) => const SpeedrunScreen(
+              //       timerDuration: 10,
+              //     ),
             },
           );
         },
