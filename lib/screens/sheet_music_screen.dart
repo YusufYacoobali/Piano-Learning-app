@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+/// Progresses the sheet according to a beat
 class ProgressTimer {
   final Sheet _sheet;
   bool _isOn = false;
@@ -57,13 +58,16 @@ class Sheet extends CustomPainter {
   late double _baseLine;
 
   final Map<String, int> _notes = <String, int>{
-    'C': -10,
-    'D': 0,
-    'E': 10,
-    'F': 20,
-    'G': 30,
-    'A': 40,
-    'B': 50,
+    'C4': -10,
+    'D4': 0,
+    'E4':7,
+    'F4': 18,
+    'G4': 27,
+    'A4': 38,
+    'B4': 47,
+    'C5': 58,
+    'D5': 67,
+    'E5': 78,
   };
 
   int _time = 0;
@@ -71,13 +75,13 @@ class Sheet extends CustomPainter {
   final double _noteSpacing = 50;
 
   final Map<int, Note> _map = <int, Note>{
-    0: Note('C', 0, 1),
-    2: Note('E', 2, 1),
-    5: Note('D', 5, 1),
-    8: Note('B', 8, 1),
-    15: Note('D', 15, 1),
-    20: Note('G', 20, 1),
-    25: Note('F', 25, 1),
+    0: Note('C4', 0, 1),
+    2: Note('E4', 2, 1),
+    5: Note('D4', 5, 1),
+    8: Note('D5', 8, 1),
+    15: Note('D4', 15, 1),
+    20: Note('G4', 20, 1),
+    25: Note('F4', 25, 1),
   };
 
   final List<NoteOnStave> _notesOnStaves = <NoteOnStave>[];
@@ -122,6 +126,38 @@ class Sheet extends CustomPainter {
     textPainter.paint(canvas, Offset(20, _baseLine - 80));
   }
 
+  void drawNote(NoteOnStave note, Canvas canvas) {
+
+    Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 3
+      ..strokeCap = StrokeCap.round;
+
+    Rect rect = Rect.fromLTWH(note.pos, _baseLine - note.height, 20, 15);
+
+    double lineStart = _baseLine - note.height+10;
+    double lineEnd = _baseLine - note.height - 60;
+    double lineXPos = note.pos + 20;
+
+    if (int.parse(note.note.name[1]) > 4) {
+      lineEnd = _baseLine - note.height + 60;
+      lineXPos = note.pos;
+    }
+
+    Offset startingPoint = Offset(lineXPos, lineStart);
+    Offset endingPoint = Offset(lineXPos, lineEnd);
+
+    canvas.drawOval(rect, Paint());
+    canvas.drawLine(startingPoint, endingPoint, paint);
+
+    if (note.note.name == 'C4') {
+      Offset startingPoint1 = Offset(note.pos - 5, _baseLine - note.height + 8);
+      Offset endingPoint1 = Offset(note.pos + 27, _baseLine - note.height  + 8);
+      canvas.drawLine(startingPoint1, endingPoint1, paint);
+    }
+  }
+
+
   @override
   void paint(Canvas canvas, Size size) {
     _baseLine = size.height / 2 + 20;
@@ -147,8 +183,7 @@ class Sheet extends CustomPainter {
     }
     else {
       for (NoteOnStave note in _notesOnStaves) {
-        Rect rect = Rect.fromLTWH(note.pos, _baseLine - note.height, 20, 20);
-        canvas.drawOval(rect, Paint());
+        drawNote(note, canvas);
       }
     }
 
@@ -177,7 +212,8 @@ class Sheet extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(Sheet oldDelegate) => false;
+  bool shouldRepaint(Sheet oldDelegate) => true;
+
   @override
   bool shouldRebuildSemantics(Sheet oldDelegate) => false;
 }
@@ -199,12 +235,6 @@ class _SheetMusicScreenState extends State<SheetMusicScreen> {
     super.dispose();
   }
 
-  void rebuild() {
-    setState(() {
-      _sheet.increment();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -214,7 +244,6 @@ class _SheetMusicScreenState extends State<SheetMusicScreen> {
           ElevatedButton(child: const Text('Start'), onPressed: () {
             if (!_isStarted) {
               _isStarted = true;
-
             }
             setState(() {
               _timer.start();
