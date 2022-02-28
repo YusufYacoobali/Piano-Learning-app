@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'note_on_stave.dart';
 
+/// TODO Draw quavers on the stave
+
 class NoteImageBuilder {
 
   static bool _isOnLine (String note) {

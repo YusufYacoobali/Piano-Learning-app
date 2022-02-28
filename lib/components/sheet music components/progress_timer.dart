@@ -9,7 +9,9 @@ class ProgressTimer {
 
   ProgressTimer(this._sheet);
 
-  // TODO: Make start method work to get timer working
+  // TODO: Make the timer work
+
+  // Problem: The canvas only runs when the UI thread is running
 
   void start() {
     _isOn = true;

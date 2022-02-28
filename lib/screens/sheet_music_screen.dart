@@ -29,16 +29,19 @@ class SheetMusicScreenState extends State<SheetMusicScreen> {
           ElevatedButton(child: const Text('Start'), onPressed: () {
             if (!_isStarted) {
               _isStarted = true;
-              _timer.start();
+              setState(() {
+                _timer.start();
+              });
             }
-            }),
+          }),
           ElevatedButton(child: const Text('Stop'), onPressed: () {
             if (_isStarted) {
               _isStarted = false;
+              setState(() {
+                _timer.stop();
+              });
             }
-            setState(() {
-              _timer.stop();
-            });}),
+          }),
           ElevatedButton(child: const Text('Increment'), onPressed: () => _sheet.increment()),
         ],
       ),

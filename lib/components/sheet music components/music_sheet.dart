@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/sheet%20music%20components/stave_builder.dart';
 
 import 'note.dart';
 import 'note_image_builder.dart';
@@ -19,7 +20,7 @@ class MusicSheet extends CustomPainter {
   final Map<String, int> _notes = <String, int>{
     'C4': -10,
     'D4': 0,
-    'E4':7,
+    'E4': 7,
     'F4': 18,
     'G4': 27,
     'A4': 38,
@@ -38,7 +39,7 @@ class MusicSheet extends CustomPainter {
     0: Note('Cb4', 0, 1),
     2: Note('D4', 2, 1.5),
     5: Note('E4', 5, 1.5),
-    8: Note('Fb4', 8, 2),
+    8: Note('F#4', 8, 2),
     13: Note('G4', 15, 3),
     18: Note('A4', 20, 3),
     23: Note('B4', 25, 4),
@@ -51,62 +52,16 @@ class MusicSheet extends CustomPainter {
 
   bool _increment = false;
 
-  /// Sets up the stave
-  void _drawStave(Canvas canvas, Size size) {
-
-    // Draws the white background
-    canvas.drawRect(Offset(0, size.height ~/ 2 - 100) & Size(size.width, 170), Paint() ..color = Colors.white);
-
-    Paint paint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 4
-      ..strokeCap = StrokeCap.round;
-
-    // Draws the lines
-
-    Offset startingPoint = Offset(0, _baseLine);
-    Offset endingPoint = Offset(size.width, _baseLine);
-    canvas.drawLine(startingPoint, endingPoint, paint);
-
-    Offset startingPoint1 = Offset(0, _baseLine - 20);
-    Offset endingPoint1 = Offset(size.width, _baseLine - 20);
-    canvas.drawLine(startingPoint1, endingPoint1, paint);
-
-    Offset startingPoint2 = Offset(0, _baseLine - 40);
-    Offset endingPoint2 = Offset(size.width, _baseLine - 40);
-    canvas.drawLine(startingPoint2, endingPoint2, paint);
-
-    Offset startingPoint3 = Offset(0, _baseLine - 60);
-    Offset endingPoint3 = Offset(size.width, _baseLine - 60);
-    canvas.drawLine(startingPoint3, endingPoint3, paint);
-
-    Offset startingPoint4 = Offset(0, _baseLine - 80);
-    Offset endingPoint4 = Offset(size.width, _baseLine - 80);
-    canvas.drawLine(startingPoint4, endingPoint4, paint);
-
-    // Draws on the Clef
-    TextPainter textPainter = TextPainter(
-        text: const TextSpan(
-            text: '𝄞',
-            style: TextStyle(
-                fontSize: 70, color: Colors.black)),
-        textDirection: TextDirection.ltr)
-      ..layout();
-
-    textPainter.paint(canvas, Offset(20, _baseLine - 80));
-  }
-
   @override
   void paint(Canvas canvas, Size size) {
+
     _baseLine = size.height / 2 + 20;
-
     _startLine = size.width + 40;
-
     _endLine = 100;
 
-    _drawStave(canvas, size);
+    StaveBuilder.drawStave(canvas, size, _baseLine, false);
 
-    for (int count = 0; count < _notesOnStaves.length; count++)  {
+    for (int count = 0; count < _notesOnStaves.length; count++) {
       if (_notesOnStaves[count].pos < _endLine) {
         _notesOnStaves.remove(_notesOnStaves[count]);
         count--;
