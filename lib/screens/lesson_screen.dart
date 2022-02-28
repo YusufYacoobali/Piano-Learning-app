@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../constants.dart';
+import '../components/question_skeleton.dart';
+
 
 class _LessonScreenState extends State<LessonScreen> {
   @override
@@ -15,19 +18,49 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Read That Sheet'),
+        title: const Text('Lessons'),
       ),
       body: SafeArea(
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'LESSON PAGE',
+            Row (
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                lessonButton('Lesson 1'), // Container
+                lessonButton('Lesson 3'), // Container
+                lessonButton('Lesson 5') // Container
+              ],
             ),
-            //testing notification here
-            ElevatedButton(onPressed: () {}, child: const Text('BACK TO HOME')),
+            Row (
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                lessonButton('Lesson 2'), // Container
+                lessonButton('Lesson 4') // Container
+              ],
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  GestureDetector lessonButton(lessonText){
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, QuestionSkeleton.id);
+      },
+      child: Container(
+        child: Center(
+          child: Text(
+              '$lessonText'
+          ),
+        ),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: buttonBoxColour,
+        ),
+        padding: const EdgeInsets.all(35),
       ),
     );
   }
