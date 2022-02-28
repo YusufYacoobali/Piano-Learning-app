@@ -30,7 +30,7 @@ const titleWidgetTextStyle = TextStyle(
 
 const scoreWidgetTextStyle = TextStyle(
   fontWeight: FontWeight.w200,
-  fontSize: 40.0,
+  fontSize: 35.0,
 );
 
 // Menu Screen
@@ -94,4 +94,4 @@ const TextStyle optionButtonTextStyle =
 const TextStyle questionTrackerTextStyle = TextStyle(fontSize: 25);
 
 // Marking Criteria
-const double failThreshold = 0.4;
+const double passThreshold = 0.4;
