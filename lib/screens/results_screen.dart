@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/screens/menu_screen.dart';
 
 import '../constants.dart';
 
@@ -36,7 +37,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
       child: FittedBox(
         fit: BoxFit.contain,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
           child: Text(
             'You got ${getPercentage()}%',
             textAlign: TextAlign.center,
@@ -67,11 +68,33 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   IconData getIcon() {
-    if (widget.score < failThreshold) {
+    if (widget.score < passThreshold) {
       return Icons.cancel;
     } else {
       return Icons.check_circle;
     }
+  }
+
+  Widget getNavigationButtons() {
+    return Expanded(
+      flex: 1,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
+            },
+            child: const Text('Exit'),
+          ),
+          ElevatedButton(
+            // TODO: Implement review answers functionality
+            onPressed: () {},
+            child: const Text('Review Answers'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -87,6 +110,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
               getTitleWidget(),
               getIconWidget(),
               getScoreWidget(),
+              getNavigationButtons(),
             ],
           ),
         ),

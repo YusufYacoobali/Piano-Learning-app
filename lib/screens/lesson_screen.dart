@@ -98,7 +98,7 @@ class _LessonScreenState extends State<LessonScreen> {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
-    if (percentage < failThreshold) {
+    if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
     } else {
       title = "Congratulations!";
