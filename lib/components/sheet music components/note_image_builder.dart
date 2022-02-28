@@ -85,7 +85,7 @@ class NoteImageBuilder {
 
     canvas.drawOval(rect, paint);
 
-    if (note.note.name == 'C4') {
+    if (note.note.name[0] + note.note.name[note.note.name.length-1] == 'C4') {
       Offset startingPoint1 = Offset(note.pos - 5, baseLine - note.height + 8);
       Offset endingPoint1 = Offset(note.pos + 27, baseLine - note.height  + 8);
       canvas.drawLine(startingPoint1, endingPoint1, paint);

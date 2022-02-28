@@ -14,13 +14,13 @@ class ProgressTimer {
   void start() {
     _isOn = true;
     Timer.periodic(const Duration(milliseconds: 1000), (Timer t) {
-      if (!_isOn) {
-        t.cancel();
-      } else {
-        _sheet.increment();
+        if (!_isOn) {
+          t.cancel();
+        } else {
+          _sheet.increment();
+        }
       }
-    }
-    );
+      );
   }
 
   void stop() {

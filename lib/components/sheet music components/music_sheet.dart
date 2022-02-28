@@ -51,7 +51,6 @@ class MusicSheet extends CustomPainter {
 
   bool _increment = false;
 
-
   /// Sets up the stave
   void _drawStave(Canvas canvas, Size size) {
 
@@ -97,7 +96,6 @@ class MusicSheet extends CustomPainter {
     textPainter.paint(canvas, Offset(20, _baseLine - 80));
   }
 
-
   @override
   void paint(Canvas canvas, Size size) {
     _baseLine = size.height / 2 + 20;
@@ -132,8 +130,7 @@ class MusicSheet extends CustomPainter {
         NoteOnStave note = NoteOnStave(n, _startLine, i.toDouble());
         _notesOnStaves.add(note);
 
-        Rect rect = Rect.fromLTWH(note.pos, _baseLine - note.height, 20, 20);
-        canvas.drawOval(rect, Paint());
+        NoteImageBuilder.drawNote(note, canvas, _baseLine);
       }
     }
   }

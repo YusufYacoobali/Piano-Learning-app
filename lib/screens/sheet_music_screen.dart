@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/sheet music components/music_sheet.dart';
 import '../components/sheet music components/progress_timer.dart';
 
-class _SheetMusicScreenState extends State<SheetMusicScreen> {
+class SheetMusicScreenState extends State<SheetMusicScreen> {
 
   final MusicSheet _sheet = MusicSheet();
   late ProgressTimer _timer;
@@ -29,10 +29,9 @@ class _SheetMusicScreenState extends State<SheetMusicScreen> {
           ElevatedButton(child: const Text('Start'), onPressed: () {
             if (!_isStarted) {
               _isStarted = true;
-            }
-            setState(() {
               _timer.start();
-          });}),
+            }
+            }),
           ElevatedButton(child: const Text('Stop'), onPressed: () {
             if (_isStarted) {
               _isStarted = false;
@@ -40,7 +39,7 @@ class _SheetMusicScreenState extends State<SheetMusicScreen> {
             setState(() {
               _timer.stop();
             });}),
-          ElevatedButton(child: const Text('Increment'), onPressed: () => setState(() {_sheet.increment();})),
+          ElevatedButton(child: const Text('Increment'), onPressed: () => _sheet.increment()),
         ],
       ),
       body: CustomPaint(
@@ -57,5 +56,5 @@ class SheetMusicScreen extends StatefulWidget {
   const SheetMusicScreen({Key? key}) : super(key: key);
 
   @override
-  _SheetMusicScreenState createState() => _SheetMusicScreenState();
+  SheetMusicScreenState createState() => SheetMusicScreenState();
 }
