@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../components/sheet music components/music_sheet.dart';
-import '../components/sheet music components/progress_timer.dart';
+import '../components/sheet_music_components/note.dart';
+import '../components/sheet_music_components/music_sheet.dart';
+import '../components/sheet_music_components/progress_timer.dart';
 
 class SheetMusicScreenState extends State<SheetMusicScreen> {
 
-  final MusicSheet _sheet = MusicSheet();
+  late final MusicSheet _sheet;
   late ProgressTimer _timer;
   bool _isStarted = false;
+
+  final NextNote _nextNote = NextNote();
 
   @override
   void initState() {
     super.initState();
-    _timer = ProgressTimer(_sheet);
+    _sheet = MusicSheet(_nextNote, MusicSheetModes.playAlong);
+    _timer = ProgressTimer(_sheet, _nextNote);
   }
 
   @override
@@ -42,7 +46,11 @@ class SheetMusicScreenState extends State<SheetMusicScreen> {
               });
             }
           }),
-          ElevatedButton(child: const Text('Increment'), onPressed: () => _sheet.increment()),
+          ElevatedButton(child: const Text('Increment'), onPressed: () {
+            setState(() {
+              _timer.increment();
+            });
+          }),
         ],
       ),
       body: CustomPaint(
