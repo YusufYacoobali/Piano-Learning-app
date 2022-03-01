@@ -16,6 +16,11 @@ enum MusicSheetModes {
   detectKeys,
 }
 
+enum Clef {
+  treble,
+  bass,
+}
+
 class MusicSheet extends CustomPainter {
 
   // The place where the notes appear
@@ -27,8 +32,8 @@ class MusicSheet extends CustomPainter {
   // The first line of the stave
   late double _baseLine;
 
-  // The offset from baseline of the notes
-  final Map<String, int> _notes = <String, int>{
+  // The offset from baseline of the notes on the treble clef
+  final Map<String, int> _trebleClefNotes = <String, int>{
     'C4': -10,
     'D4': 0,
     'E4': 7,
@@ -39,6 +44,23 @@ class MusicSheet extends CustomPainter {
     'C5': 58,
     'D5': 67,
     'E5': 78,
+    'F5': 87,
+    'G5': 98,
+  };
+
+  // The offset from baseline of the notes on the bass clef
+  final Map<String, int> _bassClefNotes = <String, int>{
+    'C4': 107,
+    'B3': 96,
+    'A3': 87,
+    'G3': 78,
+    'F3': 67,
+    'E3': 58,
+    'D3': 47,
+    'C3': 37,
+    'B2': 27,
+    'A2': 17,
+    'G2': 7,
   };
 
   // How far each note should be spaced
@@ -50,7 +72,9 @@ class MusicSheet extends CustomPainter {
 
   final MusicSheetModes _mode;
 
-  MusicSheet(this._nextNote, this._mode);
+  final Clef _clef;
+
+  MusicSheet(this._nextNote, this._mode, this._clef);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -84,17 +108,20 @@ class MusicSheet extends CustomPainter {
 
     if (_nextNote.hasNextNote) {
       Note note = _nextNote.getNextNote();
-      int? position = _notes[note.name];
+      int? position = _trebleClefNotes[note.getNameWithoutSymbol()];
+      if (_clef == Clef.bass) {
+        position = _bassClefNotes[note.getNameWithoutSymbol()];
+      }
       if (position != null) {
         double pos = position.toDouble();
         NoteOnStave newNote = NoteOnStave(note, _startLine, pos);
         _notesOnStaves.add(newNote);
-        NoteImageBuilder.drawNote(newNote, canvas, _baseLine);
+        NoteImageBuilder.drawNote(newNote, canvas, _baseLine, _clef);
       }
     }
     else {
       for (NoteOnStave note in _notesOnStaves) {
-        NoteImageBuilder.drawNote(note, canvas, _baseLine);
+        NoteImageBuilder.drawNote(note, canvas, _baseLine, _clef);
       }
     }
   }

@@ -2,30 +2,48 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import 'music_sheet.dart';
+import 'note.dart';
 import 'note_on_stave.dart';
 
 /// TODO Draw quavers on the stave
 
 class NoteImageBuilder {
 
-  static bool _isOnLine (String note) {
-    List<String> notes = <String>['C4', 'E4', 'G4', 'B4', 'D5'];
-    for (String n in notes) {
-      if (note[0] == n[0] && note[note.length - 1] == n[n.length - 1]) return true;
+  static const String _trebleClefMidLineNote = 'C5';
+  static const String _bassClefMidLineNote = 'D3';
+
+  static bool _isOnLine (Note note, Clef clef) {
+    List<String> trebleNotes = <String>['C4', 'E4', 'G4', 'B4', 'D5', 'F5'];
+    List<String> bassNotes = <String>['C4', 'A3', 'F3', 'D3', 'B2'];
+    if (clef == Clef.treble) {
+      for (String n in trebleNotes) {
+        if (note.getNameWithoutSymbol() == n) return true;
+      }
+    }
+    else {
+      for (String n in bassNotes) {
+        if (note.getNameWithoutSymbol() == n) return true;
+      }
     }
     return false;
   }
 
-  static void _drawQuaver(NoteOnStave note, Canvas canvas, double baseLine) {
+  static void _drawQuaver(NoteOnStave note, Canvas canvas, double baseLine, Clef clef) {
     _drawCircle(note, canvas, baseLine);
-    _drawTail(note, canvas, baseLine);
+    _drawTail(note, canvas, baseLine, clef);
 
     Paint accent = Paint()
       ..color = Colors.black
       ..strokeWidth = 4
       ..strokeCap = StrokeCap.round;
 
-    if (int.parse(note.note.name[note.note.name.length - 1]) > 4) {
+    String min = _trebleClefMidLineNote;
+    if (clef == Clef.bass) {
+      min = _bassClefMidLineNote;
+    }
+
+    if (Note.greaterOrEqualTo(note.note, Note(min, -1, 0))) {
       Offset start = Offset(note.pos, baseLine - note.height + 60);
       Offset end = Offset(note.pos - 20, baseLine - note.height + 30);
       canvas.drawLine(start, end, accent);
@@ -36,6 +54,8 @@ class NoteImageBuilder {
       canvas.drawLine(start, end, accent);
     }
   }
+
+  /// TODO Implement multiple quavers
 
   static void drawQuavers(List<NoteOnStave> notes, Canvas canvas, double baseLine, double noteSpacing) {
     NoteOnStave first = notes.first;
@@ -79,14 +99,14 @@ class NoteImageBuilder {
     }
   }
 
-  static void _drawDot(NoteOnStave note, Canvas canvas, double baseLine) {
+  static void _drawDot(NoteOnStave note, Canvas canvas, double baseLine, Clef clef) {
     Paint paint = Paint()
       ..color = Colors.black
       ..strokeWidth = 8
       ..strokeCap = StrokeCap.round;
 
     double pos = baseLine - note.height + 8;
-    if (_isOnLine(note.note.name)) pos = pos - 9;
+    if (_isOnLine(note.note, clef)) pos = pos - 9;
 
     Offset point = Offset(note.pos + 32, pos);
     canvas.drawPoints(PointMode.points, <Offset>[point], paint);
@@ -105,7 +125,6 @@ class NoteImageBuilder {
     }
 
     TextPainter textPainter = TextPainter(
-
         text: TextSpan(
             text: symbol,
             style: TextStyle(
@@ -117,7 +136,7 @@ class NoteImageBuilder {
     textPainter.paint(canvas, Offset(x, y), );
   }
 
-  static void _drawTail(NoteOnStave note, Canvas canvas, double baseLine) {
+  static void _drawTail(NoteOnStave note, Canvas canvas, double baseLine, Clef clef) {
     Paint paint = Paint()
       ..color = Colors.black
       ..strokeWidth = 4
@@ -127,7 +146,12 @@ class NoteImageBuilder {
     double lineEnd = baseLine - note.height - 60;
     double lineXPos = note.pos + 20;
 
-    if (int.parse(note.note.name[note.note.name.length - 1]) > 4) {
+    String min = _trebleClefMidLineNote;
+    if (clef == Clef.bass) {
+      min = _bassClefMidLineNote;
+    }
+
+    if (Note.greaterOrEqualTo(note.note, Note(min, -1, 0))) {
       lineEnd = baseLine - note.height + 60;
       lineXPos = note.pos;
     }
@@ -150,7 +174,7 @@ class NoteImageBuilder {
 
     canvas.drawOval(rect, paint);
 
-    if (note.note.name[0] + note.note.name[note.note.name.length-1] == 'C4') {
+    if (note.note.getNameWithoutSymbol() == 'C4') {
       Offset startingPoint1 = Offset(note.pos - 5, baseLine - note.height + 8);
       Offset endingPoint1 = Offset(note.pos + 27, baseLine - note.height  + 8);
       canvas.drawLine(startingPoint1, endingPoint1, paint);
@@ -162,27 +186,27 @@ class NoteImageBuilder {
   }
 
   /// Draws the note on the screen
-  static void drawNote(NoteOnStave note, Canvas canvas, double baseLine) {
+  static void drawNote(NoteOnStave note, Canvas canvas, double baseLine, Clef clef) {
     if (note.note.duration == 0.5) {
-      _drawQuaver(note, canvas, baseLine);
+      _drawQuaver(note, canvas, baseLine, clef);
     }
     else if (note.note.duration == 1) {
       _drawCircle(note, canvas, baseLine);
-      _drawTail(note, canvas, baseLine);
+      _drawTail(note, canvas, baseLine, clef);
     }
     else if (note.note.duration == 1.5) {
       _drawCircle(note, canvas, baseLine);
-      _drawTail(note, canvas, baseLine);
-      _drawDot(note, canvas, baseLine);
+      _drawTail(note, canvas, baseLine, clef);
+      _drawDot(note, canvas, baseLine, clef);
     }
     else if (note.note.duration == 2) {
       _drawCircle(note, canvas, baseLine, style: PaintingStyle.stroke);
-      _drawTail(note, canvas, baseLine);
+      _drawTail(note, canvas, baseLine, clef);
     }
     else if (note.note.duration == 3) {
       _drawCircle(note, canvas, baseLine, style: PaintingStyle.stroke);
-      _drawTail(note, canvas, baseLine);
-      _drawDot(note, canvas, baseLine);
+      _drawTail(note, canvas, baseLine, clef);
+      _drawDot(note, canvas, baseLine, clef);
     }
     else if (note.note.duration == 4) {
       _drawCircle(note, canvas, baseLine, style: PaintingStyle.stroke);

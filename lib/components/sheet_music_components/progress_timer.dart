@@ -5,16 +5,27 @@ import 'note.dart';
 
 /// Progresses the sheet according to a beat
 class ProgressTimer {
-  final MusicSheet _sheet;
+  int _time = 0;
   bool _isOn = false;
 
+  final MusicSheet _sheet;
   final NextNote _nextNote;
 
-  ProgressTimer(this._sheet, this._nextNote);
+  final Map<int, Note> _notes = <int, Note>{
+    0: Note('Cb4', 0, 1),
+    2: Note('B3', 2, 1.5),
+    5: Note('A3', 5, 0.5),
+    8: Note('G#3', 8, 2),
+    13: Note('F3', 13, 3),
+    18: Note('E3', 28, 3),
+    23: Note('D3', 23, 4),
+    26: Note('C3', 26, 0.5),
+    29: Note('B2', 29, 3),
+    32: Note('A2', 32, 1),
+    34: Note('G2', 34, 1),
+  };
 
-  int _time = 0;
-
-  final Map<int, Note> _map = <int, Note>{
+  /*final Map<int, Note> _notes = <int, Note>{
     0: Note('Cb4', 0, 1),
     2: Note('D4', 2, 1.5),
     5: Note('E4', 5, 0.5),
@@ -25,11 +36,19 @@ class ProgressTimer {
     26: Note('C5', 25, 0.5),
     29: Note('D5', 25, 3),
     32: Note('E5', 25, 1),
-  };
+  };*/
+
+  ProgressTimer(this._sheet, this._nextNote) {
+    Note? n = _notes[_time];
+    if (n != null) {
+      Note note = n;
+      _nextNote.setNextNote(note);
+    }
+  }
 
   // TODO: Make the start timer work
 
-  // Problem: The canvas only runs when the UI thread is running
+  // Problem: The timer only runs when the UI thread is running
 
   void start() {
     _isOn = true;
@@ -47,12 +66,10 @@ class ProgressTimer {
     _isOn = false;
   }
 
-
   void increment() {
-    //_increment = true;
     _time++;
     _sheet.move();
-    Note? n = _map[_time];
+    Note? n = _notes[_time];
     if (n != null) {
       Note note = n;
       _nextNote.setNextNote(note);
