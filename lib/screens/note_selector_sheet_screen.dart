@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/sheet_music_components/note.dart';
 import '../components/sheet_music_components/music_sheet.dart';
 
+/// Temporary screen to test replacement for note images
 class NoteSelectorSheetScreenState extends State<NoteSelectorSheetScreen> {
 
   late final MusicSheet _sheet;
@@ -12,16 +13,16 @@ class NoteSelectorSheetScreenState extends State<NoteSelectorSheetScreen> {
   int _index = 0;
 
   final List<Note> _notes = <Note>[
-    Note('Cb4', 0, 1),
-    Note('D4', 0, 1.5),
-    Note('E4', 0, 0.5),
-    Note('F#4', 0, 2),
-    Note('G4', 0, 3),
-    Note('A4', 0, 3),
-    Note('B4', 0, 4),
-    Note('C5', 0, 0.5),
-    Note('D5', 0, 3),
-    Note('E5', 0, 1),
+    Note('Cb4', 1),
+    Note('D4', 1.5),
+    Note('E4', 0.5),
+    Note('F#4', 2),
+    Note('G4', 3),
+    Note('A4', 3),
+    Note('B4', 4),
+    Note('C5', 0.5),
+    Note('D5', 3),
+    Note('E5', 1),
   ];
 
   @override

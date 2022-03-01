@@ -15,9 +15,17 @@ class SheetMusicScreenState extends State<SheetMusicScreen> {
   @override
   void initState() {
     super.initState();
-    _sheet = MusicSheet(_nextNote, MusicSheetModes.playAlong, Clef.bass);
-    _timer = ProgressTimer(_sheet, _nextNote);
+    _sheet = MusicSheet(_nextNote, MusicSheetModes.playAlong, Clef.treble);
+    _timer = ProgressTimer(_sheet, _nextNote, this);
   }
+
+  void rebuild() {
+    setState(() {
+
+      //_sheet.move();
+    });
+  }
+
 
   @override
   void dispose() {

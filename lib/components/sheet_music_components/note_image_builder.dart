@@ -2,17 +2,16 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'music_sheet.dart';
 import 'note.dart';
 import 'note_on_stave.dart';
 
-/// TODO Draw quavers on the stave
-
+/// Builds a note on the stave
 class NoteImageBuilder {
 
   static const String _trebleClefMidLineNote = 'C5';
   static const String _bassClefMidLineNote = 'D3';
 
+  /// Whether the note is on a line
   static bool _isOnLine (Note note, Clef clef) {
     List<String> trebleNotes = <String>['C4', 'E4', 'G4', 'B4', 'D5', 'F5'];
     List<String> bassNotes = <String>['C4', 'A3', 'F3', 'D3', 'B2'];
@@ -43,7 +42,7 @@ class NoteImageBuilder {
       min = _bassClefMidLineNote;
     }
 
-    if (Note.greaterOrEqualTo(note.note, Note(min, -1, 0))) {
+    if (Note.greaterOrEqualTo(note.note, Note(min, -1))) {
       Offset start = Offset(note.pos, baseLine - note.height + 60);
       Offset end = Offset(note.pos - 20, baseLine - note.height + 30);
       canvas.drawLine(start, end, accent);
@@ -56,7 +55,6 @@ class NoteImageBuilder {
   }
 
   /// TODO Implement multiple quavers
-
   static void drawQuavers(List<NoteOnStave> notes, Canvas canvas, double baseLine, double noteSpacing) {
     NoteOnStave first = notes.first;
     NoteOnStave last = notes.last;
@@ -151,7 +149,7 @@ class NoteImageBuilder {
       min = _bassClefMidLineNote;
     }
 
-    if (Note.greaterOrEqualTo(note.note, Note(min, -1, 0))) {
+    if (Note.greaterOrEqualTo(note.note, Note(min, -1))) {
       lineEnd = baseLine - note.height + 60;
       lineXPos = note.pos;
     }

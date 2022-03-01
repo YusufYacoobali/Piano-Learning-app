@@ -4,7 +4,7 @@ import '../constants.dart';
 
 import 'sheet_music_screen.dart';
 
-/// This is only a temporary duplicate file to test the keyboard with the sheet music
+/// Temporary proof of concept screen for moving notes along
 
 class _KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
   final player = AudioCache();

@@ -4,8 +4,7 @@ import '../components/sheet_music_components/music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 import '../constants.dart';
 
-/// This is only a temporary duplicate file to test the keyboard with the sheet music
-
+/// Temporary proof of concept of detecting
 class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
   final player = AudioCache();
 
@@ -72,7 +71,7 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
             if (_sheet.getClef() == Clef.bass) {
               level = '3';
             }
-            Note note = Note(buttonText + level, 0, 1);
+            Note note = Note(buttonText + level, 1);
             _nextNote.setNextNote(note);
           });
         },
@@ -97,7 +96,7 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
         if (_sheet.getClef() == Clef.bass) {
           level = '3';
         }
-        Note note = Note(buttonText + level, 0, 1);
+        Note note = Note(buttonText + level, 1);
         _nextNote.setNextNote(note);
       },
       style: blackKeyButtonStyle,

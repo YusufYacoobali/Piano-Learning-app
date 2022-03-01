@@ -16,11 +16,6 @@ enum MusicSheetModes {
   detectKeys,
 }
 
-enum Clef {
-  treble,
-  bass,
-}
-
 class MusicSheet extends CustomPainter {
 
   // The place where the notes appear
