@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/question_skeleton.dart';
 import '../components/notification_service.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import '../constants.dart';
@@ -145,26 +144,21 @@ class AppNameBox extends StatelessWidget {
   Widget build(BuildContext context) {
     // Temporary GestureDetector to go to QuestionSkeleton screen
     // TODO: Remove GestureDetector widget when QuestionSkeleton properly linked up
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, QuestionSkeleton.id);
-      },
-      child: Container(
-        height: double.infinity,
-        width: double.infinity,
-        margin: boxMargin,
-        padding: const EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(boxRadii),
-          color: appNameBoxColour,
-        ),
-        child: FittedBox(
-          fit: BoxFit.contain,
-          alignment: Alignment.center,
-          child: Text(
-            formattedAppName,
-            style: appNameTextStyle,
-          ),
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      margin: boxMargin,
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(boxRadii),
+        color: appNameBoxColour,
+      ),
+      child: FittedBox(
+        fit: BoxFit.contain,
+        alignment: Alignment.center,
+        child: Text(
+          formattedAppName,
+          style: appNameTextStyle,
         ),
       ),
     );

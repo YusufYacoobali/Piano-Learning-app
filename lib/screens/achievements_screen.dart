@@ -72,7 +72,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Achivements"),
+          title: const Text("Achievements"),
           bottom: const TabBar(
             tabs: [
               Tab(

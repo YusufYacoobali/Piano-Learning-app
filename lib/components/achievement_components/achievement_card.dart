@@ -7,7 +7,8 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 const double cardWidth = 230;
 final Color cardColour = Colors.indigo.shade400;
 
-const double circularIndicatorRadius = 140;
+const double circularIndicatorRadius = 80;
+
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
 const Color indicatorGoodProgress = Colors.green;
