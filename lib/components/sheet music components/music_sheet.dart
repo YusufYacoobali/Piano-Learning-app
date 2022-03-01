@@ -38,12 +38,12 @@ class MusicSheet extends CustomPainter {
   final Map<int, Note> _map = <int, Note>{
     0: Note('Cb4', 0, 1),
     2: Note('D4', 2, 1.5),
-    5: Note('E4', 5, 1.5),
+    5: Note('E4', 5, 0.5),
     8: Note('F#4', 8, 2),
     13: Note('G4', 15, 3),
     18: Note('A4', 20, 3),
     23: Note('B4', 25, 4),
-    26: Note('C5', 25, 1),
+    26: Note('C5', 25, 0.5),
     29: Note('D5', 25, 3),
     32: Note('E5', 25, 1),
   };

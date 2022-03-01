@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 import 'note_on_stave.dart';
 
@@ -14,6 +15,69 @@ class NoteImageBuilder {
       if (note[0] == n[0] && note[note.length - 1] == n[n.length - 1]) return true;
     }
     return false;
+  }
+
+  static void _drawQuaver(NoteOnStave note, Canvas canvas, double baseLine) {
+    _drawCircle(note, canvas, baseLine);
+    _drawTail(note, canvas, baseLine);
+
+    Paint accent = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 4
+      ..strokeCap = StrokeCap.round;
+
+    if (int.parse(note.note.name[note.note.name.length - 1]) > 4) {
+      Offset start = Offset(note.pos, baseLine - note.height + 60);
+      Offset end = Offset(note.pos - 20, baseLine - note.height + 30);
+      canvas.drawLine(start, end, accent);
+    }
+    else {
+      Offset start = Offset(note.pos + 20, baseLine - note.height - 60);
+      Offset end = Offset(note.pos + 40, baseLine - note.height - 30);
+      canvas.drawLine(start, end, accent);
+    }
+  }
+
+  static void drawQuavers(List<NoteOnStave> notes, Canvas canvas, double baseLine, double noteSpacing) {
+    NoteOnStave first = notes.first;
+    NoteOnStave last = notes.last;
+
+    Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 3
+      ..strokeCap = StrokeCap.round;
+
+    Paint top = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 5
+      ..strokeCap = StrokeCap.round;
+
+    if (first.note.name[first.note.name.length-1] == '5' || last.note.name[first.note.name.length-1] == '5') {
+      double startHeight = baseLine - first.height + 60;
+      double endHeight = baseLine - last.height + 60;
+      int count = 0;
+      for (NoteOnStave note in notes) {
+        Offset endNoteHeight = Offset(note.pos, startHeight + (endHeight - startHeight) * (count / notes.length));
+        Offset startNoteHeight = Offset(note.pos, baseLine - note.height + 60);
+        canvas.drawLine(startNoteHeight, endNoteHeight, paint);
+        _drawCircle(note, canvas, baseLine);
+        count++;
+      }
+      canvas.drawLine(Offset(first.pos, startHeight), Offset(last.pos, endHeight), top);
+    }
+    else {
+      double startHeight = baseLine - first.height - 60;
+      double endHeight = baseLine - last.height - 60;
+      int count = 0;
+      for (NoteOnStave note in notes) {
+        Offset endNoteHeight = Offset(note.pos, startHeight + (endHeight - startHeight) * (count / notes.length));
+        Offset startNoteHeight = Offset(note.pos, baseLine - note.height - 60);
+        canvas.drawLine(startNoteHeight, endNoteHeight, paint);
+        _drawCircle(note, canvas, baseLine);
+        count++;
+      }
+      canvas.drawLine(Offset(first.pos, startHeight), Offset(last.pos, endHeight), top);
+    }
   }
 
   static void _drawDot(NoteOnStave note, Canvas canvas, double baseLine) {
@@ -57,7 +121,7 @@ class NoteImageBuilder {
   static void _drawTail(NoteOnStave note, Canvas canvas, double baseLine) {
     Paint paint = Paint()
       ..color = Colors.black
-      ..strokeWidth = 3
+      ..strokeWidth = 4
       ..strokeCap = StrokeCap.round;
 
     double lineStart = baseLine - note.height+10;
@@ -100,7 +164,10 @@ class NoteImageBuilder {
 
   /// Draws the note on the screen
   static void drawNote(NoteOnStave note, Canvas canvas, double baseLine) {
-    if (note.note.duration == 1) {
+    if (note.note.duration == 0.5) {
+      _drawQuaver(note, canvas, baseLine);
+    }
+    else if (note.note.duration == 1) {
       _drawCircle(note, canvas, baseLine);
       _drawTail(note, canvas, baseLine);
     }
