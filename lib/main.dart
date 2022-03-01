@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
-import 'package:sight_reading_app/screens/sheet_music_screen.dart';
 
 import 'package:sight_reading_app/screens/keyboard_sheet_screen.dart';
 import 'package:sight_reading_app/screens/note_selector_sheet_screen.dart';
@@ -51,7 +50,6 @@ class SightReadingApp extends StatelessWidget {
               AchievementsScreen.id: (context) => const AchievementsScreen(),
               SettingsScreen.id: (context) => const SettingsScreen(),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
-              SheetMusicScreen.id: (context) => const SheetMusicScreen(),
               // Temporary routes to demo screens
               KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
               NoteSelectorSheetScreen.id: (context) => const NoteSelectorSheetScreen(),

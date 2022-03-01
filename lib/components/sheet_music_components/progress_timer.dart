@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:sight_reading_app/screens/sheet_music_screen.dart';
-
+import '../../screens/keyboard_sheet_screen.dart';
 import 'music_sheet.dart';
 import 'note.dart';
 
@@ -12,6 +11,8 @@ class ProgressTimer {
 
   final MusicSheet _sheet;
   final NextNote _nextNote;
+
+  final KeyboardSheetScreenState _screen;
 
   // Bass clef notes
 
@@ -42,8 +43,6 @@ class ProgressTimer {
     29: Note('D5', 3, time: 25),
     32: Note('E5', 1, time: 25),
   };
-
-  final SheetMusicScreenState _screen;
 
   ProgressTimer(this._sheet, this._nextNote, this._screen) {
     Note? n = _notes[_time];
