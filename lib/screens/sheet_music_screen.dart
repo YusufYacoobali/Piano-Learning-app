@@ -30,6 +30,9 @@ class SheetMusicScreenState extends State<SheetMusicScreen> {
       appBar: AppBar(
         title: const Text('Sheet Music'),
         actions: [
+          ElevatedButton(child: const Text('Go to another demo'), onPressed: () {
+            Navigator.pushNamed(context, 'note_selector_sheet_screen');
+          }),
           ElevatedButton(child: const Text('Start'), onPressed: () {
             if (!_isStarted) {
               _isStarted = true;

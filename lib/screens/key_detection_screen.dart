@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import '../components/sheet_music_components/music_sheet.dart';
+import '../components/sheet_music_components/note.dart';
 import '../constants.dart';
-
-import 'sheet_music_screen.dart';
 
 /// This is only a temporary duplicate file to test the keyboard with the sheet music
 
-class _KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
+class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
   final player = AudioCache();
+
+  late MusicSheet _sheet;
+  final NextNote _nextNote = NextNote();
+
+  bool _toggle = false;
+
+  _KeyDetectionScreenState() {
+    _sheet = MusicSheet(_nextNote, MusicSheetModes.detectKeys, Clef.treble);
+  }
 
   void playSound(String noteName) => player.play('note_$noteName.wav');
 
@@ -58,6 +67,14 @@ class _KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
         ),
         onPressed: () {
           playSound(buttonText.toLowerCase());
+          setState(() {
+            String level = '4';
+            if (_sheet.getClef() == Clef.bass) {
+              level = '3';
+            }
+            Note note = Note(buttonText + level, 0, 1);
+            _nextNote.setNextNote(note);
+          });
         },
         style: whiteKeyButtonStyle,
       ),
@@ -76,6 +93,12 @@ class _KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
       ),
       onPressed: () {
         playSound(buttonText.toLowerCase());
+        String level = '4';
+        if (_sheet.getClef() == Clef.bass) {
+          level = '3';
+        }
+        Note note = Note(buttonText + level, 0, 1);
+        _nextNote.setNextNote(note);
       },
       style: blackKeyButtonStyle,
     );
@@ -144,9 +167,33 @@ class _KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const Expanded(
+            Expanded(
               flex: 5,
-              child: SheetMusicScreen(),
+              child: Scaffold(
+                appBar: AppBar(
+                  title: const Text('Key Detection'),
+                  actions: [
+                    Row(
+                      children: [
+                        const Text('Toggle Clefs'),
+                        Switch.adaptive(
+                          value: _toggle,
+                          onChanged: (value) => setState(() {
+                          _toggle = value;
+                          _sheet.clear();
+                          Clef clef = Clef.treble;
+                          if (_toggle) clef = Clef.bass;
+                          _sheet = MusicSheet(_nextNote, MusicSheetModes.detectKeys, clef);
+                        }),),
+                      ],
+                    ),
+                  ],
+                ),
+                body: CustomPaint(
+                  painter: _sheet,
+                  child: Container(),
+                ),
+              ),
             ),
             Expanded(
               flex: 3,
@@ -183,11 +230,11 @@ class _KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
   }
 }
 
-class KeyboardSheetScreen extends StatefulWidget {
-  static const String id = 'keyboard_sheet_screen';
+class KeyDetectionScreen extends StatefulWidget {
+  static const String id = 'key_detection_screen';
 
-  const KeyboardSheetScreen({Key? key}) : super(key: key);
+  const KeyDetectionScreen({Key? key}) : super(key: key);
 
   @override
-  _KeyboardSheetScreenState createState() => _KeyboardSheetScreenState();
+  _KeyDetectionScreenState createState() => _KeyDetectionScreenState();
 }

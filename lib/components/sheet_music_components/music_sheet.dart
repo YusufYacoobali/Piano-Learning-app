@@ -88,16 +88,16 @@ class MusicSheet extends CustomPainter {
     else if (_mode == MusicSheetModes.showNotes) {
       start = size.width/3;
       canvasWidth = size.width/3;
-      _startLine = canvasWidth/2;
+      _startLine =  start + (canvasWidth/2);
     }
     else {
       start = size.width/3;
       canvasWidth = size.width/3;
-      _startLine = canvasWidth/2;
+      _startLine = start + (canvasWidth/2);
     }
     _endLine = 100;
 
-    StaveBuilder.drawStave(canvas, size, _baseLine, start, start + canvasWidth, true);
+    StaveBuilder.drawStave(canvas, size, _baseLine, start, start + canvasWidth, _clef == Clef.treble);
 
     for (int count = 0; count < _notesOnStaves.length; count++) {
       if (_notesOnStaves[count].pos < _endLine) {
@@ -107,6 +107,9 @@ class MusicSheet extends CustomPainter {
     }
 
     if (_nextNote.hasNextNote) {
+      if (!(_mode == MusicSheetModes.playAlong)) {
+        clear();
+      }
       Note note = _nextNote.getNextNote();
       int? position = _trebleClefNotes[note.getNameWithoutSymbol()];
       if (_clef == Clef.bass) {
@@ -138,6 +141,11 @@ class MusicSheet extends CustomPainter {
       _notesOnStaves.removeLast();
     }
   }
+
+  Clef getClef() {
+    return _clef;
+  }
+
 
   @override
   bool shouldRepaint(MusicSheet oldDelegate) => true;
