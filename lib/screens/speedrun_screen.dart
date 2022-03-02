@@ -1,9 +1,9 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/question_skeleton.dart';
+import 'package:sight_reading_app/screens/lesson_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 
-class SpeedrunScreen extends StatelessWidget {
+class SpeedrunScreen extends StatefulWidget {
   final int timerDuration;
 
   const SpeedrunScreen({Key? key, required this.timerDuration})
@@ -12,12 +12,17 @@ class SpeedrunScreen extends StatelessWidget {
   static const String id = 'speedrun_screen';
 
   @override
+  State<SpeedrunScreen> createState() => _SpeedrunScreenState();
+}
+
+class _SpeedrunScreenState extends State<SpeedrunScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
           child: Stack(
         children: [
-          const QuestionSkeleton(),
+          const LessonScreen(),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
             child: Align(
@@ -25,7 +30,7 @@ class SpeedrunScreen extends StatelessWidget {
               child: CircularCountDownTimer(
                 width: 60,
                 height: 60,
-                duration: timerDuration,
+                duration: widget.timerDuration,
                 backgroundColor: Colors.purple[500],
                 fillColor: Colors.red,
                 ringColor: Colors.grey,
