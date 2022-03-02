@@ -21,25 +21,17 @@ class _LessonScreenState extends State<LessonScreen> {
         title: const Text('Lessons'),
       ),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row (
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                lessonButton('Lesson 1'), // Container
-                lessonButton('Lesson 3'), // Container
-                lessonButton('Lesson 5') // Container
-              ],
-            ),
-            Row (
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                lessonButton('Lesson 2'), // Container
-                lessonButton('Lesson 4') // Container
-              ],
-            ),
-          ],
+        child: Expanded(
+          child: Row (
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              lessonButton('Lesson 1'), // GestureDetector
+              lessonButton('Lesson 2'), // GestureDetector
+              lessonButton('Lesson 3'), // GestureDetector
+              lessonButton('Lesson 4'), // GestureDetector
+              lessonButton('Lesson 5')  // GestureDetector
+            ],
+          ),
         ),
       ),
     );
@@ -53,14 +45,17 @@ class _LessonScreenState extends State<LessonScreen> {
       child: Container(
         child: Center(
           child: Text(
-              '$lessonText'
+            '$lessonText',
+            style: const TextStyle(
+              fontSize: 17,
+            ),
           ),
         ),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: buttonBoxColour,
         ),
-        padding: const EdgeInsets.all(35),
+        padding: const EdgeInsets.all(23),
       ),
     );
   }
