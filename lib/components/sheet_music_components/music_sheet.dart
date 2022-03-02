@@ -4,6 +4,7 @@ import 'note.dart';
 import 'note_image_builder.dart';
 import 'note_on_stave.dart';
 import 'stave_builder.dart';
+import 'package:sight_reading_app/constants.dart';
 
 enum MusicSheetModes {
   /// Notes move along the screen
@@ -21,47 +22,19 @@ class MusicSheet extends CustomPainter {
   // The place where the notes appear
   late double _startLine;
 
-  // THe place where the notes disappear
+  // The place where the notes disappear
   late double _endLine;
 
   // The first line of the stave
   late double _baseLine;
 
-  // The offset from baseline of the notes on the treble clef
-  final Map<String, int> _trebleClefNotes = <String, int>{
-    'C4': -10,
-    'D4': 0,
-    'E4': 7,
-    'F4': 18,
-    'G4': 27,
-    'A4': 38,
-    'B4': 47,
-    'C5': 58,
-    'D5': 67,
-    'E5': 78,
-    'F5': 87,
-    'G5': 98,
-  };
-
-  // The offset from baseline of the notes on the bass clef
-  final Map<String, int> _bassClefNotes = <String, int>{
-    'C4': 107,
-    'B3': 96,
-    'A3': 87,
-    'G3': 78,
-    'F3': 67,
-    'E3': 58,
-    'D3': 47,
-    'C3': 37,
-    'B2': 27,
-    'A2': 17,
-    'G2': 7,
-  };
-
   // How far each note should be spaced
   final double _noteSpacing = 50;
 
   final List<NoteOnStave> _notesOnStaves = <NoteOnStave>[];
+
+  // Builds the notes on the stave
+  late final NoteImageBuilder _noteImageBuilder;
 
   final NextNote _nextNote;
 
@@ -69,11 +42,20 @@ class MusicSheet extends CustomPainter {
 
   final Clef _clef;
 
-  MusicSheet(this._nextNote, this._mode, this._clef);
+  bool _hasSet = false;
+
+  MusicSheet(this._nextNote, this._mode, this._clef) {
+    _noteImageBuilder = NoteImageBuilder(_clef);
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
-    _baseLine = size.height/2 + 20;
+    _noteImageBuilder.setCanvas(canvas);
+    if (!_hasSet) {
+      _hasSet = true;
+      _baseLine = size.height/2 + 20;
+      _noteImageBuilder.setBaseLine(_baseLine);
+    }
     double start = 0;
     double canvasWidth = 0;
     if (_mode == MusicSheetModes.playAlong) {
@@ -106,20 +88,20 @@ class MusicSheet extends CustomPainter {
         clear();
       }
       Note note = _nextNote.getNextNote();
-      int? position = _trebleClefNotes[note.getNameWithoutSymbol()];
+      int? position = trebleClefSheetNoteOffset[note.getNameWithoutSymbol()];
       if (_clef == Clef.bass) {
-        position = _bassClefNotes[note.getNameWithoutSymbol()];
+        position = bassClefSheetNoteOffset[note.getNameWithoutSymbol()];
       }
       if (position != null) {
         double pos = position.toDouble();
         NoteOnStave newNote = NoteOnStave(note, _startLine, pos);
         _notesOnStaves.add(newNote);
-        NoteImageBuilder.drawNote(newNote, canvas, _baseLine, _clef);
+        _noteImageBuilder.drawNote(newNote);
       }
     }
     else {
       for (NoteOnStave note in _notesOnStaves) {
-        NoteImageBuilder.drawNote(note, canvas, _baseLine, _clef);
+        _noteImageBuilder.drawNote(note);
       }
     }
   }
@@ -140,7 +122,6 @@ class MusicSheet extends CustomPainter {
   Clef getClef() {
     return _clef;
   }
-
 
   @override
   bool shouldRepaint(MusicSheet oldDelegate) => true;
