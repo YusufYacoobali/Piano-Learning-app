@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'note.dart';
 import 'note_on_stave.dart';
-
 import 'package:sight_reading_app/constants.dart';
 
 /// Builds a note on the stave
@@ -64,49 +63,6 @@ class NoteImageBuilder {
       Offset start = Offset(note.pos + 20, _baseLine - note.height - 60);
       Offset end = Offset(note.pos + 40, _baseLine - note.height - 30);
       _canvas.drawLine(start, end, accent);
-    }
-  }
-
-  /// TODO Implement multiple quavers
-  void drawQuavers(List<NoteOnStave> notes, double noteSpacing) {
-    NoteOnStave first = notes.first;
-    NoteOnStave last = notes.last;
-
-    Paint paint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 3
-      ..strokeCap = StrokeCap.round;
-
-    Paint top = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 5
-      ..strokeCap = StrokeCap.round;
-
-    if (first.note.name[first.note.name.length-1] == '5' || last.note.name[first.note.name.length-1] == '5') {
-      double startHeight = _baseLine - first.height + 60;
-      double endHeight = _baseLine - last.height + 60;
-      int count = 0;
-      for (NoteOnStave note in notes) {
-        Offset endNoteHeight = Offset(note.pos, startHeight + (endHeight - startHeight) * (count / notes.length));
-        Offset startNoteHeight = Offset(note.pos, _baseLine - note.height + 60);
-        _canvas.drawLine(startNoteHeight, endNoteHeight, paint);
-        _drawCircle(note);
-        count++;
-      }
-      _canvas.drawLine(Offset(first.pos, startHeight), Offset(last.pos, endHeight), top);
-    }
-    else {
-      double startHeight = _baseLine - first.height - 60;
-      double endHeight = _baseLine - last.height - 60;
-      int count = 0;
-      for (NoteOnStave note in notes) {
-        Offset endNoteHeight = Offset(note.pos, startHeight + (endHeight - startHeight) * (count / notes.length));
-        Offset startNoteHeight = Offset(note.pos, _baseLine - note.height - 60);
-        _canvas.drawLine(startNoteHeight, endNoteHeight, paint);
-        _drawCircle(note);
-        count++;
-      }
-      _canvas.drawLine(Offset(first.pos, startHeight), Offset(last.pos, endHeight), top);
     }
   }
 
