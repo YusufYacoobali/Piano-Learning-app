@@ -7,7 +7,6 @@ import 'keyboard_sheet_screen.dart';
 import 'lesson_menu_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
-import 'lesson_screen.dart';
 
 const navigateToPracticeMainMenuButtonKey = Key('navigateToPracticeMainMenu');
 
