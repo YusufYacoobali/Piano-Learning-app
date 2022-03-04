@@ -95,3 +95,40 @@ const TextStyle questionTrackerTextStyle = TextStyle(fontSize: 25);
 
 // Marking Criteria
 const double passThreshold = 0.4;
+
+// The offset from baseline of the notes on the treble clef
+const Map<String, int> trebleClefSheetNoteOffset = <String, int>{
+  'C4': -10,
+  'D4': 0,
+  'E4': 7,
+  'F4': 18,
+  'G4': 27,
+  'A4': 38,
+  'B4': 47,
+  'C5': 58,
+  'D5': 67,
+  'E5': 78,
+  'F5': 87,
+  'G5': 98,
+};
+
+/// The offset from baseline of the notes on the bass clef
+const Map<String, int> bassClefSheetNoteOffset = <String, int>{
+  'C4': 107,
+  'B3': 96,
+  'A3': 87,
+  'G3': 78,
+  'F3': 67,
+  'E3': 58,
+  'D3': 47,
+  'C3': 37,
+  'B2': 27,
+  'A2': 17,
+  'G2': 7,
+};
+
+/// The note of the middle line of the treble clef
+const String trebleClefMidLineNote = 'C5';
+
+/// The note of the middle line of the bass clef
+const String bassClefMidLineNote = 'D3';

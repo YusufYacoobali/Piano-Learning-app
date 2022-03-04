@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
+import 'package:sight_reading_app/screens/key_detection_screen.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import 'package:sight_reading_app/screens/lesson_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
@@ -11,6 +12,9 @@ import 'package:provider/provider.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
+
+import 'package:sight_reading_app/screens/keyboard_sheet_screen.dart';
+import 'package:sight_reading_app/screens/note_selector_sheet_screen.dart';
 
 void main() {
   // Starting the app in landscape orientation
@@ -46,6 +50,10 @@ class SightReadingApp extends StatelessWidget {
               AchievementsScreen.id: (context) => const AchievementsScreen(),
               SettingsScreen.id: (context) => const SettingsScreen(),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
+              // Temporary routes to demo screens
+              KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
+              NoteSelectorSheetScreen.id: (context) => const NoteSelectorSheetScreen(),
+              KeyDetectionScreen.id: (context) => const KeyDetectionScreen(),
             },
           );
         },
