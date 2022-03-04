@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/screens/lesson_screen.dart';
 import '../constants.dart';
-import '../components/question_skeleton.dart';
 
-class _LessonScreenState extends State<LessonScreen> {
+class _LessonMenuScreenState extends State<LessonMenuScreen> {
   @override
   void initState() {
     super.initState();
@@ -20,17 +20,15 @@ class _LessonScreenState extends State<LessonScreen> {
         title: const Text('Lessons'),
       ),
       body: SafeArea(
-        child: Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              lessonButton('Lesson 1'), // GestureDetector
-              lessonButton('Lesson 2'), // GestureDetector
-              lessonButton('Lesson 3'), // GestureDetector
-              lessonButton('Lesson 4'), // GestureDetector
-              lessonButton('Lesson 5') // GestureDetector
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            lessonButton('Lesson 1'), // GestureDetector
+            lessonButton('Lesson 2'), // GestureDetector
+            lessonButton('Lesson 3'), // GestureDetector
+            lessonButton('Lesson 4'), // GestureDetector
+            lessonButton('Lesson 5') // GestureDetector
+          ],
         ),
       ),
     );
@@ -39,7 +37,7 @@ class _LessonScreenState extends State<LessonScreen> {
   GestureDetector lessonButton(lessonText) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, QuestionSkeleton.id);
+        Navigator.pushNamed(context, LessonScreen.id);
       },
       child: Container(
         child: Center(
@@ -60,11 +58,11 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 }
 
-class LessonScreen extends StatefulWidget {
-  static const String id = 'lesson_screen';
+class LessonMenuScreen extends StatefulWidget {
+  static const String id = 'lesson_menu_screen';
 
-  const LessonScreen({Key? key}) : super(key: key);
+  const LessonMenuScreen({Key? key}) : super(key: key);
 
   @override
-  _LessonScreenState createState() => _LessonScreenState();
+  _LessonMenuScreenState createState() => _LessonMenuScreenState();
 }

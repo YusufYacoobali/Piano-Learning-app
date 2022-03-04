@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/key_detection_screen.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
+import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/lesson_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
@@ -43,6 +44,7 @@ class SightReadingApp extends StatelessWidget {
             routes: {
               MenuScreen.id: (context) => const MenuScreen(),
               LessonScreen.id: (context) => const LessonScreen(),
+              LessonMenuScreen.id: (context) => const LessonMenuScreen(),
               PracticeScreen.id: (context) => const PracticeScreen(),
               PlayAlongMenuScreen.id: (context) => const PlayAlongMenuScreen(),
               SpeedrunMenuScreen.id: (context) => const SpeedrunMenuScreen(),
@@ -52,7 +54,8 @@ class SightReadingApp extends StatelessWidget {
               KeyboardScreen.id: (context) => const KeyboardScreen(),
               // Temporary routes to demo screens
               KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
-              NoteSelectorSheetScreen.id: (context) => const NoteSelectorSheetScreen(),
+              NoteSelectorSheetScreen.id: (context) =>
+                  const NoteSelectorSheetScreen(),
               KeyDetectionScreen.id: (context) => const KeyDetectionScreen(),
             },
           );

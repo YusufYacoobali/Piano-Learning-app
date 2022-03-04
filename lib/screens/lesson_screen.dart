@@ -24,9 +24,6 @@ class _LessonScreenState extends State<LessonScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Read That Sheet'),
-      ),
       body: SafeArea(
         child: Column(
           children: [

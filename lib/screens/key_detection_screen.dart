@@ -178,12 +178,14 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
                         Switch.adaptive(
                           value: _toggle,
                           onChanged: (value) => setState(() {
-                          _toggle = value;
-                          _sheet.clear();
-                          Clef clef = Clef.treble;
-                          if (_toggle) clef = Clef.bass;
-                          _sheet = MusicSheet(_nextNote, MusicSheetModes.detectKeys, clef);
-                        }),),
+                            _toggle = value;
+                            _sheet.clear();
+                            Clef clef = Clef.treble;
+                            if (_toggle) clef = Clef.bass;
+                            _sheet = MusicSheet(
+                                _nextNote, MusicSheetModes.detectKeys, clef);
+                          }),
+                        ),
                       ],
                     ),
                   ],
