@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
-import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
@@ -27,42 +25,9 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lessons'),
+        title: const Text('Read That Sheet'),
       ),
       body: SafeArea(
-        child: Expanded(
-          child: Row (
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              lessonButton('Lesson 1'), // GestureDetector
-              lessonButton('Lesson 2'), // GestureDetector
-              lessonButton('Lesson 3'), // GestureDetector
-              lessonButton('Lesson 4'), // GestureDetector
-              lessonButton('Lesson 5')  // GestureDetector
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  GestureDetector lessonButton(lessonText){
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, QuestionSkeleton.id);
-      },
-      child: Container(
-        child: Center(
-          child: Text(
-            '$lessonText',
-            style: const TextStyle(
-              fontSize: 17,
-            ),
-          ),
-        ),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: buttonBoxColour,
         child: Column(
           children: [
             screenWidget,
@@ -75,7 +40,6 @@ class _LessonScreenState extends State<LessonScreen> {
             ),
           ],
         ),
-        padding: const EdgeInsets.all(23),
       ),
     );
   }
