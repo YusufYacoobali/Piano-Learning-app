@@ -8,7 +8,7 @@ final List<Question> lessonSixQuestions = [
   Question(
     image: 'Bs_LowB.jpeg',
     question:
-        'Similar to the last lesson, in this lesson we are going to read notes lower than usual. The lower the note on the lines(fix this), the higher the pitch. Tap B for this note',
+        'Similar to the last lesson, in this lesson we are going to read notes lower than usual. The lower the note on 5 line staff, the higher the pitch. Tap B for this note',
     correctAnswer: 'B',
   ),
   Question(
