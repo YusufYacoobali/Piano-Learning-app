@@ -1,8 +1,36 @@
-# sight_reading_app
+# Sight reading app.
+---
 
-Sight reading app.
+Description of the app
 
 ## Getting Started
+---
+INSTRUCTIONS TO COPY AND RUN PROJECT ON LOCAL MACHINE
+
+### Prerequisites
+THINGS NEEDED TO USE THE APP AND HOW TO INSTALL THEM
+
+### How to use:
+STEP GUIDE TO USE APP FEATURES
+
+
+## Built with
+---
+  - Dart  - The programming language used
+  - MENTION EXTERNAL LIBRARIES USED AS BULLETS
+
+## Authors
+---
+  - Aaron Gomes
+  - Yingtong (Kiley) Hu
+  - Nannaphat (Minnie) Keamanuchet
+  - Kyal Patel
+  - Janies Rosario
+  - Pradeep Shah
+  - Yusuf Yacoobali
+
+## LICENSE
+ADD STUFF ABOUT THE LICENSE
 
 This project is a starting point for a Flutter application.
 
