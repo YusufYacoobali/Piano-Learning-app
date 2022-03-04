@@ -1,26 +1,21 @@
-// import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:sight_reading_app/main.dart';
+void main() {
+  // _goToSpeedrunScreen(WidgetTester tester) async {
+  //   await tester.pumpWidget(const SightReadingApp());
+  //   await tester.tap(find.text('Practice'));
+  //   await tester.pumpAndSettle();
+  //   await tester.tap(find.text('Speedrun'));
+  //   await tester.pumpAndSettle();
+  //   await tester.tap(find.text('10 seconds'));
+  //   await tester.pumpAndSettle();
+  // }
 
-// void main() {
-//   _goToSpeedrunScreen(WidgetTester tester) async {
-//     await tester.pumpWidget(const SightReadingApp());
-//     await tester.tap(find.text('Practice'));
-//     await tester.pumpAndSettle();
-//     await tester.tap(find.text('Speedrun'));
-//     await tester.pumpAndSettle();
-//     await tester.tap(find.text('10 seconds'));
-//     await tester.pumpAndSettle();
-//   }
-
-//   // testWidgets(
-//   //     'Check that the settings page is displayed when the button is pressed.',
-//   //     (WidgetTester tester) async {
-//   //   await _goToSpeedrunScreen(tester);
-//   //   await tester.pumpAndSettle();
-//   //   expect(find.text('D'), findsOneWidget);
-//   //   expect(find.byType(CircularCountDownTimer), findsOneWidget);
-//   //   expect(find.text('D'), findsOneWidget);
-//   // });
-// }
+  // testWidgets(
+  //     'Check that the settings page is displayed when the button is pressed.',
+  //     (WidgetTester tester) async {
+  //   await _goToSpeedrunScreen(tester);
+  //   await tester.pumpAndSettle();
+  //   expect(find.text('D'), findsOneWidget);
+  //   expect(find.byType(CircularCountDownTimer), findsOneWidget);
+  //   expect(find.text('D'), findsOneWidget);
+  // });
+}
