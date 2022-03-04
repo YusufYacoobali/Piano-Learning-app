@@ -9,6 +9,7 @@ import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/theme_listener.dart';
 import 'package:provider/provider.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
+import 'package:sight_reading_app/screens/play_along_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 
@@ -41,6 +42,7 @@ class SightReadingApp extends StatelessWidget {
               LessonScreen.id: (context) => const LessonScreen(),
               PracticeScreen.id: (context) => const PracticeScreen(),
               PlayAlongMenuScreen.id: (context) => const PlayAlongMenuScreen(),
+              PlayAlongScreen.id: (context) => const PlayAlongScreen(),
               SpeedrunMenuScreen.id: (context) => const SpeedrunMenuScreen(),
               QuizSelectionScreen.id: (context) => const QuizSelectionScreen(),
               AchievementsScreen.id: (context) => const AchievementsScreen(),
