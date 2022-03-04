@@ -8,6 +8,8 @@ void main() {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
+    await tester.pumpAndSettle();
     expect(find.text('C'), findsOneWidget);
   });
 
@@ -15,6 +17,8 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
     await tester.pumpAndSettle();
     expect(find.text('D'), findsOneWidget);
   });
@@ -24,6 +28,8 @@ void main() {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
+    await tester.pumpAndSettle();
     expect(find.text('E'), findsOneWidget);
   });
 
@@ -31,6 +37,8 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
     await tester.pumpAndSettle();
     expect(find.text('F'), findsOneWidget);
   });
@@ -40,6 +48,8 @@ void main() {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
+    await tester.pumpAndSettle();
     expect(find.text('G'), findsOneWidget);
   });
 
@@ -48,6 +58,8 @@ void main() {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
+    await tester.pumpAndSettle();
     expect(find.text('A'), findsOneWidget);
   });
 
@@ -55,6 +67,8 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
     await tester.pumpAndSettle();
     expect(find.text('B'), findsOneWidget);
   });
