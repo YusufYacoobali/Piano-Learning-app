@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
+//import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
+//import '../components/pause_menu.dart';
 
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
+  //late PauseMenu pauseMenu;
+  //OverlayEntry? entry;
 
   @override
   void initState() {
     super.initState();
     questionBrain = QuestionBrain(questionList: lessonOneQuestions);
     setScreenWidget();
+    //pauseMenu = PauseMenuState() as PauseMenu;
   }
 
   @override
@@ -26,6 +31,17 @@ class _LessonScreenState extends State<LessonScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Read That Sheet'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.pause,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              //showMenu();
+            },
+          )
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -43,6 +59,92 @@ class _LessonScreenState extends State<LessonScreen> {
       ),
     );
   }
+
+/*
+  void showMenu()  {
+    final overlay = Overlay.of(context)!;
+
+    entry = OverlayEntry(
+      builder: (context) => buildMenu(),
+    );
+    overlay.insert(entry!);
+  }
+
+
+  Widget buildMenu() => Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Card(
+            color: Colors.black.withOpacity(0.8),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 80.0, vertical: 30.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  getMenuText(),
+                  const SizedBox(height: 10.0),
+                  getHomeButton(),
+                  const SizedBox(height: 10.0),
+                  getPlayButton(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+
+  void removeMenu() {
+    entry?.remove();
+    entry = null;
+  }
+
+  Widget getMenuText() {
+    return const Text(
+      'Paused',
+      style: TextStyle(fontSize: 40.0, color: Colors.white),
+    );
+  }
+
+  Widget getHomeButton() {
+    return ElevatedButton.icon(
+      label: const Text('Main menu'),
+      icon: const Icon(
+        Icons.home,
+        size: 20.0,
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.indigo.shade400,
+        onPrimary: Colors.grey.shade300,
+        fixedSize: const Size(150.0, 50.0),
+      ),
+      onPressed: () {
+        Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
+        removeMenu();
+      },
+    );
+  }
+
+  Widget getPlayButton() {
+    return ElevatedButton.icon(
+      label: const Text('Continue'),
+      icon: const Icon(
+        Icons.play_arrow,
+        size: 20.0,
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.indigo.shade400,
+        onPrimary: Colors.grey.shade300,
+        fixedSize: const Size(150.0, 50.0),
+      ),
+      onPressed: () {
+        Navigator.popUntil(context, ModalRoute.withName(LessonScreen.id));
+        removeMenu();
+      },
+    );
+  }
+*/
 
   List<Widget> getOptionButtons() {
     // TODO: Beginners see less options and experts see all options
