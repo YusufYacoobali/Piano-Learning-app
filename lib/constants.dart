@@ -42,7 +42,7 @@ const double boxRadii = 10.0;
 final TextStyle appNameTextStyle = TextStyle(
     fontSize: 100.0,
     fontWeight: FontWeight.bold,
-    color: Colors.grey.shade300,
+    color: Colors.white,
     shadows: [
       Shadow(
         color: Colors.blueGrey.shade800,
@@ -51,7 +51,7 @@ final TextStyle appNameTextStyle = TextStyle(
     ]);
 final TextStyle buttonTextStyle = TextStyle(
   fontSize: 100.0,
-  color: Colors.orange.shade500,
+  color: Colors.grey.shade300,
   fontWeight: FontWeight.bold,
 );
 final Icon settingsIcon = Icon(

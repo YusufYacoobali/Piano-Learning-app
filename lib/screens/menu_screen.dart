@@ -152,7 +152,12 @@ class AppNameBox extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(boxRadii),
-        color: appNameBoxColour,
+        border: Border.all(
+            color: Colors.black, // Set border color
+            width: 1.0),
+        gradient: const LinearGradient(
+          colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+        ),
       ),
       child: FittedBox(
         fit: BoxFit.contain,
@@ -187,7 +192,12 @@ class MenuButton extends StatelessWidget {
         margin: boxMargin,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(boxRadii),
-          color: buttonBoxColour,
+          border: Border.all(
+              color: Colors.black, // Set border color
+              width: 1.0),
+          gradient: const LinearGradient(
+            colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+          ),
         ),
         child: FittedBox(
           fit: BoxFit.contain,
