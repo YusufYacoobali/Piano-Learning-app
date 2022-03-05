@@ -132,3 +132,26 @@ const String trebleClefMidLineNote = 'C5';
 
 /// The note of the middle line of the bass clef
 const String bassClefMidLineNote = 'D3';
+
+//Achievement screen
+const double cardWidth = 230;
+final Color cardColour = Colors.indigo.shade400;
+
+const double circularIndicatorRadius = 80;
+
+const double indicatorLineWidth = 16;
+const Color indicatorBackground = Colors.red;
+const Color indicatorGoodProgress = Colors.green;
+const Color indicatorBadProgress = Colors.orange;
+
+const Icon playLessonIcon = Icon(
+  Icons.play_lesson,
+  size: 30.0,
+);
+
+const TextStyle achievementTextStyle = TextStyle(fontSize: 20);
+const int animationDuration = 1200;
+final Decoration achievementCardDecoration = BoxDecoration(
+  borderRadius: BorderRadius.circular(20),
+  color: cardColour,
+);
