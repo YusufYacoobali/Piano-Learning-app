@@ -34,25 +34,27 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     );
   }
 
-  GestureDetector lessonButton(lessonText) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, LessonScreen.id);
-      },
-      child: Container(
-        child: Center(
-          child: Text(
-            '$lessonText',
-            style: const TextStyle(
-              fontSize: 17,
+  Widget lessonButton(lessonText) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, LessonScreen.id);
+        },
+        child: Container(
+          child: Center(
+            child: Text(
+              '$lessonText',
+              style: const TextStyle(
+                fontSize: 17,
+              ),
             ),
           ),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: buttonBoxColour,
+          ),
+          padding: const EdgeInsets.all(23),
         ),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: buttonBoxColour,
-        ),
-        padding: const EdgeInsets.all(23),
       ),
     );
   }
