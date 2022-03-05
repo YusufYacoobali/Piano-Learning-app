@@ -155,3 +155,7 @@ final Decoration achievementCardDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(20),
   color: cardColour,
 );
+
+//achievement making
+const int numOfLessons = 10;
+const int numOfquizzes = 10;
