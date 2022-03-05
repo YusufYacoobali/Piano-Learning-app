@@ -76,25 +76,24 @@ void main() {
     }
   });
 
-  // TODO: Kyal, fix this test
-  // testWidgets(
-  //     'Check that the mode option buttons display the correct Text',
-  //     (WidgetTester tester) async {
-  //       await tester.pumpWidget(const SightReadingApp());
-  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       await tester.tap(find.byKey(PracticeScreen.navigateToSpeedrunMenuButtonKey));
-  //       await tester.pumpAndSettle();
-  //       for (var i = 0; i < modeButtonKeys.length; i++) {
-  //         await tester.scrollUntilVisible(
-  //             find.byKey(modeButtonKeys[i]),
-  //             500.0,
-  //             scrollable: find.byType(Scrollable)
-  //         );
-  //         expect(find.text(modes[i]), findsWidgets);
-  //         expect(find.text('Record: ${modeRecords[i]}'), findsWidgets);
-  //       }
-  //     }
-  // );
+  testWidgets(
+      'Check that the mode option buttons display the correct Text',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(PracticeScreen.navigateToSpeedrunMenuButtonKey));
+        await tester.pumpAndSettle();
+        for (var i = 0; i < modeButtonKeys.length; i++) {
+          await tester.scrollUntilVisible(
+              find.byKey(modeButtonKeys[i]),
+              500.0,
+              scrollable: find.byType(Scrollable)
+          );
+          expect(find.text(SpeedrunMenuScreen.modes[i].toString() + ' seconds'), findsWidgets);
+          expect(find.text('Record: ${modeRecords[i]}'), findsWidgets);
+        }
+      }
+  );
   //TODO: Create tests to make sure correct context data is passed in for each quiz button
 }
