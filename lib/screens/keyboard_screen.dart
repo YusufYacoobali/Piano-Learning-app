@@ -22,17 +22,17 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-        children: [
-        Expanded(
-        flex: 5,
-          child: Container()
+          children: [
+            Expanded(
+                flex: 5,
+                child: Container()
+            ),
+            Expanded(
+              flex: 3,
+              child: Keyboard().build(context),
+            ),
+          ],
         ),
-        Expanded(
-        flex: 3,
-        child: Keyboard().build(context),
-      ),
-        ],
-      ),
       ),
     );
   }

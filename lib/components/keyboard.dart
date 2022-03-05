@@ -127,29 +127,29 @@ class Keyboard {
 
   Widget build(BuildContext context) {
     return Container(
-                color: Colors.black,
-                // The black keys are stacked on top of the white keys
-                child: Stack(
-                  children: [
-                    Row(
-                      children: getWhiteKeys(),
-                    ),
-                    Column(
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child: Row(
-                            children: getBlackKeys(),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                  ],
+      color: Colors.black,
+      // The black keys are stacked on top of the white keys
+      child: Stack(
+        children: [
+          Row(
+            children: getWhiteKeys(),
+          ),
+          Column(
+            children: [
+              Expanded(
+                flex: 6,
+                child: Row(
+                  children: getBlackKeys(),
                 ),
-              );
+              ),
+              Expanded(
+                flex: 5,
+                child: Container(),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

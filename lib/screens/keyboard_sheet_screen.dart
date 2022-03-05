@@ -77,23 +77,23 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
       ),
       body: SafeArea(
         child: Column(
-        children: [
-        Expanded(
-        flex: 5,
-        child: Scaffold(
-          body: CustomPaint(
-            painter: _sheet,
-            child: Container(),
-          ),
+          children: [
+            Expanded(
+              flex: 5,
+              child: Scaffold(
+                body: CustomPaint(
+                  painter: _sheet,
+                  child: Container(),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Keyboard().build(context),
+            ),
+          ],
         ),
       ),
-      Expanded(
-        flex: 3,
-        child: Keyboard().build(context),
-      ),
-        ],
-    ),
-    ),
     );
   }
 }

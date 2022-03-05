@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:sight_reading_app/components/sheet_music_components/keyboard_with_detection.dart';
 import '../components/keyboard.dart';
 import '../components/sheet_music_components/music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
@@ -68,7 +69,7 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
             ),
             Expanded(
               flex: 3,
-              child: Keyboard().build(context),
+              child: KeyboardWithDetection(_sheet, _nextNote).build(context),
             ),
           ],
         ),
