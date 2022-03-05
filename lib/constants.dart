@@ -142,3 +142,7 @@ const TextStyle countdownTimerTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
+
+/// List of Names of Keys
+const List<String> whiteKeyNames = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];

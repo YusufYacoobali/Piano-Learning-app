@@ -45,7 +45,7 @@ class _LessonScreenState extends State<LessonScreen> {
   List<Widget> getOptionButtons() {
     // TODO: Beginners see less options and experts see all options
     List<Widget> optionButtons = [];
-    List<String> notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+    List<String> notes = whiteKeyNames;
     for (int i = 0; i < notes.length; ++i) {
       optionButtons.add(
         OptionButton(

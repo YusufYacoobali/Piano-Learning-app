@@ -38,7 +38,6 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     super.dispose();
   }
 
-  // TODO: DUPLICATE
   void setScreenWidget() {
     AssetImage image = questionBrain.getImage();
     String questionText = questionBrain.getQuestionText();
@@ -53,10 +52,9 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-  // TODO: (a bit) DUPLICATE
   List<Widget> getOptionButtons() {
     List<Widget> optionButtons = [];
-    List<String> notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+    List<String> notes = whiteKeyNames;
     for (int i = 0; i < notes.length; ++i) {
       optionButtons.add(
         OptionButton(
@@ -74,13 +72,10 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     return optionButtons;
   }
 
-  // TODO: (a bit) DUPLICATE
   Widget getResultsScreen() {
-    String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getQuestionNum();
-
-    title =
+    String title =
         "${questionBrain.getScore()} correct in ${widget.timerDuration} seconds";
 
     return ResultsScreen(
