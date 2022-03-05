@@ -31,6 +31,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
   @override
   void dispose() {
     super.dispose();
+    _timer.stop();
   }
 
   // Returns the text displayed on the white keys
