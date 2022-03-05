@@ -1,5 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/option_button.dart';
 import '../components/question_skeleton.dart';
@@ -37,6 +38,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     super.dispose();
   }
 
+  // TODO: DUPLICATE
   void setScreenWidget() {
     AssetImage image = questionBrain.getImage();
     String questionText = questionBrain.getQuestionText();
@@ -51,6 +53,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
+  // TODO: (a bit) DUPLICATE
   List<Widget> getOptionButtons() {
     List<Widget> optionButtons = [];
     List<String> notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
@@ -71,6 +74,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     return optionButtons;
   }
 
+  // TODO: (a bit) DUPLICATE
   Widget getResultsScreen() {
     String title = '';
     double percentage =
@@ -82,6 +86,34 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     return ResultsScreen(
       score: percentage,
       title: title,
+    );
+  }
+
+  Widget getCountdownTimer() {
+    return CircularCountDownTimer(
+      width: 60,
+      height: 60,
+      duration: widget.timerDuration,
+      isReverse: true,
+      backgroundColor: countdownTimerBackgroundColour,
+      fillColor: countdownTimerFillColour,
+      ringColor: countdownTimerRingColour,
+      strokeWidth: 20.0,
+      strokeCap: StrokeCap.round,
+      textStyle: countdownTimerTextStyle,
+      isTimerTextShown: true,
+      autoStart: true,
+      onStart: () {},
+      onComplete: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return getResultsScreen();
+            },
+          ),
+        );
+      },
     );
   }
 
@@ -107,36 +139,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
               padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
               child: Align(
                 alignment: Alignment.topRight,
-                child: CircularCountDownTimer(
-                  width: 60,
-                  height: 60,
-                  duration: widget.timerDuration,
-                  isReverse: true,
-                  backgroundColor: Colors.purple[500],
-                  fillColor: Colors.red,
-                  ringColor: Colors.grey,
-                  strokeWidth: 20.0,
-                  strokeCap: StrokeCap.round,
-                  textStyle: const TextStyle(
-                      fontSize: 33.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                  isTimerTextShown: true,
-                  autoStart: true,
-                  onStart: () {
-//print('Countdown Started');
-                  },
-                  onComplete: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return getResultsScreen();
-                        },
-                      ),
-                    );
-                  },
-                ),
+                child: getCountdownTimer(),
               ),
             ),
           ],
