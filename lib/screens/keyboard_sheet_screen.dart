@@ -18,8 +18,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
   void playSound(String noteName) => player.play('note_$noteName.wav');
 
   void rebuild() {
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override
@@ -97,7 +96,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
   // Returns the list of white keys
   List<Widget> getWhiteKeys() {
     List<Widget> whiteKeys = [];
-    List<String> notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+    List<String> notes = whiteKeyNames;
     for (int i = 0; i < notes.length; ++i) {
       whiteKeys.add(getWhiteKey(notes[i]));
     }
@@ -114,7 +113,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
 
   // Returns the list of black keys with the gaps in between them
   List<Widget> getBlackKeys() {
-    List<String> notes = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
+    List<String> notes = blackKeyNames;
     List<Widget> blackKeys = [
       getBlackKeySpace(4),
       // C# or Db key
@@ -157,30 +156,38 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
       appBar: AppBar(
         title: const Text('Sheet Music'),
         actions: [
-          ElevatedButton(child: const Text('Go to another demo'), onPressed: () {
-            Navigator.pushNamed(context, 'note_selector_sheet_screen');
-          }),
-          ElevatedButton(child: const Text('Start'), onPressed: () {
-            if (!_isStarted) {
-              _isStarted = true;
-              setState(() {
-                _timer.start();
-              });
-            }
-          }),
-          ElevatedButton(child: const Text('Stop'), onPressed: () {
-            if (_isStarted) {
-              _isStarted = false;
-              setState(() {
-                _timer.stop();
-              });
-            }
-          }),
-          ElevatedButton(child: const Text('Increment'), onPressed: () {
-            setState(() {
-              _timer.increment();
-            });
-          }),
+          ElevatedButton(
+              child: const Text('Go to another demo'),
+              onPressed: () {
+                Navigator.pushNamed(context, 'note_selector_sheet_screen');
+              }),
+          ElevatedButton(
+              child: const Text('Start'),
+              onPressed: () {
+                if (!_isStarted) {
+                  _isStarted = true;
+                  setState(() {
+                    _timer.start();
+                  });
+                }
+              }),
+          ElevatedButton(
+              child: const Text('Stop'),
+              onPressed: () {
+                if (_isStarted) {
+                  _isStarted = false;
+                  setState(() {
+                    _timer.stop();
+                  });
+                }
+              }),
+          ElevatedButton(
+              child: const Text('Increment'),
+              onPressed: () {
+                setState(() {
+                  _timer.increment();
+                });
+              }),
         ],
       ),
       body: SafeArea(
