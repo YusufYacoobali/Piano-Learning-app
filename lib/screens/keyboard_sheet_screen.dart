@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:sight_reading_app/screens/note_selector_sheet_screen.dart';
 import '../components/keyboard.dart';
 import '../components/sheet_music_components/music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
@@ -44,7 +45,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
           ElevatedButton(
               child: const Text('Go to another demo'),
               onPressed: () {
-                Navigator.pushNamed(context, 'note_selector_sheet_screen');
+                Navigator.pushNamed(context, NoteSelectorSheetScreen.id);
               }),
           ElevatedButton(
               child: const Text('Start'),

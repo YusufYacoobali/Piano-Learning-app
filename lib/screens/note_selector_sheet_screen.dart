@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/screens/key_detection_screen.dart';
 
 import '../components/sheet_music_components/note.dart';
 import '../components/sheet_music_components/music_sheet.dart';
@@ -44,7 +45,7 @@ class NoteSelectorSheetScreenState extends State<NoteSelectorSheetScreen> {
         title: const Text('Note Selector Music'),
         actions: [
           ElevatedButton(child: const Text('Go to yet another demo'), onPressed: () {
-            Navigator.pushNamed(context, 'key_detection_screen');
+            Navigator.pushNamed(context, KeyDetectionScreen.id);
           }),
           ElevatedButton(child: const Text('Next'), onPressed: () {
             setState(() {
