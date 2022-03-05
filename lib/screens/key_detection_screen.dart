@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:sight_reading_app/components/sheet_music_components/keyboard_with_detection.dart';
-import '../components/keyboard.dart';
+import '../components/sheet_music_components/keyboard_with_detection.dart';
 import '../components/sheet_music_components/music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
-import '../constants.dart';
 
 /// Temporary proof of concept of detecting
 class _KeyDetectionScreenState extends State<KeyDetectionScreen> {

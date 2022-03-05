@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import '../constants.dart';
-import 'package:sight_reading_app/components/keyboard.dart';
+import '../components/keyboard.dart';
 
 class _KeyboardScreenState extends State<KeyboardScreen> {
   final player = AudioCache();

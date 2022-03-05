@@ -5,7 +5,6 @@ import '../components/keyboard.dart';
 import '../components/sheet_music_components/music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 import '../components/sheet_music_components/progress_timer.dart';
-import '../constants.dart';
 
 /// Temporary proof of concept screen for moving notes along
 class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
