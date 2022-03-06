@@ -56,7 +56,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     return Expanded(
       key: const Key('question image'),
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(50.0),
         //show notes here
         child: CustomPaint(
           painter: _sheet,

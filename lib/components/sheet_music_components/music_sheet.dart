@@ -64,8 +64,8 @@ class MusicSheet extends CustomPainter {
     }
     else if (_mode == MusicSheetModes.showNotes) {
       start = size.width/4;
-      canvasWidth = size.width/2;
-      _startLine =  start + (canvasWidth/2);
+      canvasWidth = size.width/2 + 40;
+      _startLine =  start + (canvasWidth/2) + 20;
     }
     else {
       start = size.width/3;
