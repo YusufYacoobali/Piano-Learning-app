@@ -96,8 +96,46 @@ const TextStyle questionTrackerTextStyle = TextStyle(fontSize: 25);
 /// Marking Criteria
 const double passThreshold = 0.4;
 
+/// In what positions above or below the treble clef are to be painted
+const Map<String, List<String>> trebleClefNoteLinesOffset = <String, List<String>>{
+  // Notes that are below the treble clef stave
+  'C4': ['C4'],
+  'B3': ['C4'],
+  'A3': ['A3', 'C4'],
+  'G3': ['A3', 'C4'],
+  'F3': ['F3', 'A3', 'C4'],
+
+  // Notes that are above the treble clef stave
+  'A5': ['A5'],
+  'B5': ['A5'],
+  'C6': ['C6', 'A5'],
+  'D6': ['C6', 'A5'],
+  'E6': ['E6', 'C6', 'A5'],
+};
+
+/// In what positions above or below the bass clef are to be painted
+const Map<String, List<String>> bassClefNoteLinesOffset = <String, List<String>>{
+  // Notes that are below the bass clef stave
+  'E2': ['E2'],
+  'D2': ['E2'],
+  'C2': ['C2', 'E2'],
+  'B1': ['C2', 'E2'],
+  'A1': ['A1', 'C2', 'E2'],
+
+  // Notes that are above the bass clef stave
+  'C4': ['C4'],
+  'D4': ['C4'],
+  'E4': ['E4', 'C4'],
+  'F4': ['E4', 'C4'],
+  'G4': ['G4', 'E4', 'C4'],
+};
+
 /// The offset from baseline of the notes on the treble clef
 const Map<String, int> trebleClefSheetNoteOffset = <String, int>{
+  'F3': -48,
+  'G3': -37,
+  'A3': -28,
+  'B3': -19,
   'C4': -10,
   'D4': 0,
   'E4': 7,
@@ -110,10 +148,19 @@ const Map<String, int> trebleClefSheetNoteOffset = <String, int>{
   'E5': 78,
   'F5': 87,
   'G5': 98,
+  'A5': 107,
+  'B5': 118,
+  'C6': 127,
+  'D6': 138,
+  'E6': 147,
 };
 
 /// The offset from baseline of the notes on the bass clef
 const Map<String, int> bassClefSheetNoteOffset = <String, int>{
+  'G4': 116,
+  'F4': 116,
+  'E4': 127,
+  'D4': 116,
   'C4': 107,
   'B3': 96,
   'A3': 87,
@@ -125,6 +172,12 @@ const Map<String, int> bassClefSheetNoteOffset = <String, int>{
   'B2': 27,
   'A2': 17,
   'G2': 7,
+  'F2': 0,
+  'E2': -10,
+  'D2': -17,
+  'C2': -28,
+  'B1': -37,
+  'A1': -46,
 };
 
 /// The note of the middle line of the treble clef

@@ -5,7 +5,7 @@ import '../components/sheet_music_components/note.dart';
 //List of questions
 //Teaches how to read low notes
 
-final List<Question> lessonSixQuestions = [
+final List<Question> lessonSevenQuestions = [
   //Tutorial
   Question(
     note: Note(name: 'B2', duration: 4),
@@ -15,12 +15,13 @@ final List<Question> lessonSixQuestions = [
     correctAnswer: 'B',
   ),
 
-  // Question(
-  //   note: 'Tr_LowA.jpeg',
-  //   question:
-  //       'Notice that this note is lower than B in the previous question. Press A in the option box.',
-  //   correctAnswer: 'A',
-  // ),
+  Question(
+    note: Note(name: 'A3', duration: 4),
+    clef: Clef.treble,
+    question:
+        'Notice that this note is lower than B in the previous question. Press A in the option box.',
+    correctAnswer: 'A',
+  ),
 
   //start questions
   Question(

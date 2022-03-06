@@ -9,11 +9,15 @@ import 'package:sight_reading_app/constants.dart';
 /// Builds a note on the stave
 class NoteImageBuilder {
 
-  final Clef _clef;
+  Clef _clef;
   late Canvas _canvas;
   late final double _baseLine;
 
   NoteImageBuilder(this._clef);
+
+  void changeClef(Clef clef) {
+    _clef = clef;
+  }
 
   void setCanvas(Canvas canvas) {
     _canvas = canvas;
@@ -75,7 +79,7 @@ class NoteImageBuilder {
     double pos = _baseLine - note.height + 8;
     if (_isOnLine(note.note)) pos = pos - 9;
 
-    Offset point = Offset(note.pos + 32, pos);
+    Offset point = Offset(note.pos + 34, pos);
     _canvas.drawPoints(PointMode.points, <Offset>[point], paint);
   }
 
@@ -129,6 +133,38 @@ class NoteImageBuilder {
     _canvas.drawLine(startingPoint, endingPoint, paint);
   }
 
+  _drawLines(NoteOnStave note) {
+
+    Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 3
+      ..strokeCap = StrokeCap.round;
+
+    List<String>? lines;
+    if (_clef == Clef.treble) {
+      lines = trebleClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
+    }
+    else {
+      lines = bassClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
+    }
+    if (lines != null) {
+      for (String pos in lines) {
+        int? offset;
+        if (_clef == Clef.treble) {
+          offset = trebleClefSheetNoteOffset[pos];
+        }
+        else {
+          offset = offset = trebleClefSheetNoteOffset[pos];
+        }
+        if (offset != null) {
+          Offset startingPoint1 = Offset(note.pos - 5, _baseLine - offset + 8);
+          Offset endingPoint1 = Offset(note.pos + 26, _baseLine - offset + 8);
+          _canvas.drawLine(startingPoint1, endingPoint1, paint);
+        }
+      }
+    }
+  }
+
   void _drawCircle(NoteOnStave note, {PaintingStyle style = PaintingStyle.fill}) {
 
     Paint paint = Paint()
@@ -137,15 +173,11 @@ class NoteImageBuilder {
       ..strokeCap = StrokeCap.round
       ..style = style;
 
+    _drawLines(note);
+
     Rect rect = Rect.fromLTWH(note.pos, _baseLine - note.height, 20, 15);
 
     _canvas.drawOval(rect, paint);
-
-    if (note.note.getNameWithoutSymbol() == 'C4') {
-      Offset startingPoint1 = Offset(note.pos - 5, _baseLine - note.height + 8);
-      Offset endingPoint1 = Offset(note.pos + 27, _baseLine - note.height  + 8);
-      _canvas.drawLine(startingPoint1, endingPoint1, paint);
-    }
 
     if (note.note.name.length == 3) {
       _drawSymbol(note, note.note.name[1] == 'b');

@@ -125,6 +125,7 @@ class MusicSheet extends CustomPainter {
 
   void changeClef(Clef clef) {
     _clef = clef;
+    _noteImageBuilder.changeClef(clef);
   }
 
   @override
