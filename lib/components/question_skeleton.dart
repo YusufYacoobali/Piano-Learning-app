@@ -5,7 +5,7 @@ import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 
 class QuestionSkeleton extends StatefulWidget {
   static String id = 'question_skeleton';
-  final String note;
+  final Note note;
   final Clef clef;
   final String questionText;
   final int questionNum;
@@ -25,12 +25,10 @@ class QuestionSkeleton extends StatefulWidget {
 }
 
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
-  @override
-
   late final MusicSheet _sheet;
   late final NextNote _nextNote;
 
-
+  @override
   void initState() {
     super.initState();
     _nextNote = NextNote();
@@ -54,7 +52,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
 
   Widget getQuestionImage() {
     _sheet.changeClef(widget.clef);
-    _nextNote.setNextNote(Note(widget.note, 4));
+    _nextNote.setNextNote(widget.note);
     return Expanded(
       key: const Key('question image'),
       child: Padding(

@@ -17,31 +17,31 @@ class ProgressTimer {
   // Bass clef notes
 
   // final Map<int, Note> _notes = <int, Note>{
-  //   0: Note('Cb4', 0, 1),
-  //   2: Note('B3', 2, 1.5),
-  //   5: Note('A3', 5, 0.5),
-  //   8: Note('G#3', 8, 2),
-  //   13: Note('F3', 13, 3),
-  //   18: Note('E3', 28, 3),
-  //   23: Note('D3', 23, 4),
-  //   26: Note('C3', 26, 0.5),
-  //   29: Note('B2', 29, 3),
-  //   32: Note('A2', 32, 1),
-  //   34: Note('G2', 34, 1),
+  //   0: Note(name: 'Cb4', time: 0, duration: 1),
+  //   2: Note(name: 'B3', time: 2, duration: 1.5),
+  //   5: Note(name: 'A3', time: 5, duration: 0.5),
+  //   8: Note(name: 'G#3', time: 8, duration: 2),
+  //   13: Note(name: 'F3', time: 13, duration: 3),
+  //   18: Note(name: 'E3', time: 28, duration: 3),
+  //   23: Note(name: 'D3', time: 23, duration: 4),
+  //   26: Note(name: 'C3', time: 26, duration: 0.5),
+  //   29: Note(name: 'B2', time: 29, duration: 3),
+  //   32: Note(name: 'A2', time: 32, duration: 1),
+  //   34: Note(name: 'G2', time: 34, duration: 1),
   // };
 
   // Treble clef notes
   final Map<int, Note> _notes = <int, Note>{
-    0: Note('Cb4', 1, time: 0),
-    2: Note('D4', 1.5, time: 2),
-    5: Note('E4', 0.5, time: 5),
-    8: Note('F#4', 2, time: 8),
-    13: Note('G4', 3, time: 15),
-    18: Note('A4', 3, time: 20),
-    23: Note('B4', 4, time: 25),
-    26: Note('C5', 0.5, time: 25),
-    29: Note('D5', 3, time: 25),
-    32: Note('E5', 1, time: 25),
+    0: Note(name: 'Cb4', duration: 1, time: 0),
+    2: Note(name: 'D4', duration: 1.5, time: 2),
+    5: Note(name: 'E4', duration: 0.5, time: 5),
+    8: Note(name: 'F#4', duration: 2, time: 8),
+    13: Note(name: 'G4', duration: 3, time: 15),
+    18: Note(name: 'A4', duration: 3, time: 20),
+    23: Note(name: 'B4', duration: 4, time: 25),
+    26: Note(name: 'C5', duration: 0.5, time: 25),
+    29: Note(name: 'D5', duration: 3, time: 25),
+    32: Note(name: 'E5', duration: 1, time: 25),
   };
 
   ProgressTimer(this._sheet, this._nextNote, this._screen) {

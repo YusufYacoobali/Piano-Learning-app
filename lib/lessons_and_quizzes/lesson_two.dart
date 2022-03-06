@@ -8,88 +8,88 @@ import '../components/sheet_music_components/note.dart';
 final List<Question> lessonTwoQuestions = [
   //Tutorial
   Question(
-    note: 'F4',
+    note: Note(name: 'F4', duration: 4),
     clef: Clef.treble,
     question:
         'This lesson will teach you 2 more notes. This note is call F (Fa). Now press F in the option box.',
     correctAnswer: 'F',
   ),
   Question(
-    note: 'G4',
+    note: Note(name: 'G4', duration: 4),
     clef: Clef.treble,
     question: 'This note is call G (Sol). Now press G in the option box.',
     correctAnswer: 'G',
   ),
   //Lesson questions
   Question(
-    note: 'G4',
+    note: Note(name: 'G4', duration: 4),
     clef: Clef.treble,
     question:
         'Try answer these questions on your own with a combination of the previous notes.',
     correctAnswer: 'G',
   ),
   Question(
-    note: 'F4',
+    note: Note(name: 'F4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'F',
   ),
   Question(
-    note: 'G4',
+    note: Note(name: 'G4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'G',
   ),
   Question(
-    note: 'E4',
+    note: Note(name: 'E4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'E',
   ),
   Question(
-    note: 'D4',
+    note: Note(name: 'D4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'D',
   ),
   Question(
-    note: 'F4',
+    note: Note(name: 'F4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'F',
   ),
   Question(
-    note: 'C4',
+    note: Note(name: 'C4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'C',
   ),
   Question(
-    note: 'E4',
+    note: Note(name: 'E4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'E',
   ),
   Question(
-    note: 'F4',
+    note: Note(name: 'F4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'F',
   ),
   Question(
-    note: 'G4',
+    note: Note(name: 'G4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'G',
   ),
   Question(
-    note: 'F4',
+    note: Note(name: 'F4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'F',
   ),
   Question(
-    note: 'G4.jpeg',
+    note: Note(name: 'G4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'G',

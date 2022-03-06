@@ -71,7 +71,7 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
             if (_sheet.getClef() == Clef.bass) {
               level = '3';
             }
-            Note note = Note(buttonText + level, 1);
+            Note note = Note(name: buttonText + level, duration: 1);
             _nextNote.setNextNote(note);
           });
         },
@@ -96,7 +96,7 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
         if (_sheet.getClef() == Clef.bass) {
           level = '3';
         }
-        Note note = Note(buttonText + level, 1);
+        Note note = Note(name: buttonText + level, duration: 1);
         _nextNote.setNextNote(note);
       },
       style: blackKeyButtonStyle,

@@ -54,7 +54,7 @@ class NoteImageBuilder {
       min = bassClefMidLineNote;
     }
 
-    if (Note.greaterOrEqualTo(note.note, Note(min, -1))) {
+    if (Note.greaterOrEqualTo(note.note, Note(name: min, duration: -1))) {
       Offset start = Offset(note.pos, _baseLine - note.height + 60);
       Offset end = Offset(note.pos + 20, _baseLine - note.height + 30);
       _canvas.drawLine(start, end, accent);
@@ -118,7 +118,7 @@ class NoteImageBuilder {
       min = bassClefMidLineNote;
     }
 
-    if (Note.greaterOrEqualTo(note.note, Note(min, -1))) {
+    if (Note.greaterOrEqualTo(note.note, Note(name: min, duration: -1))) {
       lineEnd = _baseLine - note.height + 60;
       lineXPos = note.pos;
     }

@@ -8,12 +8,13 @@ import '../components/sheet_music_components/note.dart';
 final List<Question> lessonSixQuestions = [
   //Tutorial
   Question(
-    note: 'B2',
+    note: Note(name: 'B2', duration: 4),
     clef: Clef.bass,
     question:
         'Similar to the last lesson, in this lesson we are going to read notes lower than usual. The lower the note on 5 line staff, the higher the pitch. Tap B for this note',
     correctAnswer: 'B',
   ),
+
   // Question(
   //   note: 'Tr_LowA.jpeg',
   //   question:
@@ -23,38 +24,38 @@ final List<Question> lessonSixQuestions = [
 
   //start questions
   Question(
-    note: 'C3',
+    note: Note(name: 'C3', duration: 4),
     clef: Clef.bass,
     question:
         'Great Job. Try answering the rest of the questions without help. What note is this?',
     correctAnswer: 'C',
   ),
   Question(
-    note: 'D3',
+    note: Note(name: 'D3', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'D',
   ),
   Question(
-    note: 'B2',
+    note: Note(name: 'B2', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'B',
   ),
   Question(
-    note: 'A2',
+    note: Note(name: 'A2', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'A',
   ),
   Question(
-    note: 'A3',
+    note: Note(name: 'A3', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'A',
   ),
   Question(
-    note: 'G3',
+    note: Note(name: 'G3', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'G',

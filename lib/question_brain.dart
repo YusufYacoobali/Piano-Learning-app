@@ -13,7 +13,7 @@ class QuestionBrain {
     required this.questionList,
   });
 
-  String getNote() {
+  Note getNote() {
     return questionList[_questionNum].note;
   }
 

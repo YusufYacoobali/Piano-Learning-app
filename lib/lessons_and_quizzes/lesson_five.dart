@@ -9,21 +9,21 @@ final List<Question> lessonFiveQuestions = [
   //Tutorial
   //Read C to F with the base clef
   Question(
-    note: 'G3',
+    note: Note(name: 'G3', duration: 4),
     clef: Clef.bass,
     question:
         'Lets learn G A B on the Base clef. This is position of G on the Base clef. Now press G in the option box.',
     correctAnswer: 'G',
   ),
   Question(
-    note: 'A2',
+    note: Note(name: 'A2', duration: 4),
     clef: Clef.bass,
     question:
         'This name is A (La) on the Base clef. Now press A in the option box.',
     correctAnswer: 'A',
   ),
   Question(
-    note: 'B2',
+    note: Note(name: 'B2', duration: 4),
     clef: Clef.bass,
     question: 'This is B (Ti) on the Base clef. Now press B in the option box.',
     correctAnswer: 'B',
@@ -31,56 +31,56 @@ final List<Question> lessonFiveQuestions = [
 
   //start questions
   Question(
-    note: 'A2',
+    note: Note(name: 'A2', duration: 4),
     clef: Clef.bass,
     question:
         'Great Job. Now you have learnt to read the basic notes on the Base clef. Try answering the rest of the questions without help. What note is this?',
     correctAnswer: 'A',
   ),
   Question(
-    note: 'B2',
+    note: Note(name: 'B2', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'B',
   ),
   Question(
-    note: 'G3',
+    note: Note(name: 'G3', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'G',
   ),
   Question(
-    note: 'C3',
+    note: Note(name: 'C3', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'C',
   ),
   Question(
-    note: 'D3',
+    note: Note(name: 'D3', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'D',
   ),
   Question(
-    note: 'E3',
+    note: Note(name: 'E3', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'E',
   ),
   Question(
-    note: 'F3',
+    note: Note(name: 'F3', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'F',
   ),
   Question(
-    note: 'G3',
+    note: Note(name: 'G3', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'G',
   ),
   Question(
-    note: 'B2',
+    note: Note(name: 'B2', duration: 4),
     clef: Clef.bass,
     question: 'What note is this?',
     correctAnswer: 'B',
