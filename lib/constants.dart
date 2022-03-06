@@ -33,6 +33,14 @@ const scoreWidgetTextStyle = TextStyle(
   fontSize: 35.0,
 );
 
+ButtonStyle navButtonDeco = ElevatedButton.styleFrom(
+  primary: Colors.orange.shade700,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(25),
+  ),
+  elevation: 15.0,
+);
+
 // Menu Screen
 const String formattedAppName = 'Read\n That\n Sheet';
 final Color appNameBoxColour = Colors.indigo.shade300;

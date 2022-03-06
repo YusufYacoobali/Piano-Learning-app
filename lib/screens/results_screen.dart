@@ -75,35 +75,30 @@ class _ResultsScreenState extends State<ResultsScreen> {
     }
   }
 
-  ButtonStyle navButtonDeco = ElevatedButton.styleFrom(
-    primary: Colors.orange.shade700,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(25),
-    ),
-    elevation: 15.0,
-  );
-
   Widget getNavigationButtons() {
     return Expanded(
       flex: 1,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
-            },
-            style: navButtonDeco,
-            child: const Text('Exit'),
-          ),
-          ElevatedButton(
-            // TODO: Implement review answers functionality
-            onPressed: () {},
-            child: const Text('Review Answers'),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
+              },
+              style: navButtonDeco,
+              child: const Text('Exit'),
+            ),
+            ElevatedButton(
+              // TODO: Implement review answers functionality
+              onPressed: () {},
+              child: const Text('Review Answers'),
 
-            style: navButtonDeco,
-          )
-        ],
+              style: navButtonDeco,
+            )
+          ],
+        ),
       ),
     );
   }
