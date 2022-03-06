@@ -14,7 +14,6 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     super.initState();
-
     NotificationAPI.init(initScheduled: true);
     //ListenNotifications();
     NotificationAPI.showScheduledNotification(

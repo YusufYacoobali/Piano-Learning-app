@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 import 'package:sight_reading_app/question_brain.dart';
 
 void main() {
-  List<Question> getFakeQuestions() {
-    return [
+  QuestionList getFakeQuestions() {
+    return QuestionList(lessonID: -1, questionList: [
       Question(
         image: 'Tr_MidC.jpeg',
         question:
@@ -24,56 +25,60 @@ void main() {
             'This is our third note. The name is E (Mi). Now press E in the option box.',
         correctAnswer: 'E',
       ),
-    ];
+    ]);
   }
 
   test('Check that getImageName() correctly returns the name of the image', () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     String imageName = qb.getImageName();
-    expect(imageName, fakeQuestions[0].image);
+    expect(imageName, fakeQuestions.questionList[0].image);
   });
 
   test('Check that getImagePath() correctly returns the path of the image', () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     String imagePath = qb.getImagePath();
-    expect(imagePath, 'assets/note_images/${fakeQuestions[0].image}');
+    expect(
+        imagePath, 'assets/note_images/${fakeQuestions.questionList[0].image}');
   });
 
   test('Check that getImage() correctly returns the image', () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     AssetImage image = qb.getImage();
-    expect(image, AssetImage('assets/note_images/${fakeQuestions[0].image}'));
+    expect(
+        image,
+        AssetImage(
+            'assets/note_images/${fakeQuestions.questionList[0].image}'));
   });
 
   test('Check that getQuestionText() correctly returns the question text', () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     String questionText = qb.getQuestionText();
-    expect(questionText, fakeQuestions[0].question);
+    expect(questionText, fakeQuestions.questionList[0].question);
   });
 
   test(
       'Check that getCorrectAnswer() correctly returns the answer to the question',
       () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     String answer = qb.getCorrectAnswer();
-    expect(answer, fakeQuestions[0].correctAnswer);
+    expect(answer, fakeQuestions.questionList[0].correctAnswer);
   });
 
   test('Check that getQuestionNumber() correctly returns the question number',
       () {
-    QuestionBrain qb = QuestionBrain(questionList: getFakeQuestions());
+    QuestionBrain qb = QuestionBrain(questions: getFakeQuestions());
     int questionNum = qb.getQuestionNum();
     expect(questionNum, 1);
   });
 
   test('Check that goToNextQuestion() correctly increments the question number',
       () {
-    QuestionBrain qb = QuestionBrain(questionList: getFakeQuestions());
+    QuestionBrain qb = QuestionBrain(questions: getFakeQuestions());
     int beforeQuestionNum = qb.getQuestionNum();
     qb.goToNextQuestion();
     int afterQuestionNum = qb.getQuestionNum();
@@ -83,9 +88,9 @@ void main() {
   test(
       'Check that goToNextQuestion() does not increment the question number if we are at the last question',
       () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
-    for (int i = 0; i < fakeQuestions.length; ++i) {
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    for (int i = 0; i < fakeQuestions.questionList.length; ++i) {
       qb.goToNextQuestion();
     }
     int beforeQuestionNum = qb.getQuestionNum();
@@ -97,14 +102,14 @@ void main() {
   test(
       'Check that getTotalNumberOfQuestions() correctly returns the total number of questions',
       () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int numOfQuestions = qb.getTotalNumberOfQuestions();
-    expect(numOfQuestions, fakeQuestions.length);
+    expect(numOfQuestions, fakeQuestions.questionList.length);
   });
 
   test('Check that getScore() correctly starts at 0', () {
-    QuestionBrain qb = QuestionBrain(questionList: getFakeQuestions());
+    QuestionBrain qb = QuestionBrain(questions: getFakeQuestions());
     int score = qb.getScore();
     expect(score, 0);
   });
@@ -112,10 +117,10 @@ void main() {
   test(
       'Check that setAnswer() correctly increments the score if the answer is correct',
       () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int beforeScore = qb.getScore();
-    qb.setAnswer(fakeQuestions[0].correctAnswer);
+    qb.setAnswer(fakeQuestions.questionList[0].correctAnswer);
     int afterScore = qb.getScore();
     expect(afterScore, beforeScore + 1);
   });
@@ -123,8 +128,8 @@ void main() {
   test(
       'Check that setAnswer() does not increment the score if the answer is incorrect',
       () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int beforeScore = qb.getScore();
     qb.setAnswer("H");
     int afterScore = qb.getScore();
@@ -134,17 +139,17 @@ void main() {
   test(
       'Check that checkAnswer() correctly returns true if the answer is correct',
       () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
-    bool result = qb.checkAnswer(fakeQuestions[0].correctAnswer);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    bool result = qb.checkAnswer(fakeQuestions.questionList[0].correctAnswer);
     expect(result, true);
   });
 
   test(
       'Check that checkAnswer() correctly returns false if the answer is incorrect',
       () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     bool result = qb.checkAnswer("H");
     expect(result, false);
   });
@@ -152,9 +157,9 @@ void main() {
   test(
       'Check that isLastQuestion() correctly returns true if we are at the last question',
       () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
-    for (int i = 0; i < fakeQuestions.length; ++i) {
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    for (int i = 0; i < fakeQuestions.questionList.length; ++i) {
       qb.goToNextQuestion();
     }
     bool result = qb.isLastQuestion();
@@ -164,8 +169,8 @@ void main() {
   test(
       'Check that isLastQuestion() correctly returns false if we are not at the last question',
       () {
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     bool result = qb.isLastQuestion();
     expect(result, false);
   });

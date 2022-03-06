@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/question.dart';
+import 'package:sight_reading_app/storage_writer.dart';
+
+import 'lessons_and_quizzes/question_list.dart';
 
 //List of questions
 class QuestionBrain {
   int _questionNum = 0;
   int _score = 0;
 
-  final List<Question> questionList;
+  final QuestionList questions;
 
   QuestionBrain({
-    required this.questionList,
+    required this.questions,
   });
 
   String getImageName() {
-    return questionList[_questionNum].image;
+    return questions.questionList[_questionNum].image;
   }
 
   String getImagePath() {
@@ -26,15 +28,15 @@ class QuestionBrain {
   }
 
   String getQuestionText() {
-    return questionList[_questionNum].question;
+    return questions.questionList[_questionNum].question;
   }
 
   String getCorrectAnswer() {
-    return questionList[_questionNum].correctAnswer;
+    return questions.questionList[_questionNum].correctAnswer;
   }
 
   void goToNextQuestion() {
-    if (_questionNum < questionList.length - 1) {
+    if (_questionNum < questions.questionList.length - 1) {
       ++_questionNum;
     }
   }
@@ -44,12 +46,17 @@ class QuestionBrain {
   }
 
   int getTotalNumberOfQuestions() {
-    return questionList.length;
+    return questions.questionList.length;
   }
 
   void setAnswer(String userAnswer) {
     if (checkAnswer(userAnswer)) {
       ++_score;
+    }
+    if (isLastQuestion()) {
+      StorageWriter writer = StorageWriter();
+      String lessonName = 'lesson ${questions.lessonID}';
+      writer.write(lessonName, _score);
     }
   }
 
@@ -62,6 +69,6 @@ class QuestionBrain {
   }
 
   bool isLastQuestion() {
-    return _questionNum == questionList.length - 1;
+    return _questionNum == questions.questionList.length - 1;
   }
 }
