@@ -103,9 +103,9 @@ BoxDecoration lessonButtonDeco = BoxDecoration(
 );
 
 // Lesson Screen
-const Color optionButtonColour = Colors.orange;
+const Color optionButtonColour = Colors.purple;
 const TextStyle optionButtonTextStyle =
-    TextStyle(fontSize: 20, color: Colors.black);
+    TextStyle(fontSize: 20, color: Colors.white);
 
 // Question Skeleton
 const TextStyle questionTrackerTextStyle = TextStyle(fontSize: 25);
@@ -152,7 +152,6 @@ const String bassClefMidLineNote = 'D3';
 
 //Achievement screen
 const double cardWidth = 230;
-final Color cardColour = Colors.indigo.shade400;
 
 const double circularIndicatorRadius = 80;
 
@@ -162,7 +161,7 @@ const Color indicatorGoodProgress = Colors.green;
 const Color indicatorBadProgress = Colors.orange;
 
 const Icon playLessonIcon = Icon(
-  Icons.play_lesson,
+  Icons.circle_outlined,
   size: 30.0,
 );
 
@@ -170,7 +169,9 @@ const TextStyle achievementTextStyle = TextStyle(fontSize: 20);
 const int animationDuration = 1200;
 final Decoration achievementCardDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(20),
-  color: cardColour,
+  gradient: const LinearGradient(
+    colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
 );
 
 //achievement making
