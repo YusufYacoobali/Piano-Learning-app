@@ -30,25 +30,25 @@ void main() {
     ];
   }
 
-  // test('Check that getImageName() correctly returns the name of the image', () {
-  //   List<Question> fakeQuestions = getFakeQuestions();
-  //   QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
-  //   String imageName = qb.getImageName();
-  //   expect(imageName, fakeQuestions[0].image);
-  // });
-  //
+  test('Check that getNote() correctly returns the name of the note', () {
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+    String imageName = qb.getNote().name;
+    expect(imageName, fakeQuestions[0].note.name);
+  });
+
   // test('Check that getImagePath() correctly returns the path of the image', () {
   //   List<Question> fakeQuestions = getFakeQuestions();
   //   QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
-  //   String imagePath = qb.getImagePath();
-  //   expect(imagePath, 'assets/note_images/${fakeQuestions[0].image}');
+  //   String imagePath = qb.getNote().name;
+  //   expect(imagePath, 'assets/note_images/${fakeQuestions[0].note}');
   // });
   //
   // test('Check that getImage() correctly returns the image', () {
   //   List<Question> fakeQuestions = getFakeQuestions();
   //   QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
   //   AssetImage image = qb.getImage();
-  //   expect(image, AssetImage('assets/note_images/${fakeQuestions[0].image}'));
+  //   expect(image, AssetImage('assets/note_images/${fakeQuestions[0].note}'));
   // });
 
   test('Check that getQuestionText() correctly returns the question text', () {
