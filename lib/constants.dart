@@ -174,6 +174,7 @@ const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 
 //Achievement screen
 const double cardWidth = 230;
+const double cardHeight = 270;
 
 const double circularIndicatorRadius = 80;
 
