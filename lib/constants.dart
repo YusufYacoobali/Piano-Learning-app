@@ -54,10 +54,17 @@ final TextStyle buttonTextStyle = TextStyle(
   color: Colors.grey.shade300,
   fontWeight: FontWeight.bold,
 );
-final Icon settingsIcon = Icon(
+const Icon settingsIcon = Icon(
   Icons.settings,
   //size: 75.0,
-  color: Colors.orange.shade300,
+  //color: Color(0xff5f0a87),
+);
+
+BoxDecoration menuButtonDeco = BoxDecoration(
+  borderRadius: BorderRadius.circular(boxRadii),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
 );
 
 // Keyboard Screen
@@ -83,6 +90,16 @@ const blackKeyTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
   fontSize: 30.0,
+);
+
+//Lesson Menu Screen
+BoxDecoration lessonButtonDeco = BoxDecoration(
+  shape: BoxShape.circle,
+  color: buttonBoxColour,
+  //borderRadius: BorderRadius.circular(boxRadii),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
 );
 
 // Lesson Screen
