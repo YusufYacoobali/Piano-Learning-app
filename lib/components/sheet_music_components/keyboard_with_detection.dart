@@ -6,7 +6,7 @@ import 'note.dart';
 
 class KeyboardWithDetection extends Keyboard {
   final MusicSheet _sheet;
-  final NextNote _nextNote;
+  final NextNoteNotifier _nextNote;
 
   KeyboardWithDetection(this._sheet, this._nextNote);
 

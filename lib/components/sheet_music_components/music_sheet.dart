@@ -36,7 +36,7 @@ class MusicSheet extends CustomPainter {
   // Builds the notes on the stave
   late final NoteImageBuilder _noteImageBuilder;
 
-  final NextNote _nextNote;
+  final NextNoteNotifier _nextNote;
 
   final MusicSheetModes _mode;
 

@@ -9,7 +9,7 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
   final player = AudioCache();
 
   late MusicSheet _sheet;
-  final NextNote _nextNote = NextNote();
+  final NextNoteNotifier _nextNote = NextNoteNotifier();
 
   bool _toggle = false;
 

@@ -10,7 +10,7 @@ class ProgressTimer {
   bool _isOn = false;
 
   final MusicSheet _sheet;
-  final NextNote _nextNote;
+  final NextNoteNotifier _nextNote;
 
   final KeyboardSheetScreenState _screen;
 

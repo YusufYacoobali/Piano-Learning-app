@@ -12,7 +12,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
   late ProgressTimer _timer;
   bool _isStarted = false;
 
-  final NextNote _nextNote = NextNote();
+  final NextNoteNotifier _nextNote = NextNoteNotifier();
 
   final player = AudioCache();
 

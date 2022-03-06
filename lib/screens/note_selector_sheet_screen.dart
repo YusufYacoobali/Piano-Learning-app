@@ -9,7 +9,7 @@ class NoteSelectorSheetScreenState extends State<NoteSelectorSheetScreen> {
 
   late final MusicSheet _sheet;
 
-  final NextNote _nextNote = NextNote();
+  final NextNoteNotifier _nextNote = NextNoteNotifier();
 
   int _index = 0;
 
