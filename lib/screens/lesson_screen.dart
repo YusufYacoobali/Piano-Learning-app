@@ -3,6 +3,7 @@ import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
+import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
 import 'package:sight_reading_app/components/option_button.dart';
 
@@ -61,13 +62,15 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   void setScreenWidget() {
-    AssetImage image = questionBrain.getImage();
+    String note = questionBrain.getNote();
+    Clef clef = questionBrain.getClef();
     String questionText = questionBrain.getQuestionText();
     int questionNum = questionBrain.getQuestionNum();
     int totalNumOfQuestions = questionBrain.getTotalNumberOfQuestions();
 
     screenWidget = QuestionSkeleton(
-      image: image,
+      note: note,
+      clef: clef,
       questionText: questionText,
       questionNum: questionNum,
       totalNumOfQuestions: totalNumOfQuestions,

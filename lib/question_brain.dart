@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:sight_reading_app/question.dart';
+
+import 'components/sheet_music_components/note.dart';
 
 //List of questions
 class QuestionBrain {
@@ -12,17 +13,12 @@ class QuestionBrain {
     required this.questionList,
   });
 
-  String getImageName() {
-    return questionList[_questionNum].image;
+  String getNote() {
+    return questionList[_questionNum].note;
   }
 
-  String getImagePath() {
-    String path = 'assets/note_images/${getImageName()}';
-    return path;
-  }
-
-  AssetImage getImage() {
-    return AssetImage(getImagePath());
+  Clef getClef() {
+    return questionList[_questionNum].clef;
   }
 
   String getQuestionText() {

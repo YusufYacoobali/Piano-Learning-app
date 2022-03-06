@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 
 class QuestionSkeleton extends StatefulWidget {
   static String id = 'question_skeleton';
-  final AssetImage image;
+  final String note;
+  final Clef clef;
   final String questionText;
   final int questionNum;
   final int totalNumOfQuestions;
 
   const QuestionSkeleton({
     Key? key,
-    required this.image,
+    required this.note,
+    required this.clef,
     required this.questionText,
     required this.questionNum,
     required this.totalNumOfQuestions,
@@ -22,8 +26,15 @@ class QuestionSkeleton extends StatefulWidget {
 
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
   @override
+
+  late final MusicSheet _sheet;
+  late final NextNote _nextNote;
+
+
   void initState() {
     super.initState();
+    _nextNote = NextNote();
+    _sheet = MusicSheet(_nextNote, MusicSheetModes.showNotes, Clef.treble);
   }
 
   @override
@@ -42,15 +53,16 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   }
 
   Widget getQuestionImage() {
+    _sheet.changeClef(widget.clef);
+    _nextNote.setNextNote(Note(widget.note, 4));
     return Expanded(
       key: const Key('question image'),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        //show image here
-        child: Image(
-          height: 150,
-          width: 150,
-          image: widget.image,
+        //show notes here
+        child: CustomPaint(
+          painter: _sheet,
+          child: Container(),
         ),
       ),
     );

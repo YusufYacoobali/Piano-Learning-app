@@ -1,145 +1,150 @@
 import 'package:sight_reading_app/question.dart';
 
+import 'components/sheet_music_components/note.dart';
+
 //List of questions
 class Questions {
   int _questionNum = 0;
 
   final List<Question> _questions = [
     Question(
-      image: 'Bs_A.jpeg',
+      note: 'A3',
+      clef: Clef.bass,
       question: 'What note is this?',
       correctAnswer: 'A',
     ),
     Question(
-      image: 'Bs_B.jpeg',
+      note: 'B3',
+      clef: Clef.bass,
       question: 'What note is this?',
       correctAnswer: 'B',
     ),
     Question(
-      image: 'Bs_C.jpeg',
+      note: 'C3.jpeg',
+      clef: Clef.bass,
       question: 'What note is this?',
       correctAnswer: 'C',
     ),
     /* Question(
-      image: 'Bs_D.jpeg',
+      note: 'D3.jpeg',
       question: 'What note is this?',
       correctAnswer: 'D',
     ),
     Question(
-      image: 'Bs_E.jpeg',
+      note: 'E3.jpeg',
       question: 'What note is this?',
       correctAnswer: 'E',
     ),
     Question(
-      image: 'Bs_F.jpeg',
+      note: 'F3.jpeg',
       question: 'What note is this?',
       correctAnswer: 'F',
     ),
     Question(
-      image: 'Bs_G.jpeg',
+      note: 'G3.jpeg',
       question: 'What note is this?',
       correctAnswer: 'G',
     ),
     Question(
-      image: 'Bs_LowA.jpeg',
+      note: 'A2.jpeg',
       question: 'What note is this?',
       correctAnswer: 'A',
     ),
     Question(
-      image: 'Bs_LowB.jpeg',
+      note: 'B2.jpeg',
       question: 'What note is this?',
       correctAnswer: 'B',
     ),
     Question(
-      image: 'Bs_LowF.jpeg',
+      note: 'F2.jpeg',
       question: 'What note is this?',
       correctAnswer: 'F',
     ),
     Question(
-      image: 'Bs_LowG.jpeg',
+      note: 'G2.jpeg',
       question: 'What note is this?',
       correctAnswer: 'G',
     ),
     Question(
-      image: 'Bs_MidC.jpeg',
+      note: 'Bs_MidC.jpeg',
       question: 'What note is this?',
       correctAnswer: 'C',
     ),
     Question(
-      image: 'Tr_A.jpeg',
+      note: 'Tr_A.jpeg',
       question: 'What note is this?',
       correctAnswer: 'A',
     ),
     Question(
-      image: 'Tr_B.jpeg',
+      note: 'Tr_B.jpeg',
       question: 'What note is this?',
       correctAnswer: 'B',
     ),
     Question(
-      image: 'Tr_C.jpeg',
+      note: 'Tr_C.jpeg',
       question: 'What note is this?',
       correctAnswer: 'C',
     ),
     Question(
-      image: 'Tr_D.jpeg',
+      note: 'Tr_D.jpeg',
       question: 'What note is this?',
       correctAnswer: 'D',
     ),
     Question(
-      image: 'Tr_E.jpeg',
+      note: 'Tr_E.jpeg',
       question: 'What note is this?',
       correctAnswer: 'E',
     ),
     Question(
-      image: 'Tr_F.jpeg',
+      note: 'Tr_F.jpeg',
       question: 'What note is this?',
       correctAnswer: 'F',
     ),
     Question(
-      image: 'Tr_G.jpeg',
+      note: 'Tr_G.jpeg',
       question: 'What note is this?',
       correctAnswer: 'G',
     ),
     Question(
-      image: 'Tr_HighA.jpeg',
+      note: 'Tr_HighA.jpeg',
       question: 'What note is this?',
       correctAnswer: 'A',
     ),
     Question(
-      image: 'Tr_HighD.jpeg',
+      note: 'Tr_HighD.jpeg',
       question: 'What note is this?',
       correctAnswer: 'D',
     ),
     Question(
-      image: 'Tr_HighE.jpeg',
+      note: 'Tr_HighE.jpeg',
       question: 'What note is this?',
       correctAnswer: 'E',
     ),
     Question(
-      image: 'Tr_HighF.jpeg',
+      note: 'Tr_HighF.jpeg',
       question: 'What note is this?',
       correctAnswer: 'F',
     ),
     Question(
-      image: 'Tr_HighG.jpeg',
+      note: 'Tr_HighG.jpeg',
       question: 'What note is this?',
       correctAnswer: 'G',
     ),
     Question(
-      image: 'Tr_MidC.jpeg',
+      note: 'Tr_MidC.jpeg',
       question: 'What note is this?',
       correctAnswer: 'C', 
     ),*/
   ];
 
-  String getImageName() {
-    return _questions[_questionNum].image;
+  String getnoteName() {
+    return _questions[_questionNum].note;
   }
 
-  String getImagePath() {
-    String path = 'assets/note_images/';
-    String fullImagePath = path + getImageName();
-    return fullImagePath;
+  String getnotePath() {
+    String path = 'assets/note_notes/';
+    String fullnotePath = path + getnoteName();
+    return fullnotePath;
   }
 
   String getQuestionsText() {
