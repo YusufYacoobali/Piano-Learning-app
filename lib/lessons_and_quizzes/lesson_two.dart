@@ -14,7 +14,7 @@ final List<Question> lessonTwoQuestions = [
   Question(
     image: 'Tr_G.jpeg',
     question:
-        'This note is call G (Sol). The circle is across the second from lowest line of the staff. Now press G in the option box.',
+        'This note is call G (Sol). The circle is on the second from lowest line of the staff. Now press G in the option box.',
     correctAnswer: 'G',
   ),
   //Lesson questions

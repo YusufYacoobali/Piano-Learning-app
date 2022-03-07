@@ -8,7 +8,7 @@ final List<Question> lessonOneQuestions = [
   Question(
     image: 'Tr_MidC.jpeg',
     question:
-        'This is our first note. The name is C (Do). It is a circle with a short line across it. Now press C in the option box.',
+        'We are going to learn how to read notes. All music notes will be on the lines or spaces of the musical staff. The far left symbol is called the Treble clef. This is our first note. The name is C (Do). It is a circle with a short line across it. Now press C in the option box.',
     correctAnswer: 'C',
   ),
   Question(
