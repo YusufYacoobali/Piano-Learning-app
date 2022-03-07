@@ -12,7 +12,7 @@ class ProgressTimer {
   final NextNoteNotifier _nextNote;
 
   int _index = 0;
-  static const int iterationsPerTimeUnit = 100;
+  static const int iterationsPerTimeUnit = 80;
 
   // Bass clef notes
 
@@ -56,7 +56,7 @@ class ProgressTimer {
 
   void start() {
     _isOn = true;
-    Timer.periodic(const Duration(milliseconds: 10), (Timer t) {
+    Timer.periodic(const Duration(milliseconds: 5), (Timer t) {
         if (!_isOn) {
           t.cancel();
         } else {
