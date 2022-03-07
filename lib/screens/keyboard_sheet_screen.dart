@@ -94,7 +94,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
             ),
             Expanded(
               flex: 3,
-              child: Keyboard().build(context),
+              child: Keyboard(),
             ),
           ],
         ),

@@ -8,7 +8,7 @@ class KeyboardWithDetection extends Keyboard {
   final MusicSheet _sheet;
   final NextNoteNotifier _nextNote;
 
-  KeyboardWithDetection(this._sheet, this._nextNote);
+  KeyboardWithDetection(this._sheet, this._nextNote, {Key? key}) : super(key: key);
 
   // Returns the buttons for the white keys
   @override

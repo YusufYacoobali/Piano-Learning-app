@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../constants.dart';
 
-class Keyboard {
+class Keyboard extends StatelessWidget {
 
   final player = AudioCache();
+
+  Keyboard({Key? key}) : super(key: key);
 
   void playSound(String noteName) => player.play('note_$noteName.wav');
 
@@ -125,6 +127,7 @@ class Keyboard {
     return blackKeys;
   }
 
+  @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,

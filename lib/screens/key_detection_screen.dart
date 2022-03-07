@@ -67,7 +67,7 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
             ),
             Expanded(
               flex: 3,
-              child: KeyboardWithDetection(_sheet, _nextNote).build(context),
+              child: KeyboardWithDetection(_sheet, _nextNote),
             ),
           ],
         ),
