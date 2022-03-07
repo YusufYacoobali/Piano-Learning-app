@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import '../../screens/keyboard_sheet_screen.dart';
 import 'music_sheet.dart';
 import 'note.dart';
 
@@ -11,8 +10,6 @@ class ProgressTimer {
 
   final MusicSheet _sheet;
   final NextNoteNotifier _nextNote;
-
-  final KeyboardSheetScreenState _screen;
 
   // Bass clef notes
 
@@ -44,7 +41,9 @@ class ProgressTimer {
     32: Note('E5', 1, time: 25),
   };
 
-  ProgressTimer(this._sheet, this._nextNote, this._screen) {
+  final Function _updater;
+
+  ProgressTimer(this._sheet, this._nextNote, this._updater) {
     Note? n = _notes[_time];
     if (n != null) {
       Note note = n;
@@ -52,11 +51,7 @@ class ProgressTimer {
     }
   }
 
-  // TODO: Make the start timer work
-
-  // Problem: The timer only runs when the UI thread is running
-
-  void start() async {
+  void start() {
     _isOn = true;
     Timer.periodic(const Duration(milliseconds: 1000), (Timer t) {
         if (!_isOn) {
@@ -64,6 +59,7 @@ class ProgressTimer {
         } else {
           _time++;
           increment();
+          _updater(_time.toString());
         }
       }
       );
@@ -82,6 +78,5 @@ class ProgressTimer {
       Note note = n;
       _nextNote.setNextNote(note);
     }
-    _screen.rebuild();
   }
 }

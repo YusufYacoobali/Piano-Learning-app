@@ -16,17 +16,21 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
 
   final player = AudioCache();
 
+  String updater = "";
+
   void playSound(String noteName) => player.play('note_$noteName.wav');
 
-  void rebuild() {
-    setState(() {});
+  void updateScreen(String update) {
+    setState(() {
+      updater = update;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     _sheet = MusicSheet(_nextNote, MusicSheetModes.playAlong, Clef.treble);
-    _timer = ProgressTimer(_sheet, _nextNote, this);
+    _timer = ProgressTimer(_sheet, _nextNote, updateScreen);
   }
 
   @override
@@ -54,6 +58,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
                   setState(() {
                     _timer.start();
                   });
+
                 }
               }),
           ElevatedButton(
@@ -83,7 +88,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
               child: Scaffold(
                 body: CustomPaint(
                   painter: _sheet,
-                  child: Container(),
+                  child: Container(key: Key(updater)),
                 ),
               ),
             ),

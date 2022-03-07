@@ -99,10 +99,12 @@ class MusicSheet extends CustomPainter {
         _noteImageBuilder.drawNote(newNote);
       }
     }
-    else {
-      for (NoteOnStave note in _notesOnStaves) {
-        _noteImageBuilder.drawNote(note);
-      }
+    drawNotes();
+  }
+
+  void drawNotes() {
+    for (NoteOnStave note in _notesOnStaves) {
+      _noteImageBuilder.drawNote(note);
     }
   }
 
