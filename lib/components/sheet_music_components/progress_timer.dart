@@ -11,6 +11,9 @@ class ProgressTimer {
   final MusicSheet _sheet;
   final NextNoteNotifier _nextNote;
 
+  int _index = 0;
+  static const int iterationsPerTimeUnit = 100;
+
   // Bass clef notes
 
   // final Map<int, Note> _notes = <int, Note>{
@@ -53,13 +56,18 @@ class ProgressTimer {
 
   void start() {
     _isOn = true;
-    Timer.periodic(const Duration(milliseconds: 1000), (Timer t) {
+    Timer.periodic(const Duration(milliseconds: 10), (Timer t) {
         if (!_isOn) {
           t.cancel();
         } else {
-          _time++;
-          increment();
-          _updater(_time.toString());
+          if (_index == 0) {
+            increment();
+          }
+          else {
+            _sheet.move();
+          }
+          _index = (_index+1) % iterationsPerTimeUnit;
+          _updater(_index.toString());
         }
       }
       );

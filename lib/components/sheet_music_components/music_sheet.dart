@@ -28,8 +28,8 @@ class MusicSheet extends CustomPainter {
   // The first line of the stave
   late double _baseLine;
 
-  // How far each note should be spaced
-  final double _noteSpacing = 50;
+  // How far each note should move
+  final double _noteSpacing = 1;
 
   final List<NoteOnStave> _notesOnStaves = <NoteOnStave>[];
 
