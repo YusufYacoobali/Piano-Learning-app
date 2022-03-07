@@ -8,19 +8,19 @@ final List<Question> lessonOneQuestions = [
   Question(
     image: 'Tr_MidC.jpeg',
     question:
-        'This is our first note. The name is C (Do). Now press C in the option box.',
+        'This is our first note. The name is C (Do). It is a circle with a short line across it. Now press C in the option box.',
     correctAnswer: 'C',
   ),
   Question(
     image: 'Tr_D.jpeg',
     question:
-        'This is our second note. The name is D (Re). Now press D in the option box.',
+        'This is our second note. The name is D (Re). It is directly under the lowest line. Now press D in the option box.',
     correctAnswer: 'D',
   ),
   Question(
     image: 'Tr_E.jpeg',
     question:
-        'This is our third note. The name is E (Mi). Now press E in the option box.',
+        'This is our third note. The name is E (Mi). The circle is across the lowest line of the 5 line staff. Now press E in the option box.',
     correctAnswer: 'E',
   ),
   //start questions

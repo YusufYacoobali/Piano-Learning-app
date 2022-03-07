@@ -34,6 +34,8 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     );
   }
 
+//should make it also connect to other screen not just lesson 1
+  //what happens if lesson screen has a parameter
   Widget lessonButton(lessonText) {
     return Expanded(
       child: GestureDetector(
