@@ -8,13 +8,13 @@ final List<Question> lessonThreeQuestions = [
     image: 'Tr_A.jpeg',
     question:
         'This lesson will teach you the last 2 notes. This note is call A (La). It is located below the middle line of the staff. Now press A in the option box.',
-    correctAnswer: 'F',
+    correctAnswer: 'A',
   ),
   Question(
     image: 'Tr_B.jpeg',
     question:
         'This note is call B (Ti). It is located at the middle line of the staff. Now press B in the option box.',
-    correctAnswer: 'G',
+    correctAnswer: 'B',
   ),
   //Lesson questions
   Question(
