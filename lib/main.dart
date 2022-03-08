@@ -4,7 +4,6 @@ import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/key_detection_screen.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
-import 'package:sight_reading_app/screens/lesson_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
@@ -43,7 +42,6 @@ class SightReadingApp extends StatelessWidget {
             initialRoute: MenuScreen.id,
             routes: {
               MenuScreen.id: (context) => const MenuScreen(),
-              LessonScreen.id: (context) => const LessonScreen(),
               LessonMenuScreen.id: (context) => const LessonMenuScreen(),
               PracticeScreen.id: (context) => const PracticeScreen(),
               PlayAlongMenuScreen.id: (context) => const PlayAlongMenuScreen(),

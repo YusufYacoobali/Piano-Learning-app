@@ -4,16 +4,30 @@ import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
+import '../lessons_and_quizzes/lesson_two.dart';
+import '../lessons_and_quizzes/lesson_three.dart';
+import '../lessons_and_quizzes/lesson_four.dart';
+import '../lessons_and_quizzes/lesson_five.dart';
 import 'package:sight_reading_app/components/option_button.dart';
+import 'package:sight_reading_app/question.dart';
 
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
 
+  List<List<Question>> questionLists = [
+    lessonOneQuestions,
+    lessonTwoQuestions,
+    lessonThreeQuestions,
+    lessonFourQuestions,
+    lessonFiveQuestions
+  ];
   @override
+  //should make it go to other question list like make a list that hass all question list.
   void initState() {
     super.initState();
-    questionBrain = QuestionBrain(questionList: lessonOneQuestions);
+    int lessonNum = widget.lessonNum;
+    questionBrain = QuestionBrain(questionList: questionLists[lessonNum - 1]);
     setScreenWidget();
   }
 
@@ -156,8 +170,9 @@ class _LessonScreenState extends State<LessonScreen> {
 
 class LessonScreen extends StatefulWidget {
   static const String id = 'lesson_screen';
-
-  const LessonScreen({Key? key}) : super(key: key);
+  final int lessonNum;
+  const LessonScreen({Key? key, this.lessonNum = 1}) : super(key: key);
+  //int lessonNum;
 
   @override
   _LessonScreenState createState() => _LessonScreenState();

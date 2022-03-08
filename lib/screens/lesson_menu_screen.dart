@@ -23,11 +23,11 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            lessonButton('Lesson 1'), // GestureDetector
-            lessonButton('Lesson 2'), // GestureDetector
-            lessonButton('Lesson 3'), // GestureDetector
-            lessonButton('Lesson 4'), // GestureDetector
-            lessonButton('Lesson 5') // GestureDetector
+            lessonButton('Lesson 1', 1), // GestureDetector
+            lessonButton('Lesson 2', 2), // GestureDetector
+            lessonButton('Lesson 3', 3), // GestureDetector
+            lessonButton('Lesson 4', 4), // GestureDetector
+            lessonButton('Lesson 5', 5) // GestureDetector
           ],
         ),
       ),
@@ -36,11 +36,17 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
 
 //should make it also connect to other screen not just lesson 1
   //what happens if lesson screen has a parameter
-  Widget lessonButton(lessonText) {
+  Widget lessonButton(lessonText, lessonNum) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, LessonScreen.id);
+          //Navigator.push(context, LessonScreen.id, arguments: <int>{lessonNum});
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return LessonScreen(lessonNum: lessonNum);
+            }),
+          );
         },
         child: Container(
           child: Center(
