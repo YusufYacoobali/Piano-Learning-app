@@ -5,6 +5,7 @@ class StorageWriter {
 
   StorageWriter() {
     _setDefaultValues();
+    _writeDefaultsToStorage();
   }
 
   Object read(String key) {

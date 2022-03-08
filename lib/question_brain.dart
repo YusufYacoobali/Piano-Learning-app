@@ -7,6 +7,7 @@ import 'lessons_and_quizzes/question_list.dart';
 class QuestionBrain {
   int _questionNum = 0;
   int _score = 0;
+  StorageWriter writer = StorageWriter();
 
   final QuestionList questions;
 
@@ -54,7 +55,6 @@ class QuestionBrain {
       ++_score;
     }
     if (isLastQuestion()) {
-      StorageWriter writer = StorageWriter();
       String lessonName = 'lesson ${questions.lessonID}';
       writer.write(lessonName, _score);
     }
