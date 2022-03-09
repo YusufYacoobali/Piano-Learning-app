@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../speedrun_menu_screen.dart';
 
 class SpeedrunInstructions extends StatelessWidget {
   const SpeedrunInstructions({Key? key}) : super(key: key);
@@ -10,17 +9,16 @@ class SpeedrunInstructions extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Speed-run Mode'),
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                    context, SpeedrunMenuScreen.id);
-              },
-              child: const Text('Next'))
-        ],
       ),
-      body: const SafeArea(
-          child: Text('Choose the duration you want to try playing for!')
+      body: SafeArea(
+        child: Container(
+          child: const Center(
+            child: Text('Get as many questions correct as you can in the chosen duration!\n'
+                '\nGood luck!',
+            textAlign: TextAlign.center,)
+          ),
+          margin: const EdgeInsets.all(50),
+        )
       ),
     );
   }

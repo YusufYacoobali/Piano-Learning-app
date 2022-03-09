@@ -36,7 +36,6 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
                 lessonButton('Lesson 4'), // GestureDetector
                 lessonButton('Lesson 5'), // GestureDetector
                 lessonButton('Lesson 6') // GestureDetector
-
               ],
             ),
           ),
@@ -67,7 +66,6 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         ),
         padding: const EdgeInsets.all(23),
         margin: const EdgeInsetsDirectional.all(7),
-
       ),
     );
   }
