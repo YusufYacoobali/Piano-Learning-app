@@ -9,19 +9,20 @@ final QuestionList lessonThreeQuestions =
   Question(
     image: 'Tr_A.jpeg',
     question:
-        'This lesson will teach you the last 2 notes. This note is call A (La). Now press A in the option box.',
-    correctAnswer: 'F',
+        'This lesson will teach you the last 2 notes. This note is call A (La). It is located below the middle line of the staff. Now press A in the option box.',
+    correctAnswer: 'A',
   ),
   Question(
     image: 'Tr_B.jpeg',
-    question: 'This note is call B (Ti). Now press B in the option box.',
-    correctAnswer: 'G',
+    question:
+        'This note is call B (Ti). It is located at the middle line of the staff. Now press B in the option box.',
+    correctAnswer: 'B',
   ),
   //Lesson questions
   Question(
     image: 'Tr_B.jpeg',
     question:
-        'Try answer these questions on your own with a combination of the previous notes.',
+        'Now you can read all the notes associated with the treble clef. Try answer these questions on your own with a combination of the previous notes.',
     correctAnswer: 'B',
   ),
   Question(

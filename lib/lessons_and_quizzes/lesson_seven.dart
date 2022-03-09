@@ -10,7 +10,7 @@ final QuestionList lessonSevenQuestions =
   Question(
     image: 'Bs_LowB.jpeg',
     question:
-        'Similar to the last lesson, in this lesson we are going to read notes lower than usual. The lower the note on 5 line staff, the higher the pitch. Tap B for this note',
+        'Similar to the last lesson, in this lesson we are going to read notes lower than usual. The lower the note on 5 line staff, the lower the pitch. Tap B for this note',
     correctAnswer: 'B',
   ),
   Question(
@@ -24,7 +24,7 @@ final QuestionList lessonSevenQuestions =
   Question(
     image: 'Bs_C.jpeg',
     question:
-        'Great Job. Try answering the rest of the questions without help. What note is this?',
+        'Great Job. When you play an actual keyboard/piano, the lower notes will be further to the left of the keyboard/piano. Try answering the rest of the questions without help. What note is this?',
     correctAnswer: 'C',
   ),
   Question(

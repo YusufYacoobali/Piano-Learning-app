@@ -29,7 +29,7 @@ final QuestionList lessonSixQuestions =
   Question(
     image: 'Tr_B.jpeg',
     question:
-        'Great Job. Try answering the rest of the questions without help. What note is this?',
+        'Great Job. All notes will repeat the pattern C-D-E-F-G-A-B before going back to C as you go higher up on the musical staff. For an actual keyboard/piano, you will go further to the right. Try answering the rest of the questions without help. What note is this?',
     correctAnswer: 'B',
   ),
   Question(
