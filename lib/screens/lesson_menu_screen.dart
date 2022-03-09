@@ -21,7 +21,6 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         title: const Text('Lessons'),
       ),
       body: SafeArea(
-
         child: Scrollbar(
           controller: _firstController,
           isAlwaysShown: true,
@@ -31,13 +30,12 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                lessonButton('Lesson 1',1), // GestureDetector
-                lessonButton('Lesson 2',2), // GestureDetector
-                lessonButton('Lesson 3',3), // GestureDetector
-                lessonButton('Lesson 4',4), // GestureDetector
-                lessonButton('Lesson 5',5), // GestureDetector
-                lessonButton('Lesson 6',6) // GestureDetector
-
+                lessonButton('Lesson 1', 1), // GestureDetector
+                lessonButton('Lesson 2', 2), // GestureDetector
+                lessonButton('Lesson 3', 3), // GestureDetector
+                lessonButton('Lesson 4', 4), // GestureDetector
+                lessonButton('Lesson 5', 5), // GestureDetector
+                lessonButton('Lesson 6', 6) // GestureDetector
               ],
             ),
           ),
@@ -46,16 +44,15 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     );
   }
 
-
-  Widget lessonButton(lessonText,lessonNum) {
+  Widget lessonButton(lessonText, lessonNum) {
     return GestureDetector(
       onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) {
-          return LessonScreen(lessonNum: lessonNum);
-        }),
-      );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return LessonScreen(lessonNum: lessonNum);
+          }),
+        );
       },
       child: Container(
         child: Center(
@@ -74,7 +71,6 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         ),
         padding: const EdgeInsets.all(23),
         margin: const EdgeInsetsDirectional.all(7),
-
       ),
     );
   }
