@@ -33,7 +33,6 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
                 lessonButton('Lesson 4'), // GestureDetector
                 lessonButton('Lesson 5'), // GestureDetector
                 lessonButton('Lesson 6') // GestureDetector
-
               ],
             ),
           ),

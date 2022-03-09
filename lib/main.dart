@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
+import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
+import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
+import 'package:sight_reading_app/screens/instruction_screens/practice_instruction_screen.dart';
+import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
+import 'package:sight_reading_app/screens/instruction_screens/speedrun_instructions_screen.dart';
 import 'package:sight_reading_app/screens/key_detection_screen.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
@@ -52,6 +57,12 @@ class SightReadingApp extends StatelessWidget {
               AchievementsScreen.id: (context) => const AchievementsScreen(),
               SettingsScreen.id: (context) => const SettingsScreen(),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
+              // instruction screens
+              PlayAlongInstructions.id: (context) => const PlayAlongInstructions(),
+              EndlessInstructions.id: (context) => const EndlessInstructions(),
+              QuizInstruction.id: (context) => const QuizInstruction(),
+              SpeedrunInstructions.id: (context) => const SpeedrunInstructions(),
+              PracticeInstructions.id: (context) => const PracticeInstructions(),
               // Temporary routes to demo screens
               KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
               NoteSelectorSheetScreen.id: (context) =>
