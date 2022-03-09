@@ -13,7 +13,7 @@ class _LessonScreenState extends State<LessonScreen> {
   @override
   void initState() {
     super.initState();
-    questionBrain = QuestionBrain(questionList: lessonOneQuestions);
+    questionBrain = QuestionBrain(questions: lessonOneQuestions);
     setScreenWidget();
   }
 
