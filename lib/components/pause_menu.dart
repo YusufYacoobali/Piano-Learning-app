@@ -29,6 +29,7 @@ class _PauseMenuState extends State<PauseMenu> {
 
   Widget getHomeButton() {
     return ElevatedButton.icon(
+      key: const Key('home button'),
       label: const Text('Main menu'),
       icon: const Icon(
         Icons.home,
@@ -48,6 +49,7 @@ class _PauseMenuState extends State<PauseMenu> {
 
   Widget getPlayButton() {
     return ElevatedButton.icon(
+      key: const Key('play button'),
       label: const Text('Continue'),
       icon: const Icon(
         Icons.play_arrow,
@@ -68,6 +70,7 @@ class _PauseMenuState extends State<PauseMenu> {
   Widget getMenuText() {
     return const Text(
       'Paused',
+      key: Key('menu text'),
       style: TextStyle(fontSize: 40.0, color: Colors.white),
     );
   }

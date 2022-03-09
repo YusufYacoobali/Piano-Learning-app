@@ -25,6 +25,7 @@ class _LessonScreenState extends State<LessonScreen> {
 
   Widget getPauseButton() {
     return IconButton(
+      key: const Key('Pause Icon'),
       icon: const Icon(
         Icons.pause,
         color: Colors.white,
