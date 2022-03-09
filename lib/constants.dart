@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-// Settings Screen
+/// Settings Screen
 // List of the different difficulties
 const List<Object> difficultyList = ['Beginner', 'Intermediate', 'Expert'];
 
-// Default values of individual settings
+/// Default values of individual settings
 const int defaultVolumeLevel = 100;
 const String defaultDifficultyLevel = 'Beginner';
 const String defaultTheme = 'Dark';
 
-// The themes and the theme data associated with it
+/// The themes and the theme data associated with it
 final Map<String, ThemeData> themeColors = <String, ThemeData>{
   'Dark': ThemeData.dark(),
   'Light': ThemeData.light(),
@@ -22,7 +22,7 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
   ),
 };
 
-// Results Screen
+/// Results Screen
 const titleWidgetTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 50.0,
@@ -31,6 +31,14 @@ const titleWidgetTextStyle = TextStyle(
 const scoreWidgetTextStyle = TextStyle(
   fontWeight: FontWeight.w200,
   fontSize: 35.0,
+);
+
+ButtonStyle navButtonDeco = ElevatedButton.styleFrom(
+  primary: Colors.orange.shade700,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(25),
+  ),
+  elevation: 15.0,
 );
 
 // Menu Screen
@@ -42,7 +50,7 @@ const double boxRadii = 10.0;
 final TextStyle appNameTextStyle = TextStyle(
     fontSize: 100.0,
     fontWeight: FontWeight.bold,
-    color: Colors.grey.shade300,
+    color: Colors.white,
     shadows: [
       Shadow(
         color: Colors.blueGrey.shade800,
@@ -51,16 +59,23 @@ final TextStyle appNameTextStyle = TextStyle(
     ]);
 final TextStyle buttonTextStyle = TextStyle(
   fontSize: 100.0,
-  color: Colors.orange.shade500,
+  color: Colors.grey.shade300,
   fontWeight: FontWeight.bold,
 );
-final Icon settingsIcon = Icon(
+const Icon settingsIcon = Icon(
   Icons.settings,
   //size: 75.0,
-  color: Colors.orange.shade300,
+  //color: Color(0xff5f0a87),
 );
 
-// Keyboard Screen
+BoxDecoration menuButtonDeco = BoxDecoration(
+  borderRadius: BorderRadius.circular(boxRadii),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
+);
+
+/// Keyboard Screen
 final whiteKeyButtonStyle = ElevatedButton.styleFrom(
   primary: Colors.white,
   minimumSize: const Size(double.infinity, double.infinity),
@@ -85,18 +100,28 @@ const blackKeyTextStyle = TextStyle(
   fontSize: 30.0,
 );
 
-// Lesson Screen
-const Color optionButtonColour = Colors.orange;
-const TextStyle optionButtonTextStyle =
-    TextStyle(fontSize: 20, color: Colors.black);
+//Lesson Menu Screen
+BoxDecoration lessonButtonDeco = BoxDecoration(
+  shape: BoxShape.circle,
+  color: buttonBoxColour,
+  //borderRadius: BorderRadius.circular(boxRadii),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
+);
 
-// Question Skeleton
+// Lesson Screen
+const Color optionButtonColour = Colors.purple;
+const TextStyle optionButtonTextStyle =
+    TextStyle(fontSize: 20, color: Colors.white);
+
+/// Question Skeleton
 const TextStyle questionTrackerTextStyle = TextStyle(fontSize: 25);
 
-// Marking Criteria
+/// Marking Criteria
 const double passThreshold = 0.4;
 
-// The offset from baseline of the notes on the treble clef
+/// The offset from baseline of the notes on the treble clef
 const Map<String, int> trebleClefSheetNoteOffset = <String, int>{
   'C4': -10,
   'D4': 0,
@@ -132,3 +157,46 @@ const String trebleClefMidLineNote = 'C5';
 
 /// The note of the middle line of the bass clef
 const String bassClefMidLineNote = 'D3';
+
+/// Speedrun Screen
+final Color countdownTimerBackgroundColour = Colors.purple.shade500;
+const Color countdownTimerFillColour = Colors.red;
+const Color countdownTimerRingColour = Colors.grey;
+const TextStyle countdownTimerTextStyle = TextStyle(
+  fontSize: 33.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+
+/// List of Names of Keys
+const List<String> whiteKeyNames = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
+
+//Achievement screen
+const double cardWidth = 230;
+const double cardHeight = 270;
+
+const double circularIndicatorRadius = 80;
+
+const double indicatorLineWidth = 16;
+const Color indicatorBackground = Colors.red;
+const Color indicatorGoodProgress = Colors.green;
+const Color indicatorBadProgress = Colors.orange;
+
+const Icon playLessonIcon = Icon(
+  Icons.circle_outlined,
+  size: 30.0,
+);
+
+const TextStyle achievementTextStyle = TextStyle(fontSize: 20);
+const int animationDuration = 1200;
+final Decoration achievementCardDecoration = BoxDecoration(
+  borderRadius: BorderRadius.circular(20),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
+);
+
+//achievement making
+const int numOfLessons = 10;
+const int numOfquizzes = 10;

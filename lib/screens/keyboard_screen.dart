@@ -80,7 +80,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
   // Returns the list of white keys
   List<Widget> getWhiteKeys() {
     List<Widget> whiteKeys = [];
-    List<String> notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+    List<String> notes = whiteKeyNames;
     for (int i = 0; i < notes.length; ++i) {
       whiteKeys.add(getWhiteKey(notes[i]));
     }
@@ -97,7 +97,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
 
   // Returns the list of black keys with the gaps in between them
   List<Widget> getBlackKeys() {
-    List<String> notes = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
+    List<String> notes = blackKeyNames;
     List<Widget> blackKeys = [
       getBlackKeySpace(4),
       // C# or Db key

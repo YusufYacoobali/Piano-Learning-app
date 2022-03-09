@@ -56,6 +56,8 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
               ),
             ),
           ),
+          decoration: lessonButtonDeco,
+          padding: const EdgeInsets.all(23),
         ),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
