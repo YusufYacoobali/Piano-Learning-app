@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 
 class PauseMenu extends StatefulWidget {
@@ -38,7 +39,7 @@ class _PauseMenuState extends State<PauseMenu> {
       style: ElevatedButton.styleFrom(
         primary: Colors.indigo.shade400,
         onPrimary: Colors.grey.shade300,
-        fixedSize: const Size(150.0, 50.0),
+        fixedSize: const Size(180.0, 30.0),
       ),
       onPressed: () {
         Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
@@ -58,10 +59,30 @@ class _PauseMenuState extends State<PauseMenu> {
       style: ElevatedButton.styleFrom(
         primary: Colors.indigo.shade400,
         onPrimary: Colors.grey.shade300,
-        fixedSize: const Size(150.0, 50.0),
+        fixedSize: const Size(180.0, 30.0),
       ),
       onPressed: () {
         widget.continueOnPressed();
+        widget.removeMenu();
+      },
+    );
+  }
+
+  Widget getLessonSelectionButton() {
+    return ElevatedButton.icon(
+      key: const Key('lesson selection button'),
+      label: const Text('Back to Lessons'),
+      icon: const Icon(
+        Icons.auto_stories_outlined,
+        size: 20.0,
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.indigo.shade400,
+        onPrimary: Colors.grey.shade300,
+        fixedSize: const Size(180.0, 30.0),
+      ),
+      onPressed: () {
+        Navigator.popUntil(context, ModalRoute.withName(LessonMenuScreen.id));
         widget.removeMenu();
       },
     );
@@ -90,10 +111,12 @@ class _PauseMenuState extends State<PauseMenu> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 getMenuText(),
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 5.0),
                 getHomeButton(),
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 3.0),
                 getPlayButton(),
+                const SizedBox(height: 3.0),
+                getLessonSelectionButton(),
               ],
             ),
           ),

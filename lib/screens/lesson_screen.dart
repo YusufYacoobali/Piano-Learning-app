@@ -30,6 +30,7 @@ class _LessonScreenState extends State<LessonScreen> {
       icon: const Icon(
         Icons.pause,
         color: Colors.white,
+        size: 20.0,
       ),
       onPressed: () {
         showMenu();
@@ -40,15 +41,10 @@ class _LessonScreenState extends State<LessonScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Read That Sheet'),
-        actions: <Widget>[
-          getPauseButton(),
-        ],
-      ),
       body: SafeArea(
         child: Column(
           children: [
+            Align(alignment: Alignment.topRight, child: getPauseButton()),
             screenWidget,
             //choices buttons
             Expanded(
