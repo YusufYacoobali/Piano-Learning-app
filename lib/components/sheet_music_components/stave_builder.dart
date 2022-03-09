@@ -9,7 +9,7 @@ class StaveBuilder {
 
     Paint paint = Paint()
       ..color = Colors.black
-      ..strokeWidth = 4
+      ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
 
     // Draws the lines
