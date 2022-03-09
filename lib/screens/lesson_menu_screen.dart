@@ -3,6 +3,7 @@ import 'package:sight_reading_app/screens/lesson_screen.dart';
 import '../constants.dart';
 
 class _LessonMenuScreenState extends State<LessonMenuScreen> {
+  final ScrollController _firstController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -21,9 +22,11 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
       ),
       body: SafeArea(
         child: Scrollbar(
+          controller: _firstController,
           isAlwaysShown: true,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
+            controller: _firstController,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -56,8 +59,6 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
               ),
             ),
           ),
-          decoration: lessonButtonDeco,
-          padding: const EdgeInsets.all(23),
         ),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
