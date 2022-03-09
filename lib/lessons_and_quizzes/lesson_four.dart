@@ -1,9 +1,11 @@
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
 //List of questions
 //Teaches how to read Do Re Mi Fa on base clef
 
-final List<Question> lessonFourQuestions = [
+final QuestionList lessonFourQuestions =
+    QuestionList(lessonID: 4, questionList: [
   //Tutorial
   //Read C to F with the base clef
   Question(
@@ -77,4 +79,4 @@ final List<Question> lessonFourQuestions = [
     question: 'What note is this?',
     correctAnswer: 'C',
   ),
-];
+]);

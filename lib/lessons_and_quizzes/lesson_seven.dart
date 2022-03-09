@@ -1,9 +1,11 @@
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
 //List of questions
 //Teaches how to read low notes
 
-final List<Question> lessonSixQuestions = [
+final QuestionList lessonSevenQuestions =
+    QuestionList(lessonID: 7, questionList: [
   //Tutorial
   Question(
     image: 'Bs_LowB.jpeg',
@@ -50,4 +52,4 @@ final List<Question> lessonSixQuestions = [
     question: 'What note is this?',
     correctAnswer: 'G',
   ),
-];
+]);

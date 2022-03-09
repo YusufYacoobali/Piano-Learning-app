@@ -1,9 +1,11 @@
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
 //List of questions
 //Teaches how to read high notes
 
-final List<Question> lessonSixQuestions = [
+final QuestionList lessonSixQuestions =
+    QuestionList(lessonID: 6, questionList: [
   //Tutorial
   Question(
     image: 'Tr_C.jpeg',
@@ -95,4 +97,4 @@ final List<Question> lessonSixQuestions = [
     question: 'What note is this?',
     correctAnswer: 'A',
   ),
-];
+]);

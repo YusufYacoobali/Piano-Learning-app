@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
-
 import '../constants.dart';
 
 class _ResultsScreenState extends State<ResultsScreen> {

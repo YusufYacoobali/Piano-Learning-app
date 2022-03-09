@@ -1,8 +1,10 @@
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
 //List of questions
 //Teaches how to read La Ti
-final List<Question> lessonThreeQuestions = [
+final QuestionList lessonThreeQuestions =
+    QuestionList(lessonID: 3, questionList: [
   //Tutorial
   Question(
     image: 'Tr_A.jpeg',
@@ -84,4 +86,4 @@ final List<Question> lessonThreeQuestions = [
     correctAnswer: 'E',
   ),
   //maybe add more pictures with 2 notes or more and ask to read the second note.
-];
+]);
