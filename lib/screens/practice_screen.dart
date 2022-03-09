@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/app_bar_with_settings_icon.dart';
+import 'instruction_screens/practice_instruction_screen.dart';
 import 'menu_screen.dart';
 import 'play_along_menu_screen.dart';
 import 'speedrun_menu_screen.dart';
@@ -28,7 +29,7 @@ class PracticeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWithSettingsIcon(Text('Practice your skills!')),
+      appBar: const AppBarWithSettingsIcon(Text('Practice your skills!'), PracticeInstructions.id),
       body: SafeArea(
         child: GridView.count(
           ///Makes the children all fit on the screen without the need for scrolling.

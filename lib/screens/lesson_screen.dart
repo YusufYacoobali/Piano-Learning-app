@@ -3,15 +3,14 @@ import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_four.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_one.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_six.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_three.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_two.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
-
 import 'package:sight_reading_app/components/option_button.dart';
-//import 'package:sight_reading_app/question.dart';
 
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
@@ -22,7 +21,8 @@ class _LessonScreenState extends State<LessonScreen> {
     lessonTwoQuestions,
     lessonThreeQuestions,
     lessonFourQuestions,
-    lessonFiveQuestions
+    lessonFiveQuestions,
+    lessonSixQuestions,
   ];
   @override
   //should make it go to other question list like make a list that hass all question list.
@@ -174,7 +174,6 @@ class LessonScreen extends StatefulWidget {
   static const String id = 'lesson_screen';
   final int lessonNum;
   const LessonScreen({Key? key, this.lessonNum = 1}) : super(key: key);
-  //int lessonNum;
 
   @override
   _LessonScreenState createState() => _LessonScreenState();
