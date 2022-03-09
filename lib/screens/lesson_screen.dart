@@ -30,7 +30,7 @@ class _LessonScreenState extends State<LessonScreen> {
       icon: const Icon(
         Icons.pause,
         color: Colors.white,
-        size: 20.0,
+        size: 35.0,
       ),
       onPressed: () {
         showMenu();

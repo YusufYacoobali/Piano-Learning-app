@@ -476,7 +476,7 @@ void main() {
       await tester.pumpWidget(const SightReadingApp());
       await tester.tap(find.text('Lessons'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Lesson 2 '));
+      await tester.tap(find.text('Lesson 2'));
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(iconKey));
       await tester.pumpAndSettle();
