@@ -12,7 +12,7 @@ void main() {
   testWidgets('check that all lesson buttons are displayed',
         (WidgetTester tester) async {
       await _goToLessonsScreen(tester);
-      expect(find.textContaining('Lesson '), findsNWidgets(5) );
+      expect(find.textContaining('Lesson '), findsNWidgets(6) );
     });
 
 }
