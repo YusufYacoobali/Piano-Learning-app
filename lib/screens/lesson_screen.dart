@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_four.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_one.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_three.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_two.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
-import '../lessons_and_quizzes/lesson_one.dart';
-import '../lessons_and_quizzes/lesson_two.dart';
-import '../lessons_and_quizzes/lesson_three.dart';
-import '../lessons_and_quizzes/lesson_four.dart';
-import '../lessons_and_quizzes/lesson_five.dart';
+
 import 'package:sight_reading_app/components/option_button.dart';
-import 'package:sight_reading_app/question.dart';
+//import 'package:sight_reading_app/question.dart';
 
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
 
-  List<List<Question>> questionLists = [
+  List<QuestionList> questionLists = [
     lessonOneQuestions,
     lessonTwoQuestions,
     lessonThreeQuestions,
@@ -27,7 +29,7 @@ class _LessonScreenState extends State<LessonScreen> {
   void initState() {
     super.initState();
     int lessonNum = widget.lessonNum;
-    questionBrain = QuestionBrain(questionList: questionLists[lessonNum - 1]);
+    questionBrain = QuestionBrain(questions: questionLists[lessonNum - 1]);
     setScreenWidget();
   }
 

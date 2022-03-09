@@ -4,7 +4,7 @@ import 'package:sight_reading_app/question.dart';
 //List of questions
 //Teaches how to read Do Re Mi
 
-final QuestionList lessonOneQuestions =
+final QuestionList lessonTwoQuestions =
     QuestionList(lessonID: 2, questionList: [
   //Tutorial
   Question(

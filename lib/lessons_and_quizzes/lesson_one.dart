@@ -67,7 +67,4 @@ final QuestionList lessonOneQuestions =
     question: 'What note is this?',
     correctAnswer: 'C',
   ),
-];
-
-  )
 ]);
