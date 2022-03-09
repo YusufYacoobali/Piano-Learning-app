@@ -1,14 +1,14 @@
 import 'package:sight_reading_app/components/achievement_components/achievement_card.dart';
 
+import '../../constants.dart';
+
 /// This file reads the values from storage and makes the achievement cards which is used for both tabs
 
 class AchievementMaker {
-  int numOfLessons = 10;
-  int numOfquizzes = 10;
-
   List<AchievementCard> makeAchievements(achieveValues) {
     //print('these are values recieved $achieveValues');
 
+    //2nd value passed in is how many have been completed
     List<AchievementCard> achievements = [
       AchievementCard('Complete the 1st lesson', 1, achieveValues[0]),
       AchievementCard('Complete 5 lessons', 5, achieveValues[0]),

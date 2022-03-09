@@ -9,6 +9,8 @@ void main() {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
+    await tester.pumpAndSettle();
     expect(find.byKey(testKey), findsOneWidget);
   });
 
@@ -16,6 +18,8 @@ void main() {
     const testKey = Key('question image');
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
     await tester.pumpAndSettle();
     expect(find.byKey(testKey), findsOneWidget);
   });
@@ -25,6 +29,8 @@ void main() {
     const testKey = Key('question text');
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
     await tester.pumpAndSettle();
     expect(find.byKey(testKey), findsOneWidget);
   });

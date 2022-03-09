@@ -5,6 +5,7 @@ import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
+import 'package:sight_reading_app/components/option_button.dart';
 
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
@@ -87,9 +88,17 @@ class _LessonScreenState extends State<LessonScreen> {
   List<Widget> getOptionButtons() {
     // TODO: Beginners see less options and experts see all options
     List<Widget> optionButtons = [];
-    List<String> notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+    List<String> notes = whiteKeyNames;
     for (int i = 0; i < notes.length; ++i) {
-      optionButtons.add(buildOptionButton(notes[i]));
+      optionButtons.add(
+        OptionButton(
+          buttonText: notes[i],
+          onPressed: () {
+            questionBrain.setAnswer(notes[i]);
+            showResultAlert(notes[i]);
+          },
+        ),
+      );
     }
     return optionButtons;
   }
@@ -185,29 +194,6 @@ class _LessonScreenState extends State<LessonScreen> {
 
   String getNextButtonText() {
     return questionBrain.isLastQuestion() ? "Finish" : "Next";
-  }
-
-// build button for choice
-//add value of answer in button
-  Widget buildOptionButton(String buttonText) {
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.all(15.0),
-        child: TextButton(
-          onPressed: () {
-            questionBrain.setAnswer(buttonText);
-            showResultAlert(buttonText);
-          },
-          style: TextButton.styleFrom(
-            backgroundColor: optionButtonColour,
-          ),
-          child: Text(
-            buttonText,
-            style: optionButtonTextStyle,
-          ),
-        ),
-      ),
-    );
   }
 }
 
