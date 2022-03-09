@@ -29,7 +29,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   @override
   void initState() {
     super.initState();
-    questionBrain = QuestionBrain(questionList: lessonOneQuestions);
+    questionBrain = QuestionBrain(questions: lessonOneQuestions);
     setScreenWidget();
   }
 
