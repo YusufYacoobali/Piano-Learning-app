@@ -1,12 +1,12 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Writes data to storage
-class StorageWriter {
+class StorageReaderWriter {
   /// The key-value pairs to store in memory
   final Map _map = {};
 
   /// Constructor
-  StorageWriter() {
+  StorageReaderWriter() {
     _setDefaultValues();
     _writeDefaultsToStorage();
   }

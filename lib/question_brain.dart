@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/storage_writer.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 import 'lessons_and_quizzes/question_list.dart';
 
 /// Manages the questions in lessons/quizzes
@@ -9,7 +9,7 @@ class QuestionBrain {
   int _score = 0;
 
   /// Used to store the score in storage
-  StorageWriter writer = StorageWriter();
+  StorageReaderWriter writer = StorageReaderWriter();
 
   /// The list of questions
   final QuestionList questions;
