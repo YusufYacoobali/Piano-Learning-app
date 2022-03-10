@@ -33,7 +33,15 @@ const scoreWidgetTextStyle = TextStyle(
   fontSize: 35.0,
 );
 
-/// Menu Screen
+ButtonStyle navButtonDeco = ElevatedButton.styleFrom(
+  primary: Colors.orange.shade700,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(25),
+  ),
+  elevation: 15.0,
+);
+
+// Menu Screen
 const String formattedAppName = 'Read\n That\n Sheet';
 final Color appNameBoxColour = Colors.indigo.shade300;
 final Color buttonBoxColour = Colors.indigo.shade400;
@@ -42,7 +50,7 @@ const double boxRadii = 10.0;
 final TextStyle appNameTextStyle = TextStyle(
     fontSize: 100.0,
     fontWeight: FontWeight.bold,
-    color: Colors.grey.shade300,
+    color: Colors.white,
     shadows: [
       Shadow(
         color: Colors.blueGrey.shade800,
@@ -51,13 +59,20 @@ final TextStyle appNameTextStyle = TextStyle(
     ]);
 final TextStyle buttonTextStyle = TextStyle(
   fontSize: 100.0,
-  color: Colors.orange.shade500,
+  color: Colors.grey.shade300,
   fontWeight: FontWeight.bold,
 );
-final Icon settingsIcon = Icon(
+const Icon settingsIcon = Icon(
   Icons.settings,
   //size: 75.0,
-  color: Colors.orange.shade300,
+  //color: Color(0xff5f0a87),
+);
+
+BoxDecoration menuButtonDeco = BoxDecoration(
+  borderRadius: BorderRadius.circular(boxRadii),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
 );
 
 /// Keyboard Screen
@@ -85,10 +100,20 @@ const blackKeyTextStyle = TextStyle(
   fontSize: 30.0,
 );
 
-/// Lesson Screen
-const Color optionButtonColour = Colors.orange;
+//Lesson Menu Screen
+BoxDecoration lessonButtonDeco = BoxDecoration(
+  shape: BoxShape.circle,
+  color: buttonBoxColour,
+  //borderRadius: BorderRadius.circular(boxRadii),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
+);
+
+// Lesson Screen
+const Color optionButtonColour = Colors.purple;
 const TextStyle optionButtonTextStyle =
-    TextStyle(fontSize: 20, color: Colors.black);
+    TextStyle(fontSize: 20, color: Colors.white);
 
 /// Question Skeleton
 const TextStyle questionTrackerTextStyle = TextStyle(fontSize: 25);
@@ -202,7 +227,7 @@ const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 
 //Achievement screen
 const double cardWidth = 230;
-final Color cardColour = Colors.indigo.shade400;
+const double cardHeight = 270;
 
 const double circularIndicatorRadius = 80;
 
@@ -212,7 +237,7 @@ const Color indicatorGoodProgress = Colors.green;
 const Color indicatorBadProgress = Colors.orange;
 
 const Icon playLessonIcon = Icon(
-  Icons.play_lesson,
+  Icons.circle_outlined,
   size: 30.0,
 );
 
@@ -220,7 +245,9 @@ const TextStyle achievementTextStyle = TextStyle(fontSize: 20);
 const int animationDuration = 1200;
 final Decoration achievementCardDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(20),
-  color: cardColour,
+  gradient: const LinearGradient(
+    colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
 );
 
 //achievement making
