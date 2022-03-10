@@ -1,0 +1,25 @@
+import 'note.dart';
+
+class NotePlayedChecker {
+  final NextNoteNotifier noteNotifier;
+  bool _isHit = false;
+  final Function _function;
+
+  NotePlayedChecker(this.noteNotifier, this._function);
+
+  void checkPress(String name) {
+    if (noteNotifier.get().name[0] + noteNotifier.get().name[1]  == name) {
+      _isHit = true;
+      _function(_isHit);
+    }
+  }
+
+  void setNewNote(Note note) {
+    noteNotifier.setNextNote(note);
+  }
+
+  void removeNote() {
+    if (!_isHit) _function(_isHit);
+    _isHit = false;
+  }
+}

@@ -33,9 +33,9 @@ class ProgressTimer {
   // Treble clef notes
   final Map<int, Note> _notes = <int, Note>{
     0: Note('Cb4', 1, time: 0),
-    2: Note('D4', 1.5, time: 2),
-    5: Note('E4', 0.5, time: 5),
-    8: Note('F#4', 2, time: 8),
+    3: Note('D4', 1.5, time: 2),
+    6: Note('E4', 0.5, time: 5),
+    9: Note('F#4', 2, time: 8),
     13: Note('G4', 3, time: 15),
     18: Note('A4', 3, time: 20),
     23: Note('B4', 4, time: 25),

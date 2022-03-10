@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
 import '../components/sheet_music_components/keyboard_with_detection.dart';
 import '../components/sheet_music_components/music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 
 /// Temporary proof of concept of detecting
 class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
-  final player = AudioCache();
 
   late MusicSheet _sheet;
   final NextNoteNotifier _nextNote = NextNoteNotifier();
@@ -14,10 +12,8 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
   bool _toggle = false;
 
   _KeyDetectionScreenState() {
-    _sheet = MusicSheet(_nextNote, MusicSheetModes.detectKeys, Clef.treble);
+    _sheet = MusicSheet(_nextNote, Clef.treble);
   }
-
-  void playSound(String noteName) => player.play('note_$noteName.wav');
 
   @override
   void initState() {
@@ -51,8 +47,7 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
                             _sheet.clear();
                             Clef clef = Clef.treble;
                             if (_toggle) clef = Clef.bass;
-                            _sheet = MusicSheet(
-                                _nextNote, MusicSheetModes.detectKeys, clef);
+                            _sheet = MusicSheet(_nextNote, clef);
                           }),
                         ),
                       ],

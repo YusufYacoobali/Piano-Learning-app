@@ -90,6 +90,11 @@ class NextNoteNotifier {
     return _nextNote;
   }
 
+  /// Gives the note to the receiver without removing it from the notifier
+  Note get() {
+    return _nextNote;
+  }
+
   /// Sends the note from the sender
   void setNextNote(Note note) {
     hasNextNote = true;
