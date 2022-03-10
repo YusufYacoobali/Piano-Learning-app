@@ -1,32 +1,39 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Writes data to storage
 class StorageWriter {
+  /// The key-value pairs to store in memory
   final Map _map = {};
 
+  /// Constructor
   StorageWriter() {
     _setDefaultValues();
     _writeDefaultsToStorage();
   }
 
+  /// Gets the value using the key in [_map]
   Object read(String key) {
     return _map[key];
   }
 
+  /// Writes the key-value pair to storage
   Future<void> write(String key, Object value) async {
-    // 'lesson 1' -> 3
+    // Key: lesson name
+    // Value: score
+    // Format: 'lesson 1' -> 3
     _map[key] = value;
     final SharedPreferences pref = await SharedPreferences.getInstance();
     _map[key] = value.toString();
     await pref.setString(key, value.toString());
   }
 
-  // Resets the StorageWriter back to the defaults
+  /// Resets the StorageWriter back to the defaults
   void reset() {
     _setDefaultValues();
     _writeDefaultsToStorage();
   }
 
-  // Puts default values into the map
+  /// Puts default values into the map
   void _setDefaultValues() {
     // _map['volume'] = constants.defaultVolumeLevel;
     // _map['difficulty'] = constants.defaultDifficultyLevel;
@@ -37,7 +44,7 @@ class StorageWriter {
     }
   }
 
-  // Writes the default StorageWriter values to Shared Preferences
+  /// Writes the default StorageWriter values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     // pref.setInt('volume', constants.defaultVolumeLevel);
@@ -47,7 +54,7 @@ class StorageWriter {
     }
   }
 
-  // Loads the StorageWriter from Shared Preferences
+  /// Loads the StorageWriter from Shared Preferences
   Future<void> loadStorageWriterFromStorage() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     // int? isOnDisk = pref.getInt('volume');

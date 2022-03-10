@@ -8,14 +8,19 @@ import '../lessons_and_quizzes/lesson_one.dart';
 import '../question_brain.dart';
 
 // TODO: Need to have enough questions so that we don't run out before the timer finishes
+
+/// Screen for speedrun mode
 class SpeedrunScreen extends StatefulWidget {
+  /// The duration of the speedrun
   final int timerDuration;
 
+  /// Constructor
   const SpeedrunScreen({
     Key? key,
     required this.timerDuration,
   }) : super(key: key);
 
+  /// ID of the screen
   static const String id = 'speedrun_screen';
 
   @override
@@ -23,12 +28,17 @@ class SpeedrunScreen extends StatefulWidget {
 }
 
 class _SpeedrunScreenState extends State<SpeedrunScreen> {
+  /// Manages the questions
   late QuestionBrain questionBrain;
+
+  /// Displays the questions
   late Widget screenWidget;
 
   @override
   void initState() {
     super.initState();
+
+    /// Loads the correct question file
     questionBrain = QuestionBrain(questions: lessonOneQuestions);
     setScreenWidget();
   }
@@ -38,6 +48,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     super.dispose();
   }
 
+  /// Creates the screen widget
   void setScreenWidget() {
     AssetImage image = questionBrain.getImage();
     String questionText = questionBrain.getQuestionText();
@@ -52,6 +63,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
+  /// Gets a list of the user-selectable option buttons
   List<Widget> getOptionButtons() {
     List<Widget> optionButtons = [];
     List<String> notes = whiteKeyNames;
@@ -63,6 +75,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
             questionBrain.setAnswer(notes[i]);
             setState(() {
               questionBrain.goToNextQuestion();
+              // Re-render the screen with new question
               setScreenWidget();
             });
           },
@@ -72,7 +85,9 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     return optionButtons;
   }
 
+  /// Gets the results screen
   Widget getResultsScreen() {
+    // Calculates the percentage achieved by the user
     double percentage =
         questionBrain.getScore() / questionBrain.getQuestionNum();
     String title =
@@ -84,11 +99,13 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
+  /// Gets the countdown timer displayed in the top-right
   Widget getCountdownTimer() {
     return CircularCountDownTimer(
       width: 60,
       height: 60,
       duration: widget.timerDuration,
+      // Makes the timer count backwards
       isReverse: true,
       backgroundColor: countdownTimerBackgroundColour,
       fillColor: countdownTimerFillColour,
@@ -100,6 +117,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
       autoStart: true,
       onStart: () {},
       onComplete: () {
+        // When timer finishes, go to results screen
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -116,12 +134,14 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        // Timer is stacked on top of the question
         child: Stack(
           children: [
             Column(
               children: [
+                // Question
                 screenWidget,
-                //choices buttons
+                // User-selectable option buttons
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -143,44 +163,3 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 }
-
-// Old Yusuf's Code
-// Stack(
-// children: [
-// const LessonScreen(),
-// Padding(
-// padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
-// child: Align(
-// alignment: Alignment.topRight,
-// child: CircularCountDownTimer(
-// width: 60,
-// height: 60,
-// duration: widget.timerDuration,
-// backgroundColor: Colors.purple[500],
-// fillColor: Colors.red,
-// ringColor: Colors.grey,
-// strokeWidth: 20.0,
-// strokeCap: StrokeCap.round,
-// textStyle: const TextStyle(
-// fontSize: 33.0,
-// color: Colors.white,
-// fontWeight: FontWeight.bold),
-// isTimerTextShown: true,
-// autoStart: true,
-// onStart: () {
-// //print('Countdown Started');
-// },
-// onComplete: () {
-// Navigator.push(
-// context,
-// MaterialPageRoute(
-// builder: (context) => const ResultsScreen(
-// score: 5, title: 'Congratulations!'),
-// ),
-// );
-// },
-// ),
-// ),
-// ),
-// ],
-// ),
