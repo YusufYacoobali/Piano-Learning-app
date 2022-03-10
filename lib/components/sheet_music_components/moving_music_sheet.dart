@@ -27,6 +27,8 @@ class MovingMusicSheet extends MusicSheet{
       _currentNoteStart = _currentNoteEnd + 100;
     }
 
+    removeNotes(canvas, size);
+
     StaveBuilder.makeBackground(canvas, size, 0, size.width);
     StaveBuilder.drawBox(canvas, size, baseLine, _currentNoteEnd, _currentNoteStart);
     StaveBuilder.drawStave(canvas, size, baseLine, 0, size.width, clef == Clef.treble);
