@@ -28,15 +28,15 @@ class MusicSheet extends CustomPainter {
   // The first line of the stave
   late double _baseLine;
 
-  // How far each note should be spaced
-  final double _noteSpacing = 50;
+  // How far each note should move
+  final double _noteSpacing = 1;
 
   final List<NoteOnStave> _notesOnStaves = <NoteOnStave>[];
 
   // Builds the notes on the stave
   late final NoteImageBuilder _noteImageBuilder;
 
-  final NextNote _nextNote;
+  final NextNoteNotifier _nextNote;
 
   final MusicSheetModes _mode;
 
@@ -99,10 +99,12 @@ class MusicSheet extends CustomPainter {
         _noteImageBuilder.drawNote(newNote);
       }
     }
-    else {
-      for (NoteOnStave note in _notesOnStaves) {
-        _noteImageBuilder.drawNote(note);
-      }
+    drawNotes();
+  }
+
+  void drawNotes() {
+    for (NoteOnStave note in _notesOnStaves) {
+      _noteImageBuilder.drawNote(note);
     }
   }
 

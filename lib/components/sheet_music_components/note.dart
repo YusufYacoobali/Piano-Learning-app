@@ -81,7 +81,7 @@ enum Clef {
 }
 
 /// A way to send and notify if notes are ready to be output to the stave
-class NextNote {
+class NextNoteNotifier {
   /// Whether the sender has sent the note
   bool hasNextNote = false;
 

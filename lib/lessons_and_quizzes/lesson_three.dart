@@ -1,30 +1,33 @@
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
 import '../components/sheet_music_components/note.dart';
 
 //List of questions
 //Teaches how to read La Ti
-final List<Question> lessonThreeQuestions = [
+final QuestionList lessonThreeQuestions =
+    QuestionList(lessonID: 3, questionList: [
   //Tutorial
   Question(
     note: Note(name: 'A4', duration: 4),
     clef: Clef.treble,
     question:
-        'This lesson will teach you the last 2 notes. This note is call A (La). Now press A in the option box.',
-    correctAnswer: 'F',
+        'This lesson will teach you the last 2 notes. This note is call A (La). It is located below the middle line of the staff. Now press A in the option box.',
+    correctAnswer: 'A',
   ),
   Question(
     note: Note(name: 'B4', duration: 4),
     clef: Clef.treble,
-    question: 'This note is call B (Ti). Now press B in the option box.',
-    correctAnswer: 'G',
+    question:
+        'This note is call B (Ti). It is located at the middle line of the staff. Now press B in the option box.',
+    correctAnswer: 'B',
   ),
   //Lesson questions
   Question(
     note: Note(name: 'B4', duration: 4),
     clef: Clef.treble,
     question:
-        'Try answer these questions on your own with a combination of the previous notes.',
+        'Now you can read all the notes associated with the treble clef. Try answer these questions on your own with a combination of the previous notes.',
     correctAnswer: 'B',
   ),
   Question(
@@ -100,4 +103,4 @@ final List<Question> lessonThreeQuestions = [
     correctAnswer: 'E',
   ),
   //maybe add more pictures with 2 notes or more and ask to read the second note.
-];
+]);

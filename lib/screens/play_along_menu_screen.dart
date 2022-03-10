@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
 import 'menu_screen.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 
@@ -44,7 +45,7 @@ class PlayAlongMenuScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: const AppBarWithSettingsIcon(Text('Select a track:')),
+      appBar: const AppBarWithSettingsIcon(Text('Select a track:'), PlayAlongInstructions.id),
       body: SafeArea(
         child: ListView.separated(
           //Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.

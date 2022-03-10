@@ -1,3 +1,4 @@
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
 import '../components/sheet_music_components/note.dart';
@@ -5,7 +6,8 @@ import '../components/sheet_music_components/note.dart';
 //List of questions
 //Teaches how to read high notes
 
-final List<Question> lessonSixQuestions = [
+final QuestionList lessonSixQuestions =
+    QuestionList(lessonID: 6, questionList: [
   //Tutorial
   Question(
     note: Note(name: 'C5', duration: 4),
@@ -33,7 +35,7 @@ final List<Question> lessonSixQuestions = [
     note: Note(name: 'B4', duration: 4),
     clef: Clef.treble,
     question:
-        'Great Job. Try answering the rest of the questions without help. What note is this?',
+        'Great Job. All notes will repeat the pattern C-D-E-F-G-A-B before going back to C as you go higher up on the musical staff. For an actual keyboard/piano, you will go further to the right. Try answering the rest of the questions without help. What note is this?',
     correctAnswer: 'B',
   ),
   Question(
@@ -114,4 +116,4 @@ final List<Question> lessonSixQuestions = [
     question: 'What note is this?',
     correctAnswer: 'A',
   ),
-];
+]);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
+import 'package:sight_reading_app/screens/instruction_screens/speedrun_instructions_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_screen.dart';
 
@@ -54,7 +55,7 @@ class SpeedrunMenuScreen extends StatelessWidget {
       modeButtonKeys.add(Key('modeSelected:$mode'));
     }
     return Scaffold(
-        appBar: const AppBarWithSettingsIcon(Text('Choose a duration:')),
+      appBar: const AppBarWithSettingsIcon(Text('Choose a duration:'), SpeedrunInstructions.id),
         body: SafeArea(
           //Uses an itemBuilder to generate a button for each mode, using the names, records and keys generated earlier.
           child: ListView.separated(

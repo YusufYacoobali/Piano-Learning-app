@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
-class PlayAlongInstructions extends StatelessWidget {
-  const PlayAlongInstructions({Key? key}) : super(key: key);
-  static const id = 'play_along_instructions_screen';
+class PracticeInstructions extends StatelessWidget {
+  const PracticeInstructions({Key? key}) : super(key: key);
+  static const id = 'practice_instruction_screen';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Play Along Mode'),
+        title: const Text('Practice your skills!'),
       ),
       body: SafeArea(
         child: Container(
           child: const Center(
-            child: Text('Play the melody along with your chosen backing track.\n'
-                '\n Have fun!',
+            child: Text('Choose one of the four game modes to practice what you have learnt.',
             textAlign: TextAlign.center),
           ),
           margin: const EdgeInsets.all(50),
-        )
+        ),
       ),
     );
   }

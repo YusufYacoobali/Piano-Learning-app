@@ -26,12 +26,12 @@ class QuestionSkeleton extends StatefulWidget {
 
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
   late final MusicSheet _sheet;
-  late final NextNote _nextNote;
+  late final NextNoteNotifier _nextNote;
 
   @override
   void initState() {
     super.initState();
-    _nextNote = NextNote();
+    _nextNote = NextNoteNotifier();
     _sheet = MusicSheet(_nextNote, MusicSheetModes.showNotes, Clef.treble);
   }
 
