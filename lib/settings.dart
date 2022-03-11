@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart' as constants;
 
 class Settings {
-
   final Map _map = {};
 
   Settings() {
@@ -20,8 +19,7 @@ class Settings {
     if (value.runtimeType == double) {
       _map[name] = double.parse(value.toString()).toInt();
       await pref.setInt(name, double.parse(value.toString()).toInt());
-    }
-    else {
+    } else {
       await pref.setString(name, value.toString());
     }
   }
@@ -52,8 +50,7 @@ class Settings {
     if (isOnDisk == null) {
       _setDefaultValues();
       await _writeDefaultsToStorage();
-    }
-    else {
+    } else {
       int? volume = pref.getInt('volume');
       String? difficulty = pref.getString('difficulty');
       if (volume != null) _map['volume'] = volume;

@@ -15,8 +15,10 @@ class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWid
   static const navigateToSettingsButtonKey = Key('navigateToSettings');
   ///The text to be contained in the AppBar
   final Text titleText;
+  ///Instruction screen to use for page
+  final String instructionScreen;
   ///The constructor, which takes the titleText as a parameter of type Text
-  const AppBarWithSettingsIcon(this.titleText, {Key? key}) : super(key: key);
+  const AppBarWithSettingsIcon(this.titleText, this.instructionScreen, {Key? key}) : super(key: key);
 
   ///The "default" height of the AppBar
   @override
@@ -29,6 +31,12 @@ class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWid
       title: titleText,
       centerTitle: true,
       actions: <Widget>[
+        IconButton(
+            icon: const Icon(Icons.help_outline),
+            onPressed: () {
+              Navigator.pushNamed(context, instructionScreen);
+            },
+        ),
         IconButton(
           icon: const Icon(Icons.settings_outlined),
           onPressed: () {

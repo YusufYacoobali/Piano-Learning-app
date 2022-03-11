@@ -1,26 +1,29 @@
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
 //List of questions
 //Teaches how to read Sol La Ti in bass clef
 
-final List<Question> lessonFiveQuestions = [
+final QuestionList lessonFiveQuestions =
+    QuestionList(lessonID: 5, questionList: [
   //Tutorial
   //Read C to F with the base clef
   Question(
     image: 'Bs_G.jpeg',
     question:
-        'Lets learn G A B on the Base clef. This is position of G on the Base clef. Now press G in the option box.',
+        'Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G in the option box.',
     correctAnswer: 'G',
   ),
   Question(
     image: 'Bs_LowA.jpeg',
     question:
-        'This name is A (La) on the Base clef. Now press A in the option box.',
+        'This name is A (La) on the Base clef. This time A is directly below the . Now press A in the option box.',
     correctAnswer: 'A',
   ),
   Question(
     image: 'Bs_LowB.jpeg',
-    question: 'This is B (Ti) on the Base clef. Now press B in the option box.',
+    question:
+        'This is B (Ti) on the Base clef. It is right below C on the second line from the bottom. Now press B in the option box.',
     correctAnswer: 'B',
   ),
 
@@ -71,4 +74,4 @@ final List<Question> lessonFiveQuestions = [
     question: 'What note is this?',
     correctAnswer: 'B',
   ),
-];
+]);

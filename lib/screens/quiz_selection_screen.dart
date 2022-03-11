@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
 import 'menu_screen.dart'; //For MenuButton
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 
@@ -67,7 +68,7 @@ class QuizSelectionScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: const AppBarWithSettingsIcon(Text('Choose a quiz:')),
+      appBar: const AppBarWithSettingsIcon(Text('Choose a quiz:'), QuizInstruction.id),
       body: SafeArea(
         child: Column(
           children: <Widget>[

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../quiz_selection_screen.dart';
 
 class QuizInstruction extends StatelessWidget {
   const QuizInstruction({Key? key}) : super(key: key);
@@ -10,17 +9,17 @@ class QuizInstruction extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quiz Mode'),
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                    context, QuizSelectionScreen.id);
-              },
-              child: const Text('Next'))
-        ],
       ),
-      body: const SafeArea(
-          child: Text('Select the quiz you want to practice!')
+      body: SafeArea(
+        child: Container(
+          child: const Center(
+            child: Text('Practice the notes like in the lessons for each lesson, or choose '
+                '\'Random mixed quiz\' to practice questions from all the lessons.\n'
+                '\n Good luck!',
+            textAlign: TextAlign.center,)
+          ),
+          margin: const EdgeInsets.all(50),
+        )
       ),
     );
   }

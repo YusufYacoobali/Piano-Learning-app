@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_four.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_one.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_six.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_three.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_two.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
-import '../lessons_and_quizzes/lesson_one.dart';
 import 'package:sight_reading_app/components/option_button.dart';
 
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
 
+  List<QuestionList> questionLists = [
+    lessonOneQuestions,
+    lessonTwoQuestions,
+    lessonThreeQuestions,
+    lessonFourQuestions,
+    lessonFiveQuestions,
+    lessonSixQuestions,
+  ];
   @override
+  //should make it go to other question list like make a list that hass all question list.
   void initState() {
     super.initState();
-    questionBrain = QuestionBrain(questionList: lessonOneQuestions);
+    int lessonNum = widget.lessonNum;
+    questionBrain = QuestionBrain(questions: questionLists[lessonNum - 1]);
     setScreenWidget();
   }
 
@@ -156,8 +172,8 @@ class _LessonScreenState extends State<LessonScreen> {
 
 class LessonScreen extends StatefulWidget {
   static const String id = 'lesson_screen';
-
-  const LessonScreen({Key? key}) : super(key: key);
+  final int lessonNum;
+  const LessonScreen({Key? key, this.lessonNum = 1}) : super(key: key);
 
   @override
   _LessonScreenState createState() => _LessonScreenState();
