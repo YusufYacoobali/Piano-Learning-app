@@ -17,31 +17,31 @@ class ProgressTimer {
   // Bass clef notes
 
   // final Map<int, Note> _notes = <int, Note>{
-  //   0: Note('Cb4', 0, 1),
-  //   2: Note('B3', 2, 1.5),
-  //   5: Note('A3', 5, 0.5),
-  //   8: Note('G#3', 8, 2),
-  //   13: Note('F3', 13, 3),
-  //   18: Note('E3', 28, 3),
-  //   23: Note('D3', 23, 4),
-  //   26: Note('C3', 26, 0.5),
-  //   29: Note('B2', 29, 3),
-  //   32: Note('A2', 32, 1),
-  //   34: Note('G2', 34, 1),
+  //   0: Note('Cb4', 1),
+  //   2: Note('B3', 1.5),
+  //   5: Note('A3', 0.5),
+  //   8: Note('G#3', 2),
+  //   13: Note('F3', 3),
+  //   18: Note('E3', 3),
+  //   23: Note('D3', 4),
+  //   26: Note('C3', 0.5),
+  //   29: Note('B2', 3),
+  //   32: Note('A2', 1),
+  //   34: Note('G2', 1),
   // };
 
   // Treble clef notes
   final Map<int, Note> _notes = <int, Note>{
-    0: Note('Cb4', 1, time: 0),
-    3: Note('D4', 1.5, time: 2),
-    6: Note('E4', 0.5, time: 5),
-    9: Note('F#4', 2, time: 8),
-    13: Note('G4', 3, time: 15),
-    18: Note('A4', 3, time: 20),
-    23: Note('B4', 4, time: 25),
-    26: Note('C5', 0.5, time: 25),
-    29: Note('D5', 3, time: 25),
-    32: Note('E5', 1, time: 25),
+    0: Note('Cb4', 1),
+    3: Note('D4', 1.5),
+    6: Note('E4', 0.5),
+    9: Note('F#4', 2),
+    13: Note('G4', 3),
+    18: Note('A4', 3),
+    23: Note('B4', 4),
+    26: Note('C5', 0.5),
+    29: Note('D5', 3),
+    32: Note('E5', 1),
   };
 
   final Function _updater;

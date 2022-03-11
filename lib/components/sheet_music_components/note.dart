@@ -3,13 +3,10 @@ class Note {
   /// The note
   late String name;
 
-  /// When the note appears
-  late int time;
-
   /// Number of beats of the note
   late double duration;
 
-  Note(this.name, this.duration, {this.time = -1});
+  Note(this.name, this.duration);
 
   /// Gets the
   String getNameWithoutSymbol() {
