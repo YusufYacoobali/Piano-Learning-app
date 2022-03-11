@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:sight_reading_app/settings.dart';
-
 import 'package:provider/provider.dart';
-import 'package:sight_reading_app/theme_listener.dart';
-import 'package:sight_reading_app/constants.dart' as constants ;
+
+import '../settings.dart';
+import '../theme_listener.dart';
+import '../constants.dart' as constants ;
 
 class _SettingsScreenState extends State<SettingsScreen> {
 
@@ -21,7 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.dispose();
   }
 
-  // Confirms if the settings should be reset
+  /// Confirms if the settings should be reset
   _confirmReset(BuildContext context, ThemeNotifier themeNotifier) {
     ElevatedButton cancelButton = ElevatedButton(
       child: const Text("Cancel"),
@@ -73,6 +73,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         SettingsSection(
                           title: const Text('General'),
                           tiles: <SettingsTile>[
+                            /// Adjust volume
                             SettingsTile(
                               title: const Text('Volume'),
                               leading: const Icon(Icons.volume_up),
@@ -93,6 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ),
 
+                            /// Adjust difficulty
                             SettingsTile(
                               leading: const Icon(Icons.signal_cellular_alt_rounded),
                               title: const Text('Difficulty'),
@@ -113,6 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ),
 
+                            /// Adjust theme
                             SettingsTile(
                               title: const Text('Theme'),
                               leading: const Icon(Icons.format_paint),
@@ -133,6 +136,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ),
 
+                            /// Reset progress
                             SettingsTile(
                               title: Center(
                                 child: ElevatedButton(
