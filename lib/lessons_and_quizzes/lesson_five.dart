@@ -1,13 +1,14 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
-//List of questions
-//Teaches how to read Sol La Ti in bass clef
+/**
+ * List of questions for lesson 5.
+ * Teaches how to read G A B on Bass clef.
+ */
 
 final QuestionList lessonFiveQuestions =
     QuestionList(lessonID: 5, questionList: [
   //Tutorial
-  //Read C to F with the base clef
   Question(
     image: 'Bs_G.jpeg',
     question:

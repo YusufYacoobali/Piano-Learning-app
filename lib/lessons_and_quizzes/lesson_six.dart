@@ -1,8 +1,10 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
-//List of questions
-//Teaches how to read high notes
+/**
+ * List of questions for lesson 6.
+ * Teaches how to read higher notes than the ones taught in previous lessons.
+ */
 
 final QuestionList lessonSixQuestions =
     QuestionList(lessonID: 6, questionList: [
@@ -25,7 +27,8 @@ final QuestionList lessonSixQuestions =
         'The same goes for notes in Base clef. This note is on the line above G. Now press A in the option box.',
     correctAnswer: 'A',
   ),
-  //start questions
+
+  //Start questions
   Question(
     image: 'Tr_B.jpeg',
     question:

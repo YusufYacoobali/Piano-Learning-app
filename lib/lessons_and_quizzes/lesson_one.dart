@@ -1,8 +1,10 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
-//List of questions
-//Teaches how to read Do Re Mi
+/**
+ * List of questions for lesson 1.
+ * Teaches how to read C D E on Treble clef.
+ */
 
 final QuestionList lessonOneQuestions =
     QuestionList(lessonID: 1, questionList: [
