@@ -4,35 +4,43 @@ import 'dart:math';
 import 'music_sheet.dart';
 import 'note.dart';
 
-/// Progresses the sheet according to a beat
+/// Generates random notes on a moving screen
 class EndlessNoteGenerator {
+  /// Whether the sheet is moving or not
   bool _isOn = false;
 
   final MusicSheet _sheet;
   final NextNoteNotifier _nextNote;
 
   int _index = 0;
+
+  /// The number of movements before the time unit changes
   static const int iterationsPerTimeUnit = 80;
 
+  /// The function to be called when a note has been hit or missed
   final Function _updater;
 
-  final Random random = Random();
+  final _trebleClefNotes = ['C4', 'Db4', 'D4', 'E4', 'Eb4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4'];
+  //final _bassClefNotes = ['B3', 'Bb3', 'A3', 'Ab3', 'G3', 'Gb3', 'F3', 'E3', 'Eb3', 'D3', 'Db3', 'C3'];
 
-  final trebleClefNotes = ['C4', 'Db4', 'D4', 'E4', 'Eb4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4'];
-  final bassClefNotes = ['B3', 'Bb3', 'A3', 'Ab3', 'G3', 'Gb3', 'F3', 'E3', 'Eb3', 'D3', 'Db3', 'C3'];
+  final Random _random = Random();
 
-  static const int maxTime = 5;
-  static const int minTime = 3;
+  /// The maximum amount of time between notes being displayed
+  static const int _maxTime = 5;
+
+  /// The minimum amount of time between notes being displayed
+  static const int _minTime = 3;
 
   int _time = 0;
 
   EndlessNoteGenerator(this._sheet, this._nextNote, this._updater) {
-    String name = trebleClefNotes[random.nextInt(trebleClefNotes.length)];
+    String name = _trebleClefNotes[_random.nextInt(_trebleClefNotes.length)];
     _nextNote.setNextNote(Note(name, 1));
   }
 
+  /// Gets a new random note to be displayed
   getRandomNote() {
-    String name = trebleClefNotes[random.nextInt(trebleClefNotes.length)];
+    String name = _trebleClefNotes[_random.nextInt(_trebleClefNotes.length)];
     _nextNote.setNextNote(Note(name, 1));
   }
 
@@ -64,7 +72,7 @@ class EndlessNoteGenerator {
     _sheet.move();
     if (_time == 0) {
       getRandomNote();
-      _time = minTime + random.nextInt(maxTime - minTime);
+      _time = _minTime + _random.nextInt(_maxTime - _minTime);
     }
     _time--;
   }
