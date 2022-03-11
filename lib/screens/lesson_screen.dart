@@ -3,6 +3,7 @@ import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_four.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_one.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_seven.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_six.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_three.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_two.dart';
@@ -12,10 +13,17 @@ import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import 'package:sight_reading_app/components/option_button.dart';
 
+/**
+ * Creates screen for a lesson.
+ * The lesson screen consists of the option buttons and components in question_skeleton
+ */
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
 
+  /**
+   * List of all lessons available
+   */
   List<QuestionList> questionLists = [
     lessonOneQuestions,
     lessonTwoQuestions,
@@ -23,9 +31,9 @@ class _LessonScreenState extends State<LessonScreen> {
     lessonFourQuestions,
     lessonFiveQuestions,
     lessonSixQuestions,
+    lessonSevenQuestions,
   ];
   @override
-  //should make it go to other question list like make a list that hass all question list.
   void initState() {
     super.initState();
     int lessonNum = widget.lessonNum;
@@ -58,6 +66,10 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /**
+   * Creates the option buttons with text displayed and check with question brain
+   * to see if the user has tapped the button with the correct answer.
+   */
   List<Widget> getOptionButtons() {
     // TODO: Beginners see less options and experts see all options
     List<Widget> optionButtons = [];
@@ -76,6 +88,10 @@ class _LessonScreenState extends State<LessonScreen> {
     return optionButtons;
   }
 
+  /**
+   * Set components from QuestionBrain including question image, text and number
+   * and send to QuestionSkeleton to display components.
+   */
   void setScreenWidget() {
     AssetImage image = questionBrain.getImage();
     String questionText = questionBrain.getQuestionText();
@@ -90,7 +106,10 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
-// show result and take to next question
+  /**
+   * Set information for an alert message which displays each time the user answers a question
+   * to show if the answer is correct and provides a  button to go to the next question.
+   */
   void showResultAlert(String choice) {
     String alertTitle = '';
     String alertDesc = '';
@@ -107,6 +126,10 @@ class _LessonScreenState extends State<LessonScreen> {
     displayDialog(alertTitle, alertDesc);
   }
 
+  /**
+   * Displays the alert with result.
+   * @return createResultAlert
+   */
   void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
@@ -116,6 +139,10 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /**
+   * Create result screen which displays after the user finishes all questions
+   * @return ResultsScreen object
+   */
   Widget getResultsScreen() {
     String title = '';
     double percentage =
@@ -131,6 +158,10 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /**
+   * Creates the template for alert with title, description and next button
+   * @return AlertDialog
+   */
   AlertDialog createResultAlert(String alertTitle, String alertDesc) {
     return AlertDialog(
       title: Text(alertTitle),
@@ -142,6 +173,11 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /**
+   * Create a next button which takes user to the next question
+   * or the result screen if the current question is the last question.
+   * @return TextButton next question button
+   */
   Widget getNextButton() {
     return TextButton(
       child: Text(getNextButtonText()),
@@ -165,6 +201,10 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /**
+   * Creates text for next button
+   * @return String: "Finish" if the current question is the last, otherwise "Next"
+   */
   String getNextButtonText() {
     return questionBrain.isLastQuestion() ? "Finish" : "Next";
   }
