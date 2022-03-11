@@ -16,7 +16,7 @@ final QuestionList lessonSevenQuestions =
     correctAnswer: 'B',
   ),
   Question(
-    image: 'Tr_LowA.jpeg',
+    image: 'Bs_LowA.jpeg',
     question:
         'Notice that this note is lower than B in the previous question. Press A in the option box.',
     correctAnswer: 'A',

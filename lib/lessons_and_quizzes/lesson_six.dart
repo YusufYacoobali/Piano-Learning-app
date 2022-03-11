@@ -22,9 +22,15 @@ final QuestionList lessonSixQuestions =
     correctAnswer: 'D',
   ),
   Question(
+    image: 'Bs_G.jpeg',
+    question:
+        'The same goes for notes in Base clef. Do you remember this note? This is G in Bass Clef. Press G in the option box.',
+    correctAnswer: 'G',
+  ),
+  Question(
     image: 'Bs_A.jpeg',
     question:
-        'The same goes for notes in Base clef. This note is on the line above G. Now press A in the option box.',
+        'This note is on the line above G in the previous question. Now press A in the option box.',
     correctAnswer: 'A',
   ),
 
