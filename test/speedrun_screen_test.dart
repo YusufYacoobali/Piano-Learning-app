@@ -1,13 +1,6 @@
-import 'dart:async';
-import 'dart:io';
-import 'dart:math';
-import 'package:fake_async/fake_async.dart';
-
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sight_reading_app/main.dart';
-import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_screen.dart';
 
 void main() {
