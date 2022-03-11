@@ -6,7 +6,7 @@ import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 
 /// Temporary proof of concept screen for moving notes along
-class EndlessModeScreenState extends State<EndlessModeScreen> {
+class _EndlessModeScreenState extends State<EndlessModeScreen> {
   late final MovingMusicSheet _sheet;
   late EndlessNoteGenerator _generator;
 
@@ -82,5 +82,5 @@ class EndlessModeScreen extends StatefulWidget {
   const EndlessModeScreen({Key? key}) : super(key: key);
 
   @override
-  EndlessModeScreenState createState() => EndlessModeScreenState();
+  _EndlessModeScreenState createState() => _EndlessModeScreenState();
 }

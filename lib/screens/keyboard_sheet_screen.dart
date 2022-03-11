@@ -20,6 +20,20 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
 
   String updater = "";
 
+  // Treble clef notes
+  final Map<int, Note> _notes = <int, Note>{
+    0: Note('Cb4', 1),
+    2: Note('D4', 1.5),
+    5: Note('E4', 0.5),
+    8: Note('F#4', 2),
+    13: Note('G4', 3),
+    18: Note('A4', 3),
+    23: Note('B4', 4),
+    26: Note('C5', 0.5),
+    29: Note('D5', 3),
+    32: Note('E5', 1),
+  };
+
   void updateScreen(String update) {
     setState(() {
       updater = update;
@@ -40,7 +54,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
     _currentNoteToPlay = NotePlayedChecker(_noteToPlay, convertHitToString);
     super.initState();
     _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
-    _timer = ProgressTimer(_sheet, _nextNote, updateScreen);
+    _timer = ProgressTimer(_sheet, _nextNote, updateScreen, _notes);
   }
 
   @override
