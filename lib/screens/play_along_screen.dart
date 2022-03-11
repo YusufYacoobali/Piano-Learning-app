@@ -4,14 +4,14 @@ import '../components/sheet_music_components/keyboard_with_play_along.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
-import '../components/sheet_music_components/progress_timer.dart';
+import '../components/sheet_music_components/play_along_note_display.dart';
 
 /// The screen that runs the "play along" practice mode with a given track.
 ///
 /// The track is selected by the user, then passed in to this screen.
 class _PlayAlongScreenState extends State<PlayAlongScreen> {
   late final MovingMusicSheet _sheet;
-  late ProgressTimer _timer;
+  late PlayAlongNoteDisplay _timer;
 
   final NextNoteNotifier _nextNote = NextNoteNotifier();
   final NextNoteNotifier _noteToPlay = NextNoteNotifier();
@@ -23,7 +23,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   bool exit = false;
 
-  Map<int, Note> _notes;
+  final Map<int, Note> _notes;
 
   _PlayAlongScreenState(this._notes);
 
@@ -33,18 +33,16 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     });
   }
 
-  void stop(bool hasPlayed) {
-    if (!hasPlayed) {
-      _timer.stop();
-    }
+  ///TODO: Replace with analytics with the notes
+  void recordHitMiss(bool hasPlayed) {
   }
 
   @override
   void initState() {
     super.initState();
-    _currentNoteToPlay = NotePlayedChecker(_noteToPlay, stop);
+    _currentNoteToPlay = NotePlayedChecker(_noteToPlay, recordHitMiss);
     _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
-    _timer = ProgressTimer(_sheet, _nextNote, updateScreen, _notes);
+    _timer = PlayAlongNoteDisplay(_sheet, _nextNote, updateScreen, _notes);
     _timer.start();
   }
 

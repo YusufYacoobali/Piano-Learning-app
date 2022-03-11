@@ -64,12 +64,15 @@ class PlayAlongMenuScreen extends StatelessWidget {
                     ],
                   ),
                   onPress: () {
-                    Map<int, Note> _map = {};
+                    ///TODO: Replace with actual music
+                    Map<int, Note> _map = {
+                      0: Note('D4', 1),
+                    };
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => PlayAlongScreen(notes: _map,),
-                        ));; //TODO: Replace with an Instruction screen template
+                        )); //TODO: Replace with an Instruction screen template
                   },
                   key: trackButtonKeys[index],
                 ),
