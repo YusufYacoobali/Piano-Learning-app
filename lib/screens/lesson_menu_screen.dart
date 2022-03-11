@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/lesson_screen.dart';
 import '../constants.dart';
 
+/// This file creates the screen where the user can select the lesson
+/// they want to learn from those available.
+
 class _LessonMenuScreenState extends State<LessonMenuScreen> {
+  final ScrollController _firstController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -13,6 +17,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     super.dispose();
   }
 
+  /// Builds the screen with the appBar and the row of lessons
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +26,11 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
       ),
       body: SafeArea(
         child: Scrollbar(
+          controller: _firstController,
           isAlwaysShown: true,
-          child: SingleChildScrollView(
+          child: SingleChildScrollView( /// makes the row scrollable
             scrollDirection: Axis.horizontal,
+            controller: _firstController,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -41,8 +48,12 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     );
   }
 
-  Widget lessonButton(lessonText) {
-    return GestureDetector(
+  /// creates the individual lesson buttons for each lesson
+  ///
+  /// @param lessonText : Text to be shown in the lesson button
+  /// @return Widget
+  Widget lessonButton(String lessonText) {
+    return GestureDetector( /// detects the clicks
       onTap: () {
         Navigator.pushNamed(context, LessonScreen.id);
       },
@@ -50,14 +61,14 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         child: Center(
           child: FittedBox(
             child: Text(
-              '$lessonText',
+              lessonText,
               style: const TextStyle(
                 fontSize: 17,
               ),
             ),
           ),
         ),
-        decoration: BoxDecoration(
+        decoration: BoxDecoration( /// Makes the container circle shaped
           shape: BoxShape.circle,
           color: buttonBoxColour,
         ),
