@@ -66,20 +66,22 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Align(alignment: Alignment.topRight, child: getPauseButton()),
-            screenWidget,
+        child: Stack(children: [
+          Align(alignment: Alignment.topRight, child: getPauseButton()),
+          Column(
+            children: [
+              screenWidget,
 
-            ///choices buttons
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: getOptionButtons(),
+              ///choices buttons
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: getOptionButtons(),
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ]),
       ),
     );
   }
