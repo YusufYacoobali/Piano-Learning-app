@@ -5,7 +5,7 @@ import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/option_button.dart';
 import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
-import '../lessons_and_quizzes/lesson_one.dart';
+import '../lessons_and_quizzes/question_finder.dart';
 import '../question_brain.dart';
 
 // TODO: Need to have enough questions so that we don't run out before the timer finishes
@@ -40,7 +40,8 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     super.initState();
 
     /// Loads the correct question file
-    questionBrain = QuestionBrain(questions: lessonOneQuestions);
+    questionBrain =
+        QuestionBrain(questions: QuestionFinder().getQuestionsForLesson(1));
     setScreenWidget();
   }
 

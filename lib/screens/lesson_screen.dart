@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/pause_menu.dart';
 import 'package:sight_reading_app/constants.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_four.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_one.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_seven.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_six.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_three.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_two.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
-import '../lessons_and_quizzes/lesson_one.dart';
 import 'package:sight_reading_app/components/option_button.dart';
+
+import '../lessons_and_quizzes/question_finder.dart';
 
 /// Creates screen for a lesson.
 /// The lesson screen consists of the option buttons and components in question_skeleton
@@ -26,20 +19,21 @@ class _LessonScreenState extends State<LessonScreen> {
 
   ///List of all lessons available
 
-  List<QuestionList> questionLists = [
-    lessonOneQuestions,
-    lessonTwoQuestions,
-    lessonThreeQuestions,
-    lessonFourQuestions,
-    lessonFiveQuestions,
-    lessonSixQuestions,
-    lessonSevenQuestions,
-  ];
+  // List<QuestionList> questionLists = [
+  //   lessonOneQuestions,
+  //   lessonTwoQuestions,
+  //   lessonThreeQuestions,
+  //   lessonFourQuestions,
+  //   lessonFiveQuestions,
+  //   lessonSixQuestions,
+  //   lessonSevenQuestions,
+  // ];
   @override
   void initState() {
     super.initState();
     int lessonNum = widget.lessonNum;
-    questionBrain = QuestionBrain(questions: questionLists[lessonNum - 1]);
+    questionBrain = QuestionBrain(
+        questions: QuestionFinder().getQuestionsForLesson(lessonNum));
     setScreenWidget();
   }
 
