@@ -1,13 +1,12 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
-/**
- * List of questions for lesson 3.
- * Teaches how to read A B on Treble clef.
- */
+/// List of questions for lesson 3.
+/// Teaches how to read A B on Treble clef.
+
 final QuestionList lessonThreeQuestions =
     QuestionList(lessonID: 3, questionList: [
-  //Tutorial
+  ///Tutorial
   Question(
     image: 'Tr_A.jpeg',
     question:
@@ -20,7 +19,8 @@ final QuestionList lessonThreeQuestions =
         'This note is call B (Ti). It is located at the middle line of the staff. Now press B in the option box.',
     correctAnswer: 'B',
   ),
-  //Lesson questions
+
+  ///Lesson questions
   Question(
     image: 'Tr_B.jpeg',
     question:

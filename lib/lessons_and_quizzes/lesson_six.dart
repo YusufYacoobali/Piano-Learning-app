@@ -1,14 +1,13 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
-/**
- * List of questions for lesson 6.
- * Teaches how to read higher notes than the ones taught in previous lessons.
- */
+/// List of questions for lesson 6.
+///
+/// Teaches how to read higher notes than the ones taught in previous lessons.
 
 final QuestionList lessonSixQuestions =
     QuestionList(lessonID: 6, questionList: [
-  //Tutorial
+  ///Tutorial
   Question(
     image: 'Tr_C.jpeg',
     question:
@@ -34,7 +33,7 @@ final QuestionList lessonSixQuestions =
     correctAnswer: 'A',
   ),
 
-  //Start questions
+  ///Start questions
   Question(
     image: 'Tr_B.jpeg',
     question:

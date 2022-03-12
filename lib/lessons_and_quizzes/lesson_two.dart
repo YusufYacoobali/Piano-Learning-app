@@ -1,14 +1,13 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
-/**
- * List of questions for lesson 2.
- * Teaches how to read F G on Treble clef.
- */
+/// List of questions for lesson 2.
+///
+/// Teaches how to read F G on Treble clef.
 
 final QuestionList lessonTwoQuestions =
     QuestionList(lessonID: 2, questionList: [
-  //Tutorial
+  ///Tutorial
   Question(
     image: 'Tr_F.jpeg',
     question:
@@ -21,7 +20,8 @@ final QuestionList lessonTwoQuestions =
         'This note is call G (Sol). The circle is on the second from lowest line of the staff. Now press G in the option box.',
     correctAnswer: 'G',
   ),
-  //Lesson questions
+
+  ///Lesson questions
   Question(
     image: 'Tr_G.jpeg',
     question:
