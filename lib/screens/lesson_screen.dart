@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/pause_menu.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_four.dart';
@@ -21,6 +22,7 @@ import 'package:sight_reading_app/components/option_button.dart';
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
+  OverlayEntry? entry;
 
   ///List of all lessons available
 
@@ -46,12 +48,27 @@ class _LessonScreenState extends State<LessonScreen> {
     super.dispose();
   }
 
+  Widget getPauseButton() {
+    return IconButton(
+      key: const Key('Pause Icon'),
+      icon: const Icon(
+        Icons.pause,
+        color: Colors.white,
+        size: 35.0,
+      ),
+      onPressed: () {
+        showMenu();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
+            Align(alignment: Alignment.topRight, child: getPauseButton()),
             screenWidget,
 
             ///choices buttons
@@ -65,6 +82,28 @@ class _LessonScreenState extends State<LessonScreen> {
         ),
       ),
     );
+  }
+
+  void showMenu() {
+    final overlay = Overlay.of(context)!;
+
+    entry = OverlayEntry(
+      builder: (context) => PauseMenu(
+        removeMenu: removeMenu,
+        continueOnPressed: () {
+          Navigator.popUntil(
+            context,
+            ModalRoute.withName(LessonScreen.id),
+          );
+        },
+      ),
+    );
+    overlay.insert(entry!);
+  }
+
+  void removeMenu() {
+    entry?.remove();
+    entry = null;
   }
 
   /// Creates the answer option buttons.

@@ -12,12 +12,14 @@ class ThemeNotifier extends ChangeNotifier {
 
   String get theme => _theme;
 
+  /// Updates theme
   set theme(String value) {
     _theme = value;
     _updateTheme(value);
     notifyListeners();
   }
 
+  /// Gets the theme if there is one else use the default
   _getTheme() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     String? theme = pref.getString('theme');
@@ -28,16 +30,19 @@ class ThemeNotifier extends ChangeNotifier {
     return constants.defaultTheme;
   }
 
+  /// Updates the theme in storage
   void _updateTheme(String value) async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString('theme', value);
   }
 
+  /// Gets and updates the theme
   getPreferences() async {
     _theme = await _getTheme();
     notifyListeners();
   }
 
+  /// Converts the theme to a actual usable theme profile
   ThemeData? convertThemeToThemeData() {
     return constants.themeColors[_theme];
   }

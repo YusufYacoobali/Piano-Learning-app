@@ -253,3 +253,50 @@ final Decoration achievementCardDecoration = BoxDecoration(
 //achievement making
 const int numOfLessons = 10;
 const int numOfquizzes = 10;
+
+//pause menu
+const double menuLength = 80.0;
+const double menuWidth = 30.0;
+
+const TextStyle pauseMenuTextStyle = TextStyle(
+  fontSize: 40.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+
+ButtonStyle pauseMenuButtonStyle = ElevatedButton.styleFrom(
+  primary: const Color(0xffa4508b),
+  onPrimary: Colors.grey.shade300,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10),
+  ),
+  fixedSize: const Size(180.0, 30.0),
+  elevation: 5.0,
+);
+
+const Icon pauseMenuHomeIcon = Icon(
+  Icons.home,
+  size: 20.0,
+);
+
+const Icon pauseMenuPlayIcon = Icon(
+  Icons.play_arrow,
+  size: 20.0,
+);
+
+const Icon pauseMenuSelectionIcon = Icon(
+  Icons.auto_stories_outlined,
+  size: 20.0,
+);
+
+BoxDecoration cardBackground = BoxDecoration(
+  borderRadius: BorderRadius.circular(10),
+  gradient: LinearGradient(
+    colors: [
+      const Color(0xff5f0a87).withOpacity(0.8),
+      const Color(0xffa4508b).withOpacity(0.5),
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  ),
+);
