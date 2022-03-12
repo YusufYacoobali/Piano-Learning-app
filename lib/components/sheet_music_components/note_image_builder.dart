@@ -15,6 +15,7 @@ class NoteImageBuilder {
 
   NoteImageBuilder(this._clef);
 
+  /// Updates the canvas
   void setCanvas(Canvas canvas) {
     _canvas = canvas;
   }
@@ -40,6 +41,7 @@ class NoteImageBuilder {
     return false;
   }
 
+  /// Draws a quaver
   void _drawQuaver(NoteOnStave note) {
     _drawCircle(note);
     _drawTail(note);
@@ -66,6 +68,7 @@ class NoteImageBuilder {
     }
   }
 
+  /// Draws a dot beside a note
   void _drawDot(NoteOnStave note) {
     Paint paint = Paint()
       ..color = Colors.black
@@ -79,6 +82,7 @@ class NoteImageBuilder {
     _canvas.drawPoints(PointMode.points, <Offset>[point], paint);
   }
 
+  /// Draws either a sharp or a flat beside the note
   void _drawSymbol(NoteOnStave note, bool isFlat) {
     String symbol = '♯';
     double x = note.pos - 27;
@@ -104,6 +108,7 @@ class NoteImageBuilder {
     textPainter.paint(_canvas, Offset(x, y), );
   }
 
+  /// Draws a tail
   void _drawTail(NoteOnStave note) {
     Paint paint = Paint()
       ..color = Colors.black
@@ -130,6 +135,7 @@ class NoteImageBuilder {
     _canvas.drawLine(startingPoint, endingPoint, paint);
   }
 
+  /// Draws the circle
   void _drawCircle(NoteOnStave note, {PaintingStyle style = PaintingStyle.fill}) {
 
     Paint paint = Paint()
@@ -156,27 +162,33 @@ class NoteImageBuilder {
   /// Draws the note on the screen
   void drawNote(NoteOnStave note) {
     if (note.note.duration == 0.5) {
+      // Quaver
       _drawQuaver(note);
     }
     else if (note.note.duration == 1) {
+      // Crotchet
       _drawCircle(note);
       _drawTail(note);
     }
     else if (note.note.duration == 1.5) {
+      // Dotted crotchet
       _drawCircle(note);
       _drawTail(note);
       _drawDot(note);
     }
     else if (note.note.duration == 2) {
+      // Minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
     }
     else if (note.note.duration == 3) {
+      // Dotted minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
       _drawDot(note);
     }
     else if (note.note.duration == 4) {
+      // Semibreve
       _drawCircle(note, style: PaintingStyle.stroke);
     }
   }

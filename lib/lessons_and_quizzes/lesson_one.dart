@@ -1,12 +1,13 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
-//List of questions
-//Teaches how to read Do Re Mi
+/// List of questions for lesson 1.
+///
+/// Teaches how to read C D E on Treble clef.
 
 final QuestionList lessonOneQuestions =
     QuestionList(lessonID: 1, questionList: [
-  //Tutorial
+  ///Tutorial
   Question(
     image: 'Tr_MidC.jpeg',
     question:
@@ -25,7 +26,8 @@ final QuestionList lessonOneQuestions =
         'This is our third note. The name is E (Mi). The circle is across the lowest line of the 5 line staff. Now press E in the option box.',
     correctAnswer: 'E',
   ),
-  //start questions
+
+  ///start questions
   Question(
     image: 'Tr_MidC.jpeg',
     question:
