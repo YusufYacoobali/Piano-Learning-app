@@ -66,7 +66,7 @@ class PlayAlongMenuScreen extends StatelessWidget {
                   onPress: () {
                     ///TODO: Replace with actual music
                     Map<int, Note> _map = {
-                      0: Note('D4', 1),
+                      0: Note(name: 'D4', duration: 1),
                     };
                     Navigator.push(
                         context,

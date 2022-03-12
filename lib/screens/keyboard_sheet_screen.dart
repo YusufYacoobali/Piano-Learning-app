@@ -22,16 +22,16 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
 
   // Treble clef notes
   final Map<int, Note> _notes = <int, Note>{
-    0: Note('Cb4', 1),
-    2: Note('D4', 1.5),
-    5: Note('E4', 0.5),
-    8: Note('F#4', 2),
-    13: Note('G4', 3),
-    18: Note('A4', 3),
-    23: Note('B4', 4),
-    26: Note('C5', 0.5),
-    29: Note('D5', 3),
-    32: Note('E5', 1),
+    0: Note(name: 'Cb4', duration: 1),
+    2: Note(name: 'D4', duration: 1.5),
+    5: Note(name: 'E4', duration: 0.5),
+    8: Note(name: 'F#4', duration: 2),
+    13: Note(name: 'G4', duration: 3),
+    18: Note(name: 'A4', duration: 3),
+    23: Note(name: 'B4', duration: 4),
+    26: Note(name: 'C5', duration: 0.5),
+    29: Note(name: 'D5', duration: 3),
+    32: Note(name: 'E5', duration: 1),
   };
 
   void updateScreen(String update) {

@@ -10,7 +10,7 @@ class MovingMusicSheet extends MusicSheet{
   final NotePlayedChecker _currentNoteToPlay;
   late final double _currentNoteStart;
   late final double _currentNoteEnd;
-  late NoteOnStave _noteInPlayArea = NoteOnStave(Note('', -1), -1, -10);
+  late NoteOnStave _noteInPlayArea = NoteOnStave(Note(name: '', duration: -1), -1, -10);
   bool _firstNoteInPlayArea = false;
 
   MovingMusicSheet(NextNoteNotifier nextNote, Clef clef, this._currentNoteToPlay) : super(nextNote, clef);

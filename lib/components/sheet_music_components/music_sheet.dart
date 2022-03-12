@@ -28,7 +28,7 @@ class MusicSheet extends CustomPainter {
 
   final NextNoteNotifier nextNote;
 
-  final Clef clef;
+  Clef clef;
 
   bool hasSet = false;
 
@@ -109,9 +109,9 @@ class MusicSheet extends CustomPainter {
     return clef;
   }
 
-  void changeClef(Clef clef) {
-    _clef = clef;
-    _noteImageBuilder.changeClef(clef);
+  void changeClef(Clef c) {
+    clef = c;
+    noteImageBuilder.changeClef(clef);
   }
 
   @override

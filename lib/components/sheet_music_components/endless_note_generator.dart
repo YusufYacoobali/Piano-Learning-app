@@ -35,13 +35,13 @@ class EndlessNoteGenerator {
 
   EndlessNoteGenerator(this._sheet, this._nextNote, this._updater) {
     String name = _trebleClefNotes[_random.nextInt(_trebleClefNotes.length)];
-    _nextNote.setNextNote(Note(name, 1));
+    _nextNote.setNextNote(Note(name: name, duration: 1));
   }
 
   /// Gets a new random note to be displayed
   getRandomNote() {
     String name = _trebleClefNotes[_random.nextInt(_trebleClefNotes.length)];
-    _nextNote.setNextNote(Note(name, 1));
+    _nextNote.setNextNote(Note(name: name, duration: 1));
   }
 
   void start() {
