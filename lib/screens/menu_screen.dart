@@ -18,8 +18,8 @@ class _MenuScreenState extends State<MenuScreen> {
     NotificationAPI.init(initScheduled: true);
     //ListenNotifications();
     NotificationAPI.showScheduledNotification(
-      title: 'Piano',
-      body: 'do more',
+      title: 'Read That Sheet',
+      body: 'Hey! Why don\'t you learn some more notes today?',
       payload: 'extra info',
       //scheduledDate: DateTime.now().add(const Duration(seconds: 10)),
     );
