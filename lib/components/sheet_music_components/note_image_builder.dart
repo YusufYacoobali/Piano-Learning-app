@@ -92,6 +92,7 @@ class NoteImageBuilder {
     }
 
     TextPainter textPainter = TextPainter(
+        textScaleFactor: 1,
         text: TextSpan(
             text: symbol,
             style: TextStyle(
