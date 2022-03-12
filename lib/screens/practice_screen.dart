@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
+import 'package:sight_reading_app/screens/endless_mode_screen.dart';
 
 import '../components/app_bar_with_settings_icon.dart';
 import 'instruction_screens/practice_instruction_screen.dart';

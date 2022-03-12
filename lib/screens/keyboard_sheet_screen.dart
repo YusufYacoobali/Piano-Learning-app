@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:sight_reading_app/screens/note_selector_sheet_screen.dart';
-import '../components/keyboard.dart';
-import '../components/sheet_music_components/music_sheet.dart';
+import '../components/sheet_music_components/keyboard_with_play_along.dart';
+import '../components/sheet_music_components/note_played_checker.dart';
+import '../screens/note_selector_sheet_screen.dart';
+import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 import '../components/sheet_music_components/progress_timer.dart';
 
 /// Temporary proof of concept screen for moving notes along
 class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
-  late final MusicSheet _sheet;
+  late final MovingMusicSheet _sheet;
   late ProgressTimer _timer;
   bool _isStarted = false;
 
   final NextNoteNotifier _nextNote = NextNoteNotifier();
+  final NextNoteNotifier _noteToPlay = NextNoteNotifier();
+  late final NotePlayedChecker _currentNoteToPlay;
 
-  final player = AudioCache();
+  String hit = '';
 
   String updater = "";
 
-  void playSound(String noteName) => player.play('note_$noteName.wav');
+  // Treble clef notes
+  final Map<int, Note> _notes = <int, Note>{
+    0: Note('Cb4', 1),
+    2: Note('D4', 1.5),
+    5: Note('E4', 0.5),
+    8: Note('F#4', 2),
+    13: Note('G4', 3),
+    18: Note('A4', 3),
+    23: Note('B4', 4),
+    26: Note('C5', 0.5),
+    29: Note('D5', 3),
+    32: Note('E5', 1),
+  };
 
   void updateScreen(String update) {
     setState(() {
@@ -26,11 +40,21 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
     });
   }
 
+  void convertHitToString(bool isHit) {
+    if (isHit) {
+      hit = 'Hit';
+    }
+    else {
+      hit = 'Miss';
+    }
+  }
+
   @override
   void initState() {
+    _currentNoteToPlay = NotePlayedChecker(_noteToPlay, convertHitToString);
     super.initState();
-    _sheet = MusicSheet(_nextNote, MusicSheetModes.playAlong, Clef.treble);
-    _timer = ProgressTimer(_sheet, _nextNote, updateScreen);
+    _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
+    _timer = ProgressTimer(_sheet, _nextNote, updateScreen, _notes);
   }
 
   @override
@@ -45,6 +69,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
       appBar: AppBar(
         title: const Text('Sheet Music'),
         actions: [
+          Text(hit),
           ElevatedButton(
               child: const Text('Go to another demo'),
               onPressed: () {
@@ -94,7 +119,7 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
             ),
             Expanded(
               flex: 3,
-              child: Keyboard(),
+              child: KeyboardWithPlayAlong(_sheet, _currentNoteToPlay),
             ),
           ],
         ),

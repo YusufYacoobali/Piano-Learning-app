@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
+import '../components/sheet_music_components/note.dart';
+import 'play_along_screen.dart';
 import 'menu_screen.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 
@@ -62,8 +64,15 @@ class PlayAlongMenuScreen extends StatelessWidget {
                     ],
                   ),
                   onPress: () {
-                    Navigator.pushNamed(
-                        context, MenuScreen.id); //TODO: Replace with an Instruction screen template
+                    ///TODO: Replace with actual music
+                    Map<int, Note> _map = {
+                      0: Note('D4', 1),
+                    };
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PlayAlongScreen(notes: _map,),
+                        )); //TODO: Replace with an Instruction screen template
                   },
                   key: trackButtonKeys[index],
                 ),

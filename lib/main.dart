@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
+import 'package:sight_reading_app/screens/endless_mode_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/practice_instruction_screen.dart';
@@ -15,9 +16,9 @@ import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/theme_listener.dart';
 import 'package:provider/provider.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
+import 'package:sight_reading_app/screens/play_along_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
-
 import 'package:sight_reading_app/screens/keyboard_sheet_screen.dart';
 import 'package:sight_reading_app/screens/note_selector_sheet_screen.dart';
 
@@ -63,9 +64,9 @@ class SightReadingApp extends StatelessWidget {
               PracticeInstructions.id: (context) => const PracticeInstructions(),
               // Temporary routes to demo screens
               KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
-              NoteSelectorSheetScreen.id: (context) =>
-                  const NoteSelectorSheetScreen(),
+              NoteSelectorSheetScreen.id: (context) => const NoteSelectorSheetScreen(),
               KeyDetectionScreen.id: (context) => const KeyDetectionScreen(),
+              EndlessModeScreen.id: (context) => const EndlessModeScreen(),
             },
           );
         },
