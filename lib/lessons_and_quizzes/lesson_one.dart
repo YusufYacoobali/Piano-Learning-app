@@ -1,29 +1,33 @@
+import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
-//List of questions
-//Teaches how to read Do Re Mi
+/// List of questions for lesson 1.
+///
+/// Teaches how to read C D E on Treble clef.
 
-final List<Question> lessonOneQuestions = [
-  //Tutorial
+final QuestionList lessonOneQuestions =
+    QuestionList(lessonID: 1, questionList: [
+  ///Tutorial
   Question(
     image: 'Tr_MidC.jpeg',
     question:
-        'This is our first note. The name is C (Do). Now press C in the option box.',
+        'We are going to learn how to read notes. All music notes will be on the lines or spaces of the musical staff. The far left symbol is called the Treble clef. This is our first note. The name is C (Do). It is a circle with a short line across it. Now press C in the option box.',
     correctAnswer: 'C',
   ),
   Question(
     image: 'Tr_D.jpeg',
     question:
-        'This is our second note. The name is D (Re). Now press D in the option box.',
+        'This is our second note. The name is D (Re). It is directly under the lowest line. Now press D in the option box.',
     correctAnswer: 'D',
   ),
   Question(
     image: 'Tr_E.jpeg',
     question:
-        'This is our third note. The name is E (Mi). Now press E in the option box.',
+        'This is our third note. The name is E (Mi). The circle is across the lowest line of the 5 line staff. Now press E in the option box.',
     correctAnswer: 'E',
   ),
-  //start questions
+
+  ///start questions
   Question(
     image: 'Tr_MidC.jpeg',
     question:
@@ -65,4 +69,4 @@ final List<Question> lessonOneQuestions = [
     question: 'What note is this?',
     correctAnswer: 'C',
   ),
-];
+]);

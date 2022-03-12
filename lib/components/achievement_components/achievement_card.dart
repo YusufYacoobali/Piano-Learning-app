@@ -1,23 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-/// This makes the card which is shown in both tab screens
-/// plan is that the card class receieves a achievement object and use the attributes to make the cards
+import '../../constants.dart';
 
-const double cardWidth = 230;
-final Color cardColour = Colors.indigo.shade400;
-
-const double circularIndicatorRadius = 80;
-
-const double indicatorLineWidth = 16;
-const Color indicatorBackground = Colors.red;
-const Color indicatorGoodProgress = Colors.green;
-const Color indicatorBadProgress = Colors.orange;
-
-const Icon playLessonIcon = Icon(
-  Icons.play_lesson,
-  size: 30.0,
-);
+///The design for an achievement card
 
 class AchievementCard extends StatelessWidget {
   final String text;
@@ -33,13 +19,11 @@ class AchievementCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: cardHeight,
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(10),
       width: cardWidth,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: cardColour,
-      ),
+      decoration: achievementCardDecoration,
       child: Column(children: [
         Row(
           children: [
@@ -57,6 +41,7 @@ class AchievementCard extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
+        //Using an external library to make it look more appealing
         Expanded(
           child: CircularPercentIndicator(
             radius: circularIndicatorRadius,
@@ -66,15 +51,16 @@ class AchievementCard extends StatelessWidget {
             center: (achieved == true)
                 ? (Text(
                     '$target/$target',
-                    style: const TextStyle(fontSize: 20),
+                    style: achievementTextStyle,
                   ))
                 : Text(
                     '$complete/$target',
-                    style: const TextStyle(fontSize: 20),
+                    style: achievementTextStyle,
                   ),
-            animationDuration: 1200,
+            animationDuration: animationDuration,
             circularStrokeCap: CircularStrokeCap.square,
             backgroundColor: indicatorBackground,
+            //Colour of progress bar changes depending of how much is completed
             progressColor: ((complete / target) > 0.5)
                 ? indicatorGoodProgress
                 : indicatorBadProgress,
