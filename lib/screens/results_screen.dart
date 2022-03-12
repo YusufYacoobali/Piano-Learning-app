@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
-
 import '../constants.dart';
 
 class _ResultsScreenState extends State<ResultsScreen> {
@@ -20,7 +19,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
       child: FittedBox(
         fit: BoxFit.contain,
         child: Padding(
-          padding: const EdgeInsets.all(2.0),
+          padding: const EdgeInsets.all(20.0),
           child: Text(
             widget.title,
             textAlign: TextAlign.center,
@@ -60,7 +59,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
         fit: BoxFit.contain,
         child: Icon(
           getIcon(),
-          color: Colors.yellow,
+          //color: Colors.grey.shade300,
           size: 150.0,
         ),
       ),
@@ -78,21 +77,27 @@ class _ResultsScreenState extends State<ResultsScreen> {
   Widget getNavigationButtons() {
     return Expanded(
       flex: 1,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
-            },
-            child: const Text('Exit'),
-          ),
-          ElevatedButton(
-            // TODO: Implement review answers functionality
-            onPressed: () {},
-            child: const Text('Review Answers'),
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
+              },
+              style: navButtonDeco,
+              child: const Text('Exit'),
+            ),
+            ElevatedButton(
+              // TODO: Implement review answers functionality
+              onPressed: () {},
+              child: const Text('Review Answers'),
+
+              style: navButtonDeco,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -100,19 +105,22 @@ class _ResultsScreenState extends State<ResultsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          color: Colors.lightGreen.shade500,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              getTitleWidget(),
-              getIconWidget(),
-              getScoreWidget(),
-              getNavigationButtons(),
-            ],
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xff5f0a87), Color(0xffa4508b)],
           ),
+        ),
+        //color: Colors.lightGreen.shade500,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            getTitleWidget(),
+            getIconWidget(),
+            getScoreWidget(),
+            getNavigationButtons(),
+          ],
         ),
       ),
     );

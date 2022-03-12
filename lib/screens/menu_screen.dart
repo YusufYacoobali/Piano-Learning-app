@@ -10,11 +10,11 @@ import 'settings_screen.dart';
 
 const navigateToPracticeMainMenuButtonKey = Key('navigateToPracticeMainMenu');
 
+/// Main menu screen
 class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     super.initState();
-
     NotificationAPI.init(initScheduled: true);
     //ListenNotifications();
     NotificationAPI.showScheduledNotification(
@@ -43,6 +43,7 @@ class _MenuScreenState extends State<MenuScreen> {
               child: Column(
                 children: [
                   Expanded(
+                    // 'Lessons' button
                     child: MenuButton(
                       buttonChild: const ButtonText(buttonText: 'Lessons'),
                       onPress: () {
@@ -51,6 +52,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                   ),
                   Expanded(
+                    // 'Practice' button
                     child: MenuButton(
                       buttonChild: const ButtonText(buttonText: 'Practice'),
                       onPress: () {
@@ -60,6 +62,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                   ),
                   Expanded(
+                    // 'Achievements' button
                     child: MenuButton(
                       buttonChild: const ButtonText(buttonText: 'Achievements'),
                       onPress: () {
@@ -104,12 +107,11 @@ class _MenuScreenState extends State<MenuScreen> {
                         Expanded(
                           flex: 2,
                           child: MenuButton(
-                            buttonChild: Align(
+                            buttonChild: const Align(
                               alignment: Alignment.center,
                               child: settingsIcon,
                             ),
                             onPress: () {
-                              //Navigator.pushNamed(context, SettingsScreen.id);
                               Navigator.pushNamed(context, SettingsScreen.id);
                             },
                           ),
@@ -150,10 +152,7 @@ class AppNameBox extends StatelessWidget {
       width: double.infinity,
       margin: boxMargin,
       padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(boxRadii),
-        color: appNameBoxColour,
-      ),
+      decoration: menuButtonDeco,
       child: FittedBox(
         fit: BoxFit.contain,
         alignment: Alignment.center,
@@ -185,10 +184,7 @@ class MenuButton extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(20.0),
         margin: boxMargin,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(boxRadii),
-          color: buttonBoxColour,
-        ),
+        decoration: menuButtonDeco,
         child: FittedBox(
           fit: BoxFit.contain,
           alignment: Alignment.center,
@@ -217,31 +213,3 @@ class ButtonText extends StatelessWidget {
     );
   }
 }
-
-// Old App name box stuff
-//
-// Column(
-// children: [
-// Expanded(
-// child: Center(
-// child: Text(
-// formattedAppName,
-// style: appNameTextStyle,
-// ),
-// ),
-// ),
-// ),
-// ],
-
-// Old Button boxes' stuff
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// Expanded(
-// child: Padding(
-// padding: const EdgeInsets.all(8.0),
-// child: buttonChild,
-// ),
-// )
-// ],
-// ),
