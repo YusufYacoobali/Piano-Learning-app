@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/endless_mode_components/endless_mode_end.dart';
-import 'package:sight_reading_app/components/endless_mode_components/endless_score_counter.dart';
+import '../components/endless_mode_components/endless_mode_end.dart';
+import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/clef_choice.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
 import '../components/sheet_music_components/keyboard_with_play_along.dart';
@@ -9,24 +9,32 @@ import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 
 class _EndlessModeScreenState extends State<EndlessModeScreen> {
+  /// Music sheet that moves
   late final MovingMusicSheet _sheet;
+
+  /// Generates the next notes and keeps time
   late EndlessNoteGenerator _generator;
 
+  /// Next note to be displayed notifier
   final NextNoteNotifier _nextNote = NextNoteNotifier();
+
+  /// Note in the area to be played notifier
   final NextNoteNotifier _noteToPlay = NextNoteNotifier();
   late final NotePlayedChecker _currentNoteToPlay;
 
-  String hit = '';
-
+  /// The key string that updates the screen
   String updater = '';
 
-  bool exit = false;
-
+  /// The clef chooser overlay
   late final OverlayEntry _startMenu;
+
+  /// The end screen overlay
   late final OverlayEntry _endScreen;
 
+  /// Whether the end screen is to be shown
   bool _hasEnded = false;
 
+  /// The score keeper
   final EndlessScoreCounter _counter = EndlessScoreCounter();
 
   @override
@@ -46,12 +54,13 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
 
     _startMenu = OverlayEntry(
       builder: (context) => ClefChoice(
-        removeMenu: removeMenu,
+        removeMenu: removeStartMenu,
       ),
     );
 
+    /// Displays the start menu
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => showMenu());
+        ?.addPostFrameCallback((_) => showStartMenu());
   }
 
   @override
@@ -59,6 +68,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     super.dispose();
     _generator.stop();
 
+    /// Gets rid of the overlays if they are visible
     if (_startMenu.mounted) {
       _startMenu.remove();
     }
@@ -67,12 +77,14 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     }
   }
 
+  /// Updates the screen
   void updateScreen(String update) {
     setState(() {
       updater = update;
     });
   }
 
+  /// The function to be called on each note moving out of the target area
   void stop(bool hasPlayed) {
     if (!hasPlayed) {
       _generator.stop();
@@ -84,12 +96,14 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     }
   }
 
-  void showMenu() {
+  /// Shows the start menu
+  void showStartMenu() {
     final overlay = Overlay.of(context)!;
     overlay.insert(_startMenu);
   }
 
-  void removeMenu(Clef clef) {
+  /// Removes the start menu
+  void removeStartMenu(Clef clef) {
     _counter.getHighScore(clef);
     _generator.setClef(clef);
     _sheet.changeClef(clef);
@@ -97,11 +111,13 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _startMenu.remove();
   }
 
+  /// Shows the end screen
   void showEndScreen() {
     final overlay = Overlay.of(context)!;
     overlay.insert(_endScreen);
   }
 
+  /// Removes the end screen
   void removeEndScreen() {
     _endScreen.remove();
   }
