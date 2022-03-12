@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
+import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/practice_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
@@ -17,6 +18,7 @@ void main() {
       (WidgetTester tester) async {
     await _goToPracticeScreen(tester);
     await tester.tap(find.byIcon(Icons.help_outline));
+    await tester.pumpAndSettle();
     expect(find.byType(PracticeInstructions), findsOneWidget);
       });
   
@@ -26,7 +28,7 @@ void main() {
     await tester.tap(find.text('Play along'));
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.help_outline));
-    tester.pumpAndSettle();
+    await tester.pumpAndSettle();
     expect(find.byType(PlayAlongInstructions), findsOneWidget);
       });
 
@@ -36,7 +38,7 @@ void main() {
         await tester.tap(find.text('Speedrun'));
         await tester.pumpAndSettle();
         await tester.tap(find.byIcon(Icons.help_outline));
-        tester.pumpAndSettle();
+        await tester.pumpAndSettle();
         expect(find.byType(SpeedrunInstructions), findsOneWidget);
       });
 
@@ -46,7 +48,15 @@ void main() {
         await tester.tap(find.text('Take a Quiz'));
         await tester.pumpAndSettle();
         await tester.tap(find.byIcon(Icons.help_outline));
-        tester.pumpAndSettle();
+        await tester.pumpAndSettle();
         expect(find.byType(QuizInstruction), findsOneWidget);
+      });
+
+  testWidgets('check for endless instruction screen',
+      (WidgetTester tester) async{
+    await _goToPracticeScreen(tester);
+    await tester.tap(find.text('Endless'));
+    await tester.pumpAndSettle();
+    expect(find.byType(EndlessInstructions), findsOneWidget);
       });
 }

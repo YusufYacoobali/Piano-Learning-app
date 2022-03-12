@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
 
 import '../components/app_bar_with_settings_icon.dart';
 import 'instruction_screens/practice_instruction_screen.dart';
@@ -70,7 +71,7 @@ class PracticeScreen extends StatelessWidget {
                 const Center(child: ButtonText(buttonText: 'Endless')),
                 onPress: () {
                   Navigator.pushNamed(
-                      context, MenuScreen.id); //TODO: Replace screen name
+                      context, EndlessInstructions.id);
                 },
                 key: navigateToEndlessModeButtonKey,
               )
