@@ -29,6 +29,7 @@ class _PauseMenuState extends State<PauseMenu> {
     super.dispose();
   }
 
+  /// A home button from the paused menu
   Widget getHomeButton() {
     return ElevatedButton.icon(
       key: const Key('home button'),
@@ -42,6 +43,7 @@ class _PauseMenuState extends State<PauseMenu> {
     );
   }
 
+  /// A play button from the paused menu
   Widget getPlayButton() {
     return ElevatedButton.icon(
       key: const Key('play button'),
@@ -55,6 +57,7 @@ class _PauseMenuState extends State<PauseMenu> {
     );
   }
 
+  /// A selection button from the paused menu
   Widget getLessonSelectionButton() {
     return ElevatedButton.icon(
       key: const Key('lesson selection button'),
@@ -68,6 +71,7 @@ class _PauseMenuState extends State<PauseMenu> {
     );
   }
 
+  /// Text of Paused Menu title
   Widget getMenuText() {
     return const Text(
       'Paused',
