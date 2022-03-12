@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import 'lessons_and_quizzes/question_list.dart';
 import 'components/sheet_music_components/note.dart';
