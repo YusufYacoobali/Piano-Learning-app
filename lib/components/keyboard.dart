@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../constants.dart';
 
+/// Keyboard widget
 class Keyboard extends StatelessWidget {
-
+  /// Used to play note sounds
   final player = AudioCache();
 
+  /// Constructor
   Keyboard({Key? key}) : super(key: key);
 
+  /// Plays the sound of the note that was pressed
   void playSound(String noteName) => player.play('note_$noteName.wav');
 
-  // Returns the text displayed on the white keys
+  /// Returns the text widget displayed on the white keys
   Widget getWhiteKeyChild(String buttonText) {
     return FittedBox(
       fit: BoxFit.fitWidth,
@@ -22,7 +25,7 @@ class Keyboard extends StatelessWidget {
     );
   }
 
-  // Returns the text displayed on the black keys
+  /// Returns the text widget displayed on the black keys
   Widget getBlackKeyChild(String buttonText) {
     return FittedBox(
       fit: BoxFit.fitWidth,
@@ -34,7 +37,7 @@ class Keyboard extends StatelessWidget {
     );
   }
 
-  // Returns the buttons for the white keys
+  /// Returns a button for the white key
   Widget getWhiteKey(String buttonText) {
     return Expanded(
       child: ElevatedButton(
@@ -53,7 +56,7 @@ class Keyboard extends StatelessWidget {
     );
   }
 
-  // Returns the buttons for the black keys
+  /// Returns a button for the black key
   Widget getBlackKey(String buttonText) {
     return ElevatedButton(
       child: Column(
@@ -70,7 +73,7 @@ class Keyboard extends StatelessWidget {
     );
   }
 
-  // Returns the list of white keys
+  /// Returns the list of white keys
   List<Widget> getWhiteKeys() {
     List<Widget> whiteKeys = [];
     List<String> notes = whiteKeyNames;
@@ -80,7 +83,7 @@ class Keyboard extends StatelessWidget {
     return whiteKeys;
   }
 
-  // Returns an empty expanded used to create a gap between the black keys
+  /// Returns an empty expanded used to create a gap between the black keys
   Widget getBlackKeySpace(int flex) {
     return Expanded(
       flex: flex,
@@ -88,7 +91,7 @@ class Keyboard extends StatelessWidget {
     );
   }
 
-  // Returns the list of black keys with the gaps in between them
+  /// Returns the list of black keys with the gaps in between them
   List<Widget> getBlackKeys() {
     List<String> notes = blackKeyNames;
     List<Widget> blackKeys = [

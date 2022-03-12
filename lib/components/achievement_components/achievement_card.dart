@@ -3,6 +3,8 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../constants.dart';
 
+///The design for an achievement card
+
 class AchievementCard extends StatelessWidget {
   final String text;
   final int complete;
@@ -39,6 +41,7 @@ class AchievementCard extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
+        //Using an external library to make it look more appealing
         Expanded(
           child: CircularPercentIndicator(
             radius: circularIndicatorRadius,
@@ -57,6 +60,7 @@ class AchievementCard extends StatelessWidget {
             animationDuration: animationDuration,
             circularStrokeCap: CircularStrokeCap.square,
             backgroundColor: indicatorBackground,
+            //Colour of progress bar changes depending of how much is completed
             progressColor: ((complete / target) > 0.5)
                 ? indicatorGoodProgress
                 : indicatorBadProgress,
