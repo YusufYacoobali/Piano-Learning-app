@@ -3,12 +3,13 @@ import 'package:sight_reading_app/question.dart';
 
 import '../components/sheet_music_components/note.dart';
 
-//List of questions
-//Teaches how to read low notes
+/// List of questions for lesson 7.
+///
+/// Teaches how to read lower notes than the ones taught in previous lessons.
 
 final QuestionList lessonSevenQuestions =
     QuestionList(lessonID: 7, questionList: [
-  //Tutorial
+  ///Tutorial
   Question(
     note: Note(name: 'B2', duration: 4),
     clef: Clef.bass,
@@ -25,7 +26,7 @@ final QuestionList lessonSevenQuestions =
     correctAnswer: 'A',
   ),
 
-  //start questions
+  ///start questions
   Question(
     note: Note(name: 'C3', duration: 4),
     clef: Clef.bass,

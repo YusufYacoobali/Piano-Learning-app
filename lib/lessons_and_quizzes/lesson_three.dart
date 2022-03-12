@@ -1,13 +1,13 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
-
 import '../components/sheet_music_components/note.dart';
 
-//List of questions
-//Teaches how to read La Ti
+/// List of questions for lesson 3.
+/// Teaches how to read A B on Treble clef.
+
 final QuestionList lessonThreeQuestions =
     QuestionList(lessonID: 3, questionList: [
-  //Tutorial
+  ///Tutorial
   Question(
     note: Note(name: 'A4', duration: 4),
     clef: Clef.treble,
@@ -22,7 +22,8 @@ final QuestionList lessonThreeQuestions =
         'This note is call B (Ti). It is located at the middle line of the staff. Now press B in the option box.',
     correctAnswer: 'B',
   ),
-  //Lesson questions
+
+  ///Lesson questions
   Question(
     note: Note(name: 'B4', duration: 4),
     clef: Clef.treble,
@@ -102,5 +103,4 @@ final QuestionList lessonThreeQuestions =
     question: 'What note is this?',
     correctAnswer: 'E',
   ),
-  //maybe add more pictures with 2 notes or more and ask to read the second note.
 ]);

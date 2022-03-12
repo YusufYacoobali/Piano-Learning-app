@@ -39,7 +39,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     //print(completedLessons);
     //print(completedQuizzes);
 
-    //states changes when values are fetched
+    //state changes when values are fetched
     setState(() {
       achieveValues.addAll([completedLessons, completedQuizzes]);
     });
@@ -54,6 +54,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         maker.makeAchievements(achieveValues);
     //print(achieveObjects);
 
+    //deciding where each card will go
     if (achieveObjects.isNotEmpty) {
       for (AchievementCard card in achieveObjects) {
         if (card.complete >= card.target) {

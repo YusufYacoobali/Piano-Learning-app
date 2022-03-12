@@ -1,15 +1,17 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
 
+
 import '../components/sheet_music_components/note.dart';
 
-//List of questions
-//Teaches how to read Do Re Mi Fa on base clef
+/// List of questions for lesson 4.
+///
+/// Teaches how to read C D E F on Bass clef.
+
 
 final QuestionList lessonFourQuestions =
     QuestionList(lessonID: 4, questionList: [
-  //Tutorial
-  //Read C to F with the base clef
+  ///Tutorial
   Question(
     note: Note(name: 'C3', duration: 4),
     clef: Clef.bass,
@@ -39,7 +41,8 @@ correctAnswer: 'E',
       'This is F (Fa) on the Base clef. It is one the second from top line of the staff. Now press F in the option box.',
     correctAnswer: 'F',
   ),
-  //start questions
+
+  ///start questions
   Question(
     note: Note(name: 'E3', duration: 4),
     clef: Clef.bass,

@@ -3,12 +3,13 @@ import 'package:sight_reading_app/question.dart';
 
 import '../components/sheet_music_components/note.dart';
 
-//List of questions
-//Teaches how to read high notes
+/// List of questions for lesson 6.
+///
+/// Teaches how to read higher notes than the ones taught in previous lessons.
 
 final QuestionList lessonSixQuestions =
     QuestionList(lessonID: 6, questionList: [
-  //Tutorial
+  ///Tutorial
   Question(
     note: Note(name: 'C5', duration: 4),
     clef: Clef.treble,
@@ -24,13 +25,21 @@ final QuestionList lessonSixQuestions =
     correctAnswer: 'D',
   ),
   Question(
+    note: Note(name: 'G3', duration: 4),
+    clef: Clef.bass,
+    question:
+        'The same goes for notes in Base clef. Do you remember this note? This is G in Bass Clef. Press G in the option box.',
+    correctAnswer: 'G',
+  ),
+  Question(
     note: Note(name: 'A3', duration: 4),
     clef: Clef.bass,
     question:
-        'The same goes for notes in Base clef. This note is on the line above G. Now press A in the option box.',
+        'This note is on the line above G in the previous question. Now press A in the option box.',
     correctAnswer: 'A',
   ),
-  //start questions
+
+  ///Start questions
   Question(
     note: Note(name: 'B4', duration: 4),
     clef: Clef.treble,
