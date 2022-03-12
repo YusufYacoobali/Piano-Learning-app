@@ -40,7 +40,7 @@ class MusicSheet extends CustomPainter {
 
   final MusicSheetModes _mode;
 
-  final Clef _clef;
+  Clef _clef;
 
   bool _hasSet = false;
 
@@ -63,9 +63,9 @@ class MusicSheet extends CustomPainter {
       _startLine = canvasWidth + 40;
     }
     else if (_mode == MusicSheetModes.showNotes) {
-      start = size.width/3;
-      canvasWidth = size.width/3;
-      _startLine =  start + (canvasWidth/2);
+      start = size.width/4;
+      canvasWidth = size.width/2 + 40;
+      _startLine =  start + (canvasWidth/2) + 20;
     }
     else {
       start = size.width/3;
@@ -123,6 +123,11 @@ class MusicSheet extends CustomPainter {
 
   Clef getClef() {
     return _clef;
+  }
+
+  void changeClef(Clef clef) {
+    _clef = clef;
+    _noteImageBuilder.changeClef(clef);
   }
 
   @override

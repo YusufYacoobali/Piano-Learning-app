@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import 'lessons_and_quizzes/question_list.dart';
+import 'components/sheet_music_components/note.dart';
 
 /// Manages the questions in lessons/quizzes
 class QuestionBrain {
@@ -19,21 +19,29 @@ class QuestionBrain {
     required this.questions,
   });
 
+  Note getNote() {
+    return questions.questionList[_questionNum].note;
+  }
+
+  Clef getClef() {
+    return questions.questionList[_questionNum].clef;
+  }
+
   /// Gets the name of the image of the current question
-  String getImageName() {
-    return questions.questionList[_questionNum].image;
-  }
+//   String getImageName() {
+//     return questions.questionList[_questionNum].image;
+//   }
 
-  /// Gets the path of the image of the current question
-  String getImagePath() {
-    String path = 'assets/note_images/${getImageName()}';
-    return path;
-  }
+//   /// Gets the path of the image of the current question
+//   String getImagePath() {
+//     String path = 'assets/note_images/${getImageName()}';
+//     return path;
+//   }
 
-  /// Gets the image for the current question
-  AssetImage getImage() {
-    return AssetImage(getImagePath());
-  }
+//   /// Gets the image for the current question
+//   AssetImage getImage() {
+//     return AssetImage(getImagePath());
+//   }
 
   /// Gets the question text for the current question
   String getQuestionText() {

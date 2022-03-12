@@ -28,7 +28,7 @@ class KeyboardWithDetection extends Keyboard {
           if (_sheet.getClef() == Clef.bass) {
             level = '3';
           }
-          Note note = Note(buttonText + level, 1);
+          Note note = Note(name: '$buttonText$level', duration: 1);
           _nextNote.setNextNote(note);
         },
         style: whiteKeyButtonStyle,
@@ -53,7 +53,7 @@ class KeyboardWithDetection extends Keyboard {
         if (_sheet.getClef() == Clef.bass) {
           level = '3';
         }
-        Note note = Note(buttonText + level, 1);
+        Note note = Note(name: '$buttonText$level', duration: 1);
         _nextNote.setNextNote(note);
       },
       style: blackKeyButtonStyle,

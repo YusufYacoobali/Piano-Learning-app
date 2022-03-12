@@ -9,7 +9,11 @@ class Note {
   /// Number of beats of the note
   late double duration;
 
-  Note(this.name, this.duration, {this.time = -1});
+  Note({
+    required this.name,
+    required this.duration,
+    this.time = -1
+  });
 
   /// Gets the
   String getNameWithoutSymbol() {

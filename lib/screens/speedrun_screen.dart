@@ -4,6 +4,7 @@ import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/option_button.dart';
 import '../components/question_skeleton.dart';
+import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
 import '../question_brain.dart';
 
@@ -50,13 +51,15 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
 
   /// Creates the screen widget
   void setScreenWidget() {
-    AssetImage image = questionBrain.getImage();
+    Note note = questionBrain.getNote();
+    Clef clef = questionBrain.getClef();
     String questionText = questionBrain.getQuestionText();
     int questionNum = questionBrain.getQuestionNum();
     int totalNumOfQuestions = questionBrain.getTotalNumberOfQuestions();
 
     screenWidget = QuestionSkeleton(
-      image: image,
+      note: note,
+      clef: clef,
       questionText: questionText,
       questionNum: questionNum,
       totalNumOfQuestions: totalNumOfQuestions,
