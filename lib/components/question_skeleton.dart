@@ -40,6 +40,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     super.dispose();
   }
 
+  /// A text of the current question number of total question.
   Widget getQuestionNumberTrackerWidget() {
     return Expanded(
       key: const Key('question number'),
@@ -50,6 +51,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     );
   }
 
+  /// Get the question image.
   Widget getQuestionImage() {
     _sheet.changeClef(widget.clef);
     _nextNote.setNextNote(widget.note);
@@ -66,6 +68,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     );
   }
 
+  /// A sentence of the question.
   Widget getQuestionText() {
     return Expanded(
       key: const Key('question text'),
