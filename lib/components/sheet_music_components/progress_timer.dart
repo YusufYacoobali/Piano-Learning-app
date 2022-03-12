@@ -13,6 +13,7 @@ class ProgressTimer {
 
   int _index = 0;
   static const int iterationsPerTimeUnit = 80;
+
   final Function _updater;
   final Map<int, Note> _notes;
 

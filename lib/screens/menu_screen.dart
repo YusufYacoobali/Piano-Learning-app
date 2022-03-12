@@ -10,6 +10,7 @@ import 'settings_screen.dart';
 
 const navigateToPracticeMainMenuButtonKey = Key('navigateToPracticeMainMenu');
 
+/// Main menu screen
 class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
@@ -17,8 +18,8 @@ class _MenuScreenState extends State<MenuScreen> {
     NotificationAPI.init(initScheduled: true);
     //ListenNotifications();
     NotificationAPI.showScheduledNotification(
-      title: 'Piano',
-      body: 'do more',
+      title: 'Read That Sheet',
+      body: 'Hey! Why don\'t you learn some more notes today?',
       payload: 'extra info',
       //scheduledDate: DateTime.now().add(const Duration(seconds: 10)),
     );
@@ -42,6 +43,7 @@ class _MenuScreenState extends State<MenuScreen> {
               child: Column(
                 children: [
                   Expanded(
+                    // 'Lessons' button
                     child: MenuButton(
                       buttonChild: const ButtonText(buttonText: 'Lessons'),
                       onPress: () {
@@ -50,6 +52,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                   ),
                   Expanded(
+                    // 'Practice' button
                     child: MenuButton(
                       buttonChild: const ButtonText(buttonText: 'Practice'),
                       onPress: () {
@@ -59,6 +62,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                   ),
                   Expanded(
+                    // 'Achievements' button
                     child: MenuButton(
                       buttonChild: const ButtonText(buttonText: 'Achievements'),
                       onPress: () {
@@ -108,7 +112,6 @@ class _MenuScreenState extends State<MenuScreen> {
                               child: settingsIcon,
                             ),
                             onPress: () {
-                              //Navigator.pushNamed(context, SettingsScreen.id);
                               Navigator.pushNamed(context, SettingsScreen.id);
                             },
                           ),

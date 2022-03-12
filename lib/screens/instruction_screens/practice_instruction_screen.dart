@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+/// This file creates the instructions for the practice menu.
+
 class PracticeInstructions extends StatelessWidget {
   const PracticeInstructions({Key? key}) : super(key: key);
   static const id = 'practice_instruction_screen';
 
+  /// Builds the appBar and container with the text
   @override
   Widget build(BuildContext context) {
     return Scaffold(

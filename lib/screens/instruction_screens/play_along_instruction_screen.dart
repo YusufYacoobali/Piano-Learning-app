@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+/// This file creates the instructions for the play along mode.
+
 class PlayAlongInstructions extends StatelessWidget {
   const PlayAlongInstructions({Key? key}) : super(key: key);
   static const id = 'play_along_instructions_screen';
 
+  /// Builds the appBar and container with the text
   @override
   Widget build(BuildContext context) {
     return Scaffold(

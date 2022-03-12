@@ -109,6 +109,11 @@ class MusicSheet extends CustomPainter {
     return clef;
   }
 
+  void changeClef(Clef clef) {
+    _clef = clef;
+    _noteImageBuilder.changeClef(clef);
+  }
+
   @override
   bool shouldRepaint(MusicSheet oldDelegate) => true;
 

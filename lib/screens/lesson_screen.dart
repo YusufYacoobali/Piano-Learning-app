@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/pause_menu.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_four.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_one.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/lesson_seven.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_six.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_three.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_two.dart';
@@ -10,11 +12,19 @@ import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
+import '../components/sheet_music_components/note.dart';
+import '../lessons_and_quizzes/lesson_one.dart';
 import 'package:sight_reading_app/components/option_button.dart';
+
+/// Creates screen for a lesson.
+/// The lesson screen consists of the option buttons and components in question_skeleton
 
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
+  OverlayEntry? entry;
+
+  ///List of all lessons available
 
   List<QuestionList> questionLists = [
     lessonOneQuestions,
@@ -23,9 +33,9 @@ class _LessonScreenState extends State<LessonScreen> {
     lessonFourQuestions,
     lessonFiveQuestions,
     lessonSixQuestions,
+    lessonSevenQuestions,
   ];
   @override
-  //should make it go to other question list like make a list that hass all question list.
   void initState() {
     super.initState();
     int lessonNum = widget.lessonNum;
@@ -38,28 +48,72 @@ class _LessonScreenState extends State<LessonScreen> {
     super.dispose();
   }
 
+  Widget getPauseButton() {
+    return IconButton(
+      key: const Key('Pause Icon'),
+      icon: const Icon(
+        Icons.pause,
+        color: Colors.white,
+        size: 35.0,
+      ),
+      onPressed: () {
+        showMenu();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            screenWidget,
-            //choices buttons
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: getOptionButtons(),
+        child: Stack(children: [
+          Align(alignment: Alignment.topRight, child: getPauseButton()),
+          Column(
+            children: [
+              screenWidget,
+
+              ///choices buttons
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: getOptionButtons(),
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ]),
       ),
     );
   }
 
+  void showMenu() {
+    final overlay = Overlay.of(context)!;
+
+    entry = OverlayEntry(
+      builder: (context) => PauseMenu(
+        removeMenu: removeMenu,
+        continueOnPressed: () {
+          Navigator.popUntil(
+            context,
+            ModalRoute.withName(LessonScreen.id),
+          );
+        },
+      ),
+    );
+    overlay.insert(entry!);
+  }
+
+  void removeMenu() {
+    entry?.remove();
+    entry = null;
+  }
+
+  /// Creates the answer option buttons.
+  ///
+  /// Each button has text displayed and check with question brain
+  /// to see if the user has tapped the button with the correct answer.
   List<Widget> getOptionButtons() {
-    // TODO: Beginners see less options and experts see all options
+    ///TODO: Beginners see less options and experts see all options
     List<Widget> optionButtons = [];
     List<String> notes = whiteKeyNames;
     for (int i = 0; i < notes.length; ++i) {
@@ -76,25 +130,37 @@ class _LessonScreenState extends State<LessonScreen> {
     return optionButtons;
   }
 
+  /// Set details of the Screen Widget in lesson.
+  ///
+  /// Set components from QuestionBrain including question image, text and number
+  /// and send to QuestionSkeleton to display components.
+
   void setScreenWidget() {
-    AssetImage image = questionBrain.getImage();
+    Note note = questionBrain.getNote();
+    Clef clef = questionBrain.getClef();
     String questionText = questionBrain.getQuestionText();
     int questionNum = questionBrain.getQuestionNum();
     int totalNumOfQuestions = questionBrain.getTotalNumberOfQuestions();
 
     screenWidget = QuestionSkeleton(
-      image: image,
+      note: note,
+      clef: clef,
       questionText: questionText,
       questionNum: questionNum,
       totalNumOfQuestions: totalNumOfQuestions,
     );
   }
 
-// show result and take to next question
+  /// Set information for an alert message.
+  ///
+  /// The alert is displayed each time the user answers a question.
+  /// Shows if the answer is correct and provides a  button to go to the next question.
+
   void showResultAlert(String choice) {
     String alertTitle = '';
     String alertDesc = '';
-    //show result
+
+    ///show result
     if (questionBrain.checkAnswer(choice)) {
       alertTitle = 'Correct!';
       alertDesc = 'You got the correct answer!';
@@ -107,6 +173,7 @@ class _LessonScreenState extends State<LessonScreen> {
     displayDialog(alertTitle, alertDesc);
   }
 
+  /// Displays the alert with result.
   void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
@@ -116,6 +183,7 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /// Create result screen which displays after the user finishes all questions
   Widget getResultsScreen() {
     String title = '';
     double percentage =
@@ -131,23 +199,29 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /// Creates the template for alert with title, description and next button
   AlertDialog createResultAlert(String alertTitle, String alertDesc) {
     return AlertDialog(
       title: Text(alertTitle),
       content: Text(alertDesc),
       actions: <Widget>[
-        //go to next question
+        ///go to next question
         getNextButton(),
       ],
     );
   }
 
+  /// Creates a next button
+  ///
+  /// Either takes user to the next question or the result screen
+  /// if the current question is the last question.
   Widget getNextButton() {
     return TextButton(
       child: Text(getNextButtonText()),
       onPressed: () {
         Navigator.pop(context, 'OK');
-        //go next if it is not the last question
+
+        ///go next if it is not the last question
         if (!questionBrain.isLastQuestion()) {
           setState(() {
             questionBrain.goToNextQuestion();
@@ -165,6 +239,7 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /// Creates text for next button
   String getNextButtonText() {
     return questionBrain.isLastQuestion() ? "Finish" : "Next";
   }

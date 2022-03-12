@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
 import '../components/keyboard.dart';
 
+/// Screen with keyboard
 class _KeyboardScreenState extends State<KeyboardScreen> {
-  final player = AudioCache();
-
-  void playSound(String noteName) => player.play('note_$noteName.wav');
-
   @override
   void initState() {
     super.initState();
@@ -16,16 +12,14 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
   void dispose() {
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(
-                flex: 5,
-                child: Container()
-            ),
+            Expanded(flex: 5, child: Container()),
             Expanded(
               flex: 3,
               child: Keyboard().build(context),
@@ -38,6 +32,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
 }
 
 class KeyboardScreen extends StatefulWidget {
+  /// ID of the keyboard screen
   static const String id = 'keyboard_screen';
 
   const KeyboardScreen({Key? key}) : super(key: key);

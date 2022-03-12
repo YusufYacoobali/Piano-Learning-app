@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/question.dart';
@@ -9,19 +9,22 @@ void main() {
   QuestionList getFakeQuestions() {
     return QuestionList(lessonID: 1, questionList: [
       Question(
-        image: 'Tr_MidC.jpeg',
+        note: Note(name: 'C4', duration: 4),
+        clef: Clef.treble,
         question:
             'This is our first note. The name is C (Do). Now press C in the option box.',
         correctAnswer: 'C',
       ),
       Question(
-        image: 'Tr_D.jpeg',
+        note: Note(name: 'D4', duration: 4),
+        clef: Clef.treble,
         question:
             'This is our second note. The name is D (Re). Now press D in the option box.',
         correctAnswer: 'D',
       ),
       Question(
-        image: 'Tr_E.jpeg',
+        note: Note(name: 'E4', duration: 4),
+        clef: Clef.treble,
         question:
             'This is our third note. The name is E (Mi). Now press E in the option box.',
         correctAnswer: 'E',
@@ -29,33 +32,27 @@ void main() {
     ]);
   }
 
-  test('Check that getImageName() correctly returns the name of the image', () {
-    SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    String imageName = qb.getImageName();
-    expect(imageName, fakeQuestions.questionList[0].image);
+  test('Check that getNote() correctly returns the name of the note', () {
+  SharedPreferences.setMockInitialValues({});
+  QuestionList fakeQuestions = getFakeQuestions();
+  QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+  String noteName = qb.getNote().name;
+  expect(noteName, fakeQuestions.questionList[0].note.name);
   });
 
-  test('Check that getImagePath() correctly returns the path of the image', () {
-    SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    String imagePath = qb.getImagePath();
-    expect(
-        imagePath, 'assets/note_images/${fakeQuestions.questionList[0].image}');
-  });
-
-  test('Check that getImage() correctly returns the image', () {
-    SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    AssetImage image = qb.getImage();
-    expect(
-        image,
-        AssetImage(
-            'assets/note_images/${fakeQuestions.questionList[0].image}'));
-  });
+  // test('Check that getImagePath() correctly returns the path of the image', () {
+  //   List<Question> fakeQuestions = getFakeQuestions();
+  //   QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+  //   String imagePath = qb.getNote().name;
+  //   expect(imagePath, 'assets/note_images/${fakeQuestions[0].note}');
+  // });
+  //
+  // test('Check that getImage() correctly returns the image', () {
+  //   List<Question> fakeQuestions = getFakeQuestions();
+  //   QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
+  //   AssetImage image = qb.getImage();
+  //   expect(image, AssetImage('assets/note_images/${fakeQuestions[0].note}'));
+  // });
 
   test('Check that getQuestionText() correctly returns the question text', () {
     SharedPreferences.setMockInitialValues({});

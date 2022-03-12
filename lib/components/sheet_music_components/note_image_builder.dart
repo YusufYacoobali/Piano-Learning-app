@@ -9,12 +9,17 @@ import 'package:sight_reading_app/constants.dart';
 /// Builds a note on the stave
 class NoteImageBuilder {
 
-  final Clef _clef;
+  Clef _clef;
   late Canvas _canvas;
   late final double _baseLine;
 
   NoteImageBuilder(this._clef);
 
+  void changeClef(Clef clef) {
+    _clef = clef;
+  }
+
+  /// Updates the canvas
   void setCanvas(Canvas canvas) {
     _canvas = canvas;
   }
@@ -40,6 +45,7 @@ class NoteImageBuilder {
     return false;
   }
 
+  /// Draws a quaver
   void _drawQuaver(NoteOnStave note) {
     _drawCircle(note);
     _drawTail(note);
@@ -54,7 +60,7 @@ class NoteImageBuilder {
       min = bassClefMidLineNote;
     }
 
-    if (Note.greaterOrEqualTo(note.note, Note(min, -1))) {
+    if (Note.greaterOrEqualTo(note.note, Note(name: min, duration: -1))) {
       Offset start = Offset(note.pos, _baseLine - note.height + 60);
       Offset end = Offset(note.pos + 20, _baseLine - note.height + 30);
       _canvas.drawLine(start, end, accent);
@@ -66,6 +72,7 @@ class NoteImageBuilder {
     }
   }
 
+  /// Draws a dot beside a note
   void _drawDot(NoteOnStave note) {
     Paint paint = Paint()
       ..color = Colors.black
@@ -75,10 +82,11 @@ class NoteImageBuilder {
     double pos = _baseLine - note.height + 8;
     if (_isOnLine(note.note)) pos = pos - 9;
 
-    Offset point = Offset(note.pos + 32, pos);
+    Offset point = Offset(note.pos + 34, pos);
     _canvas.drawPoints(PointMode.points, <Offset>[point], paint);
   }
 
+  /// Draws either a sharp or a flat beside the note
   void _drawSymbol(NoteOnStave note, bool isFlat) {
     String symbol = '♯';
     double x = note.pos - 27;
@@ -104,6 +112,7 @@ class NoteImageBuilder {
     textPainter.paint(_canvas, Offset(x, y), );
   }
 
+  /// Draws a tail
   void _drawTail(NoteOnStave note) {
     Paint paint = Paint()
       ..color = Colors.black
@@ -119,7 +128,7 @@ class NoteImageBuilder {
       min = bassClefMidLineNote;
     }
 
-    if (Note.greaterOrEqualTo(note.note, Note(min, -1))) {
+    if (Note.greaterOrEqualTo(note.note, Note(name: min, duration: -1))) {
       lineEnd = _baseLine - note.height + 60;
       lineXPos = note.pos;
     }
@@ -130,6 +139,39 @@ class NoteImageBuilder {
     _canvas.drawLine(startingPoint, endingPoint, paint);
   }
 
+  _drawLines(NoteOnStave note) {
+
+    Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 3
+      ..strokeCap = StrokeCap.round;
+
+    List<String>? lines;
+    if (_clef == Clef.treble) {
+      lines = trebleClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
+    }
+    else {
+      lines = bassClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
+    }
+    if (lines != null) {
+      for (String pos in lines) {
+        int? offset;
+        if (_clef == Clef.treble) {
+          offset = trebleClefSheetNoteOffset[pos];
+        }
+        else {
+          offset = offset = trebleClefSheetNoteOffset[pos];
+        }
+        if (offset != null) {
+          Offset startingPoint1 = Offset(note.pos - 5, _baseLine - offset + 8);
+          Offset endingPoint1 = Offset(note.pos + 26, _baseLine - offset + 8);
+          _canvas.drawLine(startingPoint1, endingPoint1, paint);
+        }
+      }
+    }
+  }
+
+  /// Draws the circle
   void _drawCircle(NoteOnStave note, {PaintingStyle style = PaintingStyle.fill}) {
 
     Paint paint = Paint()
@@ -138,15 +180,11 @@ class NoteImageBuilder {
       ..strokeCap = StrokeCap.round
       ..style = style;
 
+    _drawLines(note);
+
     Rect rect = Rect.fromLTWH(note.pos, _baseLine - note.height, 20, 15);
 
     _canvas.drawOval(rect, paint);
-
-    if (note.note.getNameWithoutSymbol() == 'C4') {
-      Offset startingPoint1 = Offset(note.pos - 5, _baseLine - note.height + 8);
-      Offset endingPoint1 = Offset(note.pos + 27, _baseLine - note.height  + 8);
-      _canvas.drawLine(startingPoint1, endingPoint1, paint);
-    }
 
     if (note.note.name.length == 3) {
       _drawSymbol(note, note.note.name[1] == 'b');
@@ -156,27 +194,33 @@ class NoteImageBuilder {
   /// Draws the note on the screen
   void drawNote(NoteOnStave note) {
     if (note.note.duration == 0.5) {
+      // Quaver
       _drawQuaver(note);
     }
     else if (note.note.duration == 1) {
+      // Crotchet
       _drawCircle(note);
       _drawTail(note);
     }
     else if (note.note.duration == 1.5) {
+      // Dotted crotchet
       _drawCircle(note);
       _drawTail(note);
       _drawDot(note);
     }
     else if (note.note.duration == 2) {
+      // Minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
     }
     else if (note.note.duration == 3) {
+      // Dotted minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
       _drawDot(note);
     }
     else if (note.note.duration == 4) {
+      // Semibreve
       _drawCircle(note, style: PaintingStyle.stroke);
     }
   }

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/lesson_screen.dart';
 import '../constants.dart';
 
+/// This file creates the screen where the user can select the lesson
+/// they want to learn from those available.
+
 class _LessonMenuScreenState extends State<LessonMenuScreen> {
   final ScrollController _firstController = ScrollController();
   @override
@@ -14,6 +17,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     super.dispose();
   }
 
+  /// Builds the screen with the appBar and the row of lessons
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +29,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
           controller: _firstController,
           isAlwaysShown: true,
           child: SingleChildScrollView(
+            /// makes the row scrollable
             scrollDirection: Axis.horizontal,
             controller: _firstController,
             child: Row(
@@ -44,6 +49,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     );
   }
 
+  /// creates the individual lesson buttons for each lesson
   Widget lessonButton(lessonText, lessonNum) {
     return GestureDetector(
       onTap: () {
@@ -58,17 +64,14 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         child: Center(
           child: FittedBox(
             child: Text(
-              '$lessonText',
+              lessonText,
               style: const TextStyle(
                 fontSize: 17,
               ),
             ),
           ),
         ),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: buttonBoxColour,
-        ),
+        decoration: lessonButtonDeco,
         padding: const EdgeInsets.all(23),
         margin: const EdgeInsetsDirectional.all(7),
       ),

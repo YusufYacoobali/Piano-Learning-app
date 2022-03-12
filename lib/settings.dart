@@ -8,10 +8,12 @@ class Settings {
     _setDefaultValues();
   }
 
+  /// Gets a setting from the map
   Object getSetting(String setting) {
     return _map[setting];
   }
 
+  /// Updates a settings with a key and the value
   Future<void> updateSetting(String name, Object value) async {
     _map[name] = value;
     final SharedPreferences pref = await SharedPreferences.getInstance();
@@ -24,26 +26,26 @@ class Settings {
     }
   }
 
-  // Resets the settings back to the defaults
+  /// Resets the settings back to the defaults
   void reset() {
     _setDefaultValues();
     _writeDefaultsToStorage();
   }
 
-  // Puts default values into the map
+  /// Puts default values into the map
   void _setDefaultValues() {
     _map['volume'] = constants.defaultVolumeLevel;
     _map['difficulty'] = constants.defaultDifficultyLevel;
   }
 
-  // Writes the default settings values to Shared Preferences
+  /// Writes the default settings values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setInt('volume', constants.defaultVolumeLevel);
     pref.setString('difficulty', constants.defaultDifficultyLevel);
   }
 
-  // Loads the settings from Shared Preferences
+  /// Loads the settings from Shared Preferences
   Future<void> loadSettingsFromStorage() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     int? isOnDisk = pref.getInt('volume');
