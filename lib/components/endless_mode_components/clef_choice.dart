@@ -52,7 +52,7 @@ class _ClefChoiceState extends State<ClefChoice> {
                   const SizedBox(height: 10.0),
                   const Text('Get as many questions correct as you can before your lives run out!'),
                   const SizedBox(height: 50.0),
-                  const Text('Select the clef', style: pauseMenuTextStyle),
+                  const Text('Select The Clef', style: pauseMenuTextStyle),
                   const SizedBox(height: 5.0),
                   getTrebleClefButton(),
                   const SizedBox(height: 5.0),
