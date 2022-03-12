@@ -71,7 +71,7 @@ final QuestionList lessonOneQuestions =
     correctAnswer: 'C',
   ),
   Question(
-    note: Note(name: 'D4', duration: 4),
+    note: Note(name: 'E4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'E',

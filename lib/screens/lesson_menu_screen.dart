@@ -28,7 +28,8 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         child: Scrollbar(
           controller: _firstController,
           isAlwaysShown: true,
-          child: SingleChildScrollView( /// makes the row scrollable
+          child: SingleChildScrollView(
+            /// makes the row scrollable
             scrollDirection: Axis.horizontal,
             controller: _firstController,
             child: Row(
@@ -70,10 +71,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
             ),
           ),
         ),
-        decoration: BoxDecoration( /// Makes the container circle shaped
-          shape: BoxShape.circle,
-          color: buttonBoxColour,
-        ),
+        decoration: lessonButtonDeco,
         padding: const EdgeInsets.all(23),
         margin: const EdgeInsetsDirectional.all(7),
       ),
