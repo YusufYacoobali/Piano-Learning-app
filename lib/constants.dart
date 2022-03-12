@@ -235,3 +235,15 @@ const Icon pauseMenuSelectionIcon = Icon(
   Icons.auto_stories_outlined,
   size: 20.0,
 );
+
+BoxDecoration cardBackground = BoxDecoration(
+  borderRadius: BorderRadius.circular(10),
+  gradient: LinearGradient(
+    colors: [
+      const Color(0xff5f0a87).withOpacity(0.8),
+      const Color(0xffa4508b).withOpacity(0.5),
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  ),
+);

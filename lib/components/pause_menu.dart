@@ -82,39 +82,29 @@ class _PauseMenuState extends State<PauseMenu> {
       alignment: Alignment.center,
       children: <Widget>[
         Card(
-          //color: Colors.black.withOpacity(0.8),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          color: Colors.black.withOpacity(0.8),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  image: const DecorationImage(
-                    image: AssetImage(
-                        'assets/backgroundImage/pausedMenuLionBackground.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: menuLength, vertical: menuWidth),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      getMenuText(),
-                      const SizedBox(height: 5.0),
-                      getHomeButton(),
-                      const SizedBox(height: 3.0),
-                      getPlayButton(),
-                      const SizedBox(height: 3.0),
-                      getLessonSelectionButton(),
-                    ],
-                  ),
-                ),
+          child: Container(
+            decoration: cardBackground,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: menuLength, vertical: menuWidth),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  getMenuText(),
+                  const SizedBox(height: 5.0),
+                  getHomeButton(),
+                  const SizedBox(height: 3.0),
+                  getPlayButton(),
+                  const SizedBox(height: 3.0),
+                  getLessonSelectionButton(),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ],
