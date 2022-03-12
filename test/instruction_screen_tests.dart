@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
-import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/practice_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
@@ -52,11 +51,11 @@ void main() {
         expect(find.byType(QuizInstruction), findsOneWidget);
       });
 
-  testWidgets('check for endless instruction screen',
-      (WidgetTester tester) async{
-    await _goToPracticeScreen(tester);
-    await tester.tap(find.text('Endless'));
-    await tester.pumpAndSettle();
-    expect(find.byType(EndlessInstructions), findsOneWidget);
-      });
+  // testWidgets('check for endless instruction screen',
+  //     (WidgetTester tester) async{
+  //   await _goToPracticeScreen(tester);
+  //   await tester.tap(find.text('Endless'));
+  //   await tester.pumpAndSettle();
+  //   expect(find.byType(EndlessInstructions), findsOneWidget);
+  //     });
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import '../components/clef_choice.dart';
 import '../components/sheet_music_components/endless_note_generator.dart';
 import '../components/sheet_music_components/keyboard_with_play_along.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 
-/// Temporary proof of concept screen for moving notes along
 class _EndlessModeScreenState extends State<EndlessModeScreen> {
   late final MovingMusicSheet _sheet;
   late EndlessNoteGenerator _generator;
@@ -19,6 +19,8 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   String updater = "";
 
   bool exit = false;
+
+  late final OverlayEntry? entry;
 
   void updateScreen(String update) {
     setState(() {
@@ -38,13 +40,33 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _currentNoteToPlay = NotePlayedChecker(_noteToPlay, stop);
     _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
     _generator = EndlessNoteGenerator(_sheet, _nextNote, updateScreen);
-    _generator.start();
+    WidgetsBinding.instance
+        ?.addPostFrameCallback((_) => showMenu());
   }
 
   @override
   void dispose() {
     super.dispose();
     _generator.stop();
+  }
+
+  void showMenu() {
+    final overlay = Overlay.of(context)!;
+
+    entry = OverlayEntry(
+      builder: (context) => ClefChoice(
+        removeMenu: removeMenu,
+      ),
+    );
+    overlay.insert(entry!);
+  }
+
+  void removeMenu(Clef clef) {
+    _generator.setClef(clef);
+    _sheet.changeClef(clef);
+    _generator.start();
+    entry?.remove();
+    entry = null;
   }
 
   @override

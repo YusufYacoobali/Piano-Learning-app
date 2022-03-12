@@ -23,9 +23,6 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   bool exit = false;
 
-  final Map<int, Note> _notes;
-
-  _PlayAlongScreenState(this._notes);
 
   void updateScreen(String update) {
     setState(() {
@@ -42,7 +39,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     super.initState();
     _currentNoteToPlay = NotePlayedChecker(_noteToPlay, recordHitMiss);
     _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
-    _timer = PlayAlongNoteDisplay(_sheet, _nextNote, updateScreen, _notes);
+    _timer = PlayAlongNoteDisplay(_sheet, _nextNote, updateScreen, widget.notes);
     _timer.start();
   }
 
@@ -85,5 +82,5 @@ class PlayAlongScreen extends StatefulWidget {
   const PlayAlongScreen({Key? key, required this.notes}) : super(key: key);
 
   @override
-  _PlayAlongScreenState createState() => _PlayAlongScreenState(notes);
+  _PlayAlongScreenState createState() => _PlayAlongScreenState();
 }

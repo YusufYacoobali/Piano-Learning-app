@@ -37,7 +37,7 @@ class MovingMusicSheet extends MusicSheet{
     startLine = canvasWidth + 40;
 
     if (_currentNoteToPlay.noteNotifier.hasNextNote && _firstNoteInPlayArea) {
-      if (_noteInPlayArea.pos < _currentNoteEnd) {
+      if (_noteInPlayArea.pos < _currentNoteEnd - 15) {
         _currentNoteToPlay.noteNotifier.hasNextNote = false;
         _currentNoteToPlay.removeNote();
       }

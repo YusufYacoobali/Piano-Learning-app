@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/endless_mode_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/practice_instruction_screen.dart';
 import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
@@ -16,7 +15,6 @@ import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/theme_listener.dart';
 import 'package:provider/provider.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
-import 'package:sight_reading_app/screens/play_along_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/keyboard_sheet_screen.dart';
@@ -58,7 +56,6 @@ class SightReadingApp extends StatelessWidget {
               KeyboardScreen.id: (context) => const KeyboardScreen(),
               // instruction screens
               PlayAlongInstructions.id: (context) => const PlayAlongInstructions(),
-              EndlessInstructions.id: (context) => const EndlessInstructions(),
               QuizInstruction.id: (context) => const QuizInstruction(),
               SpeedrunInstructions.id: (context) => const SpeedrunInstructions(),
               PracticeInstructions.id: (context) => const PracticeInstructions(),
