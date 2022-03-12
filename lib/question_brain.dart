@@ -1,5 +1,3 @@
-
-import 'storage_writer.dart';
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import 'lessons_and_quizzes/question_list.dart';
@@ -28,6 +26,8 @@ class QuestionBrain {
 
   Clef getClef() {
     return questions.questionList[_questionNum].clef;
+  }
+
   /// Gets the name of the image of the current question
 //   String getImageName() {
 //     return questions.questionList[_questionNum].image;

@@ -7,7 +7,6 @@ import '../components/sheet_music_components/note.dart';
 ///
 /// Teaches how to read C D E on Treble clef.
 
-
 final QuestionList lessonOneQuestions =
     QuestionList(lessonID: 1, questionList: [
   ///Tutorial
