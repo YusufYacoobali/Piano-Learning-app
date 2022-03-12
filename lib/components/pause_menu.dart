@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
+import 'package:sight_reading_app/constants.dart';
 
 class PauseMenu extends StatefulWidget {
   static const String id = 'pause_menu';
@@ -32,15 +33,8 @@ class _PauseMenuState extends State<PauseMenu> {
     return ElevatedButton.icon(
       key: const Key('home button'),
       label: const Text('Main menu'),
-      icon: const Icon(
-        Icons.home,
-        size: 20.0,
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.indigo.shade400,
-        onPrimary: Colors.grey.shade300,
-        fixedSize: const Size(180.0, 30.0),
-      ),
+      icon: pauseMenuHomeIcon,
+      style: pauseMenuButtonStyle,
       onPressed: () {
         Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
         widget.removeMenu();
@@ -52,15 +46,8 @@ class _PauseMenuState extends State<PauseMenu> {
     return ElevatedButton.icon(
       key: const Key('play button'),
       label: const Text('Continue'),
-      icon: const Icon(
-        Icons.play_arrow,
-        size: 20.0,
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.indigo.shade400,
-        onPrimary: Colors.grey.shade300,
-        fixedSize: const Size(180.0, 30.0),
-      ),
+      icon: pauseMenuPlayIcon,
+      style: pauseMenuButtonStyle,
       onPressed: () {
         widget.continueOnPressed();
         widget.removeMenu();
@@ -72,15 +59,8 @@ class _PauseMenuState extends State<PauseMenu> {
     return ElevatedButton.icon(
       key: const Key('lesson selection button'),
       label: const Text('Back to Lessons'),
-      icon: const Icon(
-        Icons.auto_stories_outlined,
-        size: 20.0,
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.indigo.shade400,
-        onPrimary: Colors.grey.shade300,
-        fixedSize: const Size(180.0, 30.0),
-      ),
+      icon: pauseMenuSelectionIcon,
+      style: pauseMenuButtonStyle,
       onPressed: () {
         Navigator.popUntil(context, ModalRoute.withName(LessonMenuScreen.id));
         widget.removeMenu();
@@ -92,7 +72,7 @@ class _PauseMenuState extends State<PauseMenu> {
     return const Text(
       'Paused',
       key: Key('menu text'),
-      style: TextStyle(fontSize: 40.0, color: Colors.white),
+      style: pauseMenuTextStyle,
     );
   }
 
@@ -102,23 +82,39 @@ class _PauseMenuState extends State<PauseMenu> {
       alignment: Alignment.center,
       children: <Widget>[
         Card(
-          color: Colors.black.withOpacity(0.8),
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 80.0, vertical: 30.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                getMenuText(),
-                const SizedBox(height: 5.0),
-                getHomeButton(),
-                const SizedBox(height: 3.0),
-                getPlayButton(),
-                const SizedBox(height: 3.0),
-                getLessonSelectionButton(),
-              ],
-            ),
+          //color: Colors.black.withOpacity(0.8),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: const DecorationImage(
+                    image: AssetImage(
+                        'assets/backgroundImage/pausedMenuLionBackground.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: menuLength, vertical: menuWidth),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      getMenuText(),
+                      const SizedBox(height: 5.0),
+                      getHomeButton(),
+                      const SizedBox(height: 3.0),
+                      getPlayButton(),
+                      const SizedBox(height: 3.0),
+                      getLessonSelectionButton(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
