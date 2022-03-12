@@ -174,8 +174,6 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Displays the alert with result.
-  ///
-  ///@return createResultAlert
   void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
@@ -186,8 +184,6 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  ///
-  ///@return ResultsScreen object
   Widget getResultsScreen() {
     String title = '';
     double percentage =
@@ -204,8 +200,6 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Creates the template for alert with title, description and next button
-  ///
-  /// @return AlertDialog
   AlertDialog createResultAlert(String alertTitle, String alertDesc) {
     return AlertDialog(
       title: Text(alertTitle),
@@ -221,7 +215,6 @@ class _LessonScreenState extends State<LessonScreen> {
   ///
   /// Either takes user to the next question or the result screen
   /// if the current question is the last question.
-  /// @return TextButton next question button.
   Widget getNextButton() {
     return TextButton(
       child: Text(getNextButtonText()),
@@ -247,8 +240,6 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Creates text for next button
-  ///
-  /// @return String: "Finish" if the current question is the last, otherwise "Next"
   String getNextButtonText() {
     return questionBrain.isLastQuestion() ? "Finish" : "Next";
   }
