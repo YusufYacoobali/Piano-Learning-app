@@ -80,6 +80,7 @@ class _PauseMenuState extends State<PauseMenu> {
     );
   }
 
+  /// Card contain the menu title and three buttons.
   @override
   Widget build(BuildContext context) {
     return Stack(
