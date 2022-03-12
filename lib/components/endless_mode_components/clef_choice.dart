@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../components/sheet_music_components/note.dart';
+import '../sheet_music_components/note.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class _ClefChoiceState extends State<ClefChoice> {
 

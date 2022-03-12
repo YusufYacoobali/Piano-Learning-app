@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'music_sheet.dart';
-import 'note.dart';
+import '../sheet_music_components/music_sheet.dart';
+import '../sheet_music_components/note.dart';
 
 /// Generates random notes on a moving screen
 class EndlessNoteGenerator {

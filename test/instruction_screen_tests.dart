@@ -50,12 +50,4 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.byType(QuizInstruction), findsOneWidget);
       });
-
-  // testWidgets('check for endless instruction screen',
-  //     (WidgetTester tester) async{
-  //   await _goToPracticeScreen(tester);
-  //   await tester.tap(find.text('Endless'));
-  //   await tester.pumpAndSettle();
-  //   expect(find.byType(EndlessInstructions), findsOneWidget);
-  //     });
 }
