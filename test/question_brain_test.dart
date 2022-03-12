@@ -14,6 +14,8 @@ void main() {
         question:
             'This is our first note. The name is C (Do). Now press C in the option box.',
         correctAnswer: 'C',
+        questionID: 1,
+        lessonID: 1,
       ),
       Question(
         note: Note(name: 'D4', duration: 4),
@@ -21,6 +23,8 @@ void main() {
         question:
             'This is our second note. The name is D (Re). Now press D in the option box.',
         correctAnswer: 'D',
+        questionID: 2,
+        lessonID: 1,
       ),
       Question(
         note: Note(name: 'E4', duration: 4),
@@ -28,16 +32,18 @@ void main() {
         question:
             'This is our third note. The name is E (Mi). Now press E in the option box.',
         correctAnswer: 'E',
+        questionID: 3,
+        lessonID: 1,
       ),
     ]);
   }
 
   test('Check that getNote() correctly returns the name of the note', () {
-  SharedPreferences.setMockInitialValues({});
-  QuestionList fakeQuestions = getFakeQuestions();
-  QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-  String noteName = qb.getNote().name;
-  expect(noteName, fakeQuestions.questionList[0].note.name);
+    SharedPreferences.setMockInitialValues({});
+    QuestionList fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    String noteName = qb.getNote().name;
+    expect(noteName, fakeQuestions.questionList[0].note.name);
   });
 
   // test('Check that getImagePath() correctly returns the path of the image', () {
