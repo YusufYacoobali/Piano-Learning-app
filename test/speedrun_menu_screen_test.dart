@@ -90,8 +90,8 @@ void main() {
               500.0,
               scrollable: find.byType(Scrollable)
           );
-          expect(find.text(SpeedrunMenuScreen.modes[i].toString() + ' seconds'), findsWidgets);
-          expect(find.text('Record: ${modeRecords[i]}'), findsWidgets);
+          expect(find.text(modes[i].toString() + ' seconds'), findsWidgets);
+          expect(find.text('Record: ${modeRecordsCopy[i]}'), findsWidgets);
         }
       }
   );
