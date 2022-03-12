@@ -1,6 +1,7 @@
 import 'package:sight_reading_app/question.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import 'components/sheet_music_components/note.dart';
+import 'lessons_and_quizzes/question_answer_data.dart';
 
 /// Manages the questions in lessons/quizzes
 class QuestionBrain {
@@ -75,6 +76,11 @@ class QuestionBrain {
     // Checks if the user answer was correct and if so, increments the score
     if (checkAnswer(userAnswer)) {
       ++_score;
+      // TODO: Uncomment below line once implemented
+      // QuestionAnswerData.questionAnswered(questions[_questionNum].questionID, true);
+    } else {
+      // TODO: Uncomment below line once implemented
+      // QuestionAnswerData.questionAnswered(questions[_questionNum].questionID, true);
     }
     // Checks if there are no more questions
     if (isLastQuestion()) {
