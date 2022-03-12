@@ -17,7 +17,7 @@ class EndlessInstructions extends StatelessWidget {
         child: Container(
           child: const Center(
             child: Text('Get as many questions correct as you can before your lives run out!\n'
-                '\n Good luck!')
+                '\n Coming soon!')
           ),
           margin: const EdgeInsets.all(50),
         )
