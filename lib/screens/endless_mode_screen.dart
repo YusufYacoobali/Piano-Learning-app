@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../components/endless_mode_components/endless_mode_end.dart';
+import 'package:sight_reading_app/components/endless_mode_components/display_intermediate_menus.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
-import '../components/endless_mode_components/clef_choice.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
 import '../components/sheet_music_components/keyboard_with_play_along.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
@@ -25,11 +24,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The key string that updates the screen
   String updater = '';
 
-  /// The clef chooser overlay
-  late final OverlayEntry _startMenu;
 
-  /// The end screen overlay
-  late final OverlayEntry _endScreen;
 
   /// Whether the end screen is to be shown
   bool _hasEnded = false;
@@ -37,44 +32,27 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The score keeper
   final EndlessScoreCounter _counter = EndlessScoreCounter();
 
+  late final DisplayIntermediateMenus _intermediateMenus;
+
+
   @override
   void initState() {
     super.initState();
     _currentNoteToPlay = NotePlayedChecker(_noteToPlay, stop);
     _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
     _generator = EndlessNoteGenerator(_sheet, _nextNote, updateScreen);
-
-    _endScreen = OverlayEntry(
-      builder: (context) => EndlessModeEnd(
-        removeMenu: removeEndScreen,
-        numRight: _counter.score,
-        highScore: _counter.highScore,
-      ),
-    );
-
-    _startMenu = OverlayEntry(
-      builder: (context) => ClefChoice(
-        removeMenu: removeStartMenu,
-      ),
-    );
+    _intermediateMenus = DisplayIntermediateMenus(context: context, counter: _counter, onStart: startGame);
 
     /// Displays the start menu
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => showStartMenu());
+        ?.addPostFrameCallback((_) => _intermediateMenus.showStartMenu());
   }
 
   @override
   void dispose() {
     super.dispose();
     _generator.stop();
-
-    /// Gets rid of the overlays if they are visible
-    if (_startMenu.mounted) {
-      _startMenu.remove();
-    }
-    if (_endScreen.mounted) {
-      _endScreen.remove();
-    }
+    _intermediateMenus.deleteScreens();
   }
 
   /// Updates the screen
@@ -96,37 +74,19 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     }
   }
 
-  /// Shows the start menu
-  void showStartMenu() {
-    final overlay = Overlay.of(context)!;
-    overlay.insert(_startMenu);
-  }
-
-  /// Removes the start menu
-  void removeStartMenu(Clef clef) {
+  /// Starts the endless mode game
+  void startGame(Clef clef) {
     _counter.getHighScore(clef);
     _generator.setClef(clef);
     _sheet.changeClef(clef);
     _generator.start();
-    _startMenu.remove();
-  }
-
-  /// Shows the end screen
-  void showEndScreen() {
-    final overlay = Overlay.of(context)!;
-    overlay.insert(_endScreen);
-  }
-
-  /// Removes the end screen
-  void removeEndScreen() {
-    _endScreen.remove();
   }
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance
         ?.addPostFrameCallback((_) => {
-      if (_hasEnded) showEndScreen()
+      if (_hasEnded) _intermediateMenus.showEndMenu()
     });
     return Scaffold(
       body: SafeArea(
