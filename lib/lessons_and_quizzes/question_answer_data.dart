@@ -1,3 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:sight_reading_app/questions.dart';
+
+import '../question.dart';
+
 class QuestionAnswerData {
   // Need to load map from storage when app open
   // Need to write map to storage when app close
@@ -20,6 +25,12 @@ class QuestionAnswerData {
       }
     } else {
       print('Invalid id');
+    }
+  }
+
+  static void createDefaultMap() {
+    for (Question question in questions) {
+      _questionStatistics[question.questionID] = 0;
     }
   }
 }
