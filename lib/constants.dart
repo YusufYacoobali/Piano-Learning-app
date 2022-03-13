@@ -43,7 +43,6 @@ ButtonStyle navButtonDeco = ElevatedButton.styleFrom(
 
 // Menu Screen
 const String formattedAppName = 'Read\n That\n Sheet';
-final Color appNameBoxColour = Colors.indigo.shade300;
 final Color buttonBoxColour = Colors.indigo.shade400;
 const EdgeInsets boxMargin = EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
 const double boxRadii = 10.0;
@@ -122,7 +121,8 @@ const TextStyle questionTrackerTextStyle = TextStyle(fontSize: 25);
 const double passThreshold = 0.4;
 
 /// In what positions above or below the treble clef are to be painted
-const Map<String, List<String>> trebleClefNoteLinesOffset = <String, List<String>>{
+const Map<String, List<String>> trebleClefNoteLinesOffset =
+    <String, List<String>>{
   // Notes that are below the treble clef stave
   'C4': ['C4'],
   'B3': ['C4'],
@@ -139,7 +139,8 @@ const Map<String, List<String>> trebleClefNoteLinesOffset = <String, List<String
 };
 
 /// In what positions above or below the bass clef are to be painted
-const Map<String, List<String>> bassClefNoteLinesOffset = <String, List<String>>{
+const Map<String, List<String>> bassClefNoteLinesOffset =
+    <String, List<String>>{
   // Notes that are below the bass clef stave
   'E2': ['E2'],
   'D2': ['E2'],

@@ -72,4 +72,20 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('B'), findsOneWidget);
   });
+
+  testWidgets('check that the option button 7 is displayed',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const SightReadingApp());
+    await tester.tap(find.text('Lessons'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
+    await tester.pumpAndSettle();
+    expect(find.text('B'), findsOneWidget);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('B'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+    expect(find.text('B'), findsOneWidget);
+  });
 }

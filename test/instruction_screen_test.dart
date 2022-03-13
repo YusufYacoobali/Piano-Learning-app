@@ -13,50 +13,55 @@ void main() {
     await tester.tap(find.text('Practice'));
     await tester.pumpAndSettle();
   }
-  
-  testWidgets('check for practice instruction screen showing in practice menu on icon click', 
+
+  testWidgets(
+      'check for practice instruction screen showing in practice menu on icon click',
       (WidgetTester tester) async {
     await _goToPracticeScreen(tester);
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
     expect(find.byType(PracticeInstructions), findsOneWidget);
-      });
-  
-  testWidgets('check for play along instructions being shown on icon click in the play along screen',
-      (WidgetTester tester) async{
+  });
+
+  testWidgets(
+      'check for play along instructions being shown on icon click in the play along screen',
+      (WidgetTester tester) async {
     await _goToPracticeScreen(tester);
     await tester.tap(find.text('Play along'));
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
     expect(find.byType(PlayAlongInstructions), findsOneWidget);
-      });
+  });
 
-  testWidgets('check for speedrun instructions being shown on icon click in the play along screen',
-          (WidgetTester tester) async{
-        await _goToPracticeScreen(tester);
-        await tester.tap(find.text('Speedrun'));
-        await tester.pumpAndSettle();
-        await tester.tap(find.byIcon(Icons.help_outline));
-        await tester.pumpAndSettle();
-        expect(find.byType(SpeedrunInstructions), findsOneWidget);
-      });
+  testWidgets(
+      'check for speedrun instructions being shown on icon click in the play along screen',
+      (WidgetTester tester) async {
+    await _goToPracticeScreen(tester);
+    await tester.tap(find.text('Speedrun'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.help_outline));
+    await tester.pumpAndSettle();
+    expect(find.byType(SpeedrunInstructions), findsOneWidget);
+  });
 
-  testWidgets('check for quiz instructions being shown on icon click in the play along screen',
-          (WidgetTester tester) async{
-        await _goToPracticeScreen(tester);
-        await tester.tap(find.text('Take a Quiz'));
-        await tester.pumpAndSettle();
-        await tester.tap(find.byIcon(Icons.help_outline));
-        await tester.pumpAndSettle();
-        expect(find.byType(QuizInstruction), findsOneWidget);
-      });
+  testWidgets(
+      'check for quiz instructions being shown on icon click in the play along screen',
+      (WidgetTester tester) async {
+    await _goToPracticeScreen(tester);
+    await tester.tap(find.text('Take a Quiz'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.help_outline));
+    await tester.pumpAndSettle();
+    expect(find.byType(QuizInstruction), findsOneWidget);
+  });
 
   testWidgets('check for endless instruction screen',
-      (WidgetTester tester) async{
+      (WidgetTester tester) async {
     await _goToPracticeScreen(tester);
     await tester.tap(find.text('Endless'));
     await tester.pumpAndSettle();
     expect(find.byType(EndlessInstructions), findsOneWidget);
-      });
+    expect(find.text('Endless Mode'), findsOneWidget);
+  });
 }
