@@ -50,8 +50,8 @@ class MusicSheet extends CustomPainter {
     startLine =  start + (canvasWidth/2);
 
     endLine = 100;
-    StaveBuilder.makeBackground(canvas, size, 0, canvasWidth);
-    StaveBuilder.drawStave(canvas, size, baseLine, 0, canvasWidth, clef == Clef.treble);
+    StaveBuilder.makeBackground(canvas, size, start, start + canvasWidth);
+    StaveBuilder.drawStave(canvas, size, baseLine, start, start + canvasWidth, clef == Clef.treble);
 
     removeNotes(canvas, size);
 
