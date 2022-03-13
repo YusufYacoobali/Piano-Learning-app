@@ -6,13 +6,26 @@ import '../question.dart';
 class QuestionAnswerData {
   // Need to load map from storage when app open
   // Need to write map to storage when app close
-  static Map<int, int> _questionStatistics = {};
+  static final Map<int, int> _questionStatistics = {};
 
-  // TODO: Implement method
   static List<int> getPracticeQuestionIDs(int numOfQuestionIDs) {
     // Go through map values in ascending order
     // Add each corresponding ID to the return list
-    return [1, 2, 3];
+
+    // Converting map to List of List with inner list size 2 (Pairs)
+    List<List<int>> statisticPairs = [];
+    _questionStatistics.forEach((k, v) => statisticPairs.add([k, v]));
+
+    // Sorting so first element is the question that was incorrect the most number of times
+    statisticPairs.sort((p1, p2) => p1[1].compareTo(p2[1]));
+
+    // Extracting the question IDs from most incorrect to correct
+    List<int> questionIDs = [];
+    statisticPairs.take(numOfQuestionIDs).forEach((pair) {
+      questionIDs.add(pair[0]);
+    });
+
+    return questionIDs;
   }
 
   static void questionAnswered(int questionID, bool isCorrect) {
