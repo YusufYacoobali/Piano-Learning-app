@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../components/sheet_music_components/keyboard_with_detection.dart';
+
+import '../components/keyboard.dart';
 import '../components/sheet_music_components/music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 
@@ -23,6 +24,15 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void playKey(String text) {
+    String level = '4';
+    if (_sheet.getClef() == Clef.bass) {
+      level = '3';
+    }
+    Note note = Note(name: '$text$level', duration: 1);
+    _nextNote.setNextNote(note);
   }
 
   @override
@@ -62,7 +72,7 @@ class _KeyDetectionScreenState extends State<KeyDetectionScreen> {
             ),
             Expanded(
               flex: 3,
-              child: KeyboardWithDetection(_sheet, _nextNote),
+              child: Keyboard(function: playKey),
             ),
           ],
         ),

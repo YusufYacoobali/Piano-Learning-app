@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/sheet_music_components/keyboard_with_play_along.dart';
+import '../components/keyboard.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
@@ -49,6 +49,15 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     _timer.stop();
   }
 
+  /// Gets the key pressed on the keyboard
+  void playKey(String text) {
+    String level = '4';
+    if (_sheet.getClef() == Clef.bass) {
+      level = '3';
+    }
+    _currentNoteToPlay.checkPress(text + level);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +75,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
             ),
             Expanded(
               flex: 3,
-              child: KeyboardWithPlayAlong(_sheet, _currentNoteToPlay),
+              child: Keyboard(function: playKey),
             ),
           ],
         ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../components/endless_mode_components/endless_mode_end.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/clef_choice.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
-import '../components/sheet_music_components/keyboard_with_play_along.dart';
+import '../components/keyboard.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
@@ -122,6 +123,15 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _endScreen.remove();
   }
 
+  /// Gets the key pressed on the keyboard
+  void playKey(String text) {
+    String level = '4';
+    if (_sheet.getClef() == Clef.bass) {
+      level = '3';
+    }
+    _currentNoteToPlay.checkPress(text + level);
+  }
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance
@@ -144,7 +154,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
             ),
             Expanded(
               flex: 3,
-              child: KeyboardWithPlayAlong(_sheet, _currentNoteToPlay),
+              child: Keyboard(function: playKey),
             ),
           ],
         ),
