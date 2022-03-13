@@ -28,6 +28,7 @@ class QuestionAnswerData {
     return questionIDs;
   }
 
+  // TODO: Add time taken parameter
   static void questionAnswered(int questionID, bool isCorrect) {
     int? currentStatistic = _questionStatistics[questionID];
     if (currentStatistic != null) {
@@ -39,11 +40,16 @@ class QuestionAnswerData {
     } else {
       print('Invalid id');
     }
+    // TODO: Save updated map to storage
   }
 
   static void createDefaultMap() {
     for (Question question in questions) {
       _questionStatistics[question.questionID] = 0;
     }
+  }
+
+  static Map<int, int> getQuestionStatisticsMap() {
+    return _questionStatistics;
   }
 }
