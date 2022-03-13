@@ -73,16 +73,18 @@ class MusicSheet extends CustomPainter {
   }
 
   void drawNewNote() {
-    Note note = nextNote.getNextNote();
-    int? position = trebleClefSheetNoteOffset[note.getNameWithoutSymbol()];
-    if (clef == Clef.bass) {
-      position = bassClefSheetNoteOffset[note.getNameWithoutSymbol()];
-    }
-    if (position != null) {
-      double pos = position.toDouble();
-      NoteOnStave newNote = NoteOnStave(note, startLine, pos);
-      notesOnStaves.add(newNote);
-      noteImageBuilder.drawNote(newNote);
+    Note? note = nextNote.getNextNote();
+    if (note != null) {
+      int? position = trebleClefSheetNoteOffset[note.getNameWithoutSymbol()];
+      if (clef == Clef.bass) {
+        position = bassClefSheetNoteOffset[note.getNameWithoutSymbol()];
+      }
+      if (position != null) {
+        double pos = position.toDouble();
+        NoteOnStave newNote = NoteOnStave(note, startLine, pos);
+        notesOnStaves.add(newNote);
+        noteImageBuilder.drawNote(newNote);
+      }
     }
   }
 

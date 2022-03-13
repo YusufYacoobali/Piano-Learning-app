@@ -24,16 +24,14 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The key string that updates the screen
   String updater = '';
 
-
-
   /// Whether the end screen is to be shown
   bool _hasEnded = false;
 
   /// The score keeper
   final EndlessScoreCounter _counter = EndlessScoreCounter();
 
+  /// The controller for the menus
   late final DisplayIntermediateMenus _intermediateMenus;
-
 
   @override
   void initState() {

@@ -84,6 +84,9 @@ class NextNoteNotifier {
   /// The note to be received by the receiver
   late Note _nextNote;
 
+  /// Checks if there is a note
+  bool _isThereNote = false;
+
   /// Gives the note to the receiver
   Note getNextNote() {
     hasNextNote = false;
@@ -95,8 +98,11 @@ class NextNoteNotifier {
     return _nextNote;
   }
 
+  bool isNull () => !_isThereNote;
+
   /// Sends the note from the sender
   void setNextNote(Note note) {
+    _isThereNote = true;
     hasNextNote = true;
     _nextNote = note;
   }

@@ -8,9 +8,12 @@ class NotePlayedChecker {
   NotePlayedChecker(this.noteNotifier, this._function);
 
   void checkPress(String name) {
-    if (noteNotifier.get().name == name) {
-      _isHit = true;
-      _function(_isHit);
+    if (!noteNotifier.isNull()) {
+      Note note = noteNotifier.get();
+      if (note.name == name) {
+        _isHit = true;
+        _function(_isHit);
+      }
     }
   }
 

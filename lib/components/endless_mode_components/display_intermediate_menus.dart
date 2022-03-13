@@ -131,8 +131,10 @@ class DisplayIntermediateMenus {
       _isEndMenuBuilt = true;
       buildEndMenu();
     }
-    final overlay = Overlay.of(context)!;
-    overlay.insert(_endMenu);
+    if (!_endMenu.mounted) {
+      final overlay = Overlay.of(context)!;
+      overlay.insert(_endMenu);
+    }
   }
 
   /// Removes the end screen
