@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:sight_reading_app/questions.dart';
-
 import '../question.dart';
 
 class QuestionAnswerData {
