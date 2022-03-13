@@ -7,6 +7,7 @@ import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
 import '../question_brain.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // TODO: Need to have enough questions so that we don't run out before the timer finishes
 
@@ -102,6 +103,15 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
+  Future<void> _updateRecords() async {
+    int score = questionBrain.getScore();
+    final prefs = await SharedPreferences.getInstance();
+    final int currentRecord = prefs.getInt('${widget.timerDuration}_second_speedrun_record') ?? 0;
+    if (score > currentRecord || currentRecord == 0) {
+      await prefs.setInt('${widget.timerDuration}_second_speedrun_record', score);
+    }
+  }
+
   /// Gets the countdown timer displayed in the top-right
   Widget getCountdownTimer() {
     return CircularCountDownTimer(
@@ -120,7 +130,8 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
       autoStart: true,
       onStart: () {},
       onComplete: () {
-        // When timer finishes, go to results screen
+        // When timer finishes, go to results screen and update records if needed
+        _updateRecords();
         Navigator.push(
           context,
           MaterialPageRoute(
