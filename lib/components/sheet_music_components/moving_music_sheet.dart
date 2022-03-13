@@ -7,13 +7,13 @@ import 'note.dart';
 import 'music_sheet.dart';
 
 class MovingMusicSheet extends MusicSheet{
-  final NotePlayedChecker _currentNoteToPlay;
+  final NotePlayedChecker notePlayedChecker;
   late final double _currentNoteStart;
   late final double _currentNoteEnd;
   late NoteOnStave _noteInPlayArea = NoteOnStave(Note(name: '', duration: -1), -1, -10);
   bool _firstNoteInPlayArea = false;
 
-  MovingMusicSheet(NextNoteNotifier nextNote, Clef clef, this._currentNoteToPlay) : super(nextNote, clef);
+  MovingMusicSheet({required NextNoteNotifier nextNote, required Clef clef, required this.notePlayedChecker}) : super(nextNote, clef);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -36,10 +36,10 @@ class MovingMusicSheet extends MusicSheet{
     double canvasWidth = size.width;
     startLine = canvasWidth + 40;
 
-    if (_currentNoteToPlay.noteNotifier.hasNextNote && _firstNoteInPlayArea) {
+    if (notePlayedChecker.noteNotifier.hasNextNote && _firstNoteInPlayArea) {
       if (_noteInPlayArea.pos < _currentNoteEnd - 15) {
-        _currentNoteToPlay.noteNotifier.hasNextNote = false;
-        _currentNoteToPlay.removeNote();
+        notePlayedChecker.noteNotifier.hasNextNote = false;
+        notePlayedChecker.removeNote();
       }
     }
 
@@ -55,7 +55,7 @@ class MovingMusicSheet extends MusicSheet{
     for (NoteOnStave note in notesOnStaves) {
       if (note.pos <= _currentNoteStart && note.pos >= _currentNoteEnd) {
         if (note != _noteInPlayArea) {
-          _currentNoteToPlay.setNewNote(note.note);
+          notePlayedChecker.setNewNote(note.note);
           _noteInPlayArea = note;
           _firstNoteInPlayArea = true;
         }

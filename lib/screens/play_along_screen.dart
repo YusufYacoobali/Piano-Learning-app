@@ -37,8 +37,8 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   @override
   void initState() {
     super.initState();
-    _currentNoteToPlay = NotePlayedChecker(_noteToPlay, recordHitMiss);
-    _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
+    _currentNoteToPlay = NotePlayedChecker(noteNotifier: _noteToPlay, function: recordHitMiss);
+    _sheet = MovingMusicSheet(nextNote: _nextNote, clef: Clef.treble, notePlayedChecker: _currentNoteToPlay);
     _timer = PlayAlongNoteDisplay(_sheet, _nextNote, updateScreen, widget.notes);
     _timer.start();
   }

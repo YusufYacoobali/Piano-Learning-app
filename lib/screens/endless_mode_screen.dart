@@ -36,9 +36,9 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   @override
   void initState() {
     super.initState();
-    _currentNoteToPlay = NotePlayedChecker(_noteToPlay, stop);
-    _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
-    _generator = EndlessNoteGenerator(_sheet, _nextNote, updateScreen);
+    _currentNoteToPlay = NotePlayedChecker(noteNotifier: _noteToPlay, function: stop);
+    _sheet = MovingMusicSheet(nextNote: _nextNote, clef: Clef.treble, notePlayedChecker: _currentNoteToPlay);
+    _generator = EndlessNoteGenerator(sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
     _intermediateMenus = DisplayIntermediateMenus(context: context, counter: _counter, onStart: startGame);
 
     /// Displays the start menu

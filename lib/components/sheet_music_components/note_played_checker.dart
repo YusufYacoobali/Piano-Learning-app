@@ -2,17 +2,17 @@ import 'note.dart';
 
 class NotePlayedChecker {
   final NextNoteNotifier noteNotifier;
-  bool _isHit = false;
-  final Function _function;
+  bool _noteHit = false;
+  final Function function;
 
-  NotePlayedChecker(this.noteNotifier, this._function);
+  NotePlayedChecker({required this.noteNotifier, required this.function});
 
   void checkPress(String name) {
     if (!noteNotifier.isNull()) {
       Note note = noteNotifier.get();
       if (note.name == name) {
-        _isHit = true;
-        _function(_isHit);
+        _noteHit = true;
+        function(_noteHit);
       }
     }
   }
@@ -22,7 +22,7 @@ class NotePlayedChecker {
   }
 
   void removeNote() {
-    if (!_isHit) _function(_isHit);
-    _isHit = false;
+    if (!_noteHit) function(_noteHit);
+    _noteHit = false;
   }
 }
