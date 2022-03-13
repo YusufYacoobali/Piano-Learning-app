@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import '../sheet_music_components/music_sheet.dart';
+import '../sheet_music_components/moving_music_sheet.dart';
 import '../sheet_music_components/note.dart';
 
 /// Generates random notes on a moving screen
@@ -9,7 +9,7 @@ class EndlessNoteGenerator {
   /// Whether the sheet is moving or not
   bool _isOn = false;
 
-  final MusicSheet sheet;
+  final MovingMusicSheet sheet;
   final NextNoteNotifier nextNote;
 
   int _index = 0;

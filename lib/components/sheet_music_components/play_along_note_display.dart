@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'music_sheet.dart';
+import 'moving_music_sheet.dart';
 import 'note.dart';
 
 class PlayAlongNoteDisplay {
   /// Whether the sheet is moving or not
   bool _isOn = false;
 
-  final MusicSheet _sheet;
+  final MovingMusicSheet _sheet;
   final NextNoteNotifier _nextNote;
 
   int _index = 0;

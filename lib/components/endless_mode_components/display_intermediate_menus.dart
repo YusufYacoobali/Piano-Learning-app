@@ -16,13 +16,19 @@ class DisplayIntermediateMenus {
 
   final BuildContext context;
 
+  /// Counts the number of notes successfully presses
   final EndlessScoreCounter counter;
 
+  /// The start menu
   late final IntermediateMenu _start;
+
+  /// The end menu
   late final IntermediateMenu _end;
 
+  /// The function that gets called when the game starts
   final Function onStart;
 
+  /// Whether the end menu is built
   bool _isEndMenuBuilt = false;
 
   DisplayIntermediateMenus({required this.context, required this.counter, required this.onStart}) {
@@ -30,6 +36,7 @@ class DisplayIntermediateMenus {
     buildStartMenu();
   }
 
+  /// Sets up the start menu
   void buildStartMenu() {
     Widget text = Column(
     children: const [
@@ -52,7 +59,7 @@ class DisplayIntermediateMenus {
         child: const Text('Bass'),
         style: pauseMenuButtonStyle,
         onPressed: () {
-          _removeEndMenu();
+          _removeStartMenu(Clef.bass);
           },
       ),
     ];
@@ -64,6 +71,7 @@ class DisplayIntermediateMenus {
     );
   }
 
+  /// Sets up the end menu
   void buildEndMenu() {
     Widget text = Column(
       children: [
@@ -142,8 +150,8 @@ class DisplayIntermediateMenus {
     _endMenu.remove();
   }
 
+  /// Gets rid of the overlays if they are visible
   void deleteScreens() {
-    /// Gets rid of the overlays if they are visible
     if (_startMenu.mounted) {
       _startMenu.remove();
     }

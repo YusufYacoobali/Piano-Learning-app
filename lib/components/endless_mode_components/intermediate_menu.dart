@@ -19,28 +19,30 @@ class _IntermediateMenuState extends State<IntermediateMenu> {
   /// Card containing some text and options.
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Card(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          color: Colors.black.withOpacity(0.8),
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Container(
-            decoration: cardBackground,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: menuLength, vertical: menuWidth),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: getDisplay(),
+    return FittedBox(
+      child:Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Card(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            color: Colors.black.withOpacity(0.8),
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+              decoration: cardBackground,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: menuLength, vertical: menuWidth),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: getDisplay(),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

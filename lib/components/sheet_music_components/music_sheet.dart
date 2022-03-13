@@ -9,27 +9,26 @@ import '../../constants.dart';
 
 class MusicSheet extends CustomPainter {
 
-  // The place where the notes appear
+  /// The place where the notes appear
   late double startLine;
 
-  // The place where the notes disappear
+  /// The place where the notes disappear
   late double endLine;
 
-  // The first line of the stave
+  /// The first line of the stave
   late double baseLine;
-
-  // How far each note should move
-  final double noteSpacing = 1;
 
   final List<NoteOnStave> notesOnStaves = <NoteOnStave>[];
 
-  // Builds the notes on the stave
+  /// Builds the notes on the stave
   late final NoteImageBuilder noteImageBuilder;
 
+  /// Gets the next note to be played
   final NextNoteNotifier nextNote;
 
   Clef clef;
 
+  /// Whether the initial values have been set
   bool hasSet = false;
 
   MusicSheet(this.nextNote, this.clef) {
@@ -62,7 +61,7 @@ class MusicSheet extends CustomPainter {
     drawNotes();
   }
 
-
+  /// Removes notes that are beyond the end line
   void removeNotes(Canvas canvas, Size size) {
     for (int count = 0; count < notesOnStaves.length; count++) {
       if (notesOnStaves[count].pos < endLine) {
@@ -72,6 +71,7 @@ class MusicSheet extends CustomPainter {
     }
   }
 
+  /// Draws a new note on the canvas at the start line
   void drawNewNote() {
     if (!nextNote.isNull()) {
       Note note = nextNote.getNextNote();
@@ -88,18 +88,14 @@ class MusicSheet extends CustomPainter {
     }
   }
 
+  /// Draws all the notes on the screen
   void drawNotes() {
     for (NoteOnStave note in notesOnStaves) {
       noteImageBuilder.drawNote(note);
     }
   }
 
-  void move() {
-    for (NoteOnStave note in notesOnStaves) {
-      note.pos-=noteSpacing;
-    }
-  }
-
+  /// Clears the notes from the sheet
   void clear() {
     int length = notesOnStaves.length;
     for (int i = 0; i < length; i++) {
@@ -107,10 +103,12 @@ class MusicSheet extends CustomPainter {
     }
   }
 
+  /// Gets the clef
   Clef getClef() {
     return clef;
   }
 
+  /// Changes the clef
   void changeClef(Clef c) {
     clef = c;
     noteImageBuilder.changeClef(clef);

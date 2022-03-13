@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:sight_reading_app/constants.dart';
 import 'note_on_stave.dart';
 import 'note_played_checker.dart';
 import 'stave_builder.dart';
@@ -10,7 +11,7 @@ class MovingMusicSheet extends MusicSheet{
   final NotePlayedChecker notePlayedChecker;
   late final double _currentNoteStart;
   late final double _currentNoteEnd;
-  late NoteOnStave _noteInPlayArea = NoteOnStave(Note(name: '', duration: -1), -1, -10);
+  late NoteOnStave _noteInPlayArea;
   bool _firstNoteInPlayArea = false;
 
   MovingMusicSheet({required NextNoteNotifier nextNote, required Clef clef, required this.notePlayedChecker}) : super(nextNote, clef);
@@ -51,14 +52,29 @@ class MovingMusicSheet extends MusicSheet{
     drawNotes();
   }
 
+  /// Moves the notes on the canvas towards the end line
+  void move() {
+    for (NoteOnStave note in notesOnStaves) {
+      note.pos-=noteMovement;
+    }
+  }
+
+  /// Checks if a note is in the green area to be played
   void checkIfNoteInPlayArea() {
     for (NoteOnStave note in notesOnStaves) {
       if (note.pos <= _currentNoteStart && note.pos >= _currentNoteEnd) {
-        if (note != _noteInPlayArea) {
+        if (_firstNoteInPlayArea) {
+          if (note != _noteInPlayArea) {
+            notePlayedChecker.setNewNote(note.note);
+            _noteInPlayArea = note;
+          }
+        }
+        else {
           notePlayedChecker.setNewNote(note.note);
           _noteInPlayArea = note;
           _firstNoteInPlayArea = true;
         }
+
       }
     }
   }
