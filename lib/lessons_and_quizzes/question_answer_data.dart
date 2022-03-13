@@ -3,10 +3,10 @@ import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../question.dart';
 
 class QuestionAnswerData {
-  // Need to load map from storage when app open
-  // Need to write map to storage when app close
   static final Map<int, int> _questionStatistics = {};
 
+  /// Get an ordered list of question IDs
+  /// The first question ID is the ID of the question that was answered incorrectly the most number of times
   static List<int> getPracticeQuestionIDs(int numOfQuestionIDs) {
     // Go through map values in ascending order
     // Add each corresponding ID to the return list
@@ -28,6 +28,7 @@ class QuestionAnswerData {
   }
 
   // TODO: Add time taken parameter
+  /// Record when a question has been answered correctly/incorrectly
   static void questionAnswered(int questionID, bool isCorrect) {
     int? currentStatistic = _questionStatistics[questionID];
     if (currentStatistic != null) {
@@ -42,16 +43,19 @@ class QuestionAnswerData {
     }
   }
 
+  /// Initialise values in map when no saved data is available
   static void createDefaultMap() {
     for (Question question in questions) {
       _questionStatistics[question.questionID] = 0;
     }
   }
 
+  /// Accessor for statistics map
   static Map<int, int> getQuestionStatisticsMap() {
     return _questionStatistics;
   }
 
+  /// Updates statistics map
   static void updateQuestionStatisticsMap(int questionID, int value) {
     _questionStatistics[questionID] = value;
   }

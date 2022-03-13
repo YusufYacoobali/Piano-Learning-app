@@ -4,6 +4,7 @@ import 'package:sight_reading_app/questions.dart';
 import '../question.dart';
 
 class QuestionFinder {
+  /// Return the list of questions for a specific lesson
   List<Question> getQuestionsForLesson(int lessonID) {
     List<Question> lessonQuestions = [];
     for (Question question in questions) {
@@ -14,6 +15,7 @@ class QuestionFinder {
     return lessonQuestions;
   }
 
+  /// Return a list of randomly selected questions
   List<Question> getRandomListOfQuestions(int numOfQuestions) {
     Random randomNum = Random();
     List<Question> questionsToPickFrom = questions;
@@ -25,6 +27,8 @@ class QuestionFinder {
     return lessonQuestions;
   }
 
+  /// Return an ordered list of practice questions
+  /// The first question is the question that was answered incorrectly the most number of times
   List<Question> getPracticeQuestions(int numOfQuestions) {
     // TODO: Make more efficient
     List<Question> practiceQuestions = [];
@@ -38,7 +42,6 @@ class QuestionFinder {
         }
       }
     }
-
     return practiceQuestions;
   }
 }
