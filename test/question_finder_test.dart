@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_finder.dart';
 import 'package:sight_reading_app/question.dart';
@@ -52,6 +53,7 @@ void main() {
   test(
       'Check that getPracticeQuestions returns the Questions in the right order',
       () {
+    SharedPreferences.setMockInitialValues({});
     List<Question> allQuestions = questions;
     setMockQuestionStatistics();
     List<Question> expectedQuestionsInOrder = List.from(allQuestions.reversed);

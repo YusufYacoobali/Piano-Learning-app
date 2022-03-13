@@ -1,4 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
+import 'package:sight_reading_app/questions.dart';
 
 /// Writes data to storage
 class StorageReaderWriter {
@@ -55,7 +57,7 @@ class StorageReaderWriter {
   }
 
   /// Loads the StorageWriter from Shared Preferences
-  Future<void> loadStorageWriterFromStorage() async {
+  Future<void> loadDataFromStorage() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     // int? isOnDisk = pref.getInt('volume');
     // if (isOnDisk == null) {
@@ -67,7 +69,11 @@ class StorageReaderWriter {
     //   if (volume != null) _map['volume'] = volume;
     //   if (difficulty != null) _map['difficulty'] = difficulty;
     // }
+    await loadLessonScoresFromStorage(pref);
+    await loadQuestionAnswerDataFromStorage(pref);
+  }
 
+  Future<void> loadLessonScoresFromStorage(SharedPreferences pref) async {
     int? isOnDisk = pref.getInt('lesson 1');
     if (isOnDisk == null) {
       _setDefaultValues();
@@ -76,6 +82,24 @@ class StorageReaderWriter {
       for (int i = 1; i <= 7; ++i) {
         String? lessonScore = pref.getString('lesson $i');
         if (lessonScore != null) _map['lesson $i'] = lessonScore;
+      }
+    }
+  }
+
+  Future<void> loadQuestionAnswerDataFromStorage(SharedPreferences pref) async {
+    int? isOnDisk = pref.getInt('questionID 1');
+    if (isOnDisk == null) {
+      QuestionAnswerData.createDefaultMap();
+    } else {
+      for (int i = 1; i <= questions.length; ++i) {
+        String? questionStatistic = pref.getString('questionID $i');
+        if (questionStatistic != null) {
+          _map['questionID $i'] = questionStatistic;
+          QuestionAnswerData.updateQuestionStatisticsMap(
+            i,
+            int.parse(questionStatistic),
+          );
+        }
       }
     }
   }

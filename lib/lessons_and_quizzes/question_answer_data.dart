@@ -1,4 +1,5 @@
 import 'package:sight_reading_app/questions.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../question.dart';
 
 class QuestionAnswerData {
@@ -35,10 +36,10 @@ class QuestionAnswerData {
       } else {
         _questionStatistics[questionID] = --currentStatistic;
       }
+      StorageReaderWriter().write(questionID.toString(), currentStatistic);
     } else {
       print('Invalid id');
     }
-    // TODO: Save updated map to storage
   }
 
   static void createDefaultMap() {
@@ -49,5 +50,9 @@ class QuestionAnswerData {
 
   static Map<int, int> getQuestionStatisticsMap() {
     return _questionStatistics;
+  }
+
+  static void updateQuestionStatisticsMap(int questionID, int value) {
+    _questionStatistics[questionID] = value;
   }
 }

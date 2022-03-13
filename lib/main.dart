@@ -12,6 +12,7 @@ import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 import 'package:sight_reading_app/theme_listener.dart';
 import 'package:provider/provider.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
@@ -23,6 +24,7 @@ import 'package:sight_reading_app/screens/note_selector_sheet_screen.dart';
 
 void main() {
   // Starting the app in landscape orientation
+  StorageReaderWriter().loadDataFromStorage();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft])
@@ -56,11 +58,14 @@ class SightReadingApp extends StatelessWidget {
               SettingsScreen.id: (context) => const SettingsScreen(),
               KeyboardScreen.id: (context) => const KeyboardScreen(),
               // instruction screens
-              PlayAlongInstructions.id: (context) => const PlayAlongInstructions(),
+              PlayAlongInstructions.id: (context) =>
+                  const PlayAlongInstructions(),
               EndlessInstructions.id: (context) => const EndlessInstructions(),
               QuizInstruction.id: (context) => const QuizInstruction(),
-              SpeedrunInstructions.id: (context) => const SpeedrunInstructions(),
-              PracticeInstructions.id: (context) => const PracticeInstructions(),
+              SpeedrunInstructions.id: (context) =>
+                  const SpeedrunInstructions(),
+              PracticeInstructions.id: (context) =>
+                  const PracticeInstructions(),
               // Temporary routes to demo screens
               KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
               NoteSelectorSheetScreen.id: (context) =>
