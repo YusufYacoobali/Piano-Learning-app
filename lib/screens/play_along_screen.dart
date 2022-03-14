@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/pop_up_components/pop_up_controller.dart';
+import '../components/instruction_pop_up_content/play_along_ending_instructions.dart';
 import '../components/sheet_music_components/keyboard_with_play_along.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
@@ -23,6 +25,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   bool exit = false;
 
+  late final PopUpController _endMenu;
 
   void updateScreen(String update) {
     setState(() {
@@ -37,9 +40,17 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   @override
   void initState() {
     super.initState();
+    PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(context: context);
+    _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
     _currentNoteToPlay = NotePlayedChecker(noteNotifier: _noteToPlay, function: recordHitMiss);
     _sheet = MovingMusicSheet(nextNote: _nextNote, clef: Clef.treble, notePlayedChecker: _currentNoteToPlay);
-    _timer = PlayAlongNoteDisplay(_sheet, _nextNote, updateScreen, widget.notes);
+    _timer = PlayAlongNoteDisplay(
+        sheet: _sheet,
+        nextNote: _nextNote,
+        updater: updateScreen,
+        notes: widget.notes,
+        onStop: _displayMenu,
+    );
     _timer.start();
   }
 
@@ -47,6 +58,11 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   void dispose() {
     super.dispose();
     _timer.stop();
+    _endMenu.delete();
+  }
+
+  void _displayMenu() {
+    _endMenu.show();
   }
 
   @override

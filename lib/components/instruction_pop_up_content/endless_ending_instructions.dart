@@ -31,7 +31,7 @@ class EndlessEndingInstructions extends PopUpContentBuilder {
 
     options = [
       ElevatedButton(
-        child: const Text('Try Again'),
+        child: const Text('Play Again'),
         style: pauseMenuButtonStyle,
         onPressed: () {
           removeMenu();

@@ -14,6 +14,9 @@ class MovingMusicSheet extends MusicSheet{
   late NoteOnStave _noteInPlayArea;
   bool _firstNoteInPlayArea = false;
 
+  bool hasEnded = false;
+  late final Function onEnd;
+
   MovingMusicSheet({required NextNoteNotifier nextNote, required Clef clef, required this.notePlayedChecker}) : super(nextNote, clef);
 
   @override
@@ -50,6 +53,7 @@ class MovingMusicSheet extends MusicSheet{
       drawNewNote();
     }
     drawNotes();
+    end();
   }
 
   /// Moves the notes on the canvas towards the end line
@@ -76,6 +80,12 @@ class MovingMusicSheet extends MusicSheet{
         }
 
       }
+    }
+  }
+
+  void end() {
+    if (hasEnded && notesOnStaves.isEmpty) {
+      onEnd();
     }
   }
 }

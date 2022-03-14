@@ -49,8 +49,8 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     EndlessStartingInstructions startMenuBuilder = EndlessStartingInstructions(context: context, onStart: startGame);
     EndlessEndingInstructions endMenuBuilder = EndlessEndingInstructions(context: context, counter: _counter);
 
-    _startMenu = PopUpController(context: context,menuBuilder: startMenuBuilder);
-    _endMenu = PopUpController(context: context,menuBuilder: endMenuBuilder);
+    _startMenu = PopUpController(context: context, menuBuilder: startMenuBuilder);
+    _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
 
     /// Displays the start menu
     WidgetsBinding.instance

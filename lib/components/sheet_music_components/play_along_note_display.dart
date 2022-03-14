@@ -7,8 +7,8 @@ class PlayAlongNoteDisplay {
   /// Whether the sheet is moving or not
   bool _isOn = false;
 
-  final MovingMusicSheet _sheet;
-  final NextNoteNotifier _nextNote;
+  final MovingMusicSheet sheet;
+  final NextNoteNotifier nextNote;
 
   int _index = 0;
 
@@ -16,17 +16,32 @@ class PlayAlongNoteDisplay {
   static const int iterationsPerTimeUnit = 80;
 
   /// The function to be called when a note has been hit or missed
-  final Function _updater;
+  final Function updater;
 
-  int _time = 0;
+  int _time = -1;
 
-  final Map<int, Note> _notes;
+  final Map<int, Note> notes;
 
-  PlayAlongNoteDisplay(this._sheet, this._nextNote, this._updater, this._notes) {
-    Note? n = _notes[_time];
+  late final int _endTime;
+
+  bool _hasEnded = false;
+
+  final Function onStop;
+
+  PlayAlongNoteDisplay({
+    required this.sheet,
+    required this.nextNote,
+    required this.updater,
+    required this.notes,
+    required this.onStop
+  }) {
+
+    _endTime = notes.keys.last;
+
+    Note? n = notes[_time];
     if (n != null) {
       Note note = n;
-      _nextNote.setNextNote(note);
+      nextNote.setNextNote(note);
     }
   }
 
@@ -35,32 +50,42 @@ class PlayAlongNoteDisplay {
     Timer.periodic(const Duration(milliseconds: 5), (Timer t) {
       if (!_isOn) {
         t.cancel();
-      } else {
+      }
+      else {
+        if (_time > _endTime) {
+          if (!_hasEnded) {
+            _hasEnded = true;
+            sheet.onEnd = stop;
+            sheet.hasEnded = true;
+          }
+        }
         if (_index == 0) {
           increment();
         }
         else {
-          _sheet.move();
+          sheet.move();
         }
         _index = (_index+1) % iterationsPerTimeUnit;
-        _updater(_index.toString());
+        updater(_index.toString());
       }
     }
     );
   }
 
-  void stop() {
+  void stop() async {
     _isOn = false;
+    await Future.delayed(const Duration(milliseconds: 10));
+    onStop();
   }
 
   /// Moves notes along screen and displays a new random note
   void increment() {
     _time++;
-    _sheet.move();
-    Note? n = _notes[_time];
+    sheet.move();
+    Note? n = notes[_time];
     if (n != null) {
       Note note = n;
-      _nextNote.setNextNote(note);
+      nextNote.setNextNote(note);
     }
   }
 }
