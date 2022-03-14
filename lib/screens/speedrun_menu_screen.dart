@@ -45,16 +45,16 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
 
   @override
   Widget build(BuildContext context) {
-    modeButtonKeys = <Key>[]; //Resets key list
+    modeButtonKeys = <Key>[]; //Resets key list.
     //Generates the keys for the quiz buttons based on quiz names, with the exception of the random mixed quiz.
     for (int mode in modes) {
       modeButtonKeys.add(Key('modeSelected:$mode'));
     }
 
+    //Waits for the records to be obtained from shared preferences before building the screen.
     return FutureBuilder(
       future: modeRecords,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        //TODO: (not important) Replace Container() instances with screen without any records present?
         if (snapshot.connectionState != ConnectionState.done) {
           return Container(); //The widget while loading (nothing shown currently)
         }
@@ -110,7 +110,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
     );
   }
 }
-
+///The state for the speedrun menu screen.
 class SpeedrunMenuScreen extends StatefulWidget {
   ///The id used to identify the screen.
   static const String id = 'speedrun_menu_screen';
