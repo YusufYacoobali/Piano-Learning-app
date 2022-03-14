@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
 import '../components/sheet_music_components/note.dart';
+import '../play_along_tracks/treble_track_one.dart';
 import 'play_along_screen.dart';
 import 'menu_screen.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
@@ -25,7 +26,7 @@ class PlayAlongMenuScreen extends StatelessWidget {
   //May combine with function getRecords() depending on how data is stored and retrieved.
   //TODO: Add ability to get track names from storage
   List<String> getTracks() {
-    return <String>['A', 'B', 'C', 'D', 'E', 'F'];
+    return <String>['Ode to Joy - Treble Only', 'B', 'C', 'D', 'E', 'F'];
   }
 
   ///The user records for the tracks you can play along to.
@@ -65,14 +66,12 @@ class PlayAlongMenuScreen extends StatelessWidget {
                   ),
                   onPress: () {
                     ///TODO: Replace with actual music
-                    Map<int, Note> _map = {
-                      0: Note(name: 'D4', duration: 1),
-                    };
+                    Map<int, Note> _map = getTrack();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => PlayAlongScreen(notes: _map,),
-                        )); //TODO: Replace with an Instruction screen template
+                        ));
                   },
                   key: trackButtonKeys[index],
                 ),
