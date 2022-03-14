@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 import '../sheet_music_components/note.dart';
-import 'intermediate_menu_builder.dart';
+import '../../components/pop_up_components/pop_up_content_builder.dart';
 
-class EndlessStartMenuBuilder extends IntermediateMenuBuilder {
+class EndlessStartingInstructions extends PopUpContentBuilder {
 
   final BuildContext context;
 
   /// The function that gets called when the start menu is done
   final Function onStart;
 
-  EndlessStartMenuBuilder({required this.context, required this.onStart});
+  EndlessStartingInstructions({required this.context, required this.onStart});
 
   /// Sets up the start menu
   @override

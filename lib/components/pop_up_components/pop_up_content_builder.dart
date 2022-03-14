@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class IntermediateMenuBuilder {
+abstract class PopUpContentBuilder {
 
   /// The message the menu says
   late final Widget text;

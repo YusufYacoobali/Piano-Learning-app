@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../components/endless_mode_components/endless_score_counter.dart';
-import '../../components/intermediate_menus/intermediate_menu_builder.dart';
+import '../endless_mode_components/endless_score_counter.dart';
+import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
 import '../../screens/endless_mode_screen.dart';
 import '../../screens/menu_screen.dart';
 
-class EndlessEndMenuBuilder extends IntermediateMenuBuilder {
+class EndlessEndingInstructions extends PopUpContentBuilder {
 
   /// The counter to get the high score and players score
   final EndlessScoreCounter counter;
 
   final BuildContext context;
 
-  EndlessEndMenuBuilder({required this.context, required this.counter});
+  EndlessEndingInstructions({required this.context, required this.counter});
 
   /// Sets up the end menu
   @override

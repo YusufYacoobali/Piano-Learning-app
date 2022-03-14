@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/intermediate_menus/display_intermediate_menu.dart';
-import 'package:sight_reading_app/components/intermediate_menus/endless_start_menu_builder.dart';
+
+import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
-import '../components/intermediate_menus/endless_end_menu_builder.dart';
+import '../components/instruction_pop_up_content/endless_ending_instructions.dart';
+import '../components/instruction_pop_up_content/endless_starting_instructions.dart';
 import '../components/sheet_music_components/keyboard_with_play_along.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
@@ -33,10 +34,10 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   final EndlessScoreCounter _counter = EndlessScoreCounter();
 
   /// The controller for the start menu
-  late final DisplayIntermediateMenu _startMenu;
+  late final PopUpController _startMenu;
 
   /// The controller for the end menu
-  late final DisplayIntermediateMenu _endMenu;
+  late final PopUpController _endMenu;
 
   @override
   void initState() {
@@ -45,11 +46,11 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _sheet = MovingMusicSheet(nextNote: _nextNote, clef: Clef.treble, notePlayedChecker: _currentNoteToPlay);
     _generator = EndlessNoteGenerator(sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
 
-    EndlessStartMenuBuilder startMenuBuilder = EndlessStartMenuBuilder(context: context, onStart: startGame);
-    EndlessEndMenuBuilder endMenuBuilder = EndlessEndMenuBuilder(context: context, counter: _counter);
+    EndlessStartingInstructions startMenuBuilder = EndlessStartingInstructions(context: context, onStart: startGame);
+    EndlessEndingInstructions endMenuBuilder = EndlessEndingInstructions(context: context, counter: _counter);
 
-    _startMenu = DisplayIntermediateMenu(context: context,menuBuilder: startMenuBuilder);
-    _endMenu = DisplayIntermediateMenu(context: context,menuBuilder: endMenuBuilder);
+    _startMenu = PopUpController(context: context,menuBuilder: startMenuBuilder);
+    _endMenu = PopUpController(context: context,menuBuilder: endMenuBuilder);
 
     /// Displays the start menu
     WidgetsBinding.instance

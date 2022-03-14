@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'intermediate_menu_builder.dart';
-import 'intermediate_menu.dart';
+import 'pop_up_content_builder.dart';
+import 'pop_up_content.dart';
 
 /// Controller to display an intermediate menu
-class DisplayIntermediateMenu {
+class PopUpController {
 
   /// Makes the menu display over another screen
   late final OverlayEntry _menu;
@@ -12,12 +12,12 @@ class DisplayIntermediateMenu {
   final BuildContext context;
 
   /// The menu to be displayed
-  late final IntermediateMenu _intermediateMenu;
+  late final PopUpContent _intermediateMenu;
 
   /// Builds the menu
-  IntermediateMenuBuilder menuBuilder;
+  PopUpContentBuilder menuBuilder;
 
-  DisplayIntermediateMenu({required this.context, required this.menuBuilder});
+  PopUpController({required this.context, required this.menuBuilder});
 
   /// Builds the contents of the menu
   void _build() {
@@ -25,15 +25,15 @@ class DisplayIntermediateMenu {
       menuBuilder.isBuilt = true;
       menuBuilder.removeMenu = remove;
       menuBuilder.buildMenu();
+      _intermediateMenu = PopUpContent(
+        text: menuBuilder.text,
+        options: menuBuilder.options,
+        removeMenu: remove,
+      );
+      _menu = OverlayEntry(
+        builder: (context) => _intermediateMenu,
+      );
     }
-    _intermediateMenu = IntermediateMenu(
-      text: menuBuilder.text,
-      options: menuBuilder.options,
-      removeMenu: remove,
-    );
-    _menu = OverlayEntry(
-      builder: (context) => _intermediateMenu,
-    );
   }
 
   /// Removes the menu from the screen

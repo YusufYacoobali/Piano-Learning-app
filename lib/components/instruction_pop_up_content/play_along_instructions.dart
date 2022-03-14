@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../components/intermediate_menus/intermediate_menu_builder.dart';
+import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
 
-class PlayAlongStartMenuBuilder extends IntermediateMenuBuilder {
+class PlayAlongInstructions extends PopUpContentBuilder {
 
   final BuildContext context;
 
-  PlayAlongStartMenuBuilder({required this.context});
+  PlayAlongInstructions({required this.context});
 
   /// Sets up the start menu
   @override
@@ -25,7 +25,7 @@ class PlayAlongStartMenuBuilder extends IntermediateMenuBuilder {
 
     options = [
       ElevatedButton(
-        child: const Text('Continue'),
+        child: const Text('Exit'),
         style: pauseMenuButtonStyle,
         onPressed: () {
           removeMenu();

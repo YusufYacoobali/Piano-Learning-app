@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 
-class _IntermediateMenuState extends State<IntermediateMenu> {
+class _PopUpContentState extends State<PopUpContent> {
 
   /// Combines the text and the options
   List<Widget> getDisplay() {
@@ -47,7 +47,7 @@ class _IntermediateMenuState extends State<IntermediateMenu> {
   }
 }
 
-class IntermediateMenu extends StatefulWidget {
+class PopUpContent extends StatefulWidget {
   static const String id = 'intermediate_menu';
 
   /// The text of the menu
@@ -59,7 +59,7 @@ class IntermediateMenu extends StatefulWidget {
   /// The function that removes the menu
   final Function removeMenu;
 
-  const IntermediateMenu({
+  const PopUpContent({
     Key? key,
     required this.text,
     required this.options,
@@ -67,5 +67,5 @@ class IntermediateMenu extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _IntermediateMenuState createState() => _IntermediateMenuState();
+  _PopUpContentState createState() => _PopUpContentState();
 }
