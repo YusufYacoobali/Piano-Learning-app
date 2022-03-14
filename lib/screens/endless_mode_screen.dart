@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/endless_mode_components/display_intermediate_menus.dart';
+import 'package:sight_reading_app/components/intermediate_menus/display_intermediate_menu.dart';
+import 'package:sight_reading_app/components/intermediate_menus/endless_start_menu_builder.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
+import '../components/intermediate_menus/endless_end_menu_builder.dart';
 import '../components/sheet_music_components/keyboard_with_play_along.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
@@ -30,8 +32,11 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The score keeper
   final EndlessScoreCounter _counter = EndlessScoreCounter();
 
-  /// The controller for the menus
-  late final DisplayIntermediateMenus _intermediateMenus;
+  /// The controller for the start menu
+  late final DisplayIntermediateMenu _startMenu;
+
+  /// The controller for the end menu
+  late final DisplayIntermediateMenu _endMenu;
 
   @override
   void initState() {
@@ -39,18 +44,24 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _currentNoteToPlay = NotePlayedChecker(noteNotifier: _noteToPlay, function: stop);
     _sheet = MovingMusicSheet(nextNote: _nextNote, clef: Clef.treble, notePlayedChecker: _currentNoteToPlay);
     _generator = EndlessNoteGenerator(sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
-    _intermediateMenus = DisplayIntermediateMenus(context: context, counter: _counter, onStart: startGame);
+
+    EndlessStartMenuBuilder startMenuBuilder = EndlessStartMenuBuilder(context: context, onStart: startGame);
+    EndlessEndMenuBuilder endMenuBuilder = EndlessEndMenuBuilder(context: context, counter: _counter);
+
+    _startMenu = DisplayIntermediateMenu(context: context,menuBuilder: startMenuBuilder);
+    _endMenu = DisplayIntermediateMenu(context: context,menuBuilder: endMenuBuilder);
 
     /// Displays the start menu
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => _intermediateMenus.showStartMenu());
+        ?.addPostFrameCallback((_) => _startMenu.show());
   }
 
   @override
   void dispose() {
     super.dispose();
     _generator.stop();
-    _intermediateMenus.deleteScreens();
+    _startMenu.delete();
+    _endMenu.delete();
   }
 
   /// Updates the screen
@@ -84,7 +95,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance
         ?.addPostFrameCallback((_) => {
-      if (_hasEnded) _intermediateMenus.showEndMenu()
+      if (_hasEnded) _endMenu.show()
     });
     return Scaffold(
       body: SafeArea(

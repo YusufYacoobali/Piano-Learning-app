@@ -48,9 +48,15 @@ class _IntermediateMenuState extends State<IntermediateMenu> {
 }
 
 class IntermediateMenu extends StatefulWidget {
-  static const String id = 'clef_choice';
-  final List<Widget> options;
+  static const String id = 'intermediate_menu';
+
+  /// The text of the menu
   final Widget text;
+
+  /// The options that can be made from the menu
+  final List<Widget> options;
+
+  /// The function that removes the menu
   final Function removeMenu;
 
   const IntermediateMenu({
