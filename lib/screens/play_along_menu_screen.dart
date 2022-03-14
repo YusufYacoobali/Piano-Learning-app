@@ -67,10 +67,14 @@ class PlayAlongMenuScreen extends StatelessWidget {
                   onPress: () {
                     ///TODO: Replace with actual music
                     Map<int, Note> _map = getTrack();
+
+                    /// The bpm of the moving sheet
+                    int bpm = 75;
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PlayAlongScreen(notes: _map,),
+                          builder: (context) => PlayAlongScreen(notes: _map, bpm: bpm),
                         ));
                   },
                   key: trackButtonKeys[index],

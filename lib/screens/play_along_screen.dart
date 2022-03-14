@@ -39,7 +39,13 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     super.initState();
     _currentNoteToPlay = NotePlayedChecker(_noteToPlay, recordHitMiss);
     _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
-    _timer = PlayAlongNoteDisplay(_sheet, _nextNote, updateScreen, widget.notes);
+    _timer = PlayAlongNoteDisplay(
+        sheet: _sheet,
+        nextNote: _nextNote,
+        updateFunction: updateScreen,
+        notes: widget.notes,
+        bpm: widget.bpm,
+    );
     _timer.start();
   }
 
@@ -87,8 +93,9 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 class PlayAlongScreen extends StatefulWidget {
   static const String id = 'play_along_screen';
   final Map<int, Note> notes;
+  final int bpm;
 
-  const PlayAlongScreen({Key? key, required this.notes}) : super(key: key);
+  const PlayAlongScreen({Key? key, required this.notes, required this.bpm}) : super(key: key);
 
   @override
   _PlayAlongScreenState createState() => _PlayAlongScreenState();

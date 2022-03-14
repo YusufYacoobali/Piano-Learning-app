@@ -13,7 +13,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     super.dispose();
   }
 
-  void doNothing() {
+  void doNothing(String text) {
 
   }
 

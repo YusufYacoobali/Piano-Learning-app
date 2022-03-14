@@ -7,8 +7,8 @@ class PlayAlongNoteDisplay {
   /// Whether the sheet is moving or not
   bool _isOn = false;
 
-  final MusicSheet _sheet;
-  final NextNoteNotifier _nextNote;
+  final MusicSheet sheet;
+  final NextNoteNotifier nextNote;
 
   int _index = 0;
 
@@ -16,23 +16,30 @@ class PlayAlongNoteDisplay {
   static const int iterationsPerTimeUnit = 80;
 
   /// The function to be called when a note has been hit or missed
-  final Function _updater;
+  final Function updateFunction;
 
   int _time = 0;
 
-  final Map<int, Note> _notes;
+  final Map<int, Note> notes;
 
-  PlayAlongNoteDisplay(this._sheet, this._nextNote, this._updater, this._notes) {
-    Note? n = _notes[_time];
+  /// The amount of time between increments
+  late final int _timeBetweenMovements;
+
+  /// How fast the notes move along the screen
+  final int bpm;
+
+  PlayAlongNoteDisplay({required this.sheet, required this.nextNote, required this.updateFunction, required this.notes, required this.bpm}) {
+    _timeBetweenMovements = ((1 / ((bpm / 60) * iterationsPerTimeUnit)) * 1000).round();
+    Note? n = notes[_time];
     if (n != null) {
       Note note = n;
-      _nextNote.setNextNote(note);
+      nextNote.setNextNote(note);
     }
   }
 
   void start() {
     _isOn = true;
-    Timer.periodic(const Duration(milliseconds: 5), (Timer t) {
+    Timer.periodic(Duration(milliseconds: _timeBetweenMovements), (Timer t) {
       if (!_isOn) {
         t.cancel();
       } else {
@@ -40,10 +47,10 @@ class PlayAlongNoteDisplay {
           increment();
         }
         else {
-          _sheet.move();
+          sheet.move();
         }
         _index = (_index+1) % iterationsPerTimeUnit;
-        _updater(_index.toString());
+        updateFunction(_index.toString());
       }
     }
     );
@@ -56,11 +63,11 @@ class PlayAlongNoteDisplay {
   /// Moves notes along screen and displays a new random note
   void increment() {
     _time++;
-    _sheet.move();
-    Note? n = _notes[_time];
+    sheet.move();
+    Note? n = notes[_time];
     if (n != null) {
       Note note = n;
-      _nextNote.setNextNote(note);
+      nextNote.setNextNote(note);
     }
   }
 }
