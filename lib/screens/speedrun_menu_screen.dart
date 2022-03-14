@@ -54,7 +54,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
     return FutureBuilder(
       future: modeRecords,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        //TODO: Replace Container() instances with screen without any records present
+        //TODO: (not important) Replace Container() instances with screen without any records present?
         if (snapshot.connectionState != ConnectionState.done) {
           return Container(); //The widget while loading (nothing shown currently)
         }
