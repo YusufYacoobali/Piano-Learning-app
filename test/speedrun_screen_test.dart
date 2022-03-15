@@ -6,7 +6,7 @@ import 'package:sight_reading_app/screens/speedrun_screen.dart';
 void main() {
   testWidgets('Check that the timer is displayed', (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
+      MaterialApp(
         home: SpeedrunScreen(timerDuration: 10),
       ),
     );
@@ -17,8 +17,10 @@ void main() {
   testWidgets('Check that the options are displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: SpeedrunScreen(timerDuration: 10),
+      MaterialApp(
+        home: SpeedrunScreen(
+          timerDuration: 10,
+        ),
       ),
     );
     expect(find.text('A'), findsOneWidget);
@@ -53,5 +55,44 @@ void main() {
   //   // });
 
   //   expect(find.text('Exit'), findsOneWidget);
+  // });
+
+  // testWidgets('check that the next question is displayed',
+  //     (WidgetTester tester) async {
+  //   await tester.pumpWidget(
+  //     MaterialApp(
+  //       home: SpeedrunScreen(
+  //         timerDuration: 10,
+  //       ),
+  //     ),
+  //   );
+  //   await tester.tap(find.text('B'));
+  //   await tester.pumpAndSettle();
+  //   await tester.tap(find.text('B'));
+  //   expect(find.text('B'), findsOneWidget);
+  // });
+
+  // testWidgets('check that the results screen is displayed',
+  //     (WidgetTester tester) async {
+  //   await tester.pumpWidget(
+  //     MaterialApp(
+  //       home: SpeedrunScreen(
+  //         timerDuration: 10,
+  //       ),
+  //     ),
+  //   );
+  //   await tester.pumpAndSettle();
+  //   await tester.pump(const Duration(milliseconds: 10000));
+  //   // for (int i = 0; i < 10; i++) {
+  //   //   await tester.tap(find.text('B'));
+  //   //   await tester.pumpAndSettle();
+  //   //   await tester.tap(find.text('Next'));
+  //   //   await tester.pumpAndSettle();
+  //   // }
+  //   // await tester.tap(find.text('B'));
+  //   // await tester.pumpAndSettle();
+  //   // await tester.tap(find.text('Finish'));
+  //   // await tester.pumpAndSettle();
+  //   expect(find.text("Aww, better luck next time!"), findsOneWidget);
   // });
 }
