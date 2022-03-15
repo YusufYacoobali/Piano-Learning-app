@@ -6,7 +6,7 @@ import 'package:sight_reading_app/screens/speedrun_screen.dart';
 void main() {
   testWidgets('Check that the timer is displayed', (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         home: SpeedrunScreen(timerDuration: 10),
       ),
     );
@@ -17,7 +17,7 @@ void main() {
   testWidgets('Check that the options are displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         home: SpeedrunScreen(
           timerDuration: 10,
         ),

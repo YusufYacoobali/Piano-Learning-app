@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
-import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 
 void main() {

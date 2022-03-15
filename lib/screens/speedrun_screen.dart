@@ -20,7 +20,8 @@ class SpeedrunScreen extends StatefulWidget {
   /// ID of the screen
   static const String id = 'speedrun_screen';
 
-  SpeedrunScreen({Key? key, required this.timerDuration}) : super(key: key);
+  const SpeedrunScreen({Key? key, required this.timerDuration})
+      : super(key: key);
 
   @override
   State<SpeedrunScreen> createState() => _SpeedrunScreenState();
