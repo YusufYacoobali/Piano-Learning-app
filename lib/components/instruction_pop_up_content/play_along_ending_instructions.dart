@@ -9,7 +9,10 @@ class PlayAlongEndingInstructions extends PopUpContentBuilder {
 
   final BuildContext context;
 
-  PlayAlongEndingInstructions({required this.context});
+  /// Plays the song again
+  final VoidCallback restart;
+
+  PlayAlongEndingInstructions({required this.context, required this.restart});
 
   /// Sets up the end menu
   @override
@@ -28,17 +31,18 @@ class PlayAlongEndingInstructions extends PopUpContentBuilder {
         child: const Text('Play Again'),
         style: pauseMenuButtonStyle,
         onPressed: () {
+          removeMenu();
+          restart();
         },
       ),
       ElevatedButton(
-        child: const Text('Review answers'),
+        child: const Text('Review Answers'),
         style: pauseMenuButtonStyle,
         onPressed: () {
         },
       ),
-      ///TODO: Fix error in exiting menu
       ElevatedButton(
-        child: const Text('Go to Play Along menu'),
+        child: const Text('Play Another Song'),
         style: pauseMenuButtonStyle,
         onPressed: () {
           Navigator.popUntil(context, ModalRoute.withName(PlayAlongMenuScreen.id));

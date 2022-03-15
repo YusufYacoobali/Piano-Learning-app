@@ -18,9 +18,12 @@ class EndlessEndingInstructions extends PopUpContentBuilder {
   /// Sets up the end menu
   @override
   void buildMenu() {
+    String title = 'Aww, better luck next time';
+    if (counter.score > counter.highScore) title = 'Well Done!';
+
     text = Column(
         children: [
-          const Text('Aww, better luck next time', style: pauseMenuTextStyle),
+          Text(title, style: pauseMenuTextStyle),
           const SizedBox(height: 10.0),
           Text('Your score: ${counter.score.toString()}'),
           const SizedBox(height: 10.0),

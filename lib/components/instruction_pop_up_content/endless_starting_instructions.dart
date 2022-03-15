@@ -9,7 +9,7 @@ class EndlessStartingInstructions extends PopUpContentBuilder {
   final BuildContext context;
 
   /// The function that gets called when the start menu is done
-  final Function onStart;
+  final Function(Clef) onStart;
 
   EndlessStartingInstructions({required this.context, required this.onStart});
 

@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+
 import 'moving_music_sheet.dart';
 import 'note.dart';
 
-class PlayAlongNoteDisplay {
+class PlayAlongSongTimer {
   /// Whether the sheet is moving or not
   bool _isOn = false;
 
@@ -16,19 +18,23 @@ class PlayAlongNoteDisplay {
   static const int iterationsPerTimeUnit = 80;
 
   /// The function to be called when a note has been hit or missed
-  final Function updater;
+  final Function(String) updater;
 
+  /// Timing
   int _time = -1;
 
+  /// Notes to be played
   final Map<int, Note> notes;
 
+  /// The time of the last note
   late final int _endTime;
 
   bool _hasEnded = false;
 
-  final Function onStop;
+  /// Called when song has finished
+  final VoidCallback onStop;
 
-  PlayAlongNoteDisplay({
+  PlayAlongSongTimer({
     required this.sheet,
     required this.nextNote,
     required this.updater,
@@ -43,6 +49,8 @@ class PlayAlongNoteDisplay {
       Note note = n;
       nextNote.setNextNote(note);
     }
+
+    sheet.onEnd = end;
   }
 
   void start() {
@@ -55,7 +63,6 @@ class PlayAlongNoteDisplay {
         if (_time > _endTime) {
           if (!_hasEnded) {
             _hasEnded = true;
-            sheet.onEnd = stop;
             sheet.hasEnded = true;
           }
         }
@@ -72,11 +79,28 @@ class PlayAlongNoteDisplay {
     );
   }
 
-  void stop() async {
-    _isOn = false;
+  /// Stops the timer and displays the end pop up
+  void end() async {
+    stop();
     await Future.delayed(const Duration(milliseconds: 10));
     onStop();
   }
+
+  /// Stops the timer
+  void stop() {
+    _isOn = false;
+  }
+
+  /// Restarts the song
+  void restart() {
+    _time = -1;
+    sheet.clear();
+    _hasEnded = false;
+    sheet.hasEnded = false;
+    _isOn = true;
+    start();
+  }
+
 
   /// Moves notes along screen and displays a new random note
   void increment() {

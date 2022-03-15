@@ -6,14 +6,14 @@ import '../components/sheet_music_components/keyboard_with_play_along.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
-import '../components/sheet_music_components/play_along_note_display.dart';
+import '../components/sheet_music_components/play_along_song_timer.dart';
 
 /// The screen that runs the "play along" practice mode with a given track.
 ///
 /// The track is selected by the user, then passed in to this screen.
 class _PlayAlongScreenState extends State<PlayAlongScreen> {
   late final MovingMusicSheet _sheet;
-  late PlayAlongNoteDisplay _timer;
+  late PlayAlongSongTimer _timer;
 
   final NextNoteNotifier _nextNote = NextNoteNotifier();
   final NextNoteNotifier _noteToPlay = NextNoteNotifier();
@@ -21,7 +21,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   String hit = '';
 
-  String updater = "";
+  String updater = '';
 
   bool exit = false;
 
@@ -40,11 +40,11 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   @override
   void initState() {
     super.initState();
-    PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(context: context);
+    PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(context: context, restart: () => _timer.restart());
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
     _currentNoteToPlay = NotePlayedChecker(noteNotifier: _noteToPlay, function: recordHitMiss);
     _sheet = MovingMusicSheet(nextNote: _nextNote, clef: Clef.treble, notePlayedChecker: _currentNoteToPlay);
-    _timer = PlayAlongNoteDisplay(
+    _timer = PlayAlongSongTimer(
         sheet: _sheet,
         nextNote: _nextNote,
         updater: updateScreen,
@@ -61,6 +61,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     _endMenu.delete();
   }
 
+  /// Displays the end menu
   void _displayMenu() {
     _endMenu.show();
   }

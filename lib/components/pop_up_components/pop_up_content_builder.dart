@@ -12,7 +12,7 @@ abstract class PopUpContentBuilder {
   bool isBuilt = false;
 
   /// The function that removes the menu
-  late final Function removeMenu;
+  late final VoidCallback removeMenu;
 
   void buildMenu();
 }
