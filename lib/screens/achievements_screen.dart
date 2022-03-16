@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/achievement_components/achievement_card.dart';
 import 'package:sight_reading_app/components/achievement_components/achievement_making.dart';
 import 'package:sight_reading_app/components/achievement_components/achievements_completed.dart';
 import 'package:sight_reading_app/components/achievement_components/achievements_in_progress.dart';
