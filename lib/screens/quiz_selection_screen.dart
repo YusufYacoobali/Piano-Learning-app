@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
+import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import 'menu_screen.dart'; //For MenuButton
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
@@ -90,7 +91,7 @@ class QuizSelectionScreen extends StatelessWidget {
                       onPress: () {
                         Navigator.pushNamed(
                             context,
-                            MenuScreen
+                            PracticeQuizScreen
                                 .id); //TODO: Replace with instruction screen template
                       },
                       key: quizButtonKeys[index],
