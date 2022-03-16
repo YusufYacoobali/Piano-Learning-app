@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pause_menu.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
@@ -62,6 +63,12 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /// Gets the key pressed on the keyboard
+  void answer(String text) {
+    questionBrain.setAnswer(text);
+    showResultAlert(text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,16 +78,18 @@ class _LessonScreenState extends State<LessonScreen> {
           Column(
             children: [
               screenWidget,
-
-              ///choices buttons
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: getOptionButtons(),
-                ),
+                  Expanded(
+                    child: Keyboard(function: answer),
+                  ),
+                ],
               ),
-            ],
-          ),
+              ///choices buttons
+              // Expanded(
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: getOptionButtons(),
+              //   ),
+              // ),
         ]),
       ),
     );

@@ -53,7 +53,8 @@ class SightReadingApp extends StatelessWidget {
               // Temporary routes to demo screens
               KeyboardScreen.id: (context) => const KeyboardScreen(),
               KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
-              NoteSelectorSheetScreen.id: (context) => const NoteSelectorSheetScreen(),
+              NoteSelectorSheetScreen.id: (context) =>
+                  const NoteSelectorSheetScreen(),
               KeyDetectionScreen.id: (context) => const KeyDetectionScreen(),
             },
           );

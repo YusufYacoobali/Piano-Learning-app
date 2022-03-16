@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
+import '../components/keyboard.dart';
 import '../components/instruction_pop_up_content/endless_ending_instructions.dart';
 import '../components/instruction_pop_up_content/endless_starting_instructions.dart';
-import '../components/sheet_music_components/keyboard_with_play_along.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
@@ -42,19 +42,26 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   @override
   void initState() {
     super.initState();
-    _currentNoteToPlay = NotePlayedChecker(noteNotifier: _noteToPlay, function: stop);
-    _sheet = MovingMusicSheet(nextNote: _nextNote, clef: Clef.treble, notePlayedChecker: _currentNoteToPlay);
-    _generator = EndlessNoteGenerator(sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
+    _currentNoteToPlay =
+        NotePlayedChecker(noteNotifier: _noteToPlay, function: stop);
+    _sheet = MovingMusicSheet(
+        nextNote: _nextNote,
+        clef: Clef.treble,
+        notePlayedChecker: _currentNoteToPlay);
+    _generator = EndlessNoteGenerator(
+        sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
 
-    EndlessStartingInstructions startMenuBuilder = EndlessStartingInstructions(context: context, onStart: startGame);
-    EndlessEndingInstructions endMenuBuilder = EndlessEndingInstructions(context: context, counter: _counter);
+    EndlessStartingInstructions startMenuBuilder =
+        EndlessStartingInstructions(context: context, onStart: startGame);
+    EndlessEndingInstructions endMenuBuilder =
+        EndlessEndingInstructions(context: context, counter: _counter);
 
-    _startMenu = PopUpController(context: context, menuBuilder: startMenuBuilder);
+    _startMenu =
+        PopUpController(context: context, menuBuilder: startMenuBuilder);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
 
     /// Displays the start menu
-    WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => _startMenu.show());
+    WidgetsBinding.instance?.addPostFrameCallback((_) => _startMenu.show());
   }
 
   @override
@@ -78,8 +85,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
       _generator.stop();
       _hasEnded = true;
       _counter.isNewHighScore(_sheet.clef);
-    }
-    else {
+    } else {
       _counter.score++;
     }
   }
@@ -92,12 +98,19 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _generator.start();
   }
 
+  /// Gets the key pressed on the keyboard
+  void playKey(String text) {
+    String level = '4';
+    if (_sheet.getClef() == Clef.bass) {
+      level = '3';
+    }
+    _currentNoteToPlay.checkPress(text + level);
+  }
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => {
-      if (_hasEnded) _endMenu.show()
-    });
+        ?.addPostFrameCallback((_) => {if (_hasEnded) _endMenu.show()});
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -107,14 +120,15 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
               child: Scaffold(
                 body: CustomPaint(
                   painter: _sheet,
-                  child: Container(key: Key(updater),
+                  child: Container(
+                    key: Key(updater),
                   ),
                 ),
               ),
             ),
             Expanded(
               flex: 3,
-              child: KeyboardWithPlayAlong(_sheet, _currentNoteToPlay),
+              child: Keyboard(function: playKey),
             ),
           ],
         ),

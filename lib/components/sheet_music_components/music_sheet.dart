@@ -6,9 +6,7 @@ import 'note_on_stave.dart';
 import 'stave_builder.dart';
 import '../../constants.dart';
 
-
 class MusicSheet extends CustomPainter {
-
   /// The place where the notes appear
   late double startLine;
 
@@ -40,17 +38,17 @@ class MusicSheet extends CustomPainter {
     noteImageBuilder.setCanvas(canvas);
     if (!hasSet) {
       hasSet = true;
-      baseLine = size.height/2 + 20;
+      baseLine = size.height / 2 + 20;
       noteImageBuilder.setBaseLine(baseLine);
     }
-
-    double start = size.width/3;
-    double canvasWidth = size.width/3;
-    startLine =  start + (canvasWidth/2);
+    double start = size.width / 3;
+    double canvasWidth = size.width / 2;
+    startLine = start + (canvasWidth / 1.7);
 
     endLine = 100;
-    StaveBuilder.makeBackground(canvas, size, 0, canvasWidth);
-    StaveBuilder.drawStave(canvas, size, baseLine, 0, canvasWidth, clef == Clef.treble);
+    StaveBuilder.makeBackground(canvas, size, start, start + canvasWidth);
+    StaveBuilder.drawStave(canvas, size, baseLine, start, start + canvasWidth,
+        clef == Clef.treble);
 
     removeNotes(canvas, size);
 
