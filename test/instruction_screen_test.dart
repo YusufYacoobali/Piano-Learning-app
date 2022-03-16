@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sight_reading_app/components/instruction_pop_up_content/endless_starting_instructions.dart';
 
 import 'package:sight_reading_app/components/instruction_pop_up_content/play_along_instructions.dart';
 import 'package:sight_reading_app/components/instruction_pop_up_content/practice_menu_instructions.dart';
@@ -33,37 +32,6 @@ void main() {
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
     expect(find.byType(PlayAlongInstructions), findsOneWidget);
-  });
-
-  testWidgets(
-      'check for speedrun instructions being shown on icon click in the play along screen',
-      (WidgetTester tester) async {
-    await _goToPracticeScreen(tester);
-    await tester.tap(find.text('Speedrun'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byIcon(Icons.help_outline));
-    await tester.pumpAndSettle();
-    expect(find.byType(SpeedrunMenuInstructions), findsOneWidget);
-  });
-
-  testWidgets(
-      'check for quiz instructions being shown on icon click in the play along screen',
-      (WidgetTester tester) async {
-    await _goToPracticeScreen(tester);
-    await tester.tap(find.text('Take a Quiz'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byIcon(Icons.help_outline));
-    await tester.pumpAndSettle();
-    expect(find.byType(QuizInstructions), findsOneWidget);
-  });
-
-  testWidgets('check for endless instruction screen',
-      (WidgetTester tester) async {
-    await _goToPracticeScreen(tester);
-    await tester.tap(find.text('Endless'));
-    await tester.pumpAndSettle();
-    expect(find.byType(EndlessStartingInstructions), findsOneWidget);
-    expect(find.text('Endless Mode'), findsOneWidget);
   });
 
   testWidgets(
