@@ -1,23 +1,19 @@
 import 'package:sight_reading_app/components/achievement_components/achievement_card.dart';
-import 'package:sight_reading_app/storage_reader_writer.dart';
+//import 'package:sight_reading_app/storage_reader_writer.dart';
 
 import '../../constants.dart';
 
 /// This file reads the values from storage and makes the achievement cards which is used for both tabs
 
 class AchievementMaker {
-  StorageReaderWriter storage = StorageReaderWriter();
-  final Map _map = {};
+  //StorageReaderWriter storage = StorageReaderWriter();
 
   List<AchievementCard> achieved = [];
   List<AchievementCard> inProgress = [];
 
-  void makeLists() async {
-    print('waiiting for values');
-    List achieveValues = await storage.loadValues();
-    print('got values');
+  void makeLists(allValues) {
     //print(achieveValues);
-    List<AchievementCard> achieveObjects = makeAchievements(achieveValues);
+    List<AchievementCard> achieveObjects = makeAchievements(allValues);
     //print(achieveObjects);
 
     //deciding where each card will go
@@ -29,7 +25,6 @@ class AchievementMaker {
           inProgress.add(card);
         }
       }
-      print('seperated achievements');
     }
   }
 

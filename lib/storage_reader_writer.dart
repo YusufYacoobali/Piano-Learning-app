@@ -99,12 +99,5 @@ class StorageReaderWriter {
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
 
     return [completedLessons, completedQuizzes];
-
-    //state changes when values are fetched
-    // setState(() {
-    //   achieveValues.addAll([completedLessons, completedQuizzes]);
-    // });
-
-    //makeLists(achieveValues);
   }
 }

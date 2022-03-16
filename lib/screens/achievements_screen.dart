@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/components/achievement_components/achievement_card.dart';
 import 'package:sight_reading_app/components/achievement_components/achievement_making.dart';
 import 'package:sight_reading_app/components/achievement_components/achievements_completed.dart';
@@ -21,75 +20,29 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   //maker which will make all achievement cards
   AchievementMaker maker = AchievementMaker();
   StorageReaderWriter storage = StorageReaderWriter();
-  //lists to seperate which cards go to which tabs
-  List achieveValues = [];
+  //map to
   final Map _map = {};
-  List<AchievementCard> achieved = [];
-  List<AchievementCard> inProgress = [];
 
   // when screen is initiated it gets values from storage
 
   @override
   void initState() {
     super.initState();
-    _loadValues();
+    _setPage();
     //setPage();
   }
 
-  // @override
-  // setState(VoidCallback fn) {
-  //   maker.makeLists;
-  //   achieved = maker.getAchieved();
-  //   inProgress = maker.getInProgress();
-  // }
-
-  // setPage() {
-  //   //maker.makeLists();
-  //   setState(() {
-  //     //achieveValues.addAll([completedLessons, completedQuizzes]);
-  //     maker.makeLists();
-  //   });
-  // }
-
   //Loading values from storage on start
-  void _loadValues() async {
-    final prefs = await SharedPreferences.getInstance();
-    int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
-    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
-    //achieveValues.addAll([completedLessons, completedQuizzes]);
-    // _map.addAll({
-    //   'completedLessons': completedLessons,
-    //   'completedQuizzes': completedQuizzes
-    // });
+  void _setPage() async {
+    List<int> values = await storage.loadValues();
 
     //state changes when values are fetched
     setState(() {
-      //achieveValues.addAll([completedLessons, completedQuizzes]);
-      _map.addAll({
-        'completedLessons': completedLessons,
-        'completedQuizzes': completedQuizzes
-      });
+      _map.addAll(
+          {'completedLessons': values[0], 'completedQuizzes': values[1]});
     });
 
-    makeLists(_map);
-  }
-
-  //lists of achievement cards are made for each tab
-  void makeLists(allValues) {
-    //print(achieveValues);
-    List<AchievementCard> achieveObjects = maker.makeAchievements(allValues);
-    //print(achieveObjects);
-
-    //deciding where each card will go
-    if (achieveObjects.isNotEmpty) {
-      for (AchievementCard card in achieveObjects) {
-        if (card.complete >= card.target) {
-          achieved.add(card);
-        } else {
-          inProgress.add(card);
-        }
-      }
-    }
+    maker.makeLists(_map);
   }
 
   @override
@@ -113,8 +66,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         ),
         // Tab bar which displays these two widgets, each tab bar recieves its corresponding achievements
         body: TabBarView(children: [
-          AchievementsInProgress(cards: inProgress),
-          AchievementsCompleted(cards: achieved)
+          AchievementsInProgress(cards: maker.getInProgress()),
+          AchievementsCompleted(cards: maker.getAchieved())
         ]),
       ),
     );
