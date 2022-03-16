@@ -52,9 +52,9 @@ class KeyboardSheetScreenState extends State<KeyboardSheetScreen> {
 
   @override
   void initState() {
-    _currentNoteToPlay = NotePlayedChecker(_noteToPlay, convertHitToString);
+    _currentNoteToPlay = NotePlayedChecker(noteNotifier: _noteToPlay, function: convertHitToString);
     super.initState();
-    _sheet = MovingMusicSheet(_nextNote, Clef.treble, _currentNoteToPlay);
+    _sheet = MovingMusicSheet(nextNote: _nextNote, clef: Clef.treble, notePlayedChecker: _currentNoteToPlay);
     _timer = ProgressTimer(_sheet, _nextNote, updateScreen, _notes);
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/screens/settings_screen.dart';
+
+import '../../components/pop_up_components/pop_up_controller.dart';
+import '../../screens/settings_screen.dart';
 
 const double appBarHeight = 60.0; //Default value
 
@@ -16,7 +18,7 @@ class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWid
   ///The text to be contained in the AppBar
   final Text titleText;
   ///Instruction screen to use for page
-  final String instructionScreen;
+  final PopUpController instructionScreen;
   ///The constructor, which takes the titleText as a parameter of type Text
   const AppBarWithSettingsIcon(this.titleText, this.instructionScreen, {Key? key}) : super(key: key);
 
@@ -34,7 +36,8 @@ class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWid
         IconButton(
             icon: const Icon(Icons.help_outline),
             onPressed: () {
-              Navigator.pushNamed(context, instructionScreen);
+              //Navigator.pushNamed(context, instructionScreen);
+              instructionScreen.show();
             },
         ),
         IconButton(

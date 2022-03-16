@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../components/keyboard.dart';
+import '../components/pop_up_components/pop_up_controller.dart';
+import '../components/instruction_pop_up_content/play_along_ending_instructions.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
-import '../components/sheet_music_components/play_along_note_display.dart';
+import '../components/sheet_music_components/play_along_song_timer.dart';
 
 /// The screen that runs the "play along" practice mode with a given track.
 ///
 /// The track is selected by the user, then passed in to this screen.
 class _PlayAlongScreenState extends State<PlayAlongScreen> {
   late final MovingMusicSheet _sheet;
-  late PlayAlongNoteDisplay _timer;
+  late PlayAlongSongTimer _timer;
 
   final NextNoteNotifier _nextNote = NextNoteNotifier();
   final NextNoteNotifier _noteToPlay = NextNoteNotifier();
@@ -19,10 +21,11 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   String hit = '';
 
-  String updater = "";
+  String updater = '';
 
   bool exit = false;
 
+  late final PopUpController _endMenu;
 
   void updateScreen(String update) {
     setState(() {
@@ -31,20 +34,26 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   }
 
   ///TODO: Replace with analytics with the notes
-  void recordHitMiss(bool hasPlayed) {
-  }
+  void recordHitMiss(bool hasPlayed) {}
 
   @override
   void initState() {
     super.initState();
-    _currentNoteToPlay = NotePlayedChecker(_noteToPlay, recordHitMiss);
-    _sheet = MovingMusicSheet(_nextNote, widget.clef, _currentNoteToPlay);
-    _timer = PlayAlongNoteDisplay(
-        sheet: _sheet,
+    PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(
+        context: context, restart: () => _timer.restart());
+    _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
+    _currentNoteToPlay =
+        NotePlayedChecker(noteNotifier: _noteToPlay, function: recordHitMiss);
+    _sheet = MovingMusicSheet(
         nextNote: _nextNote,
-        updateFunction: updateScreen,
-        notes: widget.notes,
-        bpm: widget.bpm,
+        clef: Clef.treble,
+        notePlayedChecker: _currentNoteToPlay);
+    _timer = PlayAlongSongTimer(
+      sheet: _sheet,
+      nextNote: _nextNote,
+      updater: updateScreen,
+      notes: widget.notes,
+      onStop: _displayMenu,
     );
     _timer.start();
   }
@@ -53,6 +62,12 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   void dispose() {
     super.dispose();
     _timer.stop();
+    _endMenu.delete();
+  }
+
+  /// Displays the end menu
+  void _displayMenu() {
+    _endMenu.show();
   }
 
   /// Gets the key pressed on the keyboard
@@ -96,7 +111,9 @@ class PlayAlongScreen extends StatefulWidget {
   final Clef clef;
   final int bpm;
 
-  const PlayAlongScreen({Key? key, required this.notes, required this.clef, required this.bpm}) : super(key: key);
+  const PlayAlongScreen(
+      {Key? key, required this.notes, required this.clef, required this.bpm})
+      : super(key: key);
 
   @override
   _PlayAlongScreenState createState() => _PlayAlongScreenState();

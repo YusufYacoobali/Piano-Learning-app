@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/endless_mode_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/practice_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/speedrun_instructions_screen.dart';
 import 'package:sight_reading_app/screens/key_detection_screen.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
@@ -53,17 +49,12 @@ class SightReadingApp extends StatelessWidget {
               QuizSelectionScreen.id: (context) => const QuizSelectionScreen(),
               AchievementsScreen.id: (context) => const AchievementsScreen(),
               SettingsScreen.id: (context) => const SettingsScreen(),
-              KeyboardScreen.id: (context) => const KeyboardScreen(),
-              // instruction screens
-              PlayAlongInstructions.id: (context) => const PlayAlongInstructions(),
-              QuizInstruction.id: (context) => const QuizInstruction(),
-              SpeedrunInstructions.id: (context) => const SpeedrunInstructions(),
-              PracticeInstructions.id: (context) => const PracticeInstructions(),
+              EndlessModeScreen.id: (context) => const EndlessModeScreen(),
               // Temporary routes to demo screens
+              KeyboardScreen.id: (context) => const KeyboardScreen(),
               KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
               NoteSelectorSheetScreen.id: (context) => const NoteSelectorSheetScreen(),
               KeyDetectionScreen.id: (context) => const KeyDetectionScreen(),
-              EndlessModeScreen.id: (context) => const EndlessModeScreen(),
             },
           );
         },

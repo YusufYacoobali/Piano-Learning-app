@@ -300,3 +300,6 @@ BoxDecoration cardBackground = BoxDecoration(
     end: Alignment.bottomRight,
   ),
 );
+
+/// How far each note should move per iteration
+const double noteMovement = 1;

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
+
+import '../components/app_bar_with_settings_icon.dart';
+import '../components/instruction_pop_up_content/quiz_instructions.dart';
+import '../components/pop_up_components/pop_up_controller.dart';
 import 'menu_screen.dart'; //For MenuButton
-import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 
 /// A list containing the names of each quiz.
 //TODO: Create function to access stored data for quizzes
@@ -67,8 +69,10 @@ class QuizSelectionScreen extends StatelessWidget {
       quizButtonKeys.add(Key('quizSelected:$quiz'));
     }
 
+    PopUpController menu = PopUpController(context: context, menuBuilder: QuizInstructions(context: context));
+
     return Scaffold(
-      appBar: const AppBarWithSettingsIcon(Text('Choose a quiz:'), QuizInstruction.id),
+      appBar: AppBarWithSettingsIcon(const Text('Choose a quiz:'), menu),
       body: SafeArea(
         child: Column(
           children: <Widget>[
