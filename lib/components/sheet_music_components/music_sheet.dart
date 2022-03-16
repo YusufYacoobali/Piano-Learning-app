@@ -87,12 +87,6 @@ class MusicSheet extends CustomPainter {
     }
   }
 
-  void move() {
-    for (NoteOnStave note in notesOnStaves) {
-      note.pos -= noteSpacing;
-    }
-  }
-
   /// Draws all the notes on the screen
   void drawNotes() {
     for (NoteOnStave note in notesOnStaves) {
