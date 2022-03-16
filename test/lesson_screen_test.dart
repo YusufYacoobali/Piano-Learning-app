@@ -72,4 +72,40 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('B'), findsOneWidget);
   });
+
+  testWidgets('check that the next question is displayed',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const SightReadingApp());
+    await tester.tap(find.text('Lessons'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
+    await tester.pumpAndSettle();
+    expect(find.text('B'), findsOneWidget);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('B'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+    expect(find.text('B'), findsOneWidget);
+  });
+
+  testWidgets('check that the results screen is displayed',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const SightReadingApp());
+    await tester.tap(find.text('Lessons'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
+    await tester.pumpAndSettle();
+    for (int i = 0; i < 10; i++) {
+      await tester.tap(find.text('B'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Next'));
+      await tester.pumpAndSettle();
+    }
+    await tester.tap(find.text('B'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Finish'));
+    await tester.pumpAndSettle();
+    expect(find.text("Aww, better luck next time!"), findsOneWidget);
+  });
 }
