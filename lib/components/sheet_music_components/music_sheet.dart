@@ -41,8 +41,8 @@ class MusicSheet extends CustomPainter {
       baseLine = size.height / 2 + 20;
       noteImageBuilder.setBaseLine(baseLine);
     }
-    double start = size.width / 3;
-    double canvasWidth = size.width / 2;
+    double start = size.width / 5;
+    double canvasWidth = size.width / 1.4;
     startLine = start + (canvasWidth / 1.7);
 
     endLine = 100;

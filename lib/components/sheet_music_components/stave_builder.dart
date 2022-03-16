@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'dart:io' show Platform;
+
+import '../../constants.dart' as constants;
+
 class StaveBuilder {
   static void makeBackground(Canvas canvas, Size size, double start, double end) {
     // Draws the white background
@@ -37,13 +41,31 @@ class StaveBuilder {
     Offset endingPoint4 = Offset(end, baseLine - 80);
     canvas.drawLine(startingPoint4, endingPoint4, paint);
 
-    String clef = '𝄞';
-    double font = 70;
-    double position = baseLine - 80;
-    if (!isTrebleClef) {
-      clef = '𝄢';
-      font = 83;
-      position = baseLine - 93;
+    //int trebleFont =
+
+    double font = constants.androidTrebleClefFont;
+    String clef = constants.trebleClef;
+    double position = baseLine - constants.androidTrebleClefOffset;
+    if (Platform.isIOS) {
+      font = constants.iosTrebleClefFont;
+
+      /// Change this to change ios treble clef position
+      position = baseLine - constants.iosTrebleClefOffset;
+
+      if (!isTrebleClef) {
+        clef = constants.bassClef;
+        font = constants.iosBassClefFont;
+
+        /// Change this to change ios bass clef position
+        position = baseLine - constants.iosBassClefOffset;
+      }
+    }
+    else {
+      if (!isTrebleClef) {
+        clef = constants.bassClef;
+        font = constants.androidBassClefFont;
+        position = baseLine - constants.androidBassClefOffset;
+      }
     }
 
     // Draws on the Clef
