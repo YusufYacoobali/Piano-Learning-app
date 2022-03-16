@@ -15,6 +15,8 @@ List<String> trackNames = <String>[];
 List<String> trackRecords = <String>[];
 /// A list of all sheet music for each of the tracks
 List<Map<int, Note>> trackSheets = <Map<int, Note>>[];
+/// A list of all sheet sheets clefs for each of the tracks
+List<Clef> trackClefs = <Clef>[];
 
 /// A screen containing a menu of the various tracks the user can play along to.
 ///
@@ -31,14 +33,14 @@ class PlayAlongMenuScreen extends StatelessWidget {
   List<String> getTracks() {
     return <String>['Ode to Joy - Treble Only',
       'A Simple Bass Melody',
-      'C', 'D', 'E', 'F'];
+    ];
   }
 
   ///The user records for the tracks you can play along to.
   //May combine with function getTracks() depending on how data is stored and retrieved.
   //TODO: Add ability to get track records from storage
   List<String> getRecords() {
-    return <String>['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'];
+    return <String>['N/A', 'N/A',];
   }
 
   List<Map<int, Note>> getMusicSheets() {
@@ -48,11 +50,19 @@ class PlayAlongMenuScreen extends StatelessWidget {
     ];
   }
 
+  List<Clef> getMusicSheetClefs() {
+    return <Clef>[
+      treble_track1.getClef(),
+      bass_track1.getClef()
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     trackNames = getTracks();
     trackRecords = getRecords();
     trackSheets = getMusicSheets();
+    trackClefs = getMusicSheetClefs();
 
     trackButtonKeys = <Key>[]; //Resets the list of keys
     ///Generates the keys for the track buttons based on track names.
@@ -78,7 +88,8 @@ class PlayAlongMenuScreen extends StatelessWidget {
                     ],
                   ),
                   onPress: () {
-                    Map<int, Note> _map = trackSheets[index];
+                    Map<int, Note> map = trackSheets[index];
+                    Clef clef = trackClefs[index];
 
                     /// The bpm of the moving sheet
                     int bpm = 75;
@@ -86,7 +97,7 @@ class PlayAlongMenuScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PlayAlongScreen(notes: _map, bpm: bpm),
+                          builder: (context) => PlayAlongScreen(notes: map, clef: clef, bpm: bpm),
                         ));
                   },
                   key: trackButtonKeys[index],
