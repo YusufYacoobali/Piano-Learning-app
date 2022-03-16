@@ -56,6 +56,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
       future: modeRecords,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
+          //TODO: Convert builder such that this returns screen with default records.
           return Container(); //The widget while loading (nothing shown currently)
         }
         if (!snapshot.hasData) {

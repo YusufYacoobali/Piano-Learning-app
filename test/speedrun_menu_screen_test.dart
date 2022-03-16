@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
@@ -27,7 +25,6 @@ void main() {
 
   testWidgets('Check that the instruction text for the screen is displayed',
           (WidgetTester tester) async {
-        final Completer<List<String>> completer = Completer<List<String>>();
         await tester.pumpWidget(const SightReadingApp());
         // Navigates to the speedrun menu screen.
         await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
@@ -35,9 +32,6 @@ void main() {
         await tester.tap(
             find.byKey(PracticeScreen.navigateToSpeedrunMenuButtonKey));
         await tester.pumpAndSettle();
-        completer.complete(getSpeedrunRecords());
-
-        await tester.pump(Duration.zero);
         expect(find.text('Choose a duration:'), findsOneWidget);
       });
 
