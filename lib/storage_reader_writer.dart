@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
 import 'package:sight_reading_app/questions.dart';
@@ -48,6 +49,7 @@ class StorageReaderWriter {
 
   /// Writes the default StorageWriter values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
+    WidgetsFlutterBinding.ensureInitialized();
     final SharedPreferences pref = await SharedPreferences.getInstance();
     // pref.setInt('volume', constants.defaultVolumeLevel);
     // pref.setString('difficulty', constants.defaultDifficultyLevel);
@@ -58,6 +60,7 @@ class StorageReaderWriter {
 
   /// Loads the StorageWriter from Shared Preferences
   Future<void> loadDataFromStorage() async {
+    WidgetsFlutterBinding.ensureInitialized();
     final SharedPreferences pref = await SharedPreferences.getInstance();
     // int? isOnDisk = pref.getInt('volume');
     // if (isOnDisk == null) {
@@ -74,7 +77,7 @@ class StorageReaderWriter {
   }
 
   Future<void> loadLessonScoresFromStorage(SharedPreferences pref) async {
-    int? isOnDisk = pref.getInt('lesson 1');
+    String? isOnDisk = pref.getString('lesson 1');
     if (isOnDisk == null) {
       _setDefaultValues();
       await _writeDefaultsToStorage();

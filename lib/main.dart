@@ -24,6 +24,7 @@ import 'package:sight_reading_app/screens/note_selector_sheet_screen.dart';
 
 void main() {
   // Starting the app in landscape orientation
+  // TODO: Null check operator used on a null value
   StorageReaderWriter().loadDataFromStorage();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
