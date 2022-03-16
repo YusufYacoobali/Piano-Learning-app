@@ -76,11 +76,11 @@ class QuestionBrain {
     // Checks if the user answer was correct and if so, increments the score
     if (checkAnswer(userAnswer)) {
       ++_score;
-      // TODO: Uncomment below line once implemented
-      // QuestionAnswerData.questionAnswered(questions[_questionNum].questionID, true);
+      QuestionAnswerData.questionAnswered(
+          questions[_questionNum].questionID, true);
     } else {
-      // TODO: Uncomment below line once implemented
-      // QuestionAnswerData.questionAnswered(questions[_questionNum].questionID, true);
+      QuestionAnswerData.questionAnswered(
+          questions[_questionNum].questionID, false);
     }
     // Checks if there are no more questions
     if (isLastQuestion()) {
