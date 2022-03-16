@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sight_reading_app/components/instruction_pop_up_content/endless_starting_instructions.dart';
 
 import 'package:sight_reading_app/components/instruction_pop_up_content/play_along_instructions.dart';
 import 'package:sight_reading_app/components/instruction_pop_up_content/practice_menu_instructions.dart';
 import 'package:sight_reading_app/components/instruction_pop_up_content/quiz_instructions.dart';
 import 'package:sight_reading_app/components/instruction_pop_up_content/speedrun_menu_instructions.dart';
 import 'package:sight_reading_app/main.dart';
-import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
 
 void main() {
   _goToPracticeScreen(WidgetTester tester) async {
@@ -62,7 +62,7 @@ void main() {
     await _goToPracticeScreen(tester);
     await tester.tap(find.text('Endless'));
     await tester.pumpAndSettle();
-    expect(find.byType(EndlessInstructions), findsOneWidget);
+    expect(find.byType(EndlessStartingInstructions), findsOneWidget);
     expect(find.text('Endless Mode'), findsOneWidget);
   });
 
