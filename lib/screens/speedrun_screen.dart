@@ -54,7 +54,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   void setScreenWidget() {
     Note note = questionBrain.getNote();
     Clef clef = questionBrain.getClef();
-    String questionText = questionBrain.getQuestionText();
+    String questionText = 'What note is this?';
     int questionNum = questionBrain.getQuestionNum();
     int totalNumOfQuestions = questionBrain.getTotalNumberOfQuestions();
 
