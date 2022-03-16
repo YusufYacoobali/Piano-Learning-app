@@ -23,18 +23,17 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   StorageReaderWriter storage = StorageReaderWriter();
   //lists to seperate which cards go to which tabs
   List achieveValues = [];
+  final Map _map = {};
   List<AchievementCard> achieved = [];
   List<AchievementCard> inProgress = [];
 
   // when screen is initiated it gets values from storage
+
   @override
   void initState() {
     super.initState();
-    // storage.loadValues().then((value) => setState(() {
-    //       maker.makeAchievements(achieveValues);
-    //     }));
-    // achieved = maker.getAchieved();
-    // inProgress = maker.getInProgress();
+    _loadValues();
+    //setPage();
   }
 
   // @override
@@ -44,38 +43,54 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   //   inProgress = maker.getInProgress();
   // }
 
-  //Loading values from storage on start
-  // void _loadValues() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
-  //   int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
-
-  //   //state changes when values are fetched
+  // setPage() {
+  //   //maker.makeLists();
   //   setState(() {
-  //     achieveValues.addAll([completedLessons, completedQuizzes]);
+  //     //achieveValues.addAll([completedLessons, completedQuizzes]);
+  //     maker.makeLists();
   //   });
-
-  //   makeLists(achieveValues);
   // }
+
+  //Loading values from storage on start
+  void _loadValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
+    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+    //achieveValues.addAll([completedLessons, completedQuizzes]);
+    // _map.addAll({
+    //   'completedLessons': completedLessons,
+    //   'completedQuizzes': completedQuizzes
+    // });
+
+    //state changes when values are fetched
+    setState(() {
+      //achieveValues.addAll([completedLessons, completedQuizzes]);
+      _map.addAll({
+        'completedLessons': completedLessons,
+        'completedQuizzes': completedQuizzes
+      });
+    });
+
+    makeLists(_map);
+  }
 
   //lists of achievement cards are made for each tab
-  // void makeLists(allValues) {
-  //   //print(achieveValues);
-  //   List<AchievementCard> achieveObjects =
-  //       maker.makeAchievements(achieveValues);
-  //   //print(achieveObjects);
+  void makeLists(allValues) {
+    //print(achieveValues);
+    List<AchievementCard> achieveObjects = maker.makeAchievements(allValues);
+    //print(achieveObjects);
 
-  //   //deciding where each card will go
-  //   if (achieveObjects.isNotEmpty) {
-  //     for (AchievementCard card in achieveObjects) {
-  //       if (card.complete >= card.target) {
-  //         achieved.add(card);
-  //       } else {
-  //         inProgress.add(card);
-  //       }
-  //     }
-  //   }
-  // }
+    //deciding where each card will go
+    if (achieveObjects.isNotEmpty) {
+      for (AchievementCard card in achieveObjects) {
+        if (card.complete >= card.target) {
+          achieved.add(card);
+        } else {
+          inProgress.add(card);
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

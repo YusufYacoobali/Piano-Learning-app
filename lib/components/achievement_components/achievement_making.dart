@@ -7,11 +7,12 @@ import '../../constants.dart';
 
 class AchievementMaker {
   StorageReaderWriter storage = StorageReaderWriter();
+  final Map _map = {};
 
   List<AchievementCard> achieved = [];
   List<AchievementCard> inProgress = [];
 
-  Future<void> makeLists(allValues) async {
+  void makeLists() async {
     print('waiiting for values');
     List achieveValues = await storage.loadValues();
     print('got values');
@@ -45,12 +46,18 @@ class AchievementMaker {
 
     //2nd value passed in is how many have been completed
     List<AchievementCard> achievements = [
-      AchievementCard('Complete the 1st lesson', 1, achieveValues[0]),
-      AchievementCard('Complete 5 lessons', 5, achieveValues[0]),
-      AchievementCard('Complete all lessons', numOfLessons, achieveValues[0]),
-      AchievementCard('Complete your 1st quiz', 1, achieveValues[1]),
-      AchievementCard('Complete 5 quizzes', 5, achieveValues[1]),
-      AchievementCard('Complete all quizzes', numOfquizzes, achieveValues[1]),
+      AchievementCard(
+          'Complete the 1st lesson', 1, achieveValues['completedLessons']),
+      AchievementCard(
+          'Complete 5 lessons', 5, achieveValues['completedLessons']),
+      AchievementCard('Complete all lessons', numOfLessons,
+          achieveValues['completedLessons']),
+      AchievementCard(
+          'Complete your 1st quiz', 1, achieveValues['completedQuizzes']),
+      AchievementCard(
+          'Complete 5 quizzes', 5, achieveValues['completedQuizzes']),
+      AchievementCard('Complete all quizzes', numOfquizzes,
+          achieveValues['completedQuizzes']),
     ];
     //print(achievements);
     return achievements;
