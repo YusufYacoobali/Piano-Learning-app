@@ -91,4 +91,20 @@ class StorageReaderWriter {
       }
     }
   }
+
+  //for achievements
+  Future<List<int>> loadValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
+    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+
+    return [completedLessons, completedQuizzes];
+
+    //state changes when values are fetched
+    // setState(() {
+    //   achieveValues.addAll([completedLessons, completedQuizzes]);
+    // });
+
+    //makeLists(achieveValues);
+  }
 }
