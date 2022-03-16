@@ -11,6 +11,7 @@ import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
+import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import 'package:sight_reading_app/theme_listener.dart';
@@ -71,6 +72,7 @@ class SightReadingApp extends StatelessWidget {
               NoteSelectorSheetScreen.id: (context) =>
                   const NoteSelectorSheetScreen(),
               KeyDetectionScreen.id: (context) => const KeyDetectionScreen(),
+              RandomQuizScreen.id: (context) => const RandomQuizScreen(),
             },
           );
         },
