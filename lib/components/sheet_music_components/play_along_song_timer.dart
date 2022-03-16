@@ -34,13 +34,21 @@ class PlayAlongSongTimer {
   /// Called when song has finished
   final VoidCallback onStop;
 
+  /// The amount of time between increments
+  late final int _timeBetweenMovements;
+
+  /// How fast the notes move along the screen
+  final int bpm;
+
   PlayAlongSongTimer({
     required this.sheet,
     required this.nextNote,
     required this.updater,
     required this.notes,
-    required this.onStop
+    required this.onStop,
+    required this.bpm
   }) {
+    _timeBetweenMovements = ((1 / ((bpm / 60) * iterationsPerTimeUnit)) * 1000).round();
 
     _endTime = notes.keys.last;
 
@@ -55,7 +63,7 @@ class PlayAlongSongTimer {
 
   void start() {
     _isOn = true;
-    Timer.periodic(const Duration(milliseconds: 5), (Timer t) {
+    Timer.periodic(Duration(milliseconds: _timeBetweenMovements), (Timer t) {
       if (!_isOn) {
         t.cancel();
       }

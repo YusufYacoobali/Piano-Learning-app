@@ -15,49 +15,88 @@ class EndlessNoteGenerator {
   int _index = 0;
 
   /// The number of movements before the time unit changes
-  static const int iterationsPerTimeUnit = 80;
+  static const int iterationsPerTimeUnit = 120;
 
   /// The function to be called when a note has been hit or missed
   final Function updater;
 
-  final List<String> _trebleClefNotes = ['C4', 'Db4', 'D4', 'E4', 'Eb4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4'];
-  final List<String> _bassClefNotes = ['B3', 'Bb3', 'A3', 'Ab3', 'G3', 'Gb3', 'F3', 'E3', 'Eb3', 'D3', 'Db3', 'C3'];
-
   final Random _random = Random();
 
   /// The maximum amount of time between notes being displayed
-  static const int _maxTime = 5;
+  late final int _maxTime;
 
   /// The minimum amount of time between notes being displayed
-  static const int _minTime = 3;
+  late final int _minTime;
 
   int _time = 0;
 
-  late final List<String> _notes;
+  final List<String> _easyNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+  final List<String> _mediumNotes = ['C', 'D', 'E', 'Eb', 'F', 'G', 'A', 'Bb', 'B'];
+  final List<String> _hardNotes = ['C', 'Db', 'Eb', 'D', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+
+  late final String _difficulty;
+
+  late final int _bpm;
+
+  late List<String> _availableNotes;
+
+  late final int _timeBetweenMovements;
 
   EndlessNoteGenerator({required this.sheet, required this.nextNote, required this.updater});
 
   void setClef(Clef clef) {
-    if (clef == Clef.treble) {
-      _notes = _trebleClefNotes;
-    } else {
-      _notes = _bassClefNotes;
+    String num = '4';
+    if (clef == Clef.bass) {
+      num = '3';
     }
+    List<String> notes = [];
+    for (String note in _availableNotes) {
+      notes.add(note + num);
+    }
+    _availableNotes = notes;
     getRandomNote();
+  }
+
+  void setDifficulty(String difficulty) {
+    _difficulty = difficulty;
+    setDifficultyValues();
+  }
+
+  void setDifficultyValues() {
+    if (_difficulty == 'hard') {
+      _bpm = 120;
+      _availableNotes = _hardNotes;
+      _minTime = 1;
+      _maxTime = 4;
+    }
+    else if (_difficulty == 'medium') {
+      _bpm = 100;
+      _availableNotes = _mediumNotes;
+      _minTime = 3;
+      _maxTime = 5;
+    }
+    else {
+      _bpm = 80;
+      _availableNotes = _easyNotes;
+      _minTime = 4;
+      _maxTime = 7;
+    }
+    _timeBetweenMovements = ((1 / ((_bpm / 60) * iterationsPerTimeUnit)) * 1000).round();
   }
 
   /// Gets a new random note to be displayed
   getRandomNote() {
-    String name = _notes[_random.nextInt(_notes.length)];
+    String name = _availableNotes[_random.nextInt(_availableNotes.length)];
     nextNote.setNextNote(Note(name: name, duration: 1));
   }
 
   void start() {
     _isOn = true;
-    Timer.periodic(const Duration(milliseconds: 5), (Timer t) {
+    Timer.periodic(Duration(milliseconds: _timeBetweenMovements), (Timer t) {
       if (!_isOn) {
         t.cancel();
       } else {
+        //print(_index);
         if (_index == 0) {
           increment();
         }

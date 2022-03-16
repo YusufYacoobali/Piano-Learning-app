@@ -15,10 +15,10 @@ class EndlessScoreCounter {
   //final StorageReaderWriter _writer = StorageReaderWriter();
 
   /// Writes the high score to storage
-  void writeHighScore(Clef clef) async {
-    String key = 'endless-treble-high-score';
+  void writeHighScore(Clef clef, String difficulty) async {
+    String key = 'endless-treble-$difficulty-high-score';
     if (clef == Clef.bass) {
-      key = 'endless-bass-high-score';
+      key = 'endless-bass-$difficulty-high-score';
     }
     //_writer.write(key, score.toString());
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -26,10 +26,10 @@ class EndlessScoreCounter {
   }
 
   /// Gets the high score
-  void getHighScore(Clef clef) async {
-    String key = 'endless-treble-high-score';
+  void getHighScore(Clef clef, String difficulty) async {
+    String key = 'endless-treble-$difficulty-high-score';
     if (clef == Clef.bass) {
-      key = 'endless-bass-high-score';
+      key = 'endless-bass-$difficulty-high-score';
     }
     //Object? score = _writer.read(key);
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -37,7 +37,7 @@ class EndlessScoreCounter {
     if (score == null) {
       //_writer.reset();
       highScore = 0;
-      writeHighScore(clef);
+      writeHighScore(clef, difficulty);
     }
     else {
       highScore = int.parse(score.toString());
@@ -45,9 +45,9 @@ class EndlessScoreCounter {
   }
 
   /// Updates the score if the new one is higher
-  void isNewHighScore(Clef clef) {
+  void isNewHighScore(Clef clef, String difficulty) {
     if (score > highScore) {
-      writeHighScore(clef);
+      writeHighScore(clef, difficulty);
     }
   }
 }

@@ -94,27 +94,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ),
 
-                            /// Adjust difficulty
-                            SettingsTile(
-                              leading: const Icon(Icons.signal_cellular_alt_rounded),
-                              title: const Text('Difficulty'),
-                              value: DropdownButton(
-                                  value: settings.getSetting('difficulty'),
-                                  key: const Key('difficulty selector'),
-                                  items: constants.difficultyList.map((option) {
-                                    return DropdownMenuItem(
-                                      child: Text(option.toString()),
-                                      value: option,
-                                    );
-                                  }).toList(),
-                                  onChanged: (level) async {
-                                    if (level != null) {
-                                      await settings.updateSetting('difficulty', level).then((v) => setState(() => {}));
-                                    }
-                                  }
-                              ),
-                            ),
-
                             /// Adjust theme
                             SettingsTile(
                               title: const Text('Theme'),

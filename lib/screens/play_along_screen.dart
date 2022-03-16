@@ -54,6 +54,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
       updater: updateScreen,
       notes: widget.notes,
       onStop: _displayMenu,
+      bpm: widget.bpm,
     );
     _timer.start();
   }
