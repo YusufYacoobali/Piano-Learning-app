@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:sight_reading_app/components/instruction_pop_up_content/play_along_instructions.dart';
-import 'package:sight_reading_app/components/instruction_pop_up_content/practice_menu_instructions.dart';
-import 'package:sight_reading_app/components/instruction_pop_up_content/quiz_instructions.dart';
-import 'package:sight_reading_app/components/instruction_pop_up_content/speedrun_menu_instructions.dart';
 import 'package:sight_reading_app/main.dart';
 
 void main() {
@@ -20,7 +16,8 @@ void main() {
     await _goToPracticeScreen(tester);
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
-    expect(find.byType(PracticeMenuInstructions), findsOneWidget);
+    expect(find.byType(Overlay), findsOneWidget);
+    expect(find.text('Practice Your Skills'), findsOneWidget);
   });
 
   testWidgets(
@@ -31,7 +28,8 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
-    expect(find.byType(PlayAlongInstructions), findsOneWidget);
+    expect(find.byType(Overlay), findsOneWidget);
+    expect(find.text('Play Along Mode'), findsOneWidget);
   });
 
   testWidgets(
@@ -42,7 +40,8 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
-    expect(find.byType(SpeedrunMenuInstructions), findsOneWidget);
+    expect(find.byType(Overlay), findsOneWidget);
+    expect(find.text('Speed-run Mode'), findsOneWidget);
   });
 
   testWidgets(
@@ -53,6 +52,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
-    expect(find.byType(QuizInstructions), findsOneWidget);
+    expect(find.byType(Overlay), findsOneWidget);
+    expect(find.text('Quiz Mode'), findsOneWidget);
   });
 }
