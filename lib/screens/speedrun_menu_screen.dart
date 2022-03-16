@@ -16,6 +16,16 @@ List<Key> modeButtonKeys = <Key>[];
 /// This variable copies the actual list and is used for testing purposes.
 List<String> modeRecordsCopy = <String>[];
 
+///The user records for each of the available speedrun modes.
+Future<List<String>> getSpeedrunRecords() async {
+  List<String> records = <String>[];
+  final prefs = await SharedPreferences.getInstance();
+  for (int mode in modes) {
+    records.add((prefs.getInt('${mode}_second_speedrun_record') ?? 'N/A').toString());
+  }
+  return records;
+}
+
 ///A screen that displays a scrollable list of available speedrun modes with buttons to access each mode.
 ///
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
@@ -24,23 +34,13 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
   late Future<List<String>> modeRecords;
   @override
   void initState() {
-    modeRecords = _getRecords();
+    modeRecords = getSpeedrunRecords();
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
-  }
-
-  ///The user records for each of the available speedrun modes.
-  Future<List<String>> _getRecords() async {
-    List<String> records = <String>[];
-    final prefs = await SharedPreferences.getInstance();
-    for (int mode in modes) {
-      records.add((prefs.getInt('${mode}_second_speedrun_record') ?? 'N/A').toString());
-    }
-    return records;
   }
 
   @override
