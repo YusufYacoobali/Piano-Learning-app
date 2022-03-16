@@ -310,8 +310,8 @@ const String trebleClef = '𝄞';
 const String bassClef = '𝄢';
 
 /// Android clef fonts
-const double androidTrebleClefFont = 70;
-const double androidBassClefFont = 83;
+const double androidTrebleClefFontSize = 70;
+const double androidBassClefFontSize = 83;
 
 /// Android clef offset positions
 const double androidTrebleClefOffset = 80;
@@ -319,10 +319,10 @@ const double androidBassClefOffset = 93;
 
 /// IOS clef fonts
 /// Change these to change the clef size
-const double iosTrebleClefFont = 120;
-const double iosBassClefFont = 120;
+const double iosTrebleClefFontSize = 190;
+const double iosBassClefFontSize = 100;
 
 /// IOS clef offsets
 /// Change these to change the clef position on screen
-const double iosTrebleClefOffset = 80;
-const double iosBassClefOffset = 93;
+const double iosTrebleClefOffset = 118;
+const double iosBassClefOffset = 85;
