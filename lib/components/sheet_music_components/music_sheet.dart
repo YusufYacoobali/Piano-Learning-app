@@ -4,130 +4,112 @@ import 'note.dart';
 import 'note_image_builder.dart';
 import 'note_on_stave.dart';
 import 'stave_builder.dart';
-import 'package:sight_reading_app/constants.dart';
-
-enum MusicSheetModes {
-  /// Notes move along the screen
-  playAlong,
-
-  /// Shows a note for the person to play
-  showNotes,
-
-  /// The person plays a key and the sheet writes the note
-  detectKeys,
-}
+import '../../constants.dart';
 
 class MusicSheet extends CustomPainter {
+  /// The place where the notes appear
+  late double startLine;
 
-  // The place where the notes appear
-  late double _startLine;
+  /// The place where the notes disappear
+  late double endLine;
 
-  // The place where the notes disappear
-  late double _endLine;
+  /// The first line of the stave
+  late double baseLine;
 
-  // The first line of the stave
-  late double _baseLine;
+  final List<NoteOnStave> notesOnStaves = <NoteOnStave>[];
 
-  // How far each note should move
-  final double _noteSpacing = 1;
+  /// Builds the notes on the stave
+  late final NoteImageBuilder noteImageBuilder;
 
-  final List<NoteOnStave> _notesOnStaves = <NoteOnStave>[];
+  /// Gets the next note to be played
+  final NextNoteNotifier nextNote;
 
-  // Builds the notes on the stave
-  late final NoteImageBuilder _noteImageBuilder;
+  Clef clef;
 
-  final NextNoteNotifier _nextNote;
+  /// Whether the initial values have been set
+  bool hasSet = false;
 
-  final MusicSheetModes _mode;
-
-  Clef _clef;
-
-  bool _hasSet = false;
-
-  MusicSheet(this._nextNote, this._mode, this._clef) {
-    _noteImageBuilder = NoteImageBuilder(_clef);
+  MusicSheet(this.nextNote, this.clef) {
+    noteImageBuilder = NoteImageBuilder(clef);
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    _noteImageBuilder.setCanvas(canvas);
-    if (!_hasSet) {
-      _hasSet = true;
-      _baseLine = size.height/2 + 20;
-      _noteImageBuilder.setBaseLine(_baseLine);
+    noteImageBuilder.setCanvas(canvas);
+    if (!hasSet) {
+      hasSet = true;
+      baseLine = size.height / 2 + 20;
+      noteImageBuilder.setBaseLine(baseLine);
     }
-    double start = 0;
-    double canvasWidth = 0;
-    if (_mode == MusicSheetModes.playAlong) {
-      canvasWidth = size.width;
-      _startLine = canvasWidth + 40;
-    }
-    else if (_mode == MusicSheetModes.showNotes) {
-      start = size.width/4;
-      canvasWidth = size.width/2 + 40;
-      _startLine =  start + (canvasWidth/2) + 20;
-    }
-    else {
-      start = size.width/3;
-      canvasWidth = size.width/3;
-      _startLine = start + (canvasWidth/2);
-    }
-    _endLine = 100;
+    double start = size.width / 3;
+    double canvasWidth = size.width / 2;
+    startLine = start + (canvasWidth / 1.7);
 
-    StaveBuilder.drawStave(canvas, size, _baseLine, start, start + canvasWidth, _clef == Clef.treble);
+    endLine = 100;
+    StaveBuilder.makeBackground(canvas, size, start, start + canvasWidth);
+    StaveBuilder.drawStave(canvas, size, baseLine, start, start + canvasWidth,
+        clef == Clef.treble);
 
-    for (int count = 0; count < _notesOnStaves.length; count++) {
-      if (_notesOnStaves[count].pos < _endLine) {
-        _notesOnStaves.remove(_notesOnStaves[count]);
-        count--;
-      }
-    }
+    removeNotes(canvas, size);
 
-    if (_nextNote.hasNextNote) {
-      if (!(_mode == MusicSheetModes.playAlong)) {
-        clear();
-      }
-      Note note = _nextNote.getNextNote();
-      int? position = trebleClefSheetNoteOffset[note.getNameWithoutSymbol()];
-      if (_clef == Clef.bass) {
-        position = bassClefSheetNoteOffset[note.getNameWithoutSymbol()];
-      }
-      if (position != null) {
-        double pos = position.toDouble();
-        NoteOnStave newNote = NoteOnStave(note, _startLine, pos);
-        _notesOnStaves.add(newNote);
-        _noteImageBuilder.drawNote(newNote);
-      }
+    if (nextNote.hasNextNote) {
+      clear();
+      drawNewNote();
     }
     drawNotes();
   }
 
+  /// Removes notes that are beyond the end line
+  void removeNotes(Canvas canvas, Size size) {
+    for (int count = 0; count < notesOnStaves.length; count++) {
+      if (notesOnStaves[count].pos < endLine) {
+        notesOnStaves.remove(notesOnStaves[count]);
+        count--;
+      }
+    }
+  }
+
+  /// Draws a new note on the canvas at the start line
+  void drawNewNote() {
+    if (!nextNote.isNull()) {
+      Note note = nextNote.getNextNote();
+      int? position = trebleClefSheetNoteOffset[note.getNameWithoutSymbol()];
+      if (clef == Clef.bass) {
+        position = bassClefSheetNoteOffset[note.getNameWithoutSymbol()];
+      }
+      if (position != null) {
+        double pos = position.toDouble();
+        NoteOnStave newNote = NoteOnStave(note, startLine, pos);
+        notesOnStaves.add(newNote);
+        noteImageBuilder.drawNote(newNote);
+      }
+    }
+  }
+
+  /// Draws all the notes on the screen
   void drawNotes() {
-    for (NoteOnStave note in _notesOnStaves) {
-      _noteImageBuilder.drawNote(note);
+    for (NoteOnStave note in notesOnStaves) {
+      noteImageBuilder.drawNote(note);
     }
   }
 
-  void move() {
-    for (NoteOnStave note in _notesOnStaves) {
-      note.pos-=_noteSpacing;
-    }
-  }
-
+  /// Clears the notes from the sheet
   void clear() {
-    int length = _notesOnStaves.length;
+    int length = notesOnStaves.length;
     for (int i = 0; i < length; i++) {
-      _notesOnStaves.removeLast();
+      notesOnStaves.removeLast();
     }
   }
 
+  /// Gets the clef
   Clef getClef() {
-    return _clef;
+    return clef;
   }
 
-  void changeClef(Clef clef) {
-    _clef = clef;
-    _noteImageBuilder.changeClef(clef);
+  /// Changes the clef
+  void changeClef(Clef c) {
+    clef = c;
+    noteImageBuilder.changeClef(clef);
   }
 
   @override

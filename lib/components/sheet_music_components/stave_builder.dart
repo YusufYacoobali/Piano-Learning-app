@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class StaveBuilder {
-  static void drawStave(Canvas canvas, Size size, double baseLine, double start, double end, bool isTrebleClef) {
+  static void makeBackground(Canvas canvas, Size size, double start, double end) {
     // Draws the white background
     canvas.drawRect(
         Offset(start, size.height ~/ 2 - 100) & Size(end - start, 170), Paint()
       ..color = Colors.white);
+  }
+
+  static void drawStave(Canvas canvas, Size size, double baseLine, double start, double end, bool isTrebleClef) {
 
     Paint paint = Paint()
       ..color = Colors.black
@@ -54,5 +57,13 @@ class StaveBuilder {
       ..layout();
 
     textPainter.paint(canvas, Offset(start + 20, position));
+  }
+
+  static void drawBox(Canvas canvas, Size size, double baseLine, double start, double end) {
+    Paint paint = Paint()
+      ..color = const Color.fromARGB(100, 0, 255, 0)
+      ..style = PaintingStyle.fill;
+
+    canvas.drawRect(Offset(start, baseLine - 120) & Size(end - start, 170), paint);
   }
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:sight_reading_app/components/instruction_pop_up_content/play_along_instructions.dart';
+import 'package:sight_reading_app/components/instruction_pop_up_content/practice_menu_instructions.dart';
+import 'package:sight_reading_app/components/instruction_pop_up_content/quiz_instructions.dart';
+import 'package:sight_reading_app/components/instruction_pop_up_content/speedrun_menu_instructions.dart';
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/practice_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/speedrun_instructions_screen.dart';
 
 void main() {
   _goToPracticeScreen(WidgetTester tester) async {
@@ -20,7 +21,7 @@ void main() {
     await _goToPracticeScreen(tester);
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
-    expect(find.byType(PracticeInstructions), findsOneWidget);
+    expect(find.byType(PracticeMenuInstructions), findsOneWidget);
   });
 
   testWidgets(
@@ -42,7 +43,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
-    expect(find.byType(SpeedrunInstructions), findsOneWidget);
+    expect(find.byType(SpeedrunMenuInstructions), findsOneWidget);
   });
 
   testWidgets(
@@ -53,7 +54,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.help_outline));
     await tester.pumpAndSettle();
-    expect(find.byType(QuizInstruction), findsOneWidget);
+    expect(find.byType(QuizInstructions), findsOneWidget);
   });
 
   testWidgets('check for endless instruction screen',
@@ -63,5 +64,27 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(EndlessInstructions), findsOneWidget);
     expect(find.text('Endless Mode'), findsOneWidget);
+  });
+
+  testWidgets(
+      'check for speedrun instructions being shown on icon click in the play along screen',
+      (WidgetTester tester) async {
+    await _goToPracticeScreen(tester);
+    await tester.tap(find.text('Speedrun'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.help_outline));
+    await tester.pumpAndSettle();
+    expect(find.byType(SpeedrunMenuInstructions), findsOneWidget);
+  });
+
+  testWidgets(
+      'check for quiz instructions being shown on icon click in the play along screen',
+      (WidgetTester tester) async {
+    await _goToPracticeScreen(tester);
+    await tester.tap(find.text('Take a Quiz'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.help_outline));
+    await tester.pumpAndSettle();
+    expect(find.byType(QuizInstructions), findsOneWidget);
   });
 }

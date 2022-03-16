@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/screens/key_detection_screen.dart';
 
+import '../screens/key_detection_screen.dart';
 import '../components/sheet_music_components/note.dart';
 import '../components/sheet_music_components/music_sheet.dart';
 
@@ -30,7 +30,7 @@ class NoteSelectorSheetScreenState extends State<NoteSelectorSheetScreen> {
   void initState() {
     super.initState();
     _nextNote.setNextNote(_notes[_index % _notes.length]);
-    _sheet = MusicSheet(_nextNote, MusicSheetModes.showNotes, Clef.treble);
+    _sheet = MusicSheet(_nextNote, Clef.treble);
   }
 
   @override
