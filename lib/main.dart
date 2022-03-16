@@ -23,8 +23,8 @@ import 'package:sight_reading_app/screens/keyboard_sheet_screen.dart';
 import 'package:sight_reading_app/screens/note_selector_sheet_screen.dart';
 
 void main() {
-  // Starting the app in landscape orientation
   StorageReaderWriter().loadDataFromStorage();
+  // Starting the app in landscape orientation
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft])
