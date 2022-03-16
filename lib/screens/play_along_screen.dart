@@ -46,7 +46,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
         NotePlayedChecker(noteNotifier: _noteToPlay, function: recordHitMiss);
     _sheet = MovingMusicSheet(
         nextNote: _nextNote,
-        clef: Clef.treble,
+        clef: widget.clef,
         notePlayedChecker: _currentNoteToPlay);
     _timer = PlayAlongSongTimer(
       sheet: _sheet,
