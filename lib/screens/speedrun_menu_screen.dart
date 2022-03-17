@@ -54,66 +54,81 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
     for (int mode in modes) {
       modeButtonKeys.add(Key('modeSelected:$mode'));
     }
-    PopUpController menu = PopUpController(context: context, menuBuilder: SpeedrunMenuInstructions(context: context));
+
+    /// A default value for the records if records have not been obtained in time.
+    List<String> defaultRecords = [
+      'N/A',
+      'N/A',
+      'N/A',
+      'N/A',
+      'N/A',
+      'N/A'
+    ];
 
     //Waits for the records to be obtained from shared preferences before building the screen.
     return FutureBuilder(
       future: modeRecords,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          //TODO: Convert builder such that this returns screen with default records.
-          return Container(); //The widget while loading (nothing shown currently)
+          return _getScreenWidget(defaultRecords); //The widget while loading (nothing shown currently)
         }
         if (!snapshot.hasData) {
-          return Container(); //The widget when an error happens
+          return _getScreenWidget(defaultRecords); //The widget when an error happens
         }
         final List<String> modeRecords = snapshot.data;
         modeRecordsCopy = modeRecords;
-        return Scaffold(
-            appBar: AppBarWithSettingsIcon(const Text('Choose a duration:'), menu),
-            body: SafeArea(
-              //Uses an itemBuilder to generate a button for each mode, using the names, records and keys generated earlier.
-              child: ListView.separated(
-                padding: const EdgeInsets.all(8),
-                itemCount: modes.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    height: 100, //Fixes the button height
-                    child: MenuButton(
-                      buttonChild: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text(modes[index].toString() + ' seconds',
-                              textAlign: TextAlign.left),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width /
-                                  4), //Adds space between Text
-                          Text('Record: ${modeRecords[index]}',
-                              textAlign: TextAlign.right),
-                        ],
-                      ),
-                      onPress: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SpeedrunScreen(
-                              timerDuration: modes[index],
-                            ),
-                          ),
-                        );
-                      },
-                      key: modeButtonKeys[index],
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(
-                  height: 10,
-                ),
-              ),
-            ));
+        return _getScreenWidget(modeRecords);
       },
     );
+  }
+
+  /// The widget to be displayed to the user.
+  Widget _getScreenWidget(recordData) {
+    /// A pop-up screen containing the speedrun instructions.
+    PopUpController menu = PopUpController(context: context, menuBuilder: SpeedrunMenuInstructions(context: context));
+    return Scaffold(
+        appBar: AppBarWithSettingsIcon(const Text('Choose a duration:'), menu),
+        body: SafeArea(
+          //Uses an itemBuilder to generate a button for each mode, using the names, records and keys generated earlier.
+          child: ListView.separated(
+            padding: const EdgeInsets.all(8),
+            itemCount: modes.length,
+            itemBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                height: 100, //Fixes the button height
+                child: MenuButton(
+                  buttonChild: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(modes[index].toString() + ' seconds',
+                          textAlign: TextAlign.left),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width /
+                              4), //Adds space between Text
+                      Text('Record: ${recordData[index]}',
+                          textAlign: TextAlign.right),
+                    ],
+                  ),
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SpeedrunScreen(
+                          timerDuration: modes[index],
+                        ),
+                      ),
+                    );
+                  },
+                  key: modeButtonKeys[index],
+                ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+            const SizedBox(
+              height: 10,
+            ),
+          ),
+        ));
   }
 }
 ///The state for the speedrun menu screen.
