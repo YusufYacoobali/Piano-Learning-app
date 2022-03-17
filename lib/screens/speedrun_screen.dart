@@ -2,6 +2,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import '../components/keyboard.dart';
 import '../components/option_button.dart';
 import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
@@ -20,13 +21,12 @@ class SpeedrunScreen extends StatefulWidget {
   final int timerDuration;
 
   /// Constructor
-  const SpeedrunScreen({
-    Key? key,
-    required this.timerDuration,
-  }) : super(key: key);
 
   /// ID of the screen
   static const String id = 'speedrun_screen';
+
+  const SpeedrunScreen({Key? key, required this.timerDuration})
+      : super(key: key);
 
   @override
   State<SpeedrunScreen> createState() => _SpeedrunScreenState();
@@ -151,6 +151,17 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
+
+  /// Gets the key pressed on the keyboard
+  void answer(String text) {
+    questionBrain.setAnswer(text);
+    setState(() {
+      questionBrain.goToNextQuestion();
+      // Re-render the screen with new question
+      setScreenWidget();
+    });
+  }
+  
   /// Creates the screen.
   @override
   Widget build(BuildContext context) {
@@ -163,13 +174,16 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
               children: [
                 // Question
                 screenWidget,
-                // User-selectable option buttons
                 Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: getOptionButtons(),
-                  ),
+                  child: Keyboard(function: answer),
                 ),
+                // User-selectable option buttons
+                // Expanded(
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: getOptionButtons(),
+                //   ),
+                // ),
               ],
             ),
             Padding(

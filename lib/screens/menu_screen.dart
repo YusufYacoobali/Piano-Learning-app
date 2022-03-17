@@ -139,9 +139,7 @@ class MenuScreen extends StatefulWidget {
 }
 
 class AppNameBox extends StatelessWidget {
-  const AppNameBox({
-    Key? key,
-  }) : super(key: key);
+  const AppNameBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -198,10 +196,7 @@ class MenuButton extends StatelessWidget {
 class ButtonText extends StatelessWidget {
   final String buttonText;
 
-  const ButtonText({
-    Key? key,
-    required this.buttonText,
-  }) : super(key: key);
+  const ButtonText({Key? key, required this.buttonText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

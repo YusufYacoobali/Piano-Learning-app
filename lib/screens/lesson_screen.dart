@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/pause_menu.dart';
+import 'package:sight_reading_app/components/keyboard.dart';
+import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_four.dart';
@@ -10,6 +11,7 @@ import 'package:sight_reading_app/lessons_and_quizzes/lesson_three.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_two.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
@@ -22,7 +24,7 @@ import 'package:sight_reading_app/components/option_button.dart';
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
-  OverlayEntry? entry;
+  late final PopUpController _pauseMenu;
 
   ///List of all lessons available
 
@@ -41,11 +43,15 @@ class _LessonScreenState extends State<LessonScreen> {
     int lessonNum = widget.lessonNum;
     questionBrain = QuestionBrain(questions: questionLists[lessonNum - 1]);
     setScreenWidget();
+
+    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    _pauseMenu = PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
 
   @override
   void dispose() {
     super.dispose();
+    _pauseMenu.delete();
   }
 
   Widget getPauseButton() {
@@ -57,9 +63,15 @@ class _LessonScreenState extends State<LessonScreen> {
         size: 35.0,
       ),
       onPressed: () {
-        showMenu();
+        _pauseMenu.show();
       },
     );
+  }
+
+  /// Gets the key pressed on the keyboard
+  void answer(String text) {
+    questionBrain.setAnswer(text);
+    showResultAlert(text);
   }
 
   @override
@@ -71,41 +83,21 @@ class _LessonScreenState extends State<LessonScreen> {
           Column(
             children: [
               screenWidget,
-
-              ///choices buttons
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: getOptionButtons(),
-                ),
+                  Expanded(
+                    child: Keyboard(function: answer),
+                  ),
+                ],
               ),
-            ],
-          ),
+              ///choices buttons
+              // Expanded(
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: getOptionButtons(),
+              //   ),
+              // ),
         ]),
       ),
     );
-  }
-
-  void showMenu() {
-    final overlay = Overlay.of(context)!;
-
-    entry = OverlayEntry(
-      builder: (context) => PauseMenu(
-        removeMenu: removeMenu,
-        continueOnPressed: () {
-          Navigator.popUntil(
-            context,
-            ModalRoute.withName(LessonScreen.id),
-          );
-        },
-      ),
-    );
-    overlay.insert(entry!);
-  }
-
-  void removeMenu() {
-    entry?.remove();
-    entry = null;
   }
 
   /// Creates the answer option buttons.

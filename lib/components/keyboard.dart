@@ -7,8 +7,11 @@ class Keyboard extends StatelessWidget {
   /// Used to play note sounds
   final player = AudioCache();
 
+  /// The function to be called when a key is pressed
+  final Function function;
+
   /// Constructor
-  Keyboard({Key? key}) : super(key: key);
+  Keyboard({Key? key, required this.function}) : super(key: key);
 
   /// Plays the sound of the note that was pressed
   void playSound(String noteName) => player.play('note_$noteName.wav');
@@ -50,6 +53,7 @@ class Keyboard extends StatelessWidget {
         ),
         onPressed: () {
           playSound(buttonText.toLowerCase());
+          function(buttonText);
         },
         style: whiteKeyButtonStyle,
       ),
@@ -68,6 +72,7 @@ class Keyboard extends StatelessWidget {
       ),
       onPressed: () {
         playSound(buttonText.toLowerCase());
+        function(buttonText);
       },
       style: blackKeyButtonStyle,
     );

@@ -4,6 +4,10 @@ import 'package:sight_reading_app/screens/instruction_screens/speedrun_instructi
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../components/instruction_pop_up_content/speedrun_menu_instructions.dart';
+import '../components/pop_up_components/pop_up_controller.dart';
+import 'menu_screen.dart';
+import 'speedrun_screen.dart';
 
 ///A list containing the various speedrun mode options.
 List<int> modes = [10, 20, 30, 40, 50, 60];
@@ -50,6 +54,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
     for (int mode in modes) {
       modeButtonKeys.add(Key('modeSelected:$mode'));
     }
+    PopUpController menu = PopUpController(context: context, menuBuilder: SpeedrunMenuInstructions(context: context));
 
     //Waits for the records to be obtained from shared preferences before building the screen.
     return FutureBuilder(
