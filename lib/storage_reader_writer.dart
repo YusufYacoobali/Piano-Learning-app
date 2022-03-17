@@ -93,11 +93,15 @@ class StorageReaderWriter {
   }
 
   //for achievements
-  Future<List<int>> loadValues() async {
+  Future<List<int>> loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
     int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+    int endlessBassHS =
+        int.parse(prefs.getString('endless-bass-high-score') ?? '0');
+    int endlessTrebleHS =
+        int.parse(prefs.getString('endless-treble-high-score') ?? '0');
 
-    return [completedLessons, completedQuizzes];
+    return [completedLessons, completedQuizzes, endlessBassHS, endlessTrebleHS];
   }
 }

@@ -33,12 +33,16 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
   //Loading values from storage on start
   void _setPage() async {
-    List<int> values = await storage.loadValues();
+    List<int> values = await storage.loadAchievementValues();
 
     //state changes when values are fetched
     setState(() {
-      _map.addAll(
-          {'completedLessons': values[0], 'completedQuizzes': values[1]});
+      _map.addAll({
+        'completedLessons': values[0],
+        'completedQuizzes': values[1],
+        'endless-bass-high-score': values[2],
+        'endless-treble-high-score': values[3]
+      });
     });
 
     maker.makeLists(_map);
