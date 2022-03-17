@@ -304,3 +304,11 @@ BoxDecoration cardBackground = BoxDecoration(
 
 /// How far each note should move per iteration
 const double noteMovement = 1;
+
+const Map<String, String> sharpFlatEquivalence = <String, String>{
+  'Db': 'C#',
+  'Eb': 'D#',
+  'Gb': 'F#',
+  'Ab': 'G#',
+  'Bb': 'A#',
+};

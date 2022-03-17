@@ -9,9 +9,13 @@ class PlayAlongSongTimer {
   /// Whether the sheet is moving or not
   bool _isOn = false;
 
+  /// The music sheet
   final MovingMusicSheet sheet;
+
+  /// Notifies the sheet with the next note to be played
   final NextNoteNotifier nextNote;
 
+  /// How far into the time unit we are
   int _index = 0;
 
   /// The number of movements before the time unit changes
@@ -29,6 +33,7 @@ class PlayAlongSongTimer {
   /// The time of the last note
   late final int _endTime;
 
+  /// Whether the song has ended
   bool _hasEnded = false;
 
   /// Called when song has finished
@@ -61,6 +66,7 @@ class PlayAlongSongTimer {
     sheet.onEnd = end;
   }
 
+  /// Starts moving the notes along the screen
   void start() {
     _isOn = true;
     Timer.periodic(Duration(milliseconds: _timeBetweenMovements), (Timer t) {
