@@ -313,3 +313,12 @@ const Icon helpPlayButtonStyle = Icon(
   Icons.play_arrow,
   size: 35.0,
 );
+
+ButtonStyle helperMenuButonStyle = ElevatedButton.styleFrom(
+  primary: const Color(0xffa4508b).withOpacity(0.3),
+  onPrimary: Colors.grey.shade300,
+  fixedSize: const Size(180.0, 60.0),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10),
+  ),
+);

@@ -3,7 +3,8 @@ import '../components/notification_service.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import '../constants.dart';
 import 'achievements_screen.dart';
-import 'helper_screen.dart';
+import 'helper_menu_screen.dart';
+//import 'helper_screen.dart';
 import 'keyboard_sheet_screen.dart';
 import 'lesson_menu_screen.dart';
 import 'practice_screen.dart';
@@ -127,7 +128,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               child: helperButton,
                             ),
                             onPress: () {
-                              Navigator.pushNamed(context, HelperScreen.id);
+                              Navigator.pushNamed(context, HelperMenuScreen.id);
                             },
                           ),
                         ),
