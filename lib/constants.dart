@@ -304,3 +304,25 @@ BoxDecoration cardBackground = BoxDecoration(
 
 /// How far each note should move per iteration
 const double noteMovement = 1;
+
+/// Clef symbols
+const String trebleClef = '𝄞';
+const String bassClef = '𝄢';
+
+/// Android clef fonts
+const double androidTrebleClefFontSize = 70;
+const double androidBassClefFontSize = 83;
+
+/// Android clef offset positions
+const double androidTrebleClefOffset = 80;
+const double androidBassClefOffset = 93;
+
+/// IOS clef fonts
+/// Change these to change the clef size
+const double iosTrebleClefFontSize = 190;
+const double iosBassClefFontSize = 100;
+
+/// IOS clef offsets
+/// Change these to change the clef position on screen
+const double iosTrebleClefOffset = 118;
+const double iosBassClefOffset = 85;
