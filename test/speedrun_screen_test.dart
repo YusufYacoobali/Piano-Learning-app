@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/screens/speedrun_screen.dart';
 
 void main() {
@@ -57,6 +58,71 @@ void main() {
   //   expect(find.text('Exit'), findsOneWidget);
   // });
 
+  //TODO: Update the following tests once it is figured out how to wait 10 seconds
+
+  // testWidgets(
+  //   'Check that user records are updated with a new record',
+  //   (WidgetTester tester) {
+  //     tester.runAsync(() async {
+  //       SharedPreferences.setMockInitialValues(
+  //         //Only need to focus on one mode for this test
+  //         {'10_second_speedrun_record': 'N/A'}
+  //       );
+  //       await tester.pumpWidget(
+  //         const MaterialApp(
+  //           home: SpeedrunScreen(timerDuration: 10),
+  //         ),
+  //       );
+  //       // TODO: Add 10 second timer + a way of answering 1 question correctly here
+  //       await tester.pump(); //Let completion process happen.
+  //       SharedPreferences prefs = await SharedPreferences.getInstance();
+  //       expect(prefs.getInt('10_second_speedrun_record'), 1);
+  //     });
+  //   }
+  // );
+
+  // testWidgets(
+  //   'Check that user records are not updated with a score lower than the current record',
+  //   (WidgetTester tester) {
+  //     tester.runAsync(() async {
+  //       SharedPreferences.setMockInitialValues(
+  //         //Only need to focus on one mode for this test
+  //         {'10_second_speedrun_record': 1}
+  //       );
+  //       await tester.pumpWidget(
+  //         const MaterialApp(
+  //           home: SpeedrunScreen(timerDuration: 10),
+  //         ),
+  //       );
+  //       // TODO: Add 10 second timer
+  //       await tester.pump(); //Let completion process happen.
+  //       SharedPreferences prefs = await SharedPreferences.getInstance();
+  //       expect(prefs.getInt('10_second_speedrun_record'), 1);
+  //     });
+  //   }
+  // );
+
+  // testWidgets(
+  //   'Check that user records are always updated after the first attempt',
+  //   (WidgetTester tester) {
+  //     tester.runAsync(() async {
+  //       SharedPreferences.setMockInitialValues(
+  //         //Only need to focus on one mode for this test
+  //         {'10_second_speedrun_record': 'N/A'}
+  //       );
+  //       await tester.pumpWidget(
+  //         const MaterialApp(
+  //           home: SpeedrunScreen(timerDuration: 10),
+  //         ),
+  //       );
+  //       // TODO: Add 10 second timer
+  //       await tester.pump(); //Let completion process happen.
+  //       SharedPreferences prefs = await SharedPreferences.getInstance();
+  //       expect(prefs.getInt('10_second_speedrun_record'), 0);
+  //     });
+  //   }
+  //);
+
   // testWidgets('check that the next question is displayed',
   //     (WidgetTester tester) async {
   //   await tester.pumpWidget(
@@ -96,3 +162,4 @@ void main() {
   //   expect(find.text("Aww, better luck next time!"), findsOneWidget);
   // });
 }
+
