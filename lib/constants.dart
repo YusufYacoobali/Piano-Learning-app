@@ -304,3 +304,12 @@ BoxDecoration cardBackground = BoxDecoration(
 
 /// How far each note should move per iteration
 const double noteMovement = 1;
+
+const Icon helperButton = Icon(
+  Icons.help,
+);
+
+const Icon helpPlayButtonStyle = Icon(
+  Icons.play_arrow,
+  size: 35.0,
+);

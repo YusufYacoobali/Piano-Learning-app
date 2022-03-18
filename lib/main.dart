@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/endless_mode_screen.dart';
+import 'package:sight_reading_app/screens/helper_screen.dart';
 import 'package:sight_reading_app/screens/key_detection_screen.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
@@ -56,6 +57,9 @@ class SightReadingApp extends StatelessWidget {
               NoteSelectorSheetScreen.id: (context) =>
                   const NoteSelectorSheetScreen(),
               KeyDetectionScreen.id: (context) => const KeyDetectionScreen(),
+
+              //helper route
+              HelperScreen.id: (context) => const HelperScreen(),
             },
           );
         },
