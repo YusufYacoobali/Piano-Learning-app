@@ -6,7 +6,7 @@ final List<Question> questions = [
     note: Note(name: 'C4', duration: 4),
     clef: Clef.treble,
     question:
-        'We are going to learn how to read notes. All music notes will be on the lines or spaces of the musical staff. The far left symbol is called the Treble clef. This is our first note. The name is C (Do). It is a circle with a short line across it. Now press C in the option box.',
+        'We are going to learn how to read notes. All music notes will be on the lines or spaces of the musical staff. The far left symbol is called the Treble clef. This is our first note. The name is C (Do). The middle C is a circle with a short line across it. Press C on the keyboard.',
     correctAnswer: 'C',
     questionID: 1,
     lessonID: 1,
@@ -635,66 +635,67 @@ final List<Question> questions = [
     lessonID: 6,
   ),
 
-  /*
-  * future lessons
-  * sharps and flats
-  * Question(
+  ///sharps and flats
+  Question(
     note: Note(name: 'F#4', duration: 4),
     clef: Clef.treble,
-    question: 'This is an extra lesson on how to read sharps and flats. This # mark is a sharp. You have to press the closest key to the right. In this case, press the black key next to F.',
+    question:
+        'This is an extra lesson on how to read sharps and flats. This # mark is a sharp. You have to press the closest key to the right (most of the time it is a black key). In this case, press the black key next to F on the right.',
     correctAnswer: 'F#',
-    questionID: 66,
-    lessonID: 6,
+    questionID: 75,
+    lessonID: 7,
   ),
-  * Question(
+  Question(
     note: Note(name: 'Bb4', duration: 4),
     clef: Clef.treble,
-    question: 'Great job, now learn about flats. The b-like mark is a flat. You have to press the closest key to the left. In this case, press the black key at the left of B',
+    question:
+        'Great job, now learn about flats. The b-like mark is a flat. You have to press the closest key to the left. In this case, press the black key at the left of B',
     correctAnswer: 'Bb',
-    questionID: 66,
-    lessonID: 6,
+    questionID: 76,
+    lessonID: 7,
   ),
-  * Question(
+  Question(
     note: Note(name: 'F#4', duration: 4),
     clef: Clef.treble,
-    question: 'Great job, now try to answer this set of sharps and flats on your own. The same applies to Bsae clef.',
+    question:
+        'Great job, now try to answer this set of sharps and flats on your own. Press the keys the same way when you found a flat or a sharp on the base clef.',
     correctAnswer: 'F#',
-    questionID: 66,
-    lessonID: 6,
+    questionID: 77,
+    lessonID: 7,
   ),
-  * Question(
+  Question(
     note: Note(name: 'G4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'G',
-    questionID: 66,
-    lessonID: 6,
+    questionID: 78,
+    lessonID: 7,
   ),
-  * Question(
+  Question(
     note: Note(name: 'F#4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'F#',
-    questionID: 66,
-    lessonID: 6,
+    questionID: 79,
+    lessonID: 7,
   ),
-  * Question(
+  Question(
     note: Note(name: 'E4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'E',
-    questionID: 66,
-    lessonID: 6,
+    questionID: 80,
+    lessonID: 7,
   ),
-  * * Question(
+  Question(
     note: Note(name: 'F#4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: 'F#',
-    questionID: 66,
-    lessonID: 6,
+    questionID: 81,
+    lessonID: 7,
   ),
-  * * Question(
+  Question(
     note: Note(name: 'D4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
@@ -703,7 +704,7 @@ final List<Question> questions = [
     lessonID: 6,
   ),
 
-  * Question(
+  Question(
     note: Note(name: 'C5', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
@@ -711,7 +712,7 @@ final List<Question> questions = [
     questionID: 66,
     lessonID: 6,
   ),
-  * Question(
+  Question(
     note: Note(name: 'Bb4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
@@ -719,7 +720,7 @@ final List<Question> questions = [
     questionID: 66,
     lessonID: 6,
   ),
-  * Question(
+  Question(
     note: Note(name: 'A4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
@@ -727,7 +728,7 @@ final List<Question> questions = [
     questionID: 66,
     lessonID: 6,
   ),
-  * Question(
+  Question(
     note: Note(name: 'Bb4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
@@ -735,7 +736,7 @@ final List<Question> questions = [
     questionID: 66,
     lessonID: 6,
   ),
-  * * Question(
+  Question(
     note: Note(name: 'G4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
@@ -743,7 +744,7 @@ final List<Question> questions = [
     questionID: 66,
     lessonID: 6,
   ),
-  * * Question(
+  Question(
     note: Note(name: 'Bb4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
@@ -751,7 +752,7 @@ final List<Question> questions = [
     questionID: 66,
     lessonID: 6,
   ),
-  * * Question(
+  Question(
     note: Note(name: 'A4', duration: 4),
     clef: Clef.treble,
     question: 'What note is this?',
@@ -759,5 +760,4 @@ final List<Question> questions = [
     questionID: 66,
     lessonID: 6,
   ),
-  * */
 ];
