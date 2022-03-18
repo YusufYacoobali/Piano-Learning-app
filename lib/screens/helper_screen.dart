@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../components/helper_note_info.dart';
 import '../constants.dart';
+
+//import '../components/helper_note_info_list.dart';
 
 class HelperScreen extends StatefulWidget {
   static const String id = 'helper_screen';
-
   const HelperScreen({Key? key}) : super(key: key);
 
   @override
@@ -37,18 +39,21 @@ class _HelperScreenState extends State<HelperScreen> {
           radius: const Radius.circular(10),
           thickness: 5.0,
           child: SingleChildScrollView(
-            controller: _helperController,
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                cardHelper(),
-                cardHelper(),
-                cardHelper(),
-              ],
-            ),
-          ),
+              controller: _helperController,
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  cardHelper(),
+                  cardHelper(),
+                  cardHelper(),
+                  cardHelper(),
+                  cardHelper(),
+                  cardHelper(),
+                  cardHelper(),
+                ],
+              )),
         ),
       ),
     );
@@ -94,7 +99,7 @@ class _HelperScreenState extends State<HelperScreen> {
       alignment: WrapAlignment.center,
       children: const [
         Text(
-          'Note_noName',
+          'Bass A',
           style: TextStyle(fontSize: 30.0),
         ),
       ],
@@ -108,7 +113,7 @@ class _HelperScreenState extends State<HelperScreen> {
         height: 200.0,
         width: 250.0,
         child: Image.asset(
-          'assets/note_images/Tr_C.jpeg',
+          'assets/note_images/Bs_A.jpeg',
           fit: BoxFit.cover,
         ),
       ),
@@ -121,4 +126,21 @@ class _HelperScreenState extends State<HelperScreen> {
       onPressed: () {},
     );
   }
+
+  final List<HelperNoteInfo> helperNoteList = [
+    HelperNoteInfo(noteImageName: 'Bs_A.jpeg', noteName: 'Bass A'),
+    HelperNoteInfo(noteImageName: 'Bs_B.jpeg', noteName: 'Bass B'),
+    HelperNoteInfo(noteImageName: 'Bs_C.jpeg', noteName: 'Bass C'),
+    HelperNoteInfo(noteImageName: 'Bs_D.jpeg', noteName: 'Bass D'),
+    HelperNoteInfo(noteImageName: 'Bs_E.jpeg', noteName: 'Bass E'),
+    HelperNoteInfo(noteImageName: 'Bs_F.jpeg', noteName: 'Bass F'),
+    HelperNoteInfo(noteImageName: 'Bs_G.jpeg', noteName: 'Bass G'),
+    HelperNoteInfo(noteImageName: 'Tr_A.jpeg', noteName: 'Clef A'),
+    HelperNoteInfo(noteImageName: 'Tr_B.jpeg', noteName: 'Clef B'),
+    HelperNoteInfo(noteImageName: 'Tr_C.jpeg', noteName: 'Clef C'),
+    HelperNoteInfo(noteImageName: 'Tr_D.jpeg', noteName: 'Clef D'),
+    HelperNoteInfo(noteImageName: 'Tr_E.jpeg', noteName: 'Clef E'),
+    HelperNoteInfo(noteImageName: 'Tr_F.jpeg', noteName: 'Clef F'),
+    HelperNoteInfo(noteImageName: 'Tr_G.jpeg', noteName: 'Clef G'),
+  ];
 }

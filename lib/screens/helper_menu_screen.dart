@@ -52,7 +52,7 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
 
   Widget bassNoteHelperbutton() {
     return ElevatedButton(
-        child: const Text('Bass note helper'),
+        child: const Text('Bass note', style: helperMenuTextStyle),
         style: helperMenuButonStyle,
         onPressed: () {
           Navigator.pushNamed(context, HelperScreen.id);
@@ -61,7 +61,10 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
 
   Widget clefNoteHelperbutton() {
     return ElevatedButton(
-        child: const Text('Clef note helper'),
+        child: const Text(
+          'Clef note',
+          style: helperMenuTextStyle,
+        ),
         style: helperMenuButonStyle,
         onPressed: () {
           Navigator.pushNamed(context, HelperScreen.id);

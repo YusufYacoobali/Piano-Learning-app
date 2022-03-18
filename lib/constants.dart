@@ -322,3 +322,9 @@ ButtonStyle helperMenuButonStyle = ElevatedButton.styleFrom(
     borderRadius: BorderRadius.circular(10),
   ),
 );
+
+const TextStyle helperMenuTextStyle = TextStyle(
+  fontSize: 40.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
