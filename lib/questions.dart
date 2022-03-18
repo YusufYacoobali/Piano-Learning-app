@@ -15,7 +15,7 @@ final List<Question> questions = [
     note: Note(name: 'D4', duration: 4),
     clef: Clef.treble,
     question:
-        'This is our second note. The name is D (Re). It is directly under the lowest line. Now press D in the option box.',
+        'This is our second note. The name is D (Re). It is directly under the lowest line. Now press D on the keyboard.',
     correctAnswer: 'D',
     questionID: 2,
     lessonID: 1,
@@ -24,7 +24,7 @@ final List<Question> questions = [
     note: Note(name: 'E4', duration: 4),
     clef: Clef.treble,
     question:
-        'This is our third note. The name is E (Mi). The circle is across the lowest line of the 5 line staff. Now press E in the option box.',
+        'This is our third note. The name is E (Mi). The circle is across the lowest line of the 5 line staff. Now press E on the keyboard.',
     correctAnswer: 'E',
     questionID: 3,
     lessonID: 1,
@@ -100,7 +100,7 @@ final List<Question> questions = [
     note: Note(name: 'F4', duration: 4),
     clef: Clef.treble,
     question:
-        'This lesson will teach you 2 more notes. This note is call F (Fa). It is between the 2 lowest lines of the staff. Now press F in the option box.',
+        'This lesson will teach you 2 more notes. This note is call F (Fa). It is between the 2 lowest lines of the staff. Now press F on the keyboard.',
     correctAnswer: 'F',
     questionID: 12,
     lessonID: 2,
@@ -109,7 +109,7 @@ final List<Question> questions = [
     note: Note(name: 'G4', duration: 4),
     clef: Clef.treble,
     question:
-        'This note is call G (Sol). The circle is on the second from lowest line of the staff. Now press G in the option box.',
+        'This note is call G (Sol). The circle is on the second from lowest line of the staff. Now press G on the keyboard.',
     correctAnswer: 'G',
     questionID: 13,
     lessonID: 2,
@@ -217,7 +217,7 @@ final List<Question> questions = [
     note: Note(name: 'A4', duration: 4),
     clef: Clef.treble,
     question:
-        'This lesson will teach you the last 2 notes. This note is call A (La). It is located below the middle line of the staff. Now press A in the option box.',
+        'This lesson will teach you the last 2 notes. This note is call A (La). It is located below the middle line of the staff. Now press A on the keyboard.',
     correctAnswer: 'A',
     questionID: 26,
     lessonID: 3,
@@ -226,7 +226,7 @@ final List<Question> questions = [
     note: Note(name: 'B4', duration: 4),
     clef: Clef.treble,
     question:
-        'This note is call B (Ti). It is located at the middle line of the staff. Now press B in the option box.',
+        'This note is call B (Ti). It is located at the middle line of the staff. Now press B on the keyboard.',
     correctAnswer: 'B',
     questionID: 27,
     lessonID: 3,
@@ -344,7 +344,7 @@ final List<Question> questions = [
     note: Note(name: 'C3', duration: 4),
     clef: Clef.bass,
     question:
-        'Have you noticed that the symbol at the far left has changed? This is called the Base clef. The positions of the notes are different from when the notes are with the Treble clef. This is position of C on the Base clef which is under the middle line. Now press C in the option box.',
+        'Have you noticed that the symbol at the far left has changed? This is called the Base clef. The positions of the notes are different from when the notes are with the Treble clef. This is position of C on the Base clef which is under the middle line. Now press C on the keyboard.',
     correctAnswer: 'C',
     questionID: 41,
     lessonID: 4,
@@ -353,7 +353,7 @@ final List<Question> questions = [
     note: Note(name: 'D3', duration: 4),
     clef: Clef.bass,
     question:
-        'This name is D (Re) on the Base clef. It is on the middle line of the staff. Now press D in the option box.',
+        'This name is D (Re) on the Base clef. It is on the middle line of the staff. Now press D on the keyboard.',
     correctAnswer: 'D',
     questionID: 42,
     lessonID: 4,
@@ -362,7 +362,7 @@ final List<Question> questions = [
     note: Note(name: 'E3', duration: 4),
     clef: Clef.bass,
     question:
-        'This is E (Mi) on the Base clef. It is between the second and third lines from top of the staff and is above D. Now press E in the option box.',
+        'This is E (Mi) on the Base clef. It is between the second and third lines from top of the staff and is above D. Now press E on the keyboard.',
     correctAnswer: 'E',
     questionID: 43,
     lessonID: 4,
@@ -371,7 +371,7 @@ final List<Question> questions = [
     note: Note(name: 'F3', duration: 4),
     clef: Clef.bass,
     question:
-        'This is F (Fa) on the Base clef. It is one the second from top line of the staff. Now press F in the option box.',
+        'This is F (Fa) on the Base clef. It is one the second from top line of the staff. Now press F on the keyboard.',
     correctAnswer: 'F',
     questionID: 44,
     lessonID: 4,
@@ -457,7 +457,7 @@ final List<Question> questions = [
     note: Note(name: 'G3', duration: 4),
     clef: Clef.bass,
     question:
-        'Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G in the option box.',
+        'Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G on the keyboard.',
     correctAnswer: 'G',
     questionID: 54,
     lessonID: 5,
@@ -466,7 +466,7 @@ final List<Question> questions = [
     note: Note(name: 'A2', duration: 4),
     clef: Clef.bass,
     question:
-        'This name is A (La) on the Base clef. This time A is directly below the . Now press A in the option box.',
+        'This name is A (La) on the Base clef. This time A is directly below the . Now press A on the keyboard.',
     correctAnswer: 'A',
     questionID: 55,
     lessonID: 5,
@@ -475,7 +475,7 @@ final List<Question> questions = [
     note: Note(name: 'B2', duration: 4),
     clef: Clef.bass,
     question:
-        'This is B (Ti) on the Base clef. It is right below C on the second line from the bottom. Now press B in the option box.',
+        'This is B (Ti) on the Base clef. It is right below C on the second line from the bottom. Now press B on the keyboard.',
     correctAnswer: 'B',
     questionID: 56,
     lessonID: 5,
@@ -570,7 +570,7 @@ final List<Question> questions = [
     note: Note(name: 'C5', duration: 4),
     clef: Clef.treble,
     question:
-        'Notice that this note is higher than B in the previous question. Press C in the option box.',
+        'Notice that this note is higher than B in the previous question. Press C on the keyboard.',
     correctAnswer: 'C',
     questionID: 67,
     lessonID: 6,
