@@ -7,6 +7,7 @@ class QuestionAnswerData {
 
   /// Get an ordered list of question IDs
   /// The first question ID is the ID of the question that was answered incorrectly the most number of times
+  // TODO: Take in lessonID so have practice questions for one lesson
   static List<int> getPracticeQuestionIDs(int numOfQuestionIDs) {
     // Go through map values in ascending order
     // Add each corresponding ID to the return list
@@ -29,13 +30,26 @@ class QuestionAnswerData {
 
   // TODO: Add time taken parameter
   /// Record when a question has been answered correctly/incorrectly
-  static void questionAnswered(int questionID, bool isCorrect) {
+  static void questionAnswered(int questionID, bool isCorrect, int? timeTaken) {
     int? currentStatistic = _questionStatistics[questionID];
     if (currentStatistic != null) {
       if (isCorrect) {
-        _questionStatistics[questionID] = ++currentStatistic;
+        // Update using combination of correct and time taken
+        if (timeTaken != null) {
+          // If answer correctly within half a second, get full marks
+          if (timeTaken <= 500) {
+            _questionStatistics[questionID] = currentStatistic += 10;
+          } else {
+            // Longer you take, more marks are reduced
+            int reduction = timeTaken ~/ 100;
+            reduction = reduction >= -5 ? reduction : -5;
+            _questionStatistics[questionID] = currentStatistic += reduction;
+          }
+        } else {
+          _questionStatistics[questionID] = currentStatistic += 10;
+        }
       } else {
-        _questionStatistics[questionID] = --currentStatistic;
+        _questionStatistics[questionID] = currentStatistic -= 10;
       }
       StorageReaderWriter().write(questionID.toString(), currentStatistic);
     } else {

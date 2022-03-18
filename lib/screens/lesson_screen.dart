@@ -16,6 +16,7 @@ class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
   OverlayEntry? entry;
+  Stopwatch stopwatch = Stopwatch();
 
   ///List of all lessons available
 
@@ -35,6 +36,7 @@ class _LessonScreenState extends State<LessonScreen> {
     questionBrain = QuestionBrain(
         questions: QuestionFinder().getQuestionsForLesson(lessonNum));
     setScreenWidget();
+    stopwatch.start();
   }
 
   @override
@@ -51,6 +53,7 @@ class _LessonScreenState extends State<LessonScreen> {
         size: 35.0,
       ),
       onPressed: () {
+        stopwatch.stop();
         showMenu();
       },
     );
@@ -107,7 +110,6 @@ class _LessonScreenState extends State<LessonScreen> {
   /// Each button has text displayed and check with question brain
   /// to see if the user has tapped the button with the correct answer.
   List<Widget> getOptionButtons() {
-    ///TODO: Beginners see less options and experts see all options
     List<Widget> optionButtons = [];
     List<String> notes = whiteKeyNames;
     for (int i = 0; i < notes.length; ++i) {
@@ -115,7 +117,10 @@ class _LessonScreenState extends State<LessonScreen> {
         OptionButton(
           buttonText: notes[i],
           onPressed: () {
-            questionBrain.setAnswer(notes[i]);
+            stopwatch.stop();
+            questionBrain.setAnswer(
+                userAnswer: notes[i], timeTaken: stopwatch.elapsedMilliseconds);
+            stopwatch.reset();
             showResultAlert(notes[i]);
           },
         ),
@@ -220,6 +225,7 @@ class _LessonScreenState extends State<LessonScreen> {
           setState(() {
             questionBrain.goToNextQuestion();
             setScreenWidget();
+            stopwatch.start();
           });
         } else {
           Navigator.push(

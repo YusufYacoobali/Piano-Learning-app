@@ -76,7 +76,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
         OptionButton(
           buttonText: notes[i],
           onPressed: () {
-            questionBrain.setAnswer(notes[i]);
+            questionBrain.setAnswer(userAnswer: notes[i]);
             setState(() {
               questionBrain.goToNextQuestion();
               // Re-render the screen with new question

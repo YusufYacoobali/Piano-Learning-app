@@ -26,10 +26,10 @@ void main() {
     QuestionAnswerData.createDefaultMap();
     Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? oldValue = initialMap[questionID];
-    QuestionAnswerData.questionAnswered(questionID, true);
+    QuestionAnswerData.questionAnswered(questionID, true, null);
     Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? newValue = updatedMap[questionID];
-    expect(oldValue! + 1, newValue);
+    expect(oldValue! + 10, newValue);
   });
 
   test(
@@ -42,10 +42,10 @@ void main() {
     QuestionAnswerData.createDefaultMap();
     Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? oldValue = initialMap[questionID];
-    QuestionAnswerData.questionAnswered(questionID, false);
+    QuestionAnswerData.questionAnswered(questionID, false, null);
     Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? newValue = updatedMap[questionID];
-    expect(oldValue! - 1, newValue);
+    expect(oldValue! - 10, newValue);
   });
 
   test(
@@ -61,11 +61,12 @@ void main() {
         int absVal = changeBy.abs();
         for (int j = 1; j <= absVal; ++j) {
           QuestionAnswerData.questionAnswered(
-              allQuestions[i].questionID, false);
+              allQuestions[i].questionID, false, null);
         }
       } else {
         for (int j = 1; j <= changeBy; ++j) {
-          QuestionAnswerData.questionAnswered(allQuestions[i].questionID, true);
+          QuestionAnswerData.questionAnswered(
+              allQuestions[i].questionID, true, null);
         }
       }
       ++changeBy;

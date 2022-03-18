@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
 import 'package:sight_reading_app/question.dart';
 import 'package:sight_reading_app/question_brain.dart';
 
+// TODO: Find out why printing "Invalid id"
 void main() {
   List<Question> getFakeQuestions() {
     return [
@@ -134,7 +136,7 @@ void main() {
     List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int beforeScore = qb.getScore();
-    qb.setAnswer(fakeQuestions[0].correctAnswer);
+    qb.setAnswer(userAnswer: fakeQuestions[0].correctAnswer);
     int afterScore = qb.getScore();
     expect(afterScore, beforeScore + 1);
   });
@@ -146,7 +148,7 @@ void main() {
     List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int beforeScore = qb.getScore();
-    qb.setAnswer("H");
+    qb.setAnswer(userAnswer: "H");
     int afterScore = qb.getScore();
     expect(afterScore, beforeScore);
   });
@@ -208,11 +210,11 @@ void main() {
     //before complete questions, check it is 0
     expect(pref.get('lesson 1'), '0');
 
-    qb.setAnswer("C");
+    qb.setAnswer(userAnswer: "C");
     qb.goToNextQuestion();
-    qb.setAnswer("D");
+    qb.setAnswer(userAnswer: "D");
     qb.goToNextQuestion();
-    qb.setAnswer("E");
+    qb.setAnswer(userAnswer: "E");
 
     // TODO: find a better way to deal with the IO delay
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -235,11 +237,11 @@ void main() {
     //before complete questions, check it is 0
     expect(pref.get('lesson 1'), '0');
 
-    qb.setAnswer("C");
+    qb.setAnswer(userAnswer: "C");
     qb.goToNextQuestion();
-    qb.setAnswer("A");
+    qb.setAnswer(userAnswer: "A");
     qb.goToNextQuestion();
-    qb.setAnswer("E");
+    qb.setAnswer(userAnswer: "E");
 
     // TODO: find a better way to deal with the IO delay
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -262,11 +264,11 @@ void main() {
     //before complete questions, check it is 0
     expect(pref.get('lesson 1'), '0');
 
-    qb.setAnswer("H");
+    qb.setAnswer(userAnswer: "H");
     qb.goToNextQuestion();
-    qb.setAnswer("T");
+    qb.setAnswer(userAnswer: "T");
     qb.goToNextQuestion();
-    qb.setAnswer("W");
+    qb.setAnswer(userAnswer: "W");
 
     // TODO: find a better way to deal with the IO delay
     await Future.delayed(const Duration(milliseconds: 1000));

@@ -72,15 +72,15 @@ class QuestionBrain {
   }
 
   /// Sets the user answer for the current question
-  void setAnswer(String userAnswer) {
+  void setAnswer({required userAnswer, int? timeTaken}) {
     // Checks if the user answer was correct and if so, increments the score
     if (checkAnswer(userAnswer)) {
       ++_score;
       QuestionAnswerData.questionAnswered(
-          questions[_questionNum].questionID, true);
+          questions[_questionNum].questionID, true, timeTaken);
     } else {
       QuestionAnswerData.questionAnswered(
-          questions[_questionNum].questionID, false);
+          questions[_questionNum].questionID, false, timeTaken);
     }
     // Checks if there are no more questions
     if (isLastQuestion()) {

@@ -104,7 +104,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         OptionButton(
           buttonText: notes[i],
           onPressed: () {
-            questionBrain.setAnswer(notes[i]);
+            questionBrain.setAnswer(userAnswer: notes[i]);
             showResultAlert(notes[i]);
           },
         ),
