@@ -324,6 +324,11 @@ ButtonStyle helperMenuButonStyle = ElevatedButton.styleFrom(
   ),
 );
 
+const TextStyle helperMenuTextStyle = TextStyle(
+  fontSize: 40.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
 /// Clef symbols
 const String trebleClef = '𝄞';
 const String bassClef = '𝄢';
