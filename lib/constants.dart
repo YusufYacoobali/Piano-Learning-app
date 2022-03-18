@@ -230,7 +230,7 @@ const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 const double cardWidth = 230;
 const double cardHeight = 270;
 
-const double circularIndicatorRadius = 80;
+const double circularIndicatorRadius = 78;
 
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
