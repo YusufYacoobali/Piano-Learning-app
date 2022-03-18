@@ -11,6 +11,7 @@ import 'package:sight_reading_app/lessons_and_quizzes/lesson_three.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/lesson_two.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
@@ -25,6 +26,7 @@ class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
   late final PopUpController _pauseMenu;
+  StorageReaderWriter storage = StorageReaderWriter();
 
   ///List of all lessons available
 
@@ -45,7 +47,8 @@ class _LessonScreenState extends State<LessonScreen> {
     setScreenWidget();
 
     PauseMenu pauseMenuBuilder = PauseMenu(context: context);
-    _pauseMenu = PopUpController(context: context, menuBuilder: pauseMenuBuilder);
+    _pauseMenu =
+        PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
 
   @override
@@ -83,18 +86,19 @@ class _LessonScreenState extends State<LessonScreen> {
           Column(
             children: [
               screenWidget,
-                  Expanded(
-                    child: Keyboard(function: answer),
-                  ),
-                ],
+              Expanded(
+                child: Keyboard(function: answer),
               ),
-              ///choices buttons
-              // Expanded(
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //     children: getOptionButtons(),
-              //   ),
-              // ),
+            ],
+          ),
+
+          ///choices buttons
+          // Expanded(
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: getOptionButtons(),
+          //   ),
+          // ),
         ]),
       ),
     );
@@ -184,12 +188,20 @@ class _LessonScreenState extends State<LessonScreen> {
       title = "Aww, better luck next time!";
     } else {
       title = "Congratulations!";
+      //int num = widget.lessonNum;
+      //print("On lesson number $num");
+      storage.saveCompletedLesson(widget.lessonNum - 1);
     }
     return ResultsScreen(
       score: percentage,
       title: title,
     );
   }
+
+  // void saveCompletedLesson(){
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.setBool('lesson-num-1', true);
+  // }
 
   /// Creates the template for alert with title, description and next button
   AlertDialog createResultAlert(String alertTitle, String alertDesc) {

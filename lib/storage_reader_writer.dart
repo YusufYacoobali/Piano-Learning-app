@@ -117,7 +117,7 @@ class StorageReaderWriter {
     final prefs = await SharedPreferences.getInstance();
     List<bool> values = [];
 
-    //prefs.setBool('lesson-num-1', true);
+    //prefs.setBool('lesson-num-1', false);
 
     for (int x = 0; x < numOfLessons; x++) {
       values.add(prefs.getBool('lesson-num-$x') ?? false);
@@ -125,5 +125,11 @@ class StorageReaderWriter {
     }
     print(values);
     return values;
+  }
+
+  Future<void> saveCompletedLesson(lessonNum) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('lesson-num-$lessonNum', true);
+    print("lesson $lessonNum set to pass");
   }
 }
