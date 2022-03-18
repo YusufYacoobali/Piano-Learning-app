@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/constants.dart';
 
 /// Writes data to storage
 class StorageReaderWriter {
@@ -103,5 +104,26 @@ class StorageReaderWriter {
         int.parse(prefs.getString('endless-treble-high-score') ?? '0');
 
     return [completedLessons, completedQuizzes, endlessBassHS, endlessTrebleHS];
+  }
+
+  // //for lessons
+  // Future<bool> isLessonComplete(lessonNum) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.setBool('lesson-num-$lessonNum', true);
+  //   return prefs.getBool('lesson-num-$lessonNum') ?? true;
+  // }
+
+  Future<List<bool>> loadLessonValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<bool> values = [];
+
+    //prefs.setBool('lesson-num-1', true);
+
+    for (int x = 0; x < numOfLessons; x++) {
+      values.add(prefs.getBool('lesson-num-$x') ?? false);
+      print('adding the $x one');
+    }
+    print(values);
+    return values;
   }
 }
