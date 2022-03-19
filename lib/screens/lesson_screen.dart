@@ -17,7 +17,6 @@ import '../lessons_and_quizzes/question_finder.dart';
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
-  OverlayEntry? entry;
   Stopwatch stopwatch = Stopwatch();
   late final PopUpController _pauseMenu;
 
@@ -42,7 +41,8 @@ class _LessonScreenState extends State<LessonScreen> {
     stopwatch.start();
 
     PauseMenu pauseMenuBuilder = PauseMenu(context: context);
-    _pauseMenu = PopUpController(context: context, menuBuilder: pauseMenuBuilder);
+    _pauseMenu =
+        PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
 
   @override
@@ -61,7 +61,6 @@ class _LessonScreenState extends State<LessonScreen> {
       ),
       onPressed: () {
         stopwatch.stop();
-        showMenu();
         _pauseMenu.show();
       },
     );
@@ -69,7 +68,7 @@ class _LessonScreenState extends State<LessonScreen> {
 
   /// Gets the key pressed on the keyboard
   void answer(String text) {
-    questionBrain.setAnswer(text);
+    questionBrain.setAnswer(userAnswer: text);
     showResultAlert(text);
   }
 
@@ -82,18 +81,19 @@ class _LessonScreenState extends State<LessonScreen> {
           Column(
             children: [
               screenWidget,
-                  Expanded(
-                    child: Keyboard(function: answer),
-                  ),
-                ],
+              Expanded(
+                child: Keyboard(function: answer),
               ),
-              ///choices buttons
-              // Expanded(
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //     children: getOptionButtons(),
-              //   ),
-              // ),
+            ],
+          ),
+
+          ///choices buttons
+          // Expanded(
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: getOptionButtons(),
+          //   ),
+          // ),
         ]),
       ),
     );

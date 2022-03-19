@@ -15,6 +15,7 @@ class StorageReaderWriter {
 
   /// If there are no values in storage it sets everything to default values
   void _areValuesInStorage() async {
+    WidgetsFlutterBinding.ensureInitialized();
     final SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getKeys().isEmpty) {
       reset();
@@ -117,8 +118,9 @@ class StorageReaderWriter {
         }
       }
     }
-  //for achievements
-  Future<List<int>> loadAchievementValues() async {
+  }
+
+  loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
     int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
@@ -128,6 +130,5 @@ class StorageReaderWriter {
         int.parse(prefs.getString('endless-treble-high-score') ?? '0');
 
     return [completedLessons, completedQuizzes, endlessBassHS, endlessTrebleHS];
-
   }
 }

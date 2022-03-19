@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/pause_menu.dart';
+
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import '../components/instruction_pop_up_content/pause_menu.dart';
+import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
 import 'package:sight_reading_app/components/option_button.dart';
 
 import '../lessons_and_quizzes/question_finder.dart';
-import 'lesson_screen.dart';
 
 /// Creates screen for the random mixed quiz.
 /// This screen consists of the option buttons and components in question_skeleton
@@ -16,7 +17,7 @@ import 'lesson_screen.dart';
 class _RandomQuizScreenState extends State<RandomQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
-  OverlayEntry? entry;
+  late final PopUpController _pauseMenu;
 
   @override
   void initState() {
@@ -25,11 +26,16 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
         questions:
             QuestionFinder().getRandomListOfQuestions(numOfQuestions: 10));
     setScreenWidget();
+
+    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    _pauseMenu =
+        PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
 
   @override
   void dispose() {
     super.dispose();
+    _pauseMenu.delete();
   }
 
   Widget getPauseButton() {
@@ -40,9 +46,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
         color: Colors.white,
         size: 35.0,
       ),
-      onPressed: () {
-        showMenu();
-      },
+      onPressed: () {},
     );
   }
 
@@ -70,27 +74,27 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
     );
   }
 
-  void showMenu() {
-    final overlay = Overlay.of(context)!;
+  // void showMenu() {
+  //   final overlay = Overlay.of(context)!;
 
-    entry = OverlayEntry(
-      builder: (context) => PauseMenu(
-        removeMenu: removeMenu,
-        continueOnPressed: () {
-          Navigator.popUntil(
-            context,
-            ModalRoute.withName(LessonScreen.id),
-          );
-        },
-      ),
-    );
-    overlay.insert(entry!);
-  }
+  //   entry = OverlayEntry(
+  //     builder: (context) => PauseMenu(
+  //       removeMenu: removeMenu,
+  //       continueOnPressed: () {
+  //         Navigator.popUntil(
+  //           context,
+  //           ModalRoute.withName(LessonScreen.id),
+  //         );
+  //       },
+  //     ),
+  //   );
+  //   overlay.insert(entry!);
+  // }
 
-  void removeMenu() {
-    entry?.remove();
-    entry = null;
-  }
+  // void removeMenu() {
+  //   entry?.remove();
+  //   entry = null;
+  // }
 
   /// Creates the answer option buttons.
   ///

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
+//import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
 import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import '../components/app_bar_with_settings_icon.dart';
@@ -64,11 +64,11 @@ class QuizSelectionScreen extends StatelessWidget {
       quizButtonKeys.add(Key('quizSelected:$quiz'));
     }
 
-    PopUpController menu = PopUpController(context: context, menuBuilder: QuizInstructions(context: context));
+    PopUpController menu = PopUpController(
+        context: context, menuBuilder: QuizInstructions(context: context));
 
     return Scaffold(
-      appBar: const AppBarWithSettingsIcon(
-          Text('Choose a quiz:'), QuizInstruction.id),
+      appBar: AppBarWithSettingsIcon(const Text('Choose a quiz:'), menu),
       body: SafeArea(
         child: Column(
           children: <Widget>[
