@@ -8,6 +8,7 @@ import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
 import 'package:sight_reading_app/components/option_button.dart';
+import '../lessons_and_quizzes/lesson_one.dart';
 
 import '../lessons_and_quizzes/question_finder.dart';
 
@@ -103,25 +104,6 @@ class _LessonScreenState extends State<LessonScreen> {
   ///
   /// Each button has text displayed and check with question brain
   /// to see if the user has tapped the button with the correct answer.
-  List<Widget> getOptionButtons() {
-    List<Widget> optionButtons = [];
-    List<String> notes = whiteKeyNames;
-    for (int i = 0; i < notes.length; ++i) {
-      optionButtons.add(
-        OptionButton(
-          buttonText: notes[i],
-          onPressed: () {
-            stopwatch.stop();
-            questionBrain.setAnswer(
-                userAnswer: notes[i], timeTaken: stopwatch.elapsedMilliseconds);
-            stopwatch.reset();
-            showResultAlert(notes[i]);
-          },
-        ),
-      );
-    }
-    return optionButtons;
-  }
 
   /// Set details of the Screen Widget in lesson.
   ///
