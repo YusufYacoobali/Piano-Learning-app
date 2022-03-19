@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
+import '../components/keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
-import 'package:sight_reading_app/components/option_button.dart';
-
 import '../lessons_and_quizzes/question_finder.dart';
 
 /// Creates screen for the random mixed quiz.
@@ -27,7 +27,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
             QuestionFinder().getRandomListOfQuestions(numOfQuestions: 10));
     setScreenWidget();
 
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id);
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
@@ -46,7 +46,9 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
         color: Colors.white,
         size: 35.0,
       ),
-      onPressed: () {},
+      onPressed: () {
+        _pauseMenu.show();
+      },
     );
   }
 
@@ -54,68 +56,27 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(children: [
-          Align(alignment: Alignment.topRight, child: getPauseButton()),
-          Column(
-            children: [
-              screenWidget,
-
-              ///choices buttons
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: getOptionButtons(),
+        child: Stack(
+          children: [
+            Align(alignment: Alignment.topRight, child: getPauseButton()),
+            Column(
+              children: [
+                screenWidget,
+                Expanded(
+                  child: Keyboard(function: answer),
                 ),
-              ),
-            ],
-          ),
-        ]),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  // void showMenu() {
-  //   final overlay = Overlay.of(context)!;
-
-  //   entry = OverlayEntry(
-  //     builder: (context) => PauseMenu(
-  //       removeMenu: removeMenu,
-  //       continueOnPressed: () {
-  //         Navigator.popUntil(
-  //           context,
-  //           ModalRoute.withName(LessonScreen.id),
-  //         );
-  //       },
-  //     ),
-  //   );
-  //   overlay.insert(entry!);
-  // }
-
-  // void removeMenu() {
-  //   entry?.remove();
-  //   entry = null;
-  // }
-
-  /// Creates the answer option buttons.
-  ///
-  /// Each button has text displayed and check with question brain
-  /// to see if the user has tapped the button with the correct answer.
-  List<Widget> getOptionButtons() {
-    ///TODO: Beginners see less options and experts see all options
-    List<Widget> optionButtons = [];
-    List<String> notes = whiteKeyNames;
-    for (int i = 0; i < notes.length; ++i) {
-      optionButtons.add(
-        OptionButton(
-          buttonText: notes[i],
-          onPressed: () {
-            questionBrain.setAnswer(userAnswer: notes[i]);
-            showResultAlert(notes[i]);
-          },
-        ),
-      );
-    }
-    return optionButtons;
+  /// Gets the key pressed on the keyboard
+  void answer(String text) {
+    questionBrain.setAnswer(userAnswer: text);
+    showResultAlert(text);
   }
 
   /// Set details of the Screen Widget in lesson.

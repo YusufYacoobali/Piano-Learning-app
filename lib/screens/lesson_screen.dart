@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/question_skeleton.dart';
@@ -39,7 +40,7 @@ class _LessonScreenState extends State<LessonScreen> {
     setScreenWidget();
     stopwatch.start();
 
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Lessons', id: LessonMenuScreen.id);
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
@@ -75,25 +76,19 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(children: [
-          Align(alignment: Alignment.topRight, child: getPauseButton()),
-          Column(
-            children: [
-              screenWidget,
-              Expanded(
-                child: Keyboard(function: answer),
-              ),
-            ],
-          ),
-
-          ///choices buttons
-          // Expanded(
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: getOptionButtons(),
-          //   ),
-          // ),
-        ]),
+        child: Stack(
+          children: [
+            Align(alignment: Alignment.topRight, child: getPauseButton()),
+            Column(
+              children: [
+                screenWidget,
+                Expanded(
+                  child: Keyboard(function: answer),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
