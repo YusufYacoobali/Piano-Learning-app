@@ -21,7 +21,9 @@ class EndlessStartingInstructions extends PopUpContentBuilder {
         Text('Endless Mode', style: pauseMenuTextStyle),
         SizedBox(height: 10.0),
         Text('Get as many questions correct as you can before your lives run out!'),
-        SizedBox(height: 50.0),
+        SizedBox(height: 10.0),
+        Text('Change the difficulty in settings to change the speed of notes.'),
+        SizedBox(height: 40.0),
         Text('Select The Clef', style: pauseMenuTextStyle),
       ],);
 

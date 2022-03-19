@@ -16,7 +16,6 @@ import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
-import 'package:sight_reading_app/components/option_button.dart';
 
 /// Creates screen for a lesson.
 /// The lesson screen consists of the option buttons and components in question_skeleton
@@ -104,23 +103,23 @@ class _LessonScreenState extends State<LessonScreen> {
   ///
   /// Each button has text displayed and check with question brain
   /// to see if the user has tapped the button with the correct answer.
-  List<Widget> getOptionButtons() {
-    ///TODO: Beginners see less options and experts see all options
-    List<Widget> optionButtons = [];
-    List<String> notes = whiteKeyNames;
-    for (int i = 0; i < notes.length; ++i) {
-      optionButtons.add(
-        OptionButton(
-          buttonText: notes[i],
-          onPressed: () {
-            questionBrain.setAnswer(notes[i]);
-            showResultAlert(notes[i]);
-          },
-        ),
-      );
-    }
-    return optionButtons;
-  }
+  // List<Widget> getOptionButtons() {
+  //   ///TODO: Beginners see less options and experts see all options
+  //   List<Widget> optionButtons = [];
+  //   List<String> notes = whiteKeyNames;
+  //   for (int i = 0; i < notes.length; ++i) {
+  //     optionButtons.add(
+  //       OptionButton(
+  //         buttonText: notes[i],
+  //         onPressed: () {
+  //           questionBrain.setAnswer(notes[i]);
+  //           showResultAlert(notes[i]);
+  //         },
+  //       ),
+  //     );
+  //   }
+  //   return optionButtons;
+  // }
 
   /// Set details of the Screen Widget in lesson.
   ///
