@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/screens/check_answers_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
 
@@ -91,7 +92,14 @@ class _ResultsScreenState extends State<ResultsScreen> {
             ),
             ElevatedButton(
               // TODO: Implement review answers functionality
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const CheckAnswersScreen();
+                  }),
+                );
+              },
               child: const Text('Review Answers'),
 
               style: navButtonDeco,
