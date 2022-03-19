@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/play_along_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/practice_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
-import 'package:sight_reading_app/screens/instruction_screens/speedrun_instructions_screen.dart';
+import 'package:sight_reading_app/screens/endless_mode_screen.dart';
+import 'package:sight_reading_app/screens/helper_menu_screen.dart';
+import 'package:sight_reading_app/screens/helper_screen.dart';
 import 'package:sight_reading_app/screens/key_detection_screen.dart';
 import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
@@ -20,7 +18,6 @@ import 'package:provider/provider.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
-
 import 'package:sight_reading_app/screens/keyboard_sheet_screen.dart';
 import 'package:sight_reading_app/screens/note_selector_sheet_screen.dart';
 
@@ -68,6 +65,7 @@ class SightReadingApp extends StatelessWidget {
                   const SpeedrunInstructions(),
               PracticeInstructions.id: (context) =>
                   const PracticeInstructions(),
+              EndlessModeScreen.id: (context) => const EndlessModeScreen(),
               // Temporary routes to demo screens
               KeyboardSheetScreen.id: (context) => const KeyboardSheetScreen(),
               NoteSelectorSheetScreen.id: (context) =>
@@ -75,6 +73,10 @@ class SightReadingApp extends StatelessWidget {
               KeyDetectionScreen.id: (context) => const KeyDetectionScreen(),
               RandomQuizScreen.id: (context) => const RandomQuizScreen(),
               PracticeQuizScreen.id: (context) => const PracticeQuizScreen(),
+
+              //helper route
+              HelperMenuScreen.id: (context) => const HelperMenuScreen(),
+              HelperScreen.id: (context) => const HelperScreen(),
             },
           );
         },

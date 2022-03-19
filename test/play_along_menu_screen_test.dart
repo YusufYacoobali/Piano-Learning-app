@@ -91,7 +91,7 @@ void main() {
               500.0,
               scrollable: find.byType(Scrollable)
           );
-          expect(find.text(tracks[i]), findsWidgets);
+          expect(find.text(trackNames[i]), findsWidgets);
           expect(find.text('Record: ${trackRecords[i]}'), findsWidgets);
         }
       }

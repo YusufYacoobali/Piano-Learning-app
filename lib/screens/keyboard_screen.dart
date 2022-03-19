@@ -13,6 +13,10 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
     super.dispose();
   }
 
+  void doNothing(String text) {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +26,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
             Expanded(flex: 5, child: Container()),
             Expanded(
               flex: 3,
-              child: Keyboard().build(context),
+              child: Keyboard(function: doNothing),
             ),
           ],
         ),

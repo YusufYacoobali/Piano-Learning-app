@@ -10,12 +10,19 @@ class StorageReaderWriter {
 
   /// Constructor
   StorageReaderWriter() {
-    _setDefaultValues();
-    _writeDefaultsToStorage();
+    _areValuesInStorage();
+  }
+
+  /// If there are no values in storage it sets everything to default values
+  void _areValuesInStorage() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    if (pref.getKeys().isEmpty) {
+      reset();
+    }
   }
 
   /// Gets the value using the key in [_map]
-  Object read(String key) {
+  Object? read(String key) {
     return _map[key];
   }
 
@@ -24,7 +31,6 @@ class StorageReaderWriter {
     // Key: lesson name
     // Value: score
     // Format: 'lesson 1' -> 3
-    _map[key] = value;
     final SharedPreferences pref = await SharedPreferences.getInstance();
     _map[key] = value.toString();
     await pref.setString(key, value.toString());
@@ -45,6 +51,9 @@ class StorageReaderWriter {
     for (int i = 1; i <= 7; ++i) {
       _map['lesson $i'] = 0;
     }
+
+    _map['endless-treble-high-score'] = 0;
+    _map['endless-bass-high-score'] = 0;
   }
 
   /// Writes the default StorageWriter values to Shared Preferences
@@ -56,6 +65,9 @@ class StorageReaderWriter {
     for (int i = 1; i <= 7; ++i) {
       pref.setString('lesson $i', '0');
     }
+
+    pref.setString('endless-treble-high-score', '0');
+    pref.setString('endless-bass-high-score', '0');
   }
 
   /// Loads the StorageWriter from Shared Preferences
@@ -105,5 +117,17 @@ class StorageReaderWriter {
         }
       }
     }
+  //for achievements
+  Future<List<int>> loadAchievementValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
+    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+    int endlessBassHS =
+        int.parse(prefs.getString('endless-bass-high-score') ?? '0');
+    int endlessTrebleHS =
+        int.parse(prefs.getString('endless-treble-high-score') ?? '0');
+
+    return [completedLessons, completedQuizzes, endlessBassHS, endlessTrebleHS];
+
   }
 }

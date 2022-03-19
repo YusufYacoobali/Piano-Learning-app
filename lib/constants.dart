@@ -43,7 +43,6 @@ ButtonStyle navButtonDeco = ElevatedButton.styleFrom(
 
 // Menu Screen
 const String formattedAppName = 'Read\n That\n Sheet';
-final Color appNameBoxColour = Colors.indigo.shade300;
 final Color buttonBoxColour = Colors.indigo.shade400;
 const EdgeInsets boxMargin = EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
 const double boxRadii = 10.0;
@@ -122,7 +121,8 @@ const TextStyle questionTrackerTextStyle = TextStyle(fontSize: 25);
 const double passThreshold = 0.4;
 
 /// In what positions above or below the treble clef are to be painted
-const Map<String, List<String>> trebleClefNoteLinesOffset = <String, List<String>>{
+const Map<String, List<String>> trebleClefNoteLinesOffset =
+    <String, List<String>>{
   // Notes that are below the treble clef stave
   'C4': ['C4'],
   'B3': ['C4'],
@@ -139,7 +139,8 @@ const Map<String, List<String>> trebleClefNoteLinesOffset = <String, List<String
 };
 
 /// In what positions above or below the bass clef are to be painted
-const Map<String, List<String>> bassClefNoteLinesOffset = <String, List<String>>{
+const Map<String, List<String>> bassClefNoteLinesOffset =
+    <String, List<String>>{
   // Notes that are below the bass clef stave
   'E2': ['E2'],
   'D2': ['E2'],
@@ -229,7 +230,7 @@ const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 const double cardWidth = 230;
 const double cardHeight = 270;
 
-const double circularIndicatorRadius = 80;
+const double circularIndicatorRadius = 78;
 
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
@@ -300,3 +301,52 @@ BoxDecoration cardBackground = BoxDecoration(
     end: Alignment.bottomRight,
   ),
 );
+
+/// How far each note should move per iteration
+const double noteMovement = 1;
+
+
+const Icon helperButton = Icon(
+  Icons.help,
+);
+
+const Icon helpPlayButtonStyle = Icon(
+  Icons.play_arrow,
+  size: 35.0,
+);
+
+ButtonStyle helperMenuButonStyle = ElevatedButton.styleFrom(
+  primary: const Color(0xffa4508b).withOpacity(0.3),
+  onPrimary: Colors.grey.shade300,
+  fixedSize: const Size(180.0, 60.0),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10),
+  ),
+);
+
+const TextStyle helperMenuTextStyle = TextStyle(
+  fontSize: 40.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+/// Clef symbols
+const String trebleClef = '𝄞';
+const String bassClef = '𝄢';
+
+/// Android clef fonts
+const double androidTrebleClefFontSize = 70;
+const double androidBassClefFontSize = 83;
+
+/// Android clef offset positions
+const double androidTrebleClefOffset = 80;
+const double androidBassClefOffset = 93;
+
+/// IOS clef fonts
+/// Change these to change the clef size
+const double iosTrebleClefFontSize = 190;
+const double iosBassClefFontSize = 100;
+
+/// IOS clef offsets
+/// Change these to change the clef position on screen
+const double iosTrebleClefOffset = 118;
+const double iosBassClefOffset = 85;

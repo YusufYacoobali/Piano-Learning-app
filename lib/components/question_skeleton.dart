@@ -32,7 +32,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   void initState() {
     super.initState();
     _nextNote = NextNoteNotifier();
-    _sheet = MusicSheet(_nextNote, MusicSheetModes.showNotes, Clef.treble);
+    _sheet = MusicSheet(_nextNote, Clef.treble);
   }
 
   @override

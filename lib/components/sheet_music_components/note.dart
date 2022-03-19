@@ -3,16 +3,12 @@ class Note {
   /// The note
   late String name;
 
-  /// When the note appears
-  late int time;
-
   /// Number of beats of the note
   late double duration;
 
   Note({
     required this.name,
     required this.duration,
-    this.time = -1
   });
 
   /// Gets the
@@ -88,14 +84,25 @@ class NextNoteNotifier {
   /// The note to be received by the receiver
   late Note _nextNote;
 
+  /// Checks if there is a note
+  bool _isThereNote = false;
+
   /// Gives the note to the receiver
   Note getNextNote() {
     hasNextNote = false;
     return _nextNote;
   }
 
+  /// Gives the note to the receiver without removing it from the notifier
+  Note get() {
+    return _nextNote;
+  }
+
+  bool isNull () => !_isThereNote;
+
   /// Sends the note from the sender
   void setNextNote(Note note) {
+    _isThereNote = true;
     hasNextNote = true;
     _nextNote = note;
   }
