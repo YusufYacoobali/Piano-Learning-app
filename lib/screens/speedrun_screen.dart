@@ -8,8 +8,6 @@ import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/question_finder.dart';
 import '../question_brain.dart';
 
-// TODO: Need to have enough questions so that we don't run out before the timer finishes
-
 /// Screen for speedrun mode
 class SpeedrunScreen extends StatefulWidget {
   /// The duration of the speedrun
@@ -39,9 +37,9 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   void initState() {
     super.initState();
 
-    /// Loads the correct question file
+    /// Gets all of the questions in a random order
     questionBrain =
-        QuestionBrain(questions: QuestionFinder().getQuestionsForLesson(1));
+        QuestionBrain(questions: QuestionFinder().getRandomListOfQuestions());
     setScreenWidget();
   }
 

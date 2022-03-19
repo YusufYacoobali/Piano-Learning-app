@@ -46,8 +46,8 @@ void main() {
       'Check that getRandomListOfQuestions correctly returns the right number of Questions',
       () {
     int numOfQuestions = 3;
-    List<Question> randomQuestions =
-        QuestionFinder().getRandomListOfQuestions(numOfQuestions);
+    List<Question> randomQuestions = QuestionFinder()
+        .getRandomListOfQuestions(numOfQuestions: numOfQuestions);
     expect(randomQuestions.length, numOfQuestions);
   });
 

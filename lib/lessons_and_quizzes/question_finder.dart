@@ -16,15 +16,20 @@ class QuestionFinder {
   }
 
   /// Return a list of randomly selected questions
-  List<Question> getRandomListOfQuestions(int numOfQuestions) {
-    Random randomNum = Random();
+  List<Question> getRandomListOfQuestions({int? numOfQuestions}) {
     List<Question> questionsToPickFrom = questions;
-    List<Question> lessonQuestions = [];
-    while (lessonQuestions.length < numOfQuestions) {
-      int randomIndex = randomNum.nextInt(questionsToPickFrom.length);
-      lessonQuestions.add(questionsToPickFrom.removeAt(randomIndex));
+    if (numOfQuestions != null) {
+      Random randomNum = Random();
+      List<Question> lessonQuestions = [];
+      while (lessonQuestions.length < numOfQuestions) {
+        int randomIndex = randomNum.nextInt(questionsToPickFrom.length);
+        lessonQuestions.add(questionsToPickFrom.removeAt(randomIndex));
+      }
+      return lessonQuestions;
+    } else {
+      questionsToPickFrom.shuffle();
+      return questionsToPickFrom;
     }
-    return lessonQuestions;
   }
 
   /// Return an ordered list of practice questions
