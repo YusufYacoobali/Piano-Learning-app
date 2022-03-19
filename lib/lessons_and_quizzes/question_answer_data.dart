@@ -8,7 +8,7 @@ class QuestionAnswerData {
   /// Get an ordered list of question IDs
   /// The first question ID is the ID of the question that was answered incorrectly the most number of times
   // TODO: Take in lessonID so have practice questions for one lesson
-  static List<int> getPracticeQuestionIDs(int numOfQuestionIDs) {
+  static List<int> getPracticeQuestionIDs() {
     // Go through map values in ascending order
     // Add each corresponding ID to the return list
 
@@ -21,9 +21,9 @@ class QuestionAnswerData {
 
     // Extracting the question IDs from most incorrect to correct
     List<int> questionIDs = [];
-    statisticPairs.take(numOfQuestionIDs).forEach((pair) {
+    for (List<int> pair in statisticPairs) {
       questionIDs.add(pair[0]);
-    });
+    }
 
     return questionIDs;
   }
@@ -53,7 +53,8 @@ class QuestionAnswerData {
       }
       StorageReaderWriter().write(questionID.toString(), currentStatistic);
     } else {
-      print('Invalid id');
+      // TODO: Remove print statement
+      // print('Invalid id');
     }
   }
 

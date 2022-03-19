@@ -52,14 +52,16 @@ void main() {
   });
 
   test(
-      'Check that getPracticeQuestions returns the Questions in the right order',
+      'Check that getPracticeQuestionsForLesson returns the Questions for the right lesson in the right order',
       () {
     SharedPreferences.setMockInitialValues({});
     List<Question> allQuestions = questions;
     setMockQuestionStatistics();
-    List<Question> expectedQuestionsInOrder = List.from(allQuestions.reversed);
-    List<Question> actualQuestionsInOrder =
-        QuestionFinder().getPracticeQuestions(allQuestions.length);
+    int lessonID = 1;
+    List<Question> expectedQuestionsInOrder = List.from(
+        allQuestions.reversed.where((element) => element.lessonID == lessonID));
+    List<Question> actualQuestionsInOrder = QuestionFinder()
+        .getPracticeQuestionsForLesson(lessonID, allQuestions.length);
     expect(expectedQuestionsInOrder, actualQuestionsInOrder);
   });
 }

@@ -76,7 +76,7 @@ void main() {
       expectedQuestionIDsOrder.add(allQuestions[i].questionID);
     }
     List<int> actualQuestionIDsInOrder =
-        QuestionAnswerData.getPracticeQuestionIDs(allQuestions.length);
+        QuestionAnswerData.getPracticeQuestionIDs();
     expect(expectedQuestionIDsOrder, actualQuestionIDsInOrder);
   });
 }

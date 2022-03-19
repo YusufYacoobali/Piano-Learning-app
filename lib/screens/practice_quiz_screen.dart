@@ -21,8 +21,9 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   @override
   void initState() {
     super.initState();
-    questionBrain =
-        QuestionBrain(questions: QuestionFinder().getPracticeQuestions(10));
+    // TODO: Pass in lessonID
+    questionBrain = QuestionBrain(
+        questions: QuestionFinder().getPracticeQuestionsForLesson(1, 10));
     setScreenWidget();
   }
 

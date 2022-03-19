@@ -5,9 +5,10 @@ import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart'
 import 'package:sight_reading_app/question.dart';
 import 'package:sight_reading_app/question_brain.dart';
 
-// TODO: Find out why printing "Invalid id"
 void main() {
   List<Question> getFakeQuestions() {
+    // TODO: Removing below line results in invalid ID since not loaded
+    QuestionAnswerData.createDefaultMap();
     return [
       Question(
         note: Note(name: 'C4', duration: 4),

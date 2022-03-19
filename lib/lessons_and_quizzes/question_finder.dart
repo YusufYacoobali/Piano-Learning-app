@@ -29,19 +29,24 @@ class QuestionFinder {
 
   /// Return an ordered list of practice questions
   /// The first question is the question that was answered incorrectly the most number of times
-  List<Question> getPracticeQuestions(int numOfQuestions) {
+  List<Question> getPracticeQuestionsForLesson(
+      int lessonID, int numOfQuestions) {
     // TODO: Make more efficient
     List<Question> practiceQuestions = [];
-    List<int> questionIDs =
-        QuestionAnswerData.getPracticeQuestionIDs(numOfQuestions);
+    List<int> questionIDs = QuestionAnswerData.getPracticeQuestionIDs();
 
     for (int id in questionIDs) {
-      for (Question question in questions) {
-        if (question.questionID == id) {
-          practiceQuestions.add(question);
+      if (practiceQuestions.length < numOfQuestions) {
+        for (Question question in questions) {
+          if (question.questionID == id && question.lessonID == lessonID) {
+            practiceQuestions.add(question);
+          }
         }
+      } else {
+        break;
       }
     }
+
     return practiceQuestions;
   }
 }
