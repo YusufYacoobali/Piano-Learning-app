@@ -69,4 +69,17 @@ void main() {
   });
 
   // TODO: Add test for "Review Answers" functionality once implemented
+
+  // testWidgets('Check that the "Exit" button takes the user to the menu page',
+  //     (WidgetTester tester) async {
+  //   await tester.pumpWidget(
+  //     const MaterialApp(
+  //       home: ResultsScreen(title: "Congratulations!", score: 0.42),
+  //     ),
+  //   );
+  //   await tester.tap(find.text('Exit'));
+  //   await tester.pumpAndSettle();
+  //   //expect(find.text('Read That Sheet'), findsOneWidget);
+  //   expect(find.byType(MenuScreen), findsOneWidget);
+  // });
 }

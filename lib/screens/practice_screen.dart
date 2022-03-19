@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/screens/instruction_screens/endless_instruction_screen.dart';
 
 import '../components/app_bar_with_settings_icon.dart';
-import 'instruction_screens/practice_instruction_screen.dart';
+import '../components/instruction_pop_up_content/practice_menu_instructions.dart';
+import '../components/pop_up_components/pop_up_controller.dart';
 import 'menu_screen.dart';
+import 'endless_mode_screen.dart';
 import 'play_along_menu_screen.dart';
 import 'speedrun_menu_screen.dart';
 import 'quiz_selection_screen.dart';
@@ -12,7 +13,6 @@ import 'quiz_selection_screen.dart';
 ///
 /// The modes are: Play along, Speedrun, Quiz, Endless.
 /// The user selects a mode by clicking the relevant button.
-/// TODO: Add endless button functionality
 /// There is also an AppBar containing the screen title, a back arrow and a setting icon, which when clicked takes you to the settings screen.
 class PracticeScreen extends StatelessWidget {
   const PracticeScreen({Key? key}) : super(key: key);
@@ -29,8 +29,10 @@ class PracticeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PopUpController menu = PopUpController(context: context, menuBuilder: PracticeMenuInstructions(context: context));
+
     return Scaffold(
-      appBar: const AppBarWithSettingsIcon(Text('Practice your skills!'), PracticeInstructions.id),
+      appBar: AppBarWithSettingsIcon(const Text('Practice your skills!'), menu),
       body: SafeArea(
         child: GridView.count(
           ///Makes the children all fit on the screen without the need for scrolling.
@@ -80,7 +82,7 @@ class PracticeScreen extends StatelessWidget {
                   const Center(child: ButtonText(buttonText: 'Endless')),
               onPress: () {
                 Navigator.pushNamed(
-                    context, EndlessInstructions.id); //TODO: Replace screen name
+                    context, EndlessModeScreen.id); //TODO: Replace screen name
               },
               key: navigateToEndlessModeButtonKey,
             )

@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/pause_menu.dart';
+import 'package:sight_reading_app/components/keyboard.dart';
+import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_five.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_four.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_one.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_seven.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_six.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_three.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/lesson_two.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
-import '../lessons_and_quizzes/lesson_one.dart';
-import 'package:sight_reading_app/components/option_button.dart';
+
+import '../lessons_and_quizzes/question_finder.dart';
 
 /// Creates screen for a lesson.
 /// The lesson screen consists of the option buttons and components in question_skeleton
@@ -22,30 +16,38 @@ import 'package:sight_reading_app/components/option_button.dart';
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
-  OverlayEntry? entry;
+  Stopwatch stopwatch = Stopwatch();
+  late final PopUpController _pauseMenu;
 
   ///List of all lessons available
 
-  List<QuestionList> questionLists = [
-    lessonOneQuestions,
-    lessonTwoQuestions,
-    lessonThreeQuestions,
-    lessonFourQuestions,
-    lessonFiveQuestions,
-    lessonSixQuestions,
-    lessonSevenQuestions,
-  ];
+  // List<QuestionList> questionLists = [
+  //   lessonOneQuestions,
+  //   lessonTwoQuestions,
+  //   lessonThreeQuestions,
+  //   lessonFourQuestions,
+  //   lessonFiveQuestions,
+  //   lessonSixQuestions,
+  //   lessonSevenQuestions,
+  // ];
   @override
   void initState() {
     super.initState();
     int lessonNum = widget.lessonNum;
-    questionBrain = QuestionBrain(questions: questionLists[lessonNum - 1]);
+    questionBrain = QuestionBrain(
+        questions: QuestionFinder().getQuestionsForLesson(lessonNum));
     setScreenWidget();
+    stopwatch.start();
+
+    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    _pauseMenu =
+        PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
 
   @override
   void dispose() {
     super.dispose();
+    _pauseMenu.delete();
   }
 
   Widget getPauseButton() {
@@ -57,9 +59,16 @@ class _LessonScreenState extends State<LessonScreen> {
         size: 35.0,
       ),
       onPressed: () {
-        showMenu();
+        stopwatch.stop();
+        _pauseMenu.show();
       },
     );
+  }
+
+  /// Gets the key pressed on the keyboard
+  void answer(String text) {
+    questionBrain.setAnswer(userAnswer: text);
+    showResultAlert(text);
   }
 
   @override
@@ -71,64 +80,28 @@ class _LessonScreenState extends State<LessonScreen> {
           Column(
             children: [
               screenWidget,
-
-              ///choices buttons
               Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: getOptionButtons(),
-                ),
+                child: Keyboard(function: answer),
               ),
             ],
           ),
+
+          ///choices buttons
+          // Expanded(
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: getOptionButtons(),
+          //   ),
+          // ),
         ]),
       ),
     );
-  }
-
-  void showMenu() {
-    final overlay = Overlay.of(context)!;
-
-    entry = OverlayEntry(
-      builder: (context) => PauseMenu(
-        removeMenu: removeMenu,
-        continueOnPressed: () {
-          Navigator.popUntil(
-            context,
-            ModalRoute.withName(LessonScreen.id),
-          );
-        },
-      ),
-    );
-    overlay.insert(entry!);
-  }
-
-  void removeMenu() {
-    entry?.remove();
-    entry = null;
   }
 
   /// Creates the answer option buttons.
   ///
   /// Each button has text displayed and check with question brain
   /// to see if the user has tapped the button with the correct answer.
-  List<Widget> getOptionButtons() {
-    ///TODO: Beginners see less options and experts see all options
-    List<Widget> optionButtons = [];
-    List<String> notes = whiteKeyNames;
-    for (int i = 0; i < notes.length; ++i) {
-      optionButtons.add(
-        OptionButton(
-          buttonText: notes[i],
-          onPressed: () {
-            questionBrain.setAnswer(notes[i]);
-            showResultAlert(notes[i]);
-          },
-        ),
-      );
-    }
-    return optionButtons;
-  }
 
   /// Set details of the Screen Widget in lesson.
   ///
@@ -177,6 +150,7 @@ class _LessonScreenState extends State<LessonScreen> {
   void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return createResultAlert(alertTitle, alertDesc);
       },
@@ -226,6 +200,7 @@ class _LessonScreenState extends State<LessonScreen> {
           setState(() {
             questionBrain.goToNextQuestion();
             setScreenWidget();
+            stopwatch.start();
           });
         } else {
           Navigator.push(

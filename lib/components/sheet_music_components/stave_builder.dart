@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'dart:io' show Platform;
+
+import '../../constants.dart' as constants;
+
 class StaveBuilder {
-  static void drawStave(Canvas canvas, Size size, double baseLine, double start, double end, bool isTrebleClef) {
+  static void makeBackground(
+      Canvas canvas, Size size, double start, double end) {
     // Draws the white background
     canvas.drawRect(
-        Offset(start, size.height ~/ 2 - 100) & Size(end - start, 170), Paint()
-      ..color = Colors.white);
+        Offset(start, size.height ~/ 2 - 100) & Size(end - start, 170),
+        Paint()..color = Colors.white);
+  }
 
+  static void drawStave(Canvas canvas, Size size, double baseLine, double start,
+      double end, bool isTrebleClef) {
     Paint paint = Paint()
       ..color = Colors.black
       ..strokeWidth = 2
@@ -34,25 +42,50 @@ class StaveBuilder {
     Offset endingPoint4 = Offset(end, baseLine - 80);
     canvas.drawLine(startingPoint4, endingPoint4, paint);
 
-    String clef = '𝄞';
-    double font = 70;
-    double position = baseLine - 80;
-    if (!isTrebleClef) {
-      clef = '𝄢';
-      font = 83;
-      position = baseLine - 93;
+    //int trebleFont =
+
+    double font = constants.androidTrebleClefFontSize;
+    String clef = constants.trebleClef;
+    double position = baseLine - constants.androidTrebleClefOffset;
+    if (Platform.isIOS) {
+      font = constants.iosTrebleClefFontSize;
+
+      /// Change this to change ios treble clef position
+      position = baseLine - constants.iosTrebleClefOffset;
+
+      if (!isTrebleClef) {
+        clef = constants.bassClef;
+        font = constants.iosBassClefFontSize;
+
+        /// Change this to change ios bass clef position
+        position = baseLine - constants.iosBassClefOffset;
+      }
+    } else {
+      if (!isTrebleClef) {
+        clef = constants.bassClef;
+        font = constants.androidBassClefFontSize;
+        position = baseLine - constants.androidBassClefOffset;
+      }
     }
 
     // Draws on the Clef
     TextPainter textPainter = TextPainter(
-      textScaleFactor: 1,
+        textScaleFactor: 1,
         text: TextSpan(
-            text: clef,
-            style: TextStyle(
-                fontSize: font, color: Colors.black)),
+            text: clef, style: TextStyle(fontSize: font, color: Colors.black)),
         textDirection: TextDirection.ltr)
       ..layout();
 
     textPainter.paint(canvas, Offset(start + 20, position));
+  }
+
+  static void drawBox(
+      Canvas canvas, Size size, double baseLine, double start, double end) {
+    Paint paint = Paint()
+      ..color = const Color.fromARGB(100, 0, 255, 0)
+      ..style = PaintingStyle.fill;
+
+    canvas.drawRect(
+        Offset(start, baseLine - 120) & Size(end - start, 170), paint);
   }
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import '../components/notification_service.dart';
-import 'package:sight_reading_app/screens/keyboard_screen.dart';
 import '../constants.dart';
 import 'achievements_screen.dart';
-import 'keyboard_sheet_screen.dart';
+import 'helper_menu_screen.dart';
 import 'lesson_menu_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
@@ -73,35 +72,17 @@ class _MenuScreenState extends State<MenuScreen> {
                   Expanded(
                     child: Row(
                       children: [
+                        //helper button
                         Expanded(
-                          flex: 4,
-                          // TODO: Remove GestureDetector widget when ResultsScreen properly linked up
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, KeyboardScreen.id);
-                            },
-                            child: Container(
-                              // TODO: Remove colour and child properties when ResultsScreen properly linked up
-                              color: Colors.red,
-                              child: const Text(
-                                  'TEMPORARY Click to go to Keyboard Screen'),
+                          flex: 2,
+                          child: MenuButton(
+                            buttonChild: const Align(
+                              alignment: Alignment.center,
+                              child: helperButton,
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          // TODO: Remove GestureDetector widget when SheetMusicScreen properly linked up
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, KeyboardSheetScreen.id);
+                            onPress: () {
+                              Navigator.pushNamed(context, HelperMenuScreen.id);
                             },
-                            child: Container(
-                              // TODO: Remove colour and child properties when SheetMusicScreen properly linked up
-                              color: Colors.red,
-                              child: const Text(
-                                  'TEMPORARY Go to Sheet Music Screen'),
-                            ),
                           ),
                         ),
                         Expanded(
@@ -139,9 +120,7 @@ class MenuScreen extends StatefulWidget {
 }
 
 class AppNameBox extends StatelessWidget {
-  const AppNameBox({
-    Key? key,
-  }) : super(key: key);
+  const AppNameBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -198,10 +177,7 @@ class MenuButton extends StatelessWidget {
 class ButtonText extends StatelessWidget {
   final String buttonText;
 
-  const ButtonText({
-    Key? key,
-    required this.buttonText,
-  }) : super(key: key);
+  const ButtonText({Key? key, required this.buttonText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
