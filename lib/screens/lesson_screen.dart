@@ -188,8 +188,6 @@ class _LessonScreenState extends State<LessonScreen> {
       title = "Aww, better luck next time!";
     } else {
       title = "Congratulations!";
-      //int num = widget.lessonNum;
-      //print("On lesson number $num");
       storage.saveCompletedLesson(widget.lessonNum - 1);
     }
     return ResultsScreen(
@@ -197,11 +195,6 @@ class _LessonScreenState extends State<LessonScreen> {
       title: title,
     );
   }
-
-  // void saveCompletedLesson(){
-  //   final prefs = await SharedPreferences.getInstance();
-  //   prefs.setBool('lesson-num-1', true);
-  // }
 
   /// Creates the template for alert with title, description and next button
   AlertDialog createResultAlert(String alertTitle, String alertDesc) {

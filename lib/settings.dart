@@ -30,6 +30,7 @@ class Settings {
   void reset() {
     _setDefaultValues();
     _writeDefaultsToStorage();
+    _resetLessons();
   }
 
   /// Puts default values into the map
@@ -58,5 +59,14 @@ class Settings {
       if (volume != null) _map['volume'] = volume;
       if (difficulty != null) _map['difficulty'] = difficulty;
     }
+  }
+
+  Future<void> _resetLessons() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 0; x < constants.numOfLessons; x++) {
+      prefs.setBool('lesson-num-$x', false);
+    }
+    //print("lessons reset");
   }
 }

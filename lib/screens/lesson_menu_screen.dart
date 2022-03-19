@@ -32,7 +32,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
 
   void _setPage() async {
     List<bool> values = await storage.loadLessonValues();
-    print("loaded values");
+    //print("loaded values");
     //state changes when values are fetched
     setState(() {
       _map.addAll({
@@ -44,7 +44,6 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         '6': values[5],
       });
     });
-    // makeLessonButtons();
   }
 
   /// Builds the screen with the appBar and the row of lessons
@@ -64,14 +63,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
             controller: _firstController,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:
-                  // lessonButton('Lesson 1', 1), // GestureDetector
-                  // lessonButton('Lesson 2', 2), // GestureDetector
-                  // lessonButton('Lesson 3', 3), // GestureDetector
-                  // lessonButton('Lesson 4', 4), // GestureDetector
-                  // lessonButton('Lesson 5', 5), // GestureDetector
-                  // lessonButton('Lesson 6', 6) // GestureDetector
-                  makeLessonButtons(),
+              children: makeLessonButtons(),
             ),
           ),
         ),
@@ -111,7 +103,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
   }
 
   List<Widget> makeLessonButtons() {
-    print("making buttons");
+    //print("making buttons");
     return [
       lessonButton('Lesson 1', 1), // GestureDetector
       lessonButton('Lesson 2', 2), // GestureDetector

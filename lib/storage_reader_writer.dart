@@ -38,6 +38,8 @@ class StorageReaderWriter {
   void reset() {
     _setDefaultValues();
     _writeDefaultsToStorage();
+    _resetLessons();
+    _resetAchievements();
   }
 
   /// Puts default values into the map
@@ -96,14 +98,25 @@ class StorageReaderWriter {
   //for achievements
   Future<List<int>> loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
-    int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
+
+    int lessonsPassed = 0;
+
+    for (int x = 0; x < numOfLessons; x++) {
+      bool value = prefs.getBool('lesson-num-$x') ?? false;
+      if (value) lessonsPassed += 1;
+      //print('adding the $x one');
+    }
+
+    //print("current lessons passed: $lessonsPassed");
+
+    //int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
     int endlessBassHS =
         int.parse(prefs.getString('endless-bass-high-score') ?? '0');
     int endlessTrebleHS =
         int.parse(prefs.getString('endless-treble-high-score') ?? '0');
 
-    return [completedLessons, completedQuizzes, endlessBassHS, endlessTrebleHS];
+    return [lessonsPassed, completedQuizzes, endlessBassHS, endlessTrebleHS];
   }
 
   // //for lessons
@@ -121,15 +134,26 @@ class StorageReaderWriter {
 
     for (int x = 0; x < numOfLessons; x++) {
       values.add(prefs.getBool('lesson-num-$x') ?? false);
-      print('adding the $x one');
+      //print('adding the $x one');
     }
-    print(values);
+    //print(values);
     return values;
   }
 
   Future<void> saveCompletedLesson(lessonNum) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('lesson-num-$lessonNum', true);
-    print("lesson $lessonNum set to pass");
+    //print("lesson $lessonNum set to pass");
   }
+
+  Future<void> _resetLessons() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 0; x < numOfLessons; x++) {
+      prefs.setBool('lesson-num-$x', false);
+    }
+    //print("lessons reset");
+  }
+
+  void _resetAchievements() {}
 }
