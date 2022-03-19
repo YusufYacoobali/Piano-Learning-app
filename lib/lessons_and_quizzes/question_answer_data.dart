@@ -7,7 +7,6 @@ class QuestionAnswerData {
 
   /// Get an ordered list of question IDs
   /// The first question ID is the ID of the question that was answered incorrectly the most number of times
-  // TODO: Take in lessonID so have practice questions for one lesson
   static List<int> getPracticeQuestionIDs() {
     // Go through map values in ascending order
     // Add each corresponding ID to the return list
@@ -28,7 +27,6 @@ class QuestionAnswerData {
     return questionIDs;
   }
 
-  // TODO: Add time taken parameter
   /// Record when a question has been answered correctly/incorrectly
   static void questionAnswered(int questionID, bool isCorrect, int? timeTaken) {
     int? currentStatistic = _questionStatistics[questionID];
