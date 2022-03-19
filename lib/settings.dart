@@ -35,12 +35,14 @@ class Settings {
   /// Puts default values into the map
   void _setDefaultValues() {
     _map['volume'] = constants.defaultVolumeLevel;
+    _map['difficulty'] = constants.defaultDifficultyLevel;
   }
 
   /// Writes the default settings values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setInt('volume', constants.defaultVolumeLevel);
+    pref.setString('difficulty', constants.defaultDifficultyLevel);
   }
 
   /// Loads the settings from Shared Preferences
@@ -52,7 +54,9 @@ class Settings {
       await _writeDefaultsToStorage();
     } else {
       int? volume = pref.getInt('volume');
+      String? difficulty = pref.getString('difficulty');
       if (volume != null) _map['volume'] = volume;
+      if (difficulty != null) _map['difficulty'] = difficulty;
     }
   }
 }

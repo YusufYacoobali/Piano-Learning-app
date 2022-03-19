@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/keyboard.dart';
-import '../components/option_button.dart';
 import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
@@ -67,26 +66,26 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   }
 
   /// Gets a list of the user-selectable option buttons
-  List<Widget> getOptionButtons() {
-    List<Widget> optionButtons = [];
-    List<String> notes = whiteKeyNames;
-    for (int i = 0; i < notes.length; ++i) {
-      optionButtons.add(
-        OptionButton(
-          buttonText: notes[i],
-          onPressed: () {
-            questionBrain.setAnswer(notes[i]);
-            setState(() {
-              questionBrain.goToNextQuestion();
-              // Re-render the screen with new question
-              setScreenWidget();
-            });
-          },
-        ),
-      );
-    }
-    return optionButtons;
-  }
+  // List<Widget> getOptionButtons() {
+  //   List<Widget> optionButtons = [];
+  //   List<String> notes = whiteKeyNames;
+  //   for (int i = 0; i < notes.length; ++i) {
+  //     optionButtons.add(
+  //       OptionButton(
+  //         buttonText: notes[i],
+  //         onPressed: () {
+  //           questionBrain.setAnswer(notes[i]);
+  //           setState(() {
+  //             questionBrain.goToNextQuestion();
+  //             // Re-render the screen with new question
+  //             setScreenWidget();
+  //           });
+  //         },
+  //       ),
+  //     );
+  //   }
+  //   return optionButtons;
+  // }
 
   /// Gets the results screen
   Widget getResultsScreen() {

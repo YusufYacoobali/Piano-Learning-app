@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
-//import 'package:sight_reading_app/screens/lesson_screen.dart';
+import 'package:sight_reading_app/screens/lesson_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 
 void main() {
@@ -307,7 +307,7 @@ void main() {
     */
   });
 
-  /*
+
   group(
       'check that can be continue the lesson once the play button is clicked.',
       () {
@@ -371,7 +371,7 @@ void main() {
       expect(find.byType(LessonScreen), findsOneWidget);
     });
 
-    testWidgets('lesson 5 play button is clicked', (WidgetTester tester) async {
+    /*testWidgets('lesson 5 play button is clicked', (WidgetTester tester) async {
       const iconKey = Key('Pause Icon');
       const playKey = Key('play button');
       await tester.pumpWidget(const SightReadingApp());
@@ -384,9 +384,9 @@ void main() {
       await tester.tap(find.byKey(playKey));
       await tester.pumpAndSettle();
       expect(find.byType(LessonScreen), findsOneWidget);
-    });
+    });*/
   });
-  */
+
 
   group('check that lesson selection button is displayed.', () {
     testWidgets('lesson 1 selection button is displayed.',

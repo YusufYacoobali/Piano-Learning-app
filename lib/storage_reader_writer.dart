@@ -49,8 +49,12 @@ class StorageReaderWriter {
       _map['lesson $i'] = 0;
     }
 
-    _map['endless-treble-high-score'] = 0;
-    _map['endless-bass-high-score'] = 0;
+    _map['endless-treble-beginner-high-score'] = 0;
+    _map['endless-treble-intermediate-high-score'] = 0;
+    _map['endless-treble-expert-high-score'] = 0;
+    _map['endless-bass-beginner-high-score'] = 0;
+    _map['endless-bass-intermediate-high-score'] = 0;
+    _map['endless-bass-expert-high-score'] = 0;
   }
 
   /// Writes the default StorageWriter values to Shared Preferences
@@ -64,6 +68,13 @@ class StorageReaderWriter {
 
     pref.setString('endless-treble-high-score', '0');
     pref.setString('endless-bass-high-score', '0');
+
+    pref.setString('endless-treble-beginner-high-score', '0');
+    pref.setString('endless-treble-intermediate-high-score', '0');
+    pref.setString('endless-treble-expert-high-score', '0');
+    pref.setString('endless-bass-beginner-high-score', '0');
+    pref.setString('endless-bass-intermediate-high-score', '0');
+    pref.setString('endless-bass-expert-high-score', '0');
   }
 
   /// Loads the StorageWriter from Shared Preferences

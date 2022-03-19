@@ -22,13 +22,20 @@ class NotePlayedChecker {
         _noteHit = true;
         function(_noteHit);
       }
-      else if (note.name.length == 3) {
+      else if (name.length == 3 && note.name.length == 3) {
         String noteWithoutOctave = name[0] + name[1];
-        String alt = sharpFlatEquivalence[noteWithoutOctave]!;
-        alt = alt + name[name.length - 1];
-        if (note.name == alt) {
+        String playedNoteWithoutOctave = note.name[0] + note.name[1];
+        if (playedNoteWithoutOctave == noteWithoutOctave) {
           _noteHit = true;
           function(_noteHit);
+        }
+        else {
+          String alt = sharpFlatEquivalence[noteWithoutOctave]!;
+          alt = alt + name[name.length - 1];
+          if (note.name == alt) {
+            _noteHit = true;
+            function(_noteHit);
+          }
         }
       }
     }

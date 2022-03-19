@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'moving_music_sheet.dart';
 import 'note.dart';
+import 'package:sight_reading_app/constants.dart' as constants;
 
 class PlayAlongSongTimer {
   /// Whether the sheet is moving or not
@@ -19,7 +20,7 @@ class PlayAlongSongTimer {
   int _index = 0;
 
   /// The number of movements before the time unit changes
-  static const int iterationsPerTimeUnit = 80;
+  late final int _iterationsPerTimeUnit;
 
   /// The function to be called when a note has been hit or missed
   final Function(String) updater;
@@ -43,7 +44,10 @@ class PlayAlongSongTimer {
   late final int _timeBetweenMovements;
 
   /// How fast the notes move along the screen
-  final int bpm;
+  late final int _bpm;
+
+  /// The difficulty level
+  late final String _difficulty;
 
   PlayAlongSongTimer({
     required this.sheet,
@@ -51,9 +55,7 @@ class PlayAlongSongTimer {
     required this.updater,
     required this.notes,
     required this.onStop,
-    required this.bpm
   }) {
-    _timeBetweenMovements = ((1 / ((bpm / 60) * iterationsPerTimeUnit)) * 1000).round();
 
     _endTime = notes.keys.last;
 
@@ -62,8 +64,32 @@ class PlayAlongSongTimer {
       Note note = n;
       nextNote.setNextNote(note);
     }
-
     sheet.onEnd = end;
+  }
+
+  void _setDifficultyValues() {
+    int apparentSpacing = 100;
+    if (_difficulty == 'Expert') {
+      _bpm = constants.endlessExpertBpm;
+      _iterationsPerTimeUnit = constants.playAlongExpertNoteSpacing;
+      apparentSpacing = _iterationsPerTimeUnit - 30;
+    }
+    else if (_difficulty == 'Intermediate') {
+      _bpm = constants.endlessIntermediateBpm;
+      _iterationsPerTimeUnit = constants.playAlongIntermediateNoteSpacing;
+      apparentSpacing = _iterationsPerTimeUnit - 60;
+    }
+    else {
+      _bpm = constants.endlessBeginnerBpm;
+      _iterationsPerTimeUnit = constants.playAlongBeginnerNoteSpacing;
+      apparentSpacing = 80;
+    }
+    _timeBetweenMovements = ((1 / ((_bpm / 60) * apparentSpacing)) * 1000).round();
+  }
+
+  void setDifficulty(String diff) {
+    _difficulty = diff;
+    _setDifficultyValues();
   }
 
   /// Starts moving the notes along the screen
@@ -86,7 +112,7 @@ class PlayAlongSongTimer {
         else {
           sheet.move();
         }
-        _index = (_index+1) % iterationsPerTimeUnit;
+        _index = (_index+1) % _iterationsPerTimeUnit;
         updater(_index.toString());
       }
     }
@@ -114,7 +140,6 @@ class PlayAlongSongTimer {
     _isOn = true;
     start();
   }
-
 
   /// Moves notes along screen and displays a new random note
   void increment() {

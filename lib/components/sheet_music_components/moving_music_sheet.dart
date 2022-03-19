@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:sight_reading_app/constants.dart';
 import 'note_on_stave.dart';
 import 'note_played_checker.dart';
 import 'stave_builder.dart';
@@ -59,7 +58,7 @@ class MovingMusicSheet extends MusicSheet{
   /// Moves the notes on the canvas towards the end line
   void move() {
     for (NoteOnStave note in notesOnStaves) {
-      note.pos-=noteMovement;
+      note.pos--;
     }
   }
 

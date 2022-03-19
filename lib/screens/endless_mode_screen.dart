@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/instruction_pop_up_content/endless_difficulty_selector.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
@@ -37,16 +37,9 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The controller for the start menu
   late final PopUpController _startMenu;
 
-  /// The controller for the difficulty menu
-  late final PopUpController _difficultyMenu;
-
   /// The controller for the end menu
   late final PopUpController _endMenu;
 
-  /// The clef selected
-  late final Clef _clef;
-
-  /// The clef selected
   late final String _difficulty;
 
   @override
@@ -60,16 +53,14 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
         notePlayedChecker: _currentNoteToPlay);
     _generator = EndlessNoteGenerator(
         sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
+    getDifficulty();
 
     EndlessStartingInstructions startMenuBuilder =
-        EndlessStartingInstructions(context: context, onStart: setClef);
-    EndlessDifficultyInstructions difficultyBuilder =
-        EndlessDifficultyInstructions(context: context, onSelection: startGame);
+        EndlessStartingInstructions(context: context, onStart: startGame);
     EndlessEndingInstructions endMenuBuilder =
         EndlessEndingInstructions(context: context, counter: _counter);
 
     _startMenu = PopUpController(context: context, menuBuilder: startMenuBuilder);
-    _difficultyMenu = PopUpController(context: context, menuBuilder: difficultyBuilder);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
 
     /// Displays the start menu
@@ -81,8 +72,13 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     super.dispose();
     _generator.stop();
     _startMenu.delete();
-    _difficultyMenu.delete();
     _endMenu.delete();
+  }
+
+  void getDifficulty() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _difficulty = pref.get('difficulty')!.toString();
+    _generator.setDifficulty(_difficulty);
   }
 
   /// Updates the screen
@@ -104,18 +100,10 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// Starts the endless mode game
-  void setClef(Clef clef) {
-    _clef = clef;
-    _sheet.changeClef(_clef);
-    _difficultyMenu.show();
-  }
-
-  /// Starts the endless mode game
-  void startGame(String difficulty) {
-    _difficulty = difficulty;
-    _counter.getHighScore(_clef, _difficulty);
-    _generator.setDifficulty(difficulty);
-    _generator.setClef(_clef);
+  void startGame(Clef clef) {
+    _counter.getHighScore(clef, _difficulty);
+    _generator.setClef(clef);
+    _sheet.changeClef(clef);
     _generator.start();
   }
 

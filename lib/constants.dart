@@ -302,9 +302,6 @@ BoxDecoration cardBackground = BoxDecoration(
   ),
 );
 
-/// How far each note should move per iteration
-const double noteMovement = 1;
-
 const Map<String, String> sharpFlatEquivalence = <String, String>{
   'Db': 'C#',
   'Eb': 'D#',
@@ -312,3 +309,31 @@ const Map<String, String> sharpFlatEquivalence = <String, String>{
   'Ab': 'G#',
   'Bb': 'A#',
 };
+
+/// Notes that can be played in endless mode
+const List<String> endlessBeginnerNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+const List<String> endlessIntermediateNotes = ['C', 'Db', 'D', 'D#', 'E', 'F', 'F#', 'G', 'A', 'Bb', 'B'];
+const List<String> endlessExpertNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B'];
+
+/// How fast the notes move across the screen in endless mode for each difficulty
+const int endlessBeginnerBpm = 80;
+const int endlessIntermediateBpm = 100;
+const int endlessExpertBpm = 120;
+
+/// maximum and minimum gaps between notes in endless mode
+const int endlessBeginnerMinTime = 4;
+const int endlessBeginnerMaxTime = 7;
+const int endlessIntermediateMinTime = 3;
+const int endlessIntermediateMaxTime = 5;
+const int endlessExpertMinTime = 1;
+const int endlessExpertMaxTime = 4;
+
+/// How fast the notes move across the screen in play along for each difficulty
+const int playAlongBeginnerBpm = 50;
+const int playAlongIntermediateBpm = 70;
+const int playAlongExpertBpm = 90;
+
+/// How far apart the notes are in play along for each difficulty
+const int playAlongBeginnerNoteSpacing = 200;
+const int playAlongIntermediateNoteSpacing = 150;
+const int playAlongExpertNoteSpacing = 130;
