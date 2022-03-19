@@ -230,7 +230,7 @@ const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 const double cardWidth = 230;
 const double cardHeight = 270;
 
-const double circularIndicatorRadius = 80;
+const double circularIndicatorRadius = 78;
 
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
@@ -337,3 +337,51 @@ const int playAlongExpertBpm = 90;
 const int playAlongBeginnerNoteSpacing = 200;
 const int playAlongIntermediateNoteSpacing = 150;
 const int playAlongExpertNoteSpacing = 130;
+/// How far each note should move per iteration
+const double noteMovement = 1;
+
+
+const Icon helperButton = Icon(
+  Icons.help,
+);
+
+const Icon helpPlayButtonStyle = Icon(
+  Icons.play_arrow,
+  size: 35.0,
+);
+
+ButtonStyle helperMenuButonStyle = ElevatedButton.styleFrom(
+  primary: const Color(0xffa4508b).withOpacity(0.3),
+  onPrimary: Colors.grey.shade300,
+  fixedSize: const Size(180.0, 60.0),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10),
+  ),
+);
+
+const TextStyle helperMenuTextStyle = TextStyle(
+  fontSize: 40.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+/// Clef symbols
+const String trebleClef = '𝄞';
+const String bassClef = '𝄢';
+
+/// Android clef fonts
+const double androidTrebleClefFontSize = 70;
+const double androidBassClefFontSize = 83;
+
+/// Android clef offset positions
+const double androidTrebleClefOffset = 80;
+const double androidBassClefOffset = 93;
+
+/// IOS clef fonts
+/// Change these to change the clef size
+const double iosTrebleClefFontSize = 190;
+const double iosBassClefFontSize = 100;
+
+/// IOS clef offsets
+/// Change these to change the clef position on screen
+const double iosTrebleClefOffset = 118;
+const double iosBassClefOffset = 85;

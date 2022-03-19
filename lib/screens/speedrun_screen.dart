@@ -7,10 +7,14 @@ import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/lesson_one.dart';
 import '../question_brain.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // TODO: Need to have enough questions so that we don't run out before the timer finishes
 
-/// Screen for speedrun mode
+/// Screen that displays and runs the speedrun mode.
+///
+/// The user's selection on the speedrun menu screen determines the time duration.
+/// Once time is up a results screen is shown with the user's score.
 class SpeedrunScreen extends StatefulWidget {
   /// The duration of the speedrun
   final int timerDuration;
@@ -27,6 +31,7 @@ class SpeedrunScreen extends StatefulWidget {
   State<SpeedrunScreen> createState() => _SpeedrunScreenState();
 }
 
+/// The state for the speedrun screen.
 class _SpeedrunScreenState extends State<SpeedrunScreen> {
   /// Manages the questions
   late QuestionBrain questionBrain;
@@ -48,7 +53,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     super.dispose();
   }
 
-  /// Creates the screen widget
+  /// The widget to appear on screen.
   void setScreenWidget() {
     Note note = questionBrain.getNote();
     Clef clef = questionBrain.getClef();
@@ -87,7 +92,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   //   return optionButtons;
   // }
 
-  /// Gets the results screen
+  /// The results screen
   Widget getResultsScreen() {
     // Calculates the percentage achieved by the user
     double percentage =
@@ -99,6 +104,18 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
       score: percentage,
       title: title,
     );
+  }
+
+  ///Checks if the user's score is a new record for the selected mode, and updates shared preferences if it is.
+  Future<void> _updateRecords() async {
+    int score = questionBrain.getScore();
+    final prefs = await SharedPreferences.getInstance();
+    final int currentRecord = prefs.getInt('${widget.timerDuration}_second_speedrun_record') ?? 0;
+    //If it is the user's first time, the currentRecord will be N/A.
+    //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
+    if (score > currentRecord || currentRecord == 0) {
+      await prefs.setInt('${widget.timerDuration}_second_speedrun_record', score);
+    }
   }
 
   /// Gets the countdown timer displayed in the top-right
@@ -119,7 +136,8 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
       autoStart: true,
       onStart: () {},
       onComplete: () {
-        // When timer finishes, go to results screen
+        // When timer finishes, go to results screen and update records if needed
+        _updateRecords();
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -132,6 +150,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
+
   /// Gets the key pressed on the keyboard
   void answer(String text) {
     questionBrain.setAnswer(text);
@@ -141,12 +160,13 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
       setScreenWidget();
     });
   }
-
+  
+  /// Creates the screen.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        // Timer is stacked on top of the question
+        // Timer is stacked on top of the question.
         child: Stack(
           children: [
             Column(
