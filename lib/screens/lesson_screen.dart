@@ -7,8 +7,6 @@ import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
-import 'package:sight_reading_app/components/option_button.dart';
-import '../lessons_and_quizzes/lesson_one.dart';
 
 import '../lessons_and_quizzes/question_finder.dart';
 
