@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 const List<Object> difficultyList = ['Beginner', 'Intermediate', 'Expert'];
 
 /// Default values of individual settings
-const int defaultVolumeLevel = 100;
+const String defaultVolumeLevel = '100';
 const String defaultDifficultyLevel = 'Beginner';
 const String defaultTheme = 'Dark';
 

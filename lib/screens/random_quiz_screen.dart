@@ -63,7 +63,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
               children: [
                 screenWidget,
                 Expanded(
-                  child: Keyboard(function: answer),
+                  child: Keyboard(onKeyPressed: answer),
                 ),
               ],
             ),

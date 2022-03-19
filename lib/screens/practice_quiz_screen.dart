@@ -63,7 +63,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
               children: [
                 screenWidget,
                 Expanded(
-                  child: Keyboard(function: answer),
+                  child: Keyboard(onKeyPressed: answer),
                 ),
               ],
             ),

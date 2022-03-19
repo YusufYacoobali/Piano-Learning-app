@@ -14,7 +14,7 @@ import '../play_along_tracks/bass_track_one.dart' as bass_track1;
 List<Key> trackButtonKeys = <Key>[];
 
 /// A list containing the names of each of the play along tracks.
-List<String> trackNames = <String>[];
+List<String> trackNames = <String>['Ode to Joy - Treble Only', 'A Simple Bass Melody'];
 
 ///A list containing the user's records for each of the tracks.
 List<String> trackRecords = <String>[];
@@ -83,7 +83,7 @@ class PlayAlongMenuScreen extends StatelessWidget {
       appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu),
       body: SafeArea(
         child: ListView.separated(
-            //Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
+          //Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
             itemBuilder: (BuildContext context, int index) {
               return SizedBox(
                 height: 100.0, //Fixes button height
@@ -110,7 +110,7 @@ class PlayAlongMenuScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              PlayAlongScreen(notes: map, clef: clef, bpm: bpm),
+                              PlayAlongScreen(notes: map, clef: clef, bpm: bpm, songName: trackNames[index],),
                         ));
                   },
                   key: trackButtonKeys[index],
@@ -119,7 +119,7 @@ class PlayAlongMenuScreen extends StatelessWidget {
             },
             //Adds blank spaces between each button.
             separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(height: 10),
+            const SizedBox(height: 10),
             itemCount: trackSheets.length),
       ),
     );

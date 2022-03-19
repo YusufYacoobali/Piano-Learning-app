@@ -83,7 +83,7 @@ class _LessonScreenState extends State<LessonScreen> {
               children: [
                 screenWidget,
                 Expanded(
-                  child: Keyboard(function: answer),
+                  child: Keyboard(onKeyPressed: answer),
                 ),
               ],
             ),

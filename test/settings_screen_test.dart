@@ -42,12 +42,12 @@ void main() {
 
         await _goToSettingsScreen(tester);
 
-        expect(pref.get('volume'), 100);
+        expect(pref.get('volume'), '100');
 
         await tester.drag(find.byType(Slider), const Offset(-100, 0));
         await tester.pump();
 
-        if (pref.get('volume') == 100) {
+        if (pref.get('volume') == '100') {
           fail('The volume should not be 100');
         }
       });
@@ -84,7 +84,7 @@ void main() {
 
         await _goToSettingsScreen(tester);
         
-        expect(pref.get('volume'), 100);
+        expect(pref.get('volume'), '100');
         expect(pref.get('theme'), 'Dark');
 
         // Check that the initial theme of the app is dark
@@ -97,7 +97,7 @@ void main() {
         await tester.tap(find.text('Light').last);
         await tester.pumpAndSettle();
         
-        if (pref.get('volume') == 100) fail('The volume should not be 100');
+        if (pref.get('volume') == '100') fail('The volume should not be 100');
         expect(pref.get('theme'), 'Light');
 
         // Check that the theme changes
@@ -108,7 +108,7 @@ void main() {
         await tester.tap(find.text('Confirm'));
         await tester.pumpAndSettle();
         
-        expect(pref.get('volume'), 100);
+        expect(pref.get('volume'), '100');
         expect(pref.get('theme'), 'Dark');
 
         // Check that the theme changes
@@ -123,7 +123,7 @@ void main() {
 
         await _goToSettingsScreen(tester);
         
-        expect(pref.get('volume'), 100);
+        expect(pref.get('volume'), '100');
         expect(pref.get('theme'), 'Dark');
 
         // Check that the initial theme of the app is dark
@@ -136,7 +136,7 @@ void main() {
         await tester.tap(find.text('Light').last);
         await tester.pumpAndSettle();
         
-        if (pref.get('volume') == 100) fail('The volume should not be 100');
+        if (pref.get('volume') == '100') fail('The volume should not be 100');
         expect(pref.get('theme'), 'Light');
 
         // Check that the theme changes
@@ -147,7 +147,7 @@ void main() {
         await tester.tap(find.text('Cancel'));
         await tester.pump();
 
-        if (pref.get('volume') == 100) fail('The volume should not be 100');
+        if (pref.get('volume') == '100') fail('The volume should not be 100');
         expect(pref.get('theme'), 'Light');
 
         // Check that the theme stays the same
@@ -157,12 +157,12 @@ void main() {
   testWidgets('Check that loading settings from storage displays correctly.',
           (WidgetTester tester) async {
 
-        SharedPreferences.setMockInitialValues({'volume': 50, 'theme': 'Light', });
+        SharedPreferences.setMockInitialValues({'volume': '50', 'difficulty': 'Expert', 'theme': 'Light', });
         final SharedPreferences pref = await SharedPreferences.getInstance();
 
         await _goToSettingsScreen(tester);
         
-        expect(pref.get('volume'), 50);
+        expect(pref.get('volume'), '50');
         expect(pref.get('theme'), 'Light');
 
         // Check that the initial theme of the app is light

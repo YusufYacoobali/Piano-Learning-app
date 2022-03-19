@@ -41,7 +41,7 @@ class Settings {
   /// Writes the default settings values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setInt('volume', constants.defaultVolumeLevel);
+    pref.setInt('volume', int.parse(constants.defaultVolumeLevel));
     pref.setString('difficulty', constants.defaultDifficultyLevel);
   }
 

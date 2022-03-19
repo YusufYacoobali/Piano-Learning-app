@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:sight_reading_app/components/sheet_music_components/play_along_hit_counter.dart';
 
 import 'moving_music_sheet.dart';
 import 'note.dart';
@@ -49,12 +50,15 @@ class PlayAlongSongTimer {
   /// The difficulty level
   late final String _difficulty;
 
+  final PlayAlongHitCounter hitCounter;
+
   PlayAlongSongTimer({
     required this.sheet,
     required this.nextNote,
     required this.updater,
     required this.notes,
     required this.onStop,
+    required this.hitCounter,
   }) {
 
     _endTime = notes.keys.last;
