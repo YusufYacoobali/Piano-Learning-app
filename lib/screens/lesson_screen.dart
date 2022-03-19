@@ -150,6 +150,7 @@ class _LessonScreenState extends State<LessonScreen> {
   void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return createResultAlert(alertTitle, alertDesc);
       },
