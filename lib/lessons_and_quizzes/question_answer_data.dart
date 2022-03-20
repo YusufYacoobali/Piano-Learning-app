@@ -41,7 +41,7 @@ class QuestionAnswerData {
                 currentStatistic += correctAnswerIncrease;
           } else {
             // Longer you take, more marks are reduced
-            int reduction = timeTaken ~/ 100;
+            int reduction = (timeTaken ~/ 100) - correctAnswerIncrease;
             reduction =
                 reduction <= maxTimeReduction ? reduction : maxTimeReduction;
             _questionStatistics[questionID] = currentStatistic -= reduction;
