@@ -36,15 +36,15 @@ class QuestionAnswerData {
         if (timeTaken != null) {
           // If answer correctly within half a second, get full marks
           if (timeTaken <= 500) {
-            _questionStatistics[questionID] = currentStatistic += 10;
+            _questionStatistics[questionID] = currentStatistic += 5;
           } else {
             // Longer you take, more marks are reduced
             int reduction = timeTaken ~/ 100;
-            reduction = reduction >= -5 ? reduction : -5;
-            _questionStatistics[questionID] = currentStatistic += reduction;
+            reduction = reduction <= 5 ? reduction : 5;
+            _questionStatistics[questionID] = currentStatistic -= reduction;
           }
         } else {
-          _questionStatistics[questionID] = currentStatistic += 10;
+          _questionStatistics[questionID] = currentStatistic += 5;
         }
       } else {
         _questionStatistics[questionID] = currentStatistic -= 10;
