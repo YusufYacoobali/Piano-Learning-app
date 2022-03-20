@@ -18,32 +18,96 @@ void main() {
   });
 
   test(
-      'Check that questionAnswered correctly updates map when the question was answered correctly',
+      'Check that questionAnswered correctly updates map when the question was answered correctly within the time threshold',
       () {
-    // TODO: Update test when checking time taken
     SharedPreferences.setMockInitialValues({});
     List<Question> allQuestions = questions;
     int questionID = allQuestions[0].questionID;
     QuestionAnswerData.createDefaultMap();
     Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? oldValue = initialMap[questionID];
-    QuestionAnswerData.questionAnswered(questionID, true, null);
+    QuestionAnswerData.questionAnswered(questionID, true, timeThreshold);
     Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? newValue = updatedMap[questionID];
     expect(oldValue! + correctAnswerIncrease, newValue);
   });
 
   test(
-      'Check that questionAnswered correctly updates map when the question was answered incorrectly',
+      'Check that questionAnswered correctly updates map when the question was answered correctly outside of the time threshold',
       () {
-    // TODO: Update test when checking time taken
     SharedPreferences.setMockInitialValues({});
     List<Question> allQuestions = questions;
     int questionID = allQuestions[0].questionID;
     QuestionAnswerData.createDefaultMap();
     Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? oldValue = initialMap[questionID];
-    QuestionAnswerData.questionAnswered(questionID, false, null);
+    int timeTaken = timeThreshold + 100;
+    QuestionAnswerData.questionAnswered(questionID, true, timeThreshold + 100);
+    Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int timePenalty = (timeTaken ~/ 100) - correctAnswerIncrease;
+    timePenalty =
+        timePenalty <= maxTimeReduction ? timePenalty : maxTimeReduction;
+    int? newValue = updatedMap[questionID];
+    expect(oldValue! - timePenalty, newValue);
+  });
+
+  test(
+      'Check that questionAnswered does not give a time penalty larger than maxTimeReduction',
+      () {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> allQuestions = questions;
+    int questionID = allQuestions[0].questionID;
+    QuestionAnswerData.createDefaultMap();
+    Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? oldValue = initialMap[questionID];
+    QuestionAnswerData.questionAnswered(
+        questionID, true, timeThreshold + 100000);
+    Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? newValue = updatedMap[questionID];
+    expect(oldValue! - maxTimeReduction, newValue);
+  });
+
+  test(
+      'Check that questionAnswered correctly updates map when the question was answered incorrectly within the time threshold',
+      () {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> allQuestions = questions;
+    int questionID = allQuestions[0].questionID;
+    QuestionAnswerData.createDefaultMap();
+    Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? oldValue = initialMap[questionID];
+    QuestionAnswerData.questionAnswered(questionID, false, timeThreshold - 100);
+    Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? newValue = updatedMap[questionID];
+    expect(oldValue! - incorrectAnswerReduction, newValue);
+  });
+
+  test(
+      'Check that questionAnswered correctly updates map when the question was answered incorrectly outside of the time threshold',
+      () {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> allQuestions = questions;
+    int questionID = allQuestions[0].questionID;
+    QuestionAnswerData.createDefaultMap();
+    Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? oldValue = initialMap[questionID];
+    QuestionAnswerData.questionAnswered(questionID, false, timeThreshold + 100);
+    Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? newValue = updatedMap[questionID];
+    expect(oldValue! - incorrectAnswerReduction, newValue);
+  });
+
+  test(
+      'Check that questionAnswered does not increase the penalty beyond the maximum incorrect answer reduction',
+      () {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> allQuestions = questions;
+    int questionID = allQuestions[0].questionID;
+    QuestionAnswerData.createDefaultMap();
+    Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? oldValue = initialMap[questionID];
+    QuestionAnswerData.questionAnswered(
+        questionID, false, timeThreshold + 100000000);
     Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? newValue = updatedMap[questionID];
     expect(oldValue! - incorrectAnswerReduction, newValue);
