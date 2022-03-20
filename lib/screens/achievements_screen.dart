@@ -46,6 +46,12 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'endlessTrebleBegHS': values[5],
         'endlessTrebleInterHS': values[6],
         'endlessTrebleExpHS': values[7],
+        'speedrun10HS': values[8],
+        'speedrun20HS': values[9],
+        'speedrun30HS': values[10],
+        'speedrun40HS': values[11],
+        'speedrun50HS': values[12],
+        'speedrun60HS': values[13],
       });
     });
 

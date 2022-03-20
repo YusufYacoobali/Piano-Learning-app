@@ -162,6 +162,22 @@ class StorageReaderWriter {
     int endlessTrebleExpHS =
         int.parse(prefs.getString('endless-treble-expert-high-score') ?? '0');
 
+    int speedrun10HS = prefs.getInt('10_second_speedrun_record') ?? 0;
+    int speedrun20HS = prefs.getInt('20_second_speedrun_record') ?? 0;
+    int speedrun30HS = prefs.getInt('30_second_speedrun_record') ?? 0;
+    int speedrun40HS = prefs.getInt('40_second_speedrun_record') ?? 0;
+    int speedrun50HS = prefs.getInt('50_second_speedrun_record') ?? 0;
+    int speedrun60HS = prefs.getInt('60_second_speedrun_record') ?? 0;
+
+    // _map.addAll({  'completedLessons': lessonsPassed,
+    //     'completedQuizzes': values[1],
+    //     'endlessBassBegHS': values[2],
+    //     'endlessBassInterHS': values[3],
+    //     'endlessBassExpHS': values[4],
+    //     'endlessTrebleBegHS': values[5],
+    //     'endlessTrebleInterHS': values[6],
+    //     'endlessTrebleExpHS': values[7],});
+
     return [
       lessonsPassed,
       completedQuizzes,
@@ -170,7 +186,13 @@ class StorageReaderWriter {
       endlessBassExpHS,
       endlessTrebleBegHS,
       endlessTrebleInterHS,
-      endlessTrebleExpHS
+      endlessTrebleExpHS,
+      speedrun10HS,
+      speedrun20HS,
+      speedrun30HS,
+      speedrun40HS,
+      speedrun50HS,
+      speedrun60HS,
     ];
   }
 
