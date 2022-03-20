@@ -425,3 +425,9 @@ const double iosBassClefFontSize = 100;
 /// Change these to change the clef position on screen
 const double iosTrebleClefOffset = 118;
 const double iosBassClefOffset = 85;
+
+/// QuestionAnswerData
+const int timeThreshold = 500;
+const int correctAnswerIncrease = 5;
+const int maxTimeReduction = 5;
+const int incorrectAnswerReduction = 10;
