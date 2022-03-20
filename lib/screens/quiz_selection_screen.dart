@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+//import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
+import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
+import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import '../components/app_bar_with_settings_icon.dart';
 import '../components/instruction_pop_up_content/quiz_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -47,14 +49,7 @@ class QuizSelectionScreen extends StatelessWidget {
   //May combine functions that get names with records depending on how data is stored
   //TODO: Add ability to get quiz records from storage.
   List<String> getQuizRecords() {
-    return <String>[
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A'
-    ];
+    return <String>['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'];
   }
 
   ///Builds the screen widgets.
@@ -69,7 +64,8 @@ class QuizSelectionScreen extends StatelessWidget {
       quizButtonKeys.add(Key('quizSelected:$quiz'));
     }
 
-    PopUpController menu = PopUpController(context: context, menuBuilder: QuizInstructions(context: context));
+    PopUpController menu = PopUpController(
+        context: context, menuBuilder: QuizInstructions(context: context));
 
     return Scaffold(
       appBar: AppBarWithSettingsIcon(const Text('Choose a quiz:'), menu),
@@ -89,13 +85,18 @@ class QuizSelectionScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           Text(quizzes[index], textAlign: TextAlign.left),
-                          SizedBox(width: MediaQuery.of(context).size.width / 4), //Adds space between Text
-                          Text('Record: ${quizRecords[index]}', textAlign: TextAlign.right),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width /
+                                  4), //Adds space between Text
+                          Text('Record: ${quizRecords[index]}',
+                              textAlign: TextAlign.right),
                         ],
                       ),
                       onPress: () {
                         Navigator.pushNamed(
-                            context, MenuScreen.id); //TODO: Replace with instruction screen template
+                            context,
+                            PracticeQuizScreen
+                                .id); //TODO: Replace with instruction screen template
                       },
                       key: quizButtonKeys[index],
                     ),
@@ -103,7 +104,7 @@ class QuizSelectionScreen extends StatelessWidget {
                 },
                 //Adds blank spaces between each button
                 separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(
+                    const SizedBox(
                   height: 10,
                 ),
               ),
@@ -118,12 +119,13 @@ class QuizSelectionScreen extends StatelessWidget {
                     buttonChild: const Center(child: Text("Random mixed quiz")),
                     onPress: () {
                       Navigator.pushNamed(
-                          context, MenuScreen.id); //TODO: Replace with Random quiz screen (instruction screen instead too?)
+                          context,
+                          RandomQuizScreen
+                              .id); //TODO: Replace with Random quiz screen (instruction screen instead too?)
                     },
                     key: randomQuizSelectedKey,
                   ),
-                )
-            )
+                ))
           ],
         ),
       ),

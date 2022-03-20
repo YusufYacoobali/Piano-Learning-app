@@ -42,7 +42,7 @@ class AchievementMaker {
     //2nd value passed in is how many have been completed
     List<AchievementCard> achievements = [
       AchievementCard(
-          'Complete the 1st lesson', 1, achieveValues['completedLessons']),
+          'Complete 1 lesson', 1, achieveValues['completedLessons']),
       AchievementCard(
           'Complete 5 lessons', 5, achieveValues['completedLessons']),
       AchievementCard('Complete all lessons', numOfLessons,
