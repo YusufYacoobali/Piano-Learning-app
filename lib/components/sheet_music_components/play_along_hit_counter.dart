@@ -30,6 +30,9 @@ class PlayAlongHitCounter {
   void writeHighScore() async {
     String key = '${songName.toLowerCase()}-${_difficulty.toLowerCase()}-high-score';
     String percentage = ((score/numNotes) * 100).toStringAsFixed(1);
+    if (percentage[percentage.length-1] == '0') {
+      percentage = double.parse(percentage).round().toString();
+    }
     await _writer.write(key, percentage);
   }
 

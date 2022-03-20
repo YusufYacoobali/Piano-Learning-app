@@ -28,6 +28,9 @@ class PlayAlongEndingInstructions extends PopUpContentBuilder {
   @override
   void buildMenu() {
     String percentage = ((hitCounter.score/hitCounter.numNotes) * 100).toStringAsFixed(1);
+    if (percentage[percentage.length-1] == '0') {
+      percentage = double.parse(percentage).round().toString();
+    }
     text = Column(
         children: [
           const Text('Song Finished', style: pauseMenuTextStyle),
