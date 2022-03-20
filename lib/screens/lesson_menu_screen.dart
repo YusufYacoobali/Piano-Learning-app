@@ -25,23 +25,25 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         title: const Text('Lessons'),
       ),
       body: SafeArea(
-        child: Scrollbar(
-          controller: _firstController,
-          isAlwaysShown: true,
-          child: SingleChildScrollView(
-            /// makes the row scrollable
-            scrollDirection: Axis.horizontal,
+        child: FittedBox(
+          child: Scrollbar(
             controller: _firstController,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                lessonButton('Lesson 1', 1), // GestureDetector
-                lessonButton('Lesson 2', 2), // GestureDetector
-                lessonButton('Lesson 3', 3), // GestureDetector
-                lessonButton('Lesson 4', 4), // GestureDetector
-                lessonButton('Lesson 5', 5), // GestureDetector
-                lessonButton('Lesson 6', 6) // GestureDetector
-              ],
+            isAlwaysShown: true,
+            child: SingleChildScrollView(
+              /// makes the row scrollable
+              scrollDirection: Axis.horizontal,
+              controller: _firstController,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  lessonButton('Lesson 1', 1), // GestureDetector
+                  lessonButton('Lesson 2', 2), // GestureDetector
+                  lessonButton('Lesson 3', 3), // GestureDetector
+                  lessonButton('Lesson 4', 4), // GestureDetector
+                  lessonButton('Lesson 5', 5), // GestureDetector
+                  lessonButton('Lesson 6', 6) // GestureDetector
+                ],
+              ),
             ),
           ),
         ),
