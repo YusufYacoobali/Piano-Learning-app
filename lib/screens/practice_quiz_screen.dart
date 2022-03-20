@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
@@ -17,6 +18,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
   late final PopUpController _pauseMenu;
+  StorageReaderWriter storage = StorageReaderWriter();
 
   @override
   void initState() {
@@ -176,6 +178,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
       title = "Aww, better luck next time!";
     } else {
       title = "Congratulations!";
+      //storage.saveCompletedQuiz(quizId);
     }
     return ResultsScreen(
       score: percentage,

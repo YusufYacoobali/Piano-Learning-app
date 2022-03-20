@@ -144,17 +144,34 @@ class StorageReaderWriter {
       if (value) lessonsPassed += 1;
       //print('adding the $x one');
     }
-
     //print("current lessons passed: $lessonsPassed");
 
     //int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
-    int endlessBassHS =
-        int.parse(prefs.getString('endless-bass-high-score') ?? '0');
-    int endlessTrebleHS =
-        int.parse(prefs.getString('endless-treble-high-score') ?? '0');
+    int endlessBassBegHS =
+        int.parse(prefs.getString('endless-bass-beginner-high-score') ?? '0');
+    int endlessBassInterHS = int.parse(
+        prefs.getString('endless-bass-intermediate-high-score') ?? '0');
+    int endlessBassExpHS =
+        int.parse(prefs.getString('endless-bass-expert-high-score') ?? '0');
 
-    return [lessonsPassed, completedQuizzes, endlessBassHS, endlessTrebleHS];
+    int endlessTrebleBegHS =
+        int.parse(prefs.getString('endless-treble-beginner-high-score') ?? '0');
+    int endlessTrebleInterHS = int.parse(
+        prefs.getString('endless-treble-intermediate-high-score') ?? '0');
+    int endlessTrebleExpHS =
+        int.parse(prefs.getString('endless-treble-expert-high-score') ?? '0');
+
+    return [
+      lessonsPassed,
+      completedQuizzes,
+      endlessBassBegHS,
+      endlessBassInterHS,
+      endlessBassExpHS,
+      endlessTrebleBegHS,
+      endlessTrebleInterHS,
+      endlessTrebleExpHS
+    ];
   }
 
   // //for lessons
@@ -181,6 +198,12 @@ class StorageReaderWriter {
   Future<void> saveCompletedLesson(lessonNum) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('lesson-num-$lessonNum', true);
+    //print("lesson $lessonNum set to pass");
+  }
+
+  Future<void> saveCompletedQuiz(quizId) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('quiz-num-$quizId', true);
     //print("lesson $lessonNum set to pass");
   }
 

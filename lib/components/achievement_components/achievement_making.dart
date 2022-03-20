@@ -47,24 +47,58 @@ class AchievementMaker {
           'Complete 5 lessons', 5, achieveValues['completedLessons']),
       AchievementCard('Complete all lessons', numOfLessons,
           achieveValues['completedLessons']),
+
       AchievementCard(
           'Complete your 1st quiz', 1, achieveValues['completedQuizzes']),
       AchievementCard(
           'Complete 5 quizzes', 5, achieveValues['completedQuizzes']),
       AchievementCard('Complete all quizzes', numOfquizzes,
           achieveValues['completedQuizzes']),
-      AchievementCard('Get a score 0f 10 on endless mode with treble', 10,
-          achieveValues['endless-treble-high-score']),
-      AchievementCard('Get a score 0f 30 on endless mode with treble', 30,
-          achieveValues['endless-treble-high-score']),
-      AchievementCard('Get a score 0f 50 on endless mode with treble', 50,
-          achieveValues['endless-treble-high-score']),
-      AchievementCard('Get a score 0f 10 on endless mode with bass', 10,
-          achieveValues['endless-bass-high-score']),
-      AchievementCard('Get a score 0f 30 on endless mode with bass', 30,
-          achieveValues['endless-bass-high-score']),
-      AchievementCard('Get a score 0f 50 on endless mode with bass', 50,
-          achieveValues['endless-bass-high-score']),
+
+      AchievementCard(
+          'score 5 or higher on endless (treble in beginner difficulty)',
+          5,
+          achieveValues['endlessTrebleBegHS']),
+      AchievementCard(
+          'score 10 or higher on endless (treble in beginner difficulty)',
+          10,
+          achieveValues['endlessTrebleBegHS']),
+      AchievementCard(
+          'score 10 or higher on endless (treble in intermediate difficulty)',
+          10,
+          achieveValues['endlessTrebleInterHS']),
+      AchievementCard(
+          'score 15 or higher on endless (treble in intermediate difficulty)',
+          15,
+          achieveValues['endlessTrebleInterHS']),
+      AchievementCard(
+          'score 20 or higher on endless (treble in expert difficulty)',
+          20,
+          achieveValues['endlessTrebleExpHS']),
+
+      AchievementCard(
+          'score 5 or higher on endless (bass in beginner difficulty)',
+          5,
+          achieveValues['endlessBassBegHS']),
+      AchievementCard(
+          'score 10 or higher on endless (bass in beginner difficulty)',
+          10,
+          achieveValues['endlessBassBegHS']),
+
+      AchievementCard(
+          'score 10 or higher on endless (bass in intermediate difficulty)',
+          10,
+          achieveValues['endlessBassInterHS']),
+      AchievementCard(
+          'score 15 or higher on endless (bass in intermediate difficulty)',
+          15,
+          achieveValues['endlessBassInterHS']),
+
+      AchievementCard(
+          'score 20 or higher on endless (bass in expert difficulty)',
+          20,
+          achieveValues['endlessBassExpHS']),
+
       //AchievementCard('Complete Ode to Joy play along', 100, complete),
       //AchievementCard('Complete the simple bass melody play along', 100, complete),
       //AchievementCard('Pass the 10 second speed run', 10, complete),

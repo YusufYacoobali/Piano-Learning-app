@@ -26,10 +26,11 @@ class AchievementCard extends StatelessWidget {
       decoration: achievementCardDecoration,
       child: Column(children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             playLessonIcon,
             const SizedBox(
-              width: 20,
+              width: 10,
             ),
             Flexible(
               child: Text(

@@ -40,8 +40,12 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       _map.addAll({
         'completedLessons': values[0],
         'completedQuizzes': values[1],
-        'endless-bass-high-score': values[2],
-        'endless-treble-high-score': values[3]
+        'endlessBassBegHS': values[2],
+        'endlessBassInterHS': values[3],
+        'endlessBassExpHS': values[4],
+        'endlessTrebleBegHS': values[5],
+        'endlessTrebleInterHS': values[6],
+        'endlessTrebleExpHS': values[7],
       });
     });
 
