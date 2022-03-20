@@ -53,11 +53,11 @@ void main() {
     await tester.tap(find.text('Achievements'));
     await tester.pumpAndSettle();
 
-    prefs.setInt('completed_lessons', 3);
-    prefs.setInt('completed_quizzes', 1);
+    prefs.setBool('lesson-num-0', false);
+    prefs.setBool('lesson-num-1', true);
 
-    expect(prefs.get('completed_lessons'), 3);
-    expect(prefs.get('completed_quizzes'), 1);
+    expect(prefs.get('lesson-num-0'), false);
+    expect(prefs.get('lesson-num-1'), true);
   });
 
   testWidgets('Check that achievements update when storage is updated',
@@ -66,7 +66,7 @@ void main() {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
 // 1st lesson and 1st quiz will have been completed
-    prefs.setInt('completed_lessons', 3);
+    prefs.setBool('lesson-num-0', true);
     prefs.setInt('completed_quizzes', 1);
 
     await tester.pumpAndSettle();
@@ -79,7 +79,7 @@ void main() {
 
     await tester.tap(find.text('Completed'));
     await tester.pumpAndSettle();
-    expect(find.text('Complete the 1st lesson'), findsOneWidget);
+    expect(find.text('Complete 1 lesson'), findsOneWidget);
     expect(find.text('Complete your 1st quiz'), findsOneWidget);
   });
 }

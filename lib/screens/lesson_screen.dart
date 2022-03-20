@@ -3,6 +3,7 @@ import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
@@ -18,6 +19,7 @@ class _LessonScreenState extends State<LessonScreen> {
   late Widget screenWidget;
   Stopwatch stopwatch = Stopwatch();
   late final PopUpController _pauseMenu;
+  StorageReaderWriter storage = StorageReaderWriter();
 
   ///List of all lessons available
 
@@ -166,6 +168,7 @@ class _LessonScreenState extends State<LessonScreen> {
       title = "Aww, better luck next time!";
     } else {
       title = "Congratulations!";
+      storage.saveCompletedLesson(widget.lessonNum - 1);
     }
     return ResultsScreen(
       score: percentage,
