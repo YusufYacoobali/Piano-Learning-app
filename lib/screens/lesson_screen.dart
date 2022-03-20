@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
@@ -82,6 +83,8 @@ class _LessonScreenState extends State<LessonScreen> {
           Column(
             children: [
               screenWidget,
+              //InAppNotification(context: context),
+              //AchievementNotification(),
               Expanded(
                 child: Keyboard(function: answer),
               ),
@@ -169,6 +172,7 @@ class _LessonScreenState extends State<LessonScreen> {
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
+      // InAppNotification;
     }
     return ResultsScreen(
       score: percentage,
