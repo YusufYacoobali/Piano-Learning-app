@@ -61,6 +61,7 @@ class Settings {
     }
   }
 
+
   Future<void> _resetLessons() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -70,3 +71,4 @@ class Settings {
     //print("lessons reset");
   }
 }
+

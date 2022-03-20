@@ -1,171 +1,763 @@
-// import 'package:sight_reading_app/question.dart';
-//
-// import 'components/sheet_music_components/note.dart';
-//
-// //List of questions
-// class Questions {
-//   int _questionNum = 0;
-//
-//   final List<Question> _questions = [
-//     Question(
-//       note: 'A3',
-//       clef: Clef.bass,
-//       question: 'What note is this?',
-//       correctAnswer: 'A',
-//     ),
-//     Question(
-//       note: 'B3',
-//       clef: Clef.bass,
-//       question: 'What note is this?',
-//       correctAnswer: 'B',
-//     ),
-//     Question(
-//       note: 'C3.jpeg',
-//       clef: Clef.bass,
-//       question: 'What note is this?',
-//       correctAnswer: 'C',
-//     ),
-//     /* Question(
-//       note: 'D3.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'D',
-//     ),
-//     Question(
-//       note: 'E3.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'E',
-//     ),
-//     Question(
-//       note: 'F3.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'F',
-//     ),
-//     Question(
-//       note: 'G3.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'G',
-//     ),
-//     Question(
-//       note: 'A2.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'A',
-//     ),
-//     Question(
-//       note: 'B2.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'B',
-//     ),
-//     Question(
-//       note: 'F2.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'F',
-//     ),
-//     Question(
-//       note: 'G2.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'G',
-//     ),
-//     Question(
-//       note: 'Bs_MidC.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'C',
-//     ),
-//     Question(
-//       note: 'Tr_A.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'A',
-//     ),
-//     Question(
-//       note: 'Tr_B.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'B',
-//     ),
-//     Question(
-//       note: 'Tr_C.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'C',
-//     ),
-//     Question(
-//       note: 'Tr_D.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'D',
-//     ),
-//     Question(
-//       note: 'Tr_E.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'E',
-//     ),
-//     Question(
-//       note: 'Tr_F.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'F',
-//     ),
-//     Question(
-//       note: 'Tr_G.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'G',
-//     ),
-//     Question(
-//       note: 'Tr_HighA.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'A',
-//     ),
-//     Question(
-//       note: 'Tr_HighD.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'D',
-//     ),
-//     Question(
-//       note: 'Tr_HighE.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'E',
-//     ),
-//     Question(
-//       note: 'Tr_HighF.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'F',
-//     ),
-//     Question(
-//       note: 'Tr_HighG.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'G',
-//     ),
-//     Question(
-//       note: 'Tr_MidC.jpeg',
-//       question: 'What note is this?',
-//       correctAnswer: 'C',
-//     ),*/
-//   ];
-//
-//   String getnoteName() {
-//     return _questions[_questionNum].note;
-//   }
-//
-//   String getnotePath() {
-//     String path = 'assets/note_notes/';
-//     String fullnotePath = path + getnoteName();
-//     return fullnotePath;
-//   }
-//
-//   String getQuestionsText() {
-//     return _questions[_questionNum].question;
-//   }
-//
-//   String getCorrectAnswer() {
-//     return _questions[_questionNum].correctAnswer;
-//   }
-//
-//   void goToNextQuestion() {
-//     if (_questionNum < _questions.length - 1) {
-//       _questionNum++;
-//     }
-//   }
-//
-//   int getCurrentQuestionNum() {
-//     return _questionNum;
-//   }
-//
-//   int getTotalQuestionLength() {
-//     return _questions.length;
-//   }
-// }
+import 'package:sight_reading_app/question.dart';
+import 'components/sheet_music_components/note.dart';
+
+final List<Question> questions = [
+  Question(
+    note: Note(name: 'C4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'We are going to learn how to read notes. All music notes will be on the lines or spaces of the musical staff. The far left symbol is called the Treble clef. This is our first note. The name is C (Do). The middle C is a circle with a short line across it. Press C on the keyboard.',
+    correctAnswer: 'C',
+    questionID: 1,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'D4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'This is our second note. The name is D (Re). It is directly under the lowest line. Now press D on the keyboard.',
+    correctAnswer: 'D',
+    questionID: 2,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'E4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'This is our third note. The name is E (Mi). The circle is across the lowest line of the 5 line staff. Now press E on the keyboard.',
+    correctAnswer: 'E',
+    questionID: 3,
+    lessonID: 1,
+  ),
+
+  ///start questions
+  Question(
+    note: Note(name: 'C4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'Great Job. Now you have learnt the first three notes. Try answering the rest of the questions without help. What note is this?',
+    correctAnswer: 'C',
+    questionID: 4,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'D4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 5,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'E4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 6,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'D4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 7,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'E4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 8,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'C4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 9,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'E4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 10,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'C4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 11,
+    lessonID: 1,
+  ),
+  Question(
+    note: Note(name: 'F4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'This lesson will teach you 2 more notes. This note is call F (Fa). It is between the 2 lowest lines of the staff. Now press F on the keyboard.',
+    correctAnswer: 'F',
+    questionID: 12,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'G4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'This note is call G (Sol). The circle is on the second from lowest line of the staff. Now press G on the keyboard.',
+    correctAnswer: 'G',
+    questionID: 13,
+    lessonID: 2,
+  ),
+
+  ///Lesson questions
+  Question(
+    note: Note(name: 'G4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'Try answer these questions on your own with a combination of the previous notes.',
+    correctAnswer: 'G',
+    questionID: 14,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'F4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'F',
+    questionID: 15,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'G4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'G',
+    questionID: 16,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'E4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 17,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'D4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 18,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'F4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'F',
+    questionID: 19,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'C4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 20,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'E4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 21,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'F4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'F',
+    questionID: 22,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'G4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'G',
+    questionID: 23,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'F4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'F',
+    questionID: 24,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'G4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'G',
+    questionID: 25,
+    lessonID: 2,
+  ),
+  Question(
+    note: Note(name: 'A4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'This lesson will teach you the last 2 notes. This note is call A (La). It is located below the middle line of the staff. Now press A on the keyboard.',
+    correctAnswer: 'A',
+    questionID: 26,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'B4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'This note is call B (Ti). It is located at the middle line of the staff. Now press B on the keyboard.',
+    correctAnswer: 'B',
+    questionID: 27,
+    lessonID: 3,
+  ),
+
+  ///Lesson questions
+  Question(
+    note: Note(name: 'B4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'Now you can read all the notes associated with the treble clef. Try answer these questions on your own with a combination of the previous notes.',
+    correctAnswer: 'B',
+    questionID: 28,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'A4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'A',
+    questionID: 29,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'G4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'G',
+    questionID: 30,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'B4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'B',
+    questionID: 31,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'F4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'F',
+    questionID: 32,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'B4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'B',
+    questionID: 33,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'A4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'A',
+    questionID: 34,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'E4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 35,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'D4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 36,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'A4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'A',
+    questionID: 37,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'C4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 38,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'D4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 39,
+    lessonID: 3,
+  ),
+  Question(
+    note: Note(name: 'E4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 40,
+    lessonID: 3,
+  ),
+
+  ///Lesson 4
+  Question(
+    note: Note(name: 'C3', duration: 4),
+    clef: Clef.bass,
+    question:
+        'Have you noticed that the symbol at the far left has changed? This is called the Base clef which means the notes will be played on the lower part of the piano. The positions of the notes on the staff are different from the Treble clef. This is position of C on the Base clef which is under the middle line. Now press C on the keyboard.',
+    correctAnswer: 'C',
+    questionID: 41,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'D3', duration: 4),
+    clef: Clef.bass,
+    question:
+        'This name is D (Re) on the Base clef. It is on the middle line of the staff. Now press D on the keyboard.',
+    correctAnswer: 'D',
+    questionID: 42,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'E3', duration: 4),
+    clef: Clef.bass,
+    question:
+        'This is E (Mi) on the Base clef. It is between the second and third lines from top of the staff and is above D. Now press E on the keyboard.',
+    correctAnswer: 'E',
+    questionID: 43,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'F3', duration: 4),
+    clef: Clef.bass,
+    question:
+        'This is F (Fa) on the Base clef. It is one the second from top line of the staff. Now press F on the keyboard.',
+    correctAnswer: 'F',
+    questionID: 44,
+    lessonID: 4,
+  ),
+
+  ///start questions
+  Question(
+    note: Note(name: 'E3', duration: 4),
+    clef: Clef.bass,
+    question:
+        'Great Job. Now you have learnt the first four notes on the Base clef. Try answering the rest of the questions without help. What note is this?',
+    correctAnswer: 'E',
+    questionID: 45,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'D3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 46,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'F3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'F',
+    questionID: 47,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'C3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 48,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'D3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 49,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'E3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 50,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'C3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 51,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'F3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'F',
+    questionID: 52,
+    lessonID: 4,
+  ),
+  Question(
+    note: Note(name: 'C3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 53,
+    lessonID: 4,
+  ),
+
+  ///Lesson 5
+  Question(
+    note: Note(name: 'G3', duration: 4),
+    clef: Clef.bass,
+    question:
+        'Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G on the keyboard.',
+    correctAnswer: 'G',
+    questionID: 54,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'A2', duration: 4),
+    clef: Clef.bass,
+    question:
+        'This name is A (La) on the Base clef. This time A is directly below the . Now press A on the keyboard.',
+    correctAnswer: 'A',
+    questionID: 55,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'B2', duration: 4),
+    clef: Clef.bass,
+    question:
+        'This is B (Ti) on the Base clef. It is right below C on the second line from the bottom. Now press B on the keyboard.',
+    correctAnswer: 'B',
+    questionID: 56,
+    lessonID: 5,
+  ),
+
+  ///start questions
+  Question(
+    note: Note(name: 'A2', duration: 4),
+    clef: Clef.bass,
+    question:
+        'Great Job. Now you have learnt to read the basic notes on the Base clef. Try answering the rest of the questions without help. What note is this?',
+    correctAnswer: 'A',
+    questionID: 57,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'B2', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'B',
+    questionID: 58,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'G3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'G',
+    questionID: 59,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'C3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 60,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'D3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 61,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'E3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 62,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'F3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'F',
+    questionID: 63,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'G3', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'G',
+    questionID: 64,
+    lessonID: 5,
+  ),
+  Question(
+    note: Note(name: 'B2', duration: 4),
+    clef: Clef.bass,
+    question: 'What note is this?',
+    correctAnswer: 'B',
+    questionID: 65,
+    lessonID: 5,
+  ),
+
+  /// Lesson 6
+  Question(
+    note: Note(name: 'B4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'We are going to read higher notes on the treble clef. The higher the note on on 5 line staff, the higher the pitch. Tap B for this note',
+    correctAnswer: 'B',
+    questionID: 66,
+    lessonID: 6,
+  ),
+  Question(
+    note: Note(name: 'C5', duration: 4),
+    clef: Clef.treble,
+    question:
+        'Notice that this note is higher than B in the previous question. Press C on the keyboard.',
+    correctAnswer: 'C',
+    questionID: 67,
+    lessonID: 6,
+  ),
+
+  ///Start questions
+  Question(
+    note: Note(name: 'B4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'Great Job. All notes will repeat the pattern C-D-E-F-G-A-B before going back to C as you go higher up on the musical staff. For an actual keyboard/piano, you will go further to the right. Try answering the rest of the questions without help. What note is this?',
+    correctAnswer: 'B',
+    questionID: 68,
+    lessonID: 6,
+  ),
+  Question(
+    note: Note(name: 'C5', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 69,
+    lessonID: 6,
+  ),
+  Question(
+    note: Note(name: 'D5', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 70,
+    lessonID: 6,
+  ),
+  Question(
+    note: Note(name: 'E5', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 71,
+    lessonID: 6,
+  ),
+  Question(
+    note: Note(name: 'A4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'A',
+    questionID: 72,
+    lessonID: 6,
+  ),
+  Question(
+    note: Note(name: 'C5', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 73,
+    lessonID: 6,
+  ),
+  Question(
+    note: Note(name: 'D5', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 74,
+    lessonID: 6,
+  ),
+
+  ///sharps and flats
+  Question(
+    note: Note(name: 'F#4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'This is an extra lesson on how to read sharps and flats. This # mark is a sharp. You have to press the closest key to the right (most of the time it is a black key). In this case, press the black key next to F on the right.',
+    correctAnswer: 'F#',
+    questionID: 75,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'Bb4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'Great job, now learn about flats. The b-like mark is a flat. You have to press the closest key to the left. In this case, press the black key at the left of B',
+    correctAnswer: 'Bb',
+    questionID: 76,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'F#4', duration: 4),
+    clef: Clef.treble,
+    question:
+        'Great job, now try to answer this set of sharps and flats on your own. Press the keys the same way when you found a flat or a sharp on the base clef.',
+    correctAnswer: 'F#',
+    questionID: 77,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'G4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'G',
+    questionID: 78,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'F#4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'F#',
+    questionID: 79,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'E4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'E',
+    questionID: 80,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'F#4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'F#',
+    questionID: 81,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'D4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'D',
+    questionID: 82,
+    lessonID: 7,
+  ),
+
+  Question(
+    note: Note(name: 'C5', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'C',
+    questionID: 83,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'Bb4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'Bb',
+    questionID: 84,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'A4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'A',
+    questionID: 85,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'Bb4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'Bb',
+    questionID: 86,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'G4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'G',
+    questionID: 87,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'Bb4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'Bb',
+    questionID: 88,
+    lessonID: 7,
+  ),
+  Question(
+    note: Note(name: 'A4', duration: 4),
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: 'A',
+    questionID: 89,
+    lessonID: 7,
+  ),
+];

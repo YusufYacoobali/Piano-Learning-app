@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
+import 'package:sight_reading_app/questions.dart';
 
 /// Writes data to storage
 class StorageReaderWriter {
@@ -13,6 +16,7 @@ class StorageReaderWriter {
 
   /// If there are no values in storage it sets everything to default values
   void _areValuesInStorage() async {
+    WidgetsFlutterBinding.ensureInitialized();
     final SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getKeys().isEmpty) {
       reset();
@@ -52,12 +56,17 @@ class StorageReaderWriter {
       _map['lesson $i'] = 0;
     }
 
-    _map['endless-treble-high-score'] = 0;
-    _map['endless-bass-high-score'] = 0;
+    _map['endless-treble-beginner-high-score'] = 0;
+    _map['endless-treble-intermediate-high-score'] = 0;
+    _map['endless-treble-expert-high-score'] = 0;
+    _map['endless-bass-beginner-high-score'] = 0;
+    _map['endless-bass-intermediate-high-score'] = 0;
+    _map['endless-bass-expert-high-score'] = 0;
   }
 
   /// Writes the default StorageWriter values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
+    WidgetsFlutterBinding.ensureInitialized();
     final SharedPreferences pref = await SharedPreferences.getInstance();
     // pref.setInt('volume', constants.defaultVolumeLevel);
     // pref.setString('difficulty', constants.defaultDifficultyLevel);
@@ -67,10 +76,18 @@ class StorageReaderWriter {
 
     pref.setString('endless-treble-high-score', '0');
     pref.setString('endless-bass-high-score', '0');
+
+    pref.setString('endless-treble-beginner-high-score', '0');
+    pref.setString('endless-treble-intermediate-high-score', '0');
+    pref.setString('endless-treble-expert-high-score', '0');
+    pref.setString('endless-bass-beginner-high-score', '0');
+    pref.setString('endless-bass-intermediate-high-score', '0');
+    pref.setString('endless-bass-expert-high-score', '0');
   }
 
   /// Loads the StorageWriter from Shared Preferences
-  Future<void> loadStorageWriterFromStorage() async {
+  Future<void> loadDataFromStorage() async {
+    WidgetsFlutterBinding.ensureInitialized();
     final SharedPreferences pref = await SharedPreferences.getInstance();
     // int? isOnDisk = pref.getInt('volume');
     // if (isOnDisk == null) {
@@ -82,8 +99,12 @@ class StorageReaderWriter {
     //   if (volume != null) _map['volume'] = volume;
     //   if (difficulty != null) _map['difficulty'] = difficulty;
     // }
+    await loadLessonScoresFromStorage(pref);
+    await loadQuestionAnswerDataFromStorage(pref);
+  }
 
-    int? isOnDisk = pref.getInt('lesson 1');
+  Future<void> loadLessonScoresFromStorage(SharedPreferences pref) async {
+    String? isOnDisk = pref.getString('lesson 1');
     if (isOnDisk == null) {
       _setDefaultValues();
       await _writeDefaultsToStorage();
@@ -95,8 +116,25 @@ class StorageReaderWriter {
     }
   }
 
-  //for achievements
-  Future<List<int>> loadAchievementValues() async {
+  Future<void> loadQuestionAnswerDataFromStorage(SharedPreferences pref) async {
+    int? isOnDisk = pref.getInt('questionID 1');
+    if (isOnDisk == null) {
+      QuestionAnswerData.createDefaultMap();
+    } else {
+      for (int i = 1; i <= questions.length; ++i) {
+        String? questionStatistic = pref.getString('questionID $i');
+        if (questionStatistic != null) {
+          _map['questionID $i'] = questionStatistic;
+          QuestionAnswerData.updateQuestionStatisticsMap(
+            i,
+            int.parse(questionStatistic),
+          );
+        }
+      }
+    }
+  }
+
+  loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
 
     int lessonsPassed = 0;
