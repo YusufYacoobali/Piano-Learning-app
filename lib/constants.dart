@@ -312,8 +312,38 @@ const Map<String, String> sharpFlatEquivalence = <String, String>{
 
 /// Notes that can be played in endless mode
 const List<String> endlessBeginnerNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-const List<String> endlessIntermediateNotes = ['C', 'Db', 'D', 'D#', 'E', 'F', 'F#', 'G', 'A', 'Bb', 'B'];
-const List<String> endlessExpertNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B'];
+const List<String> endlessIntermediateNotes = [
+  'C',
+  'Db',
+  'D',
+  'D#',
+  'E',
+  'F',
+  'F#',
+  'G',
+  'A',
+  'Bb',
+  'B'
+];
+const List<String> endlessExpertNotes = [
+  'C',
+  'C#',
+  'Db',
+  'D',
+  'D#',
+  'Eb',
+  'E',
+  'F',
+  'F#',
+  'Gb',
+  'G',
+  'G#',
+  'Ab',
+  'A',
+  'A#',
+  'Bb',
+  'B'
+];
 
 /// How fast the notes move across the screen in endless mode for each difficulty
 const int endlessBeginnerBpm = 80;
@@ -337,9 +367,9 @@ const int playAlongExpertBpm = 90;
 const int playAlongBeginnerNoteSpacing = 200;
 const int playAlongIntermediateNoteSpacing = 150;
 const int playAlongExpertNoteSpacing = 130;
+
 /// How far each note should move per iteration
 const double noteMovement = 1;
-
 
 const Icon helperButton = Icon(
   Icons.help,
@@ -364,6 +394,7 @@ const TextStyle helperMenuTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
+
 /// Clef symbols
 const String trebleClef = '𝄞';
 const String bassClef = '𝄢';
@@ -385,3 +416,9 @@ const double iosBassClefFontSize = 100;
 /// Change these to change the clef position on screen
 const double iosTrebleClefOffset = 118;
 const double iosBassClefOffset = 85;
+
+/// QuestionAnswerData
+const int timeThreshold = 500;
+const int correctAnswerIncrease = 5;
+const int maxTimeReduction = 5;
+const int incorrectAnswerReduction = 10;

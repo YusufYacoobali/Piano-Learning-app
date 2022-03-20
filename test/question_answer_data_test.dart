@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
 import 'package:sight_reading_app/question.dart';
 import 'package:sight_reading_app/questions.dart';
@@ -29,7 +30,7 @@ void main() {
     QuestionAnswerData.questionAnswered(questionID, true, null);
     Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? newValue = updatedMap[questionID];
-    expect(oldValue! + 10, newValue);
+    expect(oldValue! + correctAnswerIncrease, newValue);
   });
 
   test(
@@ -45,7 +46,7 @@ void main() {
     QuestionAnswerData.questionAnswered(questionID, false, null);
     Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
     int? newValue = updatedMap[questionID];
-    expect(oldValue! - 10, newValue);
+    expect(oldValue! - incorrectAnswerReduction, newValue);
   });
 
   test(
