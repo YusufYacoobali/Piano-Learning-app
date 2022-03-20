@@ -172,6 +172,8 @@ class _LessonScreenState extends State<LessonScreen> {
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
+
+      return const AchievementNotification();
       // InAppNotification;
     }
     return ResultsScreen(
