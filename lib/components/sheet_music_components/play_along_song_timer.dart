@@ -76,7 +76,7 @@ class PlayAlongSongTimer {
     if (_difficulty == 'Expert') {
       _bpm = constants.endlessExpertBpm;
       _iterationsPerTimeUnit = constants.playAlongExpertNoteSpacing;
-      apparentSpacing = _iterationsPerTimeUnit - 30;
+      apparentSpacing = _iterationsPerTimeUnit - 20;
     }
     else if (_difficulty == 'Intermediate') {
       _bpm = constants.endlessIntermediateBpm;

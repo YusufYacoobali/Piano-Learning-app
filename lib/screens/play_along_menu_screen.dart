@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/instruction_pop_up_content/play_along_instructions.dart';
 import '../components/sheet_music_components/note.dart';
@@ -17,7 +18,7 @@ List<Key> trackButtonKeys = <Key>[];
 List<String> trackNames = <String>['Ode to Joy - Treble Only', 'A Simple Bass Melody'];
 
 ///A list containing the user's records for each of the tracks.
-List<String> trackRecords = <String>[];
+List<String> trackRecords = <String>['0', '0',];
 
 /// A list of all sheet music for each of the tracks
 List<Map<int, Note>> trackSheets = <Map<int, Note>>[];
@@ -29,11 +30,28 @@ List<Clef> trackClefs = <Clef>[];
 ///
 /// The tracks are shown as a List of clickable buttons.
 /// There is also an AppBar containing the screen title, a back arrow and a setting icon, which when clicked takes you to the settings screen.
-class PlayAlongMenuScreen extends StatelessWidget {
-  const PlayAlongMenuScreen({Key? key}) : super(key: key);
+class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
 
-  ///The key used to identify the screen
-  static const String id = 'play_along_menu_screen';
+  final StorageReaderWriter _writer = StorageReaderWriter();
+
+  _PlayAlongMenuScreenState() {
+    loadRecords();
+  }
+
+  /// Loads the records for each song
+  void loadRecords() async {
+    _writer.loadDataFromStorage().then((value) {
+      trackRecords = [];
+      for (String track in getTracks()) {
+        String key = '${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score';
+        String record = _writer.read(key).toString();
+        trackRecords.add(record);
+      }
+      setState(() {
+
+      });
+    });
+  }
 
   ///The names of the tracks to user can play along to.
   //May combine with function getRecords() depending on how data is stored and retrieved.
@@ -42,16 +60,6 @@ class PlayAlongMenuScreen extends StatelessWidget {
     return <String>[
       'Ode to Joy - Treble Only',
       'A Simple Bass Melody',
-    ];
-  }
-
-  ///The user records for the tracks you can play along to.
-  //May combine with function getTracks() depending on how data is stored and retrieved.
-  //TODO: Add ability to get track records from storage
-  List<String> getRecords() {
-    return <String>[
-      'N/A',
-      'N/A',
     ];
   }
 
@@ -66,7 +74,6 @@ class PlayAlongMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     trackNames = getTracks();
-    trackRecords = getRecords();
     trackSheets = getMusicSheets();
     trackClefs = getMusicSheetClefs();
 
@@ -95,7 +102,7 @@ class PlayAlongMenuScreen extends StatelessWidget {
                       SizedBox(
                           width: MediaQuery.of(context).size.width /
                               4), //Adds space between Text
-                      Text('Record: ${trackRecords[index]}',
+                      Text('Record: ${trackRecords[index]}%',
                           textAlign: TextAlign.right),
                     ],
                   ),
@@ -110,7 +117,7 @@ class PlayAlongMenuScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              PlayAlongScreen(notes: map, clef: clef, bpm: bpm, songName: trackNames[index],),
+                              PlayAlongScreen(notes: map, clef: clef, bpm: bpm, songName: trackNames[index], onBackToPlayAlongMenu: loadRecords),
                         ));
                   },
                   key: trackButtonKeys[index],
@@ -124,4 +131,15 @@ class PlayAlongMenuScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+///The state for the speedrun menu screen.
+class PlayAlongMenuScreen extends StatefulWidget {
+  ///The id used to identify the screen.
+  static const String id = 'play_along_menu_screen';
+
+  const PlayAlongMenuScreen({Key? key}) : super(key: key);
+
+  @override
+  _PlayAlongMenuScreenState createState() => _PlayAlongMenuScreenState();
 }

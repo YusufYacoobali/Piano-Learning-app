@@ -207,6 +207,7 @@ class StorageReaderWriter {
     } else {
       _map['volume'] = pref.get('volume');
       _map['difficulty'] = pref.get('difficulty');
+      _map['theme'] = pref.get('theme');
     }
   }
 
@@ -214,11 +215,13 @@ class StorageReaderWriter {
   void _setDefaultSettings() {
     _map['volume'] = defaultVolumeLevel;
     _map['difficulty'] = defaultDifficultyLevel;
+    _map['theme'] = defaultTheme;
   }
 
   /// Writes default settings to storage
   void _writeDefaultSettingsToStorage() async {
     write('volume', defaultVolumeLevel);
     write('difficulty', defaultDifficultyLevel);
+    write('theme', defaultTheme);
   }
 }

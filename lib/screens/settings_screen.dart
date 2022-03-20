@@ -127,7 +127,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       value: option,
                                     );
                                   }).toList(),
-                                  value: themeNotifier.theme,
+                                  value: settings.read('theme'),
                                   onChanged: (theme) async {
                                     if (theme != null) {
                                       themeNotifier.theme = theme.toString();

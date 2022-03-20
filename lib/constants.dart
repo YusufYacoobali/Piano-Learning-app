@@ -317,8 +317,8 @@ const List<String> endlessExpertNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 
 
 /// How fast the notes move across the screen in endless mode for each difficulty
 const int endlessBeginnerBpm = 80;
-const int endlessIntermediateBpm = 100;
-const int endlessExpertBpm = 120;
+const int endlessIntermediateBpm = 110;
+const int endlessExpertBpm = 140;
 
 /// maximum and minimum gaps between notes in endless mode
 const int endlessBeginnerMinTime = 4;

@@ -54,7 +54,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     super.initState();
     _hitCounter = PlayAlongHitCounter(songName: widget.songName.toString(), numNotes: widget.notes.length);
     PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(
-        context: context, restart: reset, hitCounter: _hitCounter);
+        context: context, restart: reset, hitCounter: _hitCounter, onBack: widget.onBackToPlayAlongMenu);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
     _currentNoteToPlay =
         NotePlayedChecker(noteNotifier: _noteToPlay, function: recordHitMiss);
@@ -80,10 +80,11 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     _endMenu.delete();
   }
 
+  /// Resets the state back to the start and starts the song again
   void reset() {
     _hitCounter.score = 0;
     PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(
-        context: context, restart: reset, hitCounter: _hitCounter);
+        context: context, restart: reset, hitCounter: _hitCounter, onBack: widget.onBackToPlayAlongMenu);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
     _timer.restart();
   }
@@ -136,8 +137,16 @@ class PlayAlongScreen extends StatefulWidget {
   final int bpm;
   final String songName;
 
+  final VoidCallback onBackToPlayAlongMenu;
+
   const PlayAlongScreen(
-      {Key? key, required this.notes, required this.clef, required this.bpm, required this.songName})
+      {Key? key,
+        required this.notes,
+        required this.clef,
+        required this.bpm,
+        required this.songName,
+        required this.onBackToPlayAlongMenu
+      })
       : super(key: key);
 
   @override
