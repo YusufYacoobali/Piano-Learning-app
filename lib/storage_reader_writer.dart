@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
 import 'package:sight_reading_app/questions.dart';
 
@@ -41,6 +42,8 @@ class StorageReaderWriter {
   void reset() {
     _setDefaultValues();
     _writeDefaultsToStorage();
+    _resetLessons();
+    _resetAchievements();
   }
 
   /// Puts default values into the map
@@ -133,13 +136,62 @@ class StorageReaderWriter {
 
   loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
-    int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
+
+    int lessonsPassed = 0;
+
+    for (int x = 0; x < numOfLessons; x++) {
+      bool value = prefs.getBool('lesson-num-$x') ?? false;
+      if (value) lessonsPassed += 1;
+      //print('adding the $x one');
+    }
+
+    //print("current lessons passed: $lessonsPassed");
+
+    //int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
     int endlessBassHS =
         int.parse(prefs.getString('endless-bass-high-score') ?? '0');
     int endlessTrebleHS =
         int.parse(prefs.getString('endless-treble-high-score') ?? '0');
 
-    return [completedLessons, completedQuizzes, endlessBassHS, endlessTrebleHS];
+    return [lessonsPassed, completedQuizzes, endlessBassHS, endlessTrebleHS];
   }
+
+  // //for lessons
+  // Future<bool> isLessonComplete(lessonNum) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.setBool('lesson-num-$lessonNum', true);
+  //   return prefs.getBool('lesson-num-$lessonNum') ?? true;
+  // }
+
+  Future<List<bool>> loadLessonValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<bool> values = [];
+
+    //prefs.setBool('lesson-num-1', false);
+
+    for (int x = 0; x < numOfLessons; x++) {
+      values.add(prefs.getBool('lesson-num-$x') ?? false);
+      //print('adding the $x one');
+    }
+    //print(values);
+    return values;
+  }
+
+  Future<void> saveCompletedLesson(lessonNum) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('lesson-num-$lessonNum', true);
+    //print("lesson $lessonNum set to pass");
+  }
+
+  Future<void> _resetLessons() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 0; x < numOfLessons; x++) {
+      prefs.setBool('lesson-num-$x', false);
+    }
+    //print("lessons reset");
+  }
+
+  void _resetAchievements() {}
 }

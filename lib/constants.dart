@@ -109,6 +109,15 @@ BoxDecoration lessonButtonDeco = BoxDecoration(
   ),
 );
 
+BoxDecoration completeLessonButtonDeco = BoxDecoration(
+  shape: BoxShape.circle,
+  color: buttonBoxColour,
+  //borderRadius: BorderRadius.circular(boxRadii),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5aff15), Color(0xff00b712)],
+  ),
+);
+
 // Lesson Screen
 const Color optionButtonColour = Colors.purple;
 const TextStyle optionButtonTextStyle =
@@ -252,7 +261,7 @@ final Decoration achievementCardDecoration = BoxDecoration(
 );
 
 //achievement making
-const int numOfLessons = 10;
+const int numOfLessons = 6;
 const int numOfquizzes = 10;
 
 //pause menu
