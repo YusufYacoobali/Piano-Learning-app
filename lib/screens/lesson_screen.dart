@@ -173,6 +173,7 @@ class _LessonScreenState extends State<LessonScreen> {
     return ResultsScreen(
       score: percentage,
       title: title,
+      lessonNum: widget.lessonNum,
     );
   }
 

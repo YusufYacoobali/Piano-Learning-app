@@ -44,7 +44,7 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
 
   ///Gets the image of the question
   ///TODO: add map in question brain and import images of lesson
-  Widget addQuestionImage() {
+  Widget addQuestionImage(int questionIndex) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
@@ -72,7 +72,7 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
   }
 
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
-  Widget createResultCard() {
+  Widget createResultCard(int questionIndex) {
     return Center(
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
@@ -87,10 +87,15 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    addQuestionImage(),
+                    addQuestionImage(questionIndex),
                     Column(
                       children: [
                         addCorrectAnswer('A'),
+                        addCorrectAnswer('A'),
+
+                        ///There is a problem here, we get null
+                        addCorrectAnswer(
+                            questionBrain.getUserAnswer(questionIndex - 1)),
                       ],
                     ),
                   ],
@@ -107,7 +112,7 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
   List<Widget> getAllResultCards() {
     List<Widget> allResults = [];
     for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
-      allResults.add(createResultCard());
+      allResults.add(createResultCard(i));
     }
     return allResults;
   }
@@ -134,25 +139,6 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
               )),
         ),
       ),
-      /*body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xff5f0a87), Color(0xffa4508b)],
-          ),
-        ),
-        //color: Colors.lightGreen.shade500,
-
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   crossAxisAlignment: CrossAxisAlignment.stretch,
-        //   children: [
-        //     getTitleWidget(),
-        //     //getIconWidget(),
-        //     //getScoreWidget(),
-        //     getNavigationButtons(),
-        //   ],
-         ),
-      ),*/
     );
   }
 }

@@ -16,6 +16,7 @@ class QuestionBrain {
   final List<Question> questions;
 
   ///TODO: add map of question and answer
+  final Map _map = {1: ''};
 
   /// Constructor
   QuestionBrain({
@@ -73,9 +74,20 @@ class QuestionBrain {
     return questions.length;
   }
 
+  /// Gets the answer that the user has answered for a question
+  String getUserAnswer(int questionNumber) {
+    if (_map[questionNumber] != null) {
+      return _map[questionNumber];
+    } else {
+      return 'N/A';
+    }
+  }
+
   /// Sets the user answer for the current question
   void setAnswer({required userAnswer, int? timeTaken}) {
     // Checks if the user answer was correct and if so, increments the score
+    ///add map entry
+    _map.addEntries([MapEntry(_questionNum, userAnswer)]);
     if (checkAnswer(userAnswer)) {
       ++_score;
       QuestionAnswerData.questionAnswered(
@@ -84,6 +96,7 @@ class QuestionBrain {
       QuestionAnswerData.questionAnswered(
           questions[_questionNum].questionID, false, timeTaken);
     }
+
     // Checks if there are no more questions
     if (isLastQuestion()) {
       // Creates key for shared preferences

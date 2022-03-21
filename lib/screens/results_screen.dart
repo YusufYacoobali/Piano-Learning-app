@@ -96,7 +96,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return const CheckAnswersScreen();
+                    return CheckAnswersScreen(lessonNum: widget.lessonNum);
                   }),
                 );
               },
@@ -139,8 +139,9 @@ class ResultsScreen extends StatefulWidget {
   static const String id = 'results_screen';
   final String title;
   final double score;
-
-  const ResultsScreen({Key? key, required this.title, required this.score})
+  final int lessonNum;
+  const ResultsScreen(
+      {Key? key, required this.title, required this.score, this.lessonNum = 1})
       : super(key: key);
 
   @override
