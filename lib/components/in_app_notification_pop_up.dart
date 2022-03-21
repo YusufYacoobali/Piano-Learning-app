@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/screens/achievements_screen.dart';
-import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
-import '../../screens/menu_screen.dart';
 
 class AchievementNotification extends StatelessWidget {
   const AchievementNotification({Key? key}) : super(key: key);

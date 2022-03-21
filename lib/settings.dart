@@ -76,6 +76,6 @@ class Settings {
     final prefs = await SharedPreferences.getInstance();
 
     prefs.setInt('completed_quizzes', 0);
-    print("quizzes reset");
+    //print("quizzes reset");
   }
 }

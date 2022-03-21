@@ -221,7 +221,7 @@ class StorageReaderWriter {
     final prefs = await SharedPreferences.getInstance();
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
     prefs.setInt('completed_quizzes', completedQuizzes + 1);
-    print("quiz passed and saved");
+    //print("quiz passed and saved");
   }
 
   Future<void> _resetLessons() async {
@@ -237,7 +237,7 @@ class StorageReaderWriter {
     final prefs = await SharedPreferences.getInstance();
 
     prefs.setInt('completed_quizzes', 0);
-    print("quizzes reset");
+    //print("quizzes reset");
   }
 
   //void _resetAchievements() {}
