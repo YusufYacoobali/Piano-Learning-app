@@ -84,18 +84,26 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
             child: Column(
               children: [
                 const SizedBox(height: 20.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Column(
                   children: [
-                    addQuestionImage(questionIndex),
-                    Column(
+                    Text(
+                      'Question ${questionIndex + 1} of ${questionBrain.getTotalNumberOfQuestions()}',
+                      style: const TextStyle(fontSize: 20.0),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        addCorrectAnswer('A'),
-                        addCorrectAnswer('A'),
+                        addQuestionImage(questionIndex),
+                        Column(
+                          children: [
+                            addCorrectAnswer('A'),
+                            addCorrectAnswer('A'),
 
-                        ///There is a problem here, we get null
-                        addCorrectAnswer(
-                            questionBrain.getUserAnswer(questionIndex - 1)),
+                            ///There is a problem here, we get null
+                            addCorrectAnswer(
+                                questionBrain.getUserAnswer(questionIndex - 1)),
+                          ],
+                        ),
                       ],
                     ),
                   ],
