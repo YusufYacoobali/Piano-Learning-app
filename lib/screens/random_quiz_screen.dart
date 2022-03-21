@@ -18,6 +18,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
   late final PopUpController _pauseMenu;
+  Stopwatch stopwatch = Stopwatch();
 
   @override
   void initState() {
@@ -26,7 +27,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
         questions:
             QuestionFinder().getRandomListOfQuestions(numOfQuestions: 10));
     setScreenWidget();
-
+    stopwatch.start();
     PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id);
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
@@ -36,6 +37,8 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
   void dispose() {
     super.dispose();
     _pauseMenu.delete();
+    stopwatch.stop();
+    stopwatch.reset();
   }
 
   Widget getPauseButton() {
@@ -75,7 +78,10 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
 
   /// Gets the key pressed on the keyboard
   void answer(String text) {
-    questionBrain.setAnswer(userAnswer: text);
+    stopwatch.stop();
+    questionBrain.setAnswer(
+        userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
+    stopwatch.reset();
     showResultAlert(text);
   }
 

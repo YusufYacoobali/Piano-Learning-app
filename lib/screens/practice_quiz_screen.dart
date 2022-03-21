@@ -18,6 +18,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
   late final PopUpController _pauseMenu;
+  Stopwatch stopwatch = Stopwatch();
 
   @override
   void initState() {
@@ -26,7 +27,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     questionBrain = QuestionBrain(
         questions: QuestionFinder().getPracticeQuestionsForLesson(1, 10));
     setScreenWidget();
-
+    stopwatch.start();
     PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id);
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
@@ -36,6 +37,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   void dispose() {
     super.dispose();
     _pauseMenu.delete();
+    stopwatch.stop();
+    stopwatch.reset();
   }
 
   Widget getPauseButton() {
@@ -75,7 +78,10 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
 
   /// Gets the key pressed on the keyboard
   void answer(String text) {
-    questionBrain.setAnswer(userAnswer: text);
+    stopwatch.stop();
+    questionBrain.setAnswer(
+        userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
+    stopwatch.reset();
     showResultAlert(text);
   }
 

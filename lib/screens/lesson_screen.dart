@@ -49,6 +49,8 @@ class _LessonScreenState extends State<LessonScreen> {
   void dispose() {
     super.dispose();
     _pauseMenu.delete();
+    stopwatch.stop();
+    stopwatch.reset();
   }
 
   Widget getPauseButton() {
@@ -68,7 +70,10 @@ class _LessonScreenState extends State<LessonScreen> {
 
   /// Gets the key pressed on the keyboard
   void answer(String text) {
-    questionBrain.setAnswer(userAnswer: text);
+    stopwatch.stop();
+    questionBrain.setAnswer(
+        userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
+    stopwatch.reset();
     showResultAlert(text);
   }
 
