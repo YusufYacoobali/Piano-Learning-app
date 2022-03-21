@@ -9,7 +9,7 @@ class _KeyboardState extends State<Keyboard> {
   /// Used to play note sounds
   final player = AudioCache();
 
-  String _difficulty = 'Beginner';
+  String _difficulty = defaultDifficultyLevel;
 
   /// Constructor
   _KeyboardState() {

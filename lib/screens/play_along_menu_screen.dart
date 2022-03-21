@@ -16,7 +16,7 @@ import '../play_along_tracks/treble_track_two.dart' as treble_track2;
 List<Key> trackButtonKeys = <Key>[];
 
 /// A list containing the names of each of the play along tracks.
-List<String> trackNames = <String>['Ode to Joy - Treble Only', 'A Simple Bass Melody','Old Macdonald',];
+List<String> trackNames = <String>['Ode to Joy - Treble Only', 'A Simple Bass Melody', 'Old Macdonald',];
 
 ///A list containing the user's records for each of the tracks.
 List<String> trackRecords = <String>['0', '0', '0',];
@@ -26,6 +26,9 @@ List<Map<int, Note>> trackSheets = <Map<int, Note>>[];
 
 /// A list of all sheet sheets clefs for each of the tracks
 List<Clef> trackClefs = <Clef>[];
+
+/// A list of all sheet sheets speed for each difficulty for each of the tracks
+List<List<int>> trackSpeeds = <List<int>>[];
 
 /// A screen containing a menu of the various tracks the user can play along to.
 ///
@@ -54,6 +57,20 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     });
   }
 
+  /// Gets the bpm given a difficulty
+  int getSpeedFromDifficulty(List<int> bpm) {
+    String difficulty = _writer.read('difficulty').toString();
+    if (difficulty == 'Expert') {
+      return bpm[2];
+    }
+    else if (difficulty == 'Intermediate') {
+      return bpm[1];
+    }
+    else {
+      return bpm[0];
+    }
+  }
+
   List<Map<int, Note>> getMusicSheets() {
     return <Map<int, Note>>[treble_track1.getTrack(), bass_track1.getTrack(), treble_track2.getTrack(),];
   }
@@ -62,11 +79,16 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     return <Clef>[treble_track1.getClef(), bass_track1.getClef(), treble_track2.getClef(),];
   }
 
+  List<List<int>> getMusicSheetSpeed() {
+    return <List<int>>[treble_track1.getDifficultyBpm(), bass_track1.getDifficultyBpm(), treble_track2.getDifficultyBpm(),];
+  }
+
   @override
   Widget build(BuildContext context) {
     trackNames = trackNames;
     trackSheets = getMusicSheets();
     trackClefs = getMusicSheetClefs();
+    trackSpeeds = getMusicSheetSpeed();
 
     trackButtonKeys = <Key>[]; //Resets the list of keys
     ///Generates the keys for the track buttons based on track names.
@@ -100,12 +122,14 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
                   onPress: () {
                     Map<int, Note> map = trackSheets[index];
                     Clef clef = trackClefs[index];
+                    List<int> trackSpeed = trackSpeeds[0];
+                    int bpm = getSpeedFromDifficulty(trackSpeed);
 
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              PlayAlongScreen(notes: map, clef: clef, songName: trackNames[index], onBackToPlayAlongMenu: loadRecords),
+                              PlayAlongScreen(notes: map, clef: clef, bpm: bpm, songName: trackNames[index], onBackToPlayAlongMenu: loadRecords),
                         ));
                   },
                   key: trackButtonKeys[index],

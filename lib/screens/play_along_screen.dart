@@ -67,6 +67,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
       nextNote: _nextNote,
       updater: updateScreen,
       notes: widget.notes,
+      bpm: widget.bpm,
       onStop: _displayMenu,
       hitCounter: _hitCounter,
     );
@@ -134,6 +135,7 @@ class PlayAlongScreen extends StatefulWidget {
   static const String id = 'play_along_screen';
   final Map<int, Note> notes;
   final Clef clef;
+  final int bpm;
   final String songName;
 
   final VoidCallback onBackToPlayAlongMenu;
@@ -142,6 +144,7 @@ class PlayAlongScreen extends StatefulWidget {
       {Key? key,
         required this.notes,
         required this.clef,
+        required this.bpm,
         required this.songName,
         required this.onBackToPlayAlongMenu
       })

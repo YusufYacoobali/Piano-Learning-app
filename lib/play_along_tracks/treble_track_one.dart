@@ -5,7 +5,10 @@ import '../components/sheet_music_components/note.dart';
 /// Level: Beginner
 
 ///clef of the track
-const Clef clef = Clef.treble;
+const Clef _clef = Clef.treble;
+
+/// Bpm in each difficulty
+const List<int> _difficultyBpm = [80, 110, 150];
 
 final Map<int, Note> _map = {
   1: Note(name: 'E4', duration: 1),
@@ -47,5 +50,9 @@ Map<int, Note> getTrack() {
 }
 
 Clef getClef() {
-  return clef;
+  return _clef;
+}
+
+List<int> getDifficultyBpm() {
+  return _difficultyBpm;
 }
