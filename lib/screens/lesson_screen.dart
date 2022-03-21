@@ -3,6 +3,7 @@ import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
@@ -177,15 +178,39 @@ class _LessonScreenState extends State<LessonScreen> {
           context: context,
           builder: (context) {
             return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                  leading: new Icon(Icons.photo),
-                  title: new Text('Photo'),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+              //mainAxisSize: MainAxisSize.min,
+              children: [
+                const FittedBox(
+                  fit: BoxFit.contain,
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      "Congrats, you completed an achievement",
+                      textAlign: TextAlign.center,
+                      style: titleWidgetTextStyle,
+                    ),
+                  ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.popUntil(
+                            context, ModalRoute.withName(MenuScreen.id));
+                      },
+                      style: navButtonDeco,
+                      child: const Text('Exit'),
+                    ),
+                    ElevatedButton(
+                      // TODO: Implement review answers functionality
+                      onPressed: () {},
+                      child: const Text('Review Answers'),
+
+                      style: navButtonDeco,
+                    )
+                  ],
+                )
               ],
             );
           });
