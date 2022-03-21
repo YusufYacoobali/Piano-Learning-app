@@ -27,7 +27,8 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
             QuestionFinder().getRandomListOfQuestions(numOfQuestions: 10));
     setScreenWidget();
 
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    PauseMenu pauseMenuBuilder =
+        PauseMenu(context: context, continueOnPressed: () {});
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }

@@ -41,7 +41,8 @@ class _LessonScreenState extends State<LessonScreen> {
     setScreenWidget();
     stopwatch.start();
 
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    PauseMenu pauseMenuBuilder =
+        PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }

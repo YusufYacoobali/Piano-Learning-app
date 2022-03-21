@@ -26,7 +26,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         questions: QuestionFinder().getPracticeQuestionsForLesson(1, 10));
     setScreenWidget();
 
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    PauseMenu pauseMenuBuilder =
+        PauseMenu(context: context, continueOnPressed: () {});
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
