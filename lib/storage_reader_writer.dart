@@ -43,7 +43,8 @@ class StorageReaderWriter {
     _setDefaultValues();
     _writeDefaultsToStorage();
     _resetLessons();
-    _resetAchievements();
+    //_resetAchievements();
+    _resetQuizzes();
   }
 
   /// Puts default values into the map
@@ -216,10 +217,11 @@ class StorageReaderWriter {
     //print("lesson $lessonNum set to pass");
   }
 
-  Future<void> saveCompletedQuiz(quizId) async {
+  Future<void> saveCompletedQuiz() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('quiz-num-$quizId', true);
-    //print("lesson $lessonNum set to pass");
+    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+    prefs.setInt('completed_quizzes', completedQuizzes + 1);
+    print("quiz passed and saved");
   }
 
   Future<void> _resetLessons() async {
@@ -231,5 +233,12 @@ class StorageReaderWriter {
     //print("lessons reset");
   }
 
-  void _resetAchievements() {}
+  Future<void> _resetQuizzes() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt('completed_quizzes', 0);
+    print("quizzes reset");
+  }
+
+  //void _resetAchievements() {}
 }

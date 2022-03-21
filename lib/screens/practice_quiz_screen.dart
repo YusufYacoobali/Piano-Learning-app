@@ -178,7 +178,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
       title = "Aww, better luck next time!";
     } else {
       title = "Congratulations!";
-      //storage.saveCompletedQuiz(quizId);
+      storage.saveCompletedQuiz();
     }
     return ResultsScreen(
       score: percentage,
