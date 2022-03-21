@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
-import '../components/keyboard.dart';
+import '../components/page_keyboard.dart';
 import '../components/instruction_pop_up_content/endless_ending_instructions.dart';
 import '../components/instruction_pop_up_content/endless_starting_instructions.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
@@ -137,7 +137,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
             ),
             Expanded(
               flex: 3,
-              child: Keyboard(function: playKey),
+              child: PageKeyboard(playKey),
             ),
           ],
         ),

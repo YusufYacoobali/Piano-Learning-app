@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../components/keyboard.dart';
+import '../components/page_keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/instruction_pop_up_content/play_along_ending_instructions.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
@@ -104,7 +104,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
             ),
             Expanded(
               flex: 3,
-              child: Keyboard(function: playKey),
+              child: PageKeyboard(playKey),
             ),
           ],
         ),

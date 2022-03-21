@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/keyboard.dart';
+import 'package:sight_reading_app/components/page_keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
@@ -81,7 +81,7 @@ class _LessonScreenState extends State<LessonScreen> {
             children: [
               screenWidget,
               Expanded(
-                child: Keyboard(function: answer),
+                child: PageKeyboard(answer),
               ),
             ],
           ),
