@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
+import 'package:sight_reading_app/question_brain.dart';
+import '../lessons_and_quizzes/question_finder.dart';
 
 class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
   final ScrollController _checkController = ScrollController();
+  late QuestionBrain questionBrain;
   @override
   void initState() {
     super.initState();
+    int lessonNum = widget.lessonNum;
+    questionBrain = QuestionBrain(
+        questions: QuestionFinder().getQuestionsForLesson(lessonNum));
   }
 
   @override
@@ -65,7 +71,7 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
         ]);
   }
 
-  /// Creates card that show the question picture, correct answer and the answer that the user picked
+  /// Creates a card that show the question picture, correct answer and the answer that the user picked
   Widget createResultCard() {
     return Center(
       child: Card(
@@ -98,6 +104,14 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
     );
   }
 
+  List<Widget> getAllResultCards() {
+    List<Widget> allResults = [];
+    for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
+      allResults.add(createResultCard());
+    }
+    return allResults;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,10 +130,7 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  createResultCard(),
-                  createResultCard(),
-                ],
+                children: getAllResultCards(),
               )),
         ),
       ),
@@ -148,8 +159,8 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
 
 class CheckAnswersScreen extends StatefulWidget {
   static const String id = 'check_answers_screen';
-
-  const CheckAnswersScreen({Key? key}) : super(key: key);
+  final int lessonNum;
+  const CheckAnswersScreen({Key? key, this.lessonNum = 1}) : super(key: key);
 
   @override
   _CheckAnswersScreenState createState() => _CheckAnswersScreenState();
