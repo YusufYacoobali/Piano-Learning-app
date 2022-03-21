@@ -163,7 +163,7 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  Widget getResultsScreen() {
+  getResultsScreen() {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
@@ -173,13 +173,37 @@ class _LessonScreenState extends State<LessonScreen> {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
 
-      return const AchievementNotification();
+      return showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: new Icon(Icons.photo),
+                  title: new Text('Photo'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          });
       // InAppNotification;
     }
-    return ResultsScreen(
-      score: percentage,
-      title: title,
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return ResultsScreen(
+          score: percentage,
+          title: title,
+        );
+      }),
     );
+    // return ResultsScreen(
+    //   score: percentage,
+    //   title: title,
+    // );
   }
 
   /// Creates the template for alert with title, description and next button
@@ -212,12 +236,13 @@ class _LessonScreenState extends State<LessonScreen> {
             stopwatch.start();
           });
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return getResultsScreen();
-            }),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) {
+          //     return getResultsScreen();
+          //   }),
+          // );
+          getResultsScreen();
         }
       },
     );
