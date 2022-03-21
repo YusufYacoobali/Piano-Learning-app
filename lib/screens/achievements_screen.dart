@@ -20,7 +20,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   AchievementMaker maker = AchievementMaker();
   StorageReaderWriter storage = StorageReaderWriter();
   //map to
-  final Map _map = {};
+  Map<String, int> _map = {};
 
   // when screen is initiated it gets values from storage
 
@@ -28,33 +28,16 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   void initState() {
     super.initState();
     _setPage();
-    //setPage();
   }
 
   //Loading values from storage on start
   void _setPage() async {
-    List<int> values = await storage.loadAchievementValues();
+    Map<String, int> values = await storage.loadAchievementValues();
 
     //state changes when values are fetched
     setState(() {
-      _map.addAll({
-        'completedLessons': values[0],
-        'completedQuizzes': values[1],
-        'endlessBassBegHS': values[2],
-        'endlessBassInterHS': values[3],
-        'endlessBassExpHS': values[4],
-        'endlessTrebleBegHS': values[5],
-        'endlessTrebleInterHS': values[6],
-        'endlessTrebleExpHS': values[7],
-        'speedrun10HS': values[8],
-        'speedrun20HS': values[9],
-        'speedrun30HS': values[10],
-        'speedrun40HS': values[11],
-        'speedrun50HS': values[12],
-        'speedrun60HS': values[13],
-      });
+      _map = values;
     });
-
     maker.makeLists(_map);
   }
 

@@ -134,7 +134,7 @@ class StorageReaderWriter {
     }
   }
 
-  loadAchievementValues() async {
+  Future<Map<String, int>> loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
 
     int lessonsPassed = 0;
@@ -169,31 +169,24 @@ class StorageReaderWriter {
     int speedrun50HS = prefs.getInt('50_second_speedrun_record') ?? 0;
     int speedrun60HS = prefs.getInt('60_second_speedrun_record') ?? 0;
 
-    // _map.addAll({  'completedLessons': lessonsPassed,
-    //     'completedQuizzes': values[1],
-    //     'endlessBassBegHS': values[2],
-    //     'endlessBassInterHS': values[3],
-    //     'endlessBassExpHS': values[4],
-    //     'endlessTrebleBegHS': values[5],
-    //     'endlessTrebleInterHS': values[6],
-    //     'endlessTrebleExpHS': values[7],});
+    Map<String, int> values = {
+      'completedLessons': lessonsPassed,
+      'completedQuizzes': completedQuizzes,
+      'endlessBassBegHS': endlessBassBegHS,
+      'endlessBassInterHS': endlessBassInterHS,
+      'endlessBassExpHS': endlessBassExpHS,
+      'endlessTrebleBegHS': endlessTrebleBegHS,
+      'endlessTrebleInterHS': endlessTrebleInterHS,
+      'endlessTrebleExpHS': endlessTrebleExpHS,
+      'speedrun10HS': speedrun10HS,
+      'speedrun20HS': speedrun20HS,
+      'speedrun30HS': speedrun30HS,
+      'speedrun40HS': speedrun40HS,
+      'speedrun50HS': speedrun50HS,
+      'speedrun60HS': speedrun60HS,
+    };
 
-    return [
-      lessonsPassed,
-      completedQuizzes,
-      endlessBassBegHS,
-      endlessBassInterHS,
-      endlessBassExpHS,
-      endlessTrebleBegHS,
-      endlessTrebleInterHS,
-      endlessTrebleExpHS,
-      speedrun10HS,
-      speedrun20HS,
-      speedrun30HS,
-      speedrun40HS,
-      speedrun50HS,
-      speedrun60HS,
-    ];
+    return values;
   }
 
   // //for lessons
