@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
+import '../components/keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
-import 'package:sight_reading_app/components/option_button.dart';
 
 import '../lessons_and_quizzes/question_finder.dart';
 
@@ -17,6 +17,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
   late final PopUpController _pauseMenu;
+  Stopwatch stopwatch = Stopwatch();
 
   @override
   void initState() {
@@ -25,8 +26,9 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     questionBrain = QuestionBrain(
         questions: QuestionFinder().getPracticeQuestionsForLesson(1, 10));
     setScreenWidget();
-
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    stopwatch.start();
+    PauseMenu pauseMenuBuilder =
+        PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
@@ -35,6 +37,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   void dispose() {
     super.dispose();
     _pauseMenu.delete();
+    stopwatch.stop();
+    stopwatch.reset();
   }
 
   Widget getPauseButton() {
@@ -46,9 +50,19 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         size: 35.0,
       ),
       onPressed: () {
+        stopwatch.stop();
         _pauseMenu.show();
       },
     );
+  }
+
+  /// Gets the key pressed on the keyboard
+  void answer(String text) {
+    stopwatch.stop();
+    questionBrain.setAnswer(
+        userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
+    stopwatch.reset();
+    showResultAlert(text);
   }
 
   @override
@@ -60,58 +74,22 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
           Column(
             children: [
               screenWidget,
-
-              ///choices buttons
               Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: getOptionButtons(),
-                ),
+                child: Keyboard(function: answer),
               ),
             ],
           ),
+
+          ///choices buttons
+          // Expanded(
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: getOptionButtons(),
+          //   ),
+          // ),
         ]),
       ),
     );
-  }
-
-  // void showMenu() {
-  //   final overlay = Overlay.of(context)!;
-
-  //   entry = OverlayEntry(
-  //     builder: (context) => PauseMenu(
-  //       removeMenu: removeMenu,
-  //       continueOnPressed: () {
-  //         Navigator.popUntil(
-  //           context,
-  //           ModalRoute.withName(LessonScreen.id),
-  //         );
-  //       },
-  //     ),
-  //   );
-  //   overlay.insert(entry!);
-  // }
-
-  /// Creates the answer option buttons.
-  ///
-  /// Each button has text displayed and check with question brain
-  /// to see if the user has tapped the button with the correct answer.
-  List<Widget> getOptionButtons() {
-    ///TODO: Beginners see less options and experts see all options
-    List<Widget> optionButtons = [];
-    List<String> notes = whiteKeyNames;
-    for (int i = 0; i < notes.length; ++i) {
-      optionButtons.add(
-        OptionButton(
-          buttonText: notes[i],
-          onPressed: () {
-            questionBrain.setAnswer(userAnswer: notes[i]);
-            showResultAlert(notes[i]);
-          },
-        ),
-      );
-    }
-    return optionButtons;
   }
 
   /// Set details of the Screen Widget in lesson.
@@ -161,6 +139,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return createResultAlert(alertTitle, alertDesc);
       },
@@ -210,6 +189,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
           setState(() {
             questionBrain.goToNextQuestion();
             setScreenWidget();
+            stopwatch.start();
           });
         } else {
           Navigator.push(
