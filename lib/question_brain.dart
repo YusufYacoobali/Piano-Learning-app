@@ -59,6 +59,15 @@ class QuestionBrain {
     return questions[_questionNum].correctAnswer;
   }
 
+  /// Gets the correct answer of the a specific
+  String getSpecificCorrectAnswer(specificQuestionNum) {
+    if (specificQuestionNum < 0 ||
+        specificQuestionNum >= getTotalNumberOfQuestions()) {
+      return "Invalid index";
+    }
+    return questions[specificQuestionNum].correctAnswer;
+  }
+
   /// Moves to the next question if there is a next question
   void goToNextQuestion() {
     if (_questionNum < questions.length - 1) {

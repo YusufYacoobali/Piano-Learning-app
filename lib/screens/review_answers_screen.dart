@@ -56,17 +56,41 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     );
   }
 
-  Widget addCorrectAnswer(String message) {
+  Widget addMessageWrap(String message) {
     return Wrap(
-        spacing: 10.0,
-        runSpacing: 10.0,
+        spacing: 20.0,
+        runSpacing: 20.0,
         alignment: WrapAlignment.center,
         children: [
           Text(
             message,
-            style: const TextStyle(fontSize: 20.0),
+            style: const TextStyle(fontSize: 30.0),
           ),
         ]);
+  }
+
+  Widget addResultBox(int questionIndex) {
+    String resultText = "Incorrect";
+    Color resultColor = Colors.red;
+
+    if (questionBrain.getUserAnswer(questionIndex) ==
+        questionBrain.getSpecificCorrectAnswer(questionIndex)) {
+      resultText = "Correct";
+      resultColor = Colors.lightGreen;
+    }
+    return Container(
+      margin: boxMargin,
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        color: resultColor,
+        borderRadius: BorderRadius.circular(boxRadii),
+      ),
+      child: FittedBox(
+        fit: BoxFit.contain,
+        alignment: Alignment.center,
+        child: Text(resultText, style: const TextStyle(fontSize: 40)),
+      ),
+    );
   }
 
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
@@ -95,10 +119,12 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
                         Column(
                           children: [
                             //change to display result
-                            addCorrectAnswer('A'),
+                            addResultBox(questionIndex),
                             //change method name to add text
-                            addCorrectAnswer('Correct Answer:'),
-                            addCorrectAnswer('Your Answer: ' +
+                            addMessageWrap('Correct Answer: ' +
+                                questionBrain
+                                    .getSpecificCorrectAnswer(questionIndex)),
+                            addMessageWrap('Your Answer: ' +
                                 questionBrain.getUserAnswer(questionIndex)),
                           ],
                         ),
