@@ -29,8 +29,16 @@ class QuestionBrain {
     return questions[_questionNum].note;
   }
 
+  Note getSpecificNote(specificQuestionNumber) {
+    return questions[specificQuestionNumber].note;
+  }
+
   Clef getClef() {
     return questions[_questionNum].clef;
+  }
+
+  Clef getSpecificClef(specificQuestionNumber) {
+    return questions[specificQuestionNumber].clef;
   }
 
   /// Gets the name of the image of the current question

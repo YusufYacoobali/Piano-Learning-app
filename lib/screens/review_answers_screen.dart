@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
+import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
 import 'package:sight_reading_app/question_brain.dart';
@@ -43,14 +45,17 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   ///Gets the image of the question
   ///TODO: add map in question brain and import images of lesson
   Widget addQuestionImage(int questionIndex) {
+    NextNoteNotifier _nextNote = NextNoteNotifier();
+    _nextNote.setNextNote(questionBrain.getSpecificNote(questionIndex));
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
-        height: 160.0,
-        width: 200.0,
-        child: Image.asset(
-          'assets/note_images/Bs_A.jpeg',
-          fit: BoxFit.cover,
+        height: 200.0,
+        width: 240.0,
+        child: CustomPaint(
+          painter: MusicSheet(
+              _nextNote, questionBrain.getSpecificClef(questionIndex)),
+          child: Container(),
         ),
       ),
     );
