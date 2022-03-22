@@ -89,8 +89,6 @@ class _LessonScreenState extends State<LessonScreen> {
           Column(
             children: [
               screenWidget,
-              //InAppNotification(context: context),
-              //AchievementNotification(),
               Expanded(
                 child: Keyboard(function: answer),
               ),
@@ -169,32 +167,34 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  getResultsScreen() async {
+  getResults() async {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ResultsScreen(
-                  score: percentage,
-                  title: title,
-                )),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => ResultsScreen(
+      //             score: percentage,
+      //             title: title,
+      //           )),
+      // );
+      getResultsScreen(title, percentage);
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
       bool displayNotification = await storage.displayLessonNotification();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ResultsScreen(
-                  score: percentage,
-                  title: title,
-                )),
-      );
+      getResultsScreen(title, percentage);
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => ResultsScreen(
+      //             score: percentage,
+      //             title: title,
+      //           )),
+      // );
       //only displays notification if achievement is completed
       if (displayNotification) {
         inAppNotification(context);
@@ -202,52 +202,16 @@ class _LessonScreenState extends State<LessonScreen> {
     }
   }
 
-  // inAppNotification(context) {
-  //   return showModalBottomSheet(
-  //       context: context,
-  //       builder: (context) {
-  //         return Column(
-  //           //mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             const FittedBox(
-  //               fit: BoxFit.contain,
-  //               child: Padding(
-  //                 padding: EdgeInsets.all(20.0),
-  //                 child: Text(
-  //                   "Achievement completed",
-  //                   textAlign: TextAlign.center,
-  //                   style: titleWidgetTextStyle,
-  //                 ),
-  //               ),
-  //             ),
-  //             Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //               children: [
-  //                 ElevatedButton(
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                   },
-  //                   style: navButtonDeco,
-  //                   child: const Text('Continue To Results'),
-  //                 ),
-  //                 ElevatedButton(
-  //                   onPressed: () {
-  //                     Navigator.push(
-  //                       context,
-  //                       MaterialPageRoute(builder: (context) {
-  //                         return const AchievementsScreen();
-  //                       }),
-  //                     );
-  //                   },
-  //                   child: const Text('Check Achievements'),
-  //                   style: navButtonDeco,
-  //                 )
-  //               ],
-  //             )
-  //           ],
-  //         );
-  //       });
-  // }
+  getResultsScreen(title, percentage) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultsScreen(
+                score: percentage,
+                title: title,
+              )),
+    );
+  }
 
   /// Creates the template for alert with title, description and next button
   AlertDialog createResultAlert(String alertTitle, String alertDesc) {
@@ -285,7 +249,7 @@ class _LessonScreenState extends State<LessonScreen> {
           //     return getResultsScreen();
           //   }),
           // );
-          getResultsScreen();
+          getResults();
         }
       },
     );
