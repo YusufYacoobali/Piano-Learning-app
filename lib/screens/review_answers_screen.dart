@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
 import 'package:sight_reading_app/question_brain.dart';
-import '../lessons_and_quizzes/question_finder.dart';
 
-class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
+class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   final ScrollController _checkController = ScrollController();
   late QuestionBrain questionBrain;
   @override
   void initState() {
     super.initState();
-    int lessonNum = widget.lessonNum;
-    questionBrain = QuestionBrain(
-        questions: QuestionFinder().getQuestionsForLesson(lessonNum));
+    //int lessonNum = widget.lessonNum;
+    questionBrain = widget.questionBrain;
   }
 
   @override
@@ -96,12 +94,12 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
                         addQuestionImage(questionIndex),
                         Column(
                           children: [
+                            //change to display result
                             addCorrectAnswer('A'),
-                            addCorrectAnswer('A'),
-
-                            ///There is a problem here, we get null
-                            addCorrectAnswer(
-                                questionBrain.getUserAnswer(questionIndex - 1)),
+                            //change method name to add text
+                            addCorrectAnswer('Correct Answer:'),
+                            addCorrectAnswer('Your Answer: ' +
+                                questionBrain.getUserAnswer(questionIndex)),
                           ],
                         ),
                       ],
@@ -151,11 +149,15 @@ class _CheckAnswersScreenState extends State<CheckAnswersScreen> {
   }
 }
 
-class CheckAnswersScreen extends StatefulWidget {
+///get the question brain
+class ReviewAnswersScreen extends StatefulWidget {
   static const String id = 'check_answers_screen';
   final int lessonNum;
-  const CheckAnswersScreen({Key? key, this.lessonNum = 1}) : super(key: key);
+  final QuestionBrain questionBrain;
+  const ReviewAnswersScreen(
+      {Key? key, this.lessonNum = 1, required this.questionBrain})
+      : super(key: key);
 
   @override
-  _CheckAnswersScreenState createState() => _CheckAnswersScreenState();
+  _ReviewAnswersScreenState createState() => _ReviewAnswersScreenState();
 }

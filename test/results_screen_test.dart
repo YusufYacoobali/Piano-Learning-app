@@ -1,13 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/question_brain.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/questions.dart';
 
 void main() {
   testWidgets('Check that the title is displayed', (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: ResultsScreen(title: "Congratulations!", score: 0.42),
+      MaterialApp(
+        home: ResultsScreen(
+            title: "Congratulations!",
+            score: 0.42,
+            questionBrain: QuestionBrain(questions: questions)),
       ),
     );
     expect(find.text("Congratulations!"), findsOneWidget);
@@ -16,8 +21,11 @@ void main() {
   testWidgets('Check that the score percentage is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: ResultsScreen(title: "Congratulations!", score: 0.42),
+      MaterialApp(
+        home: ResultsScreen(
+            title: "Congratulations!",
+            score: 0.42,
+            questionBrain: QuestionBrain(questions: questions)),
       ),
     );
     expect(find.text('You got 42.0%'), findsOneWidget);
@@ -27,8 +35,11 @@ void main() {
       'Check that the tick icon is displayed when the score is high enough',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: ResultsScreen(title: "Congratulations!", score: 0.42),
+      MaterialApp(
+        home: ResultsScreen(
+            title: "Congratulations!",
+            score: 0.42,
+            questionBrain: QuestionBrain(questions: questions)),
       ),
     );
     expect(find.byIcon(Icons.check_circle), findsOneWidget);
@@ -38,9 +49,11 @@ void main() {
       'Check that the cross icon is displayed when the score below the pass threshold',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
+      MaterialApp(
         home: ResultsScreen(
-            title: "Congratulations!", score: passThreshold - 0.01),
+            title: "Congratulations!",
+            score: passThreshold - 0.01,
+            questionBrain: QuestionBrain(questions: questions)),
       ),
     );
     expect(find.byIcon(Icons.cancel), findsOneWidget);
@@ -49,8 +62,11 @@ void main() {
   testWidgets('Check that the "Exit" button is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: ResultsScreen(title: "Congratulations!", score: 0.42),
+      MaterialApp(
+        home: ResultsScreen(
+            title: "Congratulations!",
+            score: 0.42,
+            questionBrain: QuestionBrain(questions: questions)),
       ),
     );
     expect(find.text('Exit'), findsOneWidget);
@@ -61,8 +77,11 @@ void main() {
   testWidgets('Check that the "Review Answers" is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: ResultsScreen(title: "Congratulations!", score: 0.42),
+      MaterialApp(
+        home: ResultsScreen(
+            title: "Congratulations!",
+            score: 0.42,
+            questionBrain: QuestionBrain(questions: questions)),
       ),
     );
     expect(find.text('Review Answers'), findsOneWidget);

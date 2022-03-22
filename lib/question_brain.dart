@@ -16,11 +16,13 @@ class QuestionBrain {
   final List<Question> questions;
 
   ///TODO: add map of question and answer
-  final Map _map = {1: ''};
+  late final Map<int, String> _map = {};
+  //final List<String> userAnswerList;
 
   /// Constructor
   QuestionBrain({
     required this.questions,
+    //this.userAnswerList = List(getTotalNumberOfQuestions());
   });
 
   Note getNote() {
@@ -76,18 +78,17 @@ class QuestionBrain {
 
   /// Gets the answer that the user has answered for a question
   String getUserAnswer(int questionNumber) {
-    if (_map[questionNumber] != null) {
-      return _map[questionNumber];
-    } else {
-      return 'N/A';
-    }
+    //return userAnswerList[questionNumber];
+    return _map[questionNumber] ?? "N/A";
   }
 
   /// Sets the user answer for the current question
   void setAnswer({required userAnswer, int? timeTaken}) {
     // Checks if the user answer was correct and if so, increments the score
     ///add map entry
-    _map.addEntries([MapEntry(_questionNum, userAnswer)]);
+    //_map.addEntries([MapEntry(_questionNum, userAnswer)]);
+    _map[_questionNum] = userAnswer;
+    //userAnswerList.add(userAnswer);
     if (checkAnswer(userAnswer)) {
       ++_score;
       QuestionAnswerData.questionAnswered(

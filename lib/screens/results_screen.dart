@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/screens/check_answers_screen.dart';
+import 'package:sight_reading_app/screens/review_answers_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
+import '../question_brain.dart';
 
 class _ResultsScreenState extends State<ResultsScreen> {
   @override
@@ -96,7 +97,9 @@ class _ResultsScreenState extends State<ResultsScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return CheckAnswersScreen(lessonNum: widget.lessonNum);
+                    return ReviewAnswersScreen(
+                        lessonNum: widget.lessonNum,
+                        questionBrain: widget.questionBrain);
                   }),
                 );
               },
@@ -140,10 +143,16 @@ class ResultsScreen extends StatefulWidget {
   final String title;
   final double score;
   final int lessonNum;
+  final QuestionBrain questionBrain;
   const ResultsScreen(
-      {Key? key, required this.title, required this.score, this.lessonNum = 1})
+      {Key? key,
+      required this.title,
+      required this.score,
+      this.lessonNum = 1,
+      required this.questionBrain})
       : super(key: key);
 
+  ///pass the question brain
   @override
   _ResultsScreenState createState() => _ResultsScreenState();
 }

@@ -174,6 +174,7 @@ class _LessonScreenState extends State<LessonScreen> {
       score: percentage,
       title: title,
       lessonNum: widget.lessonNum,
+      questionBrain: questionBrain,
     );
   }
 

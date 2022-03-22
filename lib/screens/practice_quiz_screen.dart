@@ -180,6 +180,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     return ResultsScreen(
       score: percentage,
       title: title,
+      questionBrain: questionBrain,
     );
   }
 
