@@ -240,5 +240,25 @@ class StorageReaderWriter {
     //print("quizzes reset");
   }
 
+  Future<bool> displayLessonNotification() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    int lessonsPassed = 0;
+
+    for (int x = 0; x < numOfLessons; x++) {
+      bool value = prefs.getBool('lesson-num-$x') ?? false;
+      if (value) lessonsPassed += 1;
+      //print('adding the $x one');
+    }
+
+    if (lessonsPassed == 1 ||
+        lessonsPassed == 5 ||
+        lessonsPassed == numOfLessons) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //void _resetAchievements() {}
 }

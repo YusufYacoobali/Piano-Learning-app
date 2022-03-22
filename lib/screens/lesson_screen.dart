@@ -3,6 +3,7 @@ import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
@@ -164,71 +165,84 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  getResultsScreen() {
+  getResultsScreen() async {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ResultsScreen(
+                  score: percentage,
+                  title: title,
+                )),
+      );
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
+      bool displayNotification = await storage.displayLessonNotification();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ResultsScreen(
+                  score: percentage,
+                  title: title,
+                )),
+      );
+      //only displays notification if achievement is completed
+      if (displayNotification) {
+        inAppNotification();
+      }
+    }
+  }
 
-      return showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return Column(
-              //mainAxisSize: MainAxisSize.min,
-              children: [
-                const FittedBox(
-                  fit: BoxFit.contain,
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(
-                      "Congrats, you completed an achievement",
-                      textAlign: TextAlign.center,
-                      style: titleWidgetTextStyle,
-                    ),
+  inAppNotification() {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Column(
+            //mainAxisSize: MainAxisSize.min,
+            children: [
+              const FittedBox(
+                fit: BoxFit.contain,
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text(
+                    "Achievement completed",
+                    textAlign: TextAlign.center,
+                    style: titleWidgetTextStyle,
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.popUntil(
-                            context, ModalRoute.withName(MenuScreen.id));
-                      },
-                      style: navButtonDeco,
-                      child: const Text('Exit'),
-                    ),
-                    ElevatedButton(
-                      // TODO: Implement review answers functionality
-                      onPressed: () {},
-                      child: const Text('Review Answers'),
-
-                      style: navButtonDeco,
-                    )
-                  ],
-                )
-              ],
-            );
-          });
-      // InAppNotification;
-    }
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) {
-        return ResultsScreen(
-          score: percentage,
-          title: title,
-        );
-      }),
-    );
-    // return ResultsScreen(
-    //   score: percentage,
-    //   title: title,
-    // );
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: navButtonDeco,
+                    child: const Text('Continue To Results'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return const AchievementsScreen();
+                        }),
+                      );
+                    },
+                    child: const Text('Check Achievements'),
+                    style: navButtonDeco,
+                  )
+                ],
+              )
+            ],
+          );
+        });
   }
 
   /// Creates the template for alert with title, description and next button
