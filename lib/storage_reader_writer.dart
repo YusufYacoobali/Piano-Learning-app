@@ -260,5 +260,18 @@ class StorageReaderWriter {
     }
   }
 
+  Future<bool> displayQuizNotification() async {
+    final prefs = await SharedPreferences.getInstance();
+    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+
+    if (completedQuizzes == 1 ||
+        completedQuizzes == 5 ||
+        completedQuizzes == numOfquizzes) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //void _resetAchievements() {}
 }

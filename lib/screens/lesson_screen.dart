@@ -193,57 +193,57 @@ class _LessonScreenState extends State<LessonScreen> {
       );
       //only displays notification if achievement is completed
       if (displayNotification) {
-        inAppNotification();
+        inAppNotification(context);
       }
     }
   }
 
-  inAppNotification() {
-    return showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Column(
-            //mainAxisSize: MainAxisSize.min,
-            children: [
-              const FittedBox(
-                fit: BoxFit.contain,
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text(
-                    "Achievement completed",
-                    textAlign: TextAlign.center,
-                    style: titleWidgetTextStyle,
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: navButtonDeco,
-                    child: const Text('Continue To Results'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return const AchievementsScreen();
-                        }),
-                      );
-                    },
-                    child: const Text('Check Achievements'),
-                    style: navButtonDeco,
-                  )
-                ],
-              )
-            ],
-          );
-        });
-  }
+  // inAppNotification(context) {
+  //   return showModalBottomSheet(
+  //       context: context,
+  //       builder: (context) {
+  //         return Column(
+  //           //mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             const FittedBox(
+  //               fit: BoxFit.contain,
+  //               child: Padding(
+  //                 padding: EdgeInsets.all(20.0),
+  //                 child: Text(
+  //                   "Achievement completed",
+  //                   textAlign: TextAlign.center,
+  //                   style: titleWidgetTextStyle,
+  //                 ),
+  //               ),
+  //             ),
+  //             Row(
+  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //               children: [
+  //                 ElevatedButton(
+  //                   onPressed: () {
+  //                     Navigator.pop(context);
+  //                   },
+  //                   style: navButtonDeco,
+  //                   child: const Text('Continue To Results'),
+  //                 ),
+  //                 ElevatedButton(
+  //                   onPressed: () {
+  //                     Navigator.push(
+  //                       context,
+  //                       MaterialPageRoute(builder: (context) {
+  //                         return const AchievementsScreen();
+  //                       }),
+  //                     );
+  //                   },
+  //                   child: const Text('Check Achievements'),
+  //                   style: navButtonDeco,
+  //                 )
+  //               ],
+  //             )
+  //           ],
+  //         );
+  //       });
+  // }
 
   /// Creates the template for alert with title, description and next button
   AlertDialog createResultAlert(String alertTitle, String alertDesc) {

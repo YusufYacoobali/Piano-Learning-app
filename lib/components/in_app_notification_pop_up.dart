@@ -1,69 +1,55 @@
-// import 'package:flutter/material.dart';
-// import '../../constants.dart';
+import 'package:flutter/material.dart';
+import 'package:sight_reading_app/constants.dart';
 
+import '../screens/achievements_screen.dart';
 
-
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return FittedBox(
-// //       child: Stack(
-// //         alignment: Alignment.center,
-// //         children: <Widget>[
-// //           Card(
-// //             clipBehavior: Clip.antiAliasWithSaveLayer,
-// //             color: Colors.black.withOpacity(0.8),
-// //             shape:
-// //                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-// //             child: Container(
-// //               decoration: cardBackground,
-// //               child: Padding(
-// //                 padding: const EdgeInsets.symmetric(
-// //                     horizontal: menuLength, vertical: menuWidth),
-// //                 child: Column(
-// //                   mainAxisAlignment: MainAxisAlignment.center,
-// //                   mainAxisSize: MainAxisSize.min,
-// //                   children: getDisplay(),
-// //                 ),
-// //               ),
-// //             ),
-// //           ),
-// //         ],
-// //       ),
-// //     );
-// //   }
-
-// //   List<Widget> getDisplay() {
-// //     List<Widget> display = [];
-// //     display.add(const Text("Congrats on completing an achivement"));
-// //     display.add(const SizedBox(
-// //       height: 10,
-// //     ));
-// //     display
-// //         .add(Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-// //       ElevatedButton(
-// //         onPressed: () {
-// //           //Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
-// //         },
-// //         style: navButtonDeco,
-// //         child: const Text('Review answers'),
-// //       ),
-// //       ElevatedButton(
-// //         onPressed: () {
-// //           //  Navigator.push(
-// //           //   context,
-// //           //   MaterialPageRoute(builder: (context) {
-// //           //     return getResultsScreen();
-// //           //   }),
-// //           // );
-// //         },
-// //         style: navButtonDeco,
-// //         child: const Text('Check Achievements'),
-// //       ),
-// //     ]));
-// //     // for (Widget option in widget.options) {
-// //     //   display.add(option);
-// //     //   display.add(const SizedBox(height: 5,));
-// //     // }
-// //     return display;
-// //   }
-// // }
+inAppNotification(context) {
+  return showModalBottomSheet(
+      //backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(60), topRight: Radius.circular(60))),
+      context: context,
+      builder: (context) {
+        return Column(
+          //mainAxisSize: MainAxisSize.min,
+          children: [
+            const FittedBox(
+              fit: BoxFit.contain,
+              child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Text(
+                  "Achievement completed",
+                  textAlign: TextAlign.center,
+                  style: titleWidgetTextStyle,
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: navButtonDeco,
+                  child: const Text('Continue To Results'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return const AchievementsScreen();
+                      }),
+                    );
+                  },
+                  child: const Text('Check Achievements'),
+                  style: navButtonDeco,
+                )
+              ],
+            )
+          ],
+        );
+      });
+}
