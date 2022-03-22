@@ -6,20 +6,18 @@ import '../../screens/lesson_menu_screen.dart';
 import '../../screens/menu_screen.dart';
 
 class PauseMenu extends PopUpContentBuilder {
-
   final BuildContext context;
+  final VoidCallback continueOnPressed;
 
-  PauseMenu({required this.context});
+  PauseMenu({required this.context, required this.continueOnPressed});
 
   /// Sets up the start menu
   @override
   void buildMenu() {
-    text = Column(
-        children: const [
-          Text('Paused', style: pauseMenuTextStyle),
-          SizedBox(height: 50.0),
-        ]
-    );
+    text = Column(children: const [
+      Text('Paused', style: pauseMenuTextStyle),
+      SizedBox(height: 50.0),
+    ]);
 
     options = [
       ElevatedButton(
@@ -36,6 +34,7 @@ class PauseMenu extends PopUpContentBuilder {
         style: pauseMenuButtonStyle,
         onPressed: () {
           removeMenu();
+          continueOnPressed();
         },
       ),
       ElevatedButton(
