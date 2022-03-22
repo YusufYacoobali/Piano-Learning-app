@@ -119,9 +119,9 @@ class StorageReaderWriter {
     int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
     int endlessBassHS =
-        int.parse(prefs.getString('endless-bass-high-score') ?? '0');
+        int.parse(prefs.getString('endless-bass-${prefs.get('difficulty').toString().toLowerCase()}-high-score') ?? '0');
     int endlessTrebleHS =
-        int.parse(prefs.getString('endless-treble-high-score') ?? '0');
+        int.parse(prefs.getString('endless-treble-${prefs.get('difficulty').toString().toLowerCase()}-high-score') ?? '0');
 
     return [completedLessons, completedQuizzes, endlessBassHS, endlessTrebleHS];
   }

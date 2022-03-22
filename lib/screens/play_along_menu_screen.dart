@@ -79,7 +79,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     return <Clef>[treble_track1.getClef(), bass_track1.getClef(), treble_track2.getClef(),];
   }
 
-  List<List<int>> getMusicSheetSpeed() {
+  List<List<int>> getMusicSheetSpeeds() {
     return <List<int>>[treble_track1.getDifficultyBpm(), bass_track1.getDifficultyBpm(), treble_track2.getDifficultyBpm(),];
   }
 
@@ -88,7 +88,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     trackNames = trackNames;
     trackSheets = getMusicSheets();
     trackClefs = getMusicSheetClefs();
-    trackSpeeds = getMusicSheetSpeed();
+    trackSpeeds = getMusicSheetSpeeds();
 
     trackButtonKeys = <Key>[]; //Resets the list of keys
     ///Generates the keys for the track buttons based on track names.

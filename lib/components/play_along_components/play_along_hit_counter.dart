@@ -33,6 +33,7 @@ class PlayAlongHitCounter {
     if (percentage[percentage.length-1] == '0') {
       percentage = double.parse(percentage).round().toString();
     }
+    highScore = double.parse(percentage);
     await _writer.write(key, percentage);
   }
 
@@ -53,7 +54,7 @@ class PlayAlongHitCounter {
 
   /// Updates the score if the new one is higher
   void isNewHighScore() {
-    if (score/numNotes > highScore) {
+    if ((score/numNotes)*100 > highScore) {
       writeHighScore();
     }
   }

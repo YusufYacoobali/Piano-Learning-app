@@ -364,6 +364,7 @@ const TextStyle helperMenuTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
+
 /// Clef symbols
 const String trebleClef = '𝄞';
 const String bassClef = '𝄢';
@@ -385,3 +386,25 @@ const double iosBassClefFontSize = 100;
 /// Change these to change the clef position on screen
 const double iosTrebleClefOffset = 118;
 const double iosBassClefOffset = 85;
+
+/// black note symbols
+const String sharp = '♯';
+const String flat = '♭';
+
+/// Android symbol fonts
+const double androidSharpFontSize = 30;
+const double androidFlatFontSize = 45;
+
+/// Android symbol offset positions
+const double androidSharpOffset = 20;
+const double androidFlatOffset = 35;
+
+/// IOS symbol fonts
+/// Change these to change the symbol size
+const double iosSharpFontSize = 30;
+const double iosFlatFontSize = 45;
+
+/// IOS symbol offsets
+/// Change these to change the symbol position on screen
+const double iosSharpOffset = 0;
+const double iosFlatOffset = 15;

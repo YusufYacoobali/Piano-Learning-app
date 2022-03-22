@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:sight_reading_app/components/sheet_music_components/play_along_hit_counter.dart';
 
-import 'moving_music_sheet.dart';
-import 'note.dart';
-import 'package:sight_reading_app/constants.dart' as constants;
+import '../../constants.dart' as constants;
+import '../sheet_music_components/moving_music_sheet.dart';
+import '../sheet_music_components/note.dart';
+import 'play_along_hit_counter.dart';
 
 class PlayAlongSongTimer {
   /// Whether the sheet is moving or not

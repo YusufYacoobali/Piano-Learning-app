@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sight_reading_app/components/sheet_music_components/play_along_hit_counter.dart';
 
 import '../components/keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -8,7 +7,8 @@ import '../components/instruction_pop_up_content/play_along_ending_instructions.
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
-import '../components/sheet_music_components/play_along_song_timer.dart';
+import '../components/play_along_components/play_along_hit_counter.dart';
+import '../components/play_along_components/play_along_song_timer.dart';
 
 /// The screen that runs the "play along" practice mode with a given track.
 ///
@@ -92,7 +92,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   /// Displays the end menu
   void _displayMenu() {
-    _hitCounter.writeHighScore();
+    _hitCounter.isNewHighScore();
     _endMenu.show();
   }
 

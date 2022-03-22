@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/sheet_music_components/play_along_hit_counter.dart';
+import 'package:sight_reading_app/components/play_along_components/play_along_hit_counter.dart';
 
 import '../../screens/play_along_menu_screen.dart';
 import '../../components/pop_up_components/pop_up_content_builder.dart';
