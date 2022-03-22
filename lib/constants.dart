@@ -15,6 +15,7 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
   'Light': ThemeData.light(),
   'Pink': ThemeData.dark().copyWith(
     backgroundColor: const Color.fromARGB(255, 200, 130, 255),
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
     scaffoldBackgroundColor: const Color.fromARGB(255, 200, 130, 255),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 200, 110, 255),
@@ -236,10 +237,10 @@ const List<String> whiteKeyNames = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 
 //Achievement screen
-const double cardWidth = 230;
+const double cardWidth = 270;
 const double cardHeight = 270;
 
-const double circularIndicatorRadius = 78;
+const double circularIndicatorRadius = 74;
 
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;

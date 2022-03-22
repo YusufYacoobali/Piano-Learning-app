@@ -43,7 +43,8 @@ class StorageReaderWriter {
     _setDefaultValues();
     _writeDefaultsToStorage();
     _resetLessons();
-    _resetAchievements();
+    //_resetAchievements();
+    _resetQuizzes();
   }
 
   /// Puts default values into the map
@@ -134,7 +135,7 @@ class StorageReaderWriter {
     }
   }
 
-  loadAchievementValues() async {
+  Future<Map<String, int>> loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
 
     int lessonsPassed = 0;
@@ -144,17 +145,49 @@ class StorageReaderWriter {
       if (value) lessonsPassed += 1;
       //print('adding the $x one');
     }
-
     //print("current lessons passed: $lessonsPassed");
 
     //int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
-    int endlessBassHS =
-        int.parse(prefs.getString('endless-bass-high-score') ?? '0');
-    int endlessTrebleHS =
-        int.parse(prefs.getString('endless-treble-high-score') ?? '0');
+    int endlessBassBegHS =
+        int.parse(prefs.getString('endless-bass-beginner-high-score') ?? '0');
+    int endlessBassInterHS = int.parse(
+        prefs.getString('endless-bass-intermediate-high-score') ?? '0');
+    int endlessBassExpHS =
+        int.parse(prefs.getString('endless-bass-expert-high-score') ?? '0');
 
-    return [lessonsPassed, completedQuizzes, endlessBassHS, endlessTrebleHS];
+    int endlessTrebleBegHS =
+        int.parse(prefs.getString('endless-treble-beginner-high-score') ?? '0');
+    int endlessTrebleInterHS = int.parse(
+        prefs.getString('endless-treble-intermediate-high-score') ?? '0');
+    int endlessTrebleExpHS =
+        int.parse(prefs.getString('endless-treble-expert-high-score') ?? '0');
+
+    int speedrun10HS = prefs.getInt('10_second_speedrun_record') ?? 0;
+    int speedrun20HS = prefs.getInt('20_second_speedrun_record') ?? 0;
+    int speedrun30HS = prefs.getInt('30_second_speedrun_record') ?? 0;
+    int speedrun40HS = prefs.getInt('40_second_speedrun_record') ?? 0;
+    int speedrun50HS = prefs.getInt('50_second_speedrun_record') ?? 0;
+    int speedrun60HS = prefs.getInt('60_second_speedrun_record') ?? 0;
+
+    Map<String, int> values = {
+      'completedLessons': lessonsPassed,
+      'completedQuizzes': completedQuizzes,
+      'endlessBassBegHS': endlessBassBegHS,
+      'endlessBassInterHS': endlessBassInterHS,
+      'endlessBassExpHS': endlessBassExpHS,
+      'endlessTrebleBegHS': endlessTrebleBegHS,
+      'endlessTrebleInterHS': endlessTrebleInterHS,
+      'endlessTrebleExpHS': endlessTrebleExpHS,
+      'speedrun10HS': speedrun10HS,
+      'speedrun20HS': speedrun20HS,
+      'speedrun30HS': speedrun30HS,
+      'speedrun40HS': speedrun40HS,
+      'speedrun50HS': speedrun50HS,
+      'speedrun60HS': speedrun60HS,
+    };
+
+    return values;
   }
 
   // //for lessons
@@ -184,6 +217,13 @@ class StorageReaderWriter {
     //print("lesson $lessonNum set to pass");
   }
 
+  Future<void> saveCompletedQuiz() async {
+    final prefs = await SharedPreferences.getInstance();
+    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+    prefs.setInt('completed_quizzes', completedQuizzes + 1);
+    //print("quiz passed and saved");
+  }
+
   Future<void> _resetLessons() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -193,5 +233,45 @@ class StorageReaderWriter {
     //print("lessons reset");
   }
 
-  void _resetAchievements() {}
+  Future<void> _resetQuizzes() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt('completed_quizzes', 0);
+    //print("quizzes reset");
+  }
+
+  Future<bool> displayLessonNotification() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    int lessonsPassed = 0;
+
+    for (int x = 0; x < numOfLessons; x++) {
+      bool value = prefs.getBool('lesson-num-$x') ?? false;
+      if (value) lessonsPassed += 1;
+      //print('adding the $x one');
+    }
+
+    if (lessonsPassed == 1 ||
+        lessonsPassed == 5 ||
+        lessonsPassed == numOfLessons) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> displayQuizNotification() async {
+    final prefs = await SharedPreferences.getInstance();
+    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+
+    if (completedQuizzes == 1 ||
+        completedQuizzes == 5 ||
+        completedQuizzes == numOfquizzes) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //void _resetAchievements() {}
 }

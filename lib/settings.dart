@@ -31,6 +31,8 @@ class Settings {
     _setDefaultValues();
     _writeDefaultsToStorage();
     _resetLessons();
+    //_resetAchievements();
+    _resetQuizzes();
   }
 
   /// Puts default values into the map
@@ -61,7 +63,6 @@ class Settings {
     }
   }
 
-
   Future<void> _resetLessons() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -70,5 +71,11 @@ class Settings {
     }
     //print("lessons reset");
   }
-}
 
+  Future<void> _resetQuizzes() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt('completed_quizzes', 0);
+    //print("quizzes reset");
+  }
+}

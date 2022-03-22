@@ -47,32 +47,71 @@ class AchievementMaker {
           'Complete 5 lessons', 5, achieveValues['completedLessons']),
       AchievementCard('Complete all lessons', numOfLessons,
           achieveValues['completedLessons']),
-      AchievementCard(
-          'Complete your 1st quiz', 1, achieveValues['completedQuizzes']),
+
+      AchievementCard('Complete 1 quiz', 1, achieveValues['completedQuizzes']),
       AchievementCard(
           'Complete 5 quizzes', 5, achieveValues['completedQuizzes']),
       AchievementCard('Complete all quizzes', numOfquizzes,
           achieveValues['completedQuizzes']),
-      AchievementCard('Get a score 0f 10 on endless mode with treble', 10,
-          achieveValues['endless-treble-high-score']),
-      AchievementCard('Get a score 0f 30 on endless mode with treble', 30,
-          achieveValues['endless-treble-high-score']),
-      AchievementCard('Get a score 0f 50 on endless mode with treble', 50,
-          achieveValues['endless-treble-high-score']),
-      AchievementCard('Get a score 0f 10 on endless mode with bass', 10,
-          achieveValues['endless-bass-high-score']),
-      AchievementCard('Get a score 0f 30 on endless mode with bass', 30,
-          achieveValues['endless-bass-high-score']),
-      AchievementCard('Get a score 0f 50 on endless mode with bass', 50,
-          achieveValues['endless-bass-high-score']),
+
+      AchievementCard(
+          'Score 5 or higher on endless (treble in beginner difficulty)',
+          5,
+          achieveValues['endlessTrebleBegHS']),
+      AchievementCard(
+          'Score 10 or higher on endless (treble in beginner difficulty)',
+          10,
+          achieveValues['endlessTrebleBegHS']),
+      AchievementCard(
+          'Score 10 or higher on endless (treble in intermediate difficulty)',
+          10,
+          achieveValues['endlessTrebleInterHS']),
+      AchievementCard(
+          'Score 15 or higher on endless (treble in intermediate difficulty)',
+          15,
+          achieveValues['endlessTrebleInterHS']),
+      AchievementCard(
+          'Score 20 or higher on endless (treble in expert difficulty)',
+          20,
+          achieveValues['endlessTrebleExpHS']),
+
+      AchievementCard(
+          'Score 5 or higher on endless (bass in beginner difficulty)',
+          5,
+          achieveValues['endlessBassBegHS']),
+      AchievementCard(
+          'Score 10 or higher on endless (bass in beginner difficulty)',
+          10,
+          achieveValues['endlessBassBegHS']),
+
+      AchievementCard(
+          'Score 10 or higher on endless (bass in intermediate difficulty)',
+          10,
+          achieveValues['endlessBassInterHS']),
+      AchievementCard(
+          'Score 15 or higher on endless (bass in intermediate difficulty)',
+          15,
+          achieveValues['endlessBassInterHS']),
+
+      AchievementCard(
+          'Score 20 or higher on endless (bass in expert difficulty)',
+          20,
+          achieveValues['endlessBassExpHS']),
+
       //AchievementCard('Complete Ode to Joy play along', 100, complete),
       //AchievementCard('Complete the simple bass melody play along', 100, complete),
-      //AchievementCard('Pass the 10 second speed run', 10, complete),
-      //AchievementCard('Pass the 20 second speed run', 10, complete),
-      //AchievementCard('Pass the 30 second speed run', 10, complete),
-      //AchievementCard('Pass the 40 second speed run', 10, complete),
-      //AchievementCard('Pass the 50 second speed run', 10, complete),
-      //AchievementCard('Pass the 60 second speed run', 10, complete),
+      AchievementCard('Score 5 or higher on the 10 second speed run', 5,
+          achieveValues['speedrun10HS']),
+      AchievementCard('Score 10 or higher on the 20 second speed run', 10,
+          achieveValues['speedrun20HS']),
+      AchievementCard('Score 15 or higher on the 30 second speed run', 15,
+          achieveValues['speedrun30HS']),
+      AchievementCard('Score 20 or higher on the 40 second speed run', 20,
+          achieveValues['speedrun40HS']),
+      AchievementCard('Score 25 or higher on the 50 second speed run', 25,
+          achieveValues['speedrun50HS']),
+      AchievementCard('Score 30 or higher on the 60 second speed run', 30,
+          achieveValues['speedrun60HS']),
     ];
     //print(achievements);
     return achievements;
