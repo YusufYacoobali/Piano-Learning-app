@@ -15,6 +15,7 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
   'Light': ThemeData.light(),
   'Pink': ThemeData.dark().copyWith(
     backgroundColor: const Color.fromARGB(255, 200, 130, 255),
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
     scaffoldBackgroundColor: const Color.fromARGB(255, 200, 130, 255),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 200, 110, 255),
@@ -106,6 +107,15 @@ BoxDecoration lessonButtonDeco = BoxDecoration(
   //borderRadius: BorderRadius.circular(boxRadii),
   gradient: const LinearGradient(
     colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
+);
+
+BoxDecoration completeLessonButtonDeco = BoxDecoration(
+  shape: BoxShape.circle,
+  color: buttonBoxColour,
+  //borderRadius: BorderRadius.circular(boxRadii),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5aff15), Color(0xff00b712)],
   ),
 );
 
@@ -227,10 +237,10 @@ const List<String> whiteKeyNames = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 
 //Achievement screen
-const double cardWidth = 230;
+const double cardWidth = 270;
 const double cardHeight = 270;
 
-const double circularIndicatorRadius = 78;
+const double circularIndicatorRadius = 74;
 
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
@@ -252,7 +262,7 @@ final Decoration achievementCardDecoration = BoxDecoration(
 );
 
 //achievement making
-const int numOfLessons = 10;
+const int numOfLessons = 6;
 const int numOfquizzes = 10;
 
 //pause menu
@@ -312,8 +322,38 @@ const Map<String, String> sharpFlatEquivalence = <String, String>{
 
 /// Notes that can be played in endless mode
 const List<String> endlessBeginnerNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-const List<String> endlessIntermediateNotes = ['C', 'Db', 'D', 'D#', 'E', 'F', 'F#', 'G', 'A', 'Bb', 'B'];
-const List<String> endlessExpertNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B'];
+const List<String> endlessIntermediateNotes = [
+  'C',
+  'Db',
+  'D',
+  'D#',
+  'E',
+  'F',
+  'F#',
+  'G',
+  'A',
+  'Bb',
+  'B'
+];
+const List<String> endlessExpertNotes = [
+  'C',
+  'C#',
+  'Db',
+  'D',
+  'D#',
+  'Eb',
+  'E',
+  'F',
+  'F#',
+  'Gb',
+  'G',
+  'G#',
+  'Ab',
+  'A',
+  'A#',
+  'Bb',
+  'B'
+];
 
 /// How fast the notes move across the screen in endless mode for each difficulty
 const int endlessBeginnerBpm = 80;
@@ -337,9 +377,9 @@ const int playAlongExpertBpm = 90;
 const int playAlongBeginnerNoteSpacing = 200;
 const int playAlongIntermediateNoteSpacing = 150;
 const int playAlongExpertNoteSpacing = 130;
+
 /// How far each note should move per iteration
 const double noteMovement = 1;
-
 
 const Icon helperButton = Icon(
   Icons.help,
@@ -364,6 +404,7 @@ const TextStyle helperMenuTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
+
 /// Clef symbols
 const String trebleClef = '𝄞';
 const String bassClef = '𝄢';
@@ -385,3 +426,9 @@ const double iosBassClefFontSize = 100;
 /// Change these to change the clef position on screen
 const double iosTrebleClefOffset = 118;
 const double iosBassClefOffset = 85;
+
+/// QuestionAnswerData
+const int timeThreshold = 500;
+const int correctAnswerIncrease = 5;
+const int maxTimeReduction = 5;
+const int incorrectAnswerReduction = 10;

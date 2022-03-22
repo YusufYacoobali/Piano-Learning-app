@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/page_keyboard.dart';
+import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
+import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
@@ -18,6 +21,7 @@ class _LessonScreenState extends State<LessonScreen> {
   late Widget screenWidget;
   Stopwatch stopwatch = Stopwatch();
   late final PopUpController _pauseMenu;
+  StorageReaderWriter storage = StorageReaderWriter();
 
   ///List of all lessons available
 
@@ -39,7 +43,8 @@ class _LessonScreenState extends State<LessonScreen> {
     setScreenWidget();
     stopwatch.start();
 
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context);
+    PauseMenu pauseMenuBuilder =
+        PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
@@ -48,6 +53,8 @@ class _LessonScreenState extends State<LessonScreen> {
   void dispose() {
     super.dispose();
     _pauseMenu.delete();
+    stopwatch.stop();
+    stopwatch.reset();
   }
 
   Widget getPauseButton() {
@@ -67,7 +74,10 @@ class _LessonScreenState extends State<LessonScreen> {
 
   /// Gets the key pressed on the keyboard
   void answer(String text) {
-    questionBrain.setAnswer(userAnswer: text);
+    stopwatch.stop();
+    questionBrain.setAnswer(
+        userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
+    stopwatch.reset();
     showResultAlert(text);
   }
 
@@ -158,18 +168,49 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  Widget getResultsScreen() {
+  getResults() async {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => ResultsScreen(
+      //             score: percentage,
+      //             title: title,
+      //           )),
+      // );
+      getResultsScreen(title, percentage);
     } else {
       title = "Congratulations!";
+      storage.saveCompletedLesson(widget.lessonNum - 1);
+      bool displayNotification = await storage.displayLessonNotification();
+      getResultsScreen(title, percentage);
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => ResultsScreen(
+      //             score: percentage,
+      //             title: title,
+      //           )),
+      // );
+      //only displays notification if achievement is completed
+      if (displayNotification) {
+        inAppNotification(context);
+      }
     }
-    return ResultsScreen(
-      score: percentage,
-      title: title,
+  }
+
+  getResultsScreen(title, percentage) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultsScreen(
+                score: percentage,
+                title: title,
+              )),
     );
   }
 
@@ -203,12 +244,13 @@ class _LessonScreenState extends State<LessonScreen> {
             stopwatch.start();
           });
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return getResultsScreen();
-            }),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) {
+          //     return getResultsScreen();
+          //   }),
+          // );
+          getResults();
         }
       },
     );
