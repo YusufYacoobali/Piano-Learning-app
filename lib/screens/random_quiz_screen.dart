@@ -188,6 +188,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
     return ResultsScreen(
       score: percentage,
       title: title,
+      questionBrain: questionBrain,
     );
   }
 

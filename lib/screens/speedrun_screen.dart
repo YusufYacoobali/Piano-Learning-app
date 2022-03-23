@@ -71,7 +71,6 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-
   /// The results screen
   Widget getResultsScreen() {
     // Calculates the percentage achieved by the user
@@ -83,6 +82,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     return ResultsScreen(
       score: percentage,
       title: title,
+      questionBrain: questionBrain,
     );
   }
 

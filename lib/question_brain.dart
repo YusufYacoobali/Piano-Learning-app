@@ -15,17 +15,30 @@ class QuestionBrain {
   /// The list of questions
   final List<Question> questions;
 
+  ///TODO: add map of question and answer
+  late final Map<int, String> _map = {};
+  //final List<String> userAnswerList;
+
   /// Constructor
   QuestionBrain({
     required this.questions,
+    //this.userAnswerList = List(getTotalNumberOfQuestions());
   });
 
   Note getNote() {
     return questions[_questionNum].note;
   }
 
+  Note getSpecificNote(specificQuestionNumber) {
+    return questions[specificQuestionNumber].note;
+  }
+
   Clef getClef() {
     return questions[_questionNum].clef;
+  }
+
+  Clef getSpecificClef(specificQuestionNumber) {
+    return questions[specificQuestionNumber].clef;
   }
 
   /// Gets the name of the image of the current question
@@ -54,6 +67,15 @@ class QuestionBrain {
     return questions[_questionNum].correctAnswer;
   }
 
+  /// Gets the correct answer of the a specific
+  String getSpecificCorrectAnswer(specificQuestionNum) {
+    if (specificQuestionNum < 0 ||
+        specificQuestionNum >= getTotalNumberOfQuestions()) {
+      return "Invalid index";
+    }
+    return questions[specificQuestionNum].correctAnswer;
+  }
+
   /// Moves to the next question if there is a next question
   void goToNextQuestion() {
     if (_questionNum < questions.length - 1) {
@@ -71,9 +93,19 @@ class QuestionBrain {
     return questions.length;
   }
 
+  /// Gets the answer that the user has answered for a question
+  String getUserAnswer(int questionNumber) {
+    //return userAnswerList[questionNumber];
+    return _map[questionNumber] ?? "N/A";
+  }
+
   /// Sets the user answer for the current question
   void setAnswer({required userAnswer, int? timeTaken}) {
     // Checks if the user answer was correct and if so, increments the score
+    ///add map entry
+    //_map.addEntries([MapEntry(_questionNum, userAnswer)]);
+    _map[_questionNum] = userAnswer;
+    //userAnswerList.add(userAnswer);
     if (checkAnswer(userAnswer)) {
       ++_score;
       QuestionAnswerData.questionAnswered(
@@ -82,6 +114,7 @@ class QuestionBrain {
       QuestionAnswerData.questionAnswered(
           questions[_questionNum].questionID, false, timeTaken);
     }
+
     // Checks if there are no more questions
     if (isLastQuestion()) {
       // Creates key for shared preferences

@@ -16,6 +16,15 @@ import '../lessons_and_quizzes/question_finder.dart';
 /// Creates screen for a lesson.
 /// The lesson screen consists of the option buttons and components in question_skeleton
 
+class LessonScreen extends StatefulWidget {
+  static const String id = 'lesson_screen';
+  final int lessonNum;
+  const LessonScreen({Key? key, this.lessonNum = 1}) : super(key: key);
+
+  @override
+  _LessonScreenState createState() => _LessonScreenState();
+}
+
 class _LessonScreenState extends State<LessonScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
@@ -58,6 +67,53 @@ class _LessonScreenState extends State<LessonScreen> {
     _pauseMenu.delete();
     stopwatch.stop();
     stopwatch.reset();
+  }
+
+  /// Creates text for next button
+  String getNextButtonText() {
+    return questionBrain.isLastQuestion() ? "Finish" : "Next";
+  }
+
+  /// Creates a next button
+  ///
+  /// Either takes user to the next question or the result screen
+  /// if the current question is the last question.
+  Widget getNextButton() {
+    return TextButton(
+      child: Text(getNextButtonText()),
+      onPressed: () {
+        Navigator.pop(context, 'OK');
+
+        ///go next if it is not the last question
+        if (!questionBrain.isLastQuestion()) {
+          setState(() {
+            questionBrain.goToNextQuestion();
+            setScreenWidget();
+            stopwatch.start();
+          });
+        } else {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) {
+          //     return getResultsScreen();
+          //   }),
+          // );
+          getResults();
+        }
+      },
+    );
+  }
+
+  /// Creates the template for alert with title, description and next button
+  AlertDialog createResultAlert(String alertTitle, String alertDesc) {
+    return AlertDialog(
+      title: Text(alertTitle),
+      content: Text(alertDesc),
+      actions: <Widget>[
+        ///go to next question
+        getNextButton(),
+      ],
+    );
   }
 
   Widget getPauseButton() {
@@ -105,6 +161,19 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  getResultsScreen(title, percentage, lessonNum, questionBrain) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultsScreen(
+                score: percentage,
+                title: title,
+                lessonNum: lessonNum,
+                questionBrain: questionBrain,
+              )),
+    );
+  }
+
   /// Creates the answer option buttons.
   ///
   /// Each button has text displayed and check with question brain
@@ -135,6 +204,17 @@ class _LessonScreenState extends State<LessonScreen> {
   ///
   /// The alert is displayed each time the user answers a question.
   /// Shows if the answer is correct and provides a  button to go to the next question.
+  ///
+  /// Displays the alert with result.
+  void displayDialog(String alertTitle, String alertDesc) {
+    showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return createResultAlert(alertTitle, alertDesc);
+      },
+    );
+  }
 
   void showResultAlert(String choice) {
     String alertTitle = '';
@@ -153,17 +233,6 @@ class _LessonScreenState extends State<LessonScreen> {
     displayDialog(alertTitle, alertDesc);
   }
 
-  /// Displays the alert with result.
-  void displayDialog(String alertTitle, String alertDesc) {
-    showDialog<String>(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return createResultAlert(alertTitle, alertDesc);
-      },
-    );
-  }
-
   /// Create result screen which displays after the user finishes all questions
   getResults() async {
     String title = '';
@@ -179,12 +248,12 @@ class _LessonScreenState extends State<LessonScreen> {
       //             title: title,
       //           )),
       // );
-      getResultsScreen(title, percentage);
+      getResultsScreen(title, percentage, widget.lessonNum, questionBrain);
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
       bool displayNotification = await storage.displayLessonNotification();
-      getResultsScreen(title, percentage);
+      getResultsScreen(title, percentage, widget.lessonNum, questionBrain);
       // Navigator.push(
       //   context,
       //   MaterialPageRoute(
@@ -199,71 +268,13 @@ class _LessonScreenState extends State<LessonScreen> {
       }
     }
   }
+// <<<<<<< check-results-screen
+//     return ResultsScreen(
+//       score: percentage,
+//       title: title,
+//       lessonNum: widget.lessonNum,
+//       questionBrain: questionBrain,
+// =======
+//   }
 
-  getResultsScreen(title, percentage) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ResultsScreen(
-                score: percentage,
-                title: title,
-              )),
-    );
-  }
-
-  /// Creates the template for alert with title, description and next button
-  AlertDialog createResultAlert(String alertTitle, String alertDesc) {
-    return AlertDialog(
-      title: Text(alertTitle),
-      content: Text(alertDesc),
-      actions: <Widget>[
-        ///go to next question
-        getNextButton(),
-      ],
-    );
-  }
-
-  /// Creates a next button
-  ///
-  /// Either takes user to the next question or the result screen
-  /// if the current question is the last question.
-  Widget getNextButton() {
-    return TextButton(
-      child: Text(getNextButtonText()),
-      onPressed: () {
-        Navigator.pop(context, 'OK');
-
-        ///go next if it is not the last question
-        if (!questionBrain.isLastQuestion()) {
-          setState(() {
-            questionBrain.goToNextQuestion();
-            setScreenWidget();
-            stopwatch.start();
-          });
-        } else {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) {
-          //     return getResultsScreen();
-          //   }),
-          // );
-          getResults();
-        }
-      },
-    );
-  }
-
-  /// Creates text for next button
-  String getNextButtonText() {
-    return questionBrain.isLastQuestion() ? "Finish" : "Next";
-  }
-}
-
-class LessonScreen extends StatefulWidget {
-  static const String id = 'lesson_screen';
-  final int lessonNum;
-  const LessonScreen({Key? key, this.lessonNum = 1}) : super(key: key);
-
-  @override
-  _LessonScreenState createState() => _LessonScreenState();
 }

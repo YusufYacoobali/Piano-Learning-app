@@ -190,6 +190,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
             builder: (context) => ResultsScreen(
                   score: percentage,
                   title: title,
+               questionBrain: questionBrain,
                 )),
       );
     } else {
@@ -202,6 +203,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
             builder: (context) => ResultsScreen(
                   score: percentage,
                   title: title,
+               questionBrain: questionBrain,
                 )),
       );
       //only displays notification if achievement is completed
@@ -209,6 +211,14 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         inAppNotification(context);
       }
     }
+// <<<<<<< check-results-screen
+//     return ResultsScreen(
+//       score: percentage,
+//       title: title,
+//       questionBrain: questionBrain,
+//     );
+// =======
+// >>>>>>> main
   }
 
   /// Creates the template for alert with title, description and next button
