@@ -6,6 +6,7 @@ import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import '../components/app_bar_with_settings_icon.dart';
 import '../components/instruction_pop_up_content/quiz_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
+import '../helper.dart';
 import 'menu_screen.dart'; //For MenuButton
 
 /// A list containing the names of each quiz, apart from the "random mixed quiz" which has no record.
@@ -26,34 +27,16 @@ List<Key> quizButtonKeys = <Key>[];
 /// This is a copy that removes the Future wrapper and is used for testing purposes only.
 List<String> quizRecordsCopy = <String>[];
 
-//TODO: Move into helper file
-/// Replaces all blank spaces from all strings with underscores in a list
-List<String> removeSpacesFromStrings(List<String> toConvert) {
-  List<String> stringsWithNoSpaces = <String>[];
-  for (String string in toConvert) {
-    String stringWithNoSpaces = '';
-    for (var rune in string.runes) {
-      String char = String.fromCharCode(rune);
-      if (char != ' ') {
-        stringWithNoSpaces = stringWithNoSpaces + char;
-      }
-      else {
-        stringWithNoSpaces = stringWithNoSpaces + '_';
-      }
-    }
-    stringsWithNoSpaces.add(stringWithNoSpaces);
-  }
-  return stringsWithNoSpaces;
-}
-
 ///The key for the button that confirms the selection of a random quiz.
 const randomQuizSelectedKey = Key('quizSelected:Random');
 
 ///The user records for each of the quizzes.
+//TODO: Remove and replace with helper class function in relevant places
+//TODO: Check speedrun mode for same idea, then adjust lay_along and endless modes.
 Future<List<String>> getQuizRecords() async {
   List<String> records = <String>[];
   final prefs = await SharedPreferences.getInstance();
-  for (String quiz in removeSpacesFromStrings(quizzes)) {
+  for (String quiz in replaceSpacesWithUnderscoresFromStrings(quizzes)) {
     records.add((prefs.getInt('${quiz}_record') ?? 'N/A').toString());
   }
   return records;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
@@ -7,7 +8,9 @@ import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
 import 'package:sight_reading_app/components/option_button.dart';
+import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 
+import '../helper.dart';
 import '../lessons_and_quizzes/question_finder.dart';
 
 /// Creates screen for the practice quiz.
@@ -164,6 +167,26 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     );
   }
 
+  ///Checks if the user's final score is a new record for the selected quiz, and updates shared preferences if it is.
+  Future<void> _updateRecords() async {
+    int score = questionBrain.getScore();
+    final prefs = await SharedPreferences.getInstance();
+    final List<String> quizRecords = await getRecordsForMode('quiz');
+    print(quizRecords);
+    late int currentRecord;
+    if (quizRecords[widget.lessonID - 1] == 'N/A') {
+      currentRecord = 0;
+    } else {
+      currentRecord = int.parse(quizRecords[widget.lessonID - 1]);
+    }
+    //If it is the user's first time, the currentRecord will be N/A.
+    //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
+    if (score > currentRecord || currentRecord == 0) {
+      await prefs.setInt(
+         '${await getRecordKeysForMode('quiz')[widget.lessonID - 1]}' , score);
+    }
+  }
+
   /// Create result screen which displays after the user finishes all questions
   Widget getResultsScreen() {
     String title = '';
@@ -202,13 +225,16 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
       onPressed: () {
         Navigator.pop(context, 'OK');
 
-        //go next if it is not the last question
+        //Goes to the next question if it is not the last question.
         if (!questionBrain.isLastQuestion()) {
           setState(() {
             questionBrain.goToNextQuestion();
             setScreenWidget();
           });
-        } else {
+        }
+        // Shows results screen and updates records if the last question was answered.
+        else {
+          _updateRecords();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {
@@ -230,6 +256,7 @@ class PracticeQuizScreen extends StatefulWidget {
   /// The id used to identify the screen
   static const String id = 'practice_quiz_screen';
 
+  /// The lesson the quiz is getting questions from.
   final int lessonID;
 
   const PracticeQuizScreen({Key? key, required this.lessonID}) : super(key: key);

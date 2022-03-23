@@ -86,6 +86,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
+  //TODO: Move into helper file
   ///Checks if the user's score is a new record for the selected mode, and updates shared preferences if it is.
   Future<void> _updateRecords() async {
     int score = questionBrain.getScore();
