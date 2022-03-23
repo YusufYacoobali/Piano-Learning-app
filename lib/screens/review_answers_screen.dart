@@ -43,7 +43,6 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   }
 
   ///Gets the image of the question
-  ///TODO: add map in question brain and import images of lesson
   Widget addQuestionImage(int questionIndex) {
     NextNoteNotifier _nextNote = NextNoteNotifier();
     _nextNote.setNextNote(questionBrain.getSpecificNote(questionIndex));
@@ -61,6 +60,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     );
   }
 
+  /// Adds message to each result card
   Widget addMessageWrap(String message) {
     return Wrap(
         spacing: 20.0,
@@ -74,14 +74,17 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         ]);
   }
 
+  /// Add the result box on top of each card
   Widget addResultBox(int questionIndex) {
     String resultText = "Incorrect";
     Color resultColor = Colors.red;
+    IconData resultIcon = Icons.cancel;
 
     if (questionBrain.getUserAnswer(questionIndex) ==
         questionBrain.getSpecificCorrectAnswer(questionIndex)) {
       resultText = "Correct";
       resultColor = Colors.lightGreen;
+      resultIcon = Icons.check_circle;
     }
     return Container(
       margin: boxMargin,
@@ -93,7 +96,10 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
       child: FittedBox(
         fit: BoxFit.contain,
         alignment: Alignment.center,
-        child: Text(resultText, style: const TextStyle(fontSize: 40)),
+        child: Row(children: [
+          Icon(resultIcon),
+          Text(resultText, style: const TextStyle(fontSize: 40))
+        ]),
       ),
     );
   }
