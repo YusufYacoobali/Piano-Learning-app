@@ -196,13 +196,13 @@ class Keyboard extends StatefulWidget {
 
   /// The function to be called when a key is pressed
   /// gets the key pressed on the keyboard
-  final Function(String) function;
+  final Function(String) onKeyPressed;
   ///sets the octave of sounds to play
   final int octave;
 
   //final String difficulty = StorageReaderWriter().read('difficulty').toString();
 
-  const Keyboard(this.function, this.octave, {Key? key}) : super(key: key);
+  const Keyboard(this.onKeyPressed, this.octave, {Key? key}) : super(key: key);
 
 
   @override
