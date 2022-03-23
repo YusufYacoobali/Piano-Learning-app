@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/page_keyboard.dart';
 import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
-import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
@@ -144,19 +144,27 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            Align(alignment: Alignment.topRight, child: getPauseButton()),
-            Column(
-              children: [
-                screenWidget,
-                Expanded(
-                  child: Keyboard(onKeyPressed: answer),
-                ),
-              ],
-            ),
-          ],
-        ),
+
+        child: Stack(children: [
+          Align(alignment: Alignment.topRight, child: getPauseButton()),
+          Column(
+            children: [
+              screenWidget,
+              Expanded(
+                child: PageKeyboard(answer),
+              ),
+            ],
+          ),
+
+          ///choices buttons
+          // Expanded(
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: getOptionButtons(),
+          //   ),
+          // ),
+        ]),
+
       ),
     );
   }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/page_keyboard.dart';
 
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
-import '../components/keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
@@ -74,20 +74,26 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            Align(alignment: Alignment.topRight, child: getPauseButton()),
-            Column(
-              children: [
-                screenWidget,
-                Expanded(
-                  child: Keyboard(onKeyPressed: answer),
-                ),
-              ],
-            ),
-          ],
-        ),
-// =======
+
+        child: Stack(children: [
+          Align(alignment: Alignment.topRight, child: getPauseButton()),
+          Column(
+            children: [
+              screenWidget,
+              Expanded(
+                child: PageKeyboard(answer),
+              ),
+            ],
+          ),
+
+          ///choices buttons
+          // Expanded(
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: getOptionButtons(),
+          //   ),
+          // ),
+        ]),
 //         child: Stack(children: [
 //           Align(alignment: Alignment.topRight, child: getPauseButton()),
 //           Column(
@@ -107,7 +113,6 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
 //           //   ),
 //           // ),
 //         ]),
-// >>>>>>> main
       ),
     );
   }

@@ -14,7 +14,7 @@ void main() {
         note: Note(name: 'C4', duration: 4),
         clef: Clef.treble,
         question:
-            'This is our first note. The name is C (Do). Now press C in the option box.',
+            'This is our first note. The name is C (Do). Now press C on the keyboard.',
         correctAnswer: 'C',
         questionID: 1,
         lessonID: 1,
@@ -23,7 +23,7 @@ void main() {
         note: Note(name: 'D4', duration: 4),
         clef: Clef.treble,
         question:
-            'This is our second note. The name is D (Re). Now press D in the option box.',
+            'This is our second note. The name is D (Re). Now press D on the keyboard.',
         correctAnswer: 'D',
         questionID: 2,
         lessonID: 1,
@@ -32,7 +32,7 @@ void main() {
         note: Note(name: 'E4', duration: 4),
         clef: Clef.treble,
         question:
-            'This is our third note. The name is E (Mi). Now press E in the option box.',
+            'This is our third note. The name is E (Mi). Now press E on the keyboard.',
         correctAnswer: 'E',
         questionID: 3,
         lessonID: 1,
