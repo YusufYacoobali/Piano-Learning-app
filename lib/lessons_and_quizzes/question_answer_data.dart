@@ -1,6 +1,7 @@
 import 'package:sight_reading_app/questions.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../question.dart';
+import 'package:sight_reading_app/constants.dart';
 
 class QuestionAnswerData {
   static final Map<int, int> _questionStatistics = {};
@@ -34,20 +35,24 @@ class QuestionAnswerData {
       if (isCorrect) {
         // Update using combination of correct and time taken
         if (timeTaken != null) {
-          // If answer correctly within half a second, get full marks
-          if (timeTaken <= 500) {
-            _questionStatistics[questionID] = currentStatistic += 10;
+          // If answer correctly within threshold, get full marks
+          if (timeTaken <= timeThreshold) {
+            _questionStatistics[questionID] =
+                currentStatistic += correctAnswerIncrease;
           } else {
             // Longer you take, more marks are reduced
-            int reduction = timeTaken ~/ 100;
-            reduction = reduction >= -5 ? reduction : -5;
-            _questionStatistics[questionID] = currentStatistic += reduction;
+            int reduction = (timeTaken ~/ 100) - correctAnswerIncrease;
+            reduction =
+                reduction <= maxTimeReduction ? reduction : maxTimeReduction;
+            _questionStatistics[questionID] = currentStatistic -= reduction;
           }
         } else {
-          _questionStatistics[questionID] = currentStatistic += 10;
+          _questionStatistics[questionID] =
+              currentStatistic += correctAnswerIncrease;
         }
       } else {
-        _questionStatistics[questionID] = currentStatistic -= 10;
+        _questionStatistics[questionID] =
+            currentStatistic -= incorrectAnswerReduction;
       }
       StorageReaderWriter().write(questionID.toString(), currentStatistic);
     } else {

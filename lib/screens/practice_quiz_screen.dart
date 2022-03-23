@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
+import '../components/in_app_notification_pop_up.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -18,6 +20,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
   late final PopUpController _pauseMenu;
+  StorageReaderWriter storage = StorageReaderWriter();
   Stopwatch stopwatch = Stopwatch();
 
   @override
@@ -28,7 +31,11 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         questions: QuestionFinder().getPracticeQuestionsForLesson(1, 10));
     setScreenWidget();
     stopwatch.start();
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id);
+    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id, continueOnPressed: () => stopwatch.start());
+// =======
+//     PauseMenu pauseMenuBuilder =
+//         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
+// >>>>>>> main
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
@@ -50,9 +57,19 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         size: 35.0,
       ),
       onPressed: () {
+        stopwatch.stop();
         _pauseMenu.show();
       },
     );
+  }
+
+  /// Gets the key pressed on the keyboard
+  void answer(String text) {
+    stopwatch.stop();
+    questionBrain.setAnswer(
+        userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
+    stopwatch.reset();
+    showResultAlert(text);
   }
 
   @override
@@ -72,18 +89,39 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
             ),
           ],
         ),
+// =======
+//         child: Stack(children: [
+//           Align(alignment: Alignment.topRight, child: getPauseButton()),
+//           Column(
+//             children: [
+//               screenWidget,
+//               Expanded(
+//                 child: Keyboard(function: answer),
+//               ),
+//             ],
+//           ),
+
+//           ///choices buttons
+//           // Expanded(
+//           //   child: Row(
+//           //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           //     children: getOptionButtons(),
+//           //   ),
+//           // ),
+//         ]),
+// >>>>>>> main
       ),
     );
   }
 
-  /// Gets the key pressed on the keyboard
-  void answer(String text) {
-    stopwatch.stop();
-    questionBrain.setAnswer(
-        userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
-    stopwatch.reset();
-    showResultAlert(text);
-  }
+  // /// Gets the key pressed on the keyboard
+  // void answer(String text) {
+  //   stopwatch.stop();
+  //   questionBrain.setAnswer(
+  //       userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
+  //   stopwatch.reset();
+  //   showResultAlert(text);
+  // }
 
   /// Set details of the Screen Widget in lesson.
   ///
@@ -132,6 +170,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return createResultAlert(alertTitle, alertDesc);
       },
@@ -139,19 +178,37 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  Widget getResultsScreen() {
+  getResultsScreen() async {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ResultsScreen(
+                  score: percentage,
+                  title: title,
+                )),
+      );
     } else {
       title = "Congratulations!";
+      storage.saveCompletedQuiz();
+      bool displayNotification = await storage.displayQuizNotification();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ResultsScreen(
+                  score: percentage,
+                  title: title,
+                )),
+      );
+      //only displays notification if achievement is completed
+      if (displayNotification) {
+        inAppNotification(context);
+      }
     }
-    return ResultsScreen(
-      score: percentage,
-      title: title,
-    );
   }
 
   /// Creates the template for alert with title, description and next button
@@ -181,14 +238,16 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
           setState(() {
             questionBrain.goToNextQuestion();
             setScreenWidget();
+            stopwatch.start();
           });
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return getResultsScreen();
-            }),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) {
+          //     return getResultsScreen();
+          //   }),
+          // );
+          getResultsScreen();
         }
       },
     );
