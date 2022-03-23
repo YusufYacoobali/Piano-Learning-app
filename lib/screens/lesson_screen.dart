@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/page_keyboard.dart';
 import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
-import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';

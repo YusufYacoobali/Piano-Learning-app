@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/page_keyboard.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/in_app_notification_pop_up.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
-import '../components/keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
@@ -78,7 +78,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
             children: [
               screenWidget,
               Expanded(
-                child: Keyboard(function: answer),
+                child: PageKeyboard(answer),
               ),
             ],
           ),
