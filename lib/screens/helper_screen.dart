@@ -77,7 +77,6 @@ class _HelperScreenState extends State<HelperScreen> {
   ///Create a card that holds note images, names and sound.
   Widget cardHelper(index) {
     return Center(
-      key: const Key('card helper'),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         child: SizedBox(
