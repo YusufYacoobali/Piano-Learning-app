@@ -3,6 +3,7 @@ import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
@@ -42,8 +43,11 @@ class _LessonScreenState extends State<LessonScreen> {
     setScreenWidget();
     stopwatch.start();
 
-    PauseMenu pauseMenuBuilder =
-        PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
+    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Lessons', id: LessonMenuScreen.id, continueOnPressed: () => stopwatch.start());
+// =======
+//     PauseMenu pauseMenuBuilder =
+//         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
+// >>>>>>> main
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
@@ -84,25 +88,19 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(children: [
-          Align(alignment: Alignment.topRight, child: getPauseButton()),
-          Column(
-            children: [
-              screenWidget,
-              Expanded(
-                child: Keyboard(function: answer),
-              ),
-            ],
-          ),
-
-          ///choices buttons
-          // Expanded(
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: getOptionButtons(),
-          //   ),
-          // ),
-        ]),
+        child: Stack(
+          children: [
+            Align(alignment: Alignment.topRight, child: getPauseButton()),
+            Column(
+              children: [
+                screenWidget,
+                Expanded(
+                  child: Keyboard(onKeyPressed: answer),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

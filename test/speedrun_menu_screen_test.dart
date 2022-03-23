@@ -7,7 +7,6 @@ import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:sight_reading_app/screens/speedrun_screen.dart';
 
 void main() {
   testWidgets('Check that the speedrun menu screen is being displayed',

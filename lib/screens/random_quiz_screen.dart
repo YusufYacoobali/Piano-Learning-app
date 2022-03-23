@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/keyboard.dart';
@@ -27,8 +28,12 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
             QuestionFinder().getRandomListOfQuestions(numOfQuestions: 10));
     setScreenWidget();
     stopwatch.start();
-    PauseMenu pauseMenuBuilder =
-        PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
+
+    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id,  continueOnPressed: () => stopwatch.start());
+// =======
+//     PauseMenu pauseMenuBuilder =
+//         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
+// >>>>>>> main
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
@@ -69,28 +74,52 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(children: [
-          Align(alignment: Alignment.topRight, child: getPauseButton()),
-          Column(
-            children: [
-              screenWidget,
-              Expanded(
-                child: Keyboard(function: answer),
-              ),
-            ],
-          ),
+        child: Stack(
+          children: [
+            Align(alignment: Alignment.topRight, child: getPauseButton()),
+            Column(
+              children: [
+                screenWidget,
+                Expanded(
+                  child: Keyboard(onKeyPressed: answer),
+                ),
+              ],
+            ),
+          ],
+        ),
+// =======
+//         child: Stack(children: [
+//           Align(alignment: Alignment.topRight, child: getPauseButton()),
+//           Column(
+//             children: [
+//               screenWidget,
+//               Expanded(
+//                 child: Keyboard(function: answer),
+//               ),
+//             ],
+//           ),
 
-          ///choices buttons
-          // Expanded(
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: getOptionButtons(),
-          //   ),
-          // ),
-        ]),
+//           ///choices buttons
+//           // Expanded(
+//           //   child: Row(
+//           //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           //     children: getOptionButtons(),
+//           //   ),
+//           // ),
+//         ]),
+// >>>>>>> main
       ),
     );
   }
+
+  // /// Gets the key pressed on the keyboard
+  // void answer(String text) {
+  //   stopwatch.stop();
+  //   questionBrain.setAnswer(
+  //       userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
+  //   stopwatch.reset();
+  //   showResultAlert(text);
+  // }
 
   /// Set details of the Screen Widget in lesson.
   ///

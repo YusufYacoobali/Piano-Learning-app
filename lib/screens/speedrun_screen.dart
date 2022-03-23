@@ -155,15 +155,8 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
                 // Question
                 screenWidget,
                 Expanded(
-                  child: Keyboard(function: answer),
+                  child: Keyboard(onKeyPressed: answer),
                 ),
-                // User-selectable option buttons
-                // Expanded(
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //     children: getOptionButtons(),
-                //   ),
-                // ),
               ],
             ),
             Padding(

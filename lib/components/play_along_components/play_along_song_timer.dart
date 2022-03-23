@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 
-import 'moving_music_sheet.dart';
-import 'note.dart';
-import 'package:sight_reading_app/constants.dart' as constants;
+import '../../constants.dart' as constants;
+import '../sheet_music_components/moving_music_sheet.dart';
+import '../sheet_music_components/note.dart';
+import 'play_along_hit_counter.dart';
 
 class PlayAlongSongTimer {
   /// Whether the sheet is moving or not
@@ -44,17 +45,22 @@ class PlayAlongSongTimer {
   late final int _timeBetweenMovements;
 
   /// How fast the notes move along the screen
-  late final int _bpm;
+  final int bpm;
 
   /// The difficulty level
   late final String _difficulty;
+
+  /// Counter the number of hit notes
+  final PlayAlongHitCounter hitCounter;
 
   PlayAlongSongTimer({
     required this.sheet,
     required this.nextNote,
     required this.updater,
     required this.notes,
+    required this.bpm,
     required this.onStop,
+    required this.hitCounter,
   }) {
 
     _endTime = notes.keys.last;
@@ -67,24 +73,22 @@ class PlayAlongSongTimer {
     sheet.onEnd = end;
   }
 
+  /// Sets the values of the moving notes depending on the difficulty
   void _setDifficultyValues() {
     int apparentSpacing = 100;
     if (_difficulty == 'Expert') {
-      _bpm = constants.endlessExpertBpm;
       _iterationsPerTimeUnit = constants.playAlongExpertNoteSpacing;
-      apparentSpacing = _iterationsPerTimeUnit - 30;
+      apparentSpacing = _iterationsPerTimeUnit - 20;
     }
     else if (_difficulty == 'Intermediate') {
-      _bpm = constants.endlessIntermediateBpm;
       _iterationsPerTimeUnit = constants.playAlongIntermediateNoteSpacing;
       apparentSpacing = _iterationsPerTimeUnit - 60;
     }
     else {
-      _bpm = constants.endlessBeginnerBpm;
       _iterationsPerTimeUnit = constants.playAlongBeginnerNoteSpacing;
       apparentSpacing = 80;
     }
-    _timeBetweenMovements = ((1 / ((_bpm / 60) * apparentSpacing)) * 1000).round();
+    _timeBetweenMovements = ((1 / ((bpm / 60) * apparentSpacing)) * 1000).round();
   }
 
   void setDifficulty(String diff) {
