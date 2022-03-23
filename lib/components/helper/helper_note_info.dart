@@ -1,4 +1,4 @@
-///This give the basic information of note in a helper card.
+///This class provides the basic information of note in a helper card.
 class HelperNoteInfo {
   final String noteImageName;
   final String noteName;

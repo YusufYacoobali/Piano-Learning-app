@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/helper_screen.dart';
-//import 'package:sight_reading_app/screens/menu_screen.dart';
 
+///This screen is the helper selection screen which contain buttons.
 class _HelperMenuScreenState extends State<HelperMenuScreen> {
   @override
   void initState() {
@@ -14,6 +14,7 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
     super.dispose();
   }
 
+  ///Builds the screen with appBar and helper buttons.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,12 +51,12 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
     );
   }
 
+  ///A button that will be route to specific screen of bass helper.
   Widget bassNoteHelperbutton() {
     return ElevatedButton(
         child: const Text('Bass note', style: helperMenuTextStyle),
         style: helperMenuButonStyle,
         onPressed: () {
-          //Navigator.pushNamed(context, HelperScreen.id);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {
@@ -67,6 +68,7 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
         });
   }
 
+  ///A button that will be route to specific screen of clef helper.
   Widget clefNoteHelperbutton() {
     return ElevatedButton(
         child: const Text(
@@ -75,7 +77,6 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
         ),
         style: helperMenuButonStyle,
         onPressed: () {
-          //Navigator.pushNamed(context, HelperScreen.id);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {

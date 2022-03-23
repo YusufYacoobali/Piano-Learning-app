@@ -1,6 +1,7 @@
 import 'helper_list.dart';
 import 'helper_note_info.dart';
 
+/// A list that contains all information about helper of clef.
 final HelperList clefNoteImageNameList = HelperList(
   helperId: 2,
   helperList: [

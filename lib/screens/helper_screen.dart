@@ -3,11 +3,11 @@ import 'package:sight_reading_app/components/helper/helper_brain.dart';
 import '../components/helper/helper_bass_note_list.dart';
 import '../components/helper/helper_clef_note_list.dart';
 import '../constants.dart';
-
 import 'package:sight_reading_app/components/helper/helper_list.dart';
-
 import 'package:audioplayers/audioplayers.dart';
 
+///This screen creates helper screen
+///It contains multiple cards with images, names and icon buttons
 class HelperScreen extends StatefulWidget {
   static const String id = 'helper_screen';
   final int helperNum;
@@ -23,8 +23,10 @@ class _HelperScreenState extends State<HelperScreen> {
   late int index;
   final playSound = AudioCache();
 
+  ///List of helper list available
   List<HelperList> helperList = [bassNoteImageNameList, clefNoteImageNameList];
 
+  ///helperBrain provides the unique number for helping locate the list we need.
   @override
   void initState() {
     super.initState();
@@ -37,6 +39,8 @@ class _HelperScreenState extends State<HelperScreen> {
     super.dispose();
   }
 
+  ///Builds the screen with appBar and multiple helper cards.
+  ///Inside the helper card, it contains images, names and icon buttons.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +74,7 @@ class _HelperScreenState extends State<HelperScreen> {
     );
   }
 
+  ///Create a card that holds note images, names and sound.
   Widget cardHelper(index) {
     return Center(
       child: Card(
@@ -103,6 +108,7 @@ class _HelperScreenState extends State<HelperScreen> {
     );
   }
 
+  ///A widget that holds the name of the note.
   Widget cardText(index) {
     return Wrap(
       spacing: 10.0,
@@ -112,13 +118,13 @@ class _HelperScreenState extends State<HelperScreen> {
         Text(
           helperBrain.getHelperNoteName(index),
           //HelperNoteInfoList.getImageName(index),
-          //'Bass A',
           style: const TextStyle(fontSize: 30.0),
         ),
       ],
     );
   }
 
+  ///A widget that holds the image path of the note.
   Widget cardNoteImage(index) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
@@ -128,13 +134,13 @@ class _HelperScreenState extends State<HelperScreen> {
         child: Image.asset(
           helperBrain.getHelperNoteImageName(index),
           //HelperNoteInfoList.getImagePath(index),
-          //'assets/note_images/Bs_A.jpeg',
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 
+  ///A widget that holds the icon button which can play note sound when pressed.
   Widget cardPlayIcon(index) {
     return IconButton(
       icon: helpPlayButtonStyle,

@@ -1,6 +1,7 @@
 import 'helper_list.dart';
 import 'helper_note_info.dart';
 
+/// A list that contains all information about helper of bass.
 final HelperList bassNoteImageNameList = HelperList(
   helperId: 1,
   helperList: [
@@ -35,7 +36,7 @@ final HelperList bassNoteImageNameList = HelperList(
   ],
 );
 
-  /*
+/*
   static String getImagePath(index) {
     return bassNoteImageNameList[index].noteImageName;
   }
@@ -48,4 +49,3 @@ final HelperList bassNoteImageNameList = HelperList(
     return bassNoteImageNameList[index].noteSound;
   }
   */
-
