@@ -134,6 +134,10 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
 
   /// Gets the key pressed on the keyboard
   void answer(String text) {
+    text = text[0];
+    if (text.length == 3) {
+      text = text[0] + text[1];
+    }
     questionBrain.setAnswer(userAnswer: text);
     setState(() {
       questionBrain.goToNextQuestion();

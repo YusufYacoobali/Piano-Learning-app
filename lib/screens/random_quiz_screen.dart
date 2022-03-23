@@ -63,6 +63,10 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
 
   /// Gets the key pressed on the keyboard
   void answer(String text) {
+    text = text[0];
+    if (text.length == 3) {
+      text = text[0] + text[1];
+    }
     stopwatch.stop();
     questionBrain.setAnswer(
         userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
@@ -85,46 +89,10 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
               ),
             ],
           ),
-
-          ///choices buttons
-          // Expanded(
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: getOptionButtons(),
-          //   ),
-          // ),
         ]),
-//         child: Stack(children: [
-//           Align(alignment: Alignment.topRight, child: getPauseButton()),
-//           Column(
-//             children: [
-//               screenWidget,
-//               Expanded(
-//                 child: Keyboard(function: answer),
-//               ),
-//             ],
-//           ),
-
-//           ///choices buttons
-//           // Expanded(
-//           //   child: Row(
-//           //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//           //     children: getOptionButtons(),
-//           //   ),
-//           // ),
-//         ]),
       ),
     );
   }
-
-  // /// Gets the key pressed on the keyboard
-  // void answer(String text) {
-  //   stopwatch.stop();
-  //   questionBrain.setAnswer(
-  //       userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
-  //   stopwatch.reset();
-  //   showResultAlert(text);
-  // }
 
   /// Set details of the Screen Widget in lesson.
   ///
