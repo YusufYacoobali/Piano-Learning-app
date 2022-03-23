@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/components/keyboard.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
 import 'package:sight_reading_app/constants.dart';
@@ -166,21 +167,58 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  Widget getResultsScreen() {
+  getResults() async {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => ResultsScreen(
+      //             score: percentage,
+      //             title: title,
+      //           )),
+      // );
+      getResultsScreen(title, percentage);
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
+      bool displayNotification = await storage.displayLessonNotification();
+      getResultsScreen(title, percentage, widget.lessonNum ,questionBrain);
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => ResultsScreen(
+      //             score: percentage,
+      //             title: title,
+      //           )),
+      // );
+      //only displays notification if achievement is completed
+      if (displayNotification) {
+        inAppNotification(context);
+      }
     }
-    return ResultsScreen(
-      score: percentage,
-      title: title,
-      lessonNum: widget.lessonNum,
+// <<<<<<< check-results-screen
+//     return ResultsScreen(
+//       score: percentage,
+//       title: title,
+//       lessonNum: widget.lessonNum,
+//       questionBrain: questionBrain,
+// =======
+//   }
+
+  getResultsScreen(title, percentage, lessonNum, questionBrain) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultsScreen(
+                score: percentage,
+                title: title,
+             lessonNum: lessonNum
       questionBrain: questionBrain,
+              )),
     );
   }
 
@@ -214,12 +252,13 @@ class _LessonScreenState extends State<LessonScreen> {
             stopwatch.start();
           });
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return getResultsScreen();
-            }),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) {
+          //     return getResultsScreen();
+          //   }),
+          // );
+          getResults();
         }
       },
     );

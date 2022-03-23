@@ -21,16 +21,17 @@ class AchievementCard extends StatelessWidget {
     return Container(
       height: cardHeight,
       margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.fromLTRB(20, 15, 15, 10),
       width: cardWidth,
       decoration: achievementCardDecoration,
       child: Column(children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            playLessonIcon,
-            const SizedBox(
-              width: 20,
-            ),
+            // playLessonIcon,
+            // const SizedBox(
+            //   width: 10,
+            // ),
             Flexible(
               child: Text(
                 text,

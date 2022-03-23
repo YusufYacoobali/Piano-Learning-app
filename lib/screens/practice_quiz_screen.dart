@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
+import '../components/in_app_notification_pop_up.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
 import '../components/keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -17,6 +19,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
   late final PopUpController _pauseMenu;
+  StorageReaderWriter storage = StorageReaderWriter();
   Stopwatch stopwatch = Stopwatch();
 
   @override
@@ -147,20 +150,47 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  Widget getResultsScreen() {
+  getResultsScreen() async {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ResultsScreen(
+                  score: percentage,
+                  title: title,
+               questionBrain: questionBrain,
+                )),
+      );
     } else {
       title = "Congratulations!";
+      storage.saveCompletedQuiz();
+      bool displayNotification = await storage.displayQuizNotification();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ResultsScreen(
+                  score: percentage,
+                  title: title,
+               questionBrain: questionBrain,
+                )),
+      );
+      //only displays notification if achievement is completed
+      if (displayNotification) {
+        inAppNotification(context);
+      }
     }
-    return ResultsScreen(
-      score: percentage,
-      title: title,
-      questionBrain: questionBrain,
-    );
+// <<<<<<< check-results-screen
+//     return ResultsScreen(
+//       score: percentage,
+//       title: title,
+//       questionBrain: questionBrain,
+//     );
+// =======
+// >>>>>>> main
   }
 
   /// Creates the template for alert with title, description and next button
@@ -193,12 +223,13 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
             stopwatch.start();
           });
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return getResultsScreen();
-            }),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) {
+          //     return getResultsScreen();
+          //   }),
+          // );
+          getResultsScreen();
         }
       },
     );

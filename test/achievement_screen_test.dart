@@ -80,6 +80,6 @@ void main() {
     await tester.tap(find.text('Completed'));
     await tester.pumpAndSettle();
     expect(find.text('Complete 1 lesson'), findsOneWidget);
-    expect(find.text('Complete your 1st quiz'), findsOneWidget);
+    expect(find.text('Complete 1 quiz'), findsOneWidget);
   });
 }
