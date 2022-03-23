@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/helper_screen.dart';
+import 'package:sight_reading_app/screens/menu_screen.dart';
 
 ///This screen is the helper selection screen which contain buttons.
 class _HelperMenuScreenState extends State<HelperMenuScreen> {
@@ -31,20 +31,8 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
           mainAxisSpacing: 5,
           crossAxisCount: 2,
           children: <Widget>[
-            Container(
-              width: 50.0,
-              height: 50.0,
-              decoration: cardBackground,
-              padding: const EdgeInsets.all(8),
-              child: bassNoteHelperbutton(),
-            ),
-            Container(
-              width: 50.0,
-              height: 50.0,
-              decoration: cardBackground,
-              padding: const EdgeInsets.all(8),
-              child: clefNoteHelperbutton(),
-            ),
+            bassNoteHelperbutton(),
+            clefNoteHelperbutton(),
           ],
         ),
       ),
@@ -53,41 +41,36 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
 
   ///A button that will be route to specific screen of bass helper.
   Widget bassNoteHelperbutton() {
-    return ElevatedButton(
-        key: const Key('bass helper button'),
-        child: const Text('Bass note', style: helperMenuTextStyle),
-        style: helperMenuButonStyle,
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return const HelperScreen(
-                helperNum: 1,
-              );
-            }),
-          );
-        });
+    return MenuButton(
+      buttonChild: const ButtonText(buttonText: 'Bass note'),
+      onPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return const HelperScreen(
+              helperNum: 1,
+            );
+          }),
+        );
+      },
+    );
   }
 
   ///A button that will be route to specific screen of clef helper.
   Widget clefNoteHelperbutton() {
-    return ElevatedButton(
-        key: const Key('clef helper button'),
-        child: const Text(
-          'Clef note',
-          style: helperMenuTextStyle,
-        ),
-        style: helperMenuButonStyle,
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return const HelperScreen(
-                helperNum: 2,
-              );
-            }),
-          );
-        });
+    return MenuButton(
+      buttonChild: const ButtonText(buttonText: 'Clef note'),
+      onPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return const HelperScreen(
+              helperNum: 2,
+            );
+          }),
+        );
+      },
+    );
   }
 }
 

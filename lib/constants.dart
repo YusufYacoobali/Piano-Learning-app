@@ -390,21 +390,6 @@ const Icon helpPlayButtonStyle = Icon(
   size: 35.0,
 );
 
-ButtonStyle helperMenuButonStyle = ElevatedButton.styleFrom(
-  primary: const Color(0xffa4508b).withOpacity(0.3),
-  onPrimary: Colors.grey.shade300,
-  fixedSize: const Size(180.0, 60.0),
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10),
-  ),
-);
-
-const TextStyle helperMenuTextStyle = TextStyle(
-  fontSize: 40.0,
-  color: Colors.white,
-  fontWeight: FontWeight.bold,
-);
-
 const TextStyle helperTextStyle = TextStyle(
   fontSize: 40.0,
   color: Colors.white,

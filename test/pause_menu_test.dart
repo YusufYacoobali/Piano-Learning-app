@@ -307,7 +307,6 @@ void main() {
     */
   });
 
-
   group(
       'check that can be continue the lesson once the play button is clicked.',
       () {
@@ -386,7 +385,6 @@ void main() {
       expect(find.byType(LessonScreen), findsOneWidget);
     });*/
   });
-
 
   group('check that lesson selection button is displayed.', () {
     testWidgets('lesson 1 selection button is displayed.',

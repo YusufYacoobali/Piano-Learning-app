@@ -7,10 +7,13 @@ import 'package:sight_reading_app/components/helper/helper_list.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 ///This screen creates helper screen
-///It contains multiple cards with images, names and icon buttons
+///It contains multiple cards with note images, names and icon buttons
 class HelperScreen extends StatefulWidget {
   static const String id = 'helper_screen';
+
+  /// This number is the unique id for specific helper
   final int helperNum;
+
   const HelperScreen({Key? key, this.helperNum = 1}) : super(key: key);
 
   @override
@@ -19,9 +22,13 @@ class HelperScreen extends StatefulWidget {
 
 class _HelperScreenState extends State<HelperScreen> {
   final ScrollController _helperController = ScrollController();
+
   late HelperBrain helperBrain;
-  late int index;
+
   final playSound = AudioCache();
+
+  /// This number is representing the current position of the helper list
+  late int index;
 
   ///List of helper list available
   List<HelperList> helperList = [bassNoteImageNameList, clefNoteImageNameList];
@@ -31,6 +38,8 @@ class _HelperScreenState extends State<HelperScreen> {
   void initState() {
     super.initState();
     int helperNum = widget.helperNum;
+
+    /// Display different helper list.
     helperBrain = HelperBrain(helpers: helperList[helperNum - 1]);
   }
 

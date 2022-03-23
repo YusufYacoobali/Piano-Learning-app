@@ -19,16 +19,14 @@ void main() {
   testWidgets(
       'Check that bass helper button is displayed on the helper selection screen',
       (WidgetTester tester) async {
-    const iconKey = Key('bass helper button');
     await _goToHelperSelectionScreen(tester);
-    expect(find.byKey(iconKey), findsOneWidget);
+    expect(find.text('Bass note'), findsOneWidget);
   });
 
   testWidgets(
       'Check that clef helper button is displayed on the helper selection screen',
       (WidgetTester tester) async {
-    const iconKey = Key('clef helper button');
     await _goToHelperSelectionScreen(tester);
-    expect(find.byKey(iconKey), findsOneWidget);
+    expect(find.text('Clef note'), findsOneWidget);
   });
 }
