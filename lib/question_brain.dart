@@ -26,11 +26,11 @@ class QuestionBrain {
   });
 
   Note getNote() {
-    return questions[_questionNum].note;
+    return questions[_questionNum].correctAnswer;
   }
 
   Note getSpecificNote(specificQuestionNumber) {
-    return questions[specificQuestionNumber].note;
+    return questions[specificQuestionNumber].correctAnswer;
   }
 
   Clef getClef() {
@@ -41,30 +41,19 @@ class QuestionBrain {
     return questions[specificQuestionNumber].clef;
   }
 
-  /// Gets the name of the image of the current question
-//   String getImageName() {
-//     return questions.questionList[_questionNum].image;
-//   }
-
-//   /// Gets the path of the image of the current question
-//   String getImagePath() {
-//     String path = 'assets/note_images/${getImageName()}';
-//     return path;
-//   }
-
-//   /// Gets the image for the current question
-//   AssetImage getImage() {
-//     return AssetImage(getImagePath());
-//   }
-
   /// Gets the question text for the current question
   String getQuestionText() {
     return questions[_questionNum].question;
   }
 
+  /// Gets the correct answer of the current question without the octave
+  String getCorrectAnswerWithoutOctave() {
+    return Note.getNameWithoutOctave(questions[_questionNum].correctAnswer.name);
+  }
+
   /// Gets the correct answer of the current question
   String getCorrectAnswer() {
-    return questions[_questionNum].correctAnswer;
+    return questions[_questionNum].correctAnswer.name;
   }
 
   /// Gets the correct answer of the a specific
@@ -73,7 +62,7 @@ class QuestionBrain {
         specificQuestionNum >= getTotalNumberOfQuestions()) {
       return "Invalid index";
     }
-    return questions[specificQuestionNum].correctAnswer;
+    return questions[specificQuestionNum].correctAnswer.name;
   }
 
   /// Moves to the next question if there is a next question

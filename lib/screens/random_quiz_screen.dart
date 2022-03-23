@@ -63,10 +63,6 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
 
   /// Gets the key pressed on the keyboard
   void answer(String text) {
-    text = text[0];
-    if (text.length == 3) {
-      text = text[0] + text[1];
-    }
     stopwatch.stop();
     questionBrain.setAnswer(
         userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
@@ -131,7 +127,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
     } else {
       alertTitle = 'Incorrect!';
       alertDesc = 'Wrong answer, the correct answer is ' +
-          questionBrain.getCorrectAnswer();
+          questionBrain.getCorrectAnswerWithoutOctave();
     }
 
     displayDialog(alertTitle, alertDesc);

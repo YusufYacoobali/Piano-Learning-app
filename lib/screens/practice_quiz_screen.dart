@@ -65,10 +65,6 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
 
   /// Gets the key pressed on the keyboard
   void answer(String text) {
-    text = text[0];
-    if (text.length == 3) {
-      text = text[0] + text[1];
-    }
     stopwatch.stop();
     questionBrain.setAnswer(
         userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
@@ -132,7 +128,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     } else {
       alertTitle = 'Incorrect!';
       alertDesc = 'Wrong answer, the correct answer is ' +
-          questionBrain.getCorrectAnswer();
+          questionBrain.getCorrectAnswerWithoutOctave();
     }
 
     displayDialog(alertTitle, alertDesc);

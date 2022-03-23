@@ -11,29 +11,26 @@ void main() {
     QuestionAnswerData.createDefaultMap();
     return [
       Question(
-        note: Note(name: 'C4', duration: 4),
         clef: Clef.treble,
         question:
             'This is our first note. The name is C (Do). Now press C on the keyboard.',
-        correctAnswer: 'C',
+        correctAnswer: Note(name: 'C4', duration: 4),
         questionID: 1,
         lessonID: 1,
       ),
       Question(
-        note: Note(name: 'D4', duration: 4),
         clef: Clef.treble,
         question:
             'This is our second note. The name is D (Re). Now press D on the keyboard.',
-        correctAnswer: 'D',
+        correctAnswer: Note(name: 'D4', duration: 4),
         questionID: 2,
         lessonID: 1,
       ),
       Question(
-        note: Note(name: 'E4', duration: 4),
         clef: Clef.treble,
         question:
             'This is our third note. The name is E (Mi). Now press E on the keyboard.',
-        correctAnswer: 'E',
+        correctAnswer: Note(name: 'E4', duration: 4),
         questionID: 3,
         lessonID: 1,
       ),
@@ -45,7 +42,7 @@ void main() {
     List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     String noteName = qb.getNote().name;
-    expect(noteName, fakeQuestions[0].note.name);
+    expect(noteName, fakeQuestions[0].correctAnswer.name);
   });
 
   // test('Check that getImagePath() correctly returns the path of the image', () {
@@ -77,7 +74,7 @@ void main() {
     List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     String answer = qb.getCorrectAnswer();
-    expect(answer, fakeQuestions[0].correctAnswer);
+    expect(answer, fakeQuestions[0].correctAnswer.name);
   });
 
   test('Check that getQuestionNumber() correctly returns the question number',
@@ -137,7 +134,8 @@ void main() {
     List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int beforeScore = qb.getScore();
-    qb.setAnswer(userAnswer: fakeQuestions[0].correctAnswer);
+    //qb.setAnswer(userAnswer: fakeQuestions[0].correctAnswer);
+    qb.setAnswer(userAnswer: fakeQuestions[0].correctAnswer.name);
     int afterScore = qb.getScore();
     expect(afterScore, beforeScore + 1);
   });
@@ -160,7 +158,7 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    bool result = qb.checkAnswer(fakeQuestions[0].correctAnswer);
+    bool result = qb.checkAnswer(fakeQuestions[0].correctAnswer.name);
     expect(result, true);
   });
 
@@ -211,11 +209,11 @@ void main() {
     //before complete questions, check it is 0
     expect(pref.get('lesson 1'), '0');
 
-    qb.setAnswer(userAnswer: "C");
+    qb.setAnswer(userAnswer: "C4");
     qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "D");
+    qb.setAnswer(userAnswer: "D4");
     qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "E");
+    qb.setAnswer(userAnswer: "E4");
 
     // TODO: find a better way to deal with the IO delay
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -238,11 +236,11 @@ void main() {
     //before complete questions, check it is 0
     expect(pref.get('lesson 1'), '0');
 
-    qb.setAnswer(userAnswer: "C");
+    qb.setAnswer(userAnswer: "C4");
     qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "A");
+    qb.setAnswer(userAnswer: "A4");
     qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "E");
+    qb.setAnswer(userAnswer: "E4");
 
     // TODO: find a better way to deal with the IO delay
     await Future.delayed(const Duration(milliseconds: 1000));
