@@ -11,8 +11,8 @@ import 'package:sight_reading_app/components/option_button.dart';
 import '../lessons_and_quizzes/question_finder.dart';
 
 /// Creates screen for the practice quiz.
+///
 /// This screen consists of the option buttons and components in question_skeleton
-
 class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
@@ -21,9 +21,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   @override
   void initState() {
     super.initState();
-    // TODO: Pass in lessonID
     questionBrain = QuestionBrain(
-        questions: QuestionFinder().getPracticeQuestionsForLesson(1, 10));
+        questions: QuestionFinder().getPracticeQuestionsForLesson(widget.lessonID, 10));
     setScreenWidget();
 
     PauseMenu pauseMenuBuilder = PauseMenu(context: context);
@@ -118,7 +117,6 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   ///
   /// Set components from QuestionBrain including question image, text and number
   /// and send to QuestionSkeleton to display components.
-
   void setScreenWidget() {
     Note note = questionBrain.getNote();
     Clef clef = questionBrain.getClef();
@@ -139,12 +137,11 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   ///
   /// The alert is displayed each time the user answers a question.
   /// Shows if the answer is correct and provides a  button to go to the next question.
-
   void showResultAlert(String choice) {
     String alertTitle = '';
     String alertDesc = '';
 
-    ///show result
+    //shows result
     if (questionBrain.checkAnswer(choice)) {
       alertTitle = 'Correct!';
       alertDesc = 'You got the correct answer!';
@@ -205,7 +202,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
       onPressed: () {
         Navigator.pop(context, 'OK');
 
-        ///go next if it is not the last question
+        //go next if it is not the last question
         if (!questionBrain.isLastQuestion()) {
           setState(() {
             questionBrain.goToNextQuestion();
@@ -223,16 +220,19 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     );
   }
 
-  /// Creates text for next button
+  // Creates text for next button
   String getNextButtonText() {
     return questionBrain.isLastQuestion() ? "Finish" : "Next";
   }
 }
 
 class PracticeQuizScreen extends StatefulWidget {
+  /// The id used to identify the screen
   static const String id = 'practice_quiz_screen';
 
-  const PracticeQuizScreen({Key? key}) : super(key: key);
+  final int lessonID;
+
+  const PracticeQuizScreen({Key? key, required this.lessonID}) : super(key: key);
 
   @override
   _PracticeQuizScreenState createState() => _PracticeQuizScreenState();

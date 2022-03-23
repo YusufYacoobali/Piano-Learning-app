@@ -9,7 +9,7 @@ import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 
 void main() {
   testWidgets(
-      'Check that the quiz selection page is displayed when the button is pressed.',
+      'Check that the quiz selection page is displayed when the button to go to the screen is pressed.',
           (WidgetTester tester) async {
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
@@ -92,7 +92,7 @@ void main() {
             scrollable: find.byType(Scrollable),
           );
           expect(find.text(quizzes[i]), findsWidgets);
-          expect(find.text('Record: ${quizRecords[i]}'), findsWidgets);
+          expect(find.text('Record: ${quizRecordsCopy[i]}'), findsWidgets);
         }
       }
   );
@@ -105,7 +105,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
         await tester.pumpAndSettle();
-        expect(find.byKey(QuizSelectionScreen.randomQuizSelectedKey), findsOneWidget);
+        expect(find.byKey(randomQuizSelectedKey), findsOneWidget);
       }
   );
 
@@ -129,7 +129,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
         await tester.pumpAndSettle();
-        final buttonFinder = find.byKey(QuizSelectionScreen.randomQuizSelectedKey);
+        final buttonFinder = find.byKey(randomQuizSelectedKey);
         final startPos = tester.getCenter(buttonFinder);
         final gesture = await tester.startGesture(const Offset(0, 300));
         await gesture.moveBy(const Offset(0, -300)); //Scrolls the screen

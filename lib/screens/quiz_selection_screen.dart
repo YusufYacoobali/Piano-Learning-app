@@ -150,10 +150,12 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
                         ],
                       ),
                       onPress: () {
-                        Navigator.pushNamed(
+                        Navigator.push(
                             context,
-                            PracticeQuizScreen
-                                .id); //TODO: Replace with correct quiz links depending on button
+                            MaterialPageRoute(
+                              builder: (context) => PracticeQuizScreen(lessonID: index + 1)
+                            ),
+                        );
                       },
                       key: quizButtonKeys[index],
                     ),
