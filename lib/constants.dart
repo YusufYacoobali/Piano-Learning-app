@@ -405,6 +405,12 @@ const TextStyle helperMenuTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const TextStyle helperTextStyle = TextStyle(
+  fontSize: 40.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+
 /// Clef symbols
 const String trebleClef = '𝄞';
 const String bassClef = '𝄢';
