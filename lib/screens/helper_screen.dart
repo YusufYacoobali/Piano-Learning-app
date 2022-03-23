@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-
-import '../components/helper_note_info.dart';
+import 'package:sight_reading_app/components/helper/helper_brain.dart';
+import '../components/helper/helper_bass_note_list.dart';
+import '../components/helper/helper_clef_note_list.dart';
 import '../constants.dart';
 
-//import '../components/helper_note_info_list.dart';
+import 'package:sight_reading_app/components/helper/helper_list.dart';
+
+import 'package:audioplayers/audioplayers.dart';
 
 class HelperScreen extends StatefulWidget {
   static const String id = 'helper_screen';
-  const HelperScreen({Key? key}) : super(key: key);
+  final int helperNum;
+  const HelperScreen({Key? key, this.helperNum = 1}) : super(key: key);
 
   @override
   _HelperScreenState createState() => _HelperScreenState();
@@ -15,10 +19,17 @@ class HelperScreen extends StatefulWidget {
 
 class _HelperScreenState extends State<HelperScreen> {
   final ScrollController _helperController = ScrollController();
+  late HelperBrain helperBrain;
+  late int index;
+  final playSound = AudioCache();
+
+  List<HelperList> helperList = [bassNoteImageNameList, clefNoteImageNameList];
 
   @override
   void initState() {
     super.initState();
+    int helperNum = widget.helperNum;
+    helperBrain = HelperBrain(helpers: helperList[helperNum - 1]);
   }
 
   @override
@@ -45,13 +56,13 @@ class _HelperScreenState extends State<HelperScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
+                  cardHelper(0),
+                  cardHelper(1),
+                  cardHelper(2),
+                  cardHelper(3),
+                  cardHelper(4),
+                  cardHelper(5),
+                  cardHelper(6),
                 ],
               )),
         ),
@@ -59,7 +70,7 @@ class _HelperScreenState extends State<HelperScreen> {
     );
   }
 
-  Widget cardHelper() {
+  Widget cardHelper(index) {
     return Center(
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
@@ -74,16 +85,16 @@ class _HelperScreenState extends State<HelperScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    cardNoteImage(),
+                    cardNoteImage(index),
                     Column(
                       children: [
-                        cardText(),
+                        cardText(index),
                       ],
                     ),
                   ],
                 ),
                 const SizedBox(height: 10.0),
-                cardPlayIcon(),
+                cardPlayIcon(index),
               ],
             ),
           ),
@@ -92,55 +103,45 @@ class _HelperScreenState extends State<HelperScreen> {
     );
   }
 
-  Widget cardText() {
+  Widget cardText(index) {
     return Wrap(
       spacing: 10.0,
       runSpacing: 10.0,
       alignment: WrapAlignment.center,
-      children: const [
+      children: [
         Text(
-          'Bass A',
-          style: TextStyle(fontSize: 30.0),
+          helperBrain.getHelperNoteName(index),
+          //HelperNoteInfoList.getImageName(index),
+          //'Bass A',
+          style: const TextStyle(fontSize: 30.0),
         ),
       ],
     );
   }
 
-  Widget cardNoteImage() {
+  Widget cardNoteImage(index) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
         height: 200.0,
         width: 250.0,
         child: Image.asset(
-          'assets/note_images/Bs_A.jpeg',
+          helperBrain.getHelperNoteImageName(index),
+          //HelperNoteInfoList.getImagePath(index),
+          //'assets/note_images/Bs_A.jpeg',
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 
-  Widget cardPlayIcon() {
+  Widget cardPlayIcon(index) {
     return IconButton(
       icon: helpPlayButtonStyle,
-      onPressed: () {},
+      onPressed: () {
+        //playSound.play(HelperNoteInfoList.getNoteSound(index));
+        playSound.play(helperBrain.getHelperNoteSoundName(index));
+      },
     );
   }
-
-  final List<HelperNoteInfo> helperNoteList = [
-    HelperNoteInfo(noteImageName: 'Bs_A.jpeg', noteName: 'Bass A'),
-    HelperNoteInfo(noteImageName: 'Bs_B.jpeg', noteName: 'Bass B'),
-    HelperNoteInfo(noteImageName: 'Bs_C.jpeg', noteName: 'Bass C'),
-    HelperNoteInfo(noteImageName: 'Bs_D.jpeg', noteName: 'Bass D'),
-    HelperNoteInfo(noteImageName: 'Bs_E.jpeg', noteName: 'Bass E'),
-    HelperNoteInfo(noteImageName: 'Bs_F.jpeg', noteName: 'Bass F'),
-    HelperNoteInfo(noteImageName: 'Bs_G.jpeg', noteName: 'Bass G'),
-    HelperNoteInfo(noteImageName: 'Tr_A.jpeg', noteName: 'Clef A'),
-    HelperNoteInfo(noteImageName: 'Tr_B.jpeg', noteName: 'Clef B'),
-    HelperNoteInfo(noteImageName: 'Tr_C.jpeg', noteName: 'Clef C'),
-    HelperNoteInfo(noteImageName: 'Tr_D.jpeg', noteName: 'Clef D'),
-    HelperNoteInfo(noteImageName: 'Tr_E.jpeg', noteName: 'Clef E'),
-    HelperNoteInfo(noteImageName: 'Tr_F.jpeg', noteName: 'Clef F'),
-    HelperNoteInfo(noteImageName: 'Tr_G.jpeg', noteName: 'Clef G'),
-  ];
 }

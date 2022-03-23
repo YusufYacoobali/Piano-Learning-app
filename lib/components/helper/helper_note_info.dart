@@ -2,10 +2,11 @@
 class HelperNoteInfo {
   final String noteImageName;
   final String noteName;
-  //with it sound
+  final String noteSound;
 
   HelperNoteInfo({
     required this.noteImageName,
     required this.noteName,
+    required this.noteSound,
   });
 }

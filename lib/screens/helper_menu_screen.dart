@@ -55,7 +55,15 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
         child: const Text('Bass note', style: helperMenuTextStyle),
         style: helperMenuButonStyle,
         onPressed: () {
-          Navigator.pushNamed(context, HelperScreen.id);
+          //Navigator.pushNamed(context, HelperScreen.id);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return const HelperScreen(
+                helperNum: 1,
+              );
+            }),
+          );
         });
   }
 
@@ -67,7 +75,15 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
         ),
         style: helperMenuButonStyle,
         onPressed: () {
-          Navigator.pushNamed(context, HelperScreen.id);
+          //Navigator.pushNamed(context, HelperScreen.id);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return const HelperScreen(
+                helperNum: 2,
+              );
+            }),
+          );
         });
   }
 }
