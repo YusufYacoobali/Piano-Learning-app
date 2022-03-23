@@ -77,6 +77,7 @@ class _HelperScreenState extends State<HelperScreen> {
   ///Create a card that holds note images, names and sound.
   Widget cardHelper(index) {
     return Center(
+      key: const Key('card helper'),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         child: SizedBox(
@@ -111,14 +112,14 @@ class _HelperScreenState extends State<HelperScreen> {
   ///A widget that holds the name of the note.
   Widget cardText(index) {
     return Wrap(
+      key: const Key('card text'),
       spacing: 10.0,
       runSpacing: 10.0,
       alignment: WrapAlignment.center,
       children: [
         Text(
           helperBrain.getHelperNoteName(index),
-          //HelperNoteInfoList.getImageName(index),
-          style: const TextStyle(fontSize: 30.0),
+          style: helperTextStyle,
         ),
       ],
     );
@@ -127,13 +128,13 @@ class _HelperScreenState extends State<HelperScreen> {
   ///A widget that holds the image path of the note.
   Widget cardNoteImage(index) {
     return ClipRRect(
+      key: const Key('card note image'),
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
         height: 200.0,
         width: 250.0,
         child: Image.asset(
           helperBrain.getHelperNoteImageName(index),
-          //HelperNoteInfoList.getImagePath(index),
           fit: BoxFit.cover,
         ),
       ),
@@ -143,9 +144,9 @@ class _HelperScreenState extends State<HelperScreen> {
   ///A widget that holds the icon button which can play note sound when pressed.
   Widget cardPlayIcon(index) {
     return IconButton(
+      key: const Key('card play button'),
       icon: helpPlayButtonStyle,
       onPressed: () {
-        //playSound.play(HelperNoteInfoList.getNoteSound(index));
         playSound.play(helperBrain.getHelperNoteSoundName(index));
       },
     );

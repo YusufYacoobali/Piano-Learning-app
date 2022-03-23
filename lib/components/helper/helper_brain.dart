@@ -3,7 +3,7 @@ import 'package:sight_reading_app/components/helper/helper_list.dart';
 /// Manages the Helper information.
 class HelperBrain {
   /// The current helper position in the list.
-  late int currentHelperPosition;
+  late int currentHelperListPosition;
 
   /// The list of helper informations.
   final HelperList helpers;
@@ -12,17 +12,17 @@ class HelperBrain {
   HelperBrain({required this.helpers});
 
   /// Get the name of helper's note.
-  String getHelperNoteName(currentHelperPosition) {
-    return helpers.helperList[currentHelperPosition].noteName;
+  String getHelperNoteName(currentHelperListPosition) {
+    return helpers.helperList[currentHelperListPosition].noteName;
   }
 
   /// Get the image file name of helper's note.
-  String getHelperNoteImageName(currentHelperPosition) {
-    return helpers.helperList[currentHelperPosition].noteImageName;
+  String getHelperNoteImageName(currentHelperListPosition) {
+    return helpers.helperList[currentHelperListPosition].noteImageName;
   }
 
   /// Get the sound file name of helper's note.
-  String getHelperNoteSoundName(currentHelperPosition) {
-    return helpers.helperList[currentHelperPosition].noteSound;
+  String getHelperNoteSoundName(currentHelperListPosition) {
+    return helpers.helperList[currentHelperListPosition].noteSound;
   }
 }

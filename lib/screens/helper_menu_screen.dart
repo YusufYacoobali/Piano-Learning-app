@@ -54,6 +54,7 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
   ///A button that will be route to specific screen of bass helper.
   Widget bassNoteHelperbutton() {
     return ElevatedButton(
+        key: const Key('bass helper button'),
         child: const Text('Bass note', style: helperMenuTextStyle),
         style: helperMenuButonStyle,
         onPressed: () {
@@ -71,6 +72,7 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
   ///A button that will be route to specific screen of clef helper.
   Widget clefNoteHelperbutton() {
     return ElevatedButton(
+        key: const Key('clef helper button'),
         child: const Text(
           'Clef note',
           style: helperMenuTextStyle,
