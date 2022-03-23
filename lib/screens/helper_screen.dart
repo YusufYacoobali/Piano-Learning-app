@@ -152,7 +152,6 @@ class _HelperScreenState extends State<HelperScreen> {
   ///A widget that holds the icon button which can play note sound when pressed.
   Widget cardPlayIcon(index) {
     return IconButton(
-      key: const Key('card play button'),
       icon: helpPlayButtonStyle,
       onPressed: () {
         playSound.play(helperBrain.getHelperNoteSoundName(index));
