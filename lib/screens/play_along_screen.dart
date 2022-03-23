@@ -7,14 +7,17 @@ import '../components/instruction_pop_up_content/play_along_ending_instructions.
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
-import '../components/sheet_music_components/play_along_song_timer.dart';
+import '../components/play_along_components/play_along_hit_counter.dart';
+import '../components/play_along_components/play_along_song_timer.dart';
 
 /// The screen that runs the "play along" practice mode with a given track.
 ///
 /// The track is selected by the user, then passed in to this screen.
 class _PlayAlongScreenState extends State<PlayAlongScreen> {
   late final MovingMusicSheet _sheet;
-  late PlayAlongSongTimer _timer;
+  late final PlayAlongSongTimer _timer;
+
+  late final PlayAlongHitCounter _hitCounter;
 
   final NextNoteNotifier _nextNote = NextNoteNotifier();
   final NextNoteNotifier _noteToPlay = NextNoteNotifier();
@@ -26,7 +29,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   bool exit = false;
 
-  late final PopUpController _endMenu;
+  late PopUpController _endMenu;
 
   void updateScreen(String update) {
     setState(() {
@@ -39,16 +42,19 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     String difficulty = pref.get('difficulty')!.toString();
     _timer.setDifficulty(difficulty);
     _timer.start();
+    _hitCounter.setDifficulty(difficulty);
   }
 
-  ///TODO: Replace with analytics with the notes
-  void recordHitMiss(bool hasPlayed) {}
+  void recordHitMiss(bool hasPlayed) {
+    if (hasPlayed) _hitCounter.score++;
+  }
 
   @override
   void initState() {
     super.initState();
+    _hitCounter = PlayAlongHitCounter(songName: widget.songName.toString(), numNotes: widget.notes.length);
     PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(
-        context: context, restart: () => _timer.restart());
+        context: context, restart: reset, hitCounter: _hitCounter, onBack: widget.onBackToPlayAlongMenu);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
     _currentNoteToPlay =
         NotePlayedChecker(noteNotifier: _noteToPlay, function: recordHitMiss);
@@ -61,7 +67,9 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
       nextNote: _nextNote,
       updater: updateScreen,
       notes: widget.notes,
+      bpm: widget.bpm,
       onStop: _displayMenu,
+      hitCounter: _hitCounter,
     );
     getDifficulty();
   }
@@ -73,8 +81,18 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     _endMenu.delete();
   }
 
+  /// Resets the state back to the start and starts the song again
+  void reset() {
+    _hitCounter.score = 0;
+    PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(
+        context: context, restart: reset, hitCounter: _hitCounter, onBack: widget.onBackToPlayAlongMenu);
+    _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
+    _timer.restart();
+  }
+
   /// Displays the end menu
   void _displayMenu() {
+    _hitCounter.isNewHighScore();
     _endMenu.show();
   }
 
@@ -118,9 +136,18 @@ class PlayAlongScreen extends StatefulWidget {
   final Map<int, Note> notes;
   final Clef clef;
   final int bpm;
+  final String songName;
+
+  final VoidCallback onBackToPlayAlongMenu;
 
   const PlayAlongScreen(
-      {Key? key, required this.notes, required this.clef, required this.bpm})
+      {Key? key,
+        required this.notes,
+        required this.clef,
+        required this.bpm,
+        required this.songName,
+        required this.onBackToPlayAlongMenu
+      })
       : super(key: key);
 
   @override

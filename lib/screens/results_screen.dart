@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/screens/review_answers_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
+import '../question_brain.dart';
 
 class _ResultsScreenState extends State<ResultsScreen> {
   @override
@@ -91,7 +93,16 @@ class _ResultsScreenState extends State<ResultsScreen> {
             ),
             ElevatedButton(
               // TODO: Implement review answers functionality
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return ReviewAnswersScreen(
+                        lessonNum: widget.lessonNum,
+                        questionBrain: widget.questionBrain);
+                  }),
+                );
+              },
               child: const Text('Review Answers'),
 
               style: navButtonDeco,
@@ -131,10 +142,17 @@ class ResultsScreen extends StatefulWidget {
   static const String id = 'results_screen';
   final String title;
   final double score;
-
-  const ResultsScreen({Key? key, required this.title, required this.score})
+  final int lessonNum;
+  final QuestionBrain questionBrain;
+  const ResultsScreen(
+      {Key? key,
+      required this.title,
+      required this.score,
+      this.lessonNum = 1,
+      required this.questionBrain})
       : super(key: key);
 
+  ///pass the question brain
   @override
   _ResultsScreenState createState() => _ResultsScreenState();
 }

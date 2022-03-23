@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
@@ -75,10 +75,12 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _endMenu.delete();
   }
 
-  void getDifficulty() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    _difficulty = pref.get('difficulty')!.toString();
-    _generator.setDifficulty(_difficulty);
+  void getDifficulty() {
+    StorageReaderWriter writer = StorageReaderWriter();
+    writer.loadDataFromStorage().then((value) {
+      _difficulty = writer.read('difficulty').toString();
+      _generator.setDifficulty(_difficulty);
+    });
   }
 
   /// Updates the screen

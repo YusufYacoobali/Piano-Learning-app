@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/play_along_components/play_along_hit_counter.dart';
 
 import '../../screens/play_along_menu_screen.dart';
 import '../../components/pop_up_components/pop_up_content_builder.dart';
@@ -12,17 +13,30 @@ class PlayAlongEndingInstructions extends PopUpContentBuilder {
   /// Plays the song again
   final VoidCallback restart;
 
-  PlayAlongEndingInstructions({required this.context, required this.restart});
+  /// Counts whether the notes where hit or missed
+  final PlayAlongHitCounter hitCounter;
+
+  final VoidCallback onBack;
+
+  PlayAlongEndingInstructions({
+    required this.context,
+    required this.hitCounter,
+    required this.restart,
+    required this.onBack});
 
   /// Sets up the end menu
   @override
   void buildMenu() {
+    String percentage = ((hitCounter.score/hitCounter.numNotes) * 100).toStringAsFixed(1);
+    if (percentage[percentage.length-1] == '0') {
+      percentage = double.parse(percentage).round().toString();
+    }
     text = Column(
-        children: const [
-          Text('Song Finished', style: pauseMenuTextStyle),
-          SizedBox(height: 10.0),
-          Text('Choose an option: '),
-          SizedBox(height: 30.0),
+        children: [
+          const Text('Song Finished', style: pauseMenuTextStyle),
+          const SizedBox(height: 10.0),
+          Text('You got: $percentage%', style: pauseMenuTextStyle),
+          const SizedBox(height: 20.0),
         ]
     );
 
@@ -36,15 +50,10 @@ class PlayAlongEndingInstructions extends PopUpContentBuilder {
         },
       ),
       ElevatedButton(
-        child: const Text('Review Answers'),
-        style: pauseMenuButtonStyle,
-        onPressed: () {
-        },
-      ),
-      ElevatedButton(
         child: const Text('Play Another Song'),
         style: pauseMenuButtonStyle,
         onPressed: () {
+          onBack();
           Navigator.popUntil(context, ModalRoute.withName(PlayAlongMenuScreen.id));
         },
       ),
