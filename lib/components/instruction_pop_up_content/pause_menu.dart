@@ -8,7 +8,6 @@ class PauseMenu extends PopUpContentBuilder {
   final BuildContext context;
   final VoidCallback continueOnPressed;
 
-<<<<<<< add-results-screen-to-play-along
   final String name;
 
   final String id;
