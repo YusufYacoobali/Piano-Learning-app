@@ -1,6 +1,7 @@
+import 'package:sight_reading_app/question.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
-import 'lessons_and_quizzes/question_list.dart';
 import 'components/sheet_music_components/note.dart';
+import 'lessons_and_quizzes/question_answer_data.dart';
 
 /// Manages the questions in lessons/quizzes
 class QuestionBrain {
@@ -12,7 +13,7 @@ class QuestionBrain {
   StorageReaderWriter writer = StorageReaderWriter();
 
   /// The list of questions
-  final QuestionList questions;
+  final List<Question> questions;
 
   /// Constructor
   QuestionBrain({
@@ -20,11 +21,11 @@ class QuestionBrain {
   });
 
   Note getNote() {
-    return questions.questionList[_questionNum].note;
+    return questions[_questionNum].note;
   }
 
   Clef getClef() {
-    return questions.questionList[_questionNum].clef;
+    return questions[_questionNum].clef;
   }
 
   /// Gets the name of the image of the current question
@@ -45,17 +46,17 @@ class QuestionBrain {
 
   /// Gets the question text for the current question
   String getQuestionText() {
-    return questions.questionList[_questionNum].question;
+    return questions[_questionNum].question;
   }
 
   /// Gets the correct answer of the current question
   String getCorrectAnswer() {
-    return questions.questionList[_questionNum].correctAnswer;
+    return questions[_questionNum].correctAnswer;
   }
 
   /// Moves to the next question if there is a next question
   void goToNextQuestion() {
-    if (_questionNum < questions.questionList.length - 1) {
+    if (_questionNum < questions.length - 1) {
       ++_questionNum;
     }
   }
@@ -67,19 +68,25 @@ class QuestionBrain {
 
   /// Gets the total number of questions in the question list
   int getTotalNumberOfQuestions() {
-    return questions.questionList.length;
+    return questions.length;
   }
 
   /// Sets the user answer for the current question
-  void setAnswer(String userAnswer) {
+  void setAnswer({required userAnswer, int? timeTaken}) {
     // Checks if the user answer was correct and if so, increments the score
     if (checkAnswer(userAnswer)) {
       ++_score;
+      QuestionAnswerData.questionAnswered(
+          questions[_questionNum].questionID, true, timeTaken);
+    } else {
+      QuestionAnswerData.questionAnswered(
+          questions[_questionNum].questionID, false, timeTaken);
     }
     // Checks if there are no more questions
     if (isLastQuestion()) {
       // Creates key for shared preferences
-      String lessonName = 'lesson ${questions.lessonID}';
+      // TODO: Fix lessonID
+      String lessonName = 'lesson ${questions[0].lessonID}';
       // Stores [LessonName] as key and [_score] as value in storage
       writer.write(lessonName, _score);
     }
@@ -97,6 +104,6 @@ class QuestionBrain {
 
   /// Checks if the current question is the last question
   bool isLastQuestion() {
-    return _questionNum == questions.questionList.length - 1;
+    return _questionNum == questions.length - 1;
   }
 }

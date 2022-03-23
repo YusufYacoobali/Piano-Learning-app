@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/keyboard.dart';
-import '../components/option_button.dart';
 import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
-import '../lessons_and_quizzes/lesson_one.dart';
+import '../lessons_and_quizzes/question_finder.dart';
 import '../question_brain.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// TODO: Need to have enough questions so that we don't run out before the timer finishes
+/// Screen for speedrun mode
 
 /// Screen that displays and runs the speedrun mode.
 ///
@@ -44,8 +43,9 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   void initState() {
     super.initState();
 
-    /// Loads the correct question file
-    questionBrain = QuestionBrain(questions: lessonOneQuestions);
+    /// Gets all of the questions in a random order
+    questionBrain =
+        QuestionBrain(questions: QuestionFinder().getRandomListOfQuestions());
     setScreenWidget();
   }
 
@@ -58,7 +58,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   void setScreenWidget() {
     Note note = questionBrain.getNote();
     Clef clef = questionBrain.getClef();
-    String questionText = questionBrain.getQuestionText();
+    String questionText = 'What note is this?';
     int questionNum = questionBrain.getQuestionNum();
     int totalNumOfQuestions = questionBrain.getTotalNumberOfQuestions();
 
@@ -71,27 +71,6 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-  /// A list of the user-selectable option buttons.
-  List<Widget> getOptionButtons() {
-    List<Widget> optionButtons = [];
-    List<String> notes = whiteKeyNames;
-    for (int i = 0; i < notes.length; ++i) {
-      optionButtons.add(
-        OptionButton(
-          buttonText: notes[i],
-          onPressed: () {
-            questionBrain.setAnswer(notes[i]);
-            setState(() {
-              questionBrain.goToNextQuestion();
-              // Re-render the screen with new question
-              setScreenWidget();
-            });
-          },
-        ),
-      );
-    }
-    return optionButtons;
-  }
 
   /// The results screen
   Widget getResultsScreen() {
@@ -111,11 +90,13 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   Future<void> _updateRecords() async {
     int score = questionBrain.getScore();
     final prefs = await SharedPreferences.getInstance();
-    final int currentRecord = prefs.getInt('${widget.timerDuration}_second_speedrun_record') ?? 0;
+    final int currentRecord =
+        prefs.getInt('${widget.timerDuration}_second_speedrun_record') ?? 0;
     //If it is the user's first time, the currentRecord will be N/A.
     //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
     if (score > currentRecord || currentRecord == 0) {
-      await prefs.setInt('${widget.timerDuration}_second_speedrun_record', score);
+      await prefs.setInt(
+          '${widget.timerDuration}_second_speedrun_record', score);
     }
   }
 
@@ -151,17 +132,16 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-
   /// Gets the key pressed on the keyboard
   void answer(String text) {
-    questionBrain.setAnswer(text);
+    questionBrain.setAnswer(userAnswer: text);
     setState(() {
       questionBrain.goToNextQuestion();
       // Re-render the screen with new question
       setScreenWidget();
     });
   }
-  
+
   /// Creates the screen.
   @override
   Widget build(BuildContext context) {

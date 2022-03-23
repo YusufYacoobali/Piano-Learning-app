@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -33,6 +34,13 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
     });
   }
 
+  void getDifficulty() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String difficulty = pref.get('difficulty')!.toString();
+    _timer.setDifficulty(difficulty);
+    _timer.start();
+  }
+
   ///TODO: Replace with analytics with the notes
   void recordHitMiss(bool hasPlayed) {}
 
@@ -55,7 +63,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
       notes: widget.notes,
       onStop: _displayMenu,
     );
-    _timer.start();
+    getDifficulty();
   }
 
   @override

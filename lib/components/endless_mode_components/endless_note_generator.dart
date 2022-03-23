@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import '../../constants.dart' as constants;
 import '../sheet_music_components/moving_music_sheet.dart';
 import '../sheet_music_components/note.dart';
 
@@ -15,49 +16,91 @@ class EndlessNoteGenerator {
   int _index = 0;
 
   /// The number of movements before the time unit changes
-  static const int iterationsPerTimeUnit = 80;
+  static const int iterationsPerTimeUnit = 120;
 
   /// The function to be called when a note has been hit or missed
   final Function updater;
 
-  final List<String> _trebleClefNotes = ['C4', 'Db4', 'D4', 'E4', 'Eb4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4'];
-  final List<String> _bassClefNotes = ['B3', 'Bb3', 'A3', 'Ab3', 'G3', 'Gb3', 'F3', 'E3', 'Eb3', 'D3', 'Db3', 'C3'];
-
   final Random _random = Random();
 
   /// The maximum amount of time between notes being displayed
-  static const int _maxTime = 5;
+  late final int _maxTime;
 
   /// The minimum amount of time between notes being displayed
-  static const int _minTime = 3;
+  late final int _minTime;
 
   int _time = 0;
 
-  late final List<String> _notes;
+  late final String _difficulty;
+
+  late int _bpm;
+
+  late List<String> _availableNotes;
+
+  late final int _timeBetweenMovements;
+
+  late final Clef _clef;
 
   EndlessNoteGenerator({required this.sheet, required this.nextNote, required this.updater});
 
   void setClef(Clef clef) {
-    if (clef == Clef.treble) {
-      _notes = _trebleClefNotes;
-    } else {
-      _notes = _bassClefNotes;
-    }
+    _clef = clef;
+    _setClefInNotes();
     getRandomNote();
+  }
+
+  void _setClefInNotes() {
+    String num = '4';
+    if (_clef == Clef.bass) {
+      num = '3';
+    }
+    List<String> notes = [];
+    for (String note in _availableNotes) {
+      notes.add(note + num);
+    }
+    _availableNotes = notes;
+  }
+
+  void _setDifficultyValues() {
+    if (_difficulty == 'Expert') {
+      _bpm = constants.endlessExpertBpm;
+      _availableNotes = constants.endlessExpertNotes;
+      _minTime = constants.endlessExpertMinTime;
+      _maxTime = constants.endlessExpertMaxTime;
+    }
+    else if (_difficulty == 'Intermediate') {
+      _bpm = constants.endlessIntermediateBpm;
+      _availableNotes = constants.endlessIntermediateNotes;
+      _minTime = constants.endlessIntermediateMinTime;
+      _maxTime = constants.endlessIntermediateMaxTime;
+    }
+    else {
+      _bpm = constants.endlessBeginnerBpm;
+      _availableNotes = constants.endlessBeginnerNotes;
+      _minTime = constants.endlessBeginnerMinTime;
+      _maxTime = constants.endlessBeginnerMaxTime;
+    }
+    _timeBetweenMovements = ((1 / ((_bpm / 60) * iterationsPerTimeUnit)) * 1000).round();
   }
 
   /// Gets a new random note to be displayed
   getRandomNote() {
-    String name = _notes[_random.nextInt(_notes.length)];
+    String name = _availableNotes[_random.nextInt(_availableNotes.length)];
     nextNote.setNextNote(Note(name: name, duration: 1));
+  }
+
+  void setDifficulty(String difficulty) {
+    _difficulty = difficulty;
+    _setDifficultyValues();
   }
 
   void start() {
     _isOn = true;
-    Timer.periodic(const Duration(milliseconds: 5), (Timer t) {
+    Timer.periodic(Duration(milliseconds: _timeBetweenMovements), (Timer t) {
       if (!_isOn) {
         t.cancel();
       } else {
+        //print(_index);
         if (_index == 0) {
           increment();
         }

@@ -1,47 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
-import 'package:sight_reading_app/components/keyboard.dart';
-import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
+
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
-import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/instruction_pop_up_content/pause_menu.dart';
+import '../components/keyboard.dart';
+import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
-
 import '../lessons_and_quizzes/question_finder.dart';
 
-/// Creates screen for a lesson.
-/// The lesson screen consists of the option buttons and components in question_skeleton
+/// Creates screen for the random mixed quiz.
+/// This screen consists of the option buttons and components in question_skeleton
 
-class _LessonScreenState extends State<LessonScreen> {
+class _RandomQuizScreenState extends State<RandomQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
-  Stopwatch stopwatch = Stopwatch();
   late final PopUpController _pauseMenu;
-  StorageReaderWriter storage = StorageReaderWriter();
+  Stopwatch stopwatch = Stopwatch();
 
-  ///List of all lessons available
-
-  // List<QuestionList> questionLists = [
-  //   lessonOneQuestions,
-  //   lessonTwoQuestions,
-  //   lessonThreeQuestions,
-  //   lessonFourQuestions,
-  //   lessonFiveQuestions,
-  //   lessonSixQuestions,
-  //   lessonSevenQuestions,
-  // ];
   @override
   void initState() {
     super.initState();
-    int lessonNum = widget.lessonNum;
     questionBrain = QuestionBrain(
-        questions: QuestionFinder().getQuestionsForLesson(lessonNum));
+        questions:
+            QuestionFinder().getRandomListOfQuestions(numOfQuestions: 10));
     setScreenWidget();
     stopwatch.start();
-
     PauseMenu pauseMenuBuilder =
         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
     _pauseMenu =
@@ -107,11 +92,6 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
-  /// Creates the answer option buttons.
-  ///
-  /// Each button has text displayed and check with question brain
-  /// to see if the user has tapped the button with the correct answer.
-
   /// Set details of the Screen Widget in lesson.
   ///
   /// Set components from QuestionBrain including question image, text and number
@@ -120,7 +100,7 @@ class _LessonScreenState extends State<LessonScreen> {
   void setScreenWidget() {
     Note note = questionBrain.getNote();
     Clef clef = questionBrain.getClef();
-    String questionText = questionBrain.getQuestionText();
+    String questionText = 'What note is this?';
     int questionNum = questionBrain.getQuestionNum();
     int totalNumOfQuestions = questionBrain.getTotalNumberOfQuestions();
 
@@ -167,49 +147,18 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  getResults() async {
+  Widget getResultsScreen() {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => ResultsScreen(
-      //             score: percentage,
-      //             title: title,
-      //           )),
-      // );
-      getResultsScreen(title, percentage);
     } else {
       title = "Congratulations!";
-      storage.saveCompletedLesson(widget.lessonNum - 1);
-      bool displayNotification = await storage.displayLessonNotification();
-      getResultsScreen(title, percentage);
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => ResultsScreen(
-      //             score: percentage,
-      //             title: title,
-      //           )),
-      // );
-      //only displays notification if achievement is completed
-      if (displayNotification) {
-        inAppNotification(context);
-      }
     }
-  }
-
-  getResultsScreen(title, percentage) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ResultsScreen(
-                score: percentage,
-                title: title,
-              )),
+    return ResultsScreen(
+      score: percentage,
+      title: title,
     );
   }
 
@@ -243,13 +192,12 @@ class _LessonScreenState extends State<LessonScreen> {
             stopwatch.start();
           });
         } else {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) {
-          //     return getResultsScreen();
-          //   }),
-          // );
-          getResults();
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return getResultsScreen();
+            }),
+          );
         }
       },
     );
@@ -261,11 +209,11 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 }
 
-class LessonScreen extends StatefulWidget {
-  static const String id = 'lesson_screen';
-  final int lessonNum;
-  const LessonScreen({Key? key, this.lessonNum = 1}) : super(key: key);
+class RandomQuizScreen extends StatefulWidget {
+  static const String id = 'random_quiz_screen';
+
+  const RandomQuizScreen({Key? key}) : super(key: key);
 
   @override
-  _LessonScreenState createState() => _LessonScreenState();
+  _RandomQuizScreenState createState() => _RandomQuizScreenState();
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
@@ -39,6 +40,8 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The controller for the end menu
   late final PopUpController _endMenu;
 
+  late final String _difficulty;
+
   @override
   void initState() {
     super.initState();
@@ -50,14 +53,14 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
         notePlayedChecker: _currentNoteToPlay);
     _generator = EndlessNoteGenerator(
         sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
+    getDifficulty();
 
     EndlessStartingInstructions startMenuBuilder =
         EndlessStartingInstructions(context: context, onStart: startGame);
     EndlessEndingInstructions endMenuBuilder =
         EndlessEndingInstructions(context: context, counter: _counter);
 
-    _startMenu =
-        PopUpController(context: context, menuBuilder: startMenuBuilder);
+    _startMenu = PopUpController(context: context, menuBuilder: startMenuBuilder);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
 
     /// Displays the start menu
@@ -72,6 +75,12 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _endMenu.delete();
   }
 
+  void getDifficulty() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _difficulty = pref.get('difficulty')!.toString();
+    _generator.setDifficulty(_difficulty);
+  }
+
   /// Updates the screen
   void updateScreen(String update) {
     setState(() {
@@ -84,7 +93,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     if (!hasPlayed) {
       _generator.stop();
       _hasEnded = true;
-      _counter.isNewHighScore(_sheet.clef);
+      _counter.isNewHighScore(_sheet.clef, _difficulty);
     } else {
       _counter.score++;
     }
@@ -92,7 +101,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
 
   /// Starts the endless mode game
   void startGame(Clef clef) {
-    _counter.getHighScore(clef);
+    _counter.getHighScore(clef, _difficulty);
     _generator.setClef(clef);
     _sheet.changeClef(clef);
     _generator.start();

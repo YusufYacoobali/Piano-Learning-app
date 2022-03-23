@@ -5,6 +5,8 @@ class Question {
   final Clef clef;
   final String question;
   final String correctAnswer;
+  final int questionID;
+  final int lessonID;
 //options;
 
   Question({
@@ -12,5 +14,7 @@ class Question {
     required this.clef,
     required this.question,
     required this.correctAnswer,
+    required this.questionID,
+    required this.lessonID,
   });
 }
