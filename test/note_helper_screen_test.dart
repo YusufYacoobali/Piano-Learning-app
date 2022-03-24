@@ -17,16 +17,16 @@ void main() {
   });
 
   testWidgets(
-      'Check that bass helper button is displayed on the helper selection screen',
+      'Check that bass clef helper button is displayed on the helper selection screen',
       (WidgetTester tester) async {
     await _goToHelperSelectionScreen(tester);
-    expect(find.text('Bass Clef note'), findsOneWidget);
+    expect(find.text('Bass clef note'), findsOneWidget);
   });
 
   testWidgets(
-      'Check that clef helper button is displayed on the helper selection screen',
+      'Check that treble clef helper button is displayed on the helper selection screen',
       (WidgetTester tester) async {
     await _goToHelperSelectionScreen(tester);
-    expect(find.text('Treble Clef note'), findsOneWidget);
+    expect(find.text('Treble clef note'), findsOneWidget);
   });
 }

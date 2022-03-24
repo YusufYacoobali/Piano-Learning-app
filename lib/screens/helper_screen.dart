@@ -71,16 +71,17 @@ class _HelperScreenState extends State<HelperScreen> {
               spacing: 15.0,
               //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               //crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                cardHelper(0),
-                cardHelper(1),
-                cardHelper(2),
-                cardHelper(3),
-                cardHelper(4),
-                cardHelper(5),
-                cardHelper(6),
-                cardHelper(7),
-              ],
+              children: getAllHelperCards(),
+              /*[
+                  cardHelper(0),
+                  cardHelper(1),
+                  cardHelper(2),
+                  cardHelper(3),
+                  cardHelper(4),
+                  cardHelper(5),
+                  cardHelper(6),
+                  cardHelper(7),
+                ],*/
             ),
           ),
         ),
@@ -106,11 +107,9 @@ class _HelperScreenState extends State<HelperScreen> {
                   children: [
                     const SizedBox(height: 30.0),
                     Wrap(
-                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      spacing: 10.0,
-                      runSpacing: 10.0,
+                      alignment: WrapAlignment.center,
                       children: [
-                        const SizedBox(width: 10.0),
+                        //const SizedBox(width: 10.0),
                         cardNoteImage(index),
                         Column(
                           children: [
@@ -120,7 +119,7 @@ class _HelperScreenState extends State<HelperScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10.0),
+                    //const SizedBox(height: 10.0),
                     cardPlayIcon(index),
                   ],
                 ),
@@ -130,6 +129,14 @@ class _HelperScreenState extends State<HelperScreen> {
         ),
       ),
     );
+  }
+
+  List<Widget> getAllHelperCards() {
+    List<Widget> allHelperCards = [];
+    for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); ++i) {
+      allHelperCards.add(cardHelper(i));
+    }
+    return allHelperCards;
   }
 
   ///A widget that holds the name of the note.
@@ -148,7 +155,7 @@ class _HelperScreenState extends State<HelperScreen> {
     );
   }
 
-  ///A widget that holds the image path of the note.
+  ///A widget that holds the image of the note.
   Widget cardNoteImage(index) {
     Clef clef = Clef.treble;
     if (widget.helperNum == 1) {
@@ -163,7 +170,7 @@ class _HelperScreenState extends State<HelperScreen> {
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
         height: 200.0,
-        width: 250.0,
+        width: 280.0,
         child: CustomPaint(
           painter: sheet,
           child: Container(),

@@ -387,7 +387,7 @@ const Icon helperButton = Icon(
 
 const Icon helpPlayButtonStyle = Icon(
   Icons.play_arrow,
-  size: 35.0,
+  size: 55.0,
 );
 
 const TextStyle helperTextStyle = TextStyle(
