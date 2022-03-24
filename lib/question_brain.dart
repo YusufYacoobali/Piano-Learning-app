@@ -34,7 +34,7 @@ class QuestionBrain {
     return questions[_questionNum].clef;
   }
 
-  Clef getQuestionClef(specificQuestionNumber) {
+  Clef getQuestionClef(int specificQuestionNumber) {
     return questions[specificQuestionNumber].clef;
   }
 
@@ -49,7 +49,7 @@ class QuestionBrain {
   }
 
   /// Gets the correct answer of the a specific question
-  String getQuestionCorrectAnswer(specificQuestionNum) {
+  String getQuestionCorrectAnswer(int specificQuestionNum) {
     if (specificQuestionNum < 0 ||
         specificQuestionNum >= getTotalNumberOfQuestions()) {
       return "Invalid index";
