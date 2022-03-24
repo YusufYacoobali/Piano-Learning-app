@@ -16,7 +16,7 @@ class _PageKeyboardState extends State<PageKeyboard> {
 
   ///manages swipe detection
   final controller = PageController(
-    initialPage: 2,
+    initialPage: 1,
   );
 
   @override
