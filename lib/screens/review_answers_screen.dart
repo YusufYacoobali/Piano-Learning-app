@@ -45,7 +45,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   ///Gets the image of the question
   Widget addQuestionImage(int questionIndex) {
     NextNoteNotifier _nextNote = NextNoteNotifier();
-    _nextNote.setNextNote(questionBrain.getSpecificNote(questionIndex));
+    _nextNote.setNextNote(questionBrain.getQuestionNote(questionIndex));
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
@@ -53,7 +53,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         width: 240.0,
         child: CustomPaint(
           painter: MusicSheet(
-              _nextNote, questionBrain.getSpecificClef(questionIndex)),
+              _nextNote, questionBrain.getQuestionClef(questionIndex)),
           child: Container(),
         ),
       ),
@@ -81,7 +81,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     IconData resultIcon = Icons.cancel;
 
     if (questionBrain.getUserAnswer(questionIndex) ==
-        questionBrain.getSpecificCorrectAnswer(questionIndex)) {
+        questionBrain.getQuestionCorrectAnswer(questionIndex)) {
       resultText = "Correct";
       resultColor = Colors.lightGreen;
       resultIcon = Icons.check_circle;
@@ -134,7 +134,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
                             //change method name to add text
                             addMessageWrap('Correct Answer: ' +
                                 questionBrain
-                                    .getSpecificCorrectAnswer(questionIndex)),
+                                    .getQuestionCorrectAnswer(questionIndex)),
                             addMessageWrap('Your Answer: ' +
                                 questionBrain.getUserAnswer(questionIndex)),
                           ],

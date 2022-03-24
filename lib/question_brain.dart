@@ -15,21 +15,18 @@ class QuestionBrain {
   /// The list of questions
   final List<Question> questions;
 
-  ///TODO: add map of question and answer
   late final Map<int, String> _map = {};
-  //final List<String> userAnswerList;
 
   /// Constructor
   QuestionBrain({
     required this.questions,
-    //this.userAnswerList = List(getTotalNumberOfQuestions());
   });
 
   Note getNote() {
     return questions[_questionNum].note;
   }
 
-  Note getSpecificNote(specificQuestionNumber) {
+  Note getQuestionNote(int specificQuestionNumber) {
     return questions[specificQuestionNumber].note;
   }
 
@@ -37,25 +34,9 @@ class QuestionBrain {
     return questions[_questionNum].clef;
   }
 
-  Clef getSpecificClef(specificQuestionNumber) {
+  Clef getQuestionClef(specificQuestionNumber) {
     return questions[specificQuestionNumber].clef;
   }
-
-  /// Gets the name of the image of the current question
-//   String getImageName() {
-//     return questions.questionList[_questionNum].image;
-//   }
-
-//   /// Gets the path of the image of the current question
-//   String getImagePath() {
-//     String path = 'assets/note_images/${getImageName()}';
-//     return path;
-//   }
-
-//   /// Gets the image for the current question
-//   AssetImage getImage() {
-//     return AssetImage(getImagePath());
-//   }
 
   /// Gets the question text for the current question
   String getQuestionText() {
@@ -67,8 +48,8 @@ class QuestionBrain {
     return questions[_questionNum].correctAnswer;
   }
 
-  /// Gets the correct answer of the a specific
-  String getSpecificCorrectAnswer(specificQuestionNum) {
+  /// Gets the correct answer of the a specific question
+  String getQuestionCorrectAnswer(specificQuestionNum) {
     if (specificQuestionNum < 0 ||
         specificQuestionNum >= getTotalNumberOfQuestions()) {
       return "Invalid index";
