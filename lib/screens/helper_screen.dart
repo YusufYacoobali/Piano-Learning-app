@@ -76,6 +76,7 @@ class _HelperScreenState extends State<HelperScreen> {
                   cardHelper(4),
                   cardHelper(5),
                   cardHelper(6),
+                  cardHelper(7),
                 ],
               )),
         ),
@@ -142,7 +143,7 @@ class _HelperScreenState extends State<HelperScreen> {
         height: 200.0,
         width: 250.0,
         child: Image.asset(
-          helperBrain.getHelperNoteImageName(index),
+          'assets/note_images/${helperBrain.getHelperNoteImageName(index)}.jpeg',
           fit: BoxFit.cover,
         ),
       ),
@@ -154,7 +155,7 @@ class _HelperScreenState extends State<HelperScreen> {
     return IconButton(
       icon: helpPlayButtonStyle,
       onPressed: () {
-        playSound.play(helperBrain.getHelperNoteSoundName(index));
+        playSound.play('${helperBrain.getHelperNoteSoundName(index)}.wav');
       },
     );
   }

@@ -6,32 +6,24 @@ final HelperList clefNoteImageNameList = HelperList(
   helperId: 2,
   helperList: [
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Tr_A.jpeg',
-        noteName: 'Clef A',
-        noteSound: 'note_middle_a.wav'),
+        noteImageName: 'Tr_MidC',
+        noteName: 'Clef Mid C',
+        noteSound: 'note_middle_c'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Tr_B.jpeg',
-        noteName: 'Clef B',
-        noteSound: 'note_middle_b.wav'),
+        noteImageName: 'Tr_D', noteName: 'Clef D', noteSound: 'note_middle_d'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Tr_C.jpeg',
-        noteName: 'Clef C',
-        noteSound: 'note_middle_c.wav'),
+        noteImageName: 'Tr_E', noteName: 'Clef E', noteSound: 'note_middle_e'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Tr_D.jpeg',
-        noteName: 'Clef D',
-        noteSound: 'note_middle_d.wav'),
+        noteImageName: 'Tr_F', noteName: 'Clef F', noteSound: 'note_middle_f'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Tr_E.jpeg',
-        noteName: 'Clef E',
-        noteSound: 'note_middle_e.wav'),
+        noteImageName: 'Tr_G', noteName: 'Clef G', noteSound: 'note_middle_g'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Tr_F.jpeg',
-        noteName: 'Clef F',
-        noteSound: 'note_middle_f.wav'),
+        noteImageName: 'Tr_A', noteName: 'Clef A', noteSound: 'note_middle_a'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Tr_G.jpeg',
-        noteName: 'Clef G',
-        noteSound: 'note_middle_g.wav'),
+        noteImageName: 'Tr_B', noteName: 'Clef B', noteSound: 'note_middle_b'),
+    HelperNoteInfo(
+        noteImageName: 'Tr_C',
+        noteName: 'Clef High C',
+        noteSound: 'note_high_c'),
   ],
 );

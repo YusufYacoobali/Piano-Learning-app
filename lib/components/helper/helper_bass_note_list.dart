@@ -6,32 +6,22 @@ final HelperList bassNoteImageNameList = HelperList(
   helperId: 1,
   helperList: [
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Bs_A.jpeg',
-        noteName: 'Bass A',
-        noteSound: 'note_low_a.wav'),
+        noteImageName: 'Bs_MidC',
+        noteName: 'Bass Mid C',
+        noteSound: 'note_middle_c'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Bs_B.jpeg',
-        noteName: 'Bass B',
-        noteSound: 'note_low_b.wav'),
+        noteImageName: 'Bs_B', noteName: 'Bass B', noteSound: 'note_low_b'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Bs_C.jpeg',
-        noteName: 'Bass C',
-        noteSound: 'note_low_c.wav'),
+        noteImageName: 'Bs_A', noteName: 'Bass A', noteSound: 'note_low_a'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Bs_D.jpeg',
-        noteName: 'Bass D',
-        noteSound: 'note_low_d.wav'),
+        noteImageName: 'Bs_G', noteName: 'Bass G', noteSound: 'note_low_g'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Bs_E.jpeg',
-        noteName: 'Bass E',
-        noteSound: 'note_low_e.wav'),
+        noteImageName: 'Bs_F', noteName: 'Bass F', noteSound: 'note_low_f'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Bs_F.jpeg',
-        noteName: 'Bass F',
-        noteSound: 'note_low_f.wav'),
+        noteImageName: 'Bs_E', noteName: 'Bass E', noteSound: 'note_low_e'),
     HelperNoteInfo(
-        noteImageName: 'assets/note_images/Bs_G.jpeg',
-        noteName: 'Bass G',
-        noteSound: 'note_low_g.wav'),
+        noteImageName: 'Bs_D', noteName: 'Bass D', noteSound: 'note_low_d'),
+    HelperNoteInfo(
+        noteImageName: 'Bs_C', noteName: 'Bass C', noteSound: 'note_low_c'),
   ],
 );
