@@ -15,7 +15,7 @@ class PauseMenu extends PopUpContentBuilder {
   @override
   void buildMenu() {
     text = Column(children: const [
-      Text('Paused', style: pauseMenuTextStyle),
+      Text('Paused', style: pauseMenuTextStyle, key: Key('Menu title')),
       SizedBox(height: 50.0),
     ]);
 
