@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/components/helper/helper_brain.dart';
 import 'package:sight_reading_app/components/helper/helper_list.dart';
 import 'package:sight_reading_app/components/helper/helper_note_info.dart';
+import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 
 void main() {
   ///sample helper brain for bass.
@@ -10,7 +11,7 @@ void main() {
       helperId: 1,
       helperList: [
         HelperNoteInfo(
-            noteImageName: 'Bs_A', noteName: 'Bass A', noteSound: 'note_a'),
+            noteImageName: Note(name: 'A3', duration: 4), noteName: 'Bass A', noteSound: 'note_a'),
       ],
     );
   }
@@ -21,7 +22,7 @@ void main() {
       helperId: 2,
       helperList: [
         HelperNoteInfo(
-            noteImageName: 'Tr_A', noteName: 'Clef A', noteSound: 'note_a'),
+            noteImageName: Note(name: 'A4', duration: 4), noteName: 'Clef A', noteSound: 'note_a'),
       ],
     );
   }
@@ -45,7 +46,7 @@ void main() {
       int currentHelperListPosition = 0;
       HelperList sampleHelpers = getSampleBassHelpers();
       HelperBrain helperBrain = HelperBrain(helpers: sampleHelpers);
-      String imageName =
+      Note imageName =
           helperBrain.getHelperNoteImageName(currentHelperListPosition);
       expect(imageName,
           sampleHelpers.helperList[currentHelperListPosition].noteImageName);
@@ -83,7 +84,7 @@ void main() {
       int currentHelperListPosition = 0;
       HelperList sampleHelpers = getSampleClefHelpers();
       HelperBrain helperBrain = HelperBrain(helpers: sampleHelpers);
-      String imageName =
+      Note imageName =
           helperBrain.getHelperNoteImageName(currentHelperListPosition);
       expect(imageName,
           sampleHelpers.helperList[currentHelperListPosition].noteImageName);

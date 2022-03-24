@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/helper/helper_brain.dart';
+import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
+import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 import '../components/helper/helper_bass_note_list.dart';
 import '../components/helper/helper_clef_note_list.dart';
 import '../constants.dart';
@@ -148,15 +150,23 @@ class _HelperScreenState extends State<HelperScreen> {
 
   ///A widget that holds the image path of the note.
   Widget cardNoteImage(index) {
+    Clef clef = Clef.treble;
+    if (widget.helperNum == 1) {
+      clef = Clef.bass;
+    }
+
+    NextNoteNotifier noteNotifier = NextNoteNotifier();
+    noteNotifier.setNextNote(helperBrain.getHelperNoteImageName(index));
+    MusicSheet sheet = MusicSheet(noteNotifier, clef);
     return ClipRRect(
       key: const Key('card image'),
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
         height: 200.0,
         width: 250.0,
-        child: Image.asset(
-          'assets/note_images/${helperBrain.getHelperNoteImageName(index)}.jpeg',
-          fit: BoxFit.cover,
+        child: CustomPaint(
+          painter: sheet,
+          child: Container(),
         ),
       ),
     );

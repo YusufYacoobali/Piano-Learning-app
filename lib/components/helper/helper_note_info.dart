@@ -1,6 +1,8 @@
+import '../sheet_music_components/note.dart';
+
 ///This class provides the basic information of note in a helper card.
 class HelperNoteInfo {
-  final String noteImageName;
+  final Note noteImageName;
   final String noteName;
   final String noteSound;
 
