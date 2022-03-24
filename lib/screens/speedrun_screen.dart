@@ -2,7 +2,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
-import '../components/keyboard.dart';
+import '../components/page_keyboard.dart';
 import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/question_finder.dart';
@@ -71,7 +71,6 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-
   /// The results screen
   Widget getResultsScreen() {
     // Calculates the percentage achieved by the user
@@ -83,6 +82,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     return ResultsScreen(
       score: percentage,
       title: title,
+      questionBrain: questionBrain,
     );
   }
 
@@ -155,15 +155,9 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
                 // Question
                 screenWidget,
                 Expanded(
-                  child: Keyboard(function: answer),
+                  child: PageKeyboard(answer),
+
                 ),
-                // User-selectable option buttons
-                // Expanded(
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //     children: getOptionButtons(),
-                //   ),
-                // ),
               ],
             ),
             Padding(

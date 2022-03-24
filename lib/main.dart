@@ -18,7 +18,6 @@ import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 
 void main() {
-  StorageReaderWriter().loadDataFromStorage();
   // Starting the app in landscape orientation
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -33,6 +32,7 @@ class SightReadingApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Changes the theme
+    StorageReaderWriter().loadDataFromStorage();
     return ChangeNotifierProvider(
       create: (_) => ThemeNotifier(),
       child: Consumer<ThemeNotifier>(

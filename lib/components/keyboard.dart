@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../storage_reader_writer.dart';
 import '../constants.dart';
 
 /// Keyboard widget
@@ -8,7 +9,7 @@ class _KeyboardState extends State<Keyboard> {
   /// Used to play note sounds
   final player = AudioCache();
 
-  String _difficulty = 'Beginner';
+  String _difficulty = defaultDifficultyLevel;
 
   /// Constructor
   _KeyboardState() {
@@ -16,14 +17,24 @@ class _KeyboardState extends State<Keyboard> {
   }
 
   void getDifficulty() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    setState(() {
-      _difficulty = pref.get('difficulty')!.toString();
+    StorageReaderWriter writer = StorageReaderWriter();
+    writer.loadDataFromStorage().then((value) {
+      setState(() {
+        _difficulty = writer.read('difficulty').toString();
+      });
     });
   }
 
   /// Plays the sound of the note that was pressed
-  void playSound(String noteName) => player.play('note_$noteName.wav');
+  void playSound(String noteName) {
+    if (widget.octave == 1) {
+      player.play('note_low_$noteName.wav');
+    } else if (widget.octave == 2) {
+      player.play('note_middle_$noteName.wav');
+    } else {
+      player.play('note_high_$noteName.wav');
+    }
+  }
 
   /// Returns the text widget displayed on the white keys
   Widget getWhiteKeyChild(String buttonText) {
@@ -68,7 +79,7 @@ class _KeyboardState extends State<Keyboard> {
         ),
         onPressed: () {
           playSound(buttonText.toLowerCase());
-          widget.function(buttonText);
+          widget.onKeyPressed(buttonText);
         },
         style: whiteKeyButtonStyle,
       ),
@@ -87,7 +98,7 @@ class _KeyboardState extends State<Keyboard> {
       ),
       onPressed: () {
         playSound(buttonText.toLowerCase());
-        widget.function(buttonText);
+        widget.onKeyPressed(buttonText);
       },
       style: blackKeyButtonStyle,
     );
@@ -184,11 +195,15 @@ class Keyboard extends StatefulWidget {
   static const String id = 'keyboard';
 
   /// The function to be called when a key is pressed
-  final Function(String) function;
+  /// gets the key pressed on the keyboard
+  final Function(String) onKeyPressed;
+  ///sets the octave of sounds to play
+  final int octave;
 
   //final String difficulty = StorageReaderWriter().read('difficulty').toString();
 
-  const Keyboard({Key? key, required this.function}) : super(key: key);
+  const Keyboard(this.onKeyPressed, this.octave, {Key? key}) : super(key: key);
+
 
   @override
   State<Keyboard> createState() => _KeyboardState();

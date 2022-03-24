@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 const List<Object> difficultyList = ['Beginner', 'Intermediate', 'Expert'];
 
 /// Default values of individual settings
-const int defaultVolumeLevel = 100;
+const String defaultVolumeLevel = '100';
 const String defaultDifficultyLevel = 'Beginner';
 const String defaultTheme = 'Dark';
 
@@ -357,8 +357,8 @@ const List<String> endlessExpertNotes = [
 
 /// How fast the notes move across the screen in endless mode for each difficulty
 const int endlessBeginnerBpm = 80;
-const int endlessIntermediateBpm = 100;
-const int endlessExpertBpm = 120;
+const int endlessIntermediateBpm = 110;
+const int endlessExpertBpm = 140;
 
 /// maximum and minimum gaps between notes in endless mode
 const int endlessBeginnerMinTime = 4;
@@ -417,6 +417,28 @@ const double iosBassClefFontSize = 100;
 /// Change these to change the clef position on screen
 const double iosTrebleClefOffset = 118;
 const double iosBassClefOffset = 85;
+
+/// black note symbols
+const String sharp = '♯';
+const String flat = '♭';
+
+/// Android symbol fonts
+const double androidSharpFontSize = 30;
+const double androidFlatFontSize = 45;
+
+/// Android symbol offset positions
+const double androidSharpOffset = 20;
+const double androidFlatOffset = 35;
+
+/// IOS symbol fonts
+/// Change these to change the symbol size
+const double iosSharpFontSize = 30;
+const double iosFlatFontSize = 45;
+
+/// IOS symbol offsets
+/// Change these to change the symbol position on screen
+const double iosSharpOffset = 0;
+const double iosFlatOffset = 15;
 
 /// QuestionAnswerData
 const int timeThreshold = 500;

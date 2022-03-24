@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
-import '../../screens/lesson_menu_screen.dart';
 import '../../screens/menu_screen.dart';
 
 class PauseMenu extends PopUpContentBuilder {
   final BuildContext context;
   final VoidCallback continueOnPressed;
 
-  PauseMenu({required this.context, required this.continueOnPressed});
+  final String name;
+
+  final String id;
+
+  PauseMenu({required this.context, required this.name, required this.id, required this.continueOnPressed});
+// =======
+//   PauseMenu({required this.context, required this.continueOnPressed});
+// >>>>>>> main
 
   /// Sets up the start menu
   @override
@@ -38,11 +44,11 @@ class PauseMenu extends PopUpContentBuilder {
         },
       ),
       ElevatedButton(
-        child: const Text('Back To Lessons'),
+        child: Text('Back To $name'),
         key: const Key('lesson selection button'),
         style: pauseMenuButtonStyle,
         onPressed: () {
-          Navigator.popUntil(context, ModalRoute.withName(LessonMenuScreen.id));
+          Navigator.popUntil(context, ModalRoute.withName(id));
         },
       ),
     ];
