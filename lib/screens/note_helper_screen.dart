@@ -31,8 +31,8 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
           mainAxisSpacing: 5,
           crossAxisCount: 2,
           children: <Widget>[
-            bassNoteHelperbutton(),
-            clefNoteHelperbutton(),
+            bassClefNoteHelperbutton(),
+            trebleClefNoteHelperbutton(),
           ],
         ),
       ),
@@ -40,9 +40,9 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
   }
 
   ///A button that will be route to specific screen of bass helper.
-  Widget bassNoteHelperbutton() {
+  Widget bassClefNoteHelperbutton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Bass note'),
+      buttonChild: const ButtonText(buttonText: 'Bass Clef note'),
       onPress: () {
         Navigator.push(
           context,
@@ -57,9 +57,9 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
   }
 
   ///A button that will be route to specific screen of clef helper.
-  Widget clefNoteHelperbutton() {
+  Widget trebleClefNoteHelperbutton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Clef note'),
+      buttonChild: const ButtonText(buttonText: 'Treble Clef note'),
       onPress: () {
         Navigator.push(
           context,
