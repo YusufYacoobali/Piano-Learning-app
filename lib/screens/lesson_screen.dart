@@ -52,7 +52,11 @@ class _LessonScreenState extends State<LessonScreen> {
     setScreenWidget();
     stopwatch.start();
 
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Lessons', id: LessonMenuScreen.id, continueOnPressed: () => stopwatch.start());
+    PauseMenu pauseMenuBuilder = PauseMenu(
+        context: context,
+        name: 'Lessons',
+        id: LessonMenuScreen.id,
+        continueOnPressed: () => stopwatch.start());
 // =======
 //     PauseMenu pauseMenuBuilder =
 //         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
@@ -144,7 +148,6 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-
         child: Stack(children: [
           Align(alignment: Alignment.topRight, child: getPauseButton()),
           Column(
@@ -164,7 +167,6 @@ class _LessonScreenState extends State<LessonScreen> {
           //   ),
           // ),
         ]),
-
       ),
     );
   }

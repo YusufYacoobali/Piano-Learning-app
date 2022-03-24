@@ -222,7 +222,8 @@ class StorageReaderWriter {
     } else {
       for (String clef in <String>['treble', 'bass']) {
         for (Object difficulty in difficultyList) {
-          String key = 'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
+          String key =
+              'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
           _map[key] = pref.getString(key);
         }
       }
@@ -233,7 +234,8 @@ class StorageReaderWriter {
   void _setDefaultEndlessRecords() {
     for (String clef in <String>['treble', 'bass']) {
       for (Object difficulty in difficultyList) {
-        String key = 'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
+        String key =
+            'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
         _map[key] = '0';
       }
     }
@@ -243,7 +245,8 @@ class StorageReaderWriter {
   void _writeEndlessRecordsToStorage() {
     for (String clef in <String>['treble', 'bass']) {
       for (Object difficulty in difficultyList) {
-        String key = 'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
+        String key =
+            'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
         write(key, '0');
       }
     }
@@ -251,14 +254,16 @@ class StorageReaderWriter {
 
   /// Loads play along records from storage
   Future<void> _loadPlayAlongRecordsFromStorage(SharedPreferences pref) async {
-    String? isOnDisk = pref.getString('ode to joy - treble only-beginner-high-score');
+    String? isOnDisk =
+        pref.getString('ode to joy - treble only-beginner-high-score');
     if (isOnDisk == null) {
       _setDefaultPlayAlongRecords();
       _writePlayAlongRecordsToStorage();
     } else {
       for (String track in trackNames) {
         for (Object difficulty in difficultyList) {
-          String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+          String key =
+              '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
           _map[key] = pref.get(key);
         }
       }
@@ -269,7 +274,8 @@ class StorageReaderWriter {
   void _setDefaultPlayAlongRecords() {
     for (String track in trackNames) {
       for (Object difficulty in difficultyList) {
-        String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+        String key =
+            '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
         _map[key] = '0';
       }
     }
@@ -279,7 +285,8 @@ class StorageReaderWriter {
   void _writePlayAlongRecordsToStorage() {
     for (String track in trackNames) {
       for (Object difficulty in difficultyList) {
-        String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+        String key =
+            '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
         write(key, '0');
       }
     }
@@ -355,6 +362,44 @@ class StorageReaderWriter {
     if (completedQuizzes == 1 ||
         completedQuizzes == 5 ||
         completedQuizzes == numOfquizzes) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //only executed if prev score is beaten
+  Future<bool> displaySpeedrunNotification(time) async {
+    final prefs = await SharedPreferences.getInstance();
+    int value = (prefs.getInt('${time}_second_speedrun_record') ?? 0);
+    //times to scores which have been attained or not
+    Map scores = {
+      10: {5: false},
+      20: {10: false, 20: false}
+    };
+
+    Map current = scores[time];
+    print(current);
+
+    List toAchieve = [];
+
+    for (var entry in current.entries) {
+      //not achieved yet
+      if (entry.value == false) {
+        toAchieve.add(entry.key);
+      }
+    }
+
+    print(toAchieve);
+
+    if (toAchieve.isEmpty) {
+      return false;
+    }
+
+    int target = toAchieve[0];
+
+    // if (value >= (time / 2)) {
+    if (value >= target) {
       return true;
     } else {
       return false;

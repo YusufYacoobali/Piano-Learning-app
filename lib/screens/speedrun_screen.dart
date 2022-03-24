@@ -1,7 +1,9 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/page_keyboard.dart';
 import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
@@ -38,6 +40,8 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
 
   /// Displays the questions
   late Widget screenWidget;
+
+  StorageReaderWriter storage = StorageReaderWriter();
 
   @override
   void initState() {
@@ -97,6 +101,12 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     if (score > currentRecord || currentRecord == 0) {
       await prefs.setInt(
           '${widget.timerDuration}_second_speedrun_record', score);
+
+      bool displayNotification =
+          await storage.displaySpeedrunNotification(widget.timerDuration);
+      if (displayNotification) {
+        inAppNotification(context);
+      }
     }
   }
 
@@ -156,7 +166,6 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
                 screenWidget,
                 Expanded(
                   child: PageKeyboard(answer),
-
                 ),
               ],
             ),
