@@ -63,22 +63,24 @@ class _HelperScreenState extends State<HelperScreen> {
           radius: const Radius.circular(10),
           thickness: 5.0,
           child: SingleChildScrollView(
-              controller: _helperController,
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  cardHelper(0),
-                  cardHelper(1),
-                  cardHelper(2),
-                  cardHelper(3),
-                  cardHelper(4),
-                  cardHelper(5),
-                  cardHelper(6),
-                  cardHelper(7),
-                ],
-              )),
+            controller: _helperController,
+            scrollDirection: Axis.horizontal,
+            child: Wrap(
+              spacing: 15.0,
+              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                cardHelper(0),
+                cardHelper(1),
+                cardHelper(2),
+                cardHelper(3),
+                cardHelper(4),
+                cardHelper(5),
+                cardHelper(6),
+                cardHelper(7),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -88,28 +90,38 @@ class _HelperScreenState extends State<HelperScreen> {
   Widget cardHelper(index) {
     return Center(
       child: Card(
+        key: const Key('card'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         child: SizedBox(
           height: 300.0,
           width: 500.0,
           child: Container(
             decoration: cardBackground,
-            child: Column(
+            child: Wrap(
+              alignment: WrapAlignment.center,
               children: [
-                const SizedBox(height: 20.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Column(
                   children: [
-                    cardNoteImage(index),
-                    Column(
+                    const SizedBox(height: 30.0),
+                    Wrap(
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      spacing: 10.0,
+                      runSpacing: 10.0,
                       children: [
-                        cardText(index),
+                        const SizedBox(width: 10.0),
+                        cardNoteImage(index),
+                        Column(
+                          children: [
+                            const SizedBox(height: 65.0),
+                            cardText(index),
+                          ],
+                        ),
                       ],
                     ),
+                    const SizedBox(height: 10.0),
+                    cardPlayIcon(index),
                   ],
                 ),
-                const SizedBox(height: 10.0),
-                cardPlayIcon(index),
               ],
             ),
           ),
@@ -137,7 +149,7 @@ class _HelperScreenState extends State<HelperScreen> {
   ///A widget that holds the image path of the note.
   Widget cardNoteImage(index) {
     return ClipRRect(
-      key: const Key('card note image'),
+      key: const Key('card image'),
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
         height: 200.0,
@@ -153,6 +165,7 @@ class _HelperScreenState extends State<HelperScreen> {
   ///A widget that holds the icon button which can play note sound when pressed.
   Widget cardPlayIcon(index) {
     return IconButton(
+      key: const Key('card button'),
       icon: helpPlayButtonStyle,
       onPressed: () {
         playSound.play('${helperBrain.getHelperNoteSoundName(index)}.wav');

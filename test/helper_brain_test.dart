@@ -10,13 +10,7 @@ void main() {
       helperId: 1,
       helperList: [
         HelperNoteInfo(
-            noteImageName: 'assets/note_images/Bs_A.jpeg',
-            noteName: 'Bass A',
-            noteSound: 'note_a.wav'),
-        HelperNoteInfo(
-            noteImageName: 'assets/note_images/Bs_B.jpeg',
-            noteName: 'Bass B',
-            noteSound: 'note_b.wav'),
+            noteImageName: 'Bs_A', noteName: 'Bass A', noteSound: 'note_a'),
       ],
     );
   }
@@ -27,19 +21,13 @@ void main() {
       helperId: 2,
       helperList: [
         HelperNoteInfo(
-            noteImageName: 'assets/note_images/Tr_A.jpeg',
-            noteName: 'Clef A',
-            noteSound: 'note_a.wav'),
-        HelperNoteInfo(
-            noteImageName: 'assets/note_images/Tr_B.jpeg',
-            noteName: 'Clef B',
-            noteSound: 'note_b.wav'),
+            noteImageName: 'Tr_A', noteName: 'Clef A', noteSound: 'note_a'),
       ],
     );
   }
 
   /// Bass helper brain test.
-  group('Check for bass helper brain list.', () {
+  group('Check for bass helper brain sample list.', () {
     test(
         'Check that getHelperNoteName(currentHelperListPosition) returns the name of the current bass note in position 0',
         () {
@@ -77,7 +65,7 @@ void main() {
   });
 
   /// Clef helper brain test
-  group('Check for clef helper brain list.', () {
+  group('Check for clef helper brain sample list.', () {
     test(
         'Check that getHelperNoteName(currentHelperListPosition) returns the name of the current clef note in position 0',
         () {

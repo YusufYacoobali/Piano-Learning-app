@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
+import 'package:sight_reading_app/screens/helper_screen.dart';
 
 void main() {
   _goToHelperSelectionScreen(WidgetTester tester) async {
@@ -9,77 +10,81 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets(
-      'Check that bass helper screen is displayed when button is pressed',
-      (WidgetTester tester) async {
+  _goTorBassHelperScreen(WidgetTester tester) async {
     await _goToHelperSelectionScreen(tester);
     await tester.tap(find.text('Bass note'));
-    expect(find.text('Helper'), findsOneWidget);
-  });
+    await tester.pumpAndSettle();
+  }
 
-  group('Check for bass helper function.', () {
-    testWidgets(
-        'Check that multiple play icon button is displayed in bass helper',
-        (WidgetTester tester) async {
-      await _goToHelperSelectionScreen(tester);
-      await tester.tap(find.text('Bass note'));
-      await tester.pumpAndSettle();
-      expect(find.byIcon(Icons.play_arrow), findsWidgets);
+  _goTorClefHelperScreen(WidgetTester tester) async {
+    await _goToHelperSelectionScreen(tester);
+    await tester.tap(find.text('Clef note'));
+    await tester.pumpAndSettle();
+  }
+
+  group('Check that numbers of helper screen are displayed:', () {
+    testWidgets('Bass screen is displayed', (WidgetTester tester) async {
+      await _goTorBassHelperScreen(tester);
+      expect(find.byType(HelperScreen), findsOneWidget);
     });
 
-    testWidgets('Check that multiple note text is displayed in bass helper',
-        (WidgetTester tester) async {
-      const textKey = Key('card text');
-      await _goToHelperSelectionScreen(tester);
-      await tester.tap(find.text('Bass note'));
-      await tester.pumpAndSettle();
-      expect(find.byKey(textKey), findsWidgets);
-    });
-
-    testWidgets('Check that multiple note image is displayed in bass helper',
-        (WidgetTester tester) async {
-      const imageKey = Key('card note image');
-      await _goToHelperSelectionScreen(tester);
-      await tester.tap(find.text('Bass note'));
-      await tester.pumpAndSettle();
-      expect(find.byKey(imageKey), findsWidgets);
+    testWidgets('Clef screen is displayed', (WidgetTester tester) async {
+      await _goTorClefHelperScreen(tester);
+      expect(find.byType(HelperScreen), findsOneWidget);
     });
   });
 
-  group('Check for clef helper function.', () {
-    testWidgets(
-        'Check that clef helper screen is displayed when button is pressed',
-        (WidgetTester tester) async {
-      await _goToHelperSelectionScreen(tester);
-      await tester.tap(find.text('Clef note'));
-      expect(find.text('Helper'), findsOneWidget);
+  group('Check that helper cards are correctly displayed:', () {
+    testWidgets('Bass note card is displayed', (WidgetTester tester) async {
+      const cardKey = Key('card');
+      await _goTorBassHelperScreen(tester);
+      expect(find.byKey(cardKey), findsWidgets);
     });
 
-    testWidgets('Check that multiple note text is displayed in clef helper',
-        (WidgetTester tester) async {
-      const textKey = Key('card text');
-      await _goToHelperSelectionScreen(tester);
-      await tester.tap(find.text('Clef note'));
-      await tester.pumpAndSettle();
-      expect(find.byKey(textKey), findsWidgets);
+    testWidgets('Clef note card is displayed', (WidgetTester tester) async {
+      const cardKey = Key('card');
+      await _goTorClefHelperScreen(tester);
+      expect(find.byKey(cardKey), findsWidgets);
+    });
+  });
+
+  group('Check that Bass helper card component is correctly displayed:', () {
+    testWidgets('Bass note name is displayed', (WidgetTester tester) async {
+      const nameKey = Key('card text');
+      await _goTorBassHelperScreen(tester);
+      expect(find.byKey(nameKey), findsWidgets);
     });
 
-    testWidgets('Check that multiple note image is displayed in clef helper',
-        (WidgetTester tester) async {
-      const imageKey = Key('card note image');
-      await _goToHelperSelectionScreen(tester);
-      await tester.tap(find.text('Clef note'));
-      await tester.pumpAndSettle();
+    testWidgets('Bass note image is displayed', (WidgetTester tester) async {
+      const imageKey = Key('card image');
+      await _goTorBassHelperScreen(tester);
       expect(find.byKey(imageKey), findsWidgets);
     });
 
-    testWidgets(
-        'Check that multiple play icon button is displayed in clef helper',
-        (WidgetTester tester) async {
-      await _goToHelperSelectionScreen(tester);
-      await tester.tap(find.text('Clef note'));
-      await tester.pumpAndSettle();
-      expect(find.byIcon(Icons.play_arrow), findsWidgets);
+    testWidgets('Bass note button is displayed', (WidgetTester tester) async {
+      const buttonKey = Key('card button');
+      await _goTorBassHelperScreen(tester);
+      expect(find.byKey(buttonKey), findsWidgets);
+    });
+  });
+
+  group('Check that Clef helper card component is correctly displayed:', () {
+    testWidgets('Clef note name is displayed', (WidgetTester tester) async {
+      const nameKey = Key('card text');
+      await _goTorClefHelperScreen(tester);
+      expect(find.byKey(nameKey), findsWidgets);
+    });
+
+    testWidgets('Clef note image is displayed', (WidgetTester tester) async {
+      const imageKey = Key('card image');
+      await _goTorClefHelperScreen(tester);
+      expect(find.byKey(imageKey), findsWidgets);
+    });
+
+    testWidgets('Clef note button is displayed', (WidgetTester tester) async {
+      const buttonKey = Key('card button');
+      await _goTorClefHelperScreen(tester);
+      expect(find.byKey(buttonKey), findsWidgets);
     });
   });
 }
