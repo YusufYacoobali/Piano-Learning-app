@@ -1,7 +1,6 @@
 import 'components/sheet_music_components/note.dart';
 
 class Question {
-  //final Note note;
   final Clef clef;
   final String question;
   final Note correctAnswer;
@@ -10,7 +9,6 @@ class Question {
 //options;
 
   Question({
-    //required this.note,
     required this.clef,
     required this.question,
     required this.correctAnswer,
