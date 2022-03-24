@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/endless_mode_screen.dart';
-import 'package:sight_reading_app/screens/helper_menu_screen.dart';
+import 'package:sight_reading_app/screens/note_helper_screen.dart';
 import 'package:sight_reading_app/screens/helper_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
