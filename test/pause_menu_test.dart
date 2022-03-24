@@ -6,12 +6,14 @@ import 'package:sight_reading_app/screens/lesson_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 
 void main() {
+  /// shortcut for go to lesson selection menu.
   _goToLessonsScreen(WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
     await tester.pumpAndSettle();
   }
 
+  /// shortcut for open paused menu.
   _openPausedMenu(WidgetTester tester) async {
     const pauseKey = Key('Pause Icon');
     await tester.tap(find.byKey(pauseKey));
@@ -50,6 +52,7 @@ void main() {
     await _openPausedMenu(tester);
   }
 
+  /// Group of tests fot paused menu buttons display testing
   group('Check lesson 1 paused menu successfully displayed:', () {
     testWidgets('menu text is displayed in the pause menu.',
         (WidgetTester tester) async {
@@ -170,7 +173,7 @@ void main() {
     });
   });
 
-  /// paused menu buttons navigate test
+  /// Group of tests fot paused menu buttons navigate testing.
   group(
       'check that every buttons in the lesson 1 paused menu are correctly navigates once clicked:',
       () {
