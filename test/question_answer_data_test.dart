@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
-import 'package:sight_reading_app/question.dart';
-import 'package:sight_reading_app/questions.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 
 void main() {
   test('Check that createDefaultMap correctly initialises values to 0', () {

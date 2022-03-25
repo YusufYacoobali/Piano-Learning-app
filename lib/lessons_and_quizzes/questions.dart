@@ -1,5 +1,5 @@
-import 'package:sight_reading_app/question.dart';
-import 'components/sheet_music_components/note.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question.dart';
+import '../components/sheet_music_components/note.dart';
 
 final List<Question> questions = [
   Question(
