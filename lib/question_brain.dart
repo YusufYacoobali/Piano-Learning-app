@@ -26,6 +26,7 @@ class QuestionBrain {
     return questions[_questionNum].note;
   }
 
+  // TODO: Maybe should error check
   Note getQuestionNote(int specificQuestionNumber) {
     return questions[specificQuestionNumber].note;
   }
@@ -34,6 +35,7 @@ class QuestionBrain {
     return questions[_questionNum].clef;
   }
 
+  // TODO: Maybe should error check
   Clef getQuestionClef(int specificQuestionNumber) {
     return questions[specificQuestionNumber].clef;
   }

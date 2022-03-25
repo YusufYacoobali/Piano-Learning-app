@@ -278,157 +278,69 @@ void main() {
     expect(pref.get('lesson 1'), '0');
   });
 
-  // testWidgets('Check that changing the difficulty saves the correct value to storage.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({});
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('difficulty'), 'Beginner');
-  //
-  //       await tester.tap(find.byKey(const Key('difficulty selector')));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Expert').last);
-  //       await tester.pump();
-  //
-  //       expect(pref.get('difficulty'), 'Expert');
-  //     });
-  //
-  // testWidgets('Check that changing the theme saves the correct value to storage.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({});
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('theme'), 'Dark');
-  //
-  //       // Check that the initial theme of the app is dark
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
-  //
-  //       await tester.tap(find.text('Dark'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Light').last);
-  //       await tester.pumpAndSettle();
-  //
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the theme has changed
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //     });
-  //
-  // testWidgets('Check that resetting the settings sets their values to default.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({});
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('volume'), 100);
-  //       expect(pref.get('difficulty'), 'Beginner');
-  //       expect(pref.get('theme'), 'Dark');
-  //
-  //       // Check that the initial theme of the app is dark
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
-  //
-  //       await tester.drag(find.byType(Slider), const Offset(-100, 0));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Beginner'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Expert').last);
-  //       await tester.pump();
-  //       await tester.tap(find.text('Dark'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Light').last);
-  //       await tester.pumpAndSettle();
-  //
-  //       if (pref.get('volume') == 100) fail('The volume should not be 100');
-  //       expect(pref.get('difficulty'), 'Expert');
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the theme changes
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //
-  //       await tester.tap(find.text('Reset Progress'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Confirm'));
-  //       await tester.pumpAndSettle();
-  //
-  //       expect(pref.get('volume'), 100);
-  //       expect(pref.get('difficulty'), 'Beginner');
-  //       expect(pref.get('theme'), 'Dark');
-  //
-  //       // Check that the theme changes
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
-  //     });
-  //
-  // testWidgets('Check that cancelling a reset keeps the values the same.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({});
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('volume'), 100);
-  //       expect(pref.get('difficulty'), 'Beginner');
-  //       expect(pref.get('theme'), 'Dark');
-  //
-  //       // Check that the initial theme of the app is dark
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
-  //
-  //       await tester.drag(find.byType(Slider), const Offset(-100, 0));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Beginner'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Expert').last);
-  //       await tester.pump();
-  //       await tester.tap(find.text('Dark'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Light').last);
-  //       await tester.pumpAndSettle();
-  //
-  //       if (pref.get('volume') == 100) fail('The volume should not be 100');
-  //       expect(pref.get('difficulty'), 'Expert');
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the theme changes
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //
-  //       await tester.tap(find.text('Reset Progress'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Cancel'));
-  //       await tester.pump();
-  //
-  //       if (pref.get('volume') == 100) fail('The volume should not be 100');
-  //       expect(pref.get('difficulty'), 'Expert');
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the theme stays the same
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //     });
-  //
-  // testWidgets('Check that loading settings from storage displays correctly.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({'volume': 50, 'difficulty': 'Intermediate', 'theme': 'Light', });
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('volume'), 50);
-  //       expect(pref.get('difficulty'), 'Intermediate');
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the initial theme of the app is light
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //
-  //       expect(find.text('50'), findsOneWidget);
-  //       expect(find.text('Dark'), findsOneWidget);
-  //       expect(find.text('Intermediate'), findsOneWidget);
-  //     });
+  test('Check that getQuestionNote returns the note of the correct question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    Note expectedNote = fakeQuestions[2].note;
+    Note actualNote = qb.getQuestionNote(2);
+    expect(expectedNote, actualNote);
+  });
+
+  test('Check that getQuestionClef returns the clef of the correct question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    Clef expectedClef = fakeQuestions[2].clef;
+    Clef actualClef = qb.getQuestionClef(2);
+    expect(expectedClef, actualClef);
+  });
+
+  test(
+      'Check that getQuestionCorrectAnswer returns the correct answer of the correct question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    String expectedAnswer = fakeQuestions[2].correctAnswer;
+    String actualAnswer = qb.getQuestionCorrectAnswer(2);
+    expect(expectedAnswer, actualAnswer);
+  });
+
+  test(
+      'Check that getQuestionCorrectAnswer returns error message when given invalid index.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    String errorMessage = qb.getQuestionCorrectAnswer(56777);
+    expect(errorMessage, "Invalid index");
+  });
+
+  test(
+      'Check that getUserAnswer correctly returns the answer selected by the user for a specific question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    String expectedUserAnswer = 'C';
+    qb.setAnswer(userAnswer: 'F');
+    qb.goToNextQuestion();
+    qb.setAnswer(userAnswer: expectedUserAnswer);
+    String actualUserAnswer = qb.getUserAnswer(1);
+    expect(expectedUserAnswer, actualUserAnswer);
+  });
+
+  test(
+      'Check that getUserAnswer returns an error message when a question has not been answered by the user.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    String expectedUserAnswer = 'N/A';
+    String actualUserAnswer = qb.getUserAnswer(548457);
+    expect(expectedUserAnswer, actualUserAnswer);
+  });
 }
