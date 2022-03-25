@@ -9,7 +9,7 @@ import '../components/in_app_notification_pop_up.dart';
 import '../components/pop_ups/pause_menu.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
-import 'package:sight_reading_app/question_brain.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
 
 import '../helper.dart';
@@ -29,11 +29,16 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   void initState() {
     super.initState();
     questionBrain = QuestionBrain(
-        questions: QuestionFinder().getPracticeQuestionsForLesson(widget.lessonID, 10));
+        questions: QuestionFinder()
+            .getPracticeQuestionsForLesson(widget.lessonID, 10));
     //print(questionBrain.questions); //This is empty in testing
     setScreenWidget();
     stopwatch.start();
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id, continueOnPressed: () => stopwatch.start());
+    PauseMenu pauseMenuBuilder = PauseMenu(
+        context: context,
+        name: 'Quizzes',
+        id: QuizSelectionScreen.id,
+        continueOnPressed: () => stopwatch.start());
 // =======
 //     PauseMenu pauseMenuBuilder =
 //         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
@@ -160,7 +165,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
     if (score > currentRecord || currentRecord == 0) {
       await prefs.setInt(
-         '${await getRecordKeysForMode('quiz')[widget.lessonID - 1]}' , score);
+          '${await getRecordKeysForMode('quiz')[widget.lessonID - 1]}', score);
     }
   }
 
@@ -177,7 +182,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
             builder: (context) => ResultsScreen(
                   score: percentage,
                   title: title,
-               questionBrain: questionBrain,
+                  questionBrain: questionBrain,
                 )),
       );
     } else {
@@ -190,7 +195,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
             builder: (context) => ResultsScreen(
                   score: percentage,
                   title: title,
-               questionBrain: questionBrain,
+                  questionBrain: questionBrain,
                 )),
       );
       //only displays notification if achievement is completed
@@ -265,7 +270,8 @@ class PracticeQuizScreen extends StatefulWidget {
   /// The lesson the quiz is getting questions from.
   final int lessonID;
 
-  const PracticeQuizScreen({Key? key, required this.lessonID}) : super(key: key);
+  const PracticeQuizScreen({Key? key, required this.lessonID})
+      : super(key: key);
 
   @override
   _PracticeQuizScreenState createState() => _PracticeQuizScreenState();
