@@ -27,8 +27,8 @@ class QuestionBrain {
   }
 
   // TODO: Maybe should error check
-  Note getQuestionNote(int specificQuestionNumber) {
-    return questions[specificQuestionNumber].note;
+  Note getQuestionNote(int questionNumber) {
+    return questions[questionNumber].note;
   }
 
   Clef getClef() {
@@ -36,8 +36,8 @@ class QuestionBrain {
   }
 
   // TODO: Maybe should error check
-  Clef getQuestionClef(int specificQuestionNumber) {
-    return questions[specificQuestionNumber].clef;
+  Clef getQuestionClef(int questionNumber) {
+    return questions[questionNumber].clef;
   }
 
   /// Gets the question text for the current question
