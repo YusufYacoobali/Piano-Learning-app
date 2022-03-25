@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart' as constants;
+import 'package:perfect_volume_control/perfect_volume_control.dart';
 
 class Settings {
   final Map _map = {};
@@ -23,6 +24,9 @@ class Settings {
       await pref.setInt(name, double.parse(value.toString()).toInt());
     } else {
       await pref.setString(name, value.toString());
+    }
+    if (name == 'volume') {
+      PerfectVolumeControl.setVolume(double.parse(value.toString()) / 100); //Needs values from 0 to 1
     }
   }
 
