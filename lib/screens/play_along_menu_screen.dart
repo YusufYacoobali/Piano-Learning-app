@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
-import '../components/instruction_pop_up_content/play_along_instructions.dart';
+import '../components/pop_ups/play_along_instructions.dart';
 import '../components/sheet_music_components/note.dart';
 import '../components/app_bar_with_settings_icon.dart';
 import 'play_along_screen.dart';

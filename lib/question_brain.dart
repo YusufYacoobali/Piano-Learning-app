@@ -23,7 +23,7 @@ class QuestionBrain {
   });
 
   Note getNote() {
-    return questions[_questionNum].note;
+    return questions[_questionNum].correctAnswer;
   }
 
   Clef getClef() {
@@ -35,9 +35,14 @@ class QuestionBrain {
     return questions[_questionNum].question;
   }
 
+  /// Gets the correct answer of the current question without the octave
+  String getCorrectAnswerWithoutOctave() {
+    return Note.getNameWithoutOctave(questions[_questionNum].correctAnswer.name);
+  }
+
   /// Gets the correct answer of the current question
   String getCorrectAnswer() {
-    return questions[_questionNum].correctAnswer;
+    return questions[_questionNum].correctAnswer.name;
   }
 
   /// Moves to the next question if there is a next question
@@ -47,7 +52,7 @@ class QuestionBrain {
     }
   }
 
-  /// Gets the question number of the current question (starting from 1)
+  /// Gets the real question number of the current question (starting from 1)
   int getQuestionNum() {
     return (_questionNum + 1);
   }
