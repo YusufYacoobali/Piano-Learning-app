@@ -26,18 +26,8 @@ class QuestionBrain {
     return questions[_questionNum].note;
   }
 
-  // TODO: Maybe should error check
-  Note getQuestionNote(int questionNumber) {
-    return questions[questionNumber].note;
-  }
-
   Clef getClef() {
     return questions[_questionNum].clef;
-  }
-
-  // TODO: Maybe should error check
-  Clef getQuestionClef(int questionNumber) {
-    return questions[questionNumber].clef;
   }
 
   /// Gets the question text for the current question
@@ -48,14 +38,6 @@ class QuestionBrain {
   /// Gets the correct answer of the current question
   String getCorrectAnswer() {
     return questions[_questionNum].correctAnswer;
-  }
-
-  /// Gets the correct answer of the a specific question
-  String getQuestionCorrectAnswer(int questionNumber) {
-    if (questionNumber < 0 || questionNumber >= getTotalNumberOfQuestions()) {
-      return "Invalid index";
-    }
-    return questions[questionNumber].correctAnswer;
   }
 
   /// Moves to the next question if there is a next question
@@ -75,10 +57,10 @@ class QuestionBrain {
     return questions.length;
   }
 
-  /// Gets the answer that the user has answered for a question
-  String getUserAnswer(int questionNumber) {
+  /// Gets the user's answer for the current question
+  String getUserAnswer() {
     //return userAnswerList[questionNumber];
-    return _map[questionNumber] ?? "N/A";
+    return _map[_questionNum] ?? "N/A";
   }
 
   /// Sets the user answer for the current question
@@ -120,5 +102,10 @@ class QuestionBrain {
   /// Checks if the current question is the last question
   bool isLastQuestion() {
     return _questionNum == questions.length - 1;
+  }
+
+  /// Resets the current question to the first question in [questions]
+  void goBackToBeginning() {
+    _questionNum = 0;
   }
 }

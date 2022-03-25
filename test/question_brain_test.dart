@@ -48,20 +48,6 @@ void main() {
     expect(noteName, fakeQuestions[0].note.name);
   });
 
-  // test('Check that getImagePath() correctly returns the path of the image', () {
-  //   List<Question> fakeQuestions = getFakeQuestions();
-  //   QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
-  //   String imagePath = qb.getNote().name;
-  //   expect(imagePath, 'assets/note_images/${fakeQuestions[0].note}');
-  // });
-  //
-  // test('Check that getImage() correctly returns the image', () {
-  //   List<Question> fakeQuestions = getFakeQuestions();
-  //   QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
-  //   AssetImage image = qb.getImage();
-  //   expect(image, AssetImage('assets/note_images/${fakeQuestions[0].note}'));
-  // });
-
   test('Check that getQuestionText() correctly returns the question text', () {
     SharedPreferences.setMockInitialValues({});
     List<Question> fakeQuestions = getFakeQuestions();
@@ -278,49 +264,24 @@ void main() {
     expect(pref.get('lesson 1'), '0');
   });
 
-  test('Check that getQuestionNote returns the note of the correct question.',
+  test(
+      'Check that goBackToBeginning makes the first question the current question.',
       () async {
     SharedPreferences.setMockInitialValues({});
     List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    Note expectedNote = fakeQuestions[2].note;
-    Note actualNote = qb.getQuestionNote(2);
-    expect(expectedNote, actualNote);
-  });
-
-  test('Check that getQuestionClef returns the clef of the correct question.',
-      () async {
-    SharedPreferences.setMockInitialValues({});
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    Clef expectedClef = fakeQuestions[2].clef;
-    Clef actualClef = qb.getQuestionClef(2);
-    expect(expectedClef, actualClef);
+    int expectedQuestionNum = 1;
+    qb.goToNextQuestion();
+    qb.goToNextQuestion();
+    int updatedQuestionNum = qb.getQuestionNum();
+    qb.goBackToBeginning();
+    int actualQuestionNum = qb.getQuestionNum();
+    expect(expectedQuestionNum == updatedQuestionNum, false);
+    expect(expectedQuestionNum, actualQuestionNum);
   });
 
   test(
-      'Check that getQuestionCorrectAnswer returns the correct answer of the correct question.',
-      () async {
-    SharedPreferences.setMockInitialValues({});
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    String expectedAnswer = fakeQuestions[2].correctAnswer;
-    String actualAnswer = qb.getQuestionCorrectAnswer(2);
-    expect(expectedAnswer, actualAnswer);
-  });
-
-  test(
-      'Check that getQuestionCorrectAnswer returns error message when given invalid index.',
-      () async {
-    SharedPreferences.setMockInitialValues({});
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    String errorMessage = qb.getQuestionCorrectAnswer(56777);
-    expect(errorMessage, "Invalid index");
-  });
-
-  test(
-      'Check that getUserAnswer correctly returns the answer selected by the user for a specific question.',
+      'Check that getUserAnswer correctly returns the answer selected by the user for the current question.',
       () async {
     SharedPreferences.setMockInitialValues({});
     List<Question> fakeQuestions = getFakeQuestions();
@@ -329,18 +290,7 @@ void main() {
     qb.setAnswer(userAnswer: 'F');
     qb.goToNextQuestion();
     qb.setAnswer(userAnswer: expectedUserAnswer);
-    String actualUserAnswer = qb.getUserAnswer(1);
-    expect(expectedUserAnswer, actualUserAnswer);
-  });
-
-  test(
-      'Check that getUserAnswer returns an error message when a question has not been answered by the user.',
-      () async {
-    SharedPreferences.setMockInitialValues({});
-    List<Question> fakeQuestions = getFakeQuestions();
-    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    String expectedUserAnswer = 'N/A';
-    String actualUserAnswer = qb.getUserAnswer(548457);
+    String actualUserAnswer = qb.getUserAnswer();
     expect(expectedUserAnswer, actualUserAnswer);
   });
 }
