@@ -51,12 +51,12 @@ class QuestionBrain {
   }
 
   /// Gets the correct answer of the a specific question
-  String getQuestionCorrectAnswer(int specificQuestionNum) {
-    if (specificQuestionNum < 0 ||
-        specificQuestionNum >= getTotalNumberOfQuestions()) {
+  String getQuestionCorrectAnswer(int questionNumber) {
+    if (questionNumber < 0 ||
+        questionNumber >= getTotalNumberOfQuestions()) {
       return "Invalid index";
     }
-    return questions[specificQuestionNum].correctAnswer;
+    return questions[questionNumber].correctAnswer;
   }
 
   /// Moves to the next question if there is a next question
