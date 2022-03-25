@@ -6,18 +6,24 @@ class PageKeyboard extends StatefulWidget {
 
   final Function(String) callFunction;
 
-  const PageKeyboard(this.callFunction, {Key? key}) : super(key: key);
+  final int startOctave;
+
+  const PageKeyboard(this.callFunction, {Key? key, this.startOctave = 4}) : super(key: key);
 
   @override
   State<PageKeyboard> createState() => _PageKeyboardState();
 }
 
 class _PageKeyboardState extends State<PageKeyboard> {
+  late final PageController controller;
 
-  ///manages swipe detection
-  final controller = PageController(
-    initialPage: 2,
-  );
+  @override
+  void initState() {
+    super.initState();
+    controller = PageController(
+      initialPage: widget.startOctave - 3,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

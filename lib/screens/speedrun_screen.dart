@@ -6,7 +6,7 @@ import '../components/page_keyboard.dart';
 import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/question_finder.dart';
-import '../question_brain.dart';
+import '../lessons_and_quizzes/question_brain.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Screen for speedrun mode
@@ -86,6 +86,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
+  //TODO: Move into helper file
   ///Checks if the user's score is a new record for the selected mode, and updates shared preferences if it is.
   Future<void> _updateRecords() async {
     int score = questionBrain.getScore();
@@ -156,7 +157,6 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
                 screenWidget,
                 Expanded(
                   child: PageKeyboard(answer),
-
                 ),
               ],
             ),

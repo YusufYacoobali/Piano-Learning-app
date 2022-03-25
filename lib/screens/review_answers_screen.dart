@@ -3,7 +3,7 @@ import 'package:sight_reading_app/components/sheet_music_components/music_sheet.
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
-import 'package:sight_reading_app/question_brain.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 
 ///A list containing the keys for each of the result card created by addResultBox()
 List<Key> resultCardKeys = <Key>[];
@@ -49,13 +49,15 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   Widget addQuestionImage() {
     NextNoteNotifier _nextNote = NextNoteNotifier();
     _nextNote.setNextNote(questionBrain.getNote());
+    MusicSheet sheet = MusicSheet(_nextNote, questionBrain.getClef());
+    sheet.changeToRoundedBorder();
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
         height: 200.0,
         width: 240.0,
         child: CustomPaint(
-          painter: MusicSheet(_nextNote, questionBrain.getClef()),
+          painter: sheet,
           child: Container(),
         ),
       ),

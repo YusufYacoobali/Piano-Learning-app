@@ -5,8 +5,8 @@ import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
 import '../components/page_keyboard.dart';
-import '../components/instruction_pop_up_content/endless_ending_instructions.dart';
-import '../components/instruction_pop_up_content/endless_starting_instructions.dart';
+import '../components/pop_ups/endless_ending_instructions.dart';
+import '../components/pop_ups/endless_starting_instructions.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
@@ -42,11 +42,16 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
 
   late final String _difficulty;
 
+  late PageKeyboard _keyboard;
+
+  String _setClef = 'update';
+
   @override
   void initState() {
     super.initState();
+    _keyboard = PageKeyboard(playKey);
     _currentNoteToPlay =
-        NotePlayedChecker(noteNotifier: _noteToPlay, function: stop);
+        NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: stop);
     _sheet = MovingMusicSheet(
         nextNote: _nextNote,
         clef: Clef.treble,
@@ -103,6 +108,10 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
 
   /// Starts the endless mode game
   void startGame(Clef clef) {
+    if (clef == Clef.bass) {
+      _keyboard = PageKeyboard(playKey, startOctave: 3);
+      _setClef = _setClef + '1';
+    }
     _counter.getHighScore(clef, _difficulty);
     _generator.setClef(clef);
     _sheet.changeClef(clef);
@@ -111,17 +120,14 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
 
   /// Gets the key pressed on the keyboard
   void playKey(String text) {
-    String level = '4';
-    if (_sheet.getClef() == Clef.bass) {
-      level = '3';
-    }
-    _currentNoteToPlay.checkPress(text + level);
+    _currentNoteToPlay.checkPress(text);
   }
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance
         ?.addPostFrameCallback((_) => {if (_hasEnded) _endMenu.show()});
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -138,8 +144,9 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
               ),
             ),
             Expanded(
+              key: Key(_setClef),
               flex: 3,
-              child: PageKeyboard(playKey),
+              child: _keyboard,
             ),
           ],
         ),

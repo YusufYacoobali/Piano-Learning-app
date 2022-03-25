@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
-import 'package:sight_reading_app/questions.dart';
-import '../question.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
+import 'question.dart';
 
 class QuestionFinder {
   /// Return the list of questions for a specific lesson

@@ -12,7 +12,6 @@ class PlayAlongHitCounter {
   /// The high score
   late double highScore;
 
-  ///TODO: Make storage writer work for storing high score
   final StorageReaderWriter _writer = StorageReaderWriter();
 
   final String songName;
@@ -21,9 +20,17 @@ class PlayAlongHitCounter {
 
   PlayAlongHitCounter({required this.songName, required this.numNotes});
 
+  /// Sets the difficulty
   void setDifficulty(String difficulty) {
     _difficulty = difficulty;
     getHighScore();
+  }
+
+  /// Increments the score
+  void increment() {
+    if (score < numNotes) {
+      score++;
+    }
   }
 
   /// Writes the high score to storage
