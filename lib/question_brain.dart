@@ -29,16 +29,8 @@ class QuestionBrain {
     return questions[_questionNum].correctAnswer;
   }
 
-  Note getSpecificNote(specificQuestionNumber) {
-    return questions[specificQuestionNumber].correctAnswer;
-  }
-
   Clef getClef() {
     return questions[_questionNum].clef;
-  }
-
-  Clef getSpecificClef(specificQuestionNumber) {
-    return questions[specificQuestionNumber].clef;
   }
 
   /// Gets the question text for the current question
@@ -56,15 +48,6 @@ class QuestionBrain {
     return questions[_questionNum].correctAnswer.name;
   }
 
-  /// Gets the correct answer of the a specific
-  String getSpecificCorrectAnswer(specificQuestionNum) {
-    if (specificQuestionNum < 0 ||
-        specificQuestionNum >= getTotalNumberOfQuestions()) {
-      return "Invalid index";
-    }
-    return questions[specificQuestionNum].correctAnswer.name;
-  }
-
   /// Moves to the next question if there is a next question
   void goToNextQuestion() {
     if (_questionNum < questions.length - 1) {
@@ -72,7 +55,7 @@ class QuestionBrain {
     }
   }
 
-  /// Gets the question number of the current question (starting from 1)
+  /// Gets the real question number of the current question (starting from 1)
   int getQuestionNum() {
     return (_questionNum + 1);
   }
