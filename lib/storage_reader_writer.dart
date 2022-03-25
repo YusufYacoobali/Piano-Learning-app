@@ -407,6 +407,7 @@ class StorageReaderWriter {
     final prefs = await SharedPreferences.getInstance();
 
     String level = difficulty.toString().toLowerCase();
+    //prefs.setBool('endless-$clef-$level-achievement', false);
     bool achieved =
         (prefs.getBool('endless-$clef-$level-achievement') ?? false);
 
