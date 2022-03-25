@@ -33,6 +33,8 @@ class Settings {
     _resetLessons();
     //_resetAchievements();
     _resetQuizzes();
+    resetSpeedrunAchievements();
+    resetSpeedrunRecords();
   }
 
   /// Puts default values into the map
@@ -77,5 +79,21 @@ class Settings {
 
     prefs.setInt('completed_quizzes', 0);
     //print("quizzes reset");
+  }
+
+  resetSpeedrunAchievements() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 10; x < 70; x += 10) {
+      prefs.setBool('${x}_second_speedrun_achievement', false);
+    }
+  }
+
+  resetSpeedrunRecords() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 10; x < 70; x += 10) {
+      prefs.setInt('${x}_second_speedrun_record', 0);
+    }
   }
 }

@@ -51,6 +51,8 @@ class StorageReaderWriter {
     _resetLessons();
     //_resetAchievements();
     _resetQuizzes();
+    resetSpeedrunAchievements();
+    resetSpeedrunRecords();
   }
 
   /// Puts default values into the map
@@ -369,42 +371,36 @@ class StorageReaderWriter {
   }
 
   //only executed if prev score is beaten
-  Future<bool> displaySpeedrunNotification(time) async {
+  Future<bool> displaySpeedrunNotification(time, score) async {
     final prefs = await SharedPreferences.getInstance();
-    int value = (prefs.getInt('${time}_second_speedrun_record') ?? 0);
-    //times to scores which have been attained or not
-    Map scores = {
-      10: {5: false},
-      20: {10: false, 20: false}
-    };
+    bool achieved =
+        (prefs.getBool('${time}_second_speedrun_achievement') ?? false);
 
-    Map current = scores[time];
-    print(current);
-
-    List toAchieve = [];
-
-    for (var entry in current.entries) {
-      //not achieved yet
-      if (entry.value == false) {
-        toAchieve.add(entry.key);
-      }
-    }
-
-    print(toAchieve);
-
-    if (toAchieve.isEmpty) {
+    if (achieved) {
       return false;
-    }
-
-    int target = toAchieve[0];
-
-    // if (value >= (time / 2)) {
-    if (value >= target) {
-      return true;
     } else {
+      if (score >= time / 2) {
+        prefs.setBool('${time}_second_speedrun_achievement', true);
+        return true;
+      }
       return false;
     }
   }
 
+  resetSpeedrunAchievements() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 10; x < 70; x += 10) {
+      prefs.setBool('${x}_second_speedrun_achievement', false);
+    }
+  }
+
+  resetSpeedrunRecords() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 10; x < 70; x += 10) {
+      prefs.setInt('${x}_second_speedrun_record', 0);
+    }
+  }
   //void _resetAchievements() {}
 }

@@ -15,7 +15,6 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
   'Light': ThemeData.light(),
   'Pink': ThemeData.dark().copyWith(
     backgroundColor: const Color.fromARGB(255, 200, 130, 255),
-    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
     scaffoldBackgroundColor: const Color.fromARGB(255, 200, 130, 255),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 200, 110, 255),

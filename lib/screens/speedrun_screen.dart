@@ -76,17 +76,39 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   }
 
   /// The results screen
-  Widget getResultsScreen() {
+  Future<void> getResults() async {
     // Calculates the percentage achieved by the user
     double percentage =
         questionBrain.getScore() / questionBrain.getQuestionNum();
     String title =
         "${questionBrain.getScore()} correct in ${widget.timerDuration} seconds";
+    int score = questionBrain.getScore();
 
-    return ResultsScreen(
-      score: percentage,
-      title: title,
-      questionBrain: questionBrain,
+    bool displayNotification =
+        await storage.displaySpeedrunNotification(widget.timerDuration, score);
+
+    getResultsScreen(title, percentage);
+
+    if (displayNotification) {
+      inAppNotification(context);
+    }
+
+    // return ResultsScreen(
+    //   score: percentage,
+    //   title: title,
+    //   questionBrain: questionBrain,
+    // );
+  }
+
+  getResultsScreen(title, percentage) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultsScreen(
+                score: percentage,
+                title: title,
+                questionBrain: questionBrain,
+              )),
     );
   }
 
@@ -101,12 +123,6 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     if (score > currentRecord || currentRecord == 0) {
       await prefs.setInt(
           '${widget.timerDuration}_second_speedrun_record', score);
-
-      bool displayNotification =
-          await storage.displaySpeedrunNotification(widget.timerDuration);
-      if (displayNotification) {
-        inAppNotification(context);
-      }
     }
   }
 
@@ -130,14 +146,15 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
       onComplete: () {
         // When timer finishes, go to results screen and update records if needed
         _updateRecords();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return getResultsScreen();
-            },
-          ),
-        );
+        getResults();
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) {
+        //       return getResultsScreen();
+        //     },
+        //   ),
+        // );
       },
     );
   }

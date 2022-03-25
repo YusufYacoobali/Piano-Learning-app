@@ -5,7 +5,6 @@ import '../screens/achievements_screen.dart';
 
 inAppNotification(context) {
   return showModalBottomSheet(
-      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(60), topRight: Radius.circular(60))),
@@ -14,14 +13,14 @@ inAppNotification(context) {
         return Column(
           //mainAxisSize: MainAxisSize.min,
           children: [
-            FittedBox(
+            const FittedBox(
               fit: BoxFit.contain,
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: EdgeInsets.all(20.0),
                 child: Text(
                   "Achievement completed!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.blue.shade800, fontSize: 30),
+                  style: TextStyle(fontSize: 30),
                 ),
               ),
             ),
