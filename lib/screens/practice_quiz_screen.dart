@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/components/page_keyboard.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
@@ -11,11 +12,12 @@ import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
 
+import '../helper.dart';
 import '../lessons_and_quizzes/question_finder.dart';
 
 /// Creates screen for the practice quiz.
+///
 /// This screen consists of the option buttons and components in question_skeleton
-
 class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   late QuestionBrain questionBrain;
   late Widget screenWidget;
@@ -26,9 +28,9 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   @override
   void initState() {
     super.initState();
-    // TODO: Pass in lessonID
     questionBrain = QuestionBrain(
-        questions: QuestionFinder().getPracticeQuestionsForLesson(1, 10));
+        questions: QuestionFinder().getPracticeQuestionsForLesson(widget.lessonID, 10));
+    //print(questionBrain.questions); //This is empty in testing
     setScreenWidget();
     stopwatch.start();
     PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id, continueOnPressed: () => stopwatch.start());
@@ -131,7 +133,6 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   ///
   /// Set components from QuestionBrain including question image, text and number
   /// and send to QuestionSkeleton to display components.
-
   void setScreenWidget() {
     Note note = questionBrain.getNote();
     Clef clef = questionBrain.getClef();
@@ -152,12 +153,11 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   ///
   /// The alert is displayed each time the user answers a question.
   /// Shows if the answer is correct and provides a  button to go to the next question.
-
   void showResultAlert(String choice) {
     String alertTitle = '';
     String alertDesc = '';
 
-    ///show result
+    //shows result
     if (questionBrain.checkAnswer(choice)) {
       alertTitle = 'Correct!';
       alertDesc = 'You got the correct answer!';
@@ -179,6 +179,25 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         return createResultAlert(alertTitle, alertDesc);
       },
     );
+  }
+
+  ///Checks if the user's final score is a new record for the selected quiz, and updates shared preferences if it is.
+  Future<void> _updateRecords() async {
+    int score = questionBrain.getScore();
+    final prefs = await SharedPreferences.getInstance();
+    final List<String> quizRecords = await getRecordsForMode('quiz');
+    late int currentRecord;
+    if (quizRecords[widget.lessonID - 1] == 'N/A') {
+      currentRecord = 0;
+    } else {
+      currentRecord = int.parse(quizRecords[widget.lessonID - 1]);
+    }
+    //If it is the user's first time, the currentRecord will be N/A.
+    //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
+    if (score > currentRecord || currentRecord == 0) {
+      await prefs.setInt(
+         '${await getRecordKeysForMode('quiz')[widget.lessonID - 1]}' , score);
+    }
   }
 
   /// Create result screen which displays after the user finishes all questions
@@ -247,36 +266,42 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
       onPressed: () {
         Navigator.pop(context, 'OK');
 
-        ///go next if it is not the last question
+        //Goes to the next question if it is not the last question.
         if (!questionBrain.isLastQuestion()) {
           setState(() {
             questionBrain.goToNextQuestion();
             setScreenWidget();
             stopwatch.start();
           });
-        } else {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) {
-          //     return getResultsScreen();
-          //   }),
-          // );
-          getResultsScreen();
+        }
+        // Shows results screen and updates records if the last question was answered.
+        else {
+          _updateRecords();
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return getResultsScreen();
+            }),
+          );
         }
       },
     );
   }
 
-  /// Creates text for next button
+  // Creates text for next button
   String getNextButtonText() {
     return questionBrain.isLastQuestion() ? "Finish" : "Next";
   }
 }
 
 class PracticeQuizScreen extends StatefulWidget {
+  /// The id used to identify the screen
   static const String id = 'practice_quiz_screen';
 
-  const PracticeQuizScreen({Key? key}) : super(key: key);
+  /// The lesson the quiz is getting questions from.
+  final int lessonID;
+
+  const PracticeQuizScreen({Key? key, required this.lessonID}) : super(key: key);
 
   @override
   _PracticeQuizScreenState createState() => _PracticeQuizScreenState();
