@@ -15,6 +15,8 @@ class QuestionBrain {
   /// The list of questions
   final List<Question> questions;
 
+  late final Map<int, String> _map = {};
+
   /// Constructor
   QuestionBrain({
     required this.questions,
@@ -27,22 +29,6 @@ class QuestionBrain {
   Clef getClef() {
     return questions[_questionNum].clef;
   }
-
-  /// Gets the name of the image of the current question
-//   String getImageName() {
-//     return questions.questionList[_questionNum].image;
-//   }
-
-//   /// Gets the path of the image of the current question
-//   String getImagePath() {
-//     String path = 'assets/note_images/${getImageName()}';
-//     return path;
-//   }
-
-//   /// Gets the image for the current question
-//   AssetImage getImage() {
-//     return AssetImage(getImagePath());
-//   }
 
   /// Gets the question text for the current question
   String getQuestionText() {
@@ -71,9 +57,19 @@ class QuestionBrain {
     return questions.length;
   }
 
+  /// Gets the user's answer for the current question
+  String getUserAnswer() {
+    //return userAnswerList[questionNumber];
+    return _map[_questionNum] ?? "N/A";
+  }
+
   /// Sets the user answer for the current question
   void setAnswer({required userAnswer, int? timeTaken}) {
     // Checks if the user answer was correct and if so, increments the score
+    ///add map entry
+    //_map.addEntries([MapEntry(_questionNum, userAnswer)]);
+    _map[_questionNum] = userAnswer;
+    //userAnswerList.add(userAnswer);
     if (checkAnswer(userAnswer)) {
       ++_score;
       QuestionAnswerData.questionAnswered(
@@ -82,10 +78,11 @@ class QuestionBrain {
       QuestionAnswerData.questionAnswered(
           questions[_questionNum].questionID, false, timeTaken);
     }
+
     // Checks if there are no more questions
     if (isLastQuestion()) {
       // Creates key for shared preferences
-      // TODO: Fix lessonID
+      // TODO: Also saving lesson in lesson screen so figure out which one to keep
       String lessonName = 'lesson ${questions[0].lessonID}';
       // Stores [LessonName] as key and [_score] as value in storage
       writer.write(lessonName, _score);
@@ -105,5 +102,10 @@ class QuestionBrain {
   /// Checks if the current question is the last question
   bool isLastQuestion() {
     return _questionNum == questions.length - 1;
+  }
+
+  /// Resets the current question to the first question in [questions]
+  void goBackToBeginning() {
+    _questionNum = 0;
   }
 }

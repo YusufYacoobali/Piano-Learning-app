@@ -30,6 +30,9 @@ class Settings {
   void reset() {
     _setDefaultValues();
     _writeDefaultsToStorage();
+    _resetLessons();
+    //_resetAchievements();
+    _resetQuizzes();
   }
 
   /// Puts default values into the map
@@ -41,7 +44,7 @@ class Settings {
   /// Writes the default settings values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setInt('volume', constants.defaultVolumeLevel);
+    pref.setInt('volume', int.parse(constants.defaultVolumeLevel));
     pref.setString('difficulty', constants.defaultDifficultyLevel);
   }
 
@@ -58,5 +61,21 @@ class Settings {
       if (volume != null) _map['volume'] = volume;
       if (difficulty != null) _map['difficulty'] = difficulty;
     }
+  }
+
+  Future<void> _resetLessons() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 0; x < constants.numOfLessons; x++) {
+      prefs.setBool('lesson-num-$x', false);
+    }
+    //print("lessons reset");
+  }
+
+  Future<void> _resetQuizzes() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt('completed_quizzes', 0);
+    //print("quizzes reset");
   }
 }

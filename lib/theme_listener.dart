@@ -1,10 +1,12 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/constants.dart' as constants;
+
+import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 
 class ThemeNotifier extends ChangeNotifier {
 
-  String _theme = constants.defaultTheme;
+  String _theme = defaultTheme;
+  final StorageReaderWriter _writer = StorageReaderWriter();
 
   ThemeNotifier() {
     getPreferences();
@@ -20,30 +22,27 @@ class ThemeNotifier extends ChangeNotifier {
   }
 
   /// Gets the theme if there is one else use the default
-  _getTheme() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    String? theme = pref.getString('theme');
-    if (theme != null) {
-      return theme;
-    }
-    pref.setString('theme', constants.defaultTheme);
-    return constants.defaultTheme;
+  _getTheme() {
+    _writer.loadDataFromStorage().then((value) {
+      String theme = _writer.read('theme').toString();
+     _theme = theme;
+     notifyListeners();
+    });
   }
 
   /// Updates the theme in storage
   void _updateTheme(String value) async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString('theme', value);
+    _writer.write('theme', _theme);
   }
 
   /// Gets and updates the theme
-  getPreferences() async {
-    _theme = await _getTheme();
-    notifyListeners();
+  getPreferences() {
+    _getTheme();
+
   }
 
   /// Converts the theme to a actual usable theme profile
   ThemeData? convertThemeToThemeData() {
-    return constants.themeColors[_theme];
+    return themeColors[_theme];
   }
 }

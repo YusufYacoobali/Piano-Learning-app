@@ -42,8 +42,6 @@ class StaveBuilder {
     Offset endingPoint4 = Offset(end, baseLine - 80);
     canvas.drawLine(startingPoint4, endingPoint4, paint);
 
-    //int trebleFont =
-
     double font = constants.androidTrebleClefFontSize;
     String clef = constants.trebleClef;
     double position = baseLine - constants.androidTrebleClefOffset;
