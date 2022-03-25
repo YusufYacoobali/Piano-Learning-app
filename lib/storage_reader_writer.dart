@@ -514,8 +514,8 @@ class StorageReaderWriter {
         (prefs.getBool('${track}_${difficulty}_play_along_achievement') ??
             false);
 
-    print(
-        '${track}_${difficulty}_play_along_achievement____score:${percentage}');
+    // print(
+    //     '${track}_${difficulty}_play_along_achievement____score:${percentage}');
 
     if (achieved) {
       return false;
