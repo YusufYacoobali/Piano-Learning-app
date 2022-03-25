@@ -15,14 +15,11 @@ class QuestionBrain {
   /// The list of questions
   final List<Question> questions;
 
-  ///TODO: add map of question and answer
   late final Map<int, String> _map = {};
-  //final List<String> userAnswerList;
 
   /// Constructor
   QuestionBrain({
     required this.questions,
-    //this.userAnswerList = List(getTotalNumberOfQuestions());
   });
 
   Note getNote() {
@@ -65,10 +62,10 @@ class QuestionBrain {
     return questions.length;
   }
 
-  /// Gets the answer that the user has answered for a question
-  String getUserAnswer(int questionNumber) {
+  /// Gets the user's answer for the current question
+  String getUserAnswer() {
     //return userAnswerList[questionNumber];
-    return _map[questionNumber] ?? "N/A";
+    return _map[_questionNum] ?? "N/A";
   }
 
   /// Sets the user answer for the current question
@@ -90,7 +87,7 @@ class QuestionBrain {
     // Checks if there are no more questions
     if (isLastQuestion()) {
       // Creates key for shared preferences
-      // TODO: Fix lessonID
+      // TODO: Also saving lesson in lesson screen so figure out which one to keep
       String lessonName = 'lesson ${questions[0].lessonID}';
       // Stores [LessonName] as key and [_score] as value in storage
       writer.write(lessonName, _score);
@@ -110,5 +107,10 @@ class QuestionBrain {
   /// Checks if the current question is the last question
   bool isLastQuestion() {
     return _questionNum == questions.length - 1;
+  }
+
+  /// Resets the current question to the first question in [questions]
+  void goBackToBeginning() {
+    _questionNum = 0;
   }
 }

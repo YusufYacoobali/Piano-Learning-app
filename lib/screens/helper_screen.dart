@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
-
-import '../components/helper_note_info.dart';
+import 'package:sight_reading_app/components/helper/helper_brain.dart';
+import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
+import 'package:sight_reading_app/components/sheet_music_components/note.dart';
+import '../components/helper/helper_bass_note_list.dart';
+import '../components/helper/helper_clef_note_list.dart';
 import '../constants.dart';
+import 'package:sight_reading_app/components/helper/helper_list.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-//import '../components/helper_note_info_list.dart';
-
+///This screen creates helper screen
+///It contains multiple cards with note images, names and icon buttons
 class HelperScreen extends StatefulWidget {
   static const String id = 'helper_screen';
-  const HelperScreen({Key? key}) : super(key: key);
+
+  /// This number is the unique id for specific helper
+  final int helperNum;
+
+  const HelperScreen({Key? key, this.helperNum = 1}) : super(key: key);
 
   @override
   _HelperScreenState createState() => _HelperScreenState();
@@ -16,9 +25,24 @@ class HelperScreen extends StatefulWidget {
 class _HelperScreenState extends State<HelperScreen> {
   final ScrollController _helperController = ScrollController();
 
+  late HelperBrain helperBrain;
+
+  final playSound = AudioCache();
+
+  /// This number is representing the current position of the helper list
+  late int index;
+
+  ///List of helper list available
+  List<HelperList> helperList = [bassNoteImageNameList, clefNoteImageNameList];
+
+  ///helperBrain provides the unique number for helping locate the list we need.
   @override
   void initState() {
     super.initState();
+    int helperNum = widget.helperNum;
+
+    /// Display different helper list.
+    helperBrain = HelperBrain(helpers: helperList[helperNum - 1]);
   }
 
   @override
@@ -26,6 +50,8 @@ class _HelperScreenState extends State<HelperScreen> {
     super.dispose();
   }
 
+  ///Builds the screen with appBar and multiple helper cards.
+  ///Inside the helper card, it contains images, names and icon buttons.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,52 +65,23 @@ class _HelperScreenState extends State<HelperScreen> {
           radius: const Radius.circular(10),
           thickness: 5.0,
           child: SingleChildScrollView(
-              controller: _helperController,
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
-                  cardHelper(),
-                ],
-              )),
-        ),
-      ),
-    );
-  }
-
-  Widget cardHelper() {
-    return Center(
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        child: SizedBox(
-          height: 300.0,
-          width: 500.0,
-          child: Container(
-            decoration: cardBackground,
-            child: Column(
-              children: [
-                const SizedBox(height: 20.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    cardNoteImage(),
-                    Column(
-                      children: [
-                        cardText(),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10.0),
-                cardPlayIcon(),
-              ],
+            controller: _helperController,
+            scrollDirection: Axis.horizontal,
+            child: Wrap(
+              spacing: 15.0,
+              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //crossAxisAlignment: CrossAxisAlignment.center,
+              children: getAllHelperCards(),
+              /*[
+                  cardHelper(0),
+                  cardHelper(1),
+                  cardHelper(2),
+                  cardHelper(3),
+                  cardHelper(4),
+                  cardHelper(5),
+                  cardHelper(6),
+                  cardHelper(7),
+                ],*/
             ),
           ),
         ),
@@ -92,55 +89,109 @@ class _HelperScreenState extends State<HelperScreen> {
     );
   }
 
-  Widget cardText() {
-    return Wrap(
-      spacing: 10.0,
-      runSpacing: 10.0,
-      alignment: WrapAlignment.center,
-      children: const [
-        Text(
-          'Bass A',
-          style: TextStyle(fontSize: 30.0),
-        ),
-      ],
-    );
-  }
-
-  Widget cardNoteImage() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(15.0),
-      child: SizedBox(
-        height: 200.0,
-        width: 250.0,
-        child: Image.asset(
-          'assets/note_images/Bs_A.jpeg',
-          fit: BoxFit.cover,
+  ///Create a card that holds note images, names and sound.
+  Widget cardHelper(index) {
+    return Center(
+      child: Card(
+        key: const Key('card'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        child: DecoratedBox(
+          decoration: cardBackground,
+          //height: 300.0,
+          //width: 500.0,
+          child: Wrap(
+            direction: Axis.vertical,
+            //alignment: WrapAlignment.center,
+            //spacing: 2.0,
+            children: [
+              Column(
+                children: [
+                  const SizedBox(height: 20.0),
+                  Wrap(
+                    direction: Axis.horizontal,
+                    runSpacing: 20,
+                    spacing: 5,
+                    //alignment: WrapAlignment.center,
+                    children: [
+                      //const SizedBox(width: 10.0),
+                      cardNoteImage(index),
+                      Column(
+                        children: [
+                          const SizedBox(height: 30.0),
+                          cardText(index),
+                        ],
+                      ),
+                      const SizedBox(width: 10.0),
+                    ],
+                  ),
+                  cardPlayIcon(index),
+                  const SizedBox(height: 5.0),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget cardPlayIcon() {
-    return IconButton(
-      icon: helpPlayButtonStyle,
-      onPressed: () {},
+  List<Widget> getAllHelperCards() {
+    List<Widget> allHelperCards = [];
+    for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); ++i) {
+      allHelperCards.add(cardHelper(i));
+    }
+    return allHelperCards;
+  }
+
+  ///A widget that holds the name of the note.
+  Widget cardText(index) {
+    return Wrap(
+      key: const Key('card text'),
+      //spacing: 10.0,
+      //runSpacing: 10.0,
+      alignment: WrapAlignment.start,
+      children: [
+        Text(
+          helperBrain.getHelperNoteName(index),
+          style: helperTextStyle,
+        ),
+      ],
     );
   }
 
-  final List<HelperNoteInfo> helperNoteList = [
-    HelperNoteInfo(noteImageName: 'Bs_A.jpeg', noteName: 'Bass A'),
-    HelperNoteInfo(noteImageName: 'Bs_B.jpeg', noteName: 'Bass B'),
-    HelperNoteInfo(noteImageName: 'Bs_C.jpeg', noteName: 'Bass C'),
-    HelperNoteInfo(noteImageName: 'Bs_D.jpeg', noteName: 'Bass D'),
-    HelperNoteInfo(noteImageName: 'Bs_E.jpeg', noteName: 'Bass E'),
-    HelperNoteInfo(noteImageName: 'Bs_F.jpeg', noteName: 'Bass F'),
-    HelperNoteInfo(noteImageName: 'Bs_G.jpeg', noteName: 'Bass G'),
-    HelperNoteInfo(noteImageName: 'Tr_A.jpeg', noteName: 'Clef A'),
-    HelperNoteInfo(noteImageName: 'Tr_B.jpeg', noteName: 'Clef B'),
-    HelperNoteInfo(noteImageName: 'Tr_C.jpeg', noteName: 'Clef C'),
-    HelperNoteInfo(noteImageName: 'Tr_D.jpeg', noteName: 'Clef D'),
-    HelperNoteInfo(noteImageName: 'Tr_E.jpeg', noteName: 'Clef E'),
-    HelperNoteInfo(noteImageName: 'Tr_F.jpeg', noteName: 'Clef F'),
-    HelperNoteInfo(noteImageName: 'Tr_G.jpeg', noteName: 'Clef G'),
-  ];
+  ///A widget that holds the image of the note.
+  Widget cardNoteImage(index) {
+    Clef clef = Clef.treble;
+    if (widget.helperNum == 1) {
+      clef = Clef.bass;
+    }
+
+    NextNoteNotifier noteNotifier = NextNoteNotifier();
+    noteNotifier.setNextNote(helperBrain.getHelperNoteImageName(index));
+    MusicSheet sheet = MusicSheet(noteNotifier, clef);
+
+    /// Makes rounded border for helper images
+    sheet.changeToRoundedBorder();
+
+    return SizedBox(
+      key: const Key('card image'),
+      height: 200.0,
+      width: 260.0,
+      child: CustomPaint(
+        painter: sheet,
+        child: Container(),
+      ),
+    );
+  }
+
+  ///A widget that holds the icon button which can play note sound when pressed.
+  Widget cardPlayIcon(index) {
+    return IconButton(
+      key: const Key('card button'),
+      icon: helpPlayButtonStyle,
+      onPressed: () {
+        playSound.play('${helperBrain.getHelperNoteSoundName(index)}.wav');
+      },
+    );
+  }
 }
