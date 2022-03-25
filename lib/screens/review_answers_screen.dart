@@ -43,17 +43,16 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   }
 
   ///Gets the image of the question
-  Widget addQuestionImage(int questionIndex) {
+  Widget addQuestionImage() {
     NextNoteNotifier _nextNote = NextNoteNotifier();
-    _nextNote.setNextNote(questionBrain.getSpecificNote(questionIndex));
+    _nextNote.setNextNote(questionBrain.getNote());
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
         height: 200.0,
         width: 240.0,
         child: CustomPaint(
-          painter: MusicSheet(
-              _nextNote, questionBrain.getSpecificClef(questionIndex)),
+          painter: MusicSheet(_nextNote, questionBrain.getClef()),
           child: Container(),
         ),
       ),
@@ -69,19 +68,18 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         children: [
           Text(
             message,
-            style: const TextStyle(fontSize: 25.0),
+            style: const TextStyle(fontSize: 30.0),
           ),
         ]);
   }
 
   /// Add the result box on top of each card
-  Widget addResultBox(int questionIndex) {
+  Widget addResultBox() {
     String resultText = "Incorrect";
     Color resultColor = Colors.red;
     IconData resultIcon = Icons.cancel;
 
-    if (questionBrain.getUserAnswer(questionIndex) ==
-        questionBrain.getSpecificCorrectAnswer(questionIndex)) {
+    if (questionBrain.checkAnswer(questionBrain.getUserAnswer())) {
       resultText = "Correct";
       resultColor = Colors.lightGreen;
       resultIcon = Icons.check_circle;
@@ -105,31 +103,35 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   }
 
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
-  Widget createResultCard(int questionIndex) {
+  Widget createResultCard() {
     return Center(
       child: DecoratedBox(
         decoration: cardBackground,
         child: Column(
           children: [
-            const SizedBox(height: 10.0),
-            Text(
-              'Question ${questionIndex + 1} of ${questionBrain.getTotalNumberOfQuestions()}',
-              style: const TextStyle(fontSize: 25.0),
-            ),
-            const SizedBox(height: 15.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            const SizedBox(height: 20.0),
+            Column(
               children: [
-                addQuestionImage(questionIndex),
-                Column(
+                Text(
+                  'Question ${questionBrain.getQuestionNum()} of ${questionBrain.getTotalNumberOfQuestions()}',
+                  style: const TextStyle(fontSize: 20.0),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    //change to display result
-                    addResultBox(questionIndex),
-                    //change method name to add text
-                    addMessageWrap('Correct Answer: ' +
-                        questionBrain.getSpecificCorrectAnswer(questionIndex)),
-                    addMessageWrap('Your Answer: ' +
-                        questionBrain.getUserAnswer(questionIndex)),
+                    addQuestionImage(),
+                    Column(
+                      children: [
+                        //change to display result
+                        addResultBox(),
+                        //change method name to add text
+                        addMessageWrap('Correct Answer: ' +
+                            questionBrain
+                                .getCorrectAnswer()),
+                        addMessageWrap('Your Answer: ' +
+                            questionBrain.getUserAnswer()),
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -143,9 +145,10 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
 
   List<Widget> getAllResultCards() {
     List<Widget> allResults = [];
+    questionBrain.goBackToBeginning();
     for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
-      allResults.add(createResultCard(i));
-      allResults.add(const SizedBox(width: 10.0));
+      allResults.add(createResultCard());
+      questionBrain.goToNextQuestion();
     }
     return allResults;
   }
