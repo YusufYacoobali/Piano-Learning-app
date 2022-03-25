@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart' as constants;
+import 'package:sight_reading_app/constants.dart';
 
 class Settings {
   final Map _map = {};
@@ -35,6 +36,7 @@ class Settings {
     _resetQuizzes();
     resetSpeedrunAchievements();
     resetSpeedrunRecords();
+    resetEndlessAchievements();
   }
 
   /// Puts default values into the map
@@ -94,6 +96,18 @@ class Settings {
 
     for (int x = 10; x < 70; x += 10) {
       prefs.setInt('${x}_second_speedrun_record', 0);
+    }
+  }
+
+  Future<void> resetEndlessAchievements() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (String clef in <String>['treble', 'bass']) {
+      for (Object difficulty in difficultyList) {
+        prefs.setBool(
+            'endless-$clef-${difficulty.toString().toLowerCase()}-achievement',
+            false);
+      }
     }
   }
 }

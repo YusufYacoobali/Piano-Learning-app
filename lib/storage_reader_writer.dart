@@ -53,6 +53,7 @@ class StorageReaderWriter {
     _resetQuizzes();
     resetSpeedrunAchievements();
     resetSpeedrunRecords();
+    resetEndlessAchievements();
   }
 
   /// Puts default values into the map
@@ -407,16 +408,19 @@ class StorageReaderWriter {
     final prefs = await SharedPreferences.getInstance();
 
     String level = difficulty.toString().toLowerCase();
-    //prefs.setBool('endless-$clef-$level-achievement', false);
+    // prefs.setBool('endless-$clef-$level-achievement', false);
     bool achieved =
         (prefs.getBool('endless-$clef-$level-achievement') ?? false);
 
+    //print('endless-$clef-$level-achievement');
+
     if (achieved) {
+      //print("here");
       return false;
     } else {
       prefs.setBool('endless-$clef-$level-achievement', true);
       if (level == 'beginner') {
-        if (score >= 10) {
+        if (score >= 1) {
           return true;
         } else {
           return false;
@@ -437,6 +441,21 @@ class StorageReaderWriter {
         return false;
       }
     }
+  }
+
+  //doesnt work for some reason
+  Future<void> resetEndlessAchievements() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (String clef in <String>['treble', 'bass']) {
+      for (Object difficulty in difficultyList) {
+        String level = difficulty.toString().toLowerCase();
+        //print('endless-Clef.$clef-$level-achievement');
+        prefs.setBool('endless-Clef.$clef-$level-achievement', false);
+      }
+    }
+    // endless-Clef.treble-beginner-achievement
+    //   endless-Clef.treble-beginner-achievement
   }
   //void _resetAchievements() {}
 }
