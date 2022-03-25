@@ -27,7 +27,7 @@ class PlayAlongEndingInstructions extends PopUpContentBuilder {
   /// Sets up the end menu
   @override
   void buildMenu() {
-    String percentage = ((hitCounter.score/hitCounter.numNotes) * 100).toStringAsFixed(1);
+    String percentage = hitCounter.getScoreAsPercentage();
     if (percentage[percentage.length-1] == '0') {
       percentage = double.parse(percentage).round().toString();
     }
