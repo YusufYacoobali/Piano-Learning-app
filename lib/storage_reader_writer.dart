@@ -402,5 +402,40 @@ class StorageReaderWriter {
       prefs.setInt('${x}_second_speedrun_record', 0);
     }
   }
+
+  displayEndlessNotification(difficulty, score, clef) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String level = difficulty.toString().toLowerCase();
+    bool achieved =
+        (prefs.getBool('endless-$clef-$level-achievement') ?? false);
+
+    if (achieved) {
+      return false;
+    } else {
+      prefs.setBool('endless-$clef-$level-achievement', true);
+      if (level == 'beginner') {
+        if (score >= 10) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (level == 'intermediate') {
+        if (score >= 20) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (level == 'expert') {
+        if (score >= 30) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+  }
   //void _resetAchievements() {}
 }
