@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_volume_control/perfect_volume_control.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
@@ -40,6 +41,9 @@ class StorageReaderWriter {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     _map[key] = value.toString();
     await pref.setString(key, value.toString());
+    if (key == 'volume') {
+      PerfectVolumeControl.setVolume(double.parse(value.toString()) / 100); //Needs values from 0 to 1
+    }
   }
 
   /// Resets the StorageWriter back to the defaults
@@ -55,6 +59,8 @@ class StorageReaderWriter {
 
   /// Puts default values into the map
   void _setDefaultValues() {
+    // _map['volume'] = constants.defaultVolumeLevel;
+    // _map['difficulty'] = constants.defaultDifficultyLevel;
     // With 7 lessons:
 
     for (int i = 1; i <= 7; ++i) {
@@ -67,8 +73,9 @@ class StorageReaderWriter {
 
   /// Writes the default StorageWriter values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
-    WidgetsFlutterBinding.ensureInitialized();
     final SharedPreferences pref = await SharedPreferences.getInstance();
+    // pref.setInt('volume', constants.defaultVolumeLevel);
+    // pref.setString('difficulty', constants.defaultDifficultyLevel);
     for (int i = 1; i <= 7; ++i) {
       pref.setString('lesson $i', '0');
     }
@@ -222,7 +229,8 @@ class StorageReaderWriter {
     } else {
       for (String clef in <String>['treble', 'bass']) {
         for (Object difficulty in difficultyList) {
-          String key = 'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
+          String key =
+              'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
           _map[key] = pref.getString(key);
         }
       }
@@ -233,7 +241,8 @@ class StorageReaderWriter {
   void _setDefaultEndlessRecords() {
     for (String clef in <String>['treble', 'bass']) {
       for (Object difficulty in difficultyList) {
-        String key = 'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
+        String key =
+            'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
         _map[key] = '0';
       }
     }
@@ -243,7 +252,8 @@ class StorageReaderWriter {
   void _writeEndlessRecordsToStorage() {
     for (String clef in <String>['treble', 'bass']) {
       for (Object difficulty in difficultyList) {
-        String key = 'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
+        String key =
+            'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
         write(key, '0');
       }
     }
@@ -251,14 +261,16 @@ class StorageReaderWriter {
 
   /// Loads play along records from storage
   Future<void> _loadPlayAlongRecordsFromStorage(SharedPreferences pref) async {
-    String? isOnDisk = pref.getString('ode to joy - treble only-beginner-high-score');
+    String? isOnDisk =
+        pref.getString('ode to joy - treble only-beginner-high-score');
     if (isOnDisk == null) {
       _setDefaultPlayAlongRecords();
       _writePlayAlongRecordsToStorage();
     } else {
       for (String track in trackNames) {
         for (Object difficulty in difficultyList) {
-          String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+          String key =
+              '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
           _map[key] = pref.get(key);
         }
       }
@@ -269,7 +281,8 @@ class StorageReaderWriter {
   void _setDefaultPlayAlongRecords() {
     for (String track in trackNames) {
       for (Object difficulty in difficultyList) {
-        String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+        String key =
+            '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
         _map[key] = '0';
       }
     }
@@ -279,7 +292,8 @@ class StorageReaderWriter {
   void _writePlayAlongRecordsToStorage() {
     for (String track in trackNames) {
       for (Object difficulty in difficultyList) {
-        String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+        String key =
+            '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
         write(key, '0');
       }
     }
