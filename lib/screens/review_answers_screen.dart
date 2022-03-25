@@ -14,7 +14,6 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   @override
   void initState() {
     super.initState();
-    //int lessonNum = widget.lessonNum;
     questionBrain = widget.questionBrain;
   }
 
@@ -112,7 +111,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     return Center(
       child: SizedBox(
         height: 400, //MediaQuery.of(context).size.height,
-        width: 600, //MediaQuery.of(context).size.width,
+        width: 800, //MediaQuery.of(context).size.width,
         child: Container(
           decoration: cardBackground,
           child: Column(
@@ -197,10 +196,8 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
 ///get the question brain
 class ReviewAnswersScreen extends StatefulWidget {
   static const String id = 'check_answers_screen';
-  final int lessonNum;
   final QuestionBrain questionBrain;
-  const ReviewAnswersScreen(
-      {Key? key, this.lessonNum = 1, required this.questionBrain})
+  const ReviewAnswersScreen({Key? key, required this.questionBrain})
       : super(key: key);
 
   @override

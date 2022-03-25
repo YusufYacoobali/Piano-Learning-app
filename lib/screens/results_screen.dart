@@ -97,7 +97,6 @@ class _ResultsScreenState extends State<ResultsScreen> {
                   context,
                   MaterialPageRoute(builder: (context) {
                     return ReviewAnswersScreen(
-                        lessonNum: widget.lessonNum,
                         questionBrain: widget.questionBrain);
                   }),
                 );
