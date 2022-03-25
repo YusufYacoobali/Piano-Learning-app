@@ -165,9 +165,13 @@ class _HelperScreenState extends State<HelperScreen> {
     NextNoteNotifier noteNotifier = NextNoteNotifier();
     noteNotifier.setNextNote(helperBrain.getHelperNoteImageName(index));
     MusicSheet sheet = MusicSheet(noteNotifier, clef);
+
+    /// Makes rounded border for helper images
+    sheet.changeToRoundedBorder();
+
     return ClipRRect(
       key: const Key('card image'),
-      borderRadius: BorderRadius.circular(15.0),
+      //borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
         height: 200.0,
         width: 280.0,
