@@ -304,8 +304,8 @@ BoxDecoration cardBackground = BoxDecoration(
   borderRadius: BorderRadius.circular(10),
   gradient: LinearGradient(
     colors: [
-      const Color(0xff5f0a87).withOpacity(0.8),
-      const Color(0xffa4508b).withOpacity(0.5),
+      const Color(0xff5f0a87).withOpacity(1.0),
+      const Color(0xffa4508b).withOpacity(1.0),
     ],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -441,8 +441,8 @@ const double androidFlatOffset = 35;
 
 /// IOS symbol fonts
 /// Change these to change the symbol size
-const double iosSharpFontSize = 10;
-const double iosFlatFontSize = 15;
+const double iosSharpFontSize = 5;
+const double iosFlatFontSize = 5;
 
 /// IOS symbol offsets
 /// Change these to change the symbol position on screen

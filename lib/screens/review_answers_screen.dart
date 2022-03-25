@@ -5,6 +5,9 @@ import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
 import 'package:sight_reading_app/question_brain.dart';
 
+///A list containing the keys for each of the result card created by addResultBox()
+List<Key> resultCardKeys = <Key>[];
+
 class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   final ScrollController _checkController = ScrollController();
   late QuestionBrain questionBrain;
@@ -68,7 +71,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         children: [
           Text(
             message,
-            style: const TextStyle(fontSize: 30.0),
+            style: const TextStyle(fontSize: 20.0),
           ),
         ]);
   }
@@ -96,47 +99,53 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         alignment: Alignment.center,
         child: Row(children: [
           Icon(resultIcon),
-          Text(resultText, style: const TextStyle(fontSize: 40))
+          Text(resultText, style: const TextStyle(fontSize: 30))
         ]),
       ),
     );
   }
 
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
-  Widget createResultCard() {
+  Widget createResultCard(int i) {
     return Center(
-      child: DecoratedBox(
-        decoration: cardBackground,
-        child: Column(
-          children: [
-            const SizedBox(height: 20.0),
-            Column(
-              children: [
-                Text(
-                  'Question ${questionBrain.getQuestionNum()} of ${questionBrain.getTotalNumberOfQuestions()}',
-                  style: const TextStyle(fontSize: 20.0),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    addQuestionImage(),
-                    Column(
-                      children: [
-                        //change to display result
-                        addResultBox(),
-                        //change method name to add text
-                        addMessageWrap('Correct Answer: ' +
-                            questionBrain.getCorrectAnswer()),
-                        addMessageWrap(
-                            'Your Answer: ' + questionBrain.getUserAnswer()),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 10.0),
-          ],
+      child: SizedBox(
+        height: 400, //MediaQuery.of(context).size.height,
+        width: 600, //MediaQuery.of(context).size.width,
+        child: Container(
+          decoration: cardBackground,
+          child: Column(
+            children: [
+              const SizedBox(height: 10.0),
+              Column(
+                children: [
+                  Text(
+                    'Question ${questionBrain.getQuestionNum()} of ${questionBrain.getTotalNumberOfQuestions()}',
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
+                  const SizedBox(height: 10.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      addQuestionImage(),
+                      Column(
+                        children: [
+                          //change to display result
+                          addResultBox(),
+                          //change method name to add text
+                          addMessageWrap('Correct Answer: ' +
+                              questionBrain.getCorrectAnswer()),
+                          addMessageWrap(
+                              'Your Answer: ' + questionBrain.getUserAnswer()),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10.0),
+            ],
+          ),
+          key: resultCardKeys[i],
         ),
       ),
     );
@@ -145,8 +154,10 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   List<Widget> getAllResultCards() {
     List<Widget> allResults = [];
     questionBrain.goBackToBeginning();
+
     for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
-      allResults.add(createResultCard());
+      resultCardKeys.add(Key('resultCard:$i'));
+      allResults.add(createResultCard(i));
       allResults.add(const SizedBox(
         width: 10,
       ));
