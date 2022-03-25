@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-//import 'package:sight_reading_app/screens/instruction_screens/quiz_instruction_screen.dart';
 import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import '../components/app_bar_with_settings_icon.dart';
-import '../components/instruction_pop_up_content/quiz_instructions.dart';
+import '../components/pop_ups/quiz_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import 'menu_screen.dart'; //For MenuButton
 
