@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
-
-import '../settings.dart';
 import '../theme_listener.dart';
 import '../constants.dart' as constants;
 

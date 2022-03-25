@@ -42,8 +42,9 @@ class StorageReaderWriter {
     _map[key] = value.toString();
     await pref.setString(key, value.toString());
     if (key == 'volume') {
-      PerfectVolumeControl.setVolume(
-          double.parse(value.toString()) / 100); //Needs values from 0 to 1
+      // TODO: Figure out why this doesn't work
+      // PerfectVolumeControl.setVolume(
+      //     double.parse(value.toString()) / 100); //Needs values from 0 to 1
     }
   }
 
