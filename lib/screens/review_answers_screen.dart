@@ -152,12 +152,10 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   List<Widget> getAllResultCards() {
     List<Widget> allResults = [];
     questionBrain.goBackToBeginning();
-    while (!questionBrain.isLastQuestion()) {
+    for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
       allResults.add(createResultCard());
       questionBrain.goToNextQuestion();
     }
-    // Add the card for the last question
-    allResults.add(createResultCard());
     return allResults;
   }
 
