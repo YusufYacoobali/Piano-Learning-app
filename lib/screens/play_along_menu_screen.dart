@@ -16,10 +16,18 @@ import '../play_along_tracks/treble_track_two.dart' as treble_track2;
 List<Key> trackButtonKeys = <Key>[];
 
 /// A list containing the names of each of the play along tracks.
-List<String> trackNames = <String>['Ode to Joy - Treble Only', 'A Simple Bass Melody', 'Old Macdonald',];
+List<String> trackNames = <String>[
+  'Ode to Joy - Treble Only',
+  'A Simple Bass Melody',
+  'Old Macdonald',
+];
 
 ///A list containing the user's records for each of the tracks.
-List<String> trackRecords = <String>['0', '0', '0',];
+List<String> trackRecords = <String>[
+  '0',
+  '0',
+  '0',
+];
 
 /// A list of all sheet music for each of the tracks
 List<Map<int, Note>> trackSheets = <Map<int, Note>>[];
@@ -35,7 +43,6 @@ List<List<int>> trackSpeeds = <List<int>>[];
 /// The tracks are shown as a List of clickable buttons.
 /// There is also an AppBar containing the screen title, a back arrow and a setting icon, which when clicked takes you to the settings screen.
 class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
-
   final StorageReaderWriter _writer = StorageReaderWriter();
 
   _PlayAlongMenuScreenState() {
@@ -47,13 +54,12 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     _writer.loadDataFromStorage().then((value) {
       trackRecords = [];
       for (String track in trackNames) {
-        String key = '${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score';
+        String key =
+            '${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score';
         String record = _writer.read(key).toString();
         trackRecords.add(record);
       }
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
@@ -62,25 +68,35 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     String difficulty = _writer.read('difficulty').toString();
     if (difficulty == 'Expert') {
       return bpm[2];
-    }
-    else if (difficulty == 'Intermediate') {
+    } else if (difficulty == 'Intermediate') {
       return bpm[1];
-    }
-    else {
+    } else {
       return bpm[0];
     }
   }
 
   List<Map<int, Note>> getMusicSheets() {
-    return <Map<int, Note>>[treble_track1.getTrack(), bass_track1.getTrack(), treble_track2.getTrack(),];
+    return <Map<int, Note>>[
+      treble_track1.getTrack(),
+      bass_track1.getTrack(),
+      treble_track2.getTrack(),
+    ];
   }
 
   List<Clef> getMusicSheetClefs() {
-    return <Clef>[treble_track1.getClef(), bass_track1.getClef(), treble_track2.getClef(),];
+    return <Clef>[
+      treble_track1.getClef(),
+      bass_track1.getClef(),
+      treble_track2.getClef(),
+    ];
   }
 
   List<List<int>> getMusicSheetSpeeds() {
-    return <List<int>>[treble_track1.getDifficultyBpm(), bass_track1.getDifficultyBpm(), treble_track2.getDifficultyBpm(),];
+    return <List<int>>[
+      treble_track1.getDifficultyBpm(),
+      bass_track1.getDifficultyBpm(),
+      treble_track2.getDifficultyBpm(),
+    ];
   }
 
   @override
@@ -103,7 +119,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
       appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu),
       body: SafeArea(
         child: ListView.separated(
-          //Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
+            //Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
             itemBuilder: (BuildContext context, int index) {
               return SizedBox(
                 height: 100.0, //Fixes button height
@@ -128,8 +144,12 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              PlayAlongScreen(notes: map, clef: clef, bpm: bpm, songName: trackNames[index], onBackToPlayAlongMenu: loadRecords),
+                          builder: (context) => PlayAlongScreen(
+                              notes: map,
+                              clef: clef,
+                              bpm: bpm,
+                              songName: trackNames[index],
+                              onBackToPlayAlongMenu: loadRecords),
                         ));
                   },
                   key: trackButtonKeys[index],
@@ -138,7 +158,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
             },
             //Adds blank spaces between each button.
             separatorBuilder: (BuildContext context, int index) =>
-            const SizedBox(height: 10),
+                const SizedBox(height: 10),
             itemCount: trackSheets.length),
       ),
     );

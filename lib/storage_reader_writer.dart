@@ -162,6 +162,40 @@ class StorageReaderWriter {
     int speedrun50HS = prefs.getInt('50_second_speedrun_record') ?? 0;
     int speedrun60HS = prefs.getInt('60_second_speedrun_record') ?? 0;
 
+    // for (String track in trackNames) {
+    //   for (Object difficulty in difficultyList) {
+    //     String key =
+    //         '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+    //     _map[key] = '0';
+    //   }
+    // }
+    // String key = "ode to joy - treble only-beginner-high-score";
+    // print(_map[key] = prefs.get(key));
+    // print(prefs.getString('ode to joy - treble only-beginner-high-score'));
+    //print(_map['ode to joy - treble only-beginner-high-score']);
+
+    int playAlongOdeBeg = int.parse(
+        prefs.getString('ode to joy - treble only-beginner-high-score') ?? '0');
+
+    int playAlongOdeInter = int.parse(
+        prefs.getString('ode to joy - treble only-intermediate-high-score') ??
+            '0');
+    int playAlongOdeExp = int.parse(
+        prefs.getString('ode to joy - treble only-expert-high-score') ?? '0');
+
+    int playAlongSimpBeg = int.parse(
+        prefs.getString('a simple bass melody-beginner-high-score') ?? '0');
+    int playAlongSimpInter = int.parse(
+        prefs.getString('a simple bass melody-intermediate-high-score') ?? '0');
+    int playAlongSimpExp = int.parse(
+        prefs.getString('a simple bass melody-expert-high-score') ?? '0');
+    int playAlongSMcBeg =
+        int.parse(prefs.getString('old macdonald-beginner-high-score') ?? '0');
+    int playAlongMcInter = int.parse(
+        prefs.getString('old macdonald-intermediate-high-score') ?? '0');
+    int playAlongMcExp =
+        int.parse(prefs.getString('old macdonald-expert-high-score') ?? '0');
+
     Map<String, int> values = {
       'completedLessons': lessonsPassed,
       'completedQuizzes': completedQuizzes,
@@ -177,6 +211,15 @@ class StorageReaderWriter {
       'speedrun40HS': speedrun40HS,
       'speedrun50HS': speedrun50HS,
       'speedrun60HS': speedrun60HS,
+      'playAlongOdeBeg': playAlongOdeBeg,
+      'playAlongOdeInter': playAlongOdeInter,
+      'playAlongOdeExp': playAlongOdeExp,
+      'playAlongSimpBeg': playAlongSimpBeg,
+      'playAlongSimpInter': playAlongSimpInter,
+      'playAlongSimpExp': playAlongSimpExp,
+      'playAlongMcBeg': playAlongSMcBeg,
+      'playAlongMcInter': playAlongMcInter,
+      'playAlongMcExp': playAlongMcExp,
     };
 
     return values;
@@ -456,6 +499,34 @@ class StorageReaderWriter {
     }
     // endless-Clef.treble-beginner-achievement
     //   endless-Clef.treble-beginner-achievement
+  }
+
+  displayPlayAlongNotification(difficulty, track, hitCounter) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String percentage =
+        ((hitCounter.score / hitCounter.numNotes) * 100).toStringAsFixed(1);
+    if (percentage[percentage.length - 1] == '0') {
+      percentage = double.parse(percentage).round().toString();
+    }
+
+    bool achieved =
+        (prefs.getBool('${track}_${difficulty}_play_along_achievement') ??
+            false);
+
+    print(
+        '${track}_${difficulty}_play_along_achievement____score:${percentage}');
+
+    if (achieved) {
+      return false;
+    } else {
+      if (percentage == '100') {
+        prefs.setBool('${track}_${difficulty}_play_along_achievement', true);
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
   //void _resetAchievements() {}
 }

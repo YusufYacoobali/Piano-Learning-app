@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 
+import '../components/in_app_notification_pop_up.dart';
 import '../components/page_keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/instruction_pop_up_content/play_along_ending_instructions.dart';
@@ -31,6 +33,10 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   late PopUpController _endMenu;
 
+  StorageReaderWriter storage = StorageReaderWriter();
+
+  late String difficulty;
+
   void updateScreen(String update) {
     setState(() {
       updater = update;
@@ -39,7 +45,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   void getDifficulty() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    String difficulty = pref.get('difficulty')!.toString();
+    difficulty = pref.get('difficulty')!.toString();
     _timer.setDifficulty(difficulty);
     _timer.start();
     _hitCounter.setDifficulty(difficulty);
@@ -98,9 +104,17 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   }
 
   /// Displays the end menu
-  void _displayMenu() {
+  Future<void> _displayMenu() async {
     _hitCounter.isNewHighScore();
     _endMenu.show();
+    bool displayNotification = await storage.displayPlayAlongNotification(
+      difficulty,
+      widget.songName.toString(),
+      _hitCounter,
+    );
+    if (displayNotification) {
+      inAppNotification(context);
+    }
   }
 
   /// Gets the key pressed on the keyboard

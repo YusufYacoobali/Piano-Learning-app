@@ -97,8 +97,6 @@ class AchievementMaker {
           'Score 30 or higher on endless (bass in expert difficulty)',
           30,
           achieveValues['endlessBassExpHS']),
-
-      //AchievementCard('Complete Ode to Joy play along', 100, complete),
       //AchievementCard('Complete the simple bass melody play along', 100, complete),
       AchievementCard('Score 5 or higher on the 10 second speedrun', 5,
           achieveValues['speedrun10HS']),
@@ -112,6 +110,25 @@ class AchievementMaker {
           achieveValues['speedrun50HS']),
       AchievementCard('Score 30 or higher on the 60 second speedrun', 30,
           achieveValues['speedrun60HS']),
+
+      AchievementCard('Complete Ode to Joy play along in beginner', 100,
+          achieveValues['playAlongOdeBeg']),
+      AchievementCard('Complete Ode to Joy play along in intermediate', 100,
+          achieveValues['playAlongOdeInter']),
+      AchievementCard('Complete Ode to Joy play along in expert', 100,
+          achieveValues['playAlongOdeExp']),
+      AchievementCard('Complete Simple bass melody play along in beginner', 100,
+          achieveValues['playAlongSimpBeg']),
+      AchievementCard('Complete Simple bass melody play along in intermediate',
+          100, achieveValues['playAlongSimpInter']),
+      AchievementCard('Complete Simple bass melody play along in expert', 100,
+          achieveValues['playAlongSimpExp']),
+      AchievementCard('Complete Old Macdonald play along in beginner', 100,
+          achieveValues['playAlongMcBeg']),
+      AchievementCard('Complete Old Macdonald play along in intermediate', 100,
+          achieveValues['playAlongMcInter']),
+      AchievementCard('Complete Old Macdonald play along in expert', 100,
+          achieveValues['playAlongMcExp']),
     ];
     //print(achievements);
     return achievements;
