@@ -107,44 +107,35 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
   Widget createResultCard(int questionIndex) {
     return Center(
-      child: SizedBox(
-        height: 300.0,
-        width: 500.0,
-        child: DecoratedBox(
-          decoration: cardBackground,
-          child: Column(
-            children: [
-              const SizedBox(height: 20.0),
-              Column(
-                children: [
-                  Text(
-                    'Question ${questionIndex + 1} of ${questionBrain.getTotalNumberOfQuestions()}',
-                    style: const TextStyle(fontSize: 30.0),
-                  ),
-                  const SizedBox(height: 20.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      addQuestionImage(questionIndex),
-                      Column(
-                        children: [
-                          //change to display result
-                          addResultBox(questionIndex),
-                          //change method name to add text
-                          addMessageWrap('Correct Answer: ' +
-                              questionBrain
-                                  .getSpecificCorrectAnswer(questionIndex)),
-                          addMessageWrap('Your Answer: ' +
-                              questionBrain.getUserAnswer(questionIndex)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10.0),
-            ],
-          ),
+      child: DecoratedBox(
+        decoration: cardBackground,
+        child: Column(
+          children: [
+            const SizedBox(height: 10.0),
+            Text(
+              'Question ${questionIndex + 1} of ${questionBrain.getTotalNumberOfQuestions()}',
+              style: const TextStyle(fontSize: 25.0),
+            ),
+            const SizedBox(height: 15.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                addQuestionImage(questionIndex),
+                Column(
+                  children: [
+                    //change to display result
+                    addResultBox(questionIndex),
+                    //change method name to add text
+                    addMessageWrap('Correct Answer: ' +
+                        questionBrain.getSpecificCorrectAnswer(questionIndex)),
+                    addMessageWrap('Your Answer: ' +
+                        questionBrain.getUserAnswer(questionIndex)),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 10.0),
+          ],
         ),
       ),
     );
@@ -154,7 +145,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     List<Widget> allResults = [];
     for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
       allResults.add(createResultCard(i));
-      allResults.add(const SizedBox(width: 15.0));
+      allResults.add(const SizedBox(width: 10.0));
     }
     return allResults;
   }
@@ -163,7 +154,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Check Answers'),
+        title: const Text('Review Answers'),
       ),
       body: SafeArea(
         child: Scrollbar(

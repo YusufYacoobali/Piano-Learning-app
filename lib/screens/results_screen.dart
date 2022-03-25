@@ -92,7 +92,6 @@ class _ResultsScreenState extends State<ResultsScreen> {
               child: const Text('Exit'),
             ),
             ElevatedButton(
-              // TODO: Implement review answers functionality
               onPressed: () {
                 Navigator.push(
                   context,
@@ -104,7 +103,6 @@ class _ResultsScreenState extends State<ResultsScreen> {
                 );
               },
               child: const Text('Review Answers'),
-
               style: navButtonDeco,
             )
           ],
