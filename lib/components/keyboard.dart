@@ -1,41 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+
+import '../storage_reader_writer.dart';
 import '../constants.dart';
 
 /// Keyboard widget
-class Keyboard extends StatelessWidget {
+class _KeyboardState extends State<Keyboard> {
   /// Used to play note sounds
   final player = AudioCache();
 
-  /// The function to be called when a key is pressed
-  final Function function;
+  String _difficulty = defaultDifficultyLevel;
 
   /// Constructor
-  Keyboard({Key? key, required this.function}) : super(key: key);
+  _KeyboardState() {
+    getDifficulty();
+  }
+
+  void getDifficulty() async {
+    StorageReaderWriter writer = StorageReaderWriter();
+    writer.loadDataFromStorage().then((value) {
+      setState(() {
+        _difficulty = writer.read('difficulty').toString();
+      });
+    });
+  }
 
   /// Plays the sound of the note that was pressed
-  void playSound(String noteName) => player.play('note_$noteName.wav');
+  void playSound(String noteName) {
+    if (widget.octave == 1) {
+      player.play('note_low_$noteName.wav');
+    } else if (widget.octave == 2) {
+      player.play('note_middle_$noteName.wav');
+    } else {
+      player.play('note_high_$noteName.wav');
+    }
+  }
 
   /// Returns the text widget displayed on the white keys
   Widget getWhiteKeyChild(String buttonText) {
-    return FittedBox(
-      fit: BoxFit.fitWidth,
-      child: Text(
-        buttonText,
-        style: whiteKeyTextStyle,
-        textAlign: TextAlign.right,
+    return Visibility(
+      visible: _difficulty == 'Beginner',
+      child: FittedBox(
+        fit: BoxFit.fitWidth,
+        child: Text(
+          buttonText,
+          style: whiteKeyTextStyle,
+          textAlign: TextAlign.right,
+        ),
       ),
     );
   }
 
   /// Returns the text widget displayed on the black keys
   Widget getBlackKeyChild(String buttonText) {
-    return FittedBox(
-      fit: BoxFit.fitWidth,
-      child: Text(
-        buttonText,
-        style: blackKeyTextStyle,
-        textAlign: TextAlign.right,
+    return Visibility(
+      visible: _difficulty != 'Expert',
+      child: FittedBox(
+        fit: BoxFit.fitWidth,
+        child: Text(
+          buttonText,
+          style: blackKeyTextStyle,
+          textAlign: TextAlign.right,
+        ),
       ),
     );
   }
@@ -53,7 +79,7 @@ class Keyboard extends StatelessWidget {
         ),
         onPressed: () {
           playSound(buttonText.toLowerCase());
-          function(buttonText);
+          widget.onKeyPressed(buttonText + (widget.octave + 2).toString());
         },
         style: whiteKeyButtonStyle,
       ),
@@ -72,7 +98,7 @@ class Keyboard extends StatelessWidget {
       ),
       onPressed: () {
         playSound(buttonText.toLowerCase());
-        function(buttonText);
+        widget.onKeyPressed(buttonText + (widget.octave + 2).toString());
       },
       style: blackKeyButtonStyle,
     );
@@ -163,4 +189,23 @@ class Keyboard extends StatelessWidget {
       ),
     );
   }
+}
+
+class Keyboard extends StatefulWidget {
+  static const String id = 'keyboard';
+
+  /// The function to be called when a key is pressed
+  /// gets the key pressed on the keyboard
+  final Function(String) onKeyPressed;
+  ///sets the octave of sounds to play
+  final int octave;
+
+  //final String difficulty = StorageReaderWriter().read('difficulty').toString();
+
+  const Keyboard(this.onKeyPressed, this.octave, {Key? key}) : super(key: key);
+
+
+  @override
+  State<Keyboard> createState() => _KeyboardState();
+
 }

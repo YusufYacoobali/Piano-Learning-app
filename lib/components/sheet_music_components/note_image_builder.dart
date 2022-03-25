@@ -1,10 +1,11 @@
 import 'dart:ui';
+import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
 
 import 'note.dart';
 import 'note_on_stave.dart';
-import 'package:sight_reading_app/constants.dart';
+import '../../constants.dart' as constants;
 
 /// Builds a note on the stave
 class NoteImageBuilder {
@@ -55,9 +56,9 @@ class NoteImageBuilder {
       ..strokeWidth = 4
       ..strokeCap = StrokeCap.round;
 
-    String min = trebleClefMidLineNote;
+    String min = constants.trebleClefMidLineNote;
     if (_clef == Clef.bass) {
-      min = bassClefMidLineNote;
+      min = constants.bassClefMidLineNote;
     }
 
     if (Note.greaterOrEqualTo(note.note, Note(name: min, duration: -1))) {
@@ -88,28 +89,42 @@ class NoteImageBuilder {
 
   /// Draws either a sharp or a flat beside the note
   void _drawSymbol(NoteOnStave note, bool isFlat) {
-    String symbol = '♯';
+    double font = constants.androidSharpFontSize;
+    String symbol = constants.sharp;
     double x = note.pos - 27;
-    double y = _baseLine - note.height - 20;
-    double size = 30;
-    if (isFlat) {
-      symbol = '♭';
-      x = note.pos - 25;
-      y = _baseLine - note.height - 35;
-      size = 45;
+    double position = _baseLine - note.height - constants.androidSharpOffset;
+    if (Platform.isIOS) {
+      font = constants.iosTrebleClefFontSize;
+
+      /// Change this to change ios sharp position
+      position = _baseLine - constants.iosSharpOffset;
+
+      if (isFlat) {
+        x = note.pos - 25;
+        symbol = constants.flat;
+        font = constants.iosFlatFontSize;
+
+        /// Change this to change ios flat position
+        position = _baseLine - note.height - constants.iosFlatOffset;
+      }
+    } else {
+      if (isFlat) {
+        x = note.pos - 25;
+        symbol = constants.flat;
+        font = constants.androidFlatFontSize;
+        position = _baseLine - note.height - constants.androidFlatOffset;
+      }
     }
 
+    // Draws on the Clef
     TextPainter textPainter = TextPainter(
         textScaleFactor: 1,
         text: TextSpan(
-            text: symbol,
-            style: TextStyle(
-                fontSize: size, color: Colors.black)),
-        textDirection: TextDirection.ltr
-    )
+            text: symbol, style: TextStyle(fontSize: font, color: Colors.black)),
+        textDirection: TextDirection.ltr)
       ..layout();
 
-    textPainter.paint(_canvas, Offset(x, y), );
+    textPainter.paint(_canvas, Offset(x, position), );
   }
 
   /// Draws a tail
@@ -123,9 +138,9 @@ class NoteImageBuilder {
     double lineEnd = _baseLine - note.height - 60;
     double lineXPos = note.pos + 20;
 
-    String min = trebleClefMidLineNote;
+    String min = constants.trebleClefMidLineNote;
     if (_clef == Clef.bass) {
-      min = bassClefMidLineNote;
+      min = constants.bassClefMidLineNote;
     }
 
     if (Note.greaterOrEqualTo(note.note, Note(name: min, duration: -1))) {
@@ -148,19 +163,19 @@ class NoteImageBuilder {
 
     List<String>? lines;
     if (_clef == Clef.treble) {
-      lines = trebleClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
+      lines = constants.trebleClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
     }
     else {
-      lines = bassClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
+      lines = constants.bassClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
     }
     if (lines != null) {
       for (String pos in lines) {
         int? offset;
         if (_clef == Clef.treble) {
-          offset = trebleClefSheetNoteOffset[pos];
+          offset = constants.trebleClefSheetNoteOffset[pos];
         }
         else {
-          offset = offset = trebleClefSheetNoteOffset[pos];
+          offset = offset = constants.bassClefSheetNoteOffset[pos];
         }
         if (offset != null) {
           Offset startingPoint1 = Offset(note.pos - 5, _baseLine - offset + 8);

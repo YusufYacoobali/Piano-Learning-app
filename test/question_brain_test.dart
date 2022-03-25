@@ -1,75 +1,66 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/question_list.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
 import 'package:sight_reading_app/question.dart';
 import 'package:sight_reading_app/question_brain.dart';
 
 void main() {
-  QuestionList getFakeQuestions() {
-    return QuestionList(lessonID: 1, questionList: [
+  List<Question> getFakeQuestions() {
+    // TODO: Removing below line results in invalid ID since not loaded
+    QuestionAnswerData.createDefaultMap();
+    return [
       Question(
-        note: Note(name: 'C4', duration: 4),
         clef: Clef.treble,
         question:
-            'This is our first note. The name is C (Do). Now press C in the option box.',
-        correctAnswer: 'C',
+            'This is our first note. The name is C (Do). Now press C on the keyboard.',
+        correctAnswer: Note(name: 'C4', duration: 4),
+        questionID: 1,
+        lessonID: 1,
       ),
       Question(
-        note: Note(name: 'D4', duration: 4),
         clef: Clef.treble,
         question:
-            'This is our second note. The name is D (Re). Now press D in the option box.',
-        correctAnswer: 'D',
+            'This is our second note. The name is D (Re). Now press D on the keyboard.',
+        correctAnswer: Note(name: 'D4', duration: 4),
+        questionID: 2,
+        lessonID: 1,
       ),
       Question(
-        note: Note(name: 'E4', duration: 4),
         clef: Clef.treble,
         question:
-            'This is our third note. The name is E (Mi). Now press E in the option box.',
-        correctAnswer: 'E',
+            'This is our third note. The name is E (Mi). Now press E on the keyboard.',
+        correctAnswer: Note(name: 'E4', duration: 4),
+        questionID: 3,
+        lessonID: 1,
       ),
-    ]);
+    ];
   }
 
   test('Check that getNote() correctly returns the name of the note', () {
-  SharedPreferences.setMockInitialValues({});
-  QuestionList fakeQuestions = getFakeQuestions();
-  QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-  String noteName = qb.getNote().name;
-  expect(noteName, fakeQuestions.questionList[0].note.name);
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    String noteName = qb.getNote().name;
+    expect(noteName, fakeQuestions[0].correctAnswer.name);
   });
-
-  // test('Check that getImagePath() correctly returns the path of the image', () {
-  //   List<Question> fakeQuestions = getFakeQuestions();
-  //   QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
-  //   String imagePath = qb.getNote().name;
-  //   expect(imagePath, 'assets/note_images/${fakeQuestions[0].note}');
-  // });
-  //
-  // test('Check that getImage() correctly returns the image', () {
-  //   List<Question> fakeQuestions = getFakeQuestions();
-  //   QuestionBrain qb = QuestionBrain(questionList: fakeQuestions);
-  //   AssetImage image = qb.getImage();
-  //   expect(image, AssetImage('assets/note_images/${fakeQuestions[0].note}'));
-  // });
 
   test('Check that getQuestionText() correctly returns the question text', () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     String questionText = qb.getQuestionText();
-    expect(questionText, fakeQuestions.questionList[0].question);
+    expect(questionText, fakeQuestions[0].question);
   });
 
   test(
       'Check that getCorrectAnswer() correctly returns the answer to the question',
       () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     String answer = qb.getCorrectAnswer();
-    expect(answer, fakeQuestions.questionList[0].correctAnswer);
+    expect(answer, fakeQuestions[0].correctAnswer.name);
   });
 
   test('Check that getQuestionNumber() correctly returns the question number',
@@ -94,9 +85,9 @@ void main() {
       'Check that goToNextQuestion() does not increment the question number if we are at the last question',
       () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    for (int i = 0; i < fakeQuestions.questionList.length; ++i) {
+    for (int i = 0; i < fakeQuestions.length; ++i) {
       qb.goToNextQuestion();
     }
     int beforeQuestionNum = qb.getQuestionNum();
@@ -109,10 +100,10 @@ void main() {
       'Check that getTotalNumberOfQuestions() correctly returns the total number of questions',
       () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int numOfQuestions = qb.getTotalNumberOfQuestions();
-    expect(numOfQuestions, fakeQuestions.questionList.length);
+    expect(numOfQuestions, fakeQuestions.length);
   });
 
   test('Check that getScore() correctly starts at 0', () {
@@ -126,10 +117,11 @@ void main() {
       'Check that setAnswer() correctly increments the score if the answer is correct',
       () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int beforeScore = qb.getScore();
-    qb.setAnswer(fakeQuestions.questionList[0].correctAnswer);
+    //qb.setAnswer(userAnswer: fakeQuestions[0].correctAnswer);
+    qb.setAnswer(userAnswer: fakeQuestions[0].correctAnswer.name);
     int afterScore = qb.getScore();
     expect(afterScore, beforeScore + 1);
   });
@@ -138,10 +130,10 @@ void main() {
       'Check that setAnswer() does not increment the score if the answer is incorrect',
       () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int beforeScore = qb.getScore();
-    qb.setAnswer("H");
+    qb.setAnswer(userAnswer: "H");
     int afterScore = qb.getScore();
     expect(afterScore, beforeScore);
   });
@@ -150,9 +142,9 @@ void main() {
       'Check that checkAnswer() correctly returns true if the answer is correct',
       () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    bool result = qb.checkAnswer(fakeQuestions.questionList[0].correctAnswer);
+    bool result = qb.checkAnswer(fakeQuestions[0].correctAnswer.name);
     expect(result, true);
   });
 
@@ -160,7 +152,7 @@ void main() {
       'Check that checkAnswer() correctly returns false if the answer is incorrect',
       () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     bool result = qb.checkAnswer("H");
     expect(result, false);
@@ -170,9 +162,9 @@ void main() {
       'Check that isLastQuestion() correctly returns true if we are at the last question',
       () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
-    for (int i = 0; i < fakeQuestions.questionList.length; ++i) {
+    for (int i = 0; i < fakeQuestions.length; ++i) {
       qb.goToNextQuestion();
     }
     bool result = qb.isLastQuestion();
@@ -183,7 +175,7 @@ void main() {
       'Check that isLastQuestion() correctly returns false if we are not at the last question',
       () {
     SharedPreferences.setMockInitialValues({});
-    QuestionList fakeQuestions = getFakeQuestions();
+    List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     bool result = qb.isLastQuestion();
     expect(result, false);
@@ -203,11 +195,11 @@ void main() {
     //before complete questions, check it is 0
     expect(pref.get('lesson 1'), '0');
 
-    qb.setAnswer("C");
+    qb.setAnswer(userAnswer: "C4");
     qb.goToNextQuestion();
-    qb.setAnswer("D");
+    qb.setAnswer(userAnswer: "D4");
     qb.goToNextQuestion();
-    qb.setAnswer("E");
+    qb.setAnswer(userAnswer: "E4");
 
     // TODO: find a better way to deal with the IO delay
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -230,11 +222,11 @@ void main() {
     //before complete questions, check it is 0
     expect(pref.get('lesson 1'), '0');
 
-    qb.setAnswer("C");
+    qb.setAnswer(userAnswer: "C4");
     qb.goToNextQuestion();
-    qb.setAnswer("A");
+    qb.setAnswer(userAnswer: "A4");
     qb.goToNextQuestion();
-    qb.setAnswer("E");
+    qb.setAnswer(userAnswer: "E4");
 
     // TODO: find a better way to deal with the IO delay
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -257,11 +249,11 @@ void main() {
     //before complete questions, check it is 0
     expect(pref.get('lesson 1'), '0');
 
-    qb.setAnswer("H");
+    qb.setAnswer(userAnswer: "H");
     qb.goToNextQuestion();
-    qb.setAnswer("T");
+    qb.setAnswer(userAnswer: "T");
     qb.goToNextQuestion();
-    qb.setAnswer("W");
+    qb.setAnswer(userAnswer: "W");
 
     // TODO: find a better way to deal with the IO delay
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -270,157 +262,33 @@ void main() {
     expect(pref.get('lesson 1'), '0');
   });
 
-  // testWidgets('Check that changing the difficulty saves the correct value to storage.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({});
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('difficulty'), 'Beginner');
-  //
-  //       await tester.tap(find.byKey(const Key('difficulty selector')));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Expert').last);
-  //       await tester.pump();
-  //
-  //       expect(pref.get('difficulty'), 'Expert');
-  //     });
-  //
-  // testWidgets('Check that changing the theme saves the correct value to storage.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({});
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('theme'), 'Dark');
-  //
-  //       // Check that the initial theme of the app is dark
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
-  //
-  //       await tester.tap(find.text('Dark'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Light').last);
-  //       await tester.pumpAndSettle();
-  //
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the theme has changed
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //     });
-  //
-  // testWidgets('Check that resetting the settings sets their values to default.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({});
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('volume'), 100);
-  //       expect(pref.get('difficulty'), 'Beginner');
-  //       expect(pref.get('theme'), 'Dark');
-  //
-  //       // Check that the initial theme of the app is dark
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
-  //
-  //       await tester.drag(find.byType(Slider), const Offset(-100, 0));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Beginner'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Expert').last);
-  //       await tester.pump();
-  //       await tester.tap(find.text('Dark'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Light').last);
-  //       await tester.pumpAndSettle();
-  //
-  //       if (pref.get('volume') == 100) fail('The volume should not be 100');
-  //       expect(pref.get('difficulty'), 'Expert');
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the theme changes
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //
-  //       await tester.tap(find.text('Reset Progress'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Confirm'));
-  //       await tester.pumpAndSettle();
-  //
-  //       expect(pref.get('volume'), 100);
-  //       expect(pref.get('difficulty'), 'Beginner');
-  //       expect(pref.get('theme'), 'Dark');
-  //
-  //       // Check that the theme changes
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
-  //     });
-  //
-  // testWidgets('Check that cancelling a reset keeps the values the same.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({});
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('volume'), 100);
-  //       expect(pref.get('difficulty'), 'Beginner');
-  //       expect(pref.get('theme'), 'Dark');
-  //
-  //       // Check that the initial theme of the app is dark
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
-  //
-  //       await tester.drag(find.byType(Slider), const Offset(-100, 0));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Beginner'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Expert').last);
-  //       await tester.pump();
-  //       await tester.tap(find.text('Dark'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Light').last);
-  //       await tester.pumpAndSettle();
-  //
-  //       if (pref.get('volume') == 100) fail('The volume should not be 100');
-  //       expect(pref.get('difficulty'), 'Expert');
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the theme changes
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //
-  //       await tester.tap(find.text('Reset Progress'));
-  //       await tester.pump();
-  //       await tester.tap(find.text('Cancel'));
-  //       await tester.pump();
-  //
-  //       if (pref.get('volume') == 100) fail('The volume should not be 100');
-  //       expect(pref.get('difficulty'), 'Expert');
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the theme stays the same
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //     });
-  //
-  // testWidgets('Check that loading settings from storage displays correctly.',
-  //         (WidgetTester tester) async {
-  //
-  //       SharedPreferences.setMockInitialValues({'volume': 50, 'difficulty': 'Intermediate', 'theme': 'Light', });
-  //       final SharedPreferences pref = await SharedPreferences.getInstance();
-  //
-  //       //make tester complete quiz
-  //
-  //       expect(pref.get('volume'), 50);
-  //       expect(pref.get('difficulty'), 'Intermediate');
-  //       expect(pref.get('theme'), 'Light');
-  //
-  //       // Check that the initial theme of the app is light
-  //       expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
-  //
-  //       expect(find.text('50'), findsOneWidget);
-  //       expect(find.text('Dark'), findsOneWidget);
-  //       expect(find.text('Intermediate'), findsOneWidget);
-  //     });
+  test(
+      'Check that goBackToBeginning makes the first question the current question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    int expectedQuestionNum = 1;
+    qb.goToNextQuestion();
+    qb.goToNextQuestion();
+    int updatedQuestionNum = qb.getQuestionNum();
+    qb.goBackToBeginning();
+    int actualQuestionNum = qb.getQuestionNum();
+    expect(expectedQuestionNum == updatedQuestionNum, false);
+    expect(expectedQuestionNum, actualQuestionNum);
+  });
+
+  test(
+      'Check that getUserAnswer correctly returns the answer selected by the user for the current question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    String expectedUserAnswer = 'C';
+    qb.setAnswer(userAnswer: 'F');
+    qb.goToNextQuestion();
+    qb.setAnswer(userAnswer: expectedUserAnswer);
+    String actualUserAnswer = qb.getUserAnswer();
+    expect(expectedUserAnswer, actualUserAnswer);
+  });
 }

@@ -55,6 +55,10 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   Widget getQuestionImage() {
     _sheet.changeClef(widget.clef);
     _nextNote.setNextNote(widget.note);
+
+    /// Makes rounded border for question images
+    _sheet.changeToRoundedBorder();
+
     return Expanded(
       key: const Key('question image'),
       child: Padding(

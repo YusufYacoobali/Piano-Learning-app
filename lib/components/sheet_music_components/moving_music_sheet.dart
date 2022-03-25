@@ -1,13 +1,12 @@
 import 'dart:ui';
 
-import 'package:sight_reading_app/constants.dart';
 import 'note_on_stave.dart';
 import 'note_played_checker.dart';
 import 'stave_builder.dart';
 import 'note.dart';
 import 'music_sheet.dart';
 
-class MovingMusicSheet extends MusicSheet{
+class MovingMusicSheet extends MusicSheet {
   final NotePlayedChecker notePlayedChecker;
   late final double _currentNoteStart;
   late final double _currentNoteEnd;
@@ -17,14 +16,18 @@ class MovingMusicSheet extends MusicSheet{
   bool hasEnded = false;
   late final Function onEnd;
 
-  MovingMusicSheet({required NextNoteNotifier nextNote, required Clef clef, required this.notePlayedChecker}) : super(nextNote, clef);
+  MovingMusicSheet(
+      {required NextNoteNotifier nextNote,
+      required Clef clef,
+      required this.notePlayedChecker})
+      : super(nextNote, clef);
 
   @override
   void paint(Canvas canvas, Size size) {
     noteImageBuilder.setCanvas(canvas);
     if (!hasSet) {
       hasSet = true;
-      baseLine = size.height/2 + 20;
+      baseLine = size.height / 2 + 20;
       noteImageBuilder.setBaseLine(baseLine);
       endLine = 100;
       _currentNoteEnd = endLine + 50;
@@ -33,9 +36,11 @@ class MovingMusicSheet extends MusicSheet{
 
     removeNotes(canvas, size);
 
-    StaveBuilder.makeBackground(canvas, size, 0, size.width);
-    StaveBuilder.drawBox(canvas, size, baseLine, _currentNoteEnd, _currentNoteStart);
-    StaveBuilder.drawStave(canvas, size, baseLine, 0, size.width, clef == Clef.treble);
+    StaveBuilder.makeBackground(canvas, size, 0, size.width, isRoundedBorder);
+    StaveBuilder.drawBox(
+        canvas, size, baseLine, _currentNoteEnd, _currentNoteStart);
+    StaveBuilder.drawStave(
+        canvas, size, baseLine, 0, size.width, clef == Clef.treble);
 
     double canvasWidth = size.width;
     startLine = canvasWidth + 40;
@@ -59,7 +64,7 @@ class MovingMusicSheet extends MusicSheet{
   /// Moves the notes on the canvas towards the end line
   void move() {
     for (NoteOnStave note in notesOnStaves) {
-      note.pos-=noteMovement;
+      note.pos--;
     }
   }
 
@@ -72,13 +77,11 @@ class MovingMusicSheet extends MusicSheet{
             notePlayedChecker.setNewNote(note.note);
             _noteInPlayArea = note;
           }
-        }
-        else {
+        } else {
           notePlayedChecker.setNewNote(note.note);
           _noteInPlayArea = note;
           _firstNoteInPlayArea = true;
         }
-
       }
     }
   }

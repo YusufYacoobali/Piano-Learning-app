@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 const List<Object> difficultyList = ['Beginner', 'Intermediate', 'Expert'];
 
 /// Default values of individual settings
-const int defaultVolumeLevel = 100;
+const String defaultVolumeLevel = '100';
 const String defaultDifficultyLevel = 'Beginner';
 const String defaultTheme = 'Dark';
 
@@ -15,6 +15,7 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
   'Light': ThemeData.light(),
   'Pink': ThemeData.dark().copyWith(
     backgroundColor: const Color.fromARGB(255, 200, 130, 255),
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
     scaffoldBackgroundColor: const Color.fromARGB(255, 200, 130, 255),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 200, 110, 255),
@@ -106,6 +107,15 @@ BoxDecoration lessonButtonDeco = BoxDecoration(
   //borderRadius: BorderRadius.circular(boxRadii),
   gradient: const LinearGradient(
     colors: [Color(0xff5f0a87), Color(0xffa4508b)],
+  ),
+);
+
+BoxDecoration completeLessonButtonDeco = BoxDecoration(
+  shape: BoxShape.circle,
+  color: buttonBoxColour,
+  //borderRadius: BorderRadius.circular(boxRadii),
+  gradient: const LinearGradient(
+    colors: [Color(0xff5aff15), Color(0xff00b712)],
   ),
 );
 
@@ -227,10 +237,10 @@ const List<String> whiteKeyNames = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 
 //Achievement screen
-const double cardWidth = 230;
+const double cardWidth = 270;
 const double cardHeight = 270;
 
-const double circularIndicatorRadius = 78;
+const double circularIndicatorRadius = 74;
 
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
@@ -252,7 +262,7 @@ final Decoration achievementCardDecoration = BoxDecoration(
 );
 
 //achievement making
-const int numOfLessons = 10;
+const int numOfLessons = 6;
 const int numOfquizzes = 10;
 
 //pause menu
@@ -266,7 +276,7 @@ const TextStyle pauseMenuTextStyle = TextStyle(
 );
 
 ButtonStyle pauseMenuButtonStyle = ElevatedButton.styleFrom(
-  primary: const Color(0xffa4508b),
+  primary: const Color.fromARGB(255, 192, 94, 163),
   onPrimary: Colors.grey.shade300,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10),
@@ -292,19 +302,71 @@ const Icon pauseMenuSelectionIcon = Icon(
 
 BoxDecoration cardBackground = BoxDecoration(
   borderRadius: BorderRadius.circular(10),
-  gradient: LinearGradient(
-    colors: [
-      const Color(0xff5f0a87).withOpacity(0.8),
-      const Color(0xffa4508b).withOpacity(0.5),
-    ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  ),
+  gradient: LinearGradient(colors: [
+    const Color(0xff5f0a87).withOpacity(1.0),
+    const Color(0xffa4508b).withOpacity(1.0),
+  ], begin: Alignment.topLeft, end: Alignment.bottomRight),
 );
+
+const Map<String, String> sharpFlatEquivalence = <String, String>{
+  'Db': 'C#',
+  'Eb': 'D#',
+  'Gb': 'F#',
+  'Ab': 'G#',
+  'Bb': 'A#',
+};
+
+/// Notes that can be played in endless mode
+const List<String> endlessBeginnerTrebleNotes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+const List<String> endlessBeginnerBassNotes = ['C4', 'B3', 'A3', 'G3', 'F3', 'E3', 'D3', 'C3'];
+
+const List<String> endlessIntermediateTrebleNotes = [
+  'B3',
+  'C4', 'Db4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'A4', 'Bb4', 'B4',
+  'C5', 'D5', 'Db5', 'E5',
+];
+
+const List<String> endlessIntermediateBassNotes = [
+  'C3', 'Db3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'A3', 'Bb3', 'B3',
+  'C4', 'Db4', 'D4',
+];
+
+const List<String> endlessExpertTrebleNotes = [
+  'A3', 'A#3', 'Bb3', 'B3',
+  'C4', 'C#4', 'Db4', 'D4', 'D#4', 'Eb4', 'E4', 'F4', 'F#4', 'Gb4', 'G4', 'G#4', 'Ab4', 'A4', 'A#4', 'Bb4', 'B4',
+  'C5', 'C#5', 'Db5', 'D5', 'D#5', 'Eb5', 'E5', 'F5',
+];
+
+const List<String> endlessExpertBassNotes = [
+  'C3', 'C#3', 'Db3', 'D3', 'D#3', 'Eb3', 'E3', 'F3', 'F#3', 'Gb3', 'G3', 'G#3', 'Ab3', 'A3', 'A#3', 'Bb3', 'B3',
+  'C4', 'C#4', 'Db4', 'D4', 'D#4', 'Eb4', 'E4',
+];
+
+/// How fast the notes move across the screen in endless mode for each difficulty
+const int endlessBeginnerBpm = 80;
+const int endlessIntermediateBpm = 110;
+const int endlessExpertBpm = 140;
+
+/// maximum and minimum gaps between notes in endless mode
+const int endlessBeginnerMinTime = 4;
+const int endlessBeginnerMaxTime = 7;
+const int endlessIntermediateMinTime = 3;
+const int endlessIntermediateMaxTime = 5;
+const int endlessExpertMinTime = 1;
+const int endlessExpertMaxTime = 4;
+
+/// How fast the notes move across the screen in play along for each difficulty
+const int playAlongBeginnerBpm = 50;
+const int playAlongIntermediateBpm = 70;
+const int playAlongExpertBpm = 90;
+
+/// How far apart the notes are in play along for each difficulty
+const int playAlongBeginnerNoteSpacing = 200;
+const int playAlongIntermediateNoteSpacing = 150;
+const int playAlongExpertNoteSpacing = 130;
 
 /// How far each note should move per iteration
 const double noteMovement = 1;
-
 
 const Icon helperButton = Icon(
   Icons.help,
@@ -312,23 +374,15 @@ const Icon helperButton = Icon(
 
 const Icon helpPlayButtonStyle = Icon(
   Icons.play_arrow,
-  size: 35.0,
+  size: 40.0,
 );
 
-ButtonStyle helperMenuButonStyle = ElevatedButton.styleFrom(
-  primary: const Color(0xffa4508b).withOpacity(0.3),
-  onPrimary: Colors.grey.shade300,
-  fixedSize: const Size(180.0, 60.0),
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10),
-  ),
-);
-
-const TextStyle helperMenuTextStyle = TextStyle(
+const TextStyle helperTextStyle = TextStyle(
   fontSize: 40.0,
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
+
 /// Clef symbols
 const String trebleClef = '𝄞';
 const String bassClef = '𝄢';
@@ -350,3 +404,31 @@ const double iosBassClefFontSize = 100;
 /// Change these to change the clef position on screen
 const double iosTrebleClefOffset = 118;
 const double iosBassClefOffset = 85;
+
+/// black note symbols
+const String sharp = '♯';
+const String flat = '♭';
+
+/// Android symbol fonts
+const double androidSharpFontSize = 30;
+const double androidFlatFontSize = 45;
+
+/// Android symbol offset positions
+const double androidSharpOffset = 20;
+const double androidFlatOffset = 35;
+
+/// IOS symbol fonts
+/// Change these to change the symbol size
+const double iosSharpFontSize = 30;
+const double iosFlatFontSize = 45;
+
+/// IOS symbol offsets
+/// Change these to change the symbol position on screen
+const double iosSharpOffset = 0;
+const double iosFlatOffset = 15;
+
+/// QuestionAnswerData
+const int timeThreshold = 500;
+const int correctAnswerIncrease = 5;
+const int maxTimeReduction = 5;
+const int incorrectAnswerReduction = 10;

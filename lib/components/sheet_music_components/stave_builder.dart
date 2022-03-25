@@ -5,12 +5,22 @@ import 'dart:io' show Platform;
 import '../../constants.dart' as constants;
 
 class StaveBuilder {
-  static void makeBackground(
-      Canvas canvas, Size size, double start, double end) {
+  static void makeBackground(Canvas canvas, Size size, double start, double end,
+      bool isRoundedBorder) {
     // Draws the white background
-    canvas.drawRect(
-        Offset(start, size.height ~/ 2 - 100) & Size(end - start, 170),
-        Paint()..color = Colors.white);
+    /// Draw rounded rectangle background if is true
+    if (isRoundedBorder == true) {
+      const radius = Radius.circular(15);
+      canvas.drawRRect(
+          RRect.fromRectAndRadius(
+              Offset(start, size.height ~/ 2 - 100) & Size(end - start, 170),
+              radius),
+          Paint()..color = Colors.white);
+    } else {
+      canvas.drawRect(
+          Offset(start, size.height ~/ 2 - 100) & Size(end - start, 170),
+          Paint()..color = Colors.white);
+    }
   }
 
   static void drawStave(Canvas canvas, Size size, double baseLine, double start,
@@ -41,8 +51,6 @@ class StaveBuilder {
     Offset startingPoint4 = Offset(start, baseLine - 80);
     Offset endingPoint4 = Offset(end, baseLine - 80);
     canvas.drawLine(startingPoint4, endingPoint4, paint);
-
-    //int trebleFont =
 
     double font = constants.androidTrebleClefFontSize;
     String clef = constants.trebleClef;
