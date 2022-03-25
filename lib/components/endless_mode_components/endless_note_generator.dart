@@ -45,38 +45,29 @@ class EndlessNoteGenerator {
 
   void setClef(Clef clef) {
     _clef = clef;
-    _setClefInNotes();
+    _setClefAndValues();
     getRandomNote();
   }
 
-  void _setClefInNotes() {
-    String num = '4';
-    if (_clef == Clef.bass) {
-      num = '3';
-    }
-    List<String> notes = [];
-    for (String note in _availableNotes) {
-      notes.add(note + num);
-    }
-    _availableNotes = notes;
-  }
-
-  void _setDifficultyValues() {
+  void _setClefAndValues() {
     if (_difficulty == 'Expert') {
       _bpm = constants.endlessExpertBpm;
-      _availableNotes = constants.endlessExpertNotes;
+      _availableNotes = constants.endlessExpertTrebleNotes;
+      if (_clef == Clef.bass) _availableNotes = constants.endlessExpertBassNotes;
       _minTime = constants.endlessExpertMinTime;
       _maxTime = constants.endlessExpertMaxTime;
     }
     else if (_difficulty == 'Intermediate') {
       _bpm = constants.endlessIntermediateBpm;
-      _availableNotes = constants.endlessIntermediateNotes;
+      _availableNotes = constants.endlessIntermediateTrebleNotes;
+      if (_clef == Clef.bass) _availableNotes = constants.endlessIntermediateBassNotes;
       _minTime = constants.endlessIntermediateMinTime;
       _maxTime = constants.endlessIntermediateMaxTime;
     }
     else {
       _bpm = constants.endlessBeginnerBpm;
-      _availableNotes = constants.endlessBeginnerNotes;
+      _availableNotes = constants.endlessBeginnerTrebleNotes;
+      if (_clef == Clef.bass) _availableNotes = constants.endlessBeginnerBassNotes;
       _minTime = constants.endlessBeginnerMinTime;
       _maxTime = constants.endlessBeginnerMaxTime;
     }
@@ -91,7 +82,6 @@ class EndlessNoteGenerator {
 
   void setDifficulty(String difficulty) {
     _difficulty = difficulty;
-    _setDifficultyValues();
   }
 
   void start() {
@@ -100,7 +90,6 @@ class EndlessNoteGenerator {
       if (!_isOn) {
         t.cancel();
       } else {
-        //print(_index);
         if (_index == 0) {
           increment();
         }

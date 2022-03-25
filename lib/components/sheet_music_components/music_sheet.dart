@@ -29,8 +29,15 @@ class MusicSheet extends CustomPainter {
   /// Whether the initial values have been set
   bool hasSet = false;
 
+  /// Set the initial value stave background border is not rounded
+  bool isRoundedBorder = false;
+
   MusicSheet(this.nextNote, this.clef) {
     noteImageBuilder = NoteImageBuilder(clef);
+  }
+
+  void changeToRoundedBorder() {
+    isRoundedBorder = true;
   }
 
   @override
@@ -46,7 +53,8 @@ class MusicSheet extends CustomPainter {
     startLine = start + (canvasWidth / 1.7);
 
     endLine = 100;
-    StaveBuilder.makeBackground(canvas, size, start, start + canvasWidth);
+    StaveBuilder.makeBackground(
+        canvas, size, start, start + canvasWidth, isRoundedBorder);
     StaveBuilder.drawStave(canvas, size, baseLine, start, start + canvasWidth,
         clef == Clef.treble);
 

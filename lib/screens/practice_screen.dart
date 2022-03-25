@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/app_bar_with_settings_icon.dart';
-import '../components/instruction_pop_up_content/practice_menu_instructions.dart';
+import '../components/pop_ups/practice_menu_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import 'menu_screen.dart';
 import 'endless_mode_screen.dart';

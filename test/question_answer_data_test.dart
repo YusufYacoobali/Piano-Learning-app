@@ -144,4 +144,19 @@ void main() {
         QuestionAnswerData.getPracticeQuestionIDs();
     expect(expectedQuestionIDsOrder, actualQuestionIDsInOrder);
   });
+
+  test('Check that updateQuestionStatisticsMap correctly updates the map', () {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> allQuestions = questions;
+    int questionID = allQuestions[0].questionID;
+    QuestionAnswerData.createDefaultMap();
+    Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? oldValue = initialMap[questionID];
+    expect(oldValue, 0);
+    QuestionAnswerData.updateQuestionStatisticsMap(questionID, 5);
+    Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? newValue = updatedMap[questionID];
+    expect(oldValue == newValue, false);
+    expect(newValue, 5);
+  });
 }
