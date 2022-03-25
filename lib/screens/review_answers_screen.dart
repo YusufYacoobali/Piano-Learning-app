@@ -126,10 +126,9 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
                         addResultBox(),
                         //change method name to add text
                         addMessageWrap('Correct Answer: ' +
-                            questionBrain
-                                .getCorrectAnswer()),
-                        addMessageWrap('Your Answer: ' +
-                            questionBrain.getUserAnswer()),
+                            questionBrain.getCorrectAnswer()),
+                        addMessageWrap(
+                            'Your Answer: ' + questionBrain.getUserAnswer()),
                       ],
                     ),
                   ],
@@ -148,6 +147,9 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     questionBrain.goBackToBeginning();
     for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
       allResults.add(createResultCard());
+      allResults.add(const SizedBox(
+        width: 10,
+      ));
       questionBrain.goToNextQuestion();
     }
     return allResults;
