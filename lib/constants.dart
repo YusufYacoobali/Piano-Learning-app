@@ -441,13 +441,13 @@ const double androidFlatOffset = 35;
 
 /// IOS symbol fonts
 /// Change these to change the symbol size
-const double iosSharpFontSize = 30;
-const double iosFlatFontSize = 45;
+const double iosSharpFontSize = 10;
+const double iosFlatFontSize = 15;
 
 /// IOS symbol offsets
 /// Change these to change the symbol position on screen
-const double iosSharpOffset = 0;
-const double iosFlatOffset = 15;
+const double iosSharpOffset = 50;
+const double iosFlatOffset = 65;
 
 /// QuestionAnswerData
 const int timeThreshold = 500;
