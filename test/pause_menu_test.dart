@@ -52,6 +52,24 @@ void main() {
     await _openPausedMenu(tester);
   }
 
+  /// shortcut for paused menu in lesson 5 screen.
+  _goToLesson5PauseMenu(WidgetTester tester) async {
+    await _goToLessonsScreen(tester);
+    await tester.ensureVisible(find.text('Lesson 5'));
+    await tester.tap(find.text('Lesson 5'));
+    await tester.pumpAndSettle();
+    await _openPausedMenu(tester);
+  }
+
+  /// shortcut for paused menu in lesson 5 screen.
+  _goToLesson6PauseMenu(WidgetTester tester) async {
+    await _goToLessonsScreen(tester);
+    await tester.ensureVisible(find.text('Lesson 6'));
+    await tester.tap(find.text('Lesson 6'));
+    await tester.pumpAndSettle();
+    await _openPausedMenu(tester);
+  }
+
   /// Group of tests fot paused menu buttons display testing
   group('Check lesson 1 paused menu successfully displayed:', () {
     testWidgets('menu text is displayed in the pause menu.',
@@ -170,6 +188,66 @@ void main() {
       const selectKey = Key('lesson selection button');
       await _goToLesson4PauseMenu(tester);
       expect(find.byKey(selectKey), findsOneWidget);
+    });
+  });
+
+  group('Check lesson 5 paused menu successfully displayed:', () {
+    testWidgets('menu text is displayed in the pause menu.',
+        (WidgetTester tester) async {
+      const textKey = Key('Menu title');
+      await _goToLesson5PauseMenu(tester);
+      expect(find.byKey(textKey), findsOneWidget);
+    });
+
+    testWidgets('home button is displayed in pause menu.',
+        (WidgetTester tester) async {
+      const homeKey = Key('home button');
+      await _goToLesson5PauseMenu(tester);
+      expect(find.byKey(homeKey), findsOneWidget);
+    });
+
+    testWidgets('play button is displayed in pause menu.',
+        (WidgetTester tester) async {
+      const playKey = Key('play button');
+      await _goToLesson5PauseMenu(tester);
+      expect(find.byKey(playKey), findsOneWidget);
+    });
+
+    testWidgets('lesson selection button is displayed in pause menu.',
+        (WidgetTester tester) async {
+      const selectKey = Key('lesson selection button');
+      await _goToLesson5PauseMenu(tester);
+      expect(find.byKey(selectKey), findsOneWidget);
+    });
+
+    group('Check lesson 6 paused menu successfully displayed:', () {
+      testWidgets('menu text is displayed in the pause menu.',
+          (WidgetTester tester) async {
+        const textKey = Key('Menu title');
+        await _goToLesson6PauseMenu(tester);
+        expect(find.byKey(textKey), findsOneWidget);
+      });
+
+      testWidgets('home button is displayed in pause menu.',
+          (WidgetTester tester) async {
+        const homeKey = Key('home button');
+        await _goToLesson6PauseMenu(tester);
+        expect(find.byKey(homeKey), findsOneWidget);
+      });
+
+      testWidgets('play button is displayed in pause menu.',
+          (WidgetTester tester) async {
+        const playKey = Key('play button');
+        await _goToLesson6PauseMenu(tester);
+        expect(find.byKey(playKey), findsOneWidget);
+      });
+
+      testWidgets('lesson selection button is displayed in pause menu.',
+          (WidgetTester tester) async {
+        const selectKey = Key('lesson selection button');
+        await _goToLesson6PauseMenu(tester);
+        expect(find.byKey(selectKey), findsOneWidget);
+      });
     });
   });
 
@@ -292,6 +370,68 @@ void main() {
         (WidgetTester tester) async {
       const selectKey = Key('lesson selection button');
       await _goToLesson4PauseMenu(tester);
+      await tester.tap(find.byKey(selectKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(LessonMenuScreen), findsOneWidget);
+    });
+  });
+
+  group(
+      'check that every buttons in the lesson 5 paused menu are correctly navigates once clicked:',
+      () {
+    testWidgets('home button navigates to the main menu.',
+        (WidgetTester tester) async {
+      const homeKey = Key('home button');
+      await _goToLesson5PauseMenu(tester);
+      await tester.tap(find.byKey(homeKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(MenuScreen), findsOneWidget);
+    });
+
+    testWidgets('play button navigates to the current lesson screen.',
+        (WidgetTester tester) async {
+      const playKey = Key('play button');
+      await _goToLesson5PauseMenu(tester);
+      await tester.tap(find.byKey(playKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(LessonScreen), findsOneWidget);
+    });
+
+    testWidgets('selection button navigates to the current lesson screen.',
+        (WidgetTester tester) async {
+      const selectKey = Key('lesson selection button');
+      await _goToLesson5PauseMenu(tester);
+      await tester.tap(find.byKey(selectKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(LessonMenuScreen), findsOneWidget);
+    });
+  });
+
+  group(
+      'check that every buttons in the lesson 6 paused menu are correctly navigates once clicked:',
+      () {
+    testWidgets('home button navigates to the main menu.',
+        (WidgetTester tester) async {
+      const homeKey = Key('home button');
+      await _goToLesson6PauseMenu(tester);
+      await tester.tap(find.byKey(homeKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(MenuScreen), findsOneWidget);
+    });
+
+    testWidgets('play button navigates to the current lesson screen.',
+        (WidgetTester tester) async {
+      const playKey = Key('play button');
+      await _goToLesson6PauseMenu(tester);
+      await tester.tap(find.byKey(playKey));
+      await tester.pumpAndSettle();
+      expect(find.byType(LessonScreen), findsOneWidget);
+    });
+
+    testWidgets('selection button navigates to the current lesson screen.',
+        (WidgetTester tester) async {
+      const selectKey = Key('lesson selection button');
+      await _goToLesson6PauseMenu(tester);
       await tester.tap(find.byKey(selectKey));
       await tester.pumpAndSettle();
       expect(find.byType(LessonMenuScreen), findsOneWidget);
