@@ -8,7 +8,6 @@ import '../components/question_skeleton.dart';
 import 'package:sight_reading_app/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
 import 'package:sight_reading_app/components/option_button.dart';
-import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 
 import '../helper.dart';
 import '../lessons_and_quizzes/question_finder.dart';
@@ -26,6 +25,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     super.initState();
     questionBrain = QuestionBrain(
         questions: QuestionFinder().getPracticeQuestionsForLesson(widget.lessonID, 10));
+    //print(questionBrain.questions); //This is empty in testing
     setScreenWidget();
 
     PauseMenu pauseMenuBuilder = PauseMenu(context: context);
@@ -172,7 +172,6 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     int score = questionBrain.getScore();
     final prefs = await SharedPreferences.getInstance();
     final List<String> quizRecords = await getRecordsForMode('quiz');
-    print(quizRecords);
     late int currentRecord;
     if (quizRecords[widget.lessonID - 1] == 'N/A') {
       currentRecord = 0;

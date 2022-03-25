@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/random_quiz_screen.dart';
-import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import '../components/app_bar_with_settings_icon.dart';
 import '../components/instruction_pop_up_content/quiz_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -87,16 +86,16 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
       future: quizRecords,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          modeRecordsCopy = defaultRecords;
+          quizRecordsCopy = defaultRecords;
           return _getScreenWidget(defaultRecords);
         }
         if (!snapshot.hasData) {
-          modeRecordsCopy = defaultRecords;
+          quizRecordsCopy = defaultRecords;
           return _getScreenWidget(defaultRecords);
         }
-        final List<String> modeRecords = snapshot.data;
-        modeRecordsCopy = modeRecords;
-        return _getScreenWidget(modeRecords);
+        final List<String> quizRecords = snapshot.data;
+        quizRecordsCopy = quizRecords;
+        return _getScreenWidget(quizRecords);
       },
     );
   }
