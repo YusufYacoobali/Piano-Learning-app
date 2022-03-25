@@ -46,14 +46,17 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   Widget addQuestionImage(int questionIndex) {
     NextNoteNotifier _nextNote = NextNoteNotifier();
     _nextNote.setNextNote(questionBrain.getSpecificNote(questionIndex));
+    MusicSheet sheet =
+        MusicSheet(_nextNote, questionBrain.getSpecificClef(questionIndex));
+    sheet.changeToRoundedBorder();
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
       child: SizedBox(
         height: 200.0,
         width: 240.0,
         child: CustomPaint(
-          painter: MusicSheet(
-              _nextNote, questionBrain.getSpecificClef(questionIndex)),
+          painter: sheet,
           child: Container(),
         ),
       ),
