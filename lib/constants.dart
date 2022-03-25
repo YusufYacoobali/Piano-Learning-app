@@ -276,7 +276,7 @@ const TextStyle pauseMenuTextStyle = TextStyle(
 );
 
 ButtonStyle pauseMenuButtonStyle = ElevatedButton.styleFrom(
-  primary: const Color(0xffa4508b),
+  primary: const Color.fromARGB(255, 192, 94, 163),
   onPrimary: Colors.grey.shade300,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10),
@@ -302,14 +302,10 @@ const Icon pauseMenuSelectionIcon = Icon(
 
 BoxDecoration cardBackground = BoxDecoration(
   borderRadius: BorderRadius.circular(10),
-  gradient: LinearGradient(
-    colors: [
-      const Color(0xff5f0a87).withOpacity(0.8),
-      const Color(0xffa4508b).withOpacity(0.5),
-    ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  ),
+  gradient: LinearGradient(colors: [
+    const Color(0xff5f0a87).withOpacity(1.0),
+    const Color(0xffa4508b).withOpacity(1.0),
+  ], begin: Alignment.topLeft, end: Alignment.bottomRight),
 );
 
 const Map<String, String> sharpFlatEquivalence = <String, String>{
@@ -387,7 +383,7 @@ const Icon helperButton = Icon(
 
 const Icon helpPlayButtonStyle = Icon(
   Icons.play_arrow,
-  size: 55.0,
+  size: 40.0,
 );
 
 const TextStyle helperTextStyle = TextStyle(

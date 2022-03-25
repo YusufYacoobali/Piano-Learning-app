@@ -95,36 +95,40 @@ class _HelperScreenState extends State<HelperScreen> {
       child: Card(
         key: const Key('card'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        child: SizedBox(
-          height: 300.0,
-          width: 500.0,
-          child: Container(
-            decoration: cardBackground,
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    const SizedBox(height: 30.0),
-                    Wrap(
-                      alignment: WrapAlignment.center,
-                      children: [
-                        //const SizedBox(width: 10.0),
-                        cardNoteImage(index),
-                        Column(
-                          children: [
-                            const SizedBox(height: 65.0),
-                            cardText(index),
-                          ],
-                        ),
-                      ],
-                    ),
-                    //const SizedBox(height: 10.0),
-                    cardPlayIcon(index),
-                  ],
-                ),
-              ],
-            ),
+        child: DecoratedBox(
+          decoration: cardBackground,
+          //height: 300.0,
+          //width: 500.0,
+          child: Wrap(
+            direction: Axis.vertical,
+            //alignment: WrapAlignment.center,
+            //spacing: 2.0,
+            children: [
+              Column(
+                children: [
+                  const SizedBox(height: 20.0),
+                  Wrap(
+                    direction: Axis.horizontal,
+                    runSpacing: 20,
+                    spacing: 5,
+                    //alignment: WrapAlignment.center,
+                    children: [
+                      //const SizedBox(width: 10.0),
+                      cardNoteImage(index),
+                      Column(
+                        children: [
+                          const SizedBox(height: 30.0),
+                          cardText(index),
+                        ],
+                      ),
+                      const SizedBox(width: 10.0),
+                    ],
+                  ),
+                  cardPlayIcon(index),
+                  const SizedBox(height: 5.0),
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -143,9 +147,9 @@ class _HelperScreenState extends State<HelperScreen> {
   Widget cardText(index) {
     return Wrap(
       key: const Key('card text'),
-      spacing: 10.0,
-      runSpacing: 10.0,
-      alignment: WrapAlignment.center,
+      //spacing: 10.0,
+      //runSpacing: 10.0,
+      alignment: WrapAlignment.start,
       children: [
         Text(
           helperBrain.getHelperNoteName(index),
@@ -169,16 +173,13 @@ class _HelperScreenState extends State<HelperScreen> {
     /// Makes rounded border for helper images
     sheet.changeToRoundedBorder();
 
-    return ClipRRect(
+    return SizedBox(
       key: const Key('card image'),
-      //borderRadius: BorderRadius.circular(15.0),
-      child: SizedBox(
-        height: 200.0,
-        width: 280.0,
-        child: CustomPaint(
-          painter: sheet,
-          child: Container(),
-        ),
+      height: 200.0,
+      width: 260.0,
+      child: CustomPaint(
+        painter: sheet,
+        child: Container(),
       ),
     );
   }

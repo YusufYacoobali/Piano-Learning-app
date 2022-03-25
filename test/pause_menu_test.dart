@@ -93,9 +93,9 @@ void main() {
       expect(find.byKey(playKey), findsOneWidget);
     });
 
-    testWidgets('lesson selection button is displayed in pause menu.',
+    testWidgets('selection button is displayed in pause menu.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson1PauseMenu(tester);
       expect(find.byKey(selectKey), findsOneWidget);
     });
@@ -123,9 +123,9 @@ void main() {
       expect(find.byKey(playKey), findsOneWidget);
     });
 
-    testWidgets('lesson selection button is displayed in pause menu.',
+    testWidgets('selection button is displayed in pause menu.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson2PauseMenu(tester);
       expect(find.byKey(selectKey), findsOneWidget);
     });
@@ -153,9 +153,9 @@ void main() {
       expect(find.byKey(playKey), findsOneWidget);
     });
 
-    testWidgets('lesson selection button is displayed in pause menu.',
+    testWidgets('selection button is displayed in pause menu.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson3PauseMenu(tester);
       expect(find.byKey(selectKey), findsOneWidget);
     });
@@ -183,9 +183,9 @@ void main() {
       expect(find.byKey(playKey), findsOneWidget);
     });
 
-    testWidgets('lesson selection button is displayed in pause menu.',
+    testWidgets('selection button is displayed in pause menu.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson4PauseMenu(tester);
       expect(find.byKey(selectKey), findsOneWidget);
     });
@@ -213,9 +213,9 @@ void main() {
       expect(find.byKey(playKey), findsOneWidget);
     });
 
-    testWidgets('lesson selection button is displayed in pause menu.',
+    testWidgets('selection button is displayed in pause menu.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson5PauseMenu(tester);
       expect(find.byKey(selectKey), findsOneWidget);
     });
@@ -242,9 +242,9 @@ void main() {
         expect(find.byKey(playKey), findsOneWidget);
       });
 
-      testWidgets('lesson selection button is displayed in pause menu.',
+      testWidgets('selection button is displayed in pause menu.',
           (WidgetTester tester) async {
-        const selectKey = Key('lesson selection button');
+        const selectKey = Key('selection button');
         await _goToLesson6PauseMenu(tester);
         expect(find.byKey(selectKey), findsOneWidget);
       });
@@ -275,7 +275,7 @@ void main() {
 
     testWidgets('selection button navigates to the current lesson screen.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson1PauseMenu(tester);
       await tester.tap(find.byKey(selectKey));
       await tester.pumpAndSettle();
@@ -306,7 +306,7 @@ void main() {
 
     testWidgets('selection button navigates to the current lesson screen.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson2PauseMenu(tester);
       await tester.tap(find.byKey(selectKey));
       await tester.pumpAndSettle();
@@ -337,7 +337,7 @@ void main() {
 
     testWidgets('selection button navigates to the current lesson screen.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson3PauseMenu(tester);
       await tester.tap(find.byKey(selectKey));
       await tester.pumpAndSettle();
@@ -368,7 +368,7 @@ void main() {
 
     testWidgets('selection button navigates to the current lesson screen.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson4PauseMenu(tester);
       await tester.tap(find.byKey(selectKey));
       await tester.pumpAndSettle();
@@ -399,7 +399,7 @@ void main() {
 
     testWidgets('selection button navigates to the current lesson screen.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson5PauseMenu(tester);
       await tester.tap(find.byKey(selectKey));
       await tester.pumpAndSettle();
@@ -430,7 +430,7 @@ void main() {
 
     testWidgets('selection button navigates to the current lesson screen.',
         (WidgetTester tester) async {
-      const selectKey = Key('lesson selection button');
+      const selectKey = Key('selection button');
       await _goToLesson6PauseMenu(tester);
       await tester.tap(find.byKey(selectKey));
       await tester.pumpAndSettle();
