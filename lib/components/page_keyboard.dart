@@ -15,8 +15,6 @@ class PageKeyboard extends StatefulWidget {
 }
 
 class _PageKeyboardState extends State<PageKeyboard> {
-
-  ///manages swipe detection
   late final PageController controller;
 
   @override
