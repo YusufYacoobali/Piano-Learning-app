@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/page_keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
-import '../components/pop_ups/play_along_ending_instructions.dart';
+import '../components/pop_ups/play_along_ending_pop_up.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';

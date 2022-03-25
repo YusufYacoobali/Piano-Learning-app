@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:provider/provider.dart';
-import 'package:sight_reading_app/storage_reader_writer.dart';
+
+import '../storage_reader_writer.dart';
 import '../theme_listener.dart';
 import '../constants.dart' as constants;
 
+/// Allows settings to be changed
 class _SettingsScreenState extends State<SettingsScreen> {
+
+  /// Reads and writes the settings to storage
   StorageReaderWriter settings = StorageReaderWriter();
 
   @override
@@ -71,6 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     SettingsSection(
                       title: const Text('General'),
                       tiles: <SettingsTile>[
+
                         /// Adjust volume
                         SettingsTile(
                           title: const Text('Volume'),

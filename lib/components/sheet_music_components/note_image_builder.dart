@@ -94,7 +94,7 @@ class NoteImageBuilder {
     double x = note.pos - 27;
     double position = _baseLine - note.height - constants.androidSharpOffset;
     if (Platform.isIOS) {
-      font = constants.iosTrebleClefFontSize;
+      font = constants.iosSharpFontSize;
 
       /// Change this to change ios sharp position
       position = _baseLine - constants.iosSharpOffset;
