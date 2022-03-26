@@ -134,7 +134,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     // }
     _endMenu.show();
     List displayNotification = await storage.displayEndlessNotification(
-        _difficulty, _counter.score, _sheet.getClef());
+        _difficulty, _counter.score, _sheet.clef);
     if (displayNotification[0]) {
       inAppNotification(context, displayNotification[1]);
     }
