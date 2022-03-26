@@ -303,7 +303,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'Have you noticed that the symbol at the far left has changed? This is called the Base clef which means the notes will be played on the lower part of the piano. The positions of the notes on the staff are different from the Treble clef. This is position of C on the Base clef which is under the middle line. Now press C on the keyboard.',
+        'The clef symbol has changed! This is the Base clef and notes are played on the lower part of the piano. The positions of the notes will be different. This is C on the Base clef which is under the middle line. Now press C on the keyboard. MOVE THE KEYBOARD TO THE LEFT BEFORE ANSWERING.',
     correctAnswer: Note(name: 'C3'),
     questionID: 41,
     lessonID: 4,
@@ -403,7 +403,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G on the keyboard.',
+        'THIS LESSON IS IN BASS CLEF, MOVE THE KEYBOARD TO THE LEFT BEFORE ANSWERING.Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G on the keyboard.',
     correctAnswer: Note(name: 'G3'),
     questionID: 54,
     lessonID: 5,
@@ -411,16 +411,16 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'This name is A (La) on the Base clef. This time A is directly below the . Now press A on the keyboard.',
-    correctAnswer: Note(name: 'A2'),
+        'This name is A (La) on the Base clef. This time A is a note crossed by the top line of the staff. Now press A on the keyboard.',
+    correctAnswer: Note(name: 'A3'),
     questionID: 55,
     lessonID: 5,
   ),
   Question(
     clef: Clef.bass,
     question:
-        'This is B (Ti) on the Base clef. It is right below C on the second line from the bottom. Now press B on the keyboard.',
-    correctAnswer: Note(name: 'B2'),
+        'This is B (Ti) on the Base clef. It is on top of the first line from the staff. Now press B on the keyboard.',
+    correctAnswer: Note(name: 'B3'),
     questionID: 56,
     lessonID: 5,
   ),
@@ -430,14 +430,14 @@ final List<Question> questions = [
     clef: Clef.bass,
     question:
         'Great Job. Now you have learnt to read the basic notes on the Base clef. Try answering the rest of the questions without help. What note is this?',
-    correctAnswer: Note(name: 'A2'),
+    correctAnswer: Note(name: 'A3'),
     questionID: 57,
     lessonID: 5,
   ),
   Question(
     clef: Clef.bass,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'B2'),
+    correctAnswer: Note(name: 'B3'),
     questionID: 58,
     lessonID: 5,
   ),
@@ -486,7 +486,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'B2'),
+    correctAnswer: Note(name: 'B3'),
     questionID: 65,
     lessonID: 5,
   ),
@@ -503,7 +503,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'Notice that this note is higher than B in the previous question. Press C on the keyboard.',
+        'Notice that this note is higher than B in the previous question. MOVE THE KEYBOARD TO THE RIGHT FOR HIGH PITCH and press C on the keyboard.',
     correctAnswer: Note(name: 'C5'),
     questionID: 67,
     lessonID: 6,
@@ -513,7 +513,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'Great Job. All notes will repeat the pattern C-D-E-F-G-A-B before going back to C as you go higher up on the musical staff. For an actual keyboard/piano, you will go further to the right. Try answering the rest of the questions without help. What note is this?',
+        'Great Job. All notes will repeat the pattern C-D-E-F-G-A-B before going back to C as you go higher up the musical staff. You will go further to the right when playing higher. What note is this?',
     correctAnswer: Note(name: 'B4'),
     questionID: 68,
     lessonID: 6,
