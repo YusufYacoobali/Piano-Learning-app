@@ -110,8 +110,9 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
       lessonButton('Lesson 3', 3), // GestureDetector
       lessonButton('Lesson 4', 4), // GestureDetector
       lessonButton('Lesson 5', 5), // GestureDetector
-      lessonButton('Lesson 6', 6)
-    ]; // Gestu
+      lessonButton('Lesson 6', 6),
+      lessonButton('Lesson 7', 7)
+    ]; // Gesture Detector
   }
 }
 
