@@ -473,6 +473,20 @@ const TextStyle helperTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+ButtonStyle helperButtonStyle = ElevatedButton.styleFrom(
+  primary: const Color.fromARGB(255, 192, 94, 163),
+  onPrimary: Colors.grey.shade300,
+  textStyle: const TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  ),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10),
+  ),
+  fixedSize: const Size(190.0, 50.0),
+  elevation: 5.0,
+);
+
 /// Clef symbols
 const String trebleClef = '𝄞';
 const String bassClef = '𝄢';

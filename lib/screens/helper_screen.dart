@@ -67,21 +67,11 @@ class _HelperScreenState extends State<HelperScreen> {
           child: SingleChildScrollView(
             controller: _helperController,
             scrollDirection: Axis.horizontal,
-            child: Wrap(
-              spacing: 15.0,
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //crossAxisAlignment: CrossAxisAlignment.center,
+            child: Row(
+              //spacing: 15.0,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: getAllHelperCards(),
-              /*[
-                  cardHelper(0),
-                  cardHelper(1),
-                  cardHelper(2),
-                  cardHelper(3),
-                  cardHelper(4),
-                  cardHelper(5),
-                  cardHelper(6),
-                  cardHelper(7),
-                ],*/
             ),
           ),
         ),
@@ -95,40 +85,39 @@ class _HelperScreenState extends State<HelperScreen> {
       child: Card(
         key: const Key('card'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        child: DecoratedBox(
-          decoration: cardBackground,
-          //height: 300.0,
-          //width: 500.0,
-          child: Wrap(
-            direction: Axis.vertical,
-            //alignment: WrapAlignment.center,
-            //spacing: 2.0,
-            children: [
-              Column(
-                children: [
-                  const SizedBox(height: 20.0),
-                  Wrap(
-                    direction: Axis.horizontal,
-                    runSpacing: 20,
-                    spacing: 5,
-                    //alignment: WrapAlignment.center,
-                    children: [
-                      //const SizedBox(width: 10.0),
-                      cardNoteImage(index),
-                      Column(
-                        children: [
-                          const SizedBox(height: 30.0),
-                          cardText(index),
-                        ],
-                      ),
-                      const SizedBox(width: 10.0),
-                    ],
-                  ),
-                  cardPlayIcon(index),
-                  const SizedBox(height: 5.0),
-                ],
-              ),
-            ],
+        child: SizedBox(
+          height: 300.0,
+          width: 500.0,
+          child: Container(
+            decoration: cardBackground,
+            child: Wrap(
+              direction: Axis.vertical,
+              alignment: WrapAlignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20.0),
+                    Wrap(
+                      direction: Axis.horizontal,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        cardNoteImage(index),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const SizedBox(height: 30.0),
+                            cardText(index),
+                            const SizedBox(height: 10.0),
+                            cardPlayIcon(index),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -186,9 +175,11 @@ class _HelperScreenState extends State<HelperScreen> {
 
   ///A widget that holds the icon button which can play note sound when pressed.
   Widget cardPlayIcon(index) {
-    return IconButton(
+    return ElevatedButton.icon(
       key: const Key('card button'),
       icon: helpPlayButtonStyle,
+      label: const Text('Play'),
+      style: helperButtonStyle,
       onPressed: () {
         playSound.play('${helperBrain.getHelperNoteSoundName(index)}.wav');
       },
