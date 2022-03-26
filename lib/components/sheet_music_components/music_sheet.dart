@@ -59,6 +59,8 @@ class MusicSheet extends CustomPainter {
     StaveBuilder.drawStave(canvas, size, baseLine, start, start + canvasWidth,
         clef == Clef.treble);
 
+    drawNotes();
+
     /// Draws the next note
     if (nextNote.hasNextNote) {
       clear();
@@ -80,6 +82,13 @@ class MusicSheet extends CustomPainter {
         notesOnStaves.add(newNote);
         noteImageBuilder.drawNote(newNote);
       }
+    }
+  }
+
+  /// Draws all the notes on the screen
+  void drawNotes() {
+    for (NoteOnStave note in notesOnStaves) {
+      noteImageBuilder.drawNote(note);
     }
   }
 
