@@ -4,6 +4,9 @@ import 'package:sight_reading_app/components/sheet_music_components/music_sheet.
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 import '../components/helper/helper_bass_note_list.dart';
 import '../components/helper/helper_clef_note_list.dart';
+
+///import blank helper list
+import '../components/helper/helper_blank_list.dart';
 import '../constants.dart';
 import 'package:sight_reading_app/components/helper/helper_list.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -29,11 +32,18 @@ class _HelperScreenState extends State<HelperScreen> {
 
   final playSound = AudioCache();
 
+  /// Make widget visiable or not.
+  late bool isVisiable;
+
   /// This number is representing the current position of the helper list
   late int index;
 
   ///List of helper list available
-  List<HelperList> helperList = [bassNoteImageNameList, clefNoteImageNameList];
+  List<HelperList> helperList = [
+    bassNoteImageNameList,
+    clefNoteImageNameList,
+    blankList
+  ];
 
   ///helperBrain provides the unique number for helping locate the list we need.
   @override
@@ -109,7 +119,10 @@ class _HelperScreenState extends State<HelperScreen> {
                             const SizedBox(height: 30.0),
                             cardText(index),
                             const SizedBox(height: 10.0),
-                            cardPlayIcon(index),
+                            if (getWidgetVisiable())
+                              cardPlayIcon(index)
+                            else
+                              cardDescription(index),
                           ],
                         ),
                       ],
@@ -143,6 +156,22 @@ class _HelperScreenState extends State<HelperScreen> {
         Text(
           helperBrain.getHelperNoteName(index),
           style: helperTextStyle,
+        ),
+      ],
+    );
+  }
+
+  ///NEW FEATURE:
+  ///Widget for helper description
+  ///fixed size of text because of SizeBox
+  Widget cardDescription(index) {
+    return Wrap(
+      key: const Key('card description'),
+      alignment: WrapAlignment.start,
+      children: [
+        Text(
+          helperBrain.getHelperDescription(index),
+          style: const TextStyle(fontSize: 20.0),
         ),
       ],
     );
@@ -184,5 +213,13 @@ class _HelperScreenState extends State<HelperScreen> {
         playSound.play('${helperBrain.getHelperNoteSoundName(index)}.wav');
       },
     );
+  }
+
+  bool getWidgetVisiable() {
+    if (widget.helperNum > 2) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

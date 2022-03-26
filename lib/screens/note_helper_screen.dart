@@ -33,6 +33,7 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
           children: <Widget>[
             bassClefNoteHelperbutton(),
             trebleClefNoteHelperbutton(),
+            blankHelperbutton(),
           ],
         ),
       ),
@@ -66,6 +67,23 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
           MaterialPageRoute(builder: (context) {
             return const HelperScreen(
               helperNum: 2,
+            );
+          }),
+        );
+      },
+    );
+  }
+
+  /// This is the blank helper button for Minnie.
+  Widget blankHelperbutton() {
+    return MenuButton(
+      buttonChild: const ButtonText(buttonText: 'Blank button'),
+      onPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return const HelperScreen(
+              helperNum: 3,
             );
           }),
         );

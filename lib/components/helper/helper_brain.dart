@@ -28,6 +28,10 @@ class HelperBrain {
     return helpers.helperList[currentHelperListPosition].noteSound;
   }
 
+  String getHelperDescription(currentHelperListPosition) {
+    return helpers.helperList[currentHelperListPosition].description;
+  }
+
   ///Get the length of the helper's list.
   int getNumbersOfHelperNote() {
     return helpers.helperList.length;
