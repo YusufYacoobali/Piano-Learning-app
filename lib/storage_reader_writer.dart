@@ -136,6 +136,8 @@ class StorageReaderWriter {
     }
   }
 
+  //all achievement related information is fetched from storage to be displayed
+  //used for achievement screen
   Future<Map<String, int>> loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -258,6 +260,8 @@ class StorageReaderWriter {
     return values;
   }
 
+  //used in lesson menu screen to display right colour
+  // if lesson is complete, it is green
   Future<List<bool>> loadLessonValues() async {
     final prefs = await SharedPreferences.getInstance();
     List<bool> values = [];
@@ -265,16 +269,17 @@ class StorageReaderWriter {
     for (int x = 0; x < numOfLessons; x++) {
       values.add(prefs.getBool('lesson-num-$x') ?? false);
     }
-
     return values;
   }
 
+  //saves lesson as completed
   Future<void> saveCompletedLesson(lessonNum) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('lesson-num-$lessonNum', true);
     //print("lesson $lessonNum set to pass");
   }
 
+  //saves quiz as completed
   Future<void> saveCompletedQuiz() async {
     final prefs = await SharedPreferences.getInstance();
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
@@ -388,107 +393,24 @@ class StorageReaderWriter {
     write('theme', defaultTheme);
   }
 
-  Future<void> _resetLessons() async {
+  //resets all lesson data related to achievements
+  void _resetLessons() async {
     final prefs = await SharedPreferences.getInstance();
 
     for (int x = 0; x < numOfLessons; x++) {
       prefs.setBool('lesson-num-$x', false);
     }
-    //print("lessons reset");
   }
 
-  Future<void> _resetQuizzes() async {
+  //resets all quiz data related to achievements
+  void _resetQuizzes() async {
     final prefs = await SharedPreferences.getInstance();
 
     prefs.setInt('completed_quizzes', 0);
-    //print("quizzes reset");
   }
 
-  Future<List> displayLessonNotification() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    String text = "";
-    int lessonsPassed = 0;
-    bool achieved = true;
-
-    for (int x = 0; x < numOfLessons; x++) {
-      bool value = prefs.getBool('lesson-num-$x') ?? false;
-      if (value) lessonsPassed += 1;
-      //print('adding the $x one');
-    }
-
-    if (lessonsPassed == 1) {
-      text = "You completed 1 lesson";
-    } else if (lessonsPassed == 5) {
-      text = "You completed 5 lessons";
-      //TODO: make final adjust on num of lesssons and quizzes
-    } else if (lessonsPassed == numOfLessons) {
-      text = "You completed all lessons";
-    } else {
-      achieved = false;
-    }
-
-    return [achieved, text];
-
-    // if (lessonsPassed == 1 ||
-    //     lessonsPassed == 5 ||
-    //     lessonsPassed == numOfLessons) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-  }
-
-  Future<List> displayQuizNotification() async {
-    final prefs = await SharedPreferences.getInstance();
-    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
-
-    String text = "";
-    bool achieved = true;
-
-    if (completedQuizzes == 1) {
-      text = "You completed 1 quiz";
-    } else if (completedQuizzes == 5) {
-      text = "You completed 5 quizzes";
-      //TODO: make final adjust on num of lesssons and quizzes
-    } else if (completedQuizzes == numOfquizzes) {
-      text = "You completed all quizzes";
-    } else {
-      achieved = false;
-    }
-
-    return [achieved, text];
-
-    // if (completedQuizzes == 1 ||
-    //     completedQuizzes == 5 ||
-    //     completedQuizzes == numOfquizzes) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-  }
-
-  //only executed if prev score is beaten
-  Future<List> displaySpeedrunNotification(time, score) async {
-    final prefs = await SharedPreferences.getInstance();
-    bool achieved =
-        (prefs.getBool('${time}_second_speedrun_achievement') ?? false);
-
-    String text = "";
-
-    if (achieved) {
-      return [false, text];
-    } else {
-      if (score >= time / 2) {
-        prefs.setBool('${time}_second_speedrun_achievement', true);
-        text = "You got 50% in this speedrun";
-        return [true, text];
-      }
-      return [false, text];
-    }
-  }
-
-  _resetSpeedrunAchievements() async {
+  //resets all speedrun data related to achievements
+  void _resetSpeedrunAchievements() async {
     final prefs = await SharedPreferences.getInstance();
 
     for (int x = 10; x < 70; x += 10) {
@@ -496,7 +418,8 @@ class StorageReaderWriter {
     }
   }
 
-  _resetSpeedrunRecords() async {
+  //resets all speedrun records
+  void _resetSpeedrunRecords() async {
     final prefs = await SharedPreferences.getInstance();
 
     for (int x = 10; x < 70; x += 10) {
@@ -504,53 +427,20 @@ class StorageReaderWriter {
     }
   }
 
-  displayEndlessNotification(difficulty, score, clef) async {
+  //resets all play along data related to achievements
+  void _resetPlayAlongAchievements() async {
     final prefs = await SharedPreferences.getInstance();
 
-    String level = difficulty.toString().toLowerCase();
-    // prefs.setBool('endless-$clef-$level-achievement', false);
-    bool achieved =
-        (prefs.getBool('endless-$clef-$level-achievement') ?? false);
-
-    //bool toDisplay = false;
-    String text = "";
-
-    //print('endless-$clef-$level-achievement');
-
-    if (achieved) {
-      //print("here");
-      return [false, text];
-    } else {
-      prefs.setBool('endless-$clef-$level-achievement', true);
-      if (level == 'beginner') {
-        if (score >= 10) {
-          text = "You scored 10 or more in this endless mode";
-          return [true, text];
-        } else {
-          return [false, text];
-        }
-      } else if (level == 'intermediate') {
-        if (score >= 20) {
-          text = "You scored 20 or more in this endless mode";
-          return [true, text];
-        } else {
-          return [false, text];
-        }
-      } else if (level == 'expert') {
-        if (score >= 30) {
-          text = "You scored 30 or more in this endless mode";
-          return [true, text];
-        } else {
-          return [false, text];
-        }
-      } else {
-        return [false, text];
+    for (String track in trackNames) {
+      for (Object difficulty in difficultyList) {
+        prefs.setBool('${track}_${difficulty}_play_along_achievement', false);
       }
     }
   }
 
-  //doesnt work for some reason
-  Future<void> _resetEndlessAchievements() async {
+  //TODO i believe this doesnt work for some reason
+  //resets all endless data related to achievements
+  void _resetEndlessAchievements() async {
     final prefs = await SharedPreferences.getInstance();
 
     for (String clef in <String>['treble', 'bass']) {
@@ -564,6 +454,125 @@ class StorageReaderWriter {
     //   endless-Clef.treble-beginner-achievement
   }
 
+  //decides whether a lesson achievement needs to be shown
+  //if yes, the text of the achievement is also sent
+  Future<List> displayLessonNotification() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String text = "";
+    int lessonsPassed = 0;
+    bool achieved = true;
+
+    for (int x = 0; x < numOfLessons; x++) {
+      bool value = prefs.getBool('lesson-num-$x') ?? false;
+      if (value) lessonsPassed += 1;
+    }
+
+    if (lessonsPassed == 1) {
+      text = "You completed 1 lesson";
+    } else if (lessonsPassed == 5) {
+      text = "You completed 5 lessons";
+    } else if (lessonsPassed == numOfLessons) {
+      text = "You completed all lessons";
+    } else {
+      achieved = false;
+    }
+
+    return [achieved, text];
+  }
+
+  //decides whether a quiz achievement needs to be shown
+  //if yes, the text of the achievement is also sent
+  Future<List> displayQuizNotification() async {
+    final prefs = await SharedPreferences.getInstance();
+    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+
+    String text = "";
+    bool achieved = true;
+
+    if (completedQuizzes == 1) {
+      text = "You completed 1 quiz";
+    } else if (completedQuizzes == 5) {
+      text = "You completed 5 quizzes";
+    } else if (completedQuizzes == numOfquizzes) {
+      text = "You completed all quizzes";
+    } else {
+      achieved = false;
+    }
+
+    return [achieved, text];
+  }
+
+  //decides whether a speedrun achievement needs to be shown
+  //if yes, the text of the achievement is also sent
+  Future<List> displaySpeedrunNotification(time, score) async {
+    final prefs = await SharedPreferences.getInstance();
+    bool achieved =
+        (prefs.getBool('${time}_second_speedrun_achievement') ?? false);
+
+    bool toDisplay = true;
+
+    String text = "";
+
+    if (achieved) {
+      toDisplay = false;
+    } else {
+      if (score >= time / 2) {
+        prefs.setBool('${time}_second_speedrun_achievement', true);
+        text = "You got 50% or more in this speedrun";
+      } else {
+        toDisplay = false;
+      }
+    }
+    return [toDisplay, text];
+  }
+
+  //decides whether a endless achievement needs to be shown
+  //if yes, the text of the achievement is also sent
+  displayEndlessNotification(difficulty, score, clef) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String level = difficulty.toString().toLowerCase();
+    // prefs.setBool('endless-$clef-$level-achievement', false);
+    bool achieved =
+        (prefs.getBool('endless-$clef-$level-achievement') ?? false);
+
+    bool toDisplay = true;
+    String text = "";
+
+    if (achieved) {
+      toDisplay = false;
+    } else {
+      if (level == 'beginner') {
+        if (score >= 10) {
+          text = "You scored 10 or more in this endless mode";
+          prefs.setBool('endless-$clef-$level-achievement', true);
+        } else {
+          toDisplay = false;
+        }
+      } else if (level == 'intermediate') {
+        if (score >= 20) {
+          text = "You scored 20 or more in this endless mode";
+          prefs.setBool('endless-$clef-$level-achievement', true);
+        } else {
+          toDisplay = false;
+        }
+      } else if (level == 'expert') {
+        if (score >= 30) {
+          text = "You scored 30 or more in this endless mode";
+          prefs.setBool('endless-$clef-$level-achievement', true);
+        } else {
+          toDisplay = false;
+        }
+      } else {
+        toDisplay = false;
+      }
+      return [toDisplay, text];
+    }
+  }
+
+  //decides whether a play along achievement needs to be shown
+  //if yes, the text of the achievement is also sent
   displayPlayAlongNotification(difficulty, track, hitCounter) async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -577,34 +586,19 @@ class StorageReaderWriter {
         (prefs.getBool('${track}_${difficulty}_play_along_achievement') ??
             false);
 
-    bool toDisplay = false;
+    bool toDisplay = true;
     String text = "";
 
-    // print(
-    //     '${track}_${difficulty}_play_along_achievement____score:${percentage}');
-
     if (achieved) {
-      return [toDisplay, text];
+      toDisplay = false;
     } else {
       if (percentage == '100') {
         prefs.setBool('${track}_${difficulty}_play_along_achievement', true);
         text = "You got 100% in this play along, good job";
-        return [true, text];
       } else {
-        return [false, text];
+        toDisplay = false;
       }
+      return [toDisplay, text];
     }
   }
-
-  _resetPlayAlongAchievements() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    for (String track in trackNames) {
-      for (Object difficulty in difficultyList) {
-        prefs.setBool('${track}_${difficulty}_play_along_achievement', false);
-      }
-    }
-  }
-
-  //void _resetAchievements() {}
 }

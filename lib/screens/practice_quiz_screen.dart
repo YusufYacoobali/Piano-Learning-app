@@ -49,22 +49,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     }
   }
 
-  void getResultsScreen(
-      String title, double percentage, QuestionBrain questionBrain) {
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ResultsScreen(
-                score: percentage,
-                title: title,
-                questionBrain: questionBrain,
-              )),
-    );
-  }
-
   /// Create result screen which displays after the user finishes all questions
-  getResults() async {
+  void getResults() async {
     _updateRecords();
     String title = '';
     double percentage =
@@ -82,6 +68,20 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         inAppNotification(context, displayNotification[1]);
       }
     }
+  }
+
+  void getResultsScreen(
+      String title, double percentage, QuestionBrain questionBrain) {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultsScreen(
+                score: percentage,
+                title: title,
+                questionBrain: questionBrain,
+              )),
+    );
   }
 
   @override
