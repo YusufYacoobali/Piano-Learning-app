@@ -53,7 +53,7 @@ class MovingMusicSheet extends MusicSheet {
       _currentNoteStart = _currentNoteEnd + 100;
     }
 
-    removeNotes(canvas, size);
+    removeNotes();
 
     /// Draws the stave and green area
     StaveBuilder.makeBackground(canvas, size, 0, size.width, isRoundedBorder);
@@ -82,15 +82,9 @@ class MovingMusicSheet extends MusicSheet {
     end();
   }
 
-  /// Draws all the notes on the screen
-  void drawNotes() {
-    for (NoteOnStave note in notesOnStaves) {
-      noteImageBuilder.drawNote(note);
-    }
-  }
-
   /// Removes notes that are beyond the end line
-  void removeNotes(Canvas canvas, Size size) {
+  @override
+  void removeNotes() {
     for (int count = 0; count < notesOnStaves.length; count++) {
       if (notesOnStaves[count].pos < endLine) {
         notesOnStaves.remove(notesOnStaves[count]);

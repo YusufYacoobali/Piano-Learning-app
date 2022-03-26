@@ -59,10 +59,24 @@ class MusicSheet extends CustomPainter {
     StaveBuilder.drawStave(canvas, size, baseLine, start, start + canvasWidth,
         clef == Clef.treble);
 
+    removeNotes();
+
     /// Draws the next note
     if (nextNote.hasNextNote) {
       clear();
       drawNewNote();
+    }
+
+    drawNotes();
+  }
+
+  /// Removes notes that are beyond the end line
+  void removeNotes() {
+    if (notesOnStaves.length > 1) {
+      int excess = notesOnStaves.length - 1;
+      for (int i = 0; i < excess; ++i) {
+        notesOnStaves.removeLast();
+      }
     }
   }
 
@@ -80,6 +94,13 @@ class MusicSheet extends CustomPainter {
         notesOnStaves.add(newNote);
         noteImageBuilder.drawNote(newNote);
       }
+    }
+  }
+
+  /// Draws all the notes on the screen
+  void drawNotes() {
+    for (NoteOnStave note in notesOnStaves) {
+      noteImageBuilder.drawNote(note);
     }
   }
 
