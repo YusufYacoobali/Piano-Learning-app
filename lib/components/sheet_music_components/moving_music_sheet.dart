@@ -82,13 +82,6 @@ class MovingMusicSheet extends MusicSheet {
     end();
   }
 
-  /// Draws all the notes on the screen
-  void drawNotes() {
-    for (NoteOnStave note in notesOnStaves) {
-      noteImageBuilder.drawNote(note);
-    }
-  }
-
   /// Removes notes that are beyond the end line
   void removeNotes(Canvas canvas, Size size) {
     for (int count = 0; count < notesOnStaves.length; count++) {
