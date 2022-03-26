@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
-import 'package:sight_reading_app/question.dart';
-import 'package:sight_reading_app/question_brain.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 
 void main() {
   List<Question> getFakeQuestions() {

@@ -15,7 +15,6 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
   'Light': ThemeData.light(),
   'Pink': ThemeData.dark().copyWith(
     backgroundColor: const Color.fromARGB(255, 200, 130, 255),
-    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
     scaffoldBackgroundColor: const Color.fromARGB(255, 200, 130, 255),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 200, 110, 255),
@@ -524,13 +523,13 @@ const double androidFlatOffset = 35;
 
 /// IOS symbol fonts
 /// Change these to change the symbol size
-const double iosSharpFontSize = 30;
-const double iosFlatFontSize = 45;
+const double iosSharpFontSize = 40;
+const double iosFlatFontSize = 60;
 
 /// IOS symbol offsets
 /// Change these to change the symbol position on screen
-const double iosSharpOffset = 0;
-const double iosFlatOffset = 15;
+const double iosSharpOffset = 55;
+const double iosFlatOffset = 30;
 
 /// QuestionAnswerData
 const int timeThreshold = 500;

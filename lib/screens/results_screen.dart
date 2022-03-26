@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/review_answers_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
-import '../question_brain.dart';
+import '../lessons_and_quizzes/question_brain.dart';
 
 class _ResultsScreenState extends State<ResultsScreen> {
   @override
@@ -92,19 +92,16 @@ class _ResultsScreenState extends State<ResultsScreen> {
               child: const Text('Exit'),
             ),
             ElevatedButton(
-              // TODO: Implement review answers functionality
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
                     return ReviewAnswersScreen(
-                        lessonNum: widget.lessonNum,
                         questionBrain: widget.questionBrain);
                   }),
                 );
               },
               child: const Text('Review Answers'),
-
               style: navButtonDeco,
             )
           ],

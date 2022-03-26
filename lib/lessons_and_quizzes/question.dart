@@ -1,4 +1,4 @@
-import 'components/sheet_music_components/note.dart';
+import '../components/sheet_music_components/note.dart';
 
 class Question {
   final Clef clef;

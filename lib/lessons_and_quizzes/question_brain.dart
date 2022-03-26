@@ -1,7 +1,7 @@
-import 'package:sight_reading_app/question.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
-import 'components/sheet_music_components/note.dart';
-import 'lessons_and_quizzes/question_answer_data.dart';
+import '../components/sheet_music_components/note.dart';
+import 'question_answer_data.dart';
 
 /// Manages the questions in lessons/quizzes
 class QuestionBrain {
@@ -37,7 +37,8 @@ class QuestionBrain {
 
   /// Gets the correct answer of the current question without the octave
   String getCorrectAnswerWithoutOctave() {
-    return Note.getNameWithoutOctave(questions[_questionNum].correctAnswer.name);
+    return Note.getNameWithoutOctave(
+        questions[_questionNum].correctAnswer.name);
   }
 
   /// Gets the correct answer of the current question
