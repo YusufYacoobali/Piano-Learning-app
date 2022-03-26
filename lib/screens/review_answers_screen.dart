@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
-import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 
@@ -20,28 +19,6 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   @override
   void dispose() {
     super.dispose();
-  }
-
-  ///creates an exit button which takes back to the main menu
-  Widget getNavigationButtons() {
-    return Expanded(
-      flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
-              },
-              style: navButtonDeco,
-              child: const Text('Exit'),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   ///Gets the image of the question

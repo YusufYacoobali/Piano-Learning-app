@@ -28,7 +28,7 @@ void main() {
     mockQuestionBrain.goBackToBeginning();
     mockQuestionBrain.setAnswer(userAnswer: 'C4');
     mockQuestionBrain.goToNextQuestion();
-    mockQuestionBrain.setAnswer(userAnswer: 'C4');
+    mockQuestionBrain.setAnswer(userAnswer: 'E4');
     return mockQuestionBrain;
   }
 
@@ -91,9 +91,97 @@ void main() {
       expect(find.byKey(resultCardKey), findsOneWidget);
     }
   });
-  // TODO: Test each lesson card to see if all contents are there
-  // Test result
-  // test correct answer
-  // test user answer
-  // TODO: Test that there are the exact amount of cards available according to number of questions
+
+  testWidgets(
+      'Check that result box will display correct if a user answers correctly',
+      (WidgetTester tester) async {
+    QuestionBrain testQuestionBrain = setQuestionBrain();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.byKey(resultCardKeys[0]),
+      500.0,
+      scrollable: find.byType(Scrollable),
+    );
+    expect(find.text('Correct'), findsOneWidget);
+  });
+
+  testWidgets(
+      'Check that result box will display incorrect if a user answers incorrectly',
+      (WidgetTester tester) async {
+    QuestionBrain testQuestionBrain = setQuestionBrain();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.byKey(resultCardKeys[1]),
+      500.0,
+      scrollable: find.byType(Scrollable),
+    );
+    expect(find.text('Incorrect'), findsOneWidget);
+  });
+
+  testWidgets('Check that question number on result card is shown correctly',
+      (WidgetTester tester) async {
+    QuestionBrain testQuestionBrain = setQuestionBrain();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.byKey(resultCardKeys[0]),
+      500.0,
+      scrollable: find.byType(Scrollable),
+    );
+    testQuestionBrain.goBackToBeginning();
+    expect(
+        find.text(
+            'Question ${testQuestionBrain.getQuestionNum()} of ${testQuestionBrain.getTotalNumberOfQuestions()}'),
+        findsOneWidget);
+  });
+
+  testWidgets('Check that correct answer is shown correctly',
+      (WidgetTester tester) async {
+    QuestionBrain testQuestionBrain = setQuestionBrain();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.byKey(resultCardKeys[0]),
+      500.0,
+      scrollable: find.byType(Scrollable),
+    );
+    testQuestionBrain.goBackToBeginning();
+    String correctAnswer = testQuestionBrain.getCorrectAnswer();
+    expect(find.text('Correct Answer: $correctAnswer'), findsOneWidget);
+  });
+
+  testWidgets('Check that user answer is shown correctly',
+      (WidgetTester tester) async {
+    QuestionBrain testQuestionBrain = setQuestionBrain();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.byKey(resultCardKeys[0]),
+      500.0,
+      scrollable: find.byType(Scrollable),
+    );
+    expect(find.text('Your Answer: C4'), findsOneWidget);
+  });
 }
