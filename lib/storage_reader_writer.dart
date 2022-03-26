@@ -60,6 +60,7 @@ class StorageReaderWriter {
     resetSpeedrunAchievements();
     resetSpeedrunRecords();
     resetEndlessAchievements();
+    resetPlayAlongAchievements();
   }
 
   /// Puts default values into the map
@@ -183,27 +184,60 @@ class StorageReaderWriter {
     // print(prefs.getString('ode to joy - treble only-beginner-high-score'));
     //print(_map['ode to joy - treble only-beginner-high-score']);
 
-    int playAlongOdeBeg = int.parse(
-        prefs.getString('ode to joy - treble only-beginner-high-score') ?? '0');
+    int playAlongOdeBeg = double.parse(
+            prefs.getString('ode to joy - treble only-beginner-high-score') ??
+                '0')
+        .toInt();
 
-    int playAlongOdeInter = int.parse(
-        prefs.getString('ode to joy - treble only-intermediate-high-score') ??
-            '0');
-    int playAlongOdeExp = int.parse(
-        prefs.getString('ode to joy - treble only-expert-high-score') ?? '0');
+    int playAlongOdeInter = double.parse(prefs.getString(
+                'ode to joy - treble only-intermediate-high-score') ??
+            '0')
+        .toInt();
+    int playAlongOdeExp = double.parse(
+            prefs.getString('ode to joy - treble only-expert-high-score') ??
+                '0')
+        .toInt();
 
-    int playAlongSimpBeg = int.parse(
-        prefs.getString('a simple bass melody-beginner-high-score') ?? '0');
-    int playAlongSimpInter = int.parse(
-        prefs.getString('a simple bass melody-intermediate-high-score') ?? '0');
-    int playAlongSimpExp = int.parse(
-        prefs.getString('a simple bass melody-expert-high-score') ?? '0');
-    int playAlongSMcBeg =
-        int.parse(prefs.getString('old macdonald-beginner-high-score') ?? '0');
-    int playAlongMcInter = int.parse(
-        prefs.getString('old macdonald-intermediate-high-score') ?? '0');
+    int playAlongSimpBeg = double.parse(
+            prefs.getString('a simple bass melody-beginner-high-score') ?? '0')
+        .toInt();
+    int playAlongSimpInter = double.parse(
+            prefs.getString('a simple bass melody-intermediate-high-score') ??
+                '0')
+        .toInt();
+    int playAlongSimpExp = double.parse(
+            prefs.getString('a simple bass melody-expert-high-score') ?? '0')
+        .toInt();
+    int playAlongSMcBeg = double.parse(
+            prefs.getString('old macdonald-beginner-high-score') ?? '0')
+        .toInt();
+    int playAlongMcInter = double.parse(
+            prefs.getString('old macdonald-intermediate-high-score') ?? '0')
+        .toInt();
     int playAlongMcExp =
-        int.parse(prefs.getString('old macdonald-expert-high-score') ?? '0');
+        double.parse(prefs.getString('old macdonald-expert-high-score') ?? '0')
+            .toInt();
+
+    int playAlongFadeBeg = double.parse(
+            prefs.getString('faded - alan walker-beginner-high-score') ?? '0')
+        .toInt();
+    int playAlongFadeInter = double.parse(
+            prefs.getString('faded - alan walker-intermediate-high-score') ??
+                '0')
+        .toInt();
+    int playAlongFadeExp = double.parse(
+            prefs.getString('faded - alan walker-expert-high-score') ?? '0')
+        .toInt();
+
+    int playAlongSwayBeg = double.parse(
+            prefs.getString('swaying melody-beginner-high-score') ?? '0')
+        .toInt();
+    int playAlongSwayInter = double.parse(
+            prefs.getString('swaying melody-intermediate-high-score') ?? '0')
+        .toInt();
+    int playAlongSwayExp =
+        double.parse(prefs.getString('swaying melody-expert-high-score') ?? '0')
+            .toInt();
 
     Map<String, int> values = {
       'completedLessons': lessonsPassed,
@@ -229,6 +263,12 @@ class StorageReaderWriter {
       'playAlongMcBeg': playAlongSMcBeg,
       'playAlongMcInter': playAlongMcInter,
       'playAlongMcExp': playAlongMcExp,
+      'playAlongFadeBeg': playAlongFadeBeg,
+      'playAlongFadeInter': playAlongFadeInter,
+      'playAlongFadeExp': playAlongFadeExp,
+      'playAlongSwayBeg': playAlongSwayBeg,
+      'playAlongSwayInter': playAlongSwayInter,
+      'playAlongSwayExp': playAlongSwayExp,
     };
 
     return values;
@@ -581,5 +621,16 @@ class StorageReaderWriter {
       }
     }
   }
+
+  resetPlayAlongAchievements() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (String track in trackNames) {
+      for (Object difficulty in difficultyList) {
+        prefs.setBool('${track}_${difficulty}_play_along_achievement', false);
+      }
+    }
+  }
+
   //void _resetAchievements() {}
 }
