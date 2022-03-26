@@ -17,6 +17,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     '4': false,
     '5': false,
     '6': false,
+    '7': false,
   };
 
   @override
@@ -42,6 +43,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         '4': values[3],
         '5': values[4],
         '6': values[5],
+        '7': values[6],
       });
     });
   }

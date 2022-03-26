@@ -262,8 +262,8 @@ final Decoration achievementCardDecoration = BoxDecoration(
 );
 
 //achievement making
-const int numOfLessons = 6;
-const int numOfquizzes = 10;
+const int numOfLessons = 7;
+const int numOfquizzes = 6;
 
 //pause menu
 const double menuLength = 80.0;
