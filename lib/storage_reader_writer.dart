@@ -308,13 +308,29 @@ class StorageReaderWriter {
   Future<void> _loadSpeedrunRecordsFromStorage(SharedPreferences pref) async {
     String? isOnDisk = pref.getString('10_second_speedrun_record');
     if (isOnDisk == null) {
-      _setDefaultEndlessRecords();
-      _writeEndlessRecordsToStorage();
+      _setDefaultSpeedrunRecords();
+      _writeSpeedrunRecordsToStorage();
     } else {
         List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
         for (String key in _modeRecordKeys) {
           _map[key] = pref.get(key);
         }
+    }
+  }
+
+  /// Sets default record values for the speedrun mode
+  void _setDefaultSpeedrunRecords() {
+    List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
+    for (String key in _modeRecordKeys) {
+      _map[key] = 'N/A';
+    }
+  }
+
+  /// Writes speedrun records to storage
+  void _writeSpeedrunRecordsToStorage() {
+    List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
+    for (String key in _modeRecordKeys) {
+      write(key, 'N/A');
     }
   }
 

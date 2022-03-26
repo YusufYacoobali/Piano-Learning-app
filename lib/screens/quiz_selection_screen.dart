@@ -21,9 +21,7 @@ List<String> quizzes = <String>[
 List<Key> quizButtonKeys = <Key>[];
 
 /// A list containing the user's records for each of the quizzes.
-///
-/// This is a copy that removes the Future wrapper and is used for testing purposes only.
-List<String> quizRecordsCopy = <String>[];
+List<String> quizRecords = <String>[];
 
 ///The key for the button that confirms the selection of a random quiz.
 const randomQuizSelectedKey = Key('quizSelected:Random');
@@ -33,8 +31,6 @@ const randomQuizSelectedKey = Key('quizSelected:Random');
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
 /// There is also a button at the bottom of the screen for a "random mixed quiz".
 class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
-  ///A list containing the user records for each of the quizzes
-  late Future<List<String>> quizRecords;
 
   @override
   void initState() {
@@ -50,45 +46,12 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
   ///Builds the screen widgets.
   @override
   Widget build(BuildContext context) {
-
     quizButtonKeys = <Key>[]; //Resets list of keys
     //Generates the keys for the quiz buttons based on quiz names, with the exception of the random mixed quiz.
     for (String quiz in quizzes) {
       quizButtonKeys.add(Key('quizSelected:$quiz'));
     }
-
-    //TODO: Make size of list dependent on how many modes there actually are
-    //TODO: Move to a helper file to reduce code duplication across screens
-    /// A default list of records to display if there were any issues in obtaining the real records.
-    List<String> defaultRecords = [
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A',
-    ];
-
-    /// A widget that refreshes the screen whenever the value of the 'future' attribute changes.
-    return FutureBuilder(
-      future: quizRecords,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        // Checks if the function to get quiz records is still operating.
-        if (snapshot.connectionState != ConnectionState.done) {
-          quizRecordsCopy = defaultRecords;
-          return _getScreenWidget(defaultRecords);
-        }
-        // Checks if there has been an error in retrieving quiz_records.
-        if (!snapshot.hasData) {
-          quizRecordsCopy = defaultRecords;
-          return _getScreenWidget(defaultRecords);
-        }
-        // If there have been no issues in getting records then this runs.
-        final List<String> quizRecords = snapshot.data;
-        quizRecordsCopy = quizRecords;
-        return _getScreenWidget(quizRecords);
-      },
-    );
+    return _getScreenWidget(quizRecords);
   }
 
   /// The widget to be displayed on screen.

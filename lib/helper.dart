@@ -1,4 +1,3 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
@@ -66,17 +65,50 @@ getRecordKeysForMode(String mode) {
 ///
 /// All other inputs return the empty list.
 //TODO: Move into storage_reader_writer, or use existing storage_reader_writer methods instead.
-Future<List<String>> getRecordsForMode(String mode) async {
+// Future<List<String>> getRecordsForMode(String mode) async {
+//   List<String> keyList = getRecordKeysForMode(mode);
+//   final prefs = await SharedPreferences.getInstance();
+//   List<String> records = [];
+//   for (String key in keyList) {
+//     try {
+//       int toAdd = prefs.getInt(key) ?? 0;
+//       records.add(toAdd.toString());
+//     } catch (_) { //TODO: Find correct exception type
+//       records.add('N/A');
+//     }
+//   }
+//   return records;
+// }
+
+/// The records for each category of the inputted mode.
+///
+/// The available modes are:
+/// - 'speedrun'
+/// - 'quiz'
+/// - 'play along'
+/// - 'endless'
+///
+/// All other inputs return the empty list.
+List<String> getRecordsForMode(String mode) {
   List<String> keyList = getRecordKeysForMode(mode);
-  final prefs = await SharedPreferences.getInstance();
+  final StorageReaderWriter _reader = StorageReaderWriter();
   List<String> records = [];
-  for (String key in keyList) {
-    try {
-      int toAdd = prefs.getInt(key) ?? 0;
-      records.add(toAdd.toString());
-    } catch (_) { //TODO: Find correct exception type
-      records.add('N/A');
+  _reader.loadDataFromStorage().then((value) {
+    for (String key in keyList) {
+      records.add(_reader.read(key).toString());
     }
+    return records;
+  });
+  // A 'default' set of values.
+  for (int i = 0; i < keyList.length; i++) {
+    records.add('0');
   }
   return records;
+}
+
+/// A variant of getRecords which returns void.
+///
+/// Used for parts of the code where you need a function with a void return type and no parameters.
+void loadRecordsForPlayAlongMode() {
+  getRecordsForMode('play along');
 }

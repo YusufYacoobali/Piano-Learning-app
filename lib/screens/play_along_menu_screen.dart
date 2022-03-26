@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/helper.dart';
 //import 'package:sight_reading_app/helper.dart';
 
 import '../storage_reader_writer.dart';
@@ -28,6 +29,8 @@ List<String> trackNames = <String>[
 ];
 
 ///A list containing the user's records for each of the tracks.
+///
+/// It is set to some default values to prevent errors.
 List<String> trackRecords = <String>['0', '0', '0', '0', '0',];
 
 /// A list of all sheet music for each of the tracks
@@ -45,31 +48,12 @@ List<List<int>> trackSpeeds = <List<int>>[];
 /// There is also an AppBar containing the screen title, a back arrow and a setting icon, which when clicked takes you to the settings screen.
 class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
 
+  /// The class used to handle any reading or writing to and from storage.
   final StorageReaderWriter _writer = StorageReaderWriter();
 
-  // @override
-  // void initState() {
-  //   trackRecords = getRecordsForMode('play along');
-  //   super.initState();
-  // }
-  
+  /// The constructor for the state class.
   _PlayAlongMenuScreenState() {
-    loadRecords();
-  }
-
-  /// Loads the records for each song
-  void loadRecords() async {
-    _writer.loadDataFromStorage().then((value) {
-      trackRecords = [];
-      for (String track in trackNames) {
-        String key = '${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score';
-        String record = _writer.read(key).toString();
-        trackRecords.add(record);
-      }
-      setState(() {
-
-      });
-    });
+    getRecordsForMode('play along');
   }
 
   /// Gets the bpm given a difficulty
@@ -162,7 +146,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              PlayAlongScreen(notes: map, clef: clef, bpm: bpm, songName: trackNames[index], onBackToPlayAlongMenu: loadRecords),
+                              PlayAlongScreen(notes: map, clef: clef, bpm: bpm, songName: trackNames[index], onBackToPlayAlongMenu: loadRecordsForPlayAlongMode),
                         ));
                   },
                   key: trackButtonKeys[index],
