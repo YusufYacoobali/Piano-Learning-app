@@ -316,29 +316,120 @@ const Map<String, String> sharpFlatEquivalence = <String, String>{
 };
 
 /// Notes that can be played in endless mode
-const List<String> endlessBeginnerTrebleNotes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
-const List<String> endlessBeginnerBassNotes = ['C4', 'B3', 'A3', 'G3', 'F3', 'E3', 'D3', 'C3'];
+const List<String> endlessBeginnerTrebleNotes = [
+  'C4',
+  'D4',
+  'E4',
+  'F4',
+  'G4',
+  'A4',
+  'B4',
+  'C5'
+];
+const List<String> endlessBeginnerBassNotes = [
+  'C4',
+  'B3',
+  'A3',
+  'G3',
+  'F3',
+  'E3',
+  'D3',
+  'C3'
+];
 
 const List<String> endlessIntermediateTrebleNotes = [
   'B3',
-  'C4', 'Db4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'A4', 'Bb4', 'B4',
-  'C5', 'D5', 'Db5', 'E5',
+  'C4',
+  'Db4',
+  'D4',
+  'D#4',
+  'E4',
+  'F4',
+  'F#4',
+  'G4',
+  'A4',
+  'Bb4',
+  'B4',
+  'C5',
+  'D5',
+  'Db5',
+  'E5',
 ];
 
 const List<String> endlessIntermediateBassNotes = [
-  'C3', 'Db3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'A3', 'Bb3', 'B3',
-  'C4', 'Db4', 'D4',
+  'C3',
+  'Db3',
+  'D3',
+  'D#3',
+  'E3',
+  'F3',
+  'F#3',
+  'G3',
+  'A3',
+  'Bb3',
+  'B3',
+  'C4',
+  'Db4',
+  'D4',
 ];
 
 const List<String> endlessExpertTrebleNotes = [
-  'A3', 'A#3', 'Bb3', 'B3',
-  'C4', 'C#4', 'Db4', 'D4', 'D#4', 'Eb4', 'E4', 'F4', 'F#4', 'Gb4', 'G4', 'G#4', 'Ab4', 'A4', 'A#4', 'Bb4', 'B4',
-  'C5', 'C#5', 'Db5', 'D5', 'D#5', 'Eb5', 'E5', 'F5',
+  'A3',
+  'A#3',
+  'Bb3',
+  'B3',
+  'C4',
+  'C#4',
+  'Db4',
+  'D4',
+  'D#4',
+  'Eb4',
+  'E4',
+  'F4',
+  'F#4',
+  'Gb4',
+  'G4',
+  'G#4',
+  'Ab4',
+  'A4',
+  'A#4',
+  'Bb4',
+  'B4',
+  'C5',
+  'C#5',
+  'Db5',
+  'D5',
+  'D#5',
+  'Eb5',
+  'E5',
+  'F5',
 ];
 
 const List<String> endlessExpertBassNotes = [
-  'C3', 'C#3', 'Db3', 'D3', 'D#3', 'Eb3', 'E3', 'F3', 'F#3', 'Gb3', 'G3', 'G#3', 'Ab3', 'A3', 'A#3', 'Bb3', 'B3',
-  'C4', 'C#4', 'Db4', 'D4', 'D#4', 'Eb4', 'E4',
+  'C3',
+  'C#3',
+  'Db3',
+  'D3',
+  'D#3',
+  'Eb3',
+  'E3',
+  'F3',
+  'F#3',
+  'Gb3',
+  'G3',
+  'G#3',
+  'Ab3',
+  'A3',
+  'A#3',
+  'Bb3',
+  'B3',
+  'C4',
+  'C#4',
+  'Db4',
+  'D4',
+  'D#4',
+  'Eb4',
+  'E4',
 ];
 
 /// How fast the notes move across the screen in endless mode for each difficulty
@@ -418,13 +509,13 @@ const double androidFlatOffset = 35;
 
 /// IOS symbol fonts
 /// Change these to change the symbol size
-const double iosSharpFontSize = 30;
-const double iosFlatFontSize = 45;
+const double iosSharpFontSize = 40;
+const double iosFlatFontSize = 60;
 
 /// IOS symbol offsets
 /// Change these to change the symbol position on screen
-const double iosSharpOffset = 0;
-const double iosFlatOffset = 15;
+const double iosSharpOffset = 55;
+const double iosFlatOffset = 30;
 
 /// QuestionAnswerData
 const int timeThreshold = 500;

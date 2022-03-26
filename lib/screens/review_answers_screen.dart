@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
-import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
+
+///A list containing the keys for each of the result card created by addResultBox()
+List<Key> resultCardKeys = <Key>[];
 
 class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   final ScrollController _checkController = ScrollController();
@@ -11,35 +13,12 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   @override
   void initState() {
     super.initState();
-    //int lessonNum = widget.lessonNum;
     questionBrain = widget.questionBrain;
   }
 
   @override
   void dispose() {
     super.dispose();
-  }
-
-  ///creates an exit button which takes back to the main menu
-  Widget getNavigationButtons() {
-    return Expanded(
-      flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
-              },
-              style: navButtonDeco,
-              child: const Text('Exit'),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   ///Gets the image of the question
@@ -70,7 +49,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         children: [
           Text(
             message,
-            style: const TextStyle(fontSize: 30.0),
+            style: const TextStyle(fontSize: 20.0),
           ),
         ]);
   }
@@ -98,54 +77,53 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         alignment: Alignment.center,
         child: Row(children: [
           Icon(resultIcon),
-          Text(resultText, style: const TextStyle(fontSize: 40))
+          Text(resultText, style: const TextStyle(fontSize: 30))
         ]),
       ),
     );
   }
 
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
-  Widget createResultCard() {
+  Widget createResultCard(int i) {
     return Center(
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        child: SizedBox(
-          height: 300.0,
-          width: 500.0,
-          child: Container(
-            decoration: cardBackground,
-            child: Column(
-              children: [
-                const SizedBox(height: 20.0),
-                Column(
-                  children: [
-                    Text(
-                      'Question ${questionBrain.getQuestionNum()} of ${questionBrain.getTotalNumberOfQuestions()}',
-                      style: const TextStyle(fontSize: 20.0),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        addQuestionImage(),
-                        Column(
-                          children: [
-                            //change to display result
-                            addResultBox(),
-                            //change method name to add text
-                            addMessageWrap('Correct Answer: ' +
-                                questionBrain.getCorrectAnswer()),
-                            addMessageWrap('Your Answer: ' +
-                                questionBrain.getUserAnswer()),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10.0),
-              ],
-            ),
+      child: SizedBox(
+        height: 400, //MediaQuery.of(context).size.height,
+        width: 800, //MediaQuery.of(context).size.width,
+        child: Container(
+          decoration: cardBackground,
+          child: Column(
+            children: [
+              const SizedBox(height: 10.0),
+              Column(
+                children: [
+                  Text(
+                    'Question ${questionBrain.getQuestionNum()} of ${questionBrain.getTotalNumberOfQuestions()}',
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
+                  const SizedBox(height: 10.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      addQuestionImage(),
+                      Column(
+                        children: [
+                          //change to display result
+                          addResultBox(),
+                          //change method name to add text
+                          addMessageWrap('Correct Answer: ' +
+                              questionBrain.getCorrectAnswer()),
+                          addMessageWrap(
+                              'Your Answer: ' + questionBrain.getUserAnswer()),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10.0),
+            ],
           ),
+          key: resultCardKeys[i],
         ),
       ),
     );
@@ -154,8 +132,13 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   List<Widget> getAllResultCards() {
     List<Widget> allResults = [];
     questionBrain.goBackToBeginning();
+
     for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
-      allResults.add(createResultCard());
+      resultCardKeys.add(Key('resultCard:$i'));
+      allResults.add(createResultCard(i));
+      allResults.add(const SizedBox(
+        width: 10,
+      ));
       questionBrain.goToNextQuestion();
     }
     return allResults;
@@ -190,10 +173,8 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
 ///get the question brain
 class ReviewAnswersScreen extends StatefulWidget {
   static const String id = 'check_answers_screen';
-  final int lessonNum;
   final QuestionBrain questionBrain;
-  const ReviewAnswersScreen(
-      {Key? key, this.lessonNum = 1, required this.questionBrain})
+  const ReviewAnswersScreen({Key? key, required this.questionBrain})
       : super(key: key);
 
   @override
