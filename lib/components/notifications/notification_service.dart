@@ -16,14 +16,11 @@ class NotificationAPI {
     String? title,
     String? body,
     String? payload,
-    //comment this out later
-    //required DateTime scheduledDate,
   }) async =>
       _notifications.zonedSchedule(
         id,
         title,
         body,
-        //tz.TZDateTime.from(scheduledDate, tz.local),
         //This is when notification will pop up
         _scheduleDaily(const Time(12, 23, 00)),
         await _notificationDetails(),
@@ -76,9 +73,6 @@ class NotificationAPI {
       time.second,
     );
 
-    // return scheduleData.isBefore(now)
-    //     ? scheduleData.add(const Duration(days: 1))
-    //     : scheduleData;
     return scheduleData;
   }
 }
