@@ -16,11 +16,11 @@ final HelperList bassNoteImageNameList = HelperList(
         noteSound: 'note_low_b'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Bb3', duration: 4),
-        noteName: 'Bass B♭',
+        noteName: 'Bass Bb',
         noteSound: 'note_low_bb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'A#3', duration: 4),
-        noteName: 'Bass A♯',
+        noteName: 'Bass A#',
         noteSound: 'note_low_bb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'A3', duration: 4),
@@ -28,11 +28,11 @@ final HelperList bassNoteImageNameList = HelperList(
         noteSound: 'note_low_a'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Ab3', duration: 4),
-        noteName: 'Bass A♭',
+        noteName: 'Bass Ab',
         noteSound: 'note_low_ab'),
     HelperNoteInfo(
         noteImageName: Note(name: 'G#3', duration: 4),
-        noteName: 'Bass G♯',
+        noteName: 'Bass G#',
         noteSound: 'note_low_ab'),
     HelperNoteInfo(
         noteImageName: Note(name: 'G3', duration: 4),
@@ -40,11 +40,11 @@ final HelperList bassNoteImageNameList = HelperList(
         noteSound: 'note_low_g'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Gb3', duration: 4),
-        noteName: 'Bass G♭',
+        noteName: 'Bass Gb',
         noteSound: 'note_low_gb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'F#3', duration: 4),
-        noteName: 'Bass F♯',
+        noteName: 'Bass F#',
         noteSound: 'note_low_gb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'F3', duration: 4),
@@ -56,11 +56,11 @@ final HelperList bassNoteImageNameList = HelperList(
         noteSound: 'note_low_e'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Eb3', duration: 4),
-        noteName: 'Bass E♭',
+        noteName: 'Bass Eb',
         noteSound: 'note_low_eb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'D#3', duration: 4),
-        noteName: 'Bass D♯',
+        noteName: 'Bass D#',
         noteSound: 'note_low_eb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'D3', duration: 4),
@@ -68,11 +68,11 @@ final HelperList bassNoteImageNameList = HelperList(
         noteSound: 'note_low_d'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Db3', duration: 4),
-        noteName: 'Bass D♭',
+        noteName: 'Bass Db',
         noteSound: 'note_low_db'),
     HelperNoteInfo(
         noteImageName: Note(name: 'C#3', duration: 4),
-        noteName: 'Bass C♯',
+        noteName: 'Bass C#',
         noteSound: 'note_low_db'),
     HelperNoteInfo(
         noteImageName: Note(name: 'C3', duration: 4),

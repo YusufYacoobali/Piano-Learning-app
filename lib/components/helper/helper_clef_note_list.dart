@@ -12,11 +12,11 @@ final HelperList clefNoteImageNameList = HelperList(
         noteSound: 'note_middle_c'),
     HelperNoteInfo(
         noteImageName: Note(name: 'C#4', duration: 4),
-        noteName: 'Clef C♯',
+        noteName: 'Clef C#',
         noteSound: 'note_middle_db'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Db4', duration: 4),
-        noteName: 'Clef D♭',
+        noteName: 'Clef Db',
         noteSound: 'note_middle_db'),
     HelperNoteInfo(
         noteImageName: Note(name: 'D4', duration: 4),
@@ -24,11 +24,11 @@ final HelperList clefNoteImageNameList = HelperList(
         noteSound: 'note_middle_d'),
     HelperNoteInfo(
         noteImageName: Note(name: 'D#4', duration: 4),
-        noteName: 'Clef D♯',
+        noteName: 'Clef D#',
         noteSound: 'note_middle_eb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Eb4', duration: 4),
-        noteName: 'Clef E♭',
+        noteName: 'Clef Eb',
         noteSound: 'note_middle_eb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'E4', duration: 4),
@@ -40,11 +40,11 @@ final HelperList clefNoteImageNameList = HelperList(
         noteSound: 'note_middle_f'),
     HelperNoteInfo(
         noteImageName: Note(name: 'F#4', duration: 4),
-        noteName: 'Clef F♯',
+        noteName: 'Clef F#',
         noteSound: 'note_middle_gb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Gb4', duration: 4),
-        noteName: 'Clef G♭',
+        noteName: 'Clef Gb',
         noteSound: 'note_middle_gb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'G4', duration: 4),
@@ -52,11 +52,11 @@ final HelperList clefNoteImageNameList = HelperList(
         noteSound: 'note_middle_g'),
     HelperNoteInfo(
         noteImageName: Note(name: 'G#4', duration: 4),
-        noteName: 'Clef G♯',
+        noteName: 'Clef G#',
         noteSound: 'note_middle_ab'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Ab4', duration: 4),
-        noteName: 'Clef A♭',
+        noteName: 'Clef Ab',
         noteSound: 'note_middle_ab'),
     HelperNoteInfo(
         noteImageName: Note(name: 'A4', duration: 4),
@@ -64,11 +64,11 @@ final HelperList clefNoteImageNameList = HelperList(
         noteSound: 'note_middle_a'),
     HelperNoteInfo(
         noteImageName: Note(name: 'A#4', duration: 4),
-        noteName: 'Clef A♯',
+        noteName: 'Clef A#',
         noteSound: 'note_middle_bb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Bb4', duration: 4),
-        noteName: 'Clef B♭',
+        noteName: 'Clef Bb',
         noteSound: 'note_middle_bb'),
     HelperNoteInfo(
         noteImageName: Note(name: 'B4', duration: 4),
