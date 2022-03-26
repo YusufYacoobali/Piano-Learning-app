@@ -60,20 +60,23 @@ class MusicSheet extends CustomPainter {
         clef == Clef.treble);
 
     removeNotes();
-    drawNotes();
 
     /// Draws the next note
     if (nextNote.hasNextNote) {
       clear();
       drawNewNote();
     }
+
+    drawNotes();
   }
 
   /// Removes notes that are beyond the end line
   void removeNotes() {
-    for (int count = 0; count < notesOnStaves.length; count++) {
-        notesOnStaves.remove(notesOnStaves[count]);
-        count--;
+    if (notesOnStaves.length > 1) {
+      int excess = notesOnStaves.length - 1;
+      for (int i = 0; i < excess; ++i) {
+        notesOnStaves.removeLast();
+      }
     }
   }
 
