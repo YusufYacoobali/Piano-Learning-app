@@ -78,8 +78,11 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   /// The results screen
   Future<void> getResults() async {
     // Calculates the percentage achieved by the user
-    double percentage =
-        questionBrain.getScore() / questionBrain.getQuestionNum();
+    double percentage = 0;
+    if (questionBrain.getQuestionNum() > 1) {
+      percentage =
+          questionBrain.getScore() / (questionBrain.getQuestionNum() - 1);
+    }
     String title =
         "${questionBrain.getScore()} correct in ${widget.timerDuration} seconds";
     int score = questionBrain.getScore();
@@ -101,6 +104,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   }
 
   getResultsScreen(title, percentage) {
+    Navigator.pop(context);
     Navigator.push(
       context,
       MaterialPageRoute(

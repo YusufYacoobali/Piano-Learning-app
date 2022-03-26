@@ -39,10 +39,6 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         name: 'Quizzes',
         id: QuizSelectionScreen.id,
         continueOnPressed: () => stopwatch.start());
-// =======
-//     PauseMenu pauseMenuBuilder =
-//         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
-// >>>>>>> main
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
@@ -170,47 +166,23 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  getResultsScreen() async {
+  getResults() async {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ResultsScreen(
-                  score: percentage,
-                  title: title,
-                  questionBrain: questionBrain,
-                )),
-      );
+      getResultsScreen(title, percentage, questionBrain);
     } else {
       title = "Congratulations!";
       storage.saveCompletedQuiz();
       List displayNotification = await storage.displayQuizNotification();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ResultsScreen(
-                  score: percentage,
-                  title: title,
-                  questionBrain: questionBrain,
-                )),
-      );
+      getResultsScreen(title, percentage, questionBrain);
       //only displays notification if achievement is completed
       if (displayNotification[0]) {
         inAppNotification(context, displayNotification[1]);
       }
     }
-// <<<<<<< check-results-screen
-//     return ResultsScreen(
-//       score: percentage,
-//       title: title,
-//       questionBrain: questionBrain,
-//     );
-// =======
-// >>>>>>> main
   }
 
   /// Creates the template for alert with title, description and next button
@@ -246,14 +218,21 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         // Shows results screen and updates records if the last question was answered.
         else {
           _updateRecords();
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) {
-          //     return getResultScreen();
-          //   }),
-          getResultsScreen();
+          getResults();
         }
       },
+    );
+  }
+
+  getResultsScreen(title, percentage, questionBrain) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultsScreen(
+                score: percentage,
+                title: title,
+                questionBrain: questionBrain,
+              )),
     );
   }
 

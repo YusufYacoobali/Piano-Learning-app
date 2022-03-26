@@ -9,7 +9,6 @@ import '../../constants.dart' as constants;
 
 /// Builds a note on the stave
 class NoteImageBuilder {
-
   Clef _clef;
   late Canvas _canvas;
   late final double _baseLine;
@@ -30,15 +29,14 @@ class NoteImageBuilder {
   }
 
   /// Whether the note is on a line
-  bool _isOnLine (Note note) {
+  bool _isOnLine(Note note) {
     List<String> trebleNotes = <String>['C4', 'E4', 'G4', 'B4', 'D5', 'F5'];
     List<String> bassNotes = <String>['C4', 'A3', 'F3', 'D3', 'B2'];
     if (_clef == Clef.treble) {
       for (String n in trebleNotes) {
         if (note.getNameWithoutSymbol() == n) return true;
       }
-    }
-    else {
+    } else {
       for (String n in bassNotes) {
         if (note.getNameWithoutSymbol() == n) return true;
       }
@@ -65,8 +63,7 @@ class NoteImageBuilder {
       Offset start = Offset(note.pos, _baseLine - note.height + 60);
       Offset end = Offset(note.pos + 20, _baseLine - note.height + 30);
       _canvas.drawLine(start, end, accent);
-    }
-    else {
+    } else {
       Offset start = Offset(note.pos + 20, _baseLine - note.height - 60);
       Offset end = Offset(note.pos + 40, _baseLine - note.height - 30);
       _canvas.drawLine(start, end, accent);
@@ -94,10 +91,10 @@ class NoteImageBuilder {
     double x = note.pos - 27;
     double position = _baseLine - note.height - constants.androidSharpOffset;
     if (Platform.isIOS) {
-      font = constants.iosTrebleClefFontSize;
+      font = constants.iosSharpFontSize;
 
       /// Change this to change ios sharp position
-      position = _baseLine - constants.iosSharpOffset;
+      position = _baseLine - note.height - constants.iosSharpOffset;
 
       if (isFlat) {
         x = note.pos - 25;
@@ -120,11 +117,15 @@ class NoteImageBuilder {
     TextPainter textPainter = TextPainter(
         textScaleFactor: 1,
         text: TextSpan(
-            text: symbol, style: TextStyle(fontSize: font, color: Colors.black)),
+            text: symbol,
+            style: TextStyle(fontSize: font, color: Colors.black)),
         textDirection: TextDirection.ltr)
       ..layout();
 
-    textPainter.paint(_canvas, Offset(x, position), );
+    textPainter.paint(
+      _canvas,
+      Offset(x, position),
+    );
   }
 
   /// Draws a tail
@@ -134,7 +135,7 @@ class NoteImageBuilder {
       ..strokeWidth = 4
       ..strokeCap = StrokeCap.round;
 
-    double lineStart = _baseLine - note.height+10;
+    double lineStart = _baseLine - note.height + 10;
     double lineEnd = _baseLine - note.height - 60;
     double lineXPos = note.pos + 20;
 
@@ -155,7 +156,6 @@ class NoteImageBuilder {
   }
 
   _drawLines(NoteOnStave note) {
-
     Paint paint = Paint()
       ..color = Colors.black
       ..strokeWidth = 3
@@ -163,18 +163,18 @@ class NoteImageBuilder {
 
     List<String>? lines;
     if (_clef == Clef.treble) {
-      lines = constants.trebleClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
-    }
-    else {
-      lines = constants.bassClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
+      lines =
+          constants.trebleClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
+    } else {
+      lines =
+          constants.bassClefNoteLinesOffset[note.note.getNameWithoutSymbol()];
     }
     if (lines != null) {
       for (String pos in lines) {
         int? offset;
         if (_clef == Clef.treble) {
           offset = constants.trebleClefSheetNoteOffset[pos];
-        }
-        else {
+        } else {
           offset = offset = constants.bassClefSheetNoteOffset[pos];
         }
         if (offset != null) {
@@ -187,8 +187,8 @@ class NoteImageBuilder {
   }
 
   /// Draws the circle
-  void _drawCircle(NoteOnStave note, {PaintingStyle style = PaintingStyle.fill}) {
-
+  void _drawCircle(NoteOnStave note,
+      {PaintingStyle style = PaintingStyle.fill}) {
     Paint paint = Paint()
       ..color = Colors.black
       ..strokeWidth = 4
@@ -211,30 +211,25 @@ class NoteImageBuilder {
     if (note.note.duration == 0.5) {
       // Quaver
       _drawQuaver(note);
-    }
-    else if (note.note.duration == 1) {
+    } else if (note.note.duration == 1) {
       // Crotchet
       _drawCircle(note);
       _drawTail(note);
-    }
-    else if (note.note.duration == 1.5) {
+    } else if (note.note.duration == 1.5) {
       // Dotted crotchet
       _drawCircle(note);
       _drawTail(note);
       _drawDot(note);
-    }
-    else if (note.note.duration == 2) {
+    } else if (note.note.duration == 2) {
       // Minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
-    }
-    else if (note.note.duration == 3) {
+    } else if (note.note.duration == 3) {
       // Dotted minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
       _drawDot(note);
-    }
-    else if (note.note.duration == 4) {
+    } else if (note.note.duration == 4) {
       // Semibreve
       _drawCircle(note, style: PaintingStyle.stroke);
     }

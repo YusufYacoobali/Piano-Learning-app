@@ -25,7 +25,8 @@ Future<List<String>> getSpeedrunRecords() async {
   List<String> records = <String>[];
   final prefs = await SharedPreferences.getInstance();
   for (int mode in modes) {
-    records.add((prefs.getInt('${mode}_second_speedrun_record') ?? 'N/A').toString());
+    records.add(
+        (prefs.getInt('${mode}_second_speedrun_record') ?? 'N/A').toString());
   }
   return records;
 }
@@ -33,7 +34,7 @@ Future<List<String>> getSpeedrunRecords() async {
 ///A screen that displays a scrollable list of available speedrun modes with buttons to access each mode.
 ///
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
-class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
+class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
   ///A list containing the user records for each of the modes.
   late Future<List<String>> modeRecords;
   @override
@@ -56,14 +57,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
     }
 
     /// A default value for the records if records have not been obtained in time.
-    List<String> defaultRecords = [
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A'
-    ];
+    List<String> defaultRecords = ['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'];
 
     //Waits for the records to be obtained from shared preferences before building the screen.
     return FutureBuilder(
@@ -71,11 +65,13 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           modeRecordsCopy = defaultRecords;
-          return _getScreenWidget(defaultRecords); //The widget while loading (nothing shown currently)
+          return _getScreenWidget(
+              defaultRecords); //The widget while loading (nothing shown currently)
         }
         if (!snapshot.hasData) {
           modeRecordsCopy = defaultRecords;
-          return _getScreenWidget(defaultRecords); //The widget when an error happens
+          return _getScreenWidget(
+              defaultRecords); //The widget when an error happens
         }
         final List<String> modeRecords = snapshot.data;
         modeRecordsCopy = modeRecords;
@@ -87,7 +83,9 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
   /// The widget to be displayed to the user.
   Widget _getScreenWidget(recordData) {
     /// A pop-up screen containing the speedrun instructions.
-    PopUpController menu = PopUpController(context: context, menuBuilder: SpeedrunMenuInstructions(context: context));
+    PopUpController menu = PopUpController(
+        context: context,
+        menuBuilder: SpeedrunMenuInstructions(context: context));
     return Scaffold(
         appBar: AppBarWithSettingsIcon(const Text('Choose a duration:'), menu),
         body: SafeArea(
@@ -126,13 +124,14 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
               );
             },
             separatorBuilder: (BuildContext context, int index) =>
-            const SizedBox(
+                const SizedBox(
               height: 10,
             ),
           ),
         ));
   }
 }
+
 ///The state for the speedrun menu screen.
 class SpeedrunMenuScreen extends StatefulWidget {
   ///The id used to identify the screen.

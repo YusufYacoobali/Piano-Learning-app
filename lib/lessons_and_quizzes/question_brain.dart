@@ -69,6 +69,19 @@ class QuestionBrain {
     return _map[_questionNum] ?? "N/A";
   }
 
+  /// Gets the correct answer of the current question without the octave
+  String getUserAnswerWithoutOctave() {
+    String note = getUserAnswer();
+    if (note != "N/A") {
+      String name = note[0];
+      if (note.length == 3) {
+        name+=note[1];
+      }
+      return name;
+    }
+    return note;
+  }
+
   /// Sets the user answer for the current question
   void setAnswer({required userAnswer, int? timeTaken}) {
     // Checks if the user answer was correct and if so, increments the score
