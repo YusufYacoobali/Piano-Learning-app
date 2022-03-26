@@ -262,7 +262,7 @@ class _LessonScreenState extends State<LessonScreen> {
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
-      bool displayNotification = await storage.displayLessonNotification();
+      List displayNotification = await storage.displayLessonNotification();
       getResultsScreen(title, percentage, widget.lessonNum, questionBrain);
       // Navigator.push(
       //   context,
@@ -273,8 +273,8 @@ class _LessonScreenState extends State<LessonScreen> {
       //           )),
       // );
       //only displays notification if achievement is completed
-      if (displayNotification) {
-        inAppNotification(context);
+      if (displayNotification[0]) {
+        inAppNotification(context, displayNotification[1]);
       }
     }
   }

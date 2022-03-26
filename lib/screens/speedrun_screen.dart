@@ -84,13 +84,13 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
         "${questionBrain.getScore()} correct in ${widget.timerDuration} seconds";
     int score = questionBrain.getScore();
 
-    bool displayNotification =
+    List displayNotification =
         await storage.displaySpeedrunNotification(widget.timerDuration, score);
 
     getResultsScreen(title, percentage);
 
-    if (displayNotification) {
-      inAppNotification(context);
+    if (displayNotification[0]) {
+      inAppNotification(context, displayNotification[1]);
     }
 
     // return ResultsScreen(

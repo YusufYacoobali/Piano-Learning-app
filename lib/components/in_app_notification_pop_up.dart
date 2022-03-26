@@ -3,7 +3,7 @@ import 'package:sight_reading_app/constants.dart';
 
 import '../screens/achievements_screen.dart';
 
-inAppNotification(context) {
+inAppNotification(context, text) {
   return showModalBottomSheet(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -13,15 +13,20 @@ inAppNotification(context) {
         return Column(
           //mainAxisSize: MainAxisSize.min,
           children: [
-            const FittedBox(
-              fit: BoxFit.contain,
-              child: Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Text(
-                  "Achievement completed!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30),
-                ),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text(
+                "Achievement completed!",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 22),
               ),
             ),
             Row(

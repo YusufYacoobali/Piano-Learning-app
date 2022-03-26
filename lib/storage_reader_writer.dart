@@ -381,10 +381,12 @@ class StorageReaderWriter {
     //print("quizzes reset");
   }
 
-  Future<bool> displayLessonNotification() async {
+  Future<List> displayLessonNotification() async {
     final prefs = await SharedPreferences.getInstance();
 
+    String text = "";
     int lessonsPassed = 0;
+    bool achieved = true;
 
     for (int x = 0; x < numOfLessons; x++) {
       bool value = prefs.getBool('lesson-num-$x') ?? false;
@@ -392,42 +394,74 @@ class StorageReaderWriter {
       //print('adding the $x one');
     }
 
-    if (lessonsPassed == 1 ||
-        lessonsPassed == 5 ||
-        lessonsPassed == numOfLessons) {
-      return true;
+    if (lessonsPassed == 1) {
+      text = "You completed 1 lesson";
+    } else if (lessonsPassed == 5) {
+      text = "You completed 5 lessons";
+      //TODO: make final adjust on num of lesssons and quizzes
+    } else if (lessonsPassed == numOfLessons) {
+      text = "You completed all lessons";
     } else {
-      return false;
+      achieved = false;
     }
+
+    return [achieved, text];
+
+    // if (lessonsPassed == 1 ||
+    //     lessonsPassed == 5 ||
+    //     lessonsPassed == numOfLessons) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
-  Future<bool> displayQuizNotification() async {
+  Future<List> displayQuizNotification() async {
     final prefs = await SharedPreferences.getInstance();
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
 
-    if (completedQuizzes == 1 ||
-        completedQuizzes == 5 ||
-        completedQuizzes == numOfquizzes) {
-      return true;
+    String text = "";
+    bool achieved = true;
+
+    if (completedQuizzes == 1) {
+      text = "You completed 1 quiz";
+    } else if (completedQuizzes == 5) {
+      text = "You completed 5 quizzes";
+      //TODO: make final adjust on num of lesssons and quizzes
+    } else if (completedQuizzes == numOfquizzes) {
+      text = "You completed all quizzes";
     } else {
-      return false;
+      achieved = false;
     }
+
+    return [achieved, text];
+
+    // if (completedQuizzes == 1 ||
+    //     completedQuizzes == 5 ||
+    //     completedQuizzes == numOfquizzes) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   //only executed if prev score is beaten
-  Future<bool> displaySpeedrunNotification(time, score) async {
+  Future<List> displaySpeedrunNotification(time, score) async {
     final prefs = await SharedPreferences.getInstance();
     bool achieved =
         (prefs.getBool('${time}_second_speedrun_achievement') ?? false);
 
+    String text = "";
+
     if (achieved) {
-      return false;
+      return [false, text];
     } else {
       if (score >= time / 2) {
         prefs.setBool('${time}_second_speedrun_achievement', true);
-        return true;
+        text = "You got 50% in this speedrun";
+        return [true, text];
       }
-      return false;
+      return [false, text];
     }
   }
 
@@ -455,33 +489,39 @@ class StorageReaderWriter {
     bool achieved =
         (prefs.getBool('endless-$clef-$level-achievement') ?? false);
 
+    //bool toDisplay = false;
+    String text = "";
+
     //print('endless-$clef-$level-achievement');
 
     if (achieved) {
       //print("here");
-      return false;
+      return [false, text];
     } else {
       prefs.setBool('endless-$clef-$level-achievement', true);
       if (level == 'beginner') {
-        if (score >= 1) {
-          return true;
+        if (score >= 10) {
+          text = "You scored 10 or more in this endless mode";
+          return [true, text];
         } else {
-          return false;
+          return [false, text];
         }
       } else if (level == 'intermediate') {
         if (score >= 20) {
-          return true;
+          text = "You scored 20 or more in this endless mode";
+          return [true, text];
         } else {
-          return false;
+          return [false, text];
         }
       } else if (level == 'expert') {
         if (score >= 30) {
-          return true;
+          text = "You scored 30 or more in this endless mode";
+          return [true, text];
         } else {
-          return false;
+          return [false, text];
         }
       } else {
-        return false;
+        return [false, text];
       }
     }
   }
@@ -514,17 +554,21 @@ class StorageReaderWriter {
         (prefs.getBool('${track}_${difficulty}_play_along_achievement') ??
             false);
 
+    bool toDisplay = false;
+    String text = "";
+
     // print(
     //     '${track}_${difficulty}_play_along_achievement____score:${percentage}');
 
     if (achieved) {
-      return false;
+      return [toDisplay, text];
     } else {
       if (percentage == '100') {
         prefs.setBool('${track}_${difficulty}_play_along_achievement', true);
-        return true;
+        text = "You got 100% in this play along, good job";
+        return [true, text];
       } else {
-        return false;
+        return [false, text];
       }
     }
   }

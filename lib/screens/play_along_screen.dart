@@ -107,13 +107,13 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   Future<void> _displayMenu() async {
     _hitCounter.isNewHighScore();
     _endMenu.show();
-    bool displayNotification = await storage.displayPlayAlongNotification(
+    List displayNotification = await storage.displayPlayAlongNotification(
       difficulty,
       widget.songName.toString(),
       _hitCounter,
     );
-    if (displayNotification) {
-      inAppNotification(context);
+    if (displayNotification[0]) {
+      inAppNotification(context, displayNotification[1]);
     }
   }
 

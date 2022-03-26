@@ -31,7 +31,11 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         questions: QuestionFinder().getPracticeQuestionsForLesson(1, 10));
     setScreenWidget();
     stopwatch.start();
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id, continueOnPressed: () => stopwatch.start());
+    PauseMenu pauseMenuBuilder = PauseMenu(
+        context: context,
+        name: 'Quizzes',
+        id: QuizSelectionScreen.id,
+        continueOnPressed: () => stopwatch.start());
 // =======
 //     PauseMenu pauseMenuBuilder =
 //         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
@@ -194,25 +198,25 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
             builder: (context) => ResultsScreen(
                   score: percentage,
                   title: title,
-               questionBrain: questionBrain,
+                  questionBrain: questionBrain,
                 )),
       );
     } else {
       title = "Congratulations!";
       storage.saveCompletedQuiz();
-      bool displayNotification = await storage.displayQuizNotification();
+      List displayNotification = await storage.displayQuizNotification();
       Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ResultsScreen(
                   score: percentage,
                   title: title,
-               questionBrain: questionBrain,
+                  questionBrain: questionBrain,
                 )),
       );
       //only displays notification if achievement is completed
-      if (displayNotification) {
-        inAppNotification(context);
+      if (displayNotification[0]) {
+        inAppNotification(context, displayNotification[1]);
       }
     }
 // <<<<<<< check-results-screen
