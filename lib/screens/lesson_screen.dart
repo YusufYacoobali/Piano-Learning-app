@@ -36,21 +36,6 @@ class _LessonScreenState extends State<LessonScreen> {
     super.dispose();
   }
 
-  void getResultsScreen(
-      String title, double percentage, QuestionBrain questionBrain) {
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ResultsScreen(
-          score: percentage,
-          title: title,
-          questionBrain: questionBrain,
-        ),
-      ),
-    );
-  }
-
   /// Create result screen which displays after the user finishes all questions
   void getResults() async {
     String title = '';
@@ -69,6 +54,21 @@ class _LessonScreenState extends State<LessonScreen> {
         inAppNotification(context, displayNotification[1]);
       }
     }
+  }
+
+  void getResultsScreen(
+      String title, double percentage, QuestionBrain questionBrain) {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultsScreen(
+          score: percentage,
+          title: title,
+          questionBrain: questionBrain,
+        ),
+      ),
+    );
   }
 
   @override
