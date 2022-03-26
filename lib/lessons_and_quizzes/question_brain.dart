@@ -88,7 +88,7 @@ class QuestionBrain {
     // Checks if the user answer was correct and if so, increments the score
     ///add map entry
     //_map.addEntries([MapEntry(_questionNum, userAnswer)]);
-    _map[_questionNum] = userAnswer;
+    _map[_questionNum] = convertToAlt(userAnswer);
     //userAnswerList.add(userAnswer);
     if (checkAnswer(userAnswer)) {
       ++_score;
@@ -122,11 +122,28 @@ class QuestionBrain {
     else if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
       String correct = getCorrectAnswer();
       String noteWithoutOctave = userAnswer[0] + userAnswer[1];
-      String alt = sharpFlatEquivalence[noteWithoutOctave]!;
-      alt = alt + userAnswer[userAnswer.length - 1];
-      if (alt == correct) return true;
+      String? alt = sharpFlatEquivalence[noteWithoutOctave];
+      if (alt != null) {
+        alt = alt + userAnswer[userAnswer.length - 1];
+        if (alt == correct) return true;
+      }
     }
     return false;
+  }
+
+  /// Coverts the answer to its sharp equal if needed
+  String convertToAlt(String userAnswer) {
+    if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
+      String correct = getCorrectAnswer();
+      String noteWithoutOctave = userAnswer[0] + userAnswer[1];
+      String alt = sharpFlatEquivalence[noteWithoutOctave]!;
+      alt = alt + userAnswer[userAnswer.length - 1];
+      if (alt == correct) return alt;
+      if (alt[1] == correct[1]) {
+        return alt;
+      }
+    }
+    return userAnswer;
   }
 
   /// Checks if the current question is the last question
