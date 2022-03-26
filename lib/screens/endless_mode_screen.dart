@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
+import 'package:sight_reading_app/components/notifications/in_app_notification_pop_up.dart';
 
 import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';

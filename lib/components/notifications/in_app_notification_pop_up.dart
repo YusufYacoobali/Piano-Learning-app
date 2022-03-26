@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 
-import '../screens/achievements_screen.dart';
+import '../../screens/achievements_screen.dart';
 
 inAppNotification(context, text) {
   return showModalBottomSheet(
