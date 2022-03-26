@@ -97,7 +97,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
               Column(
                 children: [
                   Text(
-                    'Question ${questionBrain.getQuestionNum()} of ${questionBrain.getTotalNumberOfQuestions()}',
+                    'Question ${questionBrain.getQuestionNum()} of ${questionBrain.getNumberOfUserAnswers()}',
                     style: const TextStyle(fontSize: 20.0),
                   ),
                   const SizedBox(height: 10.0),
@@ -111,9 +111,9 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
                           addResultBox(),
                           //change method name to add text
                           addMessageWrap('Correct Answer: ' +
-                                questionBrain.getCorrectAnswerWithoutOctave()),
-                            addMessageWrap('Your Answer: ' +
-                                questionBrain.getUserAnswerWithoutOctave()),
+                              questionBrain.getCorrectAnswerWithoutOctave()),
+                          addMessageWrap('Your Answer: ' +
+                              questionBrain.getUserAnswerWithoutOctave()),
                         ],
                       ),
                     ],
@@ -134,11 +134,13 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     questionBrain.goBackToBeginning();
 
     for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
-      resultCardKeys.add(Key('resultCard:$i'));
-      allResults.add(createResultCard(i));
-      allResults.add(const SizedBox(
-        width: 10,
-      ));
+      if (questionBrain.getUserAnswer() != "N/A") {
+        resultCardKeys.add(Key('resultCard:$i'));
+        allResults.add(createResultCard(i));
+        allResults.add(const SizedBox(
+          width: 10,
+        ));
+      }
       questionBrain.goToNextQuestion();
     }
     return allResults;

@@ -70,13 +70,18 @@ class QuestionBrain {
     return _map[_questionNum] ?? "N/A";
   }
 
+  /// Gets the number of user answers (essential in speedrun mode)
+  int getNumberOfUserAnswers() {
+    return _map.length;
+  }
+
   /// Gets the correct answer of the current question without the octave
   String getUserAnswerWithoutOctave() {
     String note = getUserAnswer();
     if (note != "N/A") {
       String name = note[0];
       if (note.length == 3) {
-        name+=note[1];
+        name += note[1];
       }
       return name;
     }
@@ -118,8 +123,7 @@ class QuestionBrain {
   bool checkAnswer(String userAnswer) {
     if (userAnswer == getCorrectAnswer()) {
       return true;
-    }
-    else if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
+    } else if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
       String correct = getCorrectAnswer();
       String noteWithoutOctave = userAnswer[0] + userAnswer[1];
       String? alt = sharpFlatEquivalence[noteWithoutOctave];
