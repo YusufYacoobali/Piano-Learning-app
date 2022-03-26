@@ -411,16 +411,16 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'This name is A (La) on the Base clef. This time A is directly below the . Now press A on the keyboard.',
-    correctAnswer: Note(name: 'A2', duration: 4),
+        'This name is A (La) on the Base clef. This time A is a note with the first line of the staff across it. Now press A on the keyboard.',
+    correctAnswer: Note(name: 'A3', duration: 4),
     questionID: 55,
     lessonID: 5,
   ),
   Question(
     clef: Clef.bass,
     question:
-        'This is B (Ti) on the Base clef. It is right below C on the second line from the bottom. Now press B on the keyboard.',
-    correctAnswer: Note(name: 'B2', duration: 4),
+        'This is B (Ti) on the Base clef. It is above the first line of the staff. Now press B on the keyboard.',
+    correctAnswer: Note(name: 'B3', duration: 4),
     questionID: 56,
     lessonID: 5,
   ),
@@ -430,14 +430,14 @@ final List<Question> questions = [
     clef: Clef.bass,
     question:
         'Great Job. Now you have learnt to read the basic notes on the Base clef. Try answering the rest of the questions without help. What note is this?',
-    correctAnswer: Note(name: 'A2', duration: 4),
+    correctAnswer: Note(name: 'A3', duration: 4),
     questionID: 57,
     lessonID: 5,
   ),
   Question(
     clef: Clef.bass,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'B2', duration: 4),
+    correctAnswer: Note(name: 'B3', duration: 4),
     questionID: 58,
     lessonID: 5,
   ),
@@ -486,7 +486,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'B2', duration: 4),
+    correctAnswer: Note(name: 'B3', duration: 4),
     questionID: 65,
     lessonID: 5,
   ),
