@@ -1,6 +1,6 @@
-import 'package:sight_reading_app/questions.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
-import '../question.dart';
+import 'question.dart';
 import 'package:sight_reading_app/constants.dart';
 
 class QuestionAnswerData {

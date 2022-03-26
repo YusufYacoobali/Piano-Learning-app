@@ -12,7 +12,11 @@ class PauseMenu extends PopUpContentBuilder {
 
   final String id;
 
-  PauseMenu({required this.context, required this.name, required this.id, required this.continueOnPressed});
+  PauseMenu(
+      {required this.context,
+      required this.name,
+      required this.id,
+      required this.continueOnPressed});
 // =======
 //   PauseMenu({required this.context, required this.continueOnPressed});
 // >>>>>>> main
@@ -21,21 +25,23 @@ class PauseMenu extends PopUpContentBuilder {
   @override
   void buildMenu() {
     text = Column(children: const [
-      Text('Paused', style: pauseMenuTextStyle),
-      SizedBox(height: 50.0),
+      Text('Paused', style: pauseMenuTextStyle, key: Key('Menu title')),
+      SizedBox(height: 10.0),
     ]);
 
     options = [
-      ElevatedButton(
-        child: const Text('Main Menu'),
+      ElevatedButton.icon(
+        icon: pauseMenuHomeIcon,
+        label: const Text('Main Menu'),
         key: const Key('home button'),
         style: pauseMenuButtonStyle,
         onPressed: () {
           Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
         },
       ),
-      ElevatedButton(
-        child: const Text('Continue'),
+      ElevatedButton.icon(
+        icon: pauseMenuPlayIcon,
+        label: const Text('Continue'),
         key: const Key('play button'),
         style: pauseMenuButtonStyle,
         onPressed: () {
@@ -43,9 +49,10 @@ class PauseMenu extends PopUpContentBuilder {
           continueOnPressed();
         },
       ),
-      ElevatedButton(
-        child: Text('Back To $name'),
-        key: const Key('lesson selection button'),
+      ElevatedButton.icon(
+        icon: pauseMenuSelectionIcon,
+        label: Text('Back To $name'),
+        key: const Key('selection button'),
         style: pauseMenuButtonStyle,
         onPressed: () {
           Navigator.popUntil(context, ModalRoute.withName(id));

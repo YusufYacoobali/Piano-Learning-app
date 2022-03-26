@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
-import '../components/instruction_pop_up_content/play_along_instructions.dart';
+import '../components/pop_ups/play_along_instructions.dart';
 import '../components/sheet_music_components/note.dart';
 import '../components/app_bar_with_settings_icon.dart';
 import 'play_along_screen.dart';
@@ -27,7 +27,13 @@ List<String> trackNames = <String>[
 ];
 
 ///A list containing the user's records for each of the tracks.
-List<String> trackRecords = <String>['0', '0', '0', '0', '0',];
+List<String> trackRecords = <String>[
+  '0',
+  '0',
+  '0',
+  '0',
+  '0',
+];
 
 /// A list of all sheet music for each of the tracks
 List<Map<int, Note>> trackSheets = <Map<int, Note>>[];
@@ -43,7 +49,6 @@ List<List<int>> trackSpeeds = <List<int>>[];
 /// The tracks are shown as a List of clickable buttons.
 /// There is also an AppBar containing the screen title, a back arrow and a setting icon, which when clicked takes you to the settings screen.
 class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
-
   final StorageReaderWriter _writer = StorageReaderWriter();
 
   _PlayAlongMenuScreenState() {
@@ -55,13 +60,12 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     _writer.loadDataFromStorage().then((value) {
       trackRecords = [];
       for (String track in trackNames) {
-        String key = '${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score';
+        String key =
+            '${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score';
         String record = _writer.read(key).toString();
         trackRecords.add(record);
       }
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
@@ -70,11 +74,9 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     String difficulty = _writer.read('difficulty').toString();
     if (difficulty == 'Expert') {
       return bpm[2];
-    }
-    else if (difficulty == 'Intermediate') {
+    } else if (difficulty == 'Intermediate') {
       return bpm[1];
-    }
-    else {
+    } else {
       return bpm[0];
     }
   }
@@ -129,7 +131,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
       appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu),
       body: SafeArea(
         child: ListView.separated(
-          //Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
+            //Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
             itemBuilder: (BuildContext context, int index) {
               return SizedBox(
                 height: 100.0, //Fixes button height
@@ -154,8 +156,12 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              PlayAlongScreen(notes: map, clef: clef, bpm: bpm, songName: trackNames[index], onBackToPlayAlongMenu: loadRecords),
+                          builder: (context) => PlayAlongScreen(
+                              notes: map,
+                              clef: clef,
+                              bpm: bpm,
+                              songName: trackNames[index],
+                              onBackToPlayAlongMenu: loadRecords),
                         ));
                   },
                   key: trackButtonKeys[index],
@@ -164,7 +170,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
             },
             //Adds blank spaces between each button.
             separatorBuilder: (BuildContext context, int index) =>
-            const SizedBox(height: 10),
+                const SizedBox(height: 10),
             itemCount: trackSheets.length),
       ),
     );

@@ -80,7 +80,7 @@ class _KeyboardState extends State<Keyboard> {
         ),
         onPressed: () {
           playSound(buttonText.toLowerCase());
-          widget.onKeyPressed(buttonText);
+          widget.onKeyPressed(buttonText + (widget.octave + 2).toString());
         },
         style: whiteKeyButtonStyle,
       ),
@@ -99,7 +99,7 @@ class _KeyboardState extends State<Keyboard> {
       ),
       onPressed: () {
         playSound(buttonText.toLowerCase());
-        widget.onKeyPressed(buttonText);
+        widget.onKeyPressed(buttonText + (widget.octave + 2).toString());
       },
       style: blackKeyButtonStyle,
     );

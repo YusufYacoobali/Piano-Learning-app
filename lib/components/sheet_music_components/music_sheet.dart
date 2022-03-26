@@ -6,12 +6,10 @@ import 'note_on_stave.dart';
 import 'stave_builder.dart';
 import '../../constants.dart';
 
+/// A music sheet
 class MusicSheet extends CustomPainter {
   /// The place where the notes appear
   late double startLine;
-
-  /// The place where the notes disappear
-  late double endLine;
 
   /// The first line of the stave
   late double baseLine;
@@ -29,13 +27,23 @@ class MusicSheet extends CustomPainter {
   /// Whether the initial values have been set
   bool hasSet = false;
 
+  /// Set the initial value stave background border is not rounded
+  bool isRoundedBorder = false;
+
   MusicSheet(this.nextNote, this.clef) {
     noteImageBuilder = NoteImageBuilder(clef);
+  }
+
+  /// The option to change the border of the stave to be round
+  void changeToRoundedBorder() {
+    isRoundedBorder = true;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
     noteImageBuilder.setCanvas(canvas);
+
+    /// Sets the initial values
     if (!hasSet) {
       hasSet = true;
       baseLine = size.height / 2 + 20;
@@ -45,27 +53,18 @@ class MusicSheet extends CustomPainter {
     double canvasWidth = size.width / 1.4;
     startLine = start + (canvasWidth / 1.7);
 
-    endLine = 100;
-    StaveBuilder.makeBackground(canvas, size, start, start + canvasWidth);
+    /// Draws the stave
+    StaveBuilder.makeBackground(
+        canvas, size, start, start + canvasWidth, isRoundedBorder);
     StaveBuilder.drawStave(canvas, size, baseLine, start, start + canvasWidth,
         clef == Clef.treble);
 
-    removeNotes(canvas, size);
+    drawNotes();
 
+    /// Draws the next note
     if (nextNote.hasNextNote) {
       clear();
       drawNewNote();
-    }
-    drawNotes();
-  }
-
-  /// Removes notes that are beyond the end line
-  void removeNotes(Canvas canvas, Size size) {
-    for (int count = 0; count < notesOnStaves.length; count++) {
-      if (notesOnStaves[count].pos < endLine) {
-        notesOnStaves.remove(notesOnStaves[count]);
-        count--;
-      }
     }
   }
 
@@ -101,11 +100,6 @@ class MusicSheet extends CustomPainter {
     }
   }
 
-  /// Gets the clef
-  Clef getClef() {
-    return clef;
-  }
-
   /// Changes the clef
   void changeClef(Clef c) {
     clef = c;
@@ -114,7 +108,4 @@ class MusicSheet extends CustomPainter {
 
   @override
   bool shouldRepaint(MusicSheet oldDelegate) => true;
-
-  @override
-  bool shouldRebuildSemantics(MusicSheet oldDelegate) => false;
 }

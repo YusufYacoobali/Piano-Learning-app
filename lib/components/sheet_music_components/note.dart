@@ -1,19 +1,27 @@
 class Note {
 
   /// The note
-  late String name;
+  final String name;
 
   /// Number of beats of the note
-  late double duration;
+  final double duration;
 
   Note({
     required this.name,
-    required this.duration,
+    this.duration = 4,
   });
 
-  /// Gets the
+  /// Gets the name of the note without the symbol
   String getNameWithoutSymbol() {
     return name[0] + name[name.length - 1];
+  }
+
+  /// Gets the name of the note without the octave
+  static String getNameWithoutOctave(String name) {
+    if (name.length == 3) {
+      return name[0] + name[1];
+    }
+    return name[0];
   }
 
   /// Gets how high the note is on the octave

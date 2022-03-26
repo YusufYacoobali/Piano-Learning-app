@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/helper.dart';
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
@@ -9,7 +11,7 @@ import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 
 void main() {
   testWidgets(
-      'Check that the quiz selection page is displayed when the button is pressed.',
+      'Check that the quiz selection page is displayed when the button to go to the screen is pressed.',
           (WidgetTester tester) async {
         await tester.pumpWidget(const SightReadingApp());
         await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
@@ -92,10 +94,26 @@ void main() {
             scrollable: find.byType(Scrollable),
           );
           expect(find.text(quizzes[i]), findsWidgets);
-          expect(find.text('Record: ${quizRecords[i]}'), findsWidgets);
+          expect(find.text('Record: ${quizRecordsCopy[i]}'), findsWidgets);
         }
       }
   );
+
+  //TODO: Fix
+  // testWidgets(
+  //     'Check that clicking a quiz button navigates you to the quiz screen.',
+  //     (WidgetTester tester) async {
+  //       await tester.pumpWidget(const SightReadingApp());
+  //       await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(find.byKey(quizButtonKeys[0]));
+  //       await tester.pumpAndSettle();
+  //       //TODO: Fix
+  //       //expect(find.byType(PracticeQuizScreen), findsOneWidget);
+  //     }
+  // );
 
   testWidgets(
       'Check that the ${"random quiz button"} is displayed on screen.',
@@ -105,7 +123,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
         await tester.pumpAndSettle();
-        expect(find.byKey(QuizSelectionScreen.randomQuizSelectedKey), findsOneWidget);
+        expect(find.byKey(randomQuizSelectedKey), findsOneWidget);
       }
   );
 
@@ -129,7 +147,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
         await tester.pumpAndSettle();
-        final buttonFinder = find.byKey(QuizSelectionScreen.randomQuizSelectedKey);
+        final buttonFinder = find.byKey(randomQuizSelectedKey);
         final startPos = tester.getCenter(buttonFinder);
         final gesture = await tester.startGesture(const Offset(0, 300));
         await gesture.moveBy(const Offset(0, -300)); //Scrolls the screen
@@ -137,6 +155,62 @@ void main() {
         expect(startPos, equals(tester.getCenter(buttonFinder))); //Checks that the position of the button has not changed.
       }
   );
-  //TODO: Create tests to make sure correct context data is passed in for each quiz button
-  //Will need to do once we figure out how data is stored / retrieved / sent across the program etc
+
+  testWidgets(
+      'Check that clicking the random quiz button navigates you to a random quiz screen.',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(const SightReadingApp());
+        await tester.tap(find.byKey(navigateToPracticeMainMenuButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(PracticeScreen.navigateToQuizSelectionButtonKey));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(randomQuizSelectedKey));
+        await tester.pumpAndSettle();
+        //TODO: Fix.
+        // expect(find.byType(RandomQuizScreen), findsOneWidget);
+      }
+  );
+
+  testWidgets(
+      'Check that changes to user records are reflected on the menu screen',
+          (WidgetTester tester) async {
+        tester.runAsync(() async {
+          //Sets mock values for relevant shared preferences so that we do not override any existing ones.
+          List<String> tempQuizRecordKeys = replaceSpacesWithUnderscoresFromStrings(quizzes);
+          Map<String, Object> mockValues = {};
+          for (String key in tempQuizRecordKeys) {
+            mockValues[key] = 'N/A';
+          }
+          SharedPreferences.setMockInitialValues(mockValues);
+          final prefs = await SharedPreferences.getInstance();
+
+          await tester.pumpWidget(
+            const MaterialApp(
+              home: QuizSelectionScreen(),
+            ),
+          );
+
+          //Gets the old record for the first speedrun mode as an integer.
+          int oldRecord;
+          if (quizRecordsCopy[0] == 'N/A') {
+            oldRecord = -1;
+          } else {
+            oldRecord = int.parse(quizRecordsCopy[0]);
+          }
+
+          //Checks to make sure the records are being displayed correctly (before any changes).
+          expect(find.text('Record: ${quizRecordsCopy[0]}'), findsWidgets);
+
+          //Changes the user record for the first speedrun mode.
+          final newRecord = oldRecord + 1;
+          prefs.setInt(tempQuizRecordKeys[0], newRecord);
+          await tester.runAsync(() async =>
+          await Future.delayed(const Duration(milliseconds: 100)));
+          await tester.pumpAndSettle();
+
+          //Checks to make sure the change is reflected on the screen.
+          expect(find.text('Record: $newRecord'), findsOneWidget);
+        });
+      }
+  );
 }

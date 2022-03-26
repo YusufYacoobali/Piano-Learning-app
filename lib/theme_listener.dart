@@ -12,8 +12,6 @@ class ThemeNotifier extends ChangeNotifier {
     getPreferences();
   }
 
-  String get theme => _theme;
-
   /// Updates theme
   set theme(String value) {
     _theme = value;

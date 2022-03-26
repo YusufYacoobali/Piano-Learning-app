@@ -12,7 +12,6 @@ class PlayAlongHitCounter {
   /// The high score
   late double highScore;
 
-  ///TODO: Make storage writer work for storing high score
   final StorageReaderWriter _writer = StorageReaderWriter();
 
   final String songName;
@@ -21,18 +20,23 @@ class PlayAlongHitCounter {
 
   PlayAlongHitCounter({required this.songName, required this.numNotes});
 
+  /// Sets the difficulty
   void setDifficulty(String difficulty) {
     _difficulty = difficulty;
     getHighScore();
   }
 
+  /// Increments the score
+  void increment() {
+    if (score < numNotes) {
+      score++;
+    }
+  }
+
   /// Writes the high score to storage
   void writeHighScore() async {
     String key = '${songName.toLowerCase()}-${_difficulty.toLowerCase()}-high-score';
-    String percentage = ((score/numNotes) * 100).toStringAsFixed(1);
-    if (percentage[percentage.length-1] == '0') {
-      percentage = double.parse(percentage).round().toString();
-    }
+    String percentage = getScoreAsPercentage();
     highScore = double.parse(percentage);
     await _writer.write(key, percentage);
   }
@@ -57,5 +61,9 @@ class PlayAlongHitCounter {
     if ((score/numNotes)*100 > highScore) {
       writeHighScore();
     }
+  }
+
+  String getScoreAsPercentage() {
+    return ((score/numNotes) * 100).toStringAsFixed(0);
   }
 }

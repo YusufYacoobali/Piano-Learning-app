@@ -10,6 +10,7 @@ class EndlessScoreCounter {
   /// The high score
   late final int highScore;
 
+  /// Reads and writes high score to storage
   final StorageReaderWriter _writer = StorageReaderWriter();
 
   /// Writes the high score to storage

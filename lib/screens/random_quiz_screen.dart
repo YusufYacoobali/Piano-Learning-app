@@ -4,10 +4,10 @@ import 'package:sight_reading_app/components/page_keyboard.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
-import '../components/instruction_pop_up_content/pause_menu.dart';
+import '../components/pop_ups/pause_menu.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
-import 'package:sight_reading_app/question_brain.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/question_finder.dart';
 
@@ -29,7 +29,11 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
     setScreenWidget();
     stopwatch.start();
 
-    PauseMenu pauseMenuBuilder = PauseMenu(context: context, name: 'Quizzes', id: QuizSelectionScreen.id,  continueOnPressed: () => stopwatch.start());
+    PauseMenu pauseMenuBuilder = PauseMenu(
+        context: context,
+        name: 'Quizzes',
+        id: QuizSelectionScreen.id,
+        continueOnPressed: () => stopwatch.start());
 // =======
 //     PauseMenu pauseMenuBuilder =
 //         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
@@ -74,7 +78,6 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-
         child: Stack(children: [
           Align(alignment: Alignment.topRight, child: getPauseButton()),
           Column(
@@ -85,46 +88,10 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
               ),
             ],
           ),
-
-          ///choices buttons
-          // Expanded(
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: getOptionButtons(),
-          //   ),
-          // ),
         ]),
-//         child: Stack(children: [
-//           Align(alignment: Alignment.topRight, child: getPauseButton()),
-//           Column(
-//             children: [
-//               screenWidget,
-//               Expanded(
-//                 child: Keyboard(function: answer),
-//               ),
-//             ],
-//           ),
-
-//           ///choices buttons
-//           // Expanded(
-//           //   child: Row(
-//           //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//           //     children: getOptionButtons(),
-//           //   ),
-//           // ),
-//         ]),
       ),
     );
   }
-
-  // /// Gets the key pressed on the keyboard
-  // void answer(String text) {
-  //   stopwatch.stop();
-  //   questionBrain.setAnswer(
-  //       userAnswer: text, timeTaken: stopwatch.elapsedMilliseconds);
-  //   stopwatch.reset();
-  //   showResultAlert(text);
-  // }
 
   /// Set details of the Screen Widget in lesson.
   ///
@@ -163,7 +130,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
     } else {
       alertTitle = 'Incorrect!';
       alertDesc = 'Wrong answer, the correct answer is ' +
-          questionBrain.getCorrectAnswer();
+          questionBrain.getCorrectAnswerWithoutOctave();
     }
 
     displayDialog(alertTitle, alertDesc);
