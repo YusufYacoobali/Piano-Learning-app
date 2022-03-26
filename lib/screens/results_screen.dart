@@ -139,13 +139,11 @@ class ResultsScreen extends StatefulWidget {
   static const String id = 'results_screen';
   final String title;
   final double score;
-  final int lessonNum;
   final QuestionBrain questionBrain;
   const ResultsScreen(
       {Key? key,
       required this.title,
       required this.score,
-      this.lessonNum = 1,
       required this.questionBrain})
       : super(key: key);
 

@@ -19,7 +19,7 @@ import '../lessons_and_quizzes/question_finder.dart';
 class LessonScreen extends StatefulWidget {
   static const String id = 'lesson_screen';
   final int lessonNum;
-  const LessonScreen({Key? key, this.lessonNum = 1}) : super(key: key);
+  const LessonScreen({Key? key, required this.lessonNum}) : super(key: key);
 
   @override
   _LessonScreenState createState() => _LessonScreenState();
@@ -153,7 +153,7 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
-  getResultsScreen(title, percentage, lessonNum, questionBrain) {
+  getResultsScreen(title, percentage, questionBrain) {
     Navigator.pop(context);
     Navigator.push(
       context,
@@ -161,7 +161,6 @@ class _LessonScreenState extends State<LessonScreen> {
           builder: (context) => ResultsScreen(
                 score: percentage,
                 title: title,
-                lessonNum: lessonNum,
                 questionBrain: questionBrain,
               )),
     );
@@ -233,12 +232,12 @@ class _LessonScreenState extends State<LessonScreen> {
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
-      getResultsScreen(title, percentage, widget.lessonNum, questionBrain);
+      getResultsScreen(title, percentage, questionBrain);
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
       List displayNotification = await storage.displayLessonNotification();
-      getResultsScreen(title, percentage, widget.lessonNum, questionBrain);
+      getResultsScreen(title, percentage, questionBrain);
       //only displays notification if achievement is completed
       if (displayNotification[0]) {
         inAppNotification(context, displayNotification[1]);
