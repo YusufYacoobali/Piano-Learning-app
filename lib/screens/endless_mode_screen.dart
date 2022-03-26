@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
 
-import '../storage_reader_writer.dart';
+import '../components/in_app_notification_pop_up.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
@@ -11,8 +10,10 @@ import '../components/pop_ups/endless_starting_pop_up.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
+import '../storage_reader_writer.dart';
 
 class _EndlessModeScreenState extends State<EndlessModeScreen> {
+
   /// Music sheet that moves
   late final MovingMusicSheet _sheet;
 
@@ -41,11 +42,16 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The controller for the end menu
   late final PopUpController _endMenu;
 
+  /// The difficulty
   late final String _difficulty;
 
+  /// Reads and writes to the storage
   StorageReaderWriter storage = StorageReaderWriter();
+
+  /// The keyboard
   late PageKeyboard _keyboard;
 
+  /// Updates the keyboard depending on the clef
   String _setClef = 'update';
 
   @override
