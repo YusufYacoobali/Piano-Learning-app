@@ -5,7 +5,7 @@ import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
-import '../components/in_app_notification_pop_up.dart';
+import '../components/notifications/in_app_notification_pop_up.dart';
 import '../components/pop_ups/pause_menu.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/question_skeleton.dart';
