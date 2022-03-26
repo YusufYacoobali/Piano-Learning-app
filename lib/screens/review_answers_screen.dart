@@ -76,7 +76,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         fit: BoxFit.contain,
         alignment: Alignment.center,
         child: Row(children: [
-          Icon(resultIcon),
+          Icon(resultIcon, size: 45),
           Text(resultText, style: const TextStyle(fontSize: 40))
         ]),
       ),
@@ -88,7 +88,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     return Center(
       child: SizedBox(
         height: 300, //MediaQuery.of(context).size.height,
-        width: 550, //MediaQuery.of(context).size.width,
+        width: 720, //MediaQuery.of(context).size.width,
         child: Container(
           decoration: cardBackground,
           child: Column(
