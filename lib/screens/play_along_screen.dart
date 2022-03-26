@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
 
+import '../components/in_app_notification_pop_up.dart';
 import '../components/page_keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/pop_ups/play_along_ending_pop_up.dart';
@@ -31,6 +33,10 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   late PopUpController _endMenu;
 
+  StorageReaderWriter storage = StorageReaderWriter();
+
+  late String difficulty;
+
   void updateScreen(String update) {
     setState(() {
       updater = update;
@@ -39,7 +45,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   void getDifficulty() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    String difficulty = pref.get('difficulty')!.toString();
+    difficulty = pref.get('difficulty')!.toString();
     _timer.setDifficulty(difficulty);
     _timer.start();
     _hitCounter.setDifficulty(difficulty);
@@ -52,9 +58,13 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   @override
   void initState() {
     super.initState();
-    _hitCounter = PlayAlongHitCounter(songName: widget.songName.toString(), numNotes: widget.notes.length);
+    _hitCounter = PlayAlongHitCounter(
+        songName: widget.songName.toString(), numNotes: widget.notes.length);
     PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(
-        context: context, restart: reset, hitCounter: _hitCounter, onBack: widget.onBackToPlayAlongMenu);
+        context: context,
+        restart: reset,
+        hitCounter: _hitCounter,
+        onBack: widget.onBackToPlayAlongMenu);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
     _currentNoteToPlay =
         NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: recordHitMiss);
@@ -85,15 +95,26 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   void reset() {
     _hitCounter.score = 0;
     PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(
-        context: context, restart: reset, hitCounter: _hitCounter, onBack: widget.onBackToPlayAlongMenu);
+        context: context,
+        restart: reset,
+        hitCounter: _hitCounter,
+        onBack: widget.onBackToPlayAlongMenu);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
     _timer.restart();
   }
 
   /// Displays the end menu
-  void _displayMenu() {
+  Future<void> _displayMenu() async {
     _hitCounter.isNewHighScore();
     _endMenu.show();
+    List displayNotification = await storage.displayPlayAlongNotification(
+      difficulty,
+      widget.songName.toString(),
+      _hitCounter,
+    );
+    if (displayNotification[0]) {
+      inAppNotification(context, displayNotification[1]);
+    }
   }
 
   /// Gets the key pressed on the keyboard
@@ -143,12 +164,11 @@ class PlayAlongScreen extends StatefulWidget {
 
   const PlayAlongScreen(
       {Key? key,
-        required this.notes,
-        required this.clef,
-        required this.bpm,
-        required this.songName,
-        required this.onBackToPlayAlongMenu
-      })
+      required this.notes,
+      required this.clef,
+      required this.bpm,
+      required this.songName,
+      required this.onBackToPlayAlongMenu})
       : super(key: key);
 
   @override

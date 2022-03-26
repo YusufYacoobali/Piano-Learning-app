@@ -57,6 +57,10 @@ class StorageReaderWriter {
     _resetLessons();
     //_resetAchievements();
     _resetQuizzes();
+    resetSpeedrunAchievements();
+    resetSpeedrunRecords();
+    resetEndlessAchievements();
+    resetPlayAlongAchievements();
   }
 
   /// Puts default values into the map
@@ -168,6 +172,73 @@ class StorageReaderWriter {
     int speedrun50HS = prefs.getInt('50_second_speedrun_record') ?? 0;
     int speedrun60HS = prefs.getInt('60_second_speedrun_record') ?? 0;
 
+    // for (String track in trackNames) {
+    //   for (Object difficulty in difficultyList) {
+    //     String key =
+    //         '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+    //     _map[key] = '0';
+    //   }
+    // }
+    // String key = "ode to joy - treble only-beginner-high-score";
+    // print(_map[key] = prefs.get(key));
+    // print(prefs.getString('ode to joy - treble only-beginner-high-score'));
+    //print(_map['ode to joy - treble only-beginner-high-score']);
+
+    int playAlongOdeBeg = double.parse(
+            prefs.getString('ode to joy - treble only-beginner-high-score') ??
+                '0')
+        .toInt();
+
+    int playAlongOdeInter = double.parse(prefs.getString(
+                'ode to joy - treble only-intermediate-high-score') ??
+            '0')
+        .toInt();
+    int playAlongOdeExp = double.parse(
+            prefs.getString('ode to joy - treble only-expert-high-score') ??
+                '0')
+        .toInt();
+
+    int playAlongSimpBeg = double.parse(
+            prefs.getString('a simple bass melody-beginner-high-score') ?? '0')
+        .toInt();
+    int playAlongSimpInter = double.parse(
+            prefs.getString('a simple bass melody-intermediate-high-score') ??
+                '0')
+        .toInt();
+    int playAlongSimpExp = double.parse(
+            prefs.getString('a simple bass melody-expert-high-score') ?? '0')
+        .toInt();
+    int playAlongSMcBeg = double.parse(
+            prefs.getString('old macdonald-beginner-high-score') ?? '0')
+        .toInt();
+    int playAlongMcInter = double.parse(
+            prefs.getString('old macdonald-intermediate-high-score') ?? '0')
+        .toInt();
+    int playAlongMcExp =
+        double.parse(prefs.getString('old macdonald-expert-high-score') ?? '0')
+            .toInt();
+
+    int playAlongFadeBeg = double.parse(
+            prefs.getString('faded - alan walker-beginner-high-score') ?? '0')
+        .toInt();
+    int playAlongFadeInter = double.parse(
+            prefs.getString('faded - alan walker-intermediate-high-score') ??
+                '0')
+        .toInt();
+    int playAlongFadeExp = double.parse(
+            prefs.getString('faded - alan walker-expert-high-score') ?? '0')
+        .toInt();
+
+    int playAlongSwayBeg = double.parse(
+            prefs.getString('swaying melody-beginner-high-score') ?? '0')
+        .toInt();
+    int playAlongSwayInter = double.parse(
+            prefs.getString('swaying melody-intermediate-high-score') ?? '0')
+        .toInt();
+    int playAlongSwayExp =
+        double.parse(prefs.getString('swaying melody-expert-high-score') ?? '0')
+            .toInt();
+
     Map<String, int> values = {
       'completedLessons': lessonsPassed,
       'completedQuizzes': completedQuizzes,
@@ -183,6 +254,21 @@ class StorageReaderWriter {
       'speedrun40HS': speedrun40HS,
       'speedrun50HS': speedrun50HS,
       'speedrun60HS': speedrun60HS,
+      'playAlongOdeBeg': playAlongOdeBeg,
+      'playAlongOdeInter': playAlongOdeInter,
+      'playAlongOdeExp': playAlongOdeExp,
+      'playAlongSimpBeg': playAlongSimpBeg,
+      'playAlongSimpInter': playAlongSimpInter,
+      'playAlongSimpExp': playAlongSimpExp,
+      'playAlongMcBeg': playAlongSMcBeg,
+      'playAlongMcInter': playAlongMcInter,
+      'playAlongMcExp': playAlongMcExp,
+      'playAlongFadeBeg': playAlongFadeBeg,
+      'playAlongFadeInter': playAlongFadeInter,
+      'playAlongFadeExp': playAlongFadeExp,
+      'playAlongSwayBeg': playAlongSwayBeg,
+      'playAlongSwayInter': playAlongSwayInter,
+      'playAlongSwayExp': playAlongSwayExp,
     };
 
     return values;
@@ -344,10 +430,12 @@ class StorageReaderWriter {
     //print("quizzes reset");
   }
 
-  Future<bool> displayLessonNotification() async {
+  Future<List> displayLessonNotification() async {
     final prefs = await SharedPreferences.getInstance();
 
+    String text = "";
     int lessonsPassed = 0;
+    bool achieved = true;
 
     for (int x = 0; x < numOfLessons; x++) {
       bool value = prefs.getBool('lesson-num-$x') ?? false;
@@ -355,25 +443,192 @@ class StorageReaderWriter {
       //print('adding the $x one');
     }
 
-    if (lessonsPassed == 1 ||
-        lessonsPassed == 5 ||
-        lessonsPassed == numOfLessons) {
-      return true;
+    if (lessonsPassed == 1) {
+      text = "You completed 1 lesson";
+    } else if (lessonsPassed == 5) {
+      text = "You completed 5 lessons";
+      //TODO: make final adjust on num of lesssons and quizzes
+    } else if (lessonsPassed == numOfLessons) {
+      text = "You completed all lessons";
     } else {
-      return false;
+      achieved = false;
     }
+
+    return [achieved, text];
+
+    // if (lessonsPassed == 1 ||
+    //     lessonsPassed == 5 ||
+    //     lessonsPassed == numOfLessons) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
-  Future<bool> displayQuizNotification() async {
+  Future<List> displayQuizNotification() async {
     final prefs = await SharedPreferences.getInstance();
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
 
-    if (completedQuizzes == 1 ||
-        completedQuizzes == 5 ||
-        completedQuizzes == numOfquizzes) {
-      return true;
+    String text = "";
+    bool achieved = true;
+
+    if (completedQuizzes == 1) {
+      text = "You completed 1 quiz";
+    } else if (completedQuizzes == 5) {
+      text = "You completed 5 quizzes";
+      //TODO: make final adjust on num of lesssons and quizzes
+    } else if (completedQuizzes == numOfquizzes) {
+      text = "You completed all quizzes";
     } else {
-      return false;
+      achieved = false;
+    }
+
+    return [achieved, text];
+
+    // if (completedQuizzes == 1 ||
+    //     completedQuizzes == 5 ||
+    //     completedQuizzes == numOfquizzes) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+  }
+
+  //only executed if prev score is beaten
+  Future<List> displaySpeedrunNotification(time, score) async {
+    final prefs = await SharedPreferences.getInstance();
+    bool achieved =
+        (prefs.getBool('${time}_second_speedrun_achievement') ?? false);
+
+    String text = "";
+
+    if (achieved) {
+      return [false, text];
+    } else {
+      if (score >= time / 2) {
+        prefs.setBool('${time}_second_speedrun_achievement', true);
+        text = "You got 50% in this speedrun";
+        return [true, text];
+      }
+      return [false, text];
+    }
+  }
+
+  resetSpeedrunAchievements() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 10; x < 70; x += 10) {
+      prefs.setBool('${x}_second_speedrun_achievement', false);
+    }
+  }
+
+  resetSpeedrunRecords() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (int x = 10; x < 70; x += 10) {
+      prefs.setInt('${x}_second_speedrun_record', 0);
+    }
+  }
+
+  displayEndlessNotification(difficulty, score, clef) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String level = difficulty.toString().toLowerCase();
+    // prefs.setBool('endless-$clef-$level-achievement', false);
+    bool achieved =
+        (prefs.getBool('endless-$clef-$level-achievement') ?? false);
+
+    //bool toDisplay = false;
+    String text = "";
+
+    //print('endless-$clef-$level-achievement');
+
+    if (achieved) {
+      //print("here");
+      return [false, text];
+    } else {
+      prefs.setBool('endless-$clef-$level-achievement', true);
+      if (level == 'beginner') {
+        if (score >= 10) {
+          text = "You scored 10 or more in this endless mode";
+          return [true, text];
+        } else {
+          return [false, text];
+        }
+      } else if (level == 'intermediate') {
+        if (score >= 20) {
+          text = "You scored 20 or more in this endless mode";
+          return [true, text];
+        } else {
+          return [false, text];
+        }
+      } else if (level == 'expert') {
+        if (score >= 30) {
+          text = "You scored 30 or more in this endless mode";
+          return [true, text];
+        } else {
+          return [false, text];
+        }
+      } else {
+        return [false, text];
+      }
+    }
+  }
+
+  //doesnt work for some reason
+  Future<void> resetEndlessAchievements() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (String clef in <String>['treble', 'bass']) {
+      for (Object difficulty in difficultyList) {
+        String level = difficulty.toString().toLowerCase();
+        //print('endless-Clef.$clef-$level-achievement');
+        prefs.setBool('endless-Clef.$clef-$level-achievement', false);
+      }
+    }
+    // endless-Clef.treble-beginner-achievement
+    //   endless-Clef.treble-beginner-achievement
+  }
+
+  displayPlayAlongNotification(difficulty, track, hitCounter) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String percentage =
+        ((hitCounter.score / hitCounter.numNotes) * 100).toStringAsFixed(1);
+    if (percentage[percentage.length - 1] == '0') {
+      percentage = double.parse(percentage).round().toString();
+    }
+
+    bool achieved =
+        (prefs.getBool('${track}_${difficulty}_play_along_achievement') ??
+            false);
+
+    bool toDisplay = false;
+    String text = "";
+
+    // print(
+    //     '${track}_${difficulty}_play_along_achievement____score:${percentage}');
+
+    if (achieved) {
+      return [toDisplay, text];
+    } else {
+      if (percentage == '100') {
+        prefs.setBool('${track}_${difficulty}_play_along_achievement', true);
+        text = "You got 100% in this play along, good job";
+        return [true, text];
+      } else {
+        return [false, text];
+      }
+    }
+  }
+
+  resetPlayAlongAchievements() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    for (String track in trackNames) {
+      for (Object difficulty in difficultyList) {
+        prefs.setBool('${track}_${difficulty}_play_along_achievement', false);
+      }
     }
   }
 
