@@ -4,9 +4,8 @@ import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
-import '../components/in_app_notification_pop_up.dart';
+import '../components/notifications/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
-
 import '../helper.dart';
 import '../lessons_and_quizzes/question_finder.dart';
 import '../lessons_and_quizzes/quiz.dart';

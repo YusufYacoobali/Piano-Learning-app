@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/notification_service.dart';
+import '../components/notifications/notification_service.dart';
 import '../constants.dart';
 import 'achievements_screen.dart';
 import 'note_helper_screen.dart';

@@ -1,6 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
+import 'package:sight_reading_app/components/notifications/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
