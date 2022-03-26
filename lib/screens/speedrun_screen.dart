@@ -156,7 +156,6 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
                 screenWidget,
                 Expanded(
                   child: PageKeyboard(answer),
-
                 ),
               ],
             ),
