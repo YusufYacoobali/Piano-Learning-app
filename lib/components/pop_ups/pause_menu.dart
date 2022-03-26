@@ -10,12 +10,12 @@ class PauseMenu extends PopUpContentBuilder {
 
   final String name;
 
-  final String id;
+  final String backToID;
 
   PauseMenu(
       {required this.context,
       required this.name,
-      required this.id,
+      required this.backToID,
       required this.continueOnPressed});
 // =======
 //   PauseMenu({required this.context, required this.continueOnPressed});
@@ -55,7 +55,7 @@ class PauseMenu extends PopUpContentBuilder {
         key: const Key('selection button'),
         style: pauseMenuButtonStyle,
         onPressed: () {
-          Navigator.popUntil(context, ModalRoute.withName(id));
+          Navigator.popUntil(context, ModalRoute.withName(backToID));
         },
       ),
     ];
