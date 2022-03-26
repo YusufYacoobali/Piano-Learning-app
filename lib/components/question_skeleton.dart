@@ -60,9 +60,10 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     _sheet.changeToRoundedBorder();
 
     return Expanded(
+      flex: 1,
       key: const Key('question image'),
       child: Padding(
-        padding: const EdgeInsets.all(50.0),
+        padding: const EdgeInsets.fromLTRB(50.0, 80.0, 10.0, 50.0),
         //show notes here
         child: CustomPaint(
           painter: _sheet,
@@ -75,9 +76,10 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   /// A sentence of the question.
   Widget getQuestionText() {
     return Expanded(
+      flex: 1,
       key: const Key('question text'),
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0),
         child: Text(
           //show question text
           widget.questionText,
@@ -94,15 +96,17 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
       child: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             getQuestionNumberTrackerWidget(),
-            Row(
-              children: <Widget>[
-                getQuestionImage(),
-                getQuestionText(),
-              ],
+            Expanded(
+              flex: 8,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  getQuestionImage(),
+                  getQuestionText(),
+                ],
+              ),
             ),
           ],
         ),
