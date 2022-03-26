@@ -11,7 +11,10 @@ void main() {
       helperId: 1,
       helperList: [
         HelperNoteInfo(
-            noteImageName: Note(name: 'A3', duration: 4), noteName: 'Bass A', noteSound: 'note_a'),
+            noteImageName: Note(name: 'A3', duration: 4),
+            noteName: 'Bass A',
+            noteSound: 'note_a',
+            description: ''),
       ],
     );
   }
@@ -22,7 +25,10 @@ void main() {
       helperId: 2,
       helperList: [
         HelperNoteInfo(
-            noteImageName: Note(name: 'A4', duration: 4), noteName: 'Clef A', noteSound: 'note_a'),
+            noteImageName: Note(name: 'A4', duration: 4),
+            noteName: 'Clef A',
+            noteSound: 'note_a',
+            description: ''),
       ],
     );
   }
