@@ -37,6 +37,8 @@ Future<List<String>> getSpeedrunRecords() async {
 class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
   ///A list containing the user records for each of the modes.
   late Future<List<String>> modeRecords;
+  final ScrollController _firstController = ScrollController();
+
   @override
   void initState() {
     modeRecords = getSpeedrunRecords();
@@ -89,43 +91,47 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
     return Scaffold(
         appBar: AppBarWithSettingsIcon(const Text('Choose a duration:'), menu),
         body: SafeArea(
-          //Uses an itemBuilder to generate a button for each mode, using the names, records and keys generated earlier.
-          child: ListView.separated(
-            padding: const EdgeInsets.all(8),
-            itemCount: modes.length,
-            itemBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                height: 100, //Fixes the button height
-                child: MenuButton(
-                  buttonChild: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Text(modes[index].toString() + ' seconds',
-                          textAlign: TextAlign.left),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width /
-                              4), //Adds space between Text
-                      Text('Record: ${recordData[index]}',
-                          textAlign: TextAlign.right),
-                    ],
-                  ),
-                  onPress: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SpeedrunScreen(
-                          timerDuration: modes[index],
+          /// Uses an itemBuilder to generate a button for each mode, using the names, records and keys generated earlier.
+          child: Scrollbar(
+            controller: _firstController,
+            isAlwaysShown: true,
+            child: ListView.separated(
+              padding: const EdgeInsets.all(8),
+              itemCount: modes.length,
+              itemBuilder: (BuildContext context, int index) {
+                return SizedBox(
+                  height: 100, //Fixes the button height
+                  child: MenuButton(
+                    buttonChild: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(modes[index].toString() + ' seconds',
+                            textAlign: TextAlign.left),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width /
+                                4), //Adds space between Text
+                        Text('Record: ${recordData[index]}',
+                            textAlign: TextAlign.right),
+                      ],
+                    ),
+                    onPress: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SpeedrunScreen(
+                            timerDuration: modes[index],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  key: modeButtonKeys[index],
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(
-              height: 10,
+                      );
+                    },
+                    key: modeButtonKeys[index],
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const SizedBox(
+                height: 10,
+              ),
             ),
           ),
         ));
