@@ -154,6 +154,7 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   getResultsScreen(title, percentage, lessonNum, questionBrain) {
+    Navigator.pop(context);
     Navigator.push(
       context,
       MaterialPageRoute(
