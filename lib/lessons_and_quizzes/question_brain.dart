@@ -1,6 +1,7 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/sheet_music_components/note.dart';
+import '../constants.dart';
 import 'question_answer_data.dart';
 
 /// Manages the questions in lessons/quizzes
@@ -115,7 +116,17 @@ class QuestionBrain {
 
   /// Checks if the user answer is correct
   bool checkAnswer(String userAnswer) {
-    return userAnswer == getCorrectAnswer();
+    if (userAnswer == getCorrectAnswer()) {
+      return true;
+    }
+    else if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
+      String correct = getCorrectAnswer();
+      String noteWithoutOctave = userAnswer[0] + userAnswer[1];
+      String alt = sharpFlatEquivalence[noteWithoutOctave]!;
+      alt = alt + userAnswer[userAnswer.length - 1];
+      if (alt == correct) return true;
+    }
+    return false;
   }
 
   /// Checks if the current question is the last question
