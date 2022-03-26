@@ -33,7 +33,6 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
 
   void _setPage() async {
     List<bool> values = await storage.loadLessonValues();
-    //print("loaded values");
     //state changes when values are fetched
     setState(() {
       _map.addAll({
@@ -105,7 +104,6 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
   }
 
   List<Widget> makeLessonButtons() {
-    //print("making buttons");
     return [
       lessonButton('Lesson 1', 1), // GestureDetector
       lessonButton('Lesson 2', 2), // GestureDetector
