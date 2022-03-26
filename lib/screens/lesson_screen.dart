@@ -57,10 +57,6 @@ class _LessonScreenState extends State<LessonScreen> {
         name: 'Lessons',
         id: LessonMenuScreen.id,
         continueOnPressed: () => stopwatch.start());
-// =======
-//     PauseMenu pauseMenuBuilder =
-//         PauseMenu(context: context, continueOnPressed: () => stopwatch.start());
-// >>>>>>> main
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
   }
@@ -96,12 +92,6 @@ class _LessonScreenState extends State<LessonScreen> {
             stopwatch.start();
           });
         } else {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) {
-          //     return getResultsScreen();
-          //   }),
-          // );
           getResults();
         }
       },
@@ -158,14 +148,6 @@ class _LessonScreenState extends State<LessonScreen> {
               ),
             ],
           ),
-
-          ///choices buttons
-          // Expanded(
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: getOptionButtons(),
-          //   ),
-          // ),
         ]),
       ),
     );
@@ -250,41 +232,16 @@ class _LessonScreenState extends State<LessonScreen> {
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => ResultsScreen(
-      //             score: percentage,
-      //             title: title,
-      //           )),
-      // );
       getResultsScreen(title, percentage, widget.lessonNum, questionBrain);
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
       List displayNotification = await storage.displayLessonNotification();
       getResultsScreen(title, percentage, widget.lessonNum, questionBrain);
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => ResultsScreen(
-      //             score: percentage,
-      //             title: title,
-      //           )),
-      // );
       //only displays notification if achievement is completed
       if (displayNotification[0]) {
         inAppNotification(context, displayNotification[1]);
       }
     }
   }
-// <<<<<<< check-results-screen
-//     return ResultsScreen(
-//       score: percentage,
-//       title: title,
-//       lessonNum: widget.lessonNum,
-//       questionBrain: questionBrain,
-// =======
-//   }
-
 }

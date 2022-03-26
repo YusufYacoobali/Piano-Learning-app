@@ -55,12 +55,17 @@ class StorageReaderWriter {
     _setDefaultSettings();
     _writeDefaultSettingsToStorage();
     _resetLessons();
-    //_resetAchievements();
+    _resetAllAchievements();
+  }
+
+  //resetting all achievement related storage values
+  void _resetAllAchievements() {
+    _resetLessons();
     _resetQuizzes();
-    resetSpeedrunAchievements();
-    resetSpeedrunRecords();
-    resetEndlessAchievements();
-    resetPlayAlongAchievements();
+    _resetSpeedrunAchievements();
+    _resetSpeedrunRecords();
+    _resetEndlessAchievements();
+    _resetPlayAlongAchievements();
   }
 
   /// Puts default values into the map
@@ -133,23 +138,14 @@ class StorageReaderWriter {
 
   Future<Map<String, int>> loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
-    // int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
-    // int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
-    // int endlessBassHS =
-    //     int.parse(prefs.getString('endless-bass-${prefs.get('difficulty').toString().toLowerCase()}-high-score') ?? '0');
-    // int endlessTrebleHS =
-    //     int.parse(prefs.getString('endless-treble-${prefs.get('difficulty').toString().toLowerCase()}-high-score') ?? '0');
 
     int lessonsPassed = 0;
-
+    //get number of lessons passed
     for (int x = 0; x < numOfLessons; x++) {
       bool value = prefs.getBool('lesson-num-$x') ?? false;
       if (value) lessonsPassed += 1;
-      //print('adding the $x one');
     }
-    //print("current lessons passed: $lessonsPassed");
 
-    //int completedLessons = (prefs.getInt('completed_lessons') ?? 0);
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
     int endlessBassBegHS =
         int.parse(prefs.getString('endless-bass-beginner-high-score') ?? '0');
@@ -171,18 +167,6 @@ class StorageReaderWriter {
     int speedrun40HS = prefs.getInt('40_second_speedrun_record') ?? 0;
     int speedrun50HS = prefs.getInt('50_second_speedrun_record') ?? 0;
     int speedrun60HS = prefs.getInt('60_second_speedrun_record') ?? 0;
-
-    // for (String track in trackNames) {
-    //   for (Object difficulty in difficultyList) {
-    //     String key =
-    //         '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
-    //     _map[key] = '0';
-    //   }
-    // }
-    // String key = "ode to joy - treble only-beginner-high-score";
-    // print(_map[key] = prefs.get(key));
-    // print(prefs.getString('ode to joy - treble only-beginner-high-score'));
-    //print(_map['ode to joy - treble only-beginner-high-score']);
 
     int playAlongOdeBeg = double.parse(
             prefs.getString('ode to joy - treble only-beginner-high-score') ??
@@ -239,6 +223,7 @@ class StorageReaderWriter {
         double.parse(prefs.getString('swaying melody-expert-high-score') ?? '0')
             .toInt();
 
+    //This map is given to achievement screen so cards can be made
     Map<String, int> values = {
       'completedLessons': lessonsPassed,
       'completedQuizzes': completedQuizzes,
@@ -270,28 +255,17 @@ class StorageReaderWriter {
       'playAlongSwayInter': playAlongSwayInter,
       'playAlongSwayExp': playAlongSwayExp,
     };
-
     return values;
   }
-
-  // //for lessons
-  // Future<bool> isLessonComplete(lessonNum) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   prefs.setBool('lesson-num-$lessonNum', true);
-  //   return prefs.getBool('lesson-num-$lessonNum') ?? true;
-  // }
 
   Future<List<bool>> loadLessonValues() async {
     final prefs = await SharedPreferences.getInstance();
     List<bool> values = [];
 
-    //prefs.setBool('lesson-num-1', false);
-
     for (int x = 0; x < numOfLessons; x++) {
       values.add(prefs.getBool('lesson-num-$x') ?? false);
-      //print('adding the $x one');
     }
-    //print(values);
+
     return values;
   }
 
@@ -514,7 +488,7 @@ class StorageReaderWriter {
     }
   }
 
-  resetSpeedrunAchievements() async {
+  _resetSpeedrunAchievements() async {
     final prefs = await SharedPreferences.getInstance();
 
     for (int x = 10; x < 70; x += 10) {
@@ -522,7 +496,7 @@ class StorageReaderWriter {
     }
   }
 
-  resetSpeedrunRecords() async {
+  _resetSpeedrunRecords() async {
     final prefs = await SharedPreferences.getInstance();
 
     for (int x = 10; x < 70; x += 10) {
@@ -576,7 +550,7 @@ class StorageReaderWriter {
   }
 
   //doesnt work for some reason
-  Future<void> resetEndlessAchievements() async {
+  Future<void> _resetEndlessAchievements() async {
     final prefs = await SharedPreferences.getInstance();
 
     for (String clef in <String>['treble', 'bass']) {
@@ -622,7 +596,7 @@ class StorageReaderWriter {
     }
   }
 
-  resetPlayAlongAchievements() async {
+  _resetPlayAlongAchievements() async {
     final prefs = await SharedPreferences.getInstance();
 
     for (String track in trackNames) {

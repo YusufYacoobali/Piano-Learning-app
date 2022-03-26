@@ -37,9 +37,7 @@ class AchievementMaker {
   }
 
   List<AchievementCard> makeAchievements(achieveValues) {
-    //print('these are values recieved $achieveValues');
-
-    //2nd value passed in is how many have been completed
+    //lesson achievements
     List<AchievementCard> achievements = [
       AchievementCard(
           'Complete 1 lesson', 1, achieveValues['completedLessons']),
@@ -48,28 +46,22 @@ class AchievementMaker {
       AchievementCard('Complete all lessons', numOfLessons,
           achieveValues['completedLessons']),
 
+      //quiz achievements
       AchievementCard('Complete 1 quiz', 1, achieveValues['completedQuizzes']),
       AchievementCard(
           'Complete 5 quizzes', 5, achieveValues['completedQuizzes']),
       AchievementCard('Complete all quizzes', numOfquizzes,
           achieveValues['completedQuizzes']),
 
+      //endless achievements
       AchievementCard(
           'Score 10 or higher on endless (treble in beginner difficulty)',
           10,
           achieveValues['endlessTrebleBegHS']),
-      // AchievementCard(
-      //     'Score 10 or higher on endless (treble in beginner difficulty)',
-      //     10,
-      //     achieveValues['endlessTrebleBegHS']),
       AchievementCard(
           'Score 20 or higher on endless (treble in intermediate difficulty)',
           20,
           achieveValues['endlessTrebleInterHS']),
-      // AchievementCard(
-      //     'Score 15 or higher on endless (treble in intermediate difficulty)',
-      //     15,
-      //     achieveValues['endlessTrebleInterHS']),
       AchievementCard(
           'Score 30 or higher on endless (treble in expert difficulty)',
           30,
@@ -79,25 +71,18 @@ class AchievementMaker {
           'Score 10 or higher on endless (bass in beginner difficulty)',
           10,
           achieveValues['endlessBassBegHS']),
-      // AchievementCard(
-      //     'Score 10 or higher on endless (bass in beginner difficulty)',
-      //     10,
-      //     achieveValues['endlessBassBegHS']),
 
       AchievementCard(
           'Score 20 or higher on endless (bass in intermediate difficulty)',
           20,
           achieveValues['endlessBassInterHS']),
-      // AchievementCard(
-      //     'Score 15 or higher on endless (bass in intermediate difficulty)',
-      //     15,
-      //     achieveValues['endlessBassInterHS']),
 
       AchievementCard(
           'Score 30 or higher on endless (bass in expert difficulty)',
           30,
           achieveValues['endlessBassExpHS']),
-      //AchievementCard('Complete the simple bass melody play along', 100, complete),
+
+      //speedrun achievements
       AchievementCard('Score 5 or higher on the 10 second speedrun', 5,
           achieveValues['speedrun10HS']),
       AchievementCard('Score 10 or higher on the 20 second speedrun', 10,
@@ -111,6 +96,7 @@ class AchievementMaker {
       AchievementCard('Score 30 or higher on the 60 second speedrun', 30,
           achieveValues['speedrun60HS']),
 
+      //play along achievements
       AchievementCard('Complete Ode to Joy play along in beginner', 100,
           achieveValues['playAlongOdeBeg']),
       AchievementCard('Complete Ode to Joy play along in intermediate', 100,
@@ -129,7 +115,6 @@ class AchievementMaker {
           achieveValues['playAlongMcInter']),
       AchievementCard('Complete Old Macdonald play along in expert', 100,
           achieveValues['playAlongMcExp']),
-
       AchievementCard('Complete Fade - Alan Walker play along in beginner', 100,
           achieveValues['playAlongFadeBeg']),
       AchievementCard('Complete Fade - Alan Walker play along in intermediate',
@@ -143,7 +128,6 @@ class AchievementMaker {
       AchievementCard('Complete Swaying Melody play along in expert', 100,
           achieveValues['playAlongSwayExp']),
     ];
-    //print(achievements);
     return achievements;
   }
 }
