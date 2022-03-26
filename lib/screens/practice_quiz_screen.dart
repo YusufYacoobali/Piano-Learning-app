@@ -246,12 +246,12 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         // Shows results screen and updates records if the last question was answered.
         else {
           _updateRecords();
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return getResultsScreen();
-            }),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) {
+          //     return getResultScreen();
+          //   }),
+          getResultsScreen();
         }
       },
     );
