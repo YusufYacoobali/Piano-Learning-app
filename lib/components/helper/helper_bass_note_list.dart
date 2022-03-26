@@ -9,7 +9,7 @@ final HelperList bassNoteImageNameList = HelperList(
     HelperNoteInfo(
         noteImageName: Note(name: 'C4', duration: 4),
         noteName: 'Bass Mid C',
-        noteSound: 'note_middle_c'),
+        noteSound: 'note_middle_c4'),
     HelperNoteInfo(
         noteImageName: Note(name: 'B3', duration: 4),
         noteName: 'Bass B',
@@ -57,6 +57,6 @@ final HelperList bassNoteImageNameList = HelperList(
     HelperNoteInfo(
         noteImageName: Note(name: 'C3', duration: 4),
         noteName: 'Bass C',
-        noteSound: 'note_low_c'),
+        noteSound: 'note_low_c3'),
   ],
 );

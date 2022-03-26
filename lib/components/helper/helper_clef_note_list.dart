@@ -9,7 +9,7 @@ final HelperList clefNoteImageNameList = HelperList(
     HelperNoteInfo(
         noteImageName: Note(name: 'C4', duration: 4),
         noteName: 'Clef Mid C',
-        noteSound: 'note_middle_c'),
+        noteSound: 'note_middle_c4'),
     HelperNoteInfo(
         noteImageName: Note(name: 'Db4', duration: 4),
         noteName: 'Clef Db',
@@ -57,6 +57,6 @@ final HelperList clefNoteImageNameList = HelperList(
     HelperNoteInfo(
         noteImageName: Note(name: 'C5', duration: 4),
         noteName: 'Clef High C',
-        noteSound: 'note_high_c'),
+        noteSound: 'note_high_c5'),
   ],
 );
