@@ -317,10 +317,28 @@ const Map<String, String> sharpFlatEquivalence = <String, String>{
 };
 
 /// The nodes that can be played in beginner mode for the treble clef in endless mode
-const List<String> endlessBeginnerTrebleNotes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+const List<String> endlessBeginnerTrebleNotes = [
+  'C4',
+  'D4',
+  'E4',
+  'F4',
+  'G4',
+  'A4',
+  'B4',
+  'C5'
+];
 
 /// The nodes that can be played in beginner mode for the bass clef in endless mode
-const List<String> endlessBeginnerBassNotes = ['C4', 'B3', 'A3', 'G3', 'F3', 'E3', 'D3', 'C3'];
+const List<String> endlessBeginnerBassNotes = [
+  'C4',
+  'B3',
+  'A3',
+  'G3',
+  'F3',
+  'E3',
+  'D3',
+  'C3'
+];
 
 /// The nodes that can be played in intermediate mode for the treble clef in endless mode
 const List<String> endlessIntermediateTrebleNotes = [
@@ -516,12 +534,12 @@ const double androidFlatOffset = 35;
 /// IOS symbol fonts
 /// Change these to change the symbol size
 const double iosSharpFontSize = 40;
-const double iosFlatFontSize = 60;
+const double iosFlatFontSize = 50;
 
 /// IOS symbol offsets
 /// Change these to change the symbol position on screen
-const double iosSharpOffset = 55;
-const double iosFlatOffset = 30;
+const double iosSharpOffset = 16;
+const double iosFlatOffset = 24;
 
 /// QuestionAnswerData
 const int timeThreshold = 500;
