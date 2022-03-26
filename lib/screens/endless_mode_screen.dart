@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
 
 import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -42,6 +43,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
 
   late final String _difficulty;
 
+  StorageReaderWriter storage = StorageReaderWriter();
   late PageKeyboard _keyboard;
 
   String _setClef = 'update';
@@ -65,7 +67,8 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     EndlessEndingInstructions endMenuBuilder =
         EndlessEndingInstructions(context: context, counter: _counter);
 
-    _startMenu = PopUpController(context: context, menuBuilder: startMenuBuilder);
+    _startMenu =
+        PopUpController(context: context, menuBuilder: startMenuBuilder);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
 
     /// Displays the start menu
@@ -123,11 +126,25 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _currentNoteToPlay.checkPress(text);
   }
 
+  end() async {
+    // bool displayNotification = await storage.displayEndlessNotification(
+    //     _difficulty, _counter.score, _sheet.getClef());
+    // if (displayNotification) {
+    //   inAppNotification(context);
+    // }
+    _endMenu.show();
+    List displayNotification = await storage.displayEndlessNotification(
+        _difficulty, _counter.score, _sheet.getClef());
+    if (displayNotification[0]) {
+      inAppNotification(context, displayNotification[1]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    //bool display = storage.displayEndless();
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => {if (_hasEnded) _endMenu.show()});
-
+        ?.addPostFrameCallback((_) => {if (_hasEnded) end()});
     return Scaffold(
       body: SafeArea(
         child: Column(

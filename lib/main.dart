@@ -53,7 +53,9 @@ class SightReadingApp extends StatelessWidget {
               SettingsScreen.id: (context) => const SettingsScreen(),
               EndlessModeScreen.id: (context) => const EndlessModeScreen(),
               RandomQuizScreen.id: (context) => const RandomQuizScreen(),
-              PracticeQuizScreen.id: (context) => const PracticeQuizScreen(lessonID: 0), //TODO: Find out how to make default parameter value
+              PracticeQuizScreen.id: (context) => const PracticeQuizScreen(
+                  lessonID:
+                      0), //TODO: Find out how to make default parameter value
 
               //helper routes
               HelperMenuScreen.id: (context) => const HelperMenuScreen(),

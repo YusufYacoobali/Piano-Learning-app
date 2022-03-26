@@ -188,7 +188,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     } else {
       title = "Congratulations!";
       storage.saveCompletedQuiz();
-      bool displayNotification = await storage.displayQuizNotification();
+      List displayNotification = await storage.displayQuizNotification();
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -199,8 +199,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
                 )),
       );
       //only displays notification if achievement is completed
-      if (displayNotification) {
-        inAppNotification(context);
+      if (displayNotification[0]) {
+        inAppNotification(context, displayNotification[1]);
       }
     }
 // <<<<<<< check-results-screen
@@ -246,12 +246,12 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         // Shows results screen and updates records if the last question was answered.
         else {
           _updateRecords();
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return getResultsScreen();
-            }),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) {
+          //     return getResultScreen();
+          //   }),
+          getResultsScreen();
         }
       },
     );
