@@ -26,7 +26,7 @@ void main() {
     );
     expect(find.text('A'), findsOneWidget);
     expect(find.text('B'), findsOneWidget);
-    expect(find.text('C'), findsOneWidget);
+    expect(find.text('C4'), findsOneWidget);
     expect(find.text('D'), findsOneWidget);
     expect(find.text('E'), findsOneWidget);
     expect(find.text('F'), findsOneWidget);

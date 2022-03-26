@@ -10,7 +10,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Lesson 1'));
     await tester.pumpAndSettle();
-    expect(find.text('C'), findsOneWidget);
+    expect(find.text('C4'), findsOneWidget);
   });
 
   testWidgets('check that the option button 2 is displayed',
