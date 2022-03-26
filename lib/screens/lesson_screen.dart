@@ -6,9 +6,9 @@ import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
-import '../components/instruction_pop_up_content/pause_menu.dart';
+import '../components/pop_ups/pause_menu.dart';
 import '../components/question_skeleton.dart';
-import 'package:sight_reading_app/question_brain.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 import '../components/sheet_music_components/note.dart';
 
 import '../lessons_and_quizzes/question_finder.dart';
@@ -237,7 +237,7 @@ class _LessonScreenState extends State<LessonScreen> {
     } else {
       alertTitle = 'Incorrect!';
       alertDesc = 'Wrong answer, the correct answer is ' +
-          questionBrain.getCorrectAnswer();
+          questionBrain.getCorrectAnswerWithoutOctave();
     }
 
     displayDialog(alertTitle, alertDesc);

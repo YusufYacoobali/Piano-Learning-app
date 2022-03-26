@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+//import 'package:perfect_volume_control/perfect_volume_control.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
-import 'package:sight_reading_app/questions.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
 
 import 'constants.dart';
@@ -40,6 +41,11 @@ class StorageReaderWriter {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     _map[key] = value.toString();
     await pref.setString(key, value.toString());
+    if (key == 'volume') {
+      // TODO: Figure out why this doesn't work
+      // PerfectVolumeControl.setVolume(
+      //     double.parse(value.toString()) / 100); //Needs values from 0 to 1
+    }
   }
 
   /// Resets the StorageWriter back to the defaults
@@ -58,6 +64,8 @@ class StorageReaderWriter {
 
   /// Puts default values into the map
   void _setDefaultValues() {
+    // _map['volume'] = constants.defaultVolumeLevel;
+    // _map['difficulty'] = constants.defaultDifficultyLevel;
     // With 7 lessons:
 
     for (int i = 1; i <= 7; ++i) {
@@ -70,8 +78,9 @@ class StorageReaderWriter {
 
   /// Writes the default StorageWriter values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
-    WidgetsFlutterBinding.ensureInitialized();
     final SharedPreferences pref = await SharedPreferences.getInstance();
+    // pref.setInt('volume', constants.defaultVolumeLevel);
+    // pref.setString('difficulty', constants.defaultDifficultyLevel);
     for (int i = 1; i <= 7; ++i) {
       pref.setString('lesson $i', '0');
     }

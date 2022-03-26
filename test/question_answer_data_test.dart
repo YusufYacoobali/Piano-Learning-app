@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
-import 'package:sight_reading_app/question.dart';
-import 'package:sight_reading_app/questions.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 
 void main() {
   test('Check that createDefaultMap correctly initialises values to 0', () {
@@ -143,5 +143,20 @@ void main() {
     List<int> actualQuestionIDsInOrder =
         QuestionAnswerData.getPracticeQuestionIDs();
     expect(expectedQuestionIDsOrder, actualQuestionIDsInOrder);
+  });
+
+  test('Check that updateQuestionStatisticsMap correctly updates the map', () {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> allQuestions = questions;
+    int questionID = allQuestions[0].questionID;
+    QuestionAnswerData.createDefaultMap();
+    Map<int, int> initialMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? oldValue = initialMap[questionID];
+    expect(oldValue, 0);
+    QuestionAnswerData.updateQuestionStatisticsMap(questionID, 5);
+    Map<int, int> updatedMap = QuestionAnswerData.getQuestionStatisticsMap();
+    int? newValue = updatedMap[questionID];
+    expect(oldValue == newValue, false);
+    expect(newValue, 5);
   });
 }

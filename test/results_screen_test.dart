@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
-import 'package:sight_reading_app/question_brain.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
-import 'package:sight_reading_app/questions.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 
 void main() {
   testWidgets('Check that the title is displayed', (WidgetTester tester) async {

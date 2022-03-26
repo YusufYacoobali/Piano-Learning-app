@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
-import 'package:sight_reading_app/components/instruction_pop_up_content/speedrun_menu_instructions.dart';
-import 'package:sight_reading_app/screens/menu_screen.dart';
-import 'package:sight_reading_app/screens/speedrun_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../components/instruction_pop_up_content/speedrun_menu_instructions.dart';
+
+import '../components/app_bar_with_settings_icon.dart';
+import '../components/pop_ups/speedrun_menu_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
+import '../screens/menu_screen.dart';
+import '../screens/speedrun_screen.dart';
 import 'menu_screen.dart';
 import 'speedrun_screen.dart';
 

@@ -5,7 +5,7 @@ import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/in_app_notification_pop_up.dart';
 import '../components/page_keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
-import '../components/instruction_pop_up_content/play_along_ending_instructions.dart';
+import '../components/pop_ups/play_along_ending_instructions.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
@@ -52,7 +52,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   }
 
   void recordHitMiss(bool hasPlayed) {
-    if (hasPlayed) _hitCounter.score++;
+    if (hasPlayed) _hitCounter.increment();
   }
 
   @override
@@ -67,7 +67,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
         onBack: widget.onBackToPlayAlongMenu);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
     _currentNoteToPlay =
-        NotePlayedChecker(noteNotifier: _noteToPlay, function: recordHitMiss);
+        NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: recordHitMiss);
     _sheet = MovingMusicSheet(
         nextNote: _nextNote,
         clef: widget.clef,
@@ -119,15 +119,16 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   /// Gets the key pressed on the keyboard
   void playKey(String text) {
-    String level = '4';
-    if (_sheet.getClef() == Clef.bass) {
-      level = '3';
-    }
-    _currentNoteToPlay.checkPress(text + level);
+    _currentNoteToPlay.checkPress(text);
   }
 
   @override
   Widget build(BuildContext context) {
+    int octave = 4;
+    if (widget.clef == Clef.bass) {
+      octave = 3;
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -143,7 +144,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
             ),
             Expanded(
               flex: 3,
-              child: PageKeyboard(playKey),
+              child: PageKeyboard(playKey, startOctave: octave),
             ),
           ],
         ),

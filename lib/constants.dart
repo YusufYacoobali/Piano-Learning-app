@@ -275,7 +275,7 @@ const TextStyle pauseMenuTextStyle = TextStyle(
 );
 
 ButtonStyle pauseMenuButtonStyle = ElevatedButton.styleFrom(
-  primary: const Color(0xffa4508b),
+  primary: const Color.fromARGB(255, 192, 94, 163),
   onPrimary: Colors.grey.shade300,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10),
@@ -301,14 +301,10 @@ const Icon pauseMenuSelectionIcon = Icon(
 
 BoxDecoration cardBackground = BoxDecoration(
   borderRadius: BorderRadius.circular(10),
-  gradient: LinearGradient(
-    colors: [
-      const Color(0xff5f0a87).withOpacity(0.8),
-      const Color(0xffa4508b).withOpacity(0.5),
-    ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  ),
+  gradient: LinearGradient(colors: [
+    const Color(0xff5f0a87).withOpacity(1.0),
+    const Color(0xffa4508b).withOpacity(1.0),
+  ], begin: Alignment.topLeft, end: Alignment.bottomRight),
 );
 
 const Map<String, String> sharpFlatEquivalence = <String, String>{
@@ -320,38 +316,29 @@ const Map<String, String> sharpFlatEquivalence = <String, String>{
 };
 
 /// Notes that can be played in endless mode
-const List<String> endlessBeginnerNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-const List<String> endlessIntermediateNotes = [
-  'C',
-  'Db',
-  'D',
-  'D#',
-  'E',
-  'F',
-  'F#',
-  'G',
-  'A',
-  'Bb',
-  'B'
+const List<String> endlessBeginnerTrebleNotes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+const List<String> endlessBeginnerBassNotes = ['C4', 'B3', 'A3', 'G3', 'F3', 'E3', 'D3', 'C3'];
+
+const List<String> endlessIntermediateTrebleNotes = [
+  'B3',
+  'C4', 'Db4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'A4', 'Bb4', 'B4',
+  'C5', 'D5', 'Db5', 'E5',
 ];
-const List<String> endlessExpertNotes = [
-  'C',
-  'C#',
-  'Db',
-  'D',
-  'D#',
-  'Eb',
-  'E',
-  'F',
-  'F#',
-  'Gb',
-  'G',
-  'G#',
-  'Ab',
-  'A',
-  'A#',
-  'Bb',
-  'B'
+
+const List<String> endlessIntermediateBassNotes = [
+  'C3', 'Db3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'A3', 'Bb3', 'B3',
+  'C4', 'Db4', 'D4',
+];
+
+const List<String> endlessExpertTrebleNotes = [
+  'A3', 'A#3', 'Bb3', 'B3',
+  'C4', 'C#4', 'Db4', 'D4', 'D#4', 'Eb4', 'E4', 'F4', 'F#4', 'Gb4', 'G4', 'G#4', 'Ab4', 'A4', 'A#4', 'Bb4', 'B4',
+  'C5', 'C#5', 'Db5', 'D5', 'D#5', 'Eb5', 'E5', 'F5',
+];
+
+const List<String> endlessExpertBassNotes = [
+  'C3', 'C#3', 'Db3', 'D3', 'D#3', 'Eb3', 'E3', 'F3', 'F#3', 'Gb3', 'G3', 'G#3', 'Ab3', 'A3', 'A#3', 'Bb3', 'B3',
+  'C4', 'C#4', 'Db4', 'D4', 'D#4', 'Eb4', 'E4',
 ];
 
 /// How fast the notes move across the screen in endless mode for each difficulty
@@ -386,19 +373,10 @@ const Icon helperButton = Icon(
 
 const Icon helpPlayButtonStyle = Icon(
   Icons.play_arrow,
-  size: 35.0,
+  size: 40.0,
 );
 
-ButtonStyle helperMenuButonStyle = ElevatedButton.styleFrom(
-  primary: const Color(0xffa4508b).withOpacity(0.3),
-  onPrimary: Colors.grey.shade300,
-  fixedSize: const Size(180.0, 60.0),
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10),
-  ),
-);
-
-const TextStyle helperMenuTextStyle = TextStyle(
+const TextStyle helperTextStyle = TextStyle(
   fontSize: 40.0,
   color: Colors.white,
   fontWeight: FontWeight.bold,

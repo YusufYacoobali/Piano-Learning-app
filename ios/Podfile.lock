@@ -8,6 +8,8 @@ PODS:
     - Flutter
   - path_provider_ios (0.0.1):
     - Flutter
+  - perfect_volume_control (0.0.1):
+    - Flutter
   - shared_preferences_ios (0.0.1):
     - Flutter
 
@@ -17,6 +19,7 @@ DEPENDENCIES:
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_native_timezone (from `.symlinks/plugins/flutter_native_timezone/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - perfect_volume_control (from `.symlinks/plugins/perfect_volume_control/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
 
 EXTERNAL SOURCES:
@@ -30,6 +33,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_timezone/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
+  perfect_volume_control:
+    :path: ".symlinks/plugins/perfect_volume_control/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
 
@@ -39,8 +44,9 @@ SPEC CHECKSUMS:
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_native_timezone: 5f05b2de06c9776b4cc70e1839f03de178394d22
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
+  perfect_volume_control: 79b165ecd79d6ee20e60bf15534de61ebf3bb5f3
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

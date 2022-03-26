@@ -32,4 +32,10 @@ void main() {
     await tester.pumpWidget(const SightReadingApp());
     expect(find.byIcon(Icons.settings), findsOneWidget);
   });
+
+  testWidgets('check that the help button is displayed',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const SightReadingApp());
+    expect(find.byIcon(Icons.help), findsOneWidget);
+  });
 }

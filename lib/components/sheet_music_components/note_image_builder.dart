@@ -175,7 +175,7 @@ class NoteImageBuilder {
           offset = constants.trebleClefSheetNoteOffset[pos];
         }
         else {
-          offset = offset = constants.trebleClefSheetNoteOffset[pos];
+          offset = offset = constants.bassClefSheetNoteOffset[pos];
         }
         if (offset != null) {
           Offset startingPoint1 = Offset(note.pos - 5, _baseLine - offset + 8);
