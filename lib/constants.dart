@@ -240,7 +240,7 @@ const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 const double cardWidth = 270;
 const double cardHeight = 270;
 
-const double circularIndicatorRadius = 70;
+const double circularIndicatorRadius = 68;
 
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
@@ -248,10 +248,10 @@ const Color indicatorGoodProgress = Colors.green;
 const Color indicatorBadProgress = Colors.orange;
 
 const TextStyle achievementTitleTextStyle =
-    TextStyle(fontWeight: FontWeight.w500, fontSize: 16);
+    TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
 
 const TextStyle achievementTextStyle =
-    TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
 const int animationDuration = 1200;
 final Decoration achievementCardDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(20),
