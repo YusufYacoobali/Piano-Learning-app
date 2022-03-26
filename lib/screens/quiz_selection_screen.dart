@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import '../components/app_bar_with_settings_icon.dart';
@@ -29,18 +28,6 @@ List<String> quizRecordsCopy = <String>[];
 ///The key for the button that confirms the selection of a random quiz.
 const randomQuizSelectedKey = Key('quizSelected:Random');
 
-///The user records for each of the quizzes.
-//TODO: Remove and replace with helper class function in relevant places
-//TODO: Check speedrun mode for same idea, then adjust lay_along and endless modes.
-Future<List<String>> getQuizRecords() async {
-  List<String> records = <String>[];
-  final prefs = await SharedPreferences.getInstance();
-  for (String quiz in replaceSpacesWithUnderscoresFromStrings(quizzes)) {
-    records.add((prefs.getInt('${quiz}_record') ?? 'N/A').toString());
-  }
-  return records;
-}
-
 /// A screen that displays a scrollable list of available quizzes with buttons to access each quiz.
 ///
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
@@ -51,7 +38,7 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
 
   @override
   void initState() {
-    quizRecords = getQuizRecords();
+    quizRecords = getRecordsForMode('quiz');
     super.initState();
   }
 
@@ -82,17 +69,21 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
       'N/A',
     ];
 
+    /// A widget that refreshes the screen whenever the value of the 'future' attribute changes.
     return FutureBuilder(
       future: quizRecords,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
+        // Checks if the function to get quiz records is still operating.
         if (snapshot.connectionState != ConnectionState.done) {
           quizRecordsCopy = defaultRecords;
           return _getScreenWidget(defaultRecords);
         }
+        // Checks if there has been an error in retrieving quiz_records.
         if (!snapshot.hasData) {
           quizRecordsCopy = defaultRecords;
           return _getScreenWidget(defaultRecords);
         }
+        // If there have been no issues in getting records then this runs.
         final List<String> quizRecords = snapshot.data;
         quizRecordsCopy = quizRecords;
         return _getScreenWidget(quizRecords);

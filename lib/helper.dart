@@ -1,6 +1,27 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
+import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
+import 'package:sight_reading_app/storage_reader_writer.dart';
+
+/// Replaces all blank spaces from all strings with underscores in a list
+List<String> replaceSpacesWithUnderscoresFromStrings(List<String> toConvert) {
+  List<String> stringsWithNoSpaces = <String>[];
+  for (String string in toConvert) {
+    String stringWithNoSpaces = '';
+    for (var rune in string.runes) {
+      String char = String.fromCharCode(rune);
+      if (char != ' ') {
+        stringWithNoSpaces = stringWithNoSpaces + char;
+      }
+      else {
+        stringWithNoSpaces = stringWithNoSpaces + '_';
+      }
+    }
+    stringsWithNoSpaces.add(stringWithNoSpaces);
+  }
+  return stringsWithNoSpaces;
+}
 
 /// The shared preference keys for the inputted mode.
 ///
@@ -25,6 +46,12 @@ getRecordKeysForMode(String mode) {
       keyList.add('${key}_record');
     }
   }
+  else if (mode == 'play along') {
+    final StorageReaderWriter _writer = StorageReaderWriter();
+    for (String track in trackNames) {
+      keyList.add('${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score');
+    }
+  }
   //TODO: Move play_along and endless records retrieval into here.
   return keyList;
 }
@@ -38,6 +65,7 @@ getRecordKeysForMode(String mode) {
 /// - 'endless'
 ///
 /// All other inputs return the empty list.
+//TODO: Move into storage_reader_writer, or use existing storage_reader_writer methods instead.
 Future<List<String>> getRecordsForMode(String mode) async {
   List<String> keyList = getRecordKeysForMode(mode);
   final prefs = await SharedPreferences.getInstance();
@@ -51,23 +79,4 @@ Future<List<String>> getRecordsForMode(String mode) async {
     }
   }
   return records;
-}
-
-/// Replaces all blank spaces from all strings with underscores in a list
-List<String> replaceSpacesWithUnderscoresFromStrings(List<String> toConvert) {
-  List<String> stringsWithNoSpaces = <String>[];
-  for (String string in toConvert) {
-    String stringWithNoSpaces = '';
-    for (var rune in string.runes) {
-      String char = String.fromCharCode(rune);
-      if (char != ' ') {
-        stringWithNoSpaces = stringWithNoSpaces + char;
-      }
-      else {
-        stringWithNoSpaces = stringWithNoSpaces + '_';
-      }
-    }
-    stringsWithNoSpaces.add(stringWithNoSpaces);
-  }
-  return stringsWithNoSpaces;
 }

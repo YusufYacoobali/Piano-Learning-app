@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:sight_reading_app/helper.dart';
 
 import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -46,6 +47,12 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
 
   final StorageReaderWriter _writer = StorageReaderWriter();
 
+  // @override
+  // void initState() {
+  //   trackRecords = getRecordsForMode('play along');
+  //   super.initState();
+  // }
+  
   _PlayAlongMenuScreenState() {
     loadRecords();
   }

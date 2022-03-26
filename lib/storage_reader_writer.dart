@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 //import 'package:perfect_volume_control/perfect_volume_control.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/helper.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
+import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 
 import 'constants.dart';
 
@@ -94,6 +96,7 @@ class StorageReaderWriter {
     await loadQuestionAnswerDataFromStorage(pref);
     await _loadEndlessRecordsFromStorage(pref);
     await _loadPlayAlongRecordsFromStorage(pref);
+    await _loadSpeedrunRecordsFromStorage(pref);
   }
 
   Future<void> loadLessonScoresFromStorage(SharedPreferences pref) async {
@@ -298,6 +301,20 @@ class StorageReaderWriter {
             '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
         write(key, '0');
       }
+    }
+  }
+
+  /// Loads speedrun records from storage
+  Future<void> _loadSpeedrunRecordsFromStorage(SharedPreferences pref) async {
+    String? isOnDisk = pref.getString('10_second_speedrun_record');
+    if (isOnDisk == null) {
+      _setDefaultEndlessRecords();
+      _writeEndlessRecordsToStorage();
+    } else {
+        List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
+        for (String key in _modeRecordKeys) {
+          _map[key] = pref.get(key);
+        }
     }
   }
 

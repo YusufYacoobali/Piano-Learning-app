@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../components/app_bar_with_settings_icon.dart';
 import '../components/pop_ups/speedrun_menu_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -8,6 +6,7 @@ import '../screens/menu_screen.dart';
 import '../screens/speedrun_screen.dart';
 import 'menu_screen.dart';
 import 'speedrun_screen.dart';
+import 'package:sight_reading_app/helper.dart';
 
 ///A list containing the various speedrun mode options.
 List<int> modes = [10, 20, 30, 40, 50, 60];
@@ -20,16 +19,6 @@ List<Key> modeButtonKeys = <Key>[];
 /// This variable copies the actual list and is used for testing purposes.
 List<String> modeRecordsCopy = <String>[];
 
-///The user records for each of the available speedrun modes.
-Future<List<String>> getSpeedrunRecords() async {
-  List<String> records = <String>[];
-  final prefs = await SharedPreferences.getInstance();
-  for (int mode in modes) {
-    records.add((prefs.getInt('${mode}_second_speedrun_record') ?? 'N/A').toString());
-  }
-  return records;
-}
-
 ///A screen that displays a scrollable list of available speedrun modes with buttons to access each mode.
 ///
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
@@ -38,7 +27,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
   late Future<List<String>> modeRecords;
   @override
   void initState() {
-    modeRecords = getSpeedrunRecords();
+    modeRecords = getRecordsForMode('speedrun');
     super.initState();
   }
 
