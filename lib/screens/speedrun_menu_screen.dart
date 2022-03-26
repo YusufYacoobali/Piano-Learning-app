@@ -61,7 +61,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
     /// A default value for the records if records have not been obtained in time.
     List<String> defaultRecords = ['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'];
 
-    //Waits for the records to be obtained from shared preferences before building the screen.
+    /// Waits for the records to be obtained from shared preferences before building the screen.
     return FutureBuilder(
       future: modeRecords,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -96,6 +96,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
             controller: _firstController,
             isAlwaysShown: true,
             child: ListView.separated(
+              controller: _firstController,
               padding: const EdgeInsets.all(8),
               itemCount: modes.length,
               itemBuilder: (BuildContext context, int index) {

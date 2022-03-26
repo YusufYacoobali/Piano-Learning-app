@@ -135,6 +135,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
           controller: _firstController,
           isAlwaysShown: true,
           child: ListView.separated(
+            controller: _firstController,
               /// Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
               itemBuilder: (BuildContext context, int index) {
                 return SizedBox(

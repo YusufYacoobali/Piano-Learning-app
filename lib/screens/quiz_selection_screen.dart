@@ -48,6 +48,7 @@ Future<List<String>> getQuizRecords() async {
 class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
   ///A list containing the user records for each of the quizzes
   late Future<List<String>> quizRecords;
+  final ScrollController _firstController = ScrollController();
 
   @override
   void initState() {
@@ -65,7 +66,7 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
   Widget build(BuildContext context) {
 
     quizButtonKeys = <Key>[]; //Resets list of keys
-    //Generates the keys for the quiz buttons based on quiz names, with the exception of the random mixed quiz.
+    ///Generates the keys for the quiz buttons based on quiz names, with the exception of the random mixed quiz.
     for (String quiz in quizzes) {
       quizButtonKeys.add(Key('quizSelected:$quiz'));
     }
@@ -109,65 +110,74 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
     return Scaffold(
       appBar: AppBarWithSettingsIcon(const Text('Choose a quiz:'), menu),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              //Uses an itemBuilder to generate a button for each quiz, using the names, records and keys generated earlier.
-              child: ListView.separated(
-                padding: const EdgeInsets.all(8),
-                itemCount: quizzes.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    height: 100.0,
-                    child: MenuButton(
-                      buttonChild: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text(quizzes[index], textAlign: TextAlign.left),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width /
-                                  4), //Adds space between Text
-                          Text('Record: ${recordData[index]}',
-                              textAlign: TextAlign.right),
-                        ],
-                      ),
-                      onPress: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PracticeQuizScreen(lessonID: index + 1)
-                            ),
-                        );
-                      },
-                      key: quizButtonKeys[index],
+        child: Scrollbar(
+          controller: _firstController,
+          isAlwaysShown: true,
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                /// Uses an itemBuilder to generate a button for each quiz, using the names, records and keys generated earlier.
+                child: Scrollbar(
+                  controller: _firstController,
+                  isAlwaysShown: true,
+                  child: ListView.separated(
+                    controller: _firstController,
+                    padding: const EdgeInsets.all(8),
+                    itemCount: quizzes.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: 100.0,
+                        child: MenuButton(
+                          buttonChild: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Text(quizzes[index], textAlign: TextAlign.left),
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width /
+                                      4), //Adds space between Text
+                              Text('Record: ${recordData[index]}',
+                                  textAlign: TextAlign.right),
+                            ],
+                          ),
+                          onPress: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PracticeQuizScreen(lessonID: index + 1)
+                                ),
+                            );
+                          },
+                          key: quizButtonKeys[index],
+                        ),
+                      );
+                    },
+                    //Adds blank spaces between each button
+                    separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(
+                      height: 10,
                     ),
-                  );
-                },
-                //Adds blank spaces between each button
-                separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(
-                  height: 10,
+                  ),
                 ),
               ),
-            ),
-            //Adds the random mixed quiz button to the bottom of the screen.
-            //As this is not part of the ListView, it is not moved by scrolling.
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                  height: 80.0,
-                  child: MenuButton(
-                    buttonChild: const Center(child: Text("Random mixed quiz")),
-                    onPress: () {
-                      Navigator.pushNamed(
-                          context,
-                          RandomQuizScreen
-                              .id);
-                    },
-                    key: randomQuizSelectedKey,
-                  ),
-                ))
-          ],
+              //Adds the random mixed quiz button to the bottom of the screen.
+              //As this is not part of the ListView, it is not moved by scrolling.
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(
+                    height: 80.0,
+                    child: MenuButton(
+                      buttonChild: const Center(child: Text("Random mixed quiz")),
+                      onPress: () {
+                        Navigator.pushNamed(
+                            context,
+                            RandomQuizScreen
+                                .id);
+                      },
+                      key: randomQuizSelectedKey,
+                    ),
+                  ))
+            ],
+          ),
         ),
       ),
     );
