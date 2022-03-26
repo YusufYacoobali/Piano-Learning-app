@@ -1,14 +1,14 @@
 class Note {
 
   /// The note
-  late String name;
+  final String name;
 
   /// Number of beats of the note
-  late double duration;
+  final double duration;
 
   Note({
     required this.name,
-    required this.duration,
+    this.duration = 4,
   });
 
   /// Gets the name of the note without the symbol

@@ -94,7 +94,7 @@ class NoteImageBuilder {
       font = constants.iosSharpFontSize;
 
       /// Change this to change ios sharp position
-      position = _baseLine - constants.iosSharpOffset;
+      position = _baseLine - note.height - constants.iosSharpOffset;
 
       if (isFlat) {
         x = note.pos - 25;

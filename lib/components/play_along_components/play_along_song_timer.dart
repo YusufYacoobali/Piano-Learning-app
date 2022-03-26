@@ -3,31 +3,11 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 
 import '../../constants.dart' as constants;
-import '../sheet_music_components/moving_music_sheet.dart';
+import '../sheet_music_components/moving_music_sheet_timer.dart';
 import '../sheet_music_components/note.dart';
 import 'play_along_hit_counter.dart';
 
-class PlayAlongSongTimer {
-  /// Whether the sheet is moving or not
-  bool _isOn = false;
-
-  /// The music sheet
-  final MovingMusicSheet sheet;
-
-  /// Notifies the sheet with the next note to be played
-  final NextNoteNotifier nextNote;
-
-  /// How far into the time unit we are
-  int _index = 0;
-
-  /// The number of movements before the time unit changes
-  late final int _iterationsPerTimeUnit;
-
-  /// The function to be called when a note has been hit or missed
-  final Function(String) updater;
-
-  /// Timing
-  int _time = -1;
+class PlayAlongSongTimer extends MovingMusicSheetTimer {
 
   /// Notes to be played
   final Map<int, Note> notes;
@@ -41,31 +21,24 @@ class PlayAlongSongTimer {
   /// Called when song has finished
   final VoidCallback onStop;
 
-  /// The amount of time between increments
-  late final int _timeBetweenMovements;
-
-  /// How fast the notes move along the screen
-  final int bpm;
-
-  /// The difficulty level
-  late final String _difficulty;
-
   /// Counter the number of hit notes
   final PlayAlongHitCounter hitCounter;
 
   PlayAlongSongTimer({
-    required this.sheet,
-    required this.nextNote,
-    required this.updater,
+    required sheet,
+    required nextNote,
+    required updater,
+    required bpm,
     required this.notes,
-    required this.bpm,
     required this.onStop,
     required this.hitCounter,
-  }) {
+  }) : super(sheet: sheet, nextNote: nextNote, updater: updater) {
+
+    this.bpm = bpm;
 
     _endTime = notes.keys.last;
 
-    Note? n = notes[_time];
+    Note? n = notes[time];
     if (n != null) {
       Note note = n;
       nextNote.setNextNote(note);
@@ -76,48 +49,51 @@ class PlayAlongSongTimer {
   /// Sets the values of the moving notes depending on the difficulty
   void _setDifficultyValues() {
     int apparentSpacing = 100;
-    if (_difficulty == 'Expert') {
-      _iterationsPerTimeUnit = constants.playAlongExpertNoteSpacing;
-      apparentSpacing = _iterationsPerTimeUnit - 20;
+    if (difficulty == 'Expert') {
+      iterationsPerTimeUnit = constants.playAlongExpertNoteSpacing;
+      apparentSpacing = iterationsPerTimeUnit - 20;
     }
-    else if (_difficulty == 'Intermediate') {
-      _iterationsPerTimeUnit = constants.playAlongIntermediateNoteSpacing;
-      apparentSpacing = _iterationsPerTimeUnit - 60;
+    else if (difficulty == 'Intermediate') {
+      iterationsPerTimeUnit = constants.playAlongIntermediateNoteSpacing;
+      apparentSpacing = iterationsPerTimeUnit - 60;
     }
     else {
-      _iterationsPerTimeUnit = constants.playAlongBeginnerNoteSpacing;
+      iterationsPerTimeUnit = constants.playAlongBeginnerNoteSpacing;
       apparentSpacing = 80;
     }
-    _timeBetweenMovements = ((1 / ((bpm / 60) * apparentSpacing)) * 1000).round();
+    timeBetweenMovements = ((1 / ((bpm / 60) * apparentSpacing)) * 1000).round();
   }
 
+  /// Sets the difficulty of the song
+  @override
   void setDifficulty(String diff) {
-    _difficulty = diff;
+    difficulty = diff;
     _setDifficultyValues();
   }
 
   /// Starts moving the notes along the screen
+  @override
   void start() {
-    _isOn = true;
-    Timer.periodic(Duration(milliseconds: _timeBetweenMovements), (Timer t) {
-      if (!_isOn) {
+    isOn = true;
+    Timer.periodic(Duration(milliseconds: timeBetweenMovements), (Timer t) {
+      if (!isOn) {
         t.cancel();
       }
       else {
-        if (_time > _endTime) {
+        if (time > _endTime) {
           if (!_hasEnded) {
             _hasEnded = true;
             sheet.hasEnded = true;
           }
         }
-        if (_index == 0) {
+        if (index == 0) {
           increment();
         }
         else {
           sheet.move();
         }
-        _index = (_index+1) % _iterationsPerTimeUnit;
-        updater(_index.toString());
+        index = (index+1) % iterationsPerTimeUnit;
+        updater(index.toString());
       }
     }
     );
@@ -131,25 +107,27 @@ class PlayAlongSongTimer {
   }
 
   /// Stops the timer
+  @override
   void stop() {
-    _isOn = false;
+    isOn = false;
   }
 
   /// Restarts the song
   void restart() {
-    _time = -1;
+    time = -1;
     sheet.clear();
     _hasEnded = false;
     sheet.hasEnded = false;
-    _isOn = true;
+    isOn = true;
     start();
   }
 
   /// Moves notes along screen and displays a new random note
+  @override
   void increment() {
-    _time++;
+    time++;
     sheet.move();
-    Note? n = notes[_time];
+    Note? n = notes[time];
     if (n != null) {
       Note note = n;
       nextNote.setNextNote(note);

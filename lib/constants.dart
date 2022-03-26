@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Settings Screen
-// List of the different difficulties
+/// List of the different difficulties
 const List<Object> difficultyList = ['Beginner', 'Intermediate', 'Expert'];
 
 /// Default values of individual settings
@@ -307,6 +307,7 @@ BoxDecoration cardBackground = BoxDecoration(
   ], begin: Alignment.topLeft, end: Alignment.bottomRight),
 );
 
+/// Which sharps are the same as which flats
 const Map<String, String> sharpFlatEquivalence = <String, String>{
   'Db': 'C#',
   'Eb': 'D#',
@@ -315,28 +316,13 @@ const Map<String, String> sharpFlatEquivalence = <String, String>{
   'Bb': 'A#',
 };
 
-/// Notes that can be played in endless mode
-const List<String> endlessBeginnerTrebleNotes = [
-  'C4',
-  'D4',
-  'E4',
-  'F4',
-  'G4',
-  'A4',
-  'B4',
-  'C5'
-];
-const List<String> endlessBeginnerBassNotes = [
-  'C4',
-  'B3',
-  'A3',
-  'G3',
-  'F3',
-  'E3',
-  'D3',
-  'C3'
-];
+/// The nodes that can be played in beginner mode for the treble clef in endless mode
+const List<String> endlessBeginnerTrebleNotes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
 
+/// The nodes that can be played in beginner mode for the bass clef in endless mode
+const List<String> endlessBeginnerBassNotes = ['C4', 'B3', 'A3', 'G3', 'F3', 'E3', 'D3', 'C3'];
+
+/// The nodes that can be played in intermediate mode for the treble clef in endless mode
 const List<String> endlessIntermediateTrebleNotes = [
   'B3',
   'C4',
@@ -356,6 +342,7 @@ const List<String> endlessIntermediateTrebleNotes = [
   'E5',
 ];
 
+/// The nodes that can be played in intermediate mode for the bass clef in endless mode
 const List<String> endlessIntermediateBassNotes = [
   'C3',
   'Db3',
@@ -373,6 +360,7 @@ const List<String> endlessIntermediateBassNotes = [
   'D4',
 ];
 
+/// The nodes that can be played in expert mode for the treble clef in endless mode
 const List<String> endlessExpertTrebleNotes = [
   'A3',
   'A#3',
@@ -405,6 +393,7 @@ const List<String> endlessExpertTrebleNotes = [
   'F5',
 ];
 
+/// The nodes that can be played in expert mode for the bass clef in endless mode
 const List<String> endlessExpertBassNotes = [
   'C3',
   'C#3',
@@ -432,17 +421,20 @@ const List<String> endlessExpertBassNotes = [
   'E4',
 ];
 
+/// How far a note has to go to count for one time unit in endless mode
+const endlessIterationsPerTimeUnit = 120;
+
 /// How fast the notes move across the screen in endless mode for each difficulty
 const int endlessBeginnerBpm = 80;
 const int endlessIntermediateBpm = 110;
-const int endlessExpertBpm = 140;
+const int endlessExpertBpm = 120;
 
-/// maximum and minimum gaps between notes in endless mode
+/// Maximum and minimum gaps between notes in endless mode
 const int endlessBeginnerMinTime = 4;
 const int endlessBeginnerMaxTime = 7;
 const int endlessIntermediateMinTime = 3;
 const int endlessIntermediateMaxTime = 5;
-const int endlessExpertMinTime = 1;
+const int endlessExpertMinTime = 2;
 const int endlessExpertMaxTime = 4;
 
 /// How fast the notes move across the screen in play along for each difficulty

@@ -6,8 +6,8 @@ import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
 import '../components/page_keyboard.dart';
-import '../components/pop_ups/endless_ending_instructions.dart';
-import '../components/pop_ups/endless_starting_instructions.dart';
+import '../components/pop_ups/endless_ending_pop_up.dart';
+import '../components/pop_ups/endless_starting_pop_up.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
@@ -134,7 +134,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     // }
     _endMenu.show();
     List displayNotification = await storage.displayEndlessNotification(
-        _difficulty, _counter.score, _sheet.getClef());
+        _difficulty, _counter.score, _sheet.clef);
     if (displayNotification[0]) {
       inAppNotification(context, displayNotification[1]);
     }

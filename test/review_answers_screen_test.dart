@@ -164,7 +164,7 @@ void main() {
       scrollable: find.byType(Scrollable),
     );
     testQuestionBrain.goBackToBeginning();
-    String correctAnswer = testQuestionBrain.getCorrectAnswer();
+    String correctAnswer = testQuestionBrain.getCorrectAnswerWithoutOctave();
     expect(find.text('Correct Answer: $correctAnswer'), findsOneWidget);
   });
 
@@ -182,6 +182,6 @@ void main() {
       500.0,
       scrollable: find.byType(Scrollable),
     );
-    expect(find.text('Your Answer: C4'), findsOneWidget);
+    expect(find.text('Your Answer: C'), findsOneWidget);
   });
 }

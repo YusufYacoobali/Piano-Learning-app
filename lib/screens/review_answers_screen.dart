@@ -111,9 +111,9 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
                           addResultBox(),
                           //change method name to add text
                           addMessageWrap('Correct Answer: ' +
-                              questionBrain.getCorrectAnswer()),
-                          addMessageWrap(
-                              'Your Answer: ' + questionBrain.getUserAnswer()),
+                                questionBrain.getCorrectAnswerWithoutOctave()),
+                            addMessageWrap('Your Answer: ' +
+                                questionBrain.getUserAnswerWithoutOctave()),
                         ],
                       ),
                     ],
