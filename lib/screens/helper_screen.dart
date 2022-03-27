@@ -79,6 +79,36 @@ class _HelperScreenState extends State<HelperScreen> {
 
   ///Create a card that holds note images, names and sound.
   Widget cardHelper(index) {
+    /*return Center(
+      child: Card(
+        key: const Key('card'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        child: Container(
+          decoration: cardBackground,
+          child: Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(flex: 1, child: cardNoteImage(index)),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const SizedBox(height: 30.0),
+                  Flexible(flex: 1, child: cardText(index)),
+                  const SizedBox(height: 10.0),
+                  if (getWidgetVisiable())
+                    cardPlayIcon(index)
+                  else
+                    cardDescription(index),
+                ],
+              ),
+              const SizedBox(width: 10.0),
+            ],
+          ),
+        ),
+      ),
+    );*/
     return Center(
       child: Card(
         key: const Key('card'),
@@ -106,7 +136,7 @@ class _HelperScreenState extends State<HelperScreen> {
                           children: [
                             const SizedBox(height: 30.0),
                             cardText(index),
-                            const SizedBox(height: 10.0),
+                            const SizedBox(height: 5.0),
                             if (getWidgetVisiable())
                               cardPlayIcon(index)
                             else
@@ -137,7 +167,7 @@ class _HelperScreenState extends State<HelperScreen> {
   ///A widget that holds the name of the note.
   Widget cardText(index) {
     return Wrap(
-      key: const Key('card text'),
+      key: Key('card text: $index'),
       alignment: WrapAlignment.start,
       children: [
         Text(
@@ -152,7 +182,7 @@ class _HelperScreenState extends State<HelperScreen> {
   ///Widget for helper description
   ///fixed size of text because of SizeBox
   Widget cardDescription(index) {
-    return Wrap(
+    return /*Wrap(
       key: const Key('card description'),
       alignment: WrapAlignment.start,
       children: [
@@ -161,6 +191,25 @@ class _HelperScreenState extends State<HelperScreen> {
           style: const TextStyle(fontSize: 20.0),
         ),
       ],
+    );*/
+
+        Container(
+      height: 150,
+      //margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(20, 15, 15, 10),
+      width: 250,
+      key: Key('card description: $index'),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Text(
+              helperBrain.getHelperDescription(index),
+              style: const TextStyle(fontSize: 20.0),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

@@ -12,7 +12,8 @@ final HelperList noteTypeList = HelperList(helperId: 3, helperList: [
       noteImageName: Note(name: 'C4', duration: 4),
       noteName: 'Whole Note',
       noteSound: '',
-      description: 'Blank description, pretend this is a longer text...'),
+      description:
+          'Blank description, pretend this is a longer text........................................................................................'),
   HelperNoteInfo(
       noteImageName: Note(name: 'C4', duration: 4),
       noteName: 'Quarter Note',
