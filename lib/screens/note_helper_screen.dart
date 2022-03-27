@@ -33,6 +33,7 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
           children: <Widget>[
             bassClefNoteHelperbutton(),
             trebleClefNoteHelperbutton(),
+            noteTypesHelperButton(),
           ],
         ),
       ),
@@ -66,6 +67,23 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
           MaterialPageRoute(builder: (context) {
             return const HelperScreen(
               helperNum: 2,
+            );
+          }),
+        );
+      },
+    );
+  }
+
+  /// A button that will be routed to a specific screen of the note types helper.
+  Widget noteTypesHelperButton() {
+    return MenuButton(
+      buttonChild: const ButtonText(buttonText: 'Note types'),
+      onPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return const HelperScreen(
+              helperNum: 3,
             );
           }),
         );

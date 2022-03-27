@@ -6,9 +6,13 @@ class HelperNoteInfo {
   final String noteName;
   final String noteSound;
 
+  ///description for new helper
+  final String description;
+
   HelperNoteInfo({
     required this.noteImageName,
     required this.noteName,
     required this.noteSound,
+    required this.description,
   });
 }
