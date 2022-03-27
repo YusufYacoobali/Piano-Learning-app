@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/helper/helper_brain.dart';
+import 'package:sight_reading_app/components/helper/note_helper_brain.dart';
 import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 import '../components/helper/helper_bass_note_list.dart';
 import '../components/helper/helper_clef_note_list.dart';
 import '../constants.dart';
-import 'package:sight_reading_app/components/helper/helper_list.dart';
+import 'package:sight_reading_app/components/helper/note_helper_list.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 ///This screen creates helper screen
@@ -14,7 +14,7 @@ import 'package:audioplayers/audioplayers.dart';
 class _NoteHelperScreenState extends State<NoteHelperScreen> {
   final ScrollController _helperController = ScrollController();
 
-  late HelperBrain helperBrain;
+  late NoteHelperBrain helperBrain;
 
   final playSound = AudioCache();
 
@@ -22,7 +22,10 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   late int index;
 
   ///List of helper list available
-  List<HelperList> helperList = [bassNoteImageNameList, clefNoteImageNameList];
+  List<NoteHelperList> helperList = [
+    bassNoteImageNameList,
+    clefNoteImageNameList
+  ];
 
   ///helperBrain provides the unique number for helping locate the list we need.
   @override
@@ -31,7 +34,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     int helperNum = widget.helperNum;
 
     /// Display different helper list.
-    helperBrain = HelperBrain(helpers: helperList[helperNum - 1]);
+    helperBrain = NoteHelperBrain(helpers: helperList[helperNum - 1]);
   }
 
   @override
@@ -45,7 +48,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Helper'),
+        title: const Text('Note Helper'),
       ),
       body: SafeArea(
         child: Scrollbar(

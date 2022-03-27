@@ -10,26 +10,26 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  _goTorBassHelperScreen(WidgetTester tester) async {
+  _goToBassHelperScreen(WidgetTester tester) async {
     await _goToHelperSelectionScreen(tester);
-    await tester.tap(find.text('Bass clef note'));
+    await tester.tap(find.text('Bass Clef Notes'));
     await tester.pumpAndSettle();
   }
 
-  _goTorClefHelperScreen(WidgetTester tester) async {
+  _goToClefHelperScreen(WidgetTester tester) async {
     await _goToHelperSelectionScreen(tester);
-    await tester.tap(find.text('Treble clef note'));
+    await tester.tap(find.text('Treble Clef Notes'));
     await tester.pumpAndSettle();
   }
 
   group('Check that numbers of helper screen are displayed:', () {
     testWidgets('Bass clef screen is displayed', (WidgetTester tester) async {
-      await _goTorBassHelperScreen(tester);
+      await _goToBassHelperScreen(tester);
       expect(find.byType(NoteHelperScreen), findsOneWidget);
     });
 
     testWidgets('Treble clef screen is displayed', (WidgetTester tester) async {
-      await _goTorClefHelperScreen(tester);
+      await _goToClefHelperScreen(tester);
       expect(find.byType(NoteHelperScreen), findsOneWidget);
     });
   });
@@ -38,14 +38,14 @@ void main() {
     testWidgets('Bass clef note card is displayed',
         (WidgetTester tester) async {
       const cardKey = Key('card');
-      await _goTorBassHelperScreen(tester);
+      await _goToBassHelperScreen(tester);
       expect(find.byKey(cardKey), findsWidgets);
     });
 
     testWidgets('Treble clef note card is displayed',
         (WidgetTester tester) async {
       const cardKey = Key('card');
-      await _goTorClefHelperScreen(tester);
+      await _goToClefHelperScreen(tester);
       expect(find.byKey(cardKey), findsWidgets);
     });
   });
@@ -55,21 +55,21 @@ void main() {
     testWidgets('Bass clef note name is displayed',
         (WidgetTester tester) async {
       const nameKey = Key('card text');
-      await _goTorBassHelperScreen(tester);
+      await _goToBassHelperScreen(tester);
       expect(find.byKey(nameKey), findsWidgets);
     });
 
     testWidgets('Bass clef note image is displayed',
         (WidgetTester tester) async {
       const imageKey = Key('card image');
-      await _goTorBassHelperScreen(tester);
+      await _goToBassHelperScreen(tester);
       expect(find.byKey(imageKey), findsWidgets);
     });
 
     testWidgets('Bass clef note button is displayed',
         (WidgetTester tester) async {
       const buttonKey = Key('card button');
-      await _goTorBassHelperScreen(tester);
+      await _goToBassHelperScreen(tester);
       expect(find.byKey(buttonKey), findsWidgets);
     });
   });
@@ -79,21 +79,21 @@ void main() {
     testWidgets('Treble clef note name is displayed',
         (WidgetTester tester) async {
       const nameKey = Key('card text');
-      await _goTorClefHelperScreen(tester);
+      await _goToClefHelperScreen(tester);
       expect(find.byKey(nameKey), findsWidgets);
     });
 
     testWidgets('Treble clef note image is displayed',
         (WidgetTester tester) async {
       const imageKey = Key('card image');
-      await _goTorClefHelperScreen(tester);
+      await _goToClefHelperScreen(tester);
       expect(find.byKey(imageKey), findsWidgets);
     });
 
     testWidgets('Treble clef note button is displayed',
         (WidgetTester tester) async {
       const buttonKey = Key('card button');
-      await _goTorClefHelperScreen(tester);
+      await _goToClefHelperScreen(tester);
       expect(find.byKey(buttonKey), findsWidgets);
     });
   });

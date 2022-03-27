@@ -14,35 +14,10 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
     super.dispose();
   }
 
-  ///Builds the screen with appBar and helper buttons.
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Helper'),
-      ),
-      body: SafeArea(
-        child: GridView.count(
-          childAspectRatio: MediaQuery.of(context).size.width /
-              (MediaQuery.of(context).size.height * (5 / 7)),
-          primary: false,
-          padding: const EdgeInsets.all(20),
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
-          crossAxisCount: 2,
-          children: <Widget>[
-            bassClefNoteHelperbutton(),
-            trebleClefNoteHelperbutton(),
-          ],
-        ),
-      ),
-    );
-  }
-
   ///A button that will be route to specific screen of bass helper.
   Widget bassClefNoteHelperbutton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Bass clef note'),
+      buttonChild: const ButtonText(buttonText: 'Bass Clef Notes'),
       onPress: () {
         Navigator.push(
           context,
@@ -59,7 +34,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   ///A button that will be route to specific screen of clef helper.
   Widget trebleClefNoteHelperbutton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Treble clef note'),
+      buttonChild: const ButtonText(buttonText: 'Treble Clef Notes'),
       onPress: () {
         Navigator.push(
           context,
@@ -70,6 +45,31 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
           }),
         );
       },
+    );
+  }
+
+  ///Builds the screen with appBar and helper buttons.
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Note Helper'),
+      ),
+      body: SafeArea(
+        child: GridView.count(
+          childAspectRatio: MediaQuery.of(context).size.width /
+              (MediaQuery.of(context).size.height * (5 / 7)),
+          primary: false,
+          padding: const EdgeInsets.all(20),
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+          crossAxisCount: 2,
+          children: <Widget>[
+            trebleClefNoteHelperbutton(),
+            bassClefNoteHelperbutton(),
+          ],
+        ),
+      ),
     );
   }
 }
