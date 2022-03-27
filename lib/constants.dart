@@ -431,7 +431,7 @@ const Icon playLessonIcon = Icon(
 );
 
 const TextStyle achievementTitleTextStyle =
-TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
+    TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
 
 const TextStyle achievementTextStyle =
     TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
