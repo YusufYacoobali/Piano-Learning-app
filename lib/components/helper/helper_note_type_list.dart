@@ -10,13 +10,25 @@ import 'helper_note_info.dart';
 final HelperList noteTypeList = HelperList(helperId: 3, helperList: [
   HelperNoteInfo(
       noteImageName: Note(name: 'C4', duration: 4),
+      noteName: 'Quarter Note',
+      noteSound: '',
+      description: 'This note has length of 1 beat.'),
+  HelperNoteInfo(
+      noteImageName: Note(name: 'C4', duration: 4),
+      noteName: 'Half Note',
+      noteSound: '',
+      description:
+          'This note has a length of 2 beats. Equivalent to 2 quarter notes.'),
+  HelperNoteInfo(
+      noteImageName: Note(name: 'C4', duration: 4),
       noteName: 'Whole Note',
       noteSound: '',
       description:
-          'Blank description, pretend this is a longer text........................................................................................'),
+          'This note has a length of 4 beats. Equivalent to 4 quarter notes.'),
   HelperNoteInfo(
       noteImageName: Note(name: 'C4', duration: 4),
-      noteName: 'Quarter Note',
+      noteName: 'Eighth Note',
       noteSound: '',
-      description: 'Blank description, pretend this is a longer text...'),
+      description:
+          'This note has a length of half a beat. 2 eighth notes is equivalent to a quarter note.'),
 ]);
