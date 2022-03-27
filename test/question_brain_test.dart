@@ -182,87 +182,6 @@ void main() {
   });
 
   test(
-      'Check that when the quiz is completed with all answers correct, the score is saved to storage.',
-      () async {
-    SharedPreferences.setMockInitialValues({});
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-
-    //make tester complete quiz
-    QuestionBrain qb = QuestionBrain(questions: getFakeQuestions());
-
-    // TODO: find a better way to deal with the IO delay
-    await Future.delayed(const Duration(milliseconds: 1000));
-    //before complete questions, check it is 0
-    expect(pref.get('lesson 1'), '0');
-
-    qb.setAnswer(userAnswer: "C4");
-    qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "D4");
-    qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "E4");
-
-    // TODO: find a better way to deal with the IO delay
-    await Future.delayed(const Duration(milliseconds: 1000));
-
-    // after complete, check score is correct
-    expect(pref.get('lesson 1'), '3');
-  });
-
-  test(
-      'Check that when the quiz is completed with some answers correct, the score is saved to storage.',
-      () async {
-    SharedPreferences.setMockInitialValues({});
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-
-    //make tester complete quiz
-    QuestionBrain qb = QuestionBrain(questions: getFakeQuestions());
-
-    // TODO: find a better way to deal with the IO delay
-    await Future.delayed(const Duration(milliseconds: 1000));
-    //before complete questions, check it is 0
-    expect(pref.get('lesson 1'), '0');
-
-    qb.setAnswer(userAnswer: "C4");
-    qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "A4");
-    qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "E4");
-
-    // TODO: find a better way to deal with the IO delay
-    await Future.delayed(const Duration(milliseconds: 1000));
-
-    // after complete, check score is correct
-    expect(pref.get('lesson 1'), '2');
-  });
-
-  test(
-      'Check that when the quiz is completed with no answers correct, the score is saved to storage.',
-      () async {
-    SharedPreferences.setMockInitialValues({});
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-
-    //make tester complete quiz
-    QuestionBrain qb = QuestionBrain(questions: getFakeQuestions());
-
-    // TODO: find a better way to deal with the IO delay
-    await Future.delayed(const Duration(milliseconds: 1000));
-    //before complete questions, check it is 0
-    expect(pref.get('lesson 1'), '0');
-
-    qb.setAnswer(userAnswer: "H");
-    qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "T");
-    qb.goToNextQuestion();
-    qb.setAnswer(userAnswer: "W");
-
-    // TODO: find a better way to deal with the IO delay
-    await Future.delayed(const Duration(milliseconds: 1000));
-
-    // after complete, check score is correct
-    expect(pref.get('lesson 1'), '0');
-  });
-
-  test(
       'Check that goBackToBeginning makes the first question the current question.',
       () async {
     SharedPreferences.setMockInitialValues({});
@@ -290,5 +209,42 @@ void main() {
     qb.setAnswer(userAnswer: expectedUserAnswer);
     String actualUserAnswer = qb.getUserAnswer();
     expect(expectedUserAnswer, actualUserAnswer);
+  });
+  test(
+      'Check that getNumberOfUserAnswers correctly returns the number of user answers when user did not answer any question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    int result = qb.getNumberOfUserAnswers();
+    expect(result, 0);
+  });
+  test(
+      'Check that getNumberOfUserAnswers correctly returns the number of user answers when user answers some questions.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    qb.goBackToBeginning();
+    qb.setAnswer(userAnswer: 'C');
+    qb.goToNextQuestion();
+    qb.setAnswer(userAnswer: 'B');
+    int result = qb.getNumberOfUserAnswers();
+    expect(result, 2);
+  });
+  test(
+      'Check that getNumberOfUserAnswers correctly returns the number of user answers when user answers every question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    qb.goBackToBeginning();
+    qb.setAnswer(userAnswer: 'C');
+    qb.goToNextQuestion();
+    qb.setAnswer(userAnswer: 'C');
+    qb.goToNextQuestion();
+    qb.setAnswer(userAnswer: 'C');
+    int result = qb.getNumberOfUserAnswers();
+    expect(result, qb.getTotalNumberOfQuestions());
   });
 }

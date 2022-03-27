@@ -55,9 +55,6 @@ class QuestionAnswerData {
             currentStatistic -= incorrectAnswerReduction;
       }
       StorageReaderWriter().write(questionID.toString(), currentStatistic);
-    } else {
-      // TODO: Remove print statement
-      // print('Invalid id');
     }
   }
 

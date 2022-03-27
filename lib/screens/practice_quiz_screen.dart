@@ -4,9 +4,8 @@ import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
-import '../components/in_app_notification_pop_up.dart';
+import '../components/notifications/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
-
 import '../helper.dart';
 import '../lessons_and_quizzes/question_finder.dart';
 import '../lessons_and_quizzes/quiz.dart';
@@ -22,8 +21,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   void initState() {
     super.initState();
     questionBrain = QuestionBrain(
-        questions: QuestionFinder()
-            .getPracticeQuestionsForLesson(widget.lessonID, 10));
+        questions: QuestionFinder().getPracticeQuestionsForLesson(
+            widget.lessonID, numOfQuestionsInPracticeQuiz));
   }
 
   @override
@@ -50,22 +49,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     }
   }
 
-  void getResultsScreen(
-      String title, double percentage, QuestionBrain questionBrain) {
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ResultsScreen(
-                score: percentage,
-                title: title,
-                questionBrain: questionBrain,
-              )),
-    );
-  }
-
   /// Create result screen which displays after the user finishes all questions
-  getResults() async {
+  void getResults() async {
     _updateRecords();
     String title = '';
     double percentage =
@@ -83,6 +68,20 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
         inAppNotification(context, displayNotification[1]);
       }
     }
+  }
+
+  void getResultsScreen(
+      String title, double percentage, QuestionBrain questionBrain) {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultsScreen(
+                score: percentage,
+                title: title,
+                questionBrain: questionBrain,
+              )),
+    );
   }
 
   @override

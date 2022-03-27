@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../components/notification_service.dart';
+import '../components/notifications/notification_service.dart';
 import '../constants.dart';
 import 'achievements_screen.dart';
-import 'note_helper_screen.dart';
+import 'note_helper_menu_screen.dart';
 import 'lesson_menu_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
@@ -81,7 +81,8 @@ class _MenuScreenState extends State<MenuScreen> {
                               child: helperButton,
                             ),
                             onPress: () {
-                              Navigator.pushNamed(context, HelperMenuScreen.id);
+                              Navigator.pushNamed(
+                                  context, NoteHelperMenuScreen.id);
                             },
                           ),
                         ),
@@ -124,8 +125,6 @@ class AppNameBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Temporary GestureDetector to go to QuestionSkeleton screen
-    // TODO: Remove GestureDetector widget when QuestionSkeleton properly linked up
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -181,7 +180,6 @@ class ButtonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Make all buttons have same font size
     return Text(
       buttonText,
       textAlign: TextAlign.center,

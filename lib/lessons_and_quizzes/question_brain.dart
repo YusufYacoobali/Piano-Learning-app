@@ -1,6 +1,7 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 import '../components/sheet_music_components/note.dart';
+import '../constants.dart';
 import 'question_answer_data.dart';
 
 /// Manages the questions in lessons/quizzes
@@ -69,13 +70,18 @@ class QuestionBrain {
     return _map[_questionNum] ?? "N/A";
   }
 
+  /// Gets the number of user answers (essential in speedrun mode)
+  int getNumberOfUserAnswers() {
+    return _map.length;
+  }
+
   /// Gets the correct answer of the current question without the octave
   String getUserAnswerWithoutOctave() {
     String note = getUserAnswer();
     if (note != "N/A") {
       String name = note[0];
       if (note.length == 3) {
-        name+=note[1];
+        name += note[1];
       }
       return name;
     }
@@ -87,7 +93,7 @@ class QuestionBrain {
     // Checks if the user answer was correct and if so, increments the score
     ///add map entry
     //_map.addEntries([MapEntry(_questionNum, userAnswer)]);
-    _map[_questionNum] = userAnswer;
+    _map[_questionNum] = convertToAlt(userAnswer);
     //userAnswerList.add(userAnswer);
     if (checkAnswer(userAnswer)) {
       ++_score;
@@ -96,15 +102,6 @@ class QuestionBrain {
     } else {
       QuestionAnswerData.questionAnswered(
           questions[_questionNum].questionID, false, timeTaken);
-    }
-
-    // Checks if there are no more questions
-    if (isLastQuestion()) {
-      // Creates key for shared preferences
-      // TODO: Also saving lesson in lesson screen so figure out which one to keep
-      String lessonName = 'lesson ${questions[0].lessonID}';
-      // Stores [LessonName] as key and [_score] as value in storage
-      writer.write(lessonName, _score);
     }
   }
 
@@ -115,7 +112,33 @@ class QuestionBrain {
 
   /// Checks if the user answer is correct
   bool checkAnswer(String userAnswer) {
-    return userAnswer == getCorrectAnswer();
+    if (userAnswer == getCorrectAnswer()) {
+      return true;
+    } else if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
+      String correct = getCorrectAnswer();
+      String noteWithoutOctave = userAnswer[0] + userAnswer[1];
+      String? alt = sharpFlatEquivalence[noteWithoutOctave];
+      if (alt != null) {
+        alt = alt + userAnswer[userAnswer.length - 1];
+        if (alt == correct) return true;
+      }
+    }
+    return false;
+  }
+
+  /// Coverts the answer to its sharp equal if needed
+  String convertToAlt(String userAnswer) {
+    if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
+      String correct = getCorrectAnswer();
+      String noteWithoutOctave = userAnswer[0] + userAnswer[1];
+      String alt = sharpFlatEquivalence[noteWithoutOctave]!;
+      alt = alt + userAnswer[userAnswer.length - 1];
+      if (alt == correct) return alt;
+      if (alt[1] == correct[1]) {
+        return alt;
+      }
+    }
+    return userAnswer;
   }
 
   /// Checks if the current question is the last question

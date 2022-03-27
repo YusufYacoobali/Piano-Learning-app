@@ -1,6 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/in_app_notification_pop_up.dart';
+import 'package:sight_reading_app/components/notifications/in_app_notification_pop_up.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
@@ -116,7 +116,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-  //TODO: Move into helper file
+  //TODO: Move into note_helper file
   ///Checks if the user's score is a new record for the selected mode, and updates shared preferences if it is.
   Future<void> _updateRecords() async {
     int score = questionBrain.getScore();
@@ -134,8 +134,8 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   /// Gets the countdown timer displayed in the top-right
   Widget getCountdownTimer() {
     return CircularCountDownTimer(
-      width: 60,
-      height: 60,
+      width: heightAndWidthOfStopWatch,
+      height: heightAndWidthOfStopWatch,
       duration: widget.timerDuration,
       // Makes the timer count backwards
       isReverse: true,
@@ -152,14 +152,6 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
         // When timer finishes, go to results screen and update records if needed
         _updateRecords();
         getResults();
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) {
-        //       return getResultsScreen();
-        //     },
-        //   ),
-        // );
       },
     );
   }
@@ -168,9 +160,14 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   void answer(String text) {
     questionBrain.setAnswer(userAnswer: text);
     setState(() {
-      questionBrain.goToNextQuestion();
-      // Re-render the screen with new question
-      setScreenWidget();
+      //if questions have run out, it automatically takes user to results screen
+      if (questionBrain.isLastQuestion()) {
+        getResults();
+      } else {
+        questionBrain.goToNextQuestion();
+        // Re-render the screen with new question
+        setScreenWidget();
+      }
     });
   }
 
