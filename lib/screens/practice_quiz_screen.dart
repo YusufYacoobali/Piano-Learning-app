@@ -21,8 +21,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   void initState() {
     super.initState();
     questionBrain = QuestionBrain(
-        questions: QuestionFinder()
-            .getPracticeQuestionsForLesson(widget.lessonID, 10));
+        questions: QuestionFinder().getPracticeQuestionsForLesson(
+            widget.lessonID, numOfQuestionsInPracticeQuiz));
   }
 
   @override

@@ -725,6 +725,12 @@ const int correctAnswerIncrease = 5;
 const int maxTimeReduction = 5;
 const int incorrectAnswerReduction = 10;
 
-//in app notification
+/// In app notification
 const TextStyle title = TextStyle(fontSize: 30);
 const TextStyle achievedText = TextStyle(fontSize: 22);
+
+/// Random Quiz Screen
+const int numOfQuestionsInRandomQuiz = 10;
+
+/// Practice Quiz Screen
+const int numOfQuestionsInPracticeQuiz = 10;

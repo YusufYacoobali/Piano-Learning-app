@@ -103,15 +103,6 @@ class QuestionBrain {
       QuestionAnswerData.questionAnswered(
           questions[_questionNum].questionID, false, timeTaken);
     }
-
-    // Checks if there are no more questions
-    if (isLastQuestion()) {
-      // Creates key for shared preferences
-      // TODO: Also saving lesson in lesson screen so figure out which one to keep
-      String lessonName = 'lesson ${questions[0].lessonID}';
-      // Stores [LessonName] as key and [_score] as value in storage
-      writer.write(lessonName, _score);
-    }
   }
 
   /// Gets the current score

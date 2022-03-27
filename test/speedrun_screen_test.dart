@@ -15,6 +15,16 @@ void main() {
     expect(find.text('D'), findsOneWidget);
   });
 
+  testWidgets('Check that the pause button is not displayed',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: SpeedrunScreen(timerDuration: 10),
+      ),
+    );
+    expect(find.byIcon(Icons.pause), findsNothing);
+  });
+
   testWidgets('Check that the options are displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(
@@ -162,4 +172,3 @@ void main() {
   //   expect(find.text("Aww, better luck next time!"), findsOneWidget);
   // });
 }
-

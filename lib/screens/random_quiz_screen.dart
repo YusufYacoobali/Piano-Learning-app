@@ -25,8 +25,8 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
   void initState() {
     super.initState();
     questionBrain = QuestionBrain(
-        questions:
-            QuestionFinder().getRandomListOfQuestions(numOfQuestions: 10));
+        questions: QuestionFinder().getRandomListOfQuestions(
+            numOfQuestions: numOfQuestionsInRandomQuiz));
   }
 
   @override

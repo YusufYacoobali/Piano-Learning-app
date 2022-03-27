@@ -74,10 +74,6 @@ class StorageReaderWriter {
     // _map['difficulty'] = constants.defaultDifficultyLevel;
     // With 7 lessons:
 
-    for (int i = 1; i <= 7; ++i) {
-      _map['lesson $i'] = 0;
-    }
-
     _setDefaultEndlessRecords();
     _setDefaultPlayAlongRecords();
   }
