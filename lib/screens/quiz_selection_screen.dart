@@ -30,7 +30,7 @@ List<String> quizRecordsCopy = <String>[];
 const randomQuizSelectedKey = Key('quizSelected:Random');
 
 ///The user records for each of the quizzes.
-//TODO: Remove and replace with helper class function in relevant places
+//TODO: Remove and replace with note_helper class function in relevant places
 //TODO: Check speedrun mode for same idea, then adjust lay_along and endless modes.
 Future<List<String>> getQuizRecords() async {
   List<String> records = <String>[];
@@ -64,7 +64,6 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
   ///Builds the screen widgets.
   @override
   Widget build(BuildContext context) {
-
     quizButtonKeys = <Key>[]; //Resets list of keys
     ///Generates the keys for the quiz buttons based on quiz names, with the exception of the random mixed quiz.
     for (String quiz in quizzes) {
@@ -72,7 +71,7 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
     }
 
     //TODO: Make size of list dependent on how many modes there actually are
-    //TODO: Move to a helper file to reduce code duplication across screens
+    //TODO: Move to a note_helper file to reduce code duplication across screens
     /// A default list of records to display if there were any issues in obtaining the real records.
     List<String> defaultRecords = [
       'N/A',
@@ -141,10 +140,10 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
                           ),
                           onPress: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PracticeQuizScreen(lessonID: index + 1)
-                                ),
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PracticeQuizScreen(lessonID: index + 1)),
                             );
                           },
                           key: quizButtonKeys[index],
@@ -153,7 +152,7 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
                     },
                     //Adds blank spaces between each button
                     separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(
+                        const SizedBox(
                       height: 10,
                     ),
                   ),
@@ -166,12 +165,10 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
                   child: SizedBox(
                     height: 80.0,
                     child: MenuButton(
-                      buttonChild: const Center(child: Text("Random mixed quiz")),
+                      buttonChild:
+                          const Center(child: Text("Random mixed quiz")),
                       onPress: () {
-                        Navigator.pushNamed(
-                            context,
-                            RandomQuizScreen
-                                .id);
+                        Navigator.pushNamed(context, RandomQuizScreen.id);
                       },
                       key: randomQuizSelectedKey,
                     ),

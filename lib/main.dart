@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/endless_mode_screen.dart';
+import 'package:sight_reading_app/screens/note_helper_menu_screen.dart';
 import 'package:sight_reading_app/screens/note_helper_screen.dart';
-import 'package:sight_reading_app/screens/helper_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
@@ -58,8 +58,9 @@ class SightReadingApp extends StatelessWidget {
                       0), //TODO: Find out how to make default parameter value
 
               //helper routes
-              HelperMenuScreen.id: (context) => const HelperMenuScreen(),
-              HelperScreen.id: (context) => const HelperScreen(),
+              NoteHelperMenuScreen.id: (context) =>
+                  const NoteHelperMenuScreen(),
+              NoteHelperScreen.id: (context) => const NoteHelperScreen(),
             },
           );
         },

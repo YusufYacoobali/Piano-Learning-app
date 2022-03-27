@@ -1,16 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sight_reading_app/components/helper/helper_brain.dart';
-import 'package:sight_reading_app/components/helper/helper_list.dart';
-import 'package:sight_reading_app/components/helper/helper_note_info.dart';
+import 'package:sight_reading_app/components/note_helper/note_helper_brain.dart';
+import 'package:sight_reading_app/components/note_helper/note_helper_info.dart';
+import 'package:sight_reading_app/components/note_helper/note_helper_list.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 
 void main() {
-  ///sample helper brain for bass.
-  HelperList getSampleBassHelpers() {
-    return HelperList(
-      helperId: 1,
-      helperList: [
-        HelperNoteInfo(
+  ///sample note_helper brain for bass.
+  NoteHelperList getSampleBassHelpers() {
+    return NoteHelperList(
+      noteHelperID: 1,
+      noteHelperList: [
+        NoteHelperInfo(
             noteImageName: Note(name: 'A3', duration: 4),
             noteName: 'Bass A',
             noteSound: 'note_a',
@@ -19,12 +19,12 @@ void main() {
     );
   }
 
-  ///sample helper brain for clef.
-  HelperList getSampleClefHelpers() {
-    return HelperList(
-      helperId: 2,
-      helperList: [
-        HelperNoteInfo(
+  ///sample note_helper brain for clef.
+  NoteHelperList getSampleClefHelpers() {
+    return NoteHelperList(
+      noteHelperID: 2,
+      noteHelperList: [
+        NoteHelperInfo(
             noteImageName: Note(name: 'A4', duration: 4),
             noteName: 'Clef A',
             noteSound: 'note_a',
@@ -33,79 +33,89 @@ void main() {
     );
   }
 
-  /// Bass helper brain test.
-  group('Check for bass helper brain sample list.', () {
+  /// Bass note_helper brain test.
+  group('Check for bass note_helper brain sample list.', () {
     test(
-        'Check that getHelperNoteName(currentHelperListPosition) returns the name of the current bass note in position 0',
+        'Check that getHelperNoteName(currentNoteHelperListPosition) returns the name of the current bass note in position 0',
         () {
-      int currentHelperListPosition = 0;
-      HelperList sampleHelpers = getSampleBassHelpers();
-      HelperBrain helperBrain = HelperBrain(helpers: sampleHelpers);
-      String name = helperBrain.getHelperNoteName(currentHelperListPosition);
-      expect(
-          name, sampleHelpers.helperList[currentHelperListPosition].noteName);
+      int currentNoteHelperListPosition = 0;
+      NoteHelperList sampleHelpers = getSampleBassHelpers();
+      NoteHelperBrain noteHelperBrain = NoteHelperBrain(helpers: sampleHelpers);
+      String name =
+          noteHelperBrain.getHelperNoteName(currentNoteHelperListPosition);
+      expect(name,
+          sampleHelpers.noteHelperList[currentNoteHelperListPosition].noteName);
     });
 
     test(
-        'Check that getHelperNoteImageName(currentHelperListPosition) returns the name of the current bass note in position 0',
+        'Check that getHelperNoteImageName(currentNoteHelperListPosition) returns the name of the current bass note in position 0',
         () {
-      int currentHelperListPosition = 0;
-      HelperList sampleHelpers = getSampleBassHelpers();
-      HelperBrain helperBrain = HelperBrain(helpers: sampleHelpers);
+      int currentNoteHelperListPosition = 0;
+      NoteHelperList sampleHelpers = getSampleBassHelpers();
+      NoteHelperBrain noteHelperBrain = NoteHelperBrain(helpers: sampleHelpers);
       Note imageName =
-          helperBrain.getHelperNoteImageName(currentHelperListPosition);
-      expect(imageName,
-          sampleHelpers.helperList[currentHelperListPosition].noteImageName);
+          noteHelperBrain.getHelperNoteImageName(currentNoteHelperListPosition);
+      expect(
+          imageName,
+          sampleHelpers
+              .noteHelperList[currentNoteHelperListPosition].noteImageName);
     });
 
     test(
-        'Check that getHelperNoteSoundName(currentHelperListPosition) returns the name of the current bass note in position 0',
+        'Check that getHelperNoteSoundName(currentNoteHelperListPosition) returns the name of the current bass note in position 0',
         () {
-      int currentHelperListPosition = 0;
-      HelperList sampleHelpers = getSampleBassHelpers();
-      HelperBrain helperBrain = HelperBrain(helpers: sampleHelpers);
+      int currentNoteHelperListPosition = 0;
+      NoteHelperList sampleHelpers = getSampleBassHelpers();
+      NoteHelperBrain noteHelperBrain = NoteHelperBrain(helpers: sampleHelpers);
       String soundName =
-          helperBrain.getHelperNoteSoundName(currentHelperListPosition);
-      expect(soundName,
-          sampleHelpers.helperList[currentHelperListPosition].noteSound);
+          noteHelperBrain.getHelperNoteSoundName(currentNoteHelperListPosition);
+      expect(
+          soundName,
+          sampleHelpers
+              .noteHelperList[currentNoteHelperListPosition].noteSound);
     });
   });
 
-  /// Clef helper brain test
-  group('Check for clef helper brain sample list.', () {
+  /// Clef note_helper brain test
+  group('Check for clef note_helper brain sample list.', () {
     test(
-        'Check that getHelperNoteName(currentHelperListPosition) returns the name of the current clef note in position 0',
+        'Check that getHelperNoteName(currentNoteHelperListPosition) returns the name of the current clef note in position 0',
         () {
-      int currentHelperListPosition = 0;
-      HelperList sampleHelpers = getSampleClefHelpers();
-      HelperBrain helperBrain = HelperBrain(helpers: sampleHelpers);
-      String name = helperBrain.getHelperNoteName(currentHelperListPosition);
-      expect(
-          name, sampleHelpers.helperList[currentHelperListPosition].noteName);
+      int currentNoteHelperListPosition = 0;
+      NoteHelperList sampleHelpers = getSampleClefHelpers();
+      NoteHelperBrain noteHelperBrain = NoteHelperBrain(helpers: sampleHelpers);
+      String name =
+          noteHelperBrain.getHelperNoteName(currentNoteHelperListPosition);
+      expect(name,
+          sampleHelpers.noteHelperList[currentNoteHelperListPosition].noteName);
     });
 
     test(
-        'Check that getHelperNoteImageName(currentHelperListPosition) returns the name of the current clef note in position 0',
+        'Check that getHelperNoteImageName(currentNoteHelperListPosition) returns the name of the current clef note in position 0',
         () {
-      int currentHelperListPosition = 0;
-      HelperList sampleHelpers = getSampleClefHelpers();
-      HelperBrain helperBrain = HelperBrain(helpers: sampleHelpers);
+      int currentNoteHelperListPosition = 0;
+      NoteHelperList sampleHelpers = getSampleClefHelpers();
+      NoteHelperBrain noteHelperBrain = NoteHelperBrain(helpers: sampleHelpers);
       Note imageName =
-          helperBrain.getHelperNoteImageName(currentHelperListPosition);
-      expect(imageName,
-          sampleHelpers.helperList[currentHelperListPosition].noteImageName);
+          noteHelperBrain.getHelperNoteImageName(currentNoteHelperListPosition);
+      expect(
+          imageName,
+          sampleHelpers
+              .noteHelperList[currentNoteHelperListPosition].noteImageName);
     });
 
     test(
-        'Check that getHelperNoteSoundName(currentHelperListPosition) returns the name of the current clef note in position 0',
+        'Check that getHelperNoteSoundName(currentNoteHelperListPosition) returns the name of the current clef note in position 0',
         () {
-      int currentHelperListPosition = 0;
-      HelperList sampleHelpers = getSampleClefHelpers();
-      HelperBrain helperBrain = HelperBrain(helpers: sampleHelpers);
+      int currentNoteHelperListPosition = 0;
+      NoteHelperList sampleHelpers = getSampleClefHelpers();
+      NoteHelperBrain noteHelperBrain = NoteHelperBrain(helpers: sampleHelpers);
       String soundName =
-          helperBrain.getHelperNoteSoundName(currentHelperListPosition);
-      expect(soundName,
-          sampleHelpers.helperList[currentHelperListPosition].noteSound);
+          noteHelperBrain.getHelperNoteSoundName(currentNoteHelperListPosition);
+      expect(
+          soundName,
+          sampleHelpers
+              .noteHelperList[currentNoteHelperListPosition].noteSound);
     });
   });
 }

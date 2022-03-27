@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
-import 'package:sight_reading_app/screens/helper_screen.dart';
+import 'package:sight_reading_app/screens/note_helper_screen.dart';
 
 void main() {
   _goToHelperSelectionScreen(WidgetTester tester) async {
@@ -31,16 +31,16 @@ void main() {
   group('Check that numbers of helper screen are displayed:', () {
     testWidgets('Bass clef screen is displayed', (WidgetTester tester) async {
       await _goToBassHelperScreen(tester);
-      expect(find.byType(HelperScreen), findsOneWidget);
+      expect(find.byType(NoteHelperScreen), findsOneWidget);
     });
 
     testWidgets('Treble clef screen is displayed', (WidgetTester tester) async {
       await _goToClefHelperScreen(tester);
-      expect(find.byType(HelperScreen), findsOneWidget);
+      expect(find.byType(NoteHelperScreen), findsOneWidget);
     });
   });
 
-  group('Check that helper cards are correctly displayed:', () {
+  group('Check that note_helper cards are correctly displayed:', () {
     testWidgets('Bass clef note card is displayed',
         (WidgetTester tester) async {
       const cardKey = Key('card');
@@ -56,7 +56,8 @@ void main() {
     });
   });
 
-  group('Check that Bass clef helper card component is correctly displayed:',
+  group(
+      'Check that Bass clef note_helper card component is correctly displayed:',
       () {
     testWidgets('Bass clef note name is displayed',
         (WidgetTester tester) async {
@@ -80,7 +81,8 @@ void main() {
     });
   });
 
-  group('Check that Treble clef helper card component is correctly displayed:',
+  group(
+      'Check that Treble clef note_helper card component is correctly displayed:',
       () {
     testWidgets('Treble clef note name is displayed',
         (WidgetTester tester) async {
@@ -104,7 +106,8 @@ void main() {
     });
   });
 
-  group('Check that Note types helper card component is correctly displayed:',
+  group(
+      'Check that Note types note_helper card component is correctly displayed:',
       () {
     testWidgets('Note types name is displayed', (WidgetTester tester) async {
       const nameKey = Key('card text: 0');
