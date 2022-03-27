@@ -444,7 +444,7 @@ final Decoration achievementCardDecoration = BoxDecoration(
 );
 
 //achievement making
-const int numOfLessons = 7;
+const int numOfLessons = 8;
 const int numOfquizzes = 6;
 
 //pause menu
@@ -721,7 +721,7 @@ const double iosFlatFontSize = 60;
 
 /// IOS symbol offsets
 /// Change these to change the symbol position on screen
-const double iosSharpOffset = 55;
+const double iosSharpOffset = 20;
 const double iosFlatOffset = 30;
 
 /// QuestionAnswerData
