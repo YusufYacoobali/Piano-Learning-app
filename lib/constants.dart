@@ -553,3 +553,6 @@ const TextStyle achievedText = TextStyle(fontSize: 22);
 
 /// Random Quiz Screen
 const int numOfQuestionsInRandomQuiz = 10;
+
+/// Practice Quiz Screen
+const int numOfQuestionsInPracticeQuiz = 10;
