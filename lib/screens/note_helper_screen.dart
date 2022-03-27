@@ -33,7 +33,7 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
           children: <Widget>[
             bassClefNoteHelperbutton(),
             trebleClefNoteHelperbutton(),
-            blankHelperbutton(),
+            noteTypesHelperButton(),
           ],
         ),
       ),
@@ -74,10 +74,10 @@ class _HelperMenuScreenState extends State<HelperMenuScreen> {
     );
   }
 
-  /// This is the blank helper button for Minnie.
-  Widget blankHelperbutton() {
+  /// A button that will be routed to a specific screen of the note types helper.
+  Widget noteTypesHelperButton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Blank button'),
+      buttonChild: const ButtonText(buttonText: 'Note types'),
       onPress: () {
         Navigator.push(
           context,

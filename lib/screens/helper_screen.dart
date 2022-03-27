@@ -6,7 +6,7 @@ import '../components/helper/helper_bass_note_list.dart';
 import '../components/helper/helper_clef_note_list.dart';
 
 ///import blank helper list
-import '../components/helper/helper_blank_list.dart';
+import '../components/helper/helper_note_type_list.dart';
 import '../constants.dart';
 import 'package:sight_reading_app/components/helper/helper_list.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -31,7 +31,7 @@ class _HelperScreenState extends State<HelperScreen> {
   List<HelperList> helperList = [
     bassNoteImageNameList,
     clefNoteImageNameList,
-    blankList
+    noteTypeList
   ];
 
   ///helperBrain provides the unique number for helping locate the list we need.

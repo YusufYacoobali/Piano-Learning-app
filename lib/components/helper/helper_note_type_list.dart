@@ -7,10 +7,15 @@ import 'helper_note_info.dart';
 /// The helperNoteInfo I will change to more appropriate name later so
 /// it will not just for note only.
 
-final HelperList blankList = HelperList(helperId: 3, helperList: [
+final HelperList noteTypeList = HelperList(helperId: 3, helperList: [
   HelperNoteInfo(
       noteImageName: Note(name: 'C4', duration: 4),
-      noteName: 'Blank name',
+      noteName: 'Whole Note',
+      noteSound: '',
+      description: 'Blank description, pretend this is a longer text...'),
+  HelperNoteInfo(
+      noteImageName: Note(name: 'C4', duration: 4),
+      noteName: 'Quarter Note',
       noteSound: '',
       description: 'Blank description, pretend this is a longer text...'),
 ]);
