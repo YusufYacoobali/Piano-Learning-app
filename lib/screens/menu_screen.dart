@@ -124,8 +124,6 @@ class AppNameBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Temporary GestureDetector to go to QuestionSkeleton screen
-    // TODO: Remove GestureDetector widget when QuestionSkeleton properly linked up
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -181,7 +179,6 @@ class ButtonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Make all buttons have same font size
     return Text(
       buttonText,
       textAlign: TextAlign.center,
