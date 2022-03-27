@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sight_reading_app/main.dart';
-import 'package:sight_reading_app/screens/helper_screen.dart';
+import 'package:sight_reading_app/screens/note_helper_screen.dart';
 
 void main() {
   _goToHelperSelectionScreen(WidgetTester tester) async {
@@ -25,12 +25,12 @@ void main() {
   group('Check that numbers of helper screen are displayed:', () {
     testWidgets('Bass clef screen is displayed', (WidgetTester tester) async {
       await _goTorBassHelperScreen(tester);
-      expect(find.byType(HelperScreen), findsOneWidget);
+      expect(find.byType(NoteHelperScreen), findsOneWidget);
     });
 
     testWidgets('Treble clef screen is displayed', (WidgetTester tester) async {
       await _goTorClefHelperScreen(tester);
-      expect(find.byType(HelperScreen), findsOneWidget);
+      expect(find.byType(NoteHelperScreen), findsOneWidget);
     });
   });
 

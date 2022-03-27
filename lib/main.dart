@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/endless_mode_screen.dart';
-import 'package:sight_reading_app/screens/note_helper_screen.dart';
+import 'package:sight_reading_app/screens/note_helper_menu_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
@@ -51,8 +51,8 @@ class SightReadingApp extends StatelessWidget {
               SettingsScreen.id: (context) => const SettingsScreen(),
               EndlessModeScreen.id: (context) => const EndlessModeScreen(),
               RandomQuizScreen.id: (context) => const RandomQuizScreen(),
-              //helper routes
-              HelperMenuScreen.id: (context) => const HelperMenuScreen(),
+              NoteHelperMenuScreen.id: (context) =>
+                  const NoteHelperMenuScreen(),
             },
           );
         },
