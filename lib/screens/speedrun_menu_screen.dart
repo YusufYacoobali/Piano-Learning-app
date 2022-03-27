@@ -17,17 +17,15 @@ List<Key> modeButtonKeys = <Key>[];
 /// A list containing the user records for each of the modes.
 ///
 /// This variable copies the actual list and is used for testing purposes.
-List<String> modeRecordsCopy = <String>[];
+List<String> modeRecords = <String>[];
 
 ///A screen that displays a scrollable list of available speedrun modes with buttons to access each mode.
 ///
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
 class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
-  ///A list containing the user records for each of the modes.
-  late Future<List<String>> modeRecords;
   @override
   void initState() {
-    modeRecords = getRecordsForMode('speedrun');
+    _loadRecords();
     super.initState();
   }
 
@@ -36,45 +34,30 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
     super.dispose();
   }
 
+  //TODO: Move into helper
+  Future<void> _loadRecords() async {
+    //Sets default values to use while the await runs.
+    for (int i = 0; i < modes.length; i++) {
+      modeRecords.add('0');
+    }
+    modeRecords = await getRecordsForMode('speedrun');
+     setState(() {
+
+     });
+  }
   @override
   Widget build(BuildContext context) {
     modeButtonKeys = <Key>[]; //Resets key list.
-    //Generates the keys for the quiz buttons based on quiz names, with the exception of the random mixed quiz.
+    //Generates the keys for the speedrun mode buttons based on mode name.
     for (int mode in modes) {
       modeButtonKeys.add(Key('modeSelected:$mode'));
     }
-
-    /// A default value for the records if records have not been obtained in time.
-    List<String> defaultRecords = [
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A',
-      'N/A'
-    ];
-
-    //Waits for the records to be obtained from shared preferences before building the screen.
-    return FutureBuilder(
-      future: modeRecords,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          modeRecordsCopy = defaultRecords;
-          return _getScreenWidget(defaultRecords); //The widget while loading (nothing shown currently)
-        }
-        if (!snapshot.hasData) {
-          modeRecordsCopy = defaultRecords;
-          return _getScreenWidget(defaultRecords); //The widget when an error happens
-        }
-        final List<String> modeRecords = snapshot.data;
-        modeRecordsCopy = modeRecords;
-        return _getScreenWidget(modeRecords);
-      },
-    );
+    return _getScreenWidget(modeRecords);
   }
 
   /// The widget to be displayed to the user.
   Widget _getScreenWidget(recordData) {
+    print(recordData);
     /// A pop-up screen containing the speedrun instructions.
     PopUpController menu = PopUpController(context: context, menuBuilder: SpeedrunMenuInstructions(context: context));
     return Scaffold(

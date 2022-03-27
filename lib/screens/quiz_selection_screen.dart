@@ -34,7 +34,7 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
 
   @override
   void initState() {
-    quizRecords = getRecordsForMode('quiz');
+    //quizRecords = getRecordsForMode('quiz');
     super.initState();
   }
 

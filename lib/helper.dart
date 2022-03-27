@@ -89,19 +89,13 @@ getRecordKeysForMode(String mode) {
 /// - 'endless'
 ///
 /// All other inputs return the empty list.
-List<String> getRecordsForMode(String mode) {
+Future<List<String>> getRecordsForMode(String mode) async {
   List<String> keyList = getRecordKeysForMode(mode);
   final StorageReaderWriter _reader = StorageReaderWriter();
   List<String> records = [];
-  _reader.loadDataFromStorage().then((value) {
-    for (String key in keyList) {
-      records.add(_reader.read(key).toString());
-    }
-    return records;
-  });
-  // A 'default' set of values.
-  for (int i = 0; i < keyList.length; i++) {
-    records.add('0');
+  await _reader.loadDataFromStorage();
+  for (String key in keyList) {
+    records.add(_reader.read(key).toString());
   }
   return records;
 }

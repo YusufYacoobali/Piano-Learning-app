@@ -86,16 +86,13 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-  //TODO: Move into helper file
+  //TODO: Move into storage reader writer / helper?
   ///Checks if the user's score is a new record for the selected mode, and updates shared preferences if it is.
   Future<void> _updateRecords() async {
     int score = questionBrain.getScore();
     final prefs = await SharedPreferences.getInstance();
-    final int currentRecord =
-        prefs.getInt('${widget.timerDuration}_second_speedrun_record') ?? 0;
-    //If it is the user's first time, the currentRecord will be N/A.
-    //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
-    if (score > currentRecord || currentRecord == 0) {
+    final int currentRecord = int.parse((prefs.get('${widget.timerDuration}_second_speedrun_record') ?? '0').toString());
+    if (score > currentRecord) {
       await prefs.setInt(
           '${widget.timerDuration}_second_speedrun_record', score);
     }
