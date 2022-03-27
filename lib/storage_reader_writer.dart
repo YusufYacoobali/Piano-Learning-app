@@ -35,9 +35,6 @@ class StorageReaderWriter {
 
   /// Writes the key-value pair to storage
   Future<void> write(String key, Object value) async {
-    // Key: lesson name
-    // Value: score
-    // Format: 'lesson 1' -> 3
     final SharedPreferences pref = await SharedPreferences.getInstance();
     _map[key] = value.toString();
     await pref.setString(key, value.toString());
@@ -72,7 +69,6 @@ class StorageReaderWriter {
   void _setDefaultValues() {
     // _map['volume'] = constants.defaultVolumeLevel;
     // _map['difficulty'] = constants.defaultDifficultyLevel;
-    // With 7 lessons:
 
     _setDefaultEndlessRecords();
     _setDefaultPlayAlongRecords();
@@ -80,12 +76,9 @@ class StorageReaderWriter {
 
   /// Writes the default StorageWriter values to Shared Preferences
   Future<void> _writeDefaultsToStorage() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
+    //final SharedPreferences pref = await SharedPreferences.getInstance();
     // pref.setInt('volume', constants.defaultVolumeLevel);
     // pref.setString('difficulty', constants.defaultDifficultyLevel);
-    for (int i = 1; i <= 7; ++i) {
-      pref.setString('lesson $i', '0');
-    }
     _writeEndlessRecordsToStorage();
     _writePlayAlongRecordsToStorage();
   }
@@ -95,23 +88,9 @@ class StorageReaderWriter {
     WidgetsFlutterBinding.ensureInitialized();
     final SharedPreferences pref = await SharedPreferences.getInstance();
     await _loadSettingsFromStorage(pref);
-    await loadLessonScoresFromStorage(pref);
     await loadQuestionAnswerDataFromStorage(pref);
     await _loadEndlessRecordsFromStorage(pref);
     await _loadPlayAlongRecordsFromStorage(pref);
-  }
-
-  Future<void> loadLessonScoresFromStorage(SharedPreferences pref) async {
-    String? isOnDisk = pref.getString('lesson 1');
-    if (isOnDisk == null) {
-      _setDefaultValues();
-      await _writeDefaultsToStorage();
-    } else {
-      for (int i = 1; i <= 7; ++i) {
-        String? lessonScore = pref.getString('lesson $i');
-        if (lessonScore != null) _map['lesson $i'] = lessonScore;
-      }
-    }
   }
 
   Future<void> loadQuestionAnswerDataFromStorage(SharedPreferences pref) async {

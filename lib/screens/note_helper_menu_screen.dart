@@ -19,7 +19,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Helper'),
+        title: const Text('Note Helper'),
       ),
       body: SafeArea(
         child: GridView.count(
@@ -43,7 +43,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   ///A button that will be route to specific screen of bass note_helper.
   Widget bassClefNoteHelperbutton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Bass clef note'),
+      buttonChild: const ButtonText(buttonText: 'Bass Clef Notes'),
       onPress: () {
         Navigator.push(
           context,
@@ -60,7 +60,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   ///A button that will be route to specific screen of clef note_helper.
   Widget trebleClefNoteHelperbutton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Treble clef note'),
+      buttonChild: const ButtonText(buttonText: 'Treble Clef Notes'),
       onPress: () {
         Navigator.push(
           context,
@@ -77,7 +77,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   /// A button that will be routed to a specific screen of the note types note_helper.
   Widget noteTypesHelperButton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Note types'),
+      buttonChild: const ButtonText(buttonText: 'Note Types'),
       onPress: () {
         Navigator.push(
           context,

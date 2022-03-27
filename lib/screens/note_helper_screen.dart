@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
-
 import '../components/note_helper/bass_note_list_helper.dart';
 import '../components/note_helper/clef_note_helper_list.dart';
 import '../components/note_helper/note_helper_brain.dart';
 import '../components/note_helper/note_helper_list.dart';
 import '../components/note_helper/note_helper_type_list.dart';
-
-///import blank note_helper list
 import '../constants.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -56,7 +53,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Helper'),
+        title: const Text('Note Helper'),
       ),
       body: SafeArea(
         child: Scrollbar(

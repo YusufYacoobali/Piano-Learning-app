@@ -1,6 +1,6 @@
 import '../sheet_music_components/note.dart';
-import 'note_helper_list.dart';
 import 'note_helper_info.dart';
+import 'note_helper_list.dart';
 
 /// A list that contains all information about note_helper of bass.
 final NoteHelperList bassNoteImageNameList = NoteHelperList(
