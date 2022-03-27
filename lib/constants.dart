@@ -9,18 +9,201 @@ const String defaultVolumeLevel = '100';
 const String defaultDifficultyLevel = 'Beginner';
 const String defaultTheme = 'Dark';
 
+/// Colours for themes
+const Color _whiteColour = Colors.white;
+const Color _darkBackgroundColour = Color(0xff1F1D36);
+const Color _darkAppBarColour = Color(0xff655989);
+const Color _darkScrollBarColour = Color(0xffF0E3FF);
+const Color _darkAlertDialogColour = Color(0xff2C2E43);
+const Color _darkSettingColour = Color(0xff700B97);
+const Color _darkSettingColour2 = Color(0xff8566AA);
+const Color _darkTabBarColour = Color(0xffDCD6F7);
+
+const Color _lightAppBarColour = Color(0xff553C8B);
+const Color _lightBackgroundColour = Color(0xffCCC1FF);
+const Color _lightScrollBarColour = Color(0xff3D2C8D);
+const Color _lightSliderColour = Color(0xffBE9FE1);
+const Color _lightSettingColour = Color(0xff664E88);
+const Color _lightSettingColour2 = Color(0xff602080);
+const Color _lightTabBarColour = Color(0xffF7E8F6);
+
+const Color _pinkAppBarColour = Color(0xffE7759A);
+const Color _pinkBackgroundColour = Color(0xffEFBBCF);
+const Color _pinkScrollBarColour = Color(0xffB762C1);
+const Color _pinkAlertDialogColour = Color(0xffFFC0D3);
+const Color _pinkSettingColour = Color(0xffFF96AD);
+const Color _pinkSettingColour2 = Color(0xffEB596E);
+const Color _pinkTabBarColour = Color(0xffF1C6E7);
+
 /// The themes and the theme data associated with it
 final Map<String, ThemeData> themeColors = <String, ThemeData>{
-  'Dark': ThemeData.dark(),
-  'Light': ThemeData.light(),
-  'Pink': ThemeData.dark().copyWith(
-    backgroundColor: const Color.fromARGB(255, 200, 130, 255),
-    scaffoldBackgroundColor: const Color.fromARGB(255, 200, 130, 255),
-    appBarTheme: const AppBarTheme(
-      color: Color.fromARGB(255, 200, 110, 255),
-    ),
+  'Dark': ThemeData.dark().copyWith(
+    scaffoldBackgroundColor: _darkBackgroundColour,
+    appBarTheme: darkAppBarTheme,
+    tabBarTheme: darkTabBarTheme,
+    scrollbarTheme: darkScrollBarTheme,
+    elevatedButtonTheme: darkElevatedButtonTheme,
+    sliderTheme: darkSliderTheme,
+    dialogTheme: darkDialogTextStyleTheme,
+    textButtonTheme: darkTextButtonButtonTheme,
+  ),
+  'Light': ThemeData.light().copyWith(
+    scaffoldBackgroundColor: _lightBackgroundColour,
+    appBarTheme: lightAppBarTheme,
+    tabBarTheme: lightTabBarTheme,
+    iconTheme: iconColourTheme,
+    scrollbarTheme: lightScrollBarTheme,
+    sliderTheme: lightSliderTheme,
+    elevatedButtonTheme: lightElevatedButtonTheme,
+    textButtonTheme: lightTextButtonButtonTheme,
+  ),
+  'Pink': ThemeData.light().copyWith(
+    //const Color.fromARGB(255, 200, 110, 255),
+    backgroundColor: _whiteColour,
+    appBarTheme: pinkAppBarTheme,
+    tabBarTheme: pinkTabBarTheme,
+    scaffoldBackgroundColor: _pinkBackgroundColour,
+    iconTheme: iconColourTheme,
+    scrollbarTheme: pinkScrollBarTheme,
+    sliderTheme: pinkSliderTheme,
+    dialogTheme: pinkDialogTextStyleTheme,
+    elevatedButtonTheme: pinkElevatedButtonTheme,
+    textButtonTheme: pinkTextButtonButtonTheme,
   ),
 };
+
+/// Theme data
+
+/// Different theme of App bars.
+const darkAppBarTheme = AppBarTheme(
+  color: _darkAppBarColour,
+);
+const lightAppBarTheme = AppBarTheme(
+  color: _lightAppBarColour,
+);
+const pinkAppBarTheme = AppBarTheme(
+  color: _pinkAppBarColour,
+);
+
+/// Different theme of Tab bars.
+final darkTabBarTheme = TabBarTheme(
+  labelColor: _whiteColour,
+  unselectedLabelColor: _darkTabBarColour,
+  indicator: tabBarUnderlineColour,
+);
+final lightTabBarTheme = TabBarTheme(
+  labelColor: _whiteColour,
+  unselectedLabelColor: _lightTabBarColour,
+  indicator: tabBarUnderlineColour,
+);
+final pinkTabBarTheme = TabBarTheme(
+  labelColor: _whiteColour,
+  unselectedLabelColor: _pinkTabBarColour,
+  indicator: tabBarUnderlineColour,
+);
+UnderlineTabIndicator tabBarUnderlineColour = const UnderlineTabIndicator(
+  borderSide: BorderSide(width: 2, color: _whiteColour),
+);
+
+/// Colour for icons.
+final iconColourTheme = const IconThemeData().copyWith(color: _whiteColour);
+
+/// Different theme of scroll bars.
+final darkScrollBarTheme = const ScrollbarThemeData().copyWith(
+  thumbColor: MaterialStateProperty.all(_darkScrollBarColour),
+);
+final lightScrollBarTheme = const ScrollbarThemeData().copyWith(
+  thumbColor: MaterialStateProperty.all(_lightScrollBarColour),
+);
+final pinkScrollBarTheme = const ScrollbarThemeData().copyWith(
+  thumbColor: MaterialStateProperty.all(_pinkScrollBarColour),
+);
+
+/// Different theme of sliders.
+final darkSliderTheme = const SliderThemeData().copyWith(
+  activeTrackColor: _darkSettingColour,
+  inactiveTrackColor: _darkSettingColour2,
+  thumbColor: _darkAppBarColour,
+);
+final lightSliderTheme = const SliderThemeData().copyWith(
+  activeTrackColor: _lightSettingColour2,
+  inactiveTrackColor: _lightSliderColour,
+  thumbColor: _lightAppBarColour,
+);
+final pinkSliderTheme = const SliderThemeData().copyWith(
+  activeTrackColor: _pinkSettingColour2,
+  inactiveTrackColor: _pinkSettingColour,
+  thumbColor: _pinkAppBarColour,
+);
+
+const alertDialogTextStyle = TextStyle(
+  color: _whiteColour,
+  fontWeight: FontWeight.bold,
+  fontSize: 20.0,
+);
+
+const contentDialogTextStyle = TextStyle(
+  color: _whiteColour,
+  fontSize: 16.0,
+);
+
+/// Different theme of alert dialogs.
+const darkDialogTextStyleTheme = DialogTheme(
+  backgroundColor: _darkAlertDialogColour,
+  titleTextStyle: alertDialogTextStyle,
+  contentTextStyle: contentDialogTextStyle,
+);
+const pinkDialogTextStyleTheme = DialogTheme(
+  backgroundColor: _pinkAlertDialogColour,
+  titleTextStyle: alertDialogTextStyle,
+  contentTextStyle: contentDialogTextStyle,
+);
+
+/// Different theme of elevated buttons.
+final darkElevatedButtonTheme =
+    ElevatedButtonThemeData(style: darkElevatedButtonStyle);
+
+final lightElevatedButtonTheme =
+    ElevatedButtonThemeData(style: lightElevatedButtonStyle);
+
+final pinkElevatedButtonTheme =
+    ElevatedButtonThemeData(style: pinkElevatedButtonStyle);
+
+/// Different colour of elevated buttons.
+ButtonStyle darkElevatedButtonStyle = ElevatedButton.styleFrom(
+  primary: _darkSettingColour,
+);
+
+ButtonStyle lightElevatedButtonStyle = ElevatedButton.styleFrom(
+  primary: _lightSettingColour,
+);
+
+ButtonStyle pinkElevatedButtonStyle = ElevatedButton.styleFrom(
+  primary: _pinkSettingColour,
+);
+
+/// Different theme of text buttons.
+final darkTextButtonButtonTheme =
+    TextButtonThemeData(style: darkTextButtonStyle);
+
+final lightTextButtonButtonTheme =
+    TextButtonThemeData(style: lightTextButtonStyle);
+
+final pinkTextButtonButtonTheme =
+    TextButtonThemeData(style: pinkTextButtonStyle);
+
+/// Different colour of text buttons.
+ButtonStyle darkTextButtonStyle = TextButton.styleFrom(
+  primary: _darkSettingColour2,
+);
+
+ButtonStyle lightTextButtonStyle = TextButton.styleFrom(
+  primary: _lightSettingColour,
+);
+
+ButtonStyle pinkTextButtonStyle = TextButton.styleFrom(
+  primary: _pinkSettingColour2,
+);
 
 /// Results Screen
 const titleWidgetTextStyle = TextStyle(
