@@ -195,6 +195,7 @@ ButtonStyle darkTextButtonStyle = TextButton.styleFrom(
 ButtonStyle lightTextButtonStyle = TextButton.styleFrom(
   primary: _lightSettingColour,
 );
+
 ButtonStyle pinkTextButtonStyle = TextButton.styleFrom(
   primary: _pinkSettingColour2,
 );
@@ -291,7 +292,7 @@ BoxDecoration completeLessonButtonDeco = BoxDecoration(
   color: buttonBoxColour,
   //borderRadius: BorderRadius.circular(boxRadii),
   gradient: const LinearGradient(
-    colors: [Color(0xff5aff15), Color(0xff00b712)],
+    colors: [Color(0xff00b712), Color(0xff5aff15)],
   ),
 );
 
