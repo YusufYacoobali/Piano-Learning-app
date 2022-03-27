@@ -478,7 +478,7 @@ const Icon helpPlayButtonStyle = Icon(
 );
 
 const TextStyle helperTextStyle = TextStyle(
-  fontSize: 40.0,
+  fontSize: 34.0,
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );

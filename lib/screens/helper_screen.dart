@@ -79,36 +79,6 @@ class _HelperScreenState extends State<HelperScreen> {
 
   ///Create a card that holds note images, names and sound.
   Widget cardHelper(index) {
-    /*return Center(
-      child: Card(
-        key: const Key('card'),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        child: Container(
-          decoration: cardBackground,
-          child: Row(
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(flex: 1, child: cardNoteImage(index)),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const SizedBox(height: 30.0),
-                  Flexible(flex: 1, child: cardText(index)),
-                  const SizedBox(height: 10.0),
-                  if (getWidgetVisiable())
-                    cardPlayIcon(index)
-                  else
-                    cardDescription(index),
-                ],
-              ),
-              const SizedBox(width: 10.0),
-            ],
-          ),
-        ),
-      ),
-    );*/
     return Center(
       child: Card(
         key: const Key('card'),
@@ -182,20 +152,8 @@ class _HelperScreenState extends State<HelperScreen> {
   ///Widget for helper description
   ///fixed size of text because of SizeBox
   Widget cardDescription(index) {
-    return /*Wrap(
-      key: const Key('card description'),
-      alignment: WrapAlignment.start,
-      children: [
-        Text(
-          helperBrain.getHelperDescription(index),
-          style: const TextStyle(fontSize: 20.0),
-        ),
-      ],
-    );*/
-
-        Container(
+    return Container(
       height: 150,
-      //margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.fromLTRB(20, 15, 15, 10),
       width: 250,
       key: Key('card description: $index'),
