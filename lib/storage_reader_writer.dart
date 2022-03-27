@@ -542,8 +542,8 @@ class StorageReaderWriter {
       } else {
         toDisplay = false;
       }
-      return [toDisplay, text];
     }
+    return [toDisplay, text];
   }
 
   //decides whether a play along achievement needs to be shown
