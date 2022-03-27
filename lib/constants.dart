@@ -413,6 +413,7 @@ const TextStyle countdownTimerTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
+const double heightAndWidthOfStopWatch = 60;
 
 /// List of Names of Keys
 const List<String> whiteKeyNames = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
@@ -422,19 +423,18 @@ const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 const double cardWidth = 270;
 const double cardHeight = 270;
 
-const double circularIndicatorRadius = 74;
+const double circularIndicatorRadius = 68;
 
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
 const Color indicatorGoodProgress = Colors.green;
 const Color indicatorBadProgress = Colors.orange;
 
-const Icon playLessonIcon = Icon(
-  Icons.circle_outlined,
-  size: 30.0,
-);
+const TextStyle achievementTitleTextStyle =
+    TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
 
-const TextStyle achievementTextStyle = TextStyle(fontSize: 20);
+const TextStyle achievementTextStyle =
+    TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
 const int animationDuration = 1200;
 final Decoration achievementCardDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(20),
@@ -500,10 +500,28 @@ const Map<String, String> sharpFlatEquivalence = <String, String>{
 };
 
 /// The nodes that can be played in beginner mode for the treble clef in endless mode
-const List<String> endlessBeginnerTrebleNotes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+const List<String> endlessBeginnerTrebleNotes = [
+  'C4',
+  'D4',
+  'E4',
+  'F4',
+  'G4',
+  'A4',
+  'B4',
+  'C5'
+];
 
 /// The nodes that can be played in beginner mode for the bass clef in endless mode
-const List<String> endlessBeginnerBassNotes = ['C4', 'B3', 'A3', 'G3', 'F3', 'E3', 'D3', 'C3'];
+const List<String> endlessBeginnerBassNotes = [
+  'C4',
+  'B3',
+  'A3',
+  'G3',
+  'F3',
+  'E3',
+  'D3',
+  'C3'
+];
 
 /// The nodes that can be played in intermediate mode for the treble clef in endless mode
 const List<String> endlessIntermediateTrebleNotes = [
@@ -698,12 +716,12 @@ const double androidFlatOffset = 35;
 
 /// IOS symbol fonts
 /// Change these to change the symbol size
-const double iosSharpFontSize = 40;
+const double iosSharpFontSize = 50;
 const double iosFlatFontSize = 60;
 
 /// IOS symbol offsets
 /// Change these to change the symbol position on screen
-const double iosSharpOffset = 55;
+const double iosSharpOffset = 20;
 const double iosFlatOffset = 30;
 
 /// QuestionAnswerData
@@ -711,3 +729,7 @@ const int timeThreshold = 500;
 const int correctAnswerIncrease = 5;
 const int maxTimeReduction = 5;
 const int incorrectAnswerReduction = 10;
+
+//in app notification
+const TextStyle title = TextStyle(fontSize: 30);
+const TextStyle achievedText = TextStyle(fontSize: 22);

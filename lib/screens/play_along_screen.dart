@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 
-import '../components/in_app_notification_pop_up.dart';
+import '../components/notifications/in_app_notification_pop_up.dart';
 import '../components/page_keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/pop_ups/play_along_ending_pop_up.dart';

@@ -10,17 +10,6 @@ import 'package:audioplayers/audioplayers.dart';
 
 ///This screen creates helper screen
 ///It contains multiple cards with note images, names and icon buttons
-class HelperScreen extends StatefulWidget {
-  static const String id = 'helper_screen';
-
-  /// This number is the unique id for specific helper
-  final int helperNum;
-
-  const HelperScreen({Key? key, this.helperNum = 1}) : super(key: key);
-
-  @override
-  _HelperScreenState createState() => _HelperScreenState();
-}
 
 class _HelperScreenState extends State<HelperScreen> {
   final ScrollController _helperController = ScrollController();
@@ -68,7 +57,6 @@ class _HelperScreenState extends State<HelperScreen> {
             controller: _helperController,
             scrollDirection: Axis.horizontal,
             child: Row(
-              //spacing: 15.0,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: getAllHelperCards(),
@@ -124,6 +112,7 @@ class _HelperScreenState extends State<HelperScreen> {
     );
   }
 
+  /// List of Card widgets to display.
   List<Widget> getAllHelperCards() {
     List<Widget> allHelperCards = [];
     for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); ++i) {
@@ -136,8 +125,6 @@ class _HelperScreenState extends State<HelperScreen> {
   Widget cardText(index) {
     return Wrap(
       key: const Key('card text'),
-      //spacing: 10.0,
-      //runSpacing: 10.0,
       alignment: WrapAlignment.start,
       children: [
         Text(
@@ -185,4 +172,16 @@ class _HelperScreenState extends State<HelperScreen> {
       },
     );
   }
+}
+
+class HelperScreen extends StatefulWidget {
+  static const String id = 'helper_screen';
+
+  /// This number is the unique id for specific helper
+  final int helperNum;
+
+  const HelperScreen({Key? key, this.helperNum = 1}) : super(key: key);
+
+  @override
+  _HelperScreenState createState() => _HelperScreenState();
 }

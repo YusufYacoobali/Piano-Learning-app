@@ -291,4 +291,41 @@ void main() {
     String actualUserAnswer = qb.getUserAnswer();
     expect(expectedUserAnswer, actualUserAnswer);
   });
+  test(
+      'Check that getNumberOfUserAnswers correctly returns the number of user answers when user did not answer any question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    int result = qb.getNumberOfUserAnswers();
+    expect(result, 0);
+  });
+  test(
+      'Check that getNumberOfUserAnswers correctly returns the number of user answers when user answers some questions.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    qb.goBackToBeginning();
+    qb.setAnswer(userAnswer: 'C');
+    qb.goToNextQuestion();
+    qb.setAnswer(userAnswer: 'B');
+    int result = qb.getNumberOfUserAnswers();
+    expect(result, 2);
+  });
+  test(
+      'Check that getNumberOfUserAnswers correctly returns the number of user answers when user answers every question.',
+      () async {
+    SharedPreferences.setMockInitialValues({});
+    List<Question> fakeQuestions = getFakeQuestions();
+    QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
+    qb.goBackToBeginning();
+    qb.setAnswer(userAnswer: 'C');
+    qb.goToNextQuestion();
+    qb.setAnswer(userAnswer: 'C');
+    qb.goToNextQuestion();
+    qb.setAnswer(userAnswer: 'C');
+    int result = qb.getNumberOfUserAnswers();
+    expect(result, qb.getTotalNumberOfQuestions());
+  });
 }
