@@ -58,7 +58,6 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
     textButtonTheme: lightTextButtonButtonTheme,
   ),
   'Pink': ThemeData.light().copyWith(
-    //const Color.fromARGB(255, 200, 110, 255),
     backgroundColor: _whiteColour,
     appBarTheme: pinkAppBarTheme,
     tabBarTheme: pinkTabBarTheme,
@@ -73,7 +72,6 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
 };
 
 /// Theme data
-
 /// Different theme of App bars.
 const darkAppBarTheme = AppBarTheme(
   color: _darkAppBarColour,
@@ -185,10 +183,8 @@ ButtonStyle pinkElevatedButtonStyle = ElevatedButton.styleFrom(
 /// Different theme of text buttons.
 final darkTextButtonButtonTheme =
     TextButtonThemeData(style: darkTextButtonStyle);
-
 final lightTextButtonButtonTheme =
     TextButtonThemeData(style: lightTextButtonStyle);
-
 final pinkTextButtonButtonTheme =
     TextButtonThemeData(style: pinkTextButtonStyle);
 
@@ -196,11 +192,9 @@ final pinkTextButtonButtonTheme =
 ButtonStyle darkTextButtonStyle = TextButton.styleFrom(
   primary: _darkSettingColour2,
 );
-
 ButtonStyle lightTextButtonStyle = TextButton.styleFrom(
   primary: _lightSettingColour,
 );
-
 ButtonStyle pinkTextButtonStyle = TextButton.styleFrom(
   primary: _pinkSettingColour2,
 );
