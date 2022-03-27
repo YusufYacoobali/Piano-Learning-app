@@ -83,9 +83,7 @@ class _HelperScreenState extends State<HelperScreen> {
       child: Card(
         key: const Key('card'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        child: SizedBox(
-          height: 300.0,
-          width: 500.0,
+        child: FittedBox(
           child: Container(
             decoration: cardBackground,
             child: Wrap(
@@ -136,15 +134,12 @@ class _HelperScreenState extends State<HelperScreen> {
 
   ///A widget that holds the name of the note.
   Widget cardText(index) {
-    return Wrap(
+    return FittedBox(
       key: Key('card text: $index'),
-      alignment: WrapAlignment.start,
-      children: [
-        Text(
-          helperBrain.getHelperNoteName(index),
-          style: helperTextStyle,
-        ),
-      ],
+      child: Text(
+        helperBrain.getHelperNoteName(index),
+        style: helperTextStyle,
+      ),
     );
   }
 
