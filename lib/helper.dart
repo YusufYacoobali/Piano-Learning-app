@@ -31,7 +31,7 @@ List<String> replaceSpacesWithUnderscoresFromStrings(List<String> toConvert) {
 /// - 'endless'
 ///
 /// All other inputs return the empty list.
-getRecordKeysForMode(String mode) {
+List<String> getRecordKeysForMode(String mode) {
   // Identifies which keys need to be obtained.
   List<String> keyList = [];
   if (mode == 'speedrun') {
@@ -75,9 +75,40 @@ Future<List<String>> getRecordsForMode(String mode) async {
   return records;
 }
 
+/// Resets the record lists for the specified mode to reflect default values.
+///
+/// These lists are used for UI purposes - to set defaults in storage see StorageReaderWriter methods.
+///
+/// The available mode inputs are:
+/// - 'speedrun'
+/// - 'quiz'
+/// - 'play along'
+///
+/// All other inputs do nothing.
+List<String> resetRecordListForMode(String mode) {
+  List<Object> categoryList = [];
+  if (mode == 'speedrun') {
+    modeRecords = [];
+    categoryList = modes;
+  }
+  else if (mode == 'play along') {
+    trackRecords = [];
+    categoryList = trackNames;
+  }
+  else if (mode == 'quiz') {
+    quizRecords = [];
+    categoryList = quizzes;
+  }
+  List<String> defaultList = [];
+  for (int i = 0; i < categoryList.length; i++) {
+    defaultList.add('0');
+  }
+  return defaultList;
+}
+
 /// A variant of getRecords which returns void.
 ///
-/// Used for parts of the code where you need a function with a void return type and no parameters.
+/// Used for certain parts of the code where you need a function with a void return type and no parameters.
 void loadRecordsForPlayAlongMode() {
   getRecordsForMode('play along');
 }

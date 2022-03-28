@@ -4,7 +4,6 @@ import '../components/pop_ups/speedrun_menu_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../screens/menu_screen.dart';
 import '../screens/speedrun_screen.dart';
-import 'menu_screen.dart';
 import 'speedrun_screen.dart';
 import 'package:sight_reading_app/helper.dart';
 
@@ -15,8 +14,6 @@ List<int> modes = [10, 20, 30, 40, 50, 60];
 List<Key> modeButtonKeys = <Key>[];
 
 /// A list containing the user records for each of the modes.
-///
-/// This variable copies the actual list and is used for testing purposes.
 List<String> modeRecords = <String>[];
 
 ///A screen that displays a scrollable list of available speedrun modes with buttons to access each mode.
@@ -37,10 +34,8 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
   /// Loads the records for the speedrun mode.
   void _loadRecords() async {
     //Sets default values to use while the real records load.
-    modeRecords = [];
-    for (int i = 0; i < modes.length; i++) {
-      modeRecords.add('0');
-    }
+    modeRecords = resetRecordListForMode('speedrun');
+    // Once the real records are loaded, the screen is refreshed with the new values.
     getRecordsForMode('speedrun').then((value) {
         setState(() {
           modeRecords = value;

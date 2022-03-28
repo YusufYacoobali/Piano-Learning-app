@@ -34,13 +34,27 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
 
   @override
   void initState() {
-    //quizRecords = getRecordsForMode('quiz');
+    _loadRecords();
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  /// Loads the records for the quizzes.
+  void _loadRecords() async {
+    //Sets default values to use while the real records load.
+    quizRecords = resetRecordListForMode('quiz');
+    print(quizRecords);
+    // Once the real records are loaded, the screen is refreshed with the new values.
+    getRecordsForMode('quiz').then((value) {
+      setState(() {
+        quizRecords = value;
+        print(quizRecords);
+      });
+    });
   }
 
   ///Builds the screen widgets.
@@ -51,11 +65,11 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
     for (String quiz in quizzes) {
       quizButtonKeys.add(Key('quizSelected:$quiz'));
     }
-    return _getScreenWidget(quizRecords);
+    return _getScreenWidget();
   }
 
   /// The widget to be displayed on screen.
-  Widget _getScreenWidget(recordData) {
+  Widget _getScreenWidget() {
     /// A pop-up instruction screen for the quizzes.
     PopUpController menu = PopUpController(
         context: context, menuBuilder: QuizInstructions(context: context));
@@ -81,7 +95,7 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
                           SizedBox(
                               width: MediaQuery.of(context).size.width /
                                   4), //Adds space between Text
-                          Text('Record: ${recordData[index]}',
+                          Text('Record: ${quizRecords[index]}',
                               textAlign: TextAlign.right),
                         ],
                       ),
