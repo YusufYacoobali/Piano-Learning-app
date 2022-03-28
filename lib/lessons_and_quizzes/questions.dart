@@ -27,8 +27,6 @@ final List<Question> questions = [
     questionID: 3,
     lessonID: 1,
   ),
-
-  ///start questions
   Question(
     clef: Clef.treble,
     question:
@@ -104,8 +102,6 @@ final List<Question> questions = [
     questionID: 13,
     lessonID: 2,
   ),
-
-  ///Lesson questions
   Question(
     clef: Clef.treble,
     question:
@@ -209,8 +205,6 @@ final List<Question> questions = [
     questionID: 27,
     lessonID: 3,
   ),
-
-  ///Lesson questions
   Question(
     clef: Clef.treble,
     question:
@@ -308,7 +302,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'The clef symbol has changed! This is the Base clef and notes are played on the lower part of the piano. The positions of the notes will be different. This is C on the Base clef which is under the middle line. Now press C on the keyboard. MOVE THE KEYBOARD TO THE LEFT BEFORE ANSWERING.',
+        'The clef symbol has changed! This is the Base clef and notes are played on the lower part of the piano. The positions of the notes will be different. This is C on the Base clef which is under the middle line. Now press C on the keyboard. ** Move the keyboard to the left before answering **.',
     correctAnswer: Note(name: 'C3'),
     questionID: 41,
     lessonID: 4,
@@ -337,8 +331,6 @@ final List<Question> questions = [
     questionID: 44,
     lessonID: 4,
   ),
-
-  ///start questions
   Question(
     clef: Clef.bass,
     question:
@@ -408,7 +400,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'THIS LESSON IS IN BASS CLEF, MOVE THE KEYBOARD TO THE LEFT BEFORE ANSWERING.Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G on the keyboard.',
+        '** This lesson is in bass clef, swipe the keyboard to the left first. ** Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G on the keyboard.',
     correctAnswer: Note(name: 'G3'),
     questionID: 54,
     lessonID: 5,
@@ -429,8 +421,6 @@ final List<Question> questions = [
     questionID: 56,
     lessonID: 5,
   ),
-
-  ///start questions
   Question(
     clef: Clef.bass,
     question:
@@ -513,8 +503,6 @@ final List<Question> questions = [
     questionID: 67,
     lessonID: 6,
   ),
-
-  ///Start questions
   Question(
     clef: Clef.treble,
     question:
@@ -566,7 +554,6 @@ final List<Question> questions = [
     lessonID: 6,
   ),
 
-  ///read lower notes
   ///Lesson 7
   Question(
     clef: Clef.treble,
@@ -650,7 +637,6 @@ final List<Question> questions = [
     lessonID: 7,
   ),
 
-  ///sharps and flats
   ///Lesson 8
   Question(
     clef: Clef.treble,
@@ -776,7 +762,7 @@ final List<Question> questions = [
     lessonID: 8,
   ),
 
-  ///Lesson 9 : review treble clef A3 to F5
+  ///Lesson 9
   Question(
     clef: Clef.treble,
     question:
@@ -946,7 +932,7 @@ final List<Question> questions = [
     lessonID: 9,
   ),
 
-  ///Lesson 10: review bass clef from C3 to E4
+  ///Lesson 10
   Question(
     clef: Clef.bass,
     question:

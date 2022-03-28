@@ -4,9 +4,6 @@ import 'note_helper_info.dart';
 
 ////// A list that contains all information about BLANK HELPER.
 
-/// The helperNoteInfo I will change to more appropriate name later so
-/// it will not just for note only.
-
 final NoteHelperList noteTypeList =
     NoteHelperList(noteHelperID: 3, noteHelperList: [
   NoteHelperInfo(
