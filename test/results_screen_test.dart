@@ -10,7 +10,7 @@ import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 import 'package:sight_reading_app/screens/review_answers_screen.dart';
 
 void main() {
-  testWidgets('Check that the title is displayed', (WidgetTester tester) async {
+  Future<void> _createResultsScreen(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: ResultsScreen(
@@ -19,33 +19,23 @@ void main() {
             questionBrain: QuestionBrain(questions: questions)),
       ),
     );
+  }
+
+  testWidgets('Check that the title is displayed', (WidgetTester tester) async {
+    await _createResultsScreen(tester);
     expect(find.text("Congratulations!"), findsOneWidget);
   });
 
   testWidgets('Check that the score percentage is displayed',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: ResultsScreen(
-            title: "Congratulations!",
-            score: 0.42,
-            questionBrain: QuestionBrain(questions: questions)),
-      ),
-    );
+    await _createResultsScreen(tester);
     expect(find.text('You got 42%'), findsOneWidget);
   });
 
   testWidgets(
       'Check that the tick icon is displayed when the score is high enough',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: ResultsScreen(
-            title: "Congratulations!",
-            score: 0.42,
-            questionBrain: QuestionBrain(questions: questions)),
-      ),
-    );
+    await _createResultsScreen(tester);
     expect(find.byIcon(Icons.check_circle), findsOneWidget);
   });
 
@@ -65,14 +55,7 @@ void main() {
 
   testWidgets('Check that the "Exit" button is displayed',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: ResultsScreen(
-            title: "Congratulations!",
-            score: 0.42,
-            questionBrain: QuestionBrain(questions: questions)),
-      ),
-    );
+    await _createResultsScreen(tester);
     expect(find.text('Exit'), findsOneWidget);
   });
 
@@ -102,28 +85,14 @@ void main() {
 
   testWidgets('Check that the "Review Answers" button is displayed',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: ResultsScreen(
-            title: "Congratulations!",
-            score: 0.42,
-            questionBrain: QuestionBrain(questions: questions)),
-      ),
-    );
+    await _createResultsScreen(tester);
     expect(find.text('Review Answers'), findsOneWidget);
   });
 
   testWidgets(
       'Check that tapping the "Review Answers" button takes the user to the review answers screen',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: ResultsScreen(
-            title: "Congratulations!",
-            score: 0.42,
-            questionBrain: QuestionBrain(questions: questions)),
-      ),
-    );
+    await _createResultsScreen(tester);
     await tester.tap(find.text('Review Answers'));
     await tester.pumpAndSettle();
     expect(find.byType(ReviewAnswersScreen), findsOneWidget);
