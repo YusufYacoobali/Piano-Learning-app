@@ -2,8 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/question_finder.dart';
+import 'package:sight_reading_app/main.dart';
+import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
+import 'package:sight_reading_app/screens/review_answers_screen.dart';
 
 void main() {
   testWidgets('Check that the title is displayed', (WidgetTester tester) async {
@@ -72,9 +76,31 @@ void main() {
     expect(find.text('Exit'), findsOneWidget);
   });
 
-  // TODO: Add test checking that pressing the "Exit" button takes the user back to the main menu screen
+  testWidgets(
+      'Check that pressing the exit button takes the user back to the main menu screen',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const SightReadingApp());
+    await tester.tap(find.text('Lessons'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Lesson 1'));
+    await tester.pumpAndSettle();
+    int numOfQuestions = QuestionFinder().getQuestionsForLesson(1).length;
+    for (int i = 0; i < numOfQuestions - 1; ++i) {
+      await tester.tap(find.text('C'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(TextButton));
+      await tester.pumpAndSettle();
+    }
+    await tester.tap(find.text('C'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(TextButton));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Exit'));
+    await tester.pumpAndSettle();
+    expect(find.byType(MenuScreen), findsOneWidget);
+  });
 
-  testWidgets('Check that the "Review Answers" is displayed',
+  testWidgets('Check that the "Review Answers" button is displayed',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -87,18 +113,19 @@ void main() {
     expect(find.text('Review Answers'), findsOneWidget);
   });
 
-  // TODO: Add test for "Review Answers" functionality once implemented
-
-  // testWidgets('Check that the "Exit" button takes the user to the menu page',
-  //     (WidgetTester tester) async {
-  //   await tester.pumpWidget(
-  //     const MaterialApp(
-  //       home: ResultsScreen(title: "Congratulations!", score: 0.42),
-  //     ),
-  //   );
-  //   await tester.tap(find.text('Exit'));
-  //   await tester.pumpAndSettle();
-  //   //expect(find.text('Read That Sheet'), findsOneWidget);
-  //   expect(find.byType(MenuScreen), findsOneWidget);
-  // });
+  testWidgets(
+      'Check that tapping the "Review Answers" button takes the user to the review answers screen',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ResultsScreen(
+            title: "Congratulations!",
+            score: 0.42,
+            questionBrain: QuestionBrain(questions: questions)),
+      ),
+    );
+    await tester.tap(find.text('Review Answers'));
+    await tester.pumpAndSettle();
+    expect(find.byType(ReviewAnswersScreen), findsOneWidget);
+  });
 }
