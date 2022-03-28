@@ -26,6 +26,8 @@ class QuestionFinder {
         lessonQuestions.add(questionsToPickFrom.removeAt(randomIndex));
       }
       return lessonQuestions;
+      // If the numOfQuestions is not provided, randomise the order of all of the questions
+      // Used in speedrun
     } else {
       questionsToPickFrom.shuffle();
       return questionsToPickFrom;
@@ -37,10 +39,13 @@ class QuestionFinder {
   List<Question> getPracticeQuestionsForLesson(
       int lessonID, int numOfQuestions) {
     List<Question> practiceQuestions = [];
+    // Get a list of practice question IDs and take the first [numOfQuestions] elements from it
     List<int> questionIDs = List.from(
         QuestionAnswerData.getPracticeQuestionIDs().take(numOfQuestions));
 
-    List<Question> lessonQuestions = questions.where((question) => question.lessonID == lessonID).toList();
+    // Get a list of questions for the lesson requested
+    List<Question> lessonQuestions =
+        questions.where((question) => question.lessonID == lessonID).toList();
 
     for (int id in questionIDs) {
       for (Question question in lessonQuestions) {

@@ -80,6 +80,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     // Calculates the percentage achieved by the user
     double percentage = 0;
     if (questionBrain.getQuestionNum() > 1) {
+      // Exclude the last question since it is displayed immediately before the results screen is shown
       percentage =
           questionBrain.getScore() / (questionBrain.getQuestionNum() - 1);
     }
@@ -95,15 +96,11 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     if (displayNotification[0]) {
       inAppNotification(context, displayNotification[1]);
     }
-
-    // return ResultsScreen(
-    //   score: percentage,
-    //   title: title,
-    //   questionBrain: questionBrain,
-    // );
   }
 
-  getResultsScreen(title, percentage) {
+  /// Gets the results screen
+  void getResultsScreen(String title, double percentage) {
+    // Stops the user from swiping back to the quiz
     Navigator.pop(context);
     Navigator.push(
       context,

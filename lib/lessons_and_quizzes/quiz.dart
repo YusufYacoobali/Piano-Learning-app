@@ -7,6 +7,7 @@ import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
 import 'question_brain.dart';
 
+/// Quiz format questions
 class Quiz extends StatefulWidget {
   final String id;
   final String name;
@@ -14,6 +15,7 @@ class Quiz extends StatefulWidget {
   final Function getResults;
   final bool useQuestionText;
 
+  /// Constructor for Quiz
   const Quiz({
     Key? key,
     required this.id,
@@ -43,9 +45,11 @@ class _QuizState extends State<Quiz> {
     showResultAlert(text);
   }
 
+  /// Sets the widget showing the question displayed on screen
   void setScreenWidget() {
     Note note = widget.questionBrain.getNote();
     Clef clef = widget.questionBrain.getClef();
+    // Question text is not displayed in speedrun/random quiz/practice quiz
     String questionText = widget.useQuestionText
         ? widget.questionBrain.getQuestionText()
         : 'What note is this?';
@@ -61,6 +65,7 @@ class _QuizState extends State<Quiz> {
     );
   }
 
+  /// Gets the pause button displayed in the top right
   Widget getPauseButton() {
     return IconButton(
       key: const Key('Pause Icon'),
@@ -91,8 +96,9 @@ class _QuizState extends State<Quiz> {
       onPressed: () {
         Navigator.pop(context, 'OK');
 
-        ///go next if it is not the last question
+        // Go to the next question if it is not the last question
         if (!widget.questionBrain.isLastQuestion()) {
+          // Update the screen
           setState(() {
             widget.questionBrain.goToNextQuestion();
             setScreenWidget();
@@ -111,13 +117,14 @@ class _QuizState extends State<Quiz> {
       title: Text(alertTitle),
       content: Text(alertDesc),
       actions: <Widget>[
-        ///go to next question
         getNextButton(),
       ],
     );
   }
 
+  /// Gets the results screen
   void getResultsScreen(title, percentage, questionBrain) {
+    // Stops the user from swiping back to the quiz
     Navigator.pop(context);
     Navigator.push(
       context,
@@ -131,11 +138,11 @@ class _QuizState extends State<Quiz> {
     );
   }
 
+  /// Shows the pop-up when an option is selected
   void showResultAlert(String choice) {
     String alertTitle = '';
     String alertDesc = '';
 
-    ///show result
     if (widget.questionBrain.checkAnswer(choice)) {
       alertTitle = 'Correct!';
       alertDesc = 'You got the correct answer!';
@@ -157,6 +164,7 @@ class _QuizState extends State<Quiz> {
   void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
+      // Stops the user from tapping outside of the pop-up
       barrierDismissible: false,
       builder: (context) {
         return createResultAlert(alertTitle, alertDesc);
