@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/main.dart';
 
 void main() {
@@ -193,39 +193,41 @@ void main() {
 
   //giving pump and settle time out error
 
-  // testWidgets(
-  //     'Check that black key names do not appear on keyboard in intermediate difficulty',
-  //     (WidgetTester tester) async {
-  //   SharedPreferences.setMockInitialValues({'difficulty': 'Intermediate'});
-  //   await _navigateToAKeyboard(tester);
-  //   expect(find.text('C'), findsNothing);
-  //   expect(find.text('D'), findsNothing);
-  //   expect(find.text('E'), findsNothing);
-  //   expect(find.text('F'), findsNothing);
-  //   expect(find.text('G'), findsNothing);
-  //   expect(find.text('A'), findsNothing);
-  //   expect(find.text('B'), findsNothing);
-  //   expect(find.text('Db'), findsOneWidget);
-  //   expect(find.text('Eb'), findsOneWidget);
-  //   expect(find.text('Gb'), findsOneWidget);
-  //   expect(find.text('Ab'), findsOneWidget);
-  //   expect(find.text('Bb'), findsOneWidget);
-  // });
+  testWidgets(
+      'Check that black key names do not appear on keyboard in intermediate difficulty',
+      (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({'difficulty': 'Intermediate'});
+    await _navigateToAKeyboard(tester);
+    expect(find.text('C'), findsNothing);
+    expect(find.text('D'), findsNothing);
+    expect(find.text('E'), findsNothing);
+    expect(find.text('F'), findsNothing);
+    expect(find.text('G'), findsNothing);
+    expect(find.text('A'), findsNothing);
+    expect(find.text('B'), findsNothing);
+    expect(find.text('Db'), findsOneWidget);
+    expect(find.text('Eb'), findsOneWidget);
+    expect(find.text('Gb'), findsOneWidget);
+    expect(find.text('Ab'), findsOneWidget);
+    expect(find.text('Bb'), findsOneWidget);
+  });
 
-  // testWidgets('Check that none of the key names appear on keyboard in expert difficulty', (WidgetTester tester) async {
-  //   SharedPreferences.setMockInitialValues({'difficulty': 'Expert'});
-  //   await _navigateToAKeyboard(tester);
-  //   expect(find.text('C'), findsNothing);
-  //   expect(find.text('D'), findsNothing);
-  //   expect(find.text('E'), findsNothing);
-  //   expect(find.text('F'), findsNothing);
-  //   expect(find.text('G'), findsNothing);
-  //   expect(find.text('A'), findsNothing);
-  //   expect(find.text('B'), findsNothing);
-  //   expect(find.text('Db'), findsNothing);
-  //   expect(find.text('Eb'), findsNothing);
-  //   expect(find.text('Gb'), findsNothing);
-  //   expect(find.text('Ab'), findsNothing);
-  //   expect(find.text('Bb'), findsNothing);
-  // });
+  testWidgets(
+      'Check that none of the key names appear on keyboard in expert difficulty',
+      (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({'difficulty': 'Expert'});
+    await _navigateToAKeyboard(tester);
+    expect(find.text('C'), findsNothing);
+    expect(find.text('D'), findsNothing);
+    expect(find.text('E'), findsNothing);
+    expect(find.text('F'), findsNothing);
+    expect(find.text('G'), findsNothing);
+    expect(find.text('A'), findsNothing);
+    expect(find.text('B'), findsNothing);
+    expect(find.text('Db'), findsNothing);
+    expect(find.text('Eb'), findsNothing);
+    expect(find.text('Gb'), findsNothing);
+    expect(find.text('Ab'), findsNothing);
+    expect(find.text('Bb'), findsNothing);
+  });
 }

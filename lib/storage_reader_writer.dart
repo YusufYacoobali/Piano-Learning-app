@@ -475,7 +475,7 @@ class StorageReaderWriter {
       text = "You completed 1 quiz";
     } else if (completedQuizzes == 5) {
       text = "You completed 5 quizzes";
-    } else if (completedQuizzes == numOfquizzes && achieved == false) {
+    } else if (completedQuizzes == numOfquizzes && allAchieved == false) {
       text = "You completed all quizzes";
       prefs.setBool('all-quizzes-complete', true);
     } else {
