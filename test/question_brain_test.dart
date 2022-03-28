@@ -7,7 +7,6 @@ import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 
 void main() {
   List<Question> getFakeQuestions() {
-    // TODO: Removing below line results in invalid ID since not loaded
     QuestionAnswerData.createDefaultMap();
     return [
       Question(
