@@ -16,6 +16,7 @@ class _KeyboardState extends State<Keyboard> {
     getDifficulty();
   }
 
+  /// Loads the difficulty setting from storage
   void getDifficulty() async {
     StorageReaderWriter writer = StorageReaderWriter();
     writer.loadDataFromStorage().then((value) {
@@ -27,6 +28,7 @@ class _KeyboardState extends State<Keyboard> {
 
   /// Plays the sound of the note that was pressed
   void playSound(String noteName) {
+    // Play a sound file depending on the current octave
     if (widget.octave == 1) {
       player.play('note_low_$noteName.wav');
     } else if (widget.octave == 2) {
@@ -39,6 +41,7 @@ class _KeyboardState extends State<Keyboard> {
   /// Returns the text widget displayed on the white keys
   Widget getWhiteKeyChild(String buttonText) {
     return Visibility(
+      // Beginners see the names of all white keys
       visible: _difficulty == 'Beginner',
       child: FittedBox(
         fit: BoxFit.fitWidth,
@@ -54,6 +57,7 @@ class _KeyboardState extends State<Keyboard> {
   /// Returns the text widget displayed on the black keys
   Widget getBlackKeyChild(String buttonText) {
     return Visibility(
+      // Non-expert difficulty users see the names of all black keys
       visible: _difficulty != 'Expert',
       child: FittedBox(
         fit: BoxFit.fitWidth,
@@ -197,6 +201,7 @@ class Keyboard extends StatefulWidget {
   /// The function to be called when a key is pressed
   /// gets the key pressed on the keyboard
   final Function(String) onKeyPressed;
+
   ///sets the octave of sounds to play
   final int octave;
 
@@ -204,8 +209,6 @@ class Keyboard extends StatefulWidget {
 
   const Keyboard(this.onKeyPressed, this.octave, {Key? key}) : super(key: key);
 
-
   @override
   State<Keyboard> createState() => _KeyboardState();
-
 }

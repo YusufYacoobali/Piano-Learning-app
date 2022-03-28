@@ -10,7 +10,6 @@ import '../lessons_and_quizzes/question_finder.dart';
 
 /// Creates screen for a lesson.
 /// The lesson screen consists of the option buttons and components in question_skeleton
-
 class LessonScreen extends StatefulWidget {
   static const String id = 'lesson_screen';
   final int lessonNum;

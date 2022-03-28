@@ -4,6 +4,24 @@ import 'package:sight_reading_app/screens/menu_screen.dart';
 import '../constants.dart';
 import '../lessons_and_quizzes/question_brain.dart';
 
+/// Screen displaying the user's results
+class ResultsScreen extends StatefulWidget {
+  static const String id = 'results_screen';
+  final String title;
+  final double score;
+  final QuestionBrain questionBrain;
+
+  const ResultsScreen(
+      {Key? key,
+      required this.title,
+      required this.score,
+      required this.questionBrain})
+      : super(key: key);
+
+  @override
+  _ResultsScreenState createState() => _ResultsScreenState();
+}
+
 class _ResultsScreenState extends State<ResultsScreen> {
   @override
   void initState() {
@@ -15,6 +33,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
     super.dispose();
   }
 
+  /// Gets the widget displaying the title
   Widget getTitleWidget() {
     return Expanded(
       flex: 1,
@@ -32,6 +51,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
     );
   }
 
+  /// Gets the widget displaying the user's score
   Widget getScoreWidget() {
     return Expanded(
       flex: 1,
@@ -40,7 +60,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
           child: Text(
-            'You got ${getPercentage()}%',
+            'You got ${getPercentage()}',
             textAlign: TextAlign.center,
             style: scoreWidgetTextStyle,
           ),
@@ -49,11 +69,13 @@ class _ResultsScreenState extends State<ResultsScreen> {
     );
   }
 
+  /// Formats and returns the percentage
   String getPercentage() {
     double unroundedPercentage = widget.score * 100;
-    return unroundedPercentage.toStringAsFixed(0);
+    return '${unroundedPercentage.toStringAsFixed(0)}%';
   }
 
+  /// Gets the widget displaying the icon in the centre of the screen
   Widget getIconWidget() {
     return Expanded(
       flex: 2,
@@ -61,13 +83,13 @@ class _ResultsScreenState extends State<ResultsScreen> {
         fit: BoxFit.contain,
         child: Icon(
           getIcon(),
-          //color: Colors.grey.shade300,
           size: 150.0,
         ),
       ),
     );
   }
 
+  /// Gets the correct icon depending on the user's score
   IconData getIcon() {
     if (widget.score < passThreshold) {
       return Icons.cancel;
@@ -76,6 +98,34 @@ class _ResultsScreenState extends State<ResultsScreen> {
     }
   }
 
+  /// Gets the "Exit" button displayed at the bottom of the screen
+  Widget getExitButton() {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
+      },
+      style: navButtonDeco,
+      child: const Text('Exit'),
+    );
+  }
+
+  /// Gets the "Review Answers" button displayed at the bottom of the screen
+  Widget getReviewAnswersButton() {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return ReviewAnswersScreen(questionBrain: widget.questionBrain);
+          }),
+        );
+      },
+      child: const Text('Review Answers'),
+      style: navButtonDeco,
+    );
+  }
+
+  /// Gets the buttons at the bottom of the screen
   Widget getNavigationButtons() {
     return Expanded(
       flex: 1,
@@ -84,26 +134,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
-              },
-              style: navButtonDeco,
-              child: const Text('Exit'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return ReviewAnswersScreen(
-                        questionBrain: widget.questionBrain);
-                  }),
-                );
-              },
-              child: const Text('Review Answers'),
-              style: navButtonDeco,
-            )
+            getExitButton(),
+            getReviewAnswersButton(),
           ],
         ),
       ),
@@ -133,21 +165,4 @@ class _ResultsScreenState extends State<ResultsScreen> {
       ),
     );
   }
-}
-
-class ResultsScreen extends StatefulWidget {
-  static const String id = 'results_screen';
-  final String title;
-  final double score;
-  final QuestionBrain questionBrain;
-  const ResultsScreen(
-      {Key? key,
-      required this.title,
-      required this.score,
-      required this.questionBrain})
-      : super(key: key);
-
-  ///pass the question brain
-  @override
-  _ResultsScreenState createState() => _ResultsScreenState();
 }

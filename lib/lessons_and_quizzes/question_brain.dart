@@ -16,17 +16,20 @@ class QuestionBrain {
   /// The list of questions
   final List<Question> questions;
 
-  late final Map<int, String> _map = {};
+  /// A map storing the user answers for each question in [questions]
+  late final Map<int, String> _userAnswerMap = {};
 
   /// Constructor
   QuestionBrain({
     required this.questions,
   });
 
+  /// Accessor for the note of the current question
   Note getNote() {
     return questions[_questionNum].correctAnswer;
   }
 
+  /// Accessor for the clef of the current question
   Clef getClef() {
     return questions[_questionNum].clef;
   }
@@ -49,7 +52,7 @@ class QuestionBrain {
 
   /// Moves to the next question if there is a next question
   void goToNextQuestion() {
-    if (_questionNum < questions.length - 1) {
+    if (!isLastQuestion()) {
       ++_questionNum;
     }
   }
@@ -66,19 +69,20 @@ class QuestionBrain {
 
   /// Gets the user's answer for the current question
   String getUserAnswer() {
-    //return userAnswerList[questionNumber];
-    return _map[_questionNum] ?? "N/A";
+    // Return "N/A" if question has not been answered
+    return _userAnswerMap[_questionNum] ?? "N/A";
   }
 
   /// Gets the number of user answers (essential in speedrun mode)
   int getNumberOfUserAnswers() {
-    return _map.length;
+    return _userAnswerMap.length;
   }
 
   /// Gets the correct answer of the current question without the octave
   String getUserAnswerWithoutOctave() {
     String note = getUserAnswer();
     if (note != "N/A") {
+      // TODO: Add comments here explaining what's happening
       String name = note[0];
       if (note.length == 3) {
         name += note[1];
@@ -90,11 +94,9 @@ class QuestionBrain {
 
   /// Sets the user answer for the current question
   void setAnswer({required userAnswer, int? timeTaken}) {
+    // Add map entry
+    _userAnswerMap[_questionNum] = convertToAlt(userAnswer);
     // Checks if the user answer was correct and if so, increments the score
-    ///add map entry
-    //_map.addEntries([MapEntry(_questionNum, userAnswer)]);
-    _map[_questionNum] = convertToAlt(userAnswer);
-    //userAnswerList.add(userAnswer);
     if (checkAnswer(userAnswer)) {
       ++_score;
       QuestionAnswerData.questionAnswered(
@@ -114,6 +116,7 @@ class QuestionBrain {
   bool checkAnswer(String userAnswer) {
     if (userAnswer == getCorrectAnswer()) {
       return true;
+      // TODO: Add comments here explaining what's happening
     } else if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
       String correct = getCorrectAnswer();
       String noteWithoutOctave = userAnswer[0] + userAnswer[1];
