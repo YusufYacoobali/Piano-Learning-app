@@ -36,19 +36,15 @@ class QuestionFinder {
   /// The first question is the question that was answered incorrectly the most number of times
   List<Question> getPracticeQuestionsForLesson(
       int lessonID, int numOfQuestions) {
-    // TODO: Make more efficient
     List<Question> practiceQuestions = [];
-    List<int> questionIDs = QuestionAnswerData.getPracticeQuestionIDs();
+    List<int> questionIDs = List.from(
+        QuestionAnswerData.getPracticeQuestionIDs().take(numOfQuestions));
 
     for (int id in questionIDs) {
-      if (practiceQuestions.length < numOfQuestions) {
-        for (Question question in questions) {
-          if (question.questionID == id && question.lessonID == lessonID) {
-            practiceQuestions.add(question);
-          }
+      for (Question question in questions) {
+        if (question.questionID == id && question.lessonID == lessonID) {
+          practiceQuestions.add(question);
         }
-      } else {
-        break;
       }
     }
 
