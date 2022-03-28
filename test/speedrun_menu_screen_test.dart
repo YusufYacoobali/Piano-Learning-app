@@ -133,7 +133,7 @@ void main() {
               500.0,
               scrollable: find.byType(Scrollable)
           );
-          expect(find.text('Record: ${modeRecordsCopy[i]}'), findsWidgets);
+          expect(find.text('Record: ${modeRecords[i]}'), findsWidgets);
         }
       }
   );
@@ -188,14 +188,14 @@ void main() {
 
           //Gets the old record for the first speedrun mode as an integer.
           int oldRecord;
-          if (modeRecordsCopy[0] == 'N/A') {
+          if (modeRecords[0] == 'N/A') {
             oldRecord = -1;
           } else {
-            oldRecord = int.parse(modeRecordsCopy[0]);
+            oldRecord = int.parse(modeRecords[0]);
           }
 
           //Checks to make sure the records are being displayed correctly (before any changes).
-          expect(find.text('Record: ${modeRecordsCopy[0]}'), findsWidgets);
+          expect(find.text('Record: ${modeRecords[0]}'), findsWidgets);
 
           //Changes the user record for the first speedrun mode.
           final newRecord = oldRecord + 1;

@@ -34,17 +34,20 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
     super.dispose();
   }
 
-  //TODO: Move into helper
-  Future<void> _loadRecords() async {
-    //Sets default values to use while the await runs.
+  /// Loads the records for the speedrun mode.
+  void _loadRecords() async {
+    //Sets default values to use while the real records load.
+    modeRecords = [];
     for (int i = 0; i < modes.length; i++) {
       modeRecords.add('0');
     }
-    modeRecords = await getRecordsForMode('speedrun');
-     setState(() {
-
-     });
+    getRecordsForMode('speedrun').then((value) {
+        setState(() {
+          modeRecords = value;
+      });
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     modeButtonKeys = <Key>[]; //Resets key list.
@@ -52,12 +55,11 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
     for (int mode in modes) {
       modeButtonKeys.add(Key('modeSelected:$mode'));
     }
-    return _getScreenWidget(modeRecords);
+    return _getScreenWidget();
   }
 
   /// The widget to be displayed to the user.
-  Widget _getScreenWidget(recordData) {
-    print(recordData);
+  Widget _getScreenWidget() {
     /// A pop-up screen containing the speedrun instructions.
     PopUpController menu = PopUpController(context: context, menuBuilder: SpeedrunMenuInstructions(context: context));
     return Scaffold(
@@ -66,7 +68,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
           //Uses an itemBuilder to generate a button for each mode, using the names, records and keys generated earlier.
           child: ListView.separated(
             padding: const EdgeInsets.all(8),
-            itemCount: modes.length,
+            itemCount: modeRecords.length,
             itemBuilder: (BuildContext context, int index) {
               return SizedBox(
                 height: 100, //Fixes the button height
@@ -79,7 +81,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen>{
                       SizedBox(
                           width: MediaQuery.of(context).size.width /
                               4), //Adds space between Text
-                      Text('Record: ${recordData[index]}',
+                      Text('Record: ${modeRecords[index]}',
                           textAlign: TextAlign.right),
                     ],
                   ),

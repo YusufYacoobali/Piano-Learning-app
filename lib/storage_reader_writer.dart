@@ -307,7 +307,6 @@ class StorageReaderWriter {
   /// Loads speedrun records from storage
   Future<void> _loadSpeedrunRecordsFromStorage(SharedPreferences pref) async {
     Object? isOnDisk = pref.get('10_second_speedrun_record');
-    print(isOnDisk);
     if (isOnDisk == null) {
       _setDefaultSpeedrunRecords();
       _writeSpeedrunRecordsToStorage();

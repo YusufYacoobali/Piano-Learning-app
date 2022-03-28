@@ -64,31 +64,6 @@ getRecordKeysForMode(String mode) {
 /// - 'endless'
 ///
 /// All other inputs return the empty list.
-//TODO: Move into storage_reader_writer, or use existing storage_reader_writer methods instead.
-// Future<List<String>> getRecordsForMode(String mode) async {
-//   List<String> keyList = getRecordKeysForMode(mode);
-//   final prefs = await SharedPreferences.getInstance();
-//   List<String> records = [];
-//   for (String key in keyList) {
-//     try {
-//       int toAdd = prefs.getInt(key) ?? 0;
-//       records.add(toAdd.toString());
-//     } catch (_) { //TODO: Find correct exception type
-//       records.add('N/A');
-//     }
-//   }
-//   return records;
-// }
-
-/// The records for each category of the inputted mode.
-///
-/// The available modes are:
-/// - 'speedrun'
-/// - 'quiz'
-/// - 'play along'
-/// - 'endless'
-///
-/// All other inputs return the empty list.
 Future<List<String>> getRecordsForMode(String mode) async {
   List<String> keyList = getRecordKeysForMode(mode);
   final StorageReaderWriter _reader = StorageReaderWriter();
