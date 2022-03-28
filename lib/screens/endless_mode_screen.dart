@@ -58,6 +58,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   void initState() {
     super.initState();
     _keyboard = PageKeyboard(playKey);
+    /// Sets up the music sheet
     _currentNoteToPlay =
         NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: stop);
     _sheet = MovingMusicSheet(
@@ -66,13 +67,14 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
         notePlayedChecker: _currentNoteToPlay);
     _generator = EndlessNoteGenerator(
         sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
+
     getDifficulty();
 
+    /// Builds the menus
     EndlessStartingInstructions startMenuBuilder =
         EndlessStartingInstructions(context: context, onStart: startGame);
     EndlessEndingInstructions endMenuBuilder =
         EndlessEndingInstructions(context: context, counter: _counter);
-
     _startMenu =
         PopUpController(context: context, menuBuilder: startMenuBuilder);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
@@ -89,10 +91,10 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _endMenu.delete();
   }
 
+  /// Gets the difficulty level from storage
   void getDifficulty() {
-    StorageReaderWriter writer = StorageReaderWriter();
-    writer.loadDataFromStorage().then((value) {
-      _difficulty = writer.read('difficulty').toString();
+    storage.loadDataFromStorage().then((value) {
+      _difficulty = storage.read('difficulty').toString();
       _generator.setDifficulty(_difficulty);
     });
   }
