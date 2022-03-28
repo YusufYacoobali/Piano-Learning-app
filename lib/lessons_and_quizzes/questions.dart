@@ -788,7 +788,8 @@ final List<Question> questions = [
   ),
   Question(
     clef: Clef.treble,
-    question: 'What note is this?  ',
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave.',
     correctAnswer: Note(name: 'F#4'),
     questionID: 105,
     lessonID: 9,
@@ -933,7 +934,7 @@ final List<Question> questions = [
     clef: Clef.treble,
     question:
         'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
-    correctAnswer: Note(name: 'd5'),
+    correctAnswer: Note(name: 'D5'),
     questionID: 123,
     lessonID: 9,
   ),
