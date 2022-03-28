@@ -28,11 +28,6 @@ List<String> trackNames = <String>[
 
 ///A list containing the user's records for each of the tracks.
 List<String> trackRecords = <String>[
-  '0',
-  '0',
-  '0',
-  '0',
-  '0',
 ];
 
 /// A list of all sheet music for each of the tracks
@@ -52,7 +47,14 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   final StorageReaderWriter _writer = StorageReaderWriter();
 
   _PlayAlongMenuScreenState() {
+    fillRecordsWithDefaults();
     loadRecords();
+  }
+  /// Sets all of the records to a default
+  void fillRecordsWithDefaults() {
+    for (int i = 0; i < trackNames.length; ++i) {
+      trackRecords.add('0');
+    }
   }
 
   /// Loads the records for each song
