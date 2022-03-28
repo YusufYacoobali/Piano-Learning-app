@@ -135,11 +135,6 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   end() async {
-    // bool displayNotification = await storage.displayEndlessNotification(
-    //     _difficulty, _counter.score, _sheet.getClef());
-    // if (displayNotification) {
-    //   inAppNotification(context);
-    // }
     _endMenu.show();
     List displayNotification = await storage.displayEndlessNotification(
         _difficulty, _counter.score, _sheet.clef);
@@ -150,7 +145,6 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //bool display = storage.displayEndless();
     WidgetsBinding.instance
         ?.addPostFrameCallback((_) => {if (_hasEnded) end()});
     return Scaffold(

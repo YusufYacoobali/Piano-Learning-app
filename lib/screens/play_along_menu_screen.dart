@@ -81,6 +81,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     }
   }
 
+  /// Gets the music track notes
   List<Map<int, Note>> getMusicSheets() {
     return <Map<int, Note>>[
       treble_track1.getTrack(),
@@ -91,6 +92,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     ];
   }
 
+  /// Gets the clefs associated with the songs
   List<Clef> getMusicSheetClefs() {
     return <Clef>[
       treble_track1.getClef(),
@@ -101,6 +103,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     ];
   }
 
+  /// Gets the speed associated with the songs
   List<List<int>> getMusicSheetSpeeds() {
     return <List<int>>[
       treble_track1.getDifficultyBpm(),
