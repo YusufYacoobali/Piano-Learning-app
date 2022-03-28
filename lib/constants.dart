@@ -425,6 +425,11 @@ const Color indicatorBackground = Colors.red;
 const Color indicatorGoodProgress = Colors.green;
 const Color indicatorBadProgress = Colors.orange;
 
+const Icon playLessonIcon = Icon(
+  Icons.circle_outlined,
+  size: 30.0,
+);
+
 const TextStyle achievementTitleTextStyle =
     TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
 
@@ -439,7 +444,7 @@ final Decoration achievementCardDecoration = BoxDecoration(
 );
 
 //achievement making
-const int numOfLessons = 7;
+const int numOfLessons = 10;
 const int numOfquizzes = 6;
 
 //pause menu
@@ -609,12 +614,6 @@ const List<String> endlessExpertBassNotes = [
   'Bb3',
   'B3',
   'C4',
-  'C#4',
-  'Db4',
-  'D4',
-  'D#4',
-  'Eb4',
-  'E4',
 ];
 
 /// How far a note has to go to count for one time unit in endless mode
@@ -711,7 +710,7 @@ const double androidFlatOffset = 35;
 
 /// IOS symbol fonts
 /// Change these to change the symbol size
-const double iosSharpFontSize = 50;
+const double iosSharpFontSize = 40;
 const double iosFlatFontSize = 60;
 
 /// IOS symbol offsets
