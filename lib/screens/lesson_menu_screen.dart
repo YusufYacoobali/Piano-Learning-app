@@ -50,7 +50,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
   /// Builds the screen with the appBar and the row of lessons
   @override
   Widget build(BuildContext context) {
-    _setPage();
+    //_setPage();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lessons'),
