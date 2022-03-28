@@ -32,7 +32,7 @@ void main() {
             questionBrain: QuestionBrain(questions: questions)),
       ),
     );
-    expect(find.text('You got 42.0%'), findsOneWidget);
+    expect(find.text('You got 42%'), findsOneWidget);
   });
 
   testWidgets(

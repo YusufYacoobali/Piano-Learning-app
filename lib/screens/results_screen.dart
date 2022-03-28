@@ -51,7 +51,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
 
   String getPercentage() {
     double unroundedPercentage = widget.score * 100;
-    return unroundedPercentage.toStringAsFixed(1);
+    return unroundedPercentage.toStringAsFixed(0);
   }
 
   Widget getIconWidget() {
