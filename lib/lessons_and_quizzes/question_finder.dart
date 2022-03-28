@@ -40,9 +40,11 @@ class QuestionFinder {
     List<int> questionIDs = List.from(
         QuestionAnswerData.getPracticeQuestionIDs().take(numOfQuestions));
 
+    List<Question> lessonQuestions = questions.where((question) => question.lessonID == lessonID).toList();
+
     for (int id in questionIDs) {
-      for (Question question in questions) {
-        if (question.questionID == id && question.lessonID == lessonID) {
+      for (Question question in lessonQuestions) {
+        if (question.questionID == id) {
           practiceQuestions.add(question);
         }
       }
