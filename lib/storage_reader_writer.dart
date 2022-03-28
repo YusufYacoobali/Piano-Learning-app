@@ -375,6 +375,7 @@ class StorageReaderWriter {
     for (int x = 0; x < numOfLessons; x++) {
       prefs.setBool('lesson-num-$x', false);
     }
+    prefs.setBool('all-lessons-complete', false);
   }
 
   //resets all quiz data related to achievements
@@ -382,6 +383,7 @@ class StorageReaderWriter {
     final prefs = await SharedPreferences.getInstance();
 
     prefs.setInt('completed_quizzes', 0);
+    prefs.setBool('all-quizzes-complete', false);
   }
 
   //resets all speedrun data related to achievements
@@ -443,12 +445,15 @@ class StorageReaderWriter {
       if (value) lessonsPassed += 1;
     }
 
+    bool allAchieved = prefs.getBool('all-lessons-complete') ?? false;
+
     if (lessonsPassed == 1) {
       text = "You completed 1 lesson";
     } else if (lessonsPassed == 5) {
       text = "You completed 5 lessons";
-    } else if (lessonsPassed == numOfLessons) {
+    } else if (lessonsPassed == numOfLessons && allAchieved == false) {
       text = "You completed all lessons";
+      prefs.setBool('all-lessons-complete', true);
     } else {
       achieved = false;
     }
@@ -461,6 +466,7 @@ class StorageReaderWriter {
   Future<List> displayQuizNotification() async {
     final prefs = await SharedPreferences.getInstance();
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
+    bool allAchieved = prefs.getBool('all-quizzes-complete') ?? false;
 
     String text = "";
     bool achieved = true;
@@ -469,8 +475,9 @@ class StorageReaderWriter {
       text = "You completed 1 quiz";
     } else if (completedQuizzes == 5) {
       text = "You completed 5 quizzes";
-    } else if (completedQuizzes == numOfquizzes) {
+    } else if (completedQuizzes == numOfquizzes && achieved == false) {
       text = "You completed all quizzes";
+      prefs.setBool('all-quizzes-complete', true);
     } else {
       achieved = false;
     }
