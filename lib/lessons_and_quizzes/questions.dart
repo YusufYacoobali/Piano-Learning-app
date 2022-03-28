@@ -1050,36 +1050,22 @@ final List<Question> questions = [
     questionID: 136,
     lessonID: 10,
   ),
-  Question(
-    clef: Clef.bass,
-    question:
-        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
-    correctAnswer: Note(name: 'D4'),
-    questionID: 137,
-    lessonID: 10,
-  ),
+
   Question(
     clef: Clef.bass,
     question:
         'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
     correctAnswer: Note(name: 'Bb3'),
-    questionID: 138,
+    questionID: 137,
     lessonID: 10,
   ),
-  Question(
-    clef: Clef.bass,
-    question:
-        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
-    correctAnswer: Note(name: 'E4'),
-    questionID: 139,
-    lessonID: 10,
-  ),
+
   Question(
     clef: Clef.bass,
     question:
         'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
     correctAnswer: Note(name: 'G#3'),
-    questionID: 140,
+    questionID: 138,
     lessonID: 10,
   ),
 ];

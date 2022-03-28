@@ -614,12 +614,6 @@ const List<String> endlessExpertBassNotes = [
   'Bb3',
   'B3',
   'C4',
-  'C#4',
-  'Db4',
-  'D4',
-  'D#4',
-  'Eb4',
-  'E4',
 ];
 
 /// How far a note has to go to count for one time unit in endless mode

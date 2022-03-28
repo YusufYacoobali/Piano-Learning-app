@@ -12,6 +12,6 @@ void main() {
   testWidgets('check that all lesson buttons are displayed',
       (WidgetTester tester) async {
     await _goToLessonsScreen(tester);
-    expect(find.textContaining('Lesson '), findsNWidgets(7));
+    expect(find.textContaining('Lesson '), findsNWidgets(10));
   });
 }
