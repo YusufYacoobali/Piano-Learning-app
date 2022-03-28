@@ -56,7 +56,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   }
 
   /// Loads the records for each song
-  void loadRecords() async {
+  void loadRecords() {
     _writer.loadDataFromStorage().then((value) {
       trackRecords = [];
       for (String track in trackNames) {

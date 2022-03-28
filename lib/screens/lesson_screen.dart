@@ -209,6 +209,16 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
+  /// Converts the correct answer if both the user answer and correct answer are the same note but different octaves
+  String convertAnswer() {
+    String correct = questionBrain.getCorrectAnswerWithoutOctave();
+    String user = questionBrain.getUserAnswerWithoutOctave();
+    if (correct == user && questionBrain.getCorrectAnswer() != questionBrain.getUserAnswer()) {
+      return questionBrain.getCorrectAnswer();
+    }
+    return correct;
+  }
+
   void showResultAlert(String choice) {
     String alertTitle = '';
     String alertDesc = '';
@@ -220,7 +230,7 @@ class _LessonScreenState extends State<LessonScreen> {
     } else {
       alertTitle = 'Incorrect!';
       alertDesc = 'Wrong answer, the correct answer is ' +
-          questionBrain.getCorrectAnswerWithoutOctave();
+          convertAnswer();
     }
 
     displayDialog(alertTitle, alertDesc);
