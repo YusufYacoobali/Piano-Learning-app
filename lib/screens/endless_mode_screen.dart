@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/notifications/in_app_notification_pop_up.dart';
 
+import '../components/notifications/in_app_notification_pop_up.dart';
 import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
@@ -127,11 +127,13 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   end() async {
-    _endMenu.show();
     List displayNotification = await storage.displayEndlessNotification(
         _difficulty, _counter.score, _sheet.clef);
     if (displayNotification[0]) {
-      inAppNotification(context, displayNotification[1]);
+      inAppNotification(context, displayNotification[1], onBack: () => _endMenu.show());
+    }
+    else {
+       _endMenu.show();
     }
   }
 

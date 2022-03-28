@@ -13,14 +13,20 @@ const double appBarHeight = 60.0; //Default value
 class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWidget{
   /// An id used to identify the AppBar
   static const id = 'app_bar_with_settings_icon';
+
   /// The key for the settings icon button.
   static const navigateToSettingsButtonKey = Key('navigateToSettings');
+
   ///The text to be contained in the AppBar
   final Text titleText;
+
   ///Instruction screen to use for page
   final PopUpController instructionScreen;
+
+  final Function(String)? onScreenDelete;
+
   ///The constructor, which takes the titleText as a parameter of type Text
-  const AppBarWithSettingsIcon(this.titleText, this.instructionScreen, {Key? key}) : super(key: key);
+  const AppBarWithSettingsIcon(this.titleText, this.instructionScreen, {Key? key, this.onScreenDelete}) : super(key: key);
 
   ///The "default" height of the AppBar
   @override
@@ -42,8 +48,20 @@ class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWid
         IconButton(
           icon: const Icon(Icons.settings_outlined),
           onPressed: () {
-            Navigator.pushNamed(
-                context, SettingsScreen.id); //Replace screen name
+            /// If there is a function to be called once the settings
+            if (onScreenDelete != null) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SettingsScreen(
+                        onBack: onScreenDelete,
+                    ),
+                  ));
+            }
+            else {
+              Navigator.pushNamed(
+                  context, SettingsScreen.id); //Replace screen name
+            }
           },
           key: navigateToSettingsButtonKey,
         )

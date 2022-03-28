@@ -59,15 +59,18 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   /// Loads the records for each song
   void loadRecords() async {
     _writer.loadDataFromStorage().then((value) {
-      trackRecords = [];
-      for (String track in trackNames) {
-        String key =
-            '${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score';
-        String record = _writer.read(key).toString();
-        trackRecords.add(record);
-      }
-      setState(() {});
+      updateRecords(_writer.read('difficulty').toString());
     });
+  }
+
+  void updateRecords(String difficulty) {
+    trackRecords = [];
+    for (String track in trackNames) {
+      String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+      String record = _writer.read(key).toString();
+      trackRecords.add(record);
+    }
+    setState(() {});
   }
 
   /// Gets the bpm given a difficulty
@@ -129,7 +132,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
         context: context, menuBuilder: PlayAlongInstructions(context: context));
 
     return Scaffold(
-      appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu),
+      appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu, onScreenDelete: updateRecords,),
       body: SafeArea(
         child: Scrollbar(
           controller: _firstController,

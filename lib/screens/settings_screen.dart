@@ -65,6 +65,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Settings'),
+          leading: BackButton(onPressed: () {
+            Navigator.pop(context);
+            if (widget.onBack != null) widget.onBack!(settings.read('difficulty').toString());
+          },),
         ),
         body: SafeArea(
           child: Row(
@@ -171,8 +175,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
 class SettingsScreen extends StatefulWidget {
   static const String id = 'settings_screen';
+  final Function(String)? onBack;
 
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({Key? key, this.onBack}) : super(key: key);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
