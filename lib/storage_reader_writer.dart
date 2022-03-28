@@ -573,7 +573,7 @@ class StorageReaderWriter {
       } else {
         toDisplay = false;
       }
-      return [toDisplay, text];
     }
+    return [toDisplay, text];
   }
 }
