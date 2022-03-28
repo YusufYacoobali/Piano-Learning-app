@@ -85,6 +85,8 @@ final List<Question> questions = [
     questionID: 11,
     lessonID: 1,
   ),
+
+  /// Lesson 2
   Question(
     clef: Clef.treble,
     question:
@@ -188,6 +190,8 @@ final List<Question> questions = [
     questionID: 25,
     lessonID: 2,
   ),
+
+  ///Lesson 3
   Question(
     clef: Clef.treble,
     question:
@@ -562,6 +566,7 @@ final List<Question> questions = [
   ),
 
   ///read lower notes
+  ///Lesson 7
   Question(
     clef: Clef.treble,
     question:
@@ -645,6 +650,7 @@ final List<Question> questions = [
   ),
 
   ///sharps and flats
+  ///Lesson 8
   Question(
     clef: Clef.treble,
     question:
@@ -937,5 +943,143 @@ final List<Question> questions = [
     correctAnswer: Note(name: 'D5'),
     questionID: 123,
     lessonID: 9,
+  ),
+
+  ///Lesson 10: review bass clef from C3 to E4
+  Question(
+    clef: Clef.bass,
+    question:
+        'This is a wrap up lesson. We are reviewing notes on bass clef and some new notes for challenge. Remember you can swipe the keyboard left and right to change octave. REMINDER TO SWIPE LEFT FIRST ',
+    correctAnswer: Note(name: 'C3'),
+    questionID: 124,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'E3'),
+    questionID: 125,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Db3'),
+    questionID: 126,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'C#3'),
+    questionID: 127,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'A3'),
+    questionID: 128,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'C4'),
+    questionID: 129,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'G3'),
+    questionID: 130,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'F#3'),
+    questionID: 131,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'D#3'),
+    questionID: 132,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'F3'),
+    questionID: 133,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'D3'),
+    questionID: 134,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Eb3'),
+    questionID: 135,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'B3'),
+    questionID: 136,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'D4'),
+    questionID: 137,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Bb3'),
+    questionID: 138,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'E4'),
+    questionID: 139,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'G#3'),
+    questionID: 140,
+    lessonID: 10,
   ),
 ];

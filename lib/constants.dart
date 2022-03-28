@@ -444,7 +444,7 @@ final Decoration achievementCardDecoration = BoxDecoration(
 );
 
 //achievement making
-const int numOfLessons = 9;
+const int numOfLessons = 10;
 const int numOfquizzes = 6;
 
 //pause menu

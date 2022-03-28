@@ -20,6 +20,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     '7': false,
     '8': false,
     '9': false,
+    '10': false,
   };
 
   @override
@@ -47,6 +48,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
         '7': values[6],
         '8': values[7],
         '9': values[8],
+        '10': values[9],
       });
     });
   }
@@ -118,7 +120,8 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
       lessonButton('Lesson 6', 6),
       lessonButton('Lesson 7', 7),
       lessonButton('Lesson 8', 8),
-      lessonButton('Lesson 9', 9)
+      lessonButton('Lesson 9', 9),
+      lessonButton('Lesson 10', 10)
     ]; // Gesture Detector
   }
 }
