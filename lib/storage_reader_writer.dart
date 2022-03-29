@@ -415,7 +415,6 @@ class StorageReaderWriter {
     }
   }
 
-  //TODO i believe this doesnt work for some reason
   //resets all endless data related to achievements
   void _resetEndlessAchievements() async {
     final prefs = await SharedPreferences.getInstance();
@@ -423,12 +422,9 @@ class StorageReaderWriter {
     for (String clef in <String>['treble', 'bass']) {
       for (Object difficulty in difficultyList) {
         String level = difficulty.toString().toLowerCase();
-        //print('endless-Clef.$clef-$level-achievement');
         prefs.setBool('endless-Clef.$clef-$level-achievement', false);
       }
     }
-    // endless-Clef.treble-beginner-achievement
-    //   endless-Clef.treble-beginner-achievement
   }
 
   //decides whether a lesson achievement needs to be shown

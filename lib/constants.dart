@@ -418,9 +418,9 @@ const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 const double cardWidth = 270;
 const double cardHeight = 270;
 
-const double circularIndicatorRadius = 68;
+const double circularIndicatorRadius = 65;
 
-const double indicatorLineWidth = 16;
+const double indicatorLineWidth = 13;
 const Color indicatorBackground = Colors.red;
 const Color indicatorGoodProgress = Colors.green;
 const Color indicatorBadProgress = Colors.orange;
