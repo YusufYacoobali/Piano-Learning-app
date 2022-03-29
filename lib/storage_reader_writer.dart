@@ -304,7 +304,7 @@ class StorageReaderWriter {
   /// Loads play along records from storage
   Future<void> _loadPlayAlongRecordsFromStorage(SharedPreferences pref) async {
     String? isOnDisk =
-        pref.getString('ode to joy - treble only-beginner-high-score');
+        pref.getString('${trackNames[0].toLowerCase()}-${defaultDifficultyLevel.toLowerCase()}-high-score');
     if (isOnDisk == null) {
       _setDefaultPlayAlongRecords();
       _writePlayAlongRecordsToStorage();

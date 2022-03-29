@@ -296,6 +296,20 @@ BoxDecoration completeLessonButtonDeco = BoxDecoration(
   ),
 );
 
+// Stave Colours
+
+/// The colour of the stave background
+const Color staveBackgroundColour = Colors.white;
+
+/// The colour of stave lines
+const Color staveStaveColour = Colors.black;
+
+/// The colour of the stave notes
+const Color staveNoteColour = Colors.black;
+
+/// The colour of the stave play area
+const Color stavePlayAreaColour = Color.fromARGB(100, 0, 255, 0);
+
 // Lesson Screen
 const Color optionButtonColour = Colors.purple;
 const TextStyle optionButtonTextStyle =
@@ -563,8 +577,6 @@ const List<String> endlessIntermediateBassNotes = [
 
 /// The nodes that can be played in expert mode for the treble clef in endless mode
 const List<String> endlessExpertTrebleNotes = [
-  'A3',
-  'A#3',
   'Bb3',
   'B3',
   'C4',
@@ -614,6 +626,7 @@ const List<String> endlessExpertBassNotes = [
   'Bb3',
   'B3',
   'C4',
+  'C#4',
 ];
 
 /// How far a note has to go to count for one time unit in endless mode

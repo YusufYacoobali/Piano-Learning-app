@@ -11,8 +11,10 @@ import '../components/pop_ups/endless_starting_pop_up.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
+import '../storage_reader_writer.dart';
 
 class _EndlessModeScreenState extends State<EndlessModeScreen> {
+
   /// Music sheet that moves
   late final MovingMusicSheet _sheet;
 
@@ -41,17 +43,23 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The controller for the end menu
   late final PopUpController _endMenu;
 
+  /// The difficulty
   late final String _difficulty;
 
+  /// Reads and writes to the storage
   StorageReaderWriter storage = StorageReaderWriter();
+
+  /// The keyboard
   late PageKeyboard _keyboard;
 
+  /// Updates the keyboard depending on the clef
   String _setClef = 'update';
 
   @override
   void initState() {
     super.initState();
     _keyboard = PageKeyboard(playKey);
+    /// Sets up the music sheet
     _currentNoteToPlay =
         NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: stop);
     _sheet = MovingMusicSheet(
@@ -60,13 +68,14 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
         notePlayedChecker: _currentNoteToPlay);
     _generator = EndlessNoteGenerator(
         sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
+
     getDifficulty();
 
+    /// Builds the menus
     EndlessStartingInstructions startMenuBuilder =
         EndlessStartingInstructions(context: context, onStart: startGame);
     EndlessEndingInstructions endMenuBuilder =
         EndlessEndingInstructions(context: context, counter: _counter);
-
     _startMenu =
         PopUpController(context: context, menuBuilder: startMenuBuilder);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
@@ -83,10 +92,10 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _endMenu.delete();
   }
 
+  /// Gets the difficulty level from storage
   void getDifficulty() {
-    StorageReaderWriter writer = StorageReaderWriter();
-    writer.loadDataFromStorage().then((value) {
-      _difficulty = writer.read('difficulty').toString();
+    storage.loadDataFromStorage().then((value) {
+      _difficulty = storage.read('difficulty').toString();
       _generator.setDifficulty(_difficulty);
     });
   }
@@ -139,7 +148,6 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //bool display = storage.displayEndless();
     WidgetsBinding.instance
         ?.addPostFrameCallback((_) => {if (_hasEnded) end()});
     return Scaffold(

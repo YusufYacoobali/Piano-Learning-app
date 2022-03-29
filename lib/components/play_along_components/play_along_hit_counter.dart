@@ -34,11 +34,11 @@ class PlayAlongHitCounter {
   }
 
   /// Writes the high score to storage
-  void writeHighScore() async {
+  void writeHighScore() {
     String key = '${songName.toLowerCase()}-${_difficulty.toLowerCase()}-high-score';
     String percentage = getScoreAsPercentage();
     highScore = double.parse(percentage);
-    await _writer.write(key, percentage);
+    _writer.write(key, percentage);
   }
 
   /// Gets the high score

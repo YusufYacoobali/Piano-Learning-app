@@ -83,6 +83,16 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     );
   }
 
+  /// Converts the answers if both are the same note but different octaves
+  List<String> convertAnswers() {
+    String correct = questionBrain.getCorrectAnswerWithoutOctave();
+    String user = questionBrain.getUserAnswerWithoutOctave();
+    if (correct == user && questionBrain.getCorrectAnswer() != questionBrain.getUserAnswer()) {
+      return [questionBrain.getCorrectAnswer(), questionBrain.getUserAnswer()];
+    }
+    return [correct, user];
+  }
+
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
   Widget createResultCard(int i) {
     return Center(
@@ -111,9 +121,9 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
                           addResultBox(),
                           //change method name to add text
                           addMessageWrap('Correct Answer: ' +
-                              questionBrain.getCorrectAnswerWithoutOctave()),
-                          addMessageWrap('Your Answer: ' +
-                              questionBrain.getUserAnswerWithoutOctave()),
+                                convertAnswers()[0]),
+                            addMessageWrap('Your Answer: ' +
+                                convertAnswers()[1]),
                         ],
                       ),
                     ],

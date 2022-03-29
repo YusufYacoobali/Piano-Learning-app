@@ -4,10 +4,12 @@ import 'dart:io' show Platform;
 
 import '../../constants.dart' as constants;
 
+/// Builds the stave for the music sheet
 class StaveBuilder {
+
+  /// Draws the white background
   static void makeBackground(Canvas canvas, Size size, double start, double end,
       bool isRoundedBorder) {
-    // Draws the white background
     /// Draw rounded rectangle background if is true
     if (isRoundedBorder == true) {
       const radius = Radius.circular(15);
@@ -15,23 +17,23 @@ class StaveBuilder {
           RRect.fromRectAndRadius(
               Offset(start, size.height ~/ 2 - 100) & Size(end - start, 170),
               radius),
-          Paint()..color = Colors.white);
+          Paint()..color = constants.staveBackgroundColour);
     } else {
       canvas.drawRect(
           Offset(start, size.height ~/ 2 - 100) & Size(end - start, 170),
-          Paint()..color = Colors.white);
+          Paint()..color = constants.staveBackgroundColour);
     }
   }
 
+  /// Draws the stave for the music sheet
   static void drawStave(Canvas canvas, Size size, double baseLine, double start,
       double end, bool isTrebleClef) {
     Paint paint = Paint()
-      ..color = Colors.black
+      ..color = constants.staveStaveColour
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
 
-    // Draws the lines
-
+    /// Draws the lines
     Offset startingPoint = Offset(start, baseLine);
     Offset endingPoint = Offset(end, baseLine);
     canvas.drawLine(startingPoint, endingPoint, paint);
@@ -76,21 +78,22 @@ class StaveBuilder {
       }
     }
 
-    // Draws on the Clef
+    /// Draws on the Clef
     TextPainter textPainter = TextPainter(
         textScaleFactor: 1,
         text: TextSpan(
-            text: clef, style: TextStyle(fontSize: font, color: Colors.black)),
+            text: clef, style: TextStyle(fontSize: font, color: constants.staveStaveColour)),
         textDirection: TextDirection.ltr)
       ..layout();
 
     textPainter.paint(canvas, Offset(start + 20, position));
   }
 
+  /// Draws the play area on screen
   static void drawBox(
       Canvas canvas, Size size, double baseLine, double start, double end) {
     Paint paint = Paint()
-      ..color = const Color.fromARGB(100, 0, 255, 0)
+      ..color = constants.stavePlayAreaColour
       ..style = PaintingStyle.fill;
 
     canvas.drawRect(

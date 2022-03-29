@@ -28,11 +28,6 @@ List<String> trackNames = <String>[
 
 ///A list containing the user's records for each of the tracks.
 List<String> trackRecords = <String>[
-  '0',
-  '0',
-  '0',
-  '0',
-  '0',
 ];
 
 /// A list of all sheet music for each of the tracks
@@ -53,11 +48,18 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   final ScrollController _firstController = ScrollController();
 
   _PlayAlongMenuScreenState() {
+    fillRecordsWithDefaults();
     loadRecords();
+  }
+  /// Sets all of the records to a default
+  void fillRecordsWithDefaults() {
+    for (int i = 0; i < trackNames.length; ++i) {
+      trackRecords.add('0');
+    }
   }
 
   /// Loads the records for each song
-  void loadRecords() async {
+  void loadRecords() {
     _writer.loadDataFromStorage().then((value) {
       updateRecords(_writer.read('difficulty').toString());
     });
@@ -85,6 +87,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     }
   }
 
+  /// Gets the music track notes
   List<Map<int, Note>> getMusicSheets() {
     return <Map<int, Note>>[
       treble_track1.getTrack(),
@@ -95,6 +98,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     ];
   }
 
+  /// Gets the clefs associated with the songs
   List<Clef> getMusicSheetClefs() {
     return <Clef>[
       treble_track1.getClef(),
@@ -105,6 +109,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     ];
   }
 
+  /// Gets the speed associated with the songs
   List<List<int>> getMusicSheetSpeeds() {
     return <List<int>>[
       treble_track1.getDifficultyBpm(),
