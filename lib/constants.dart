@@ -733,3 +733,15 @@ const int numOfQuestionsInRandomQuiz = 10;
 
 /// Practice Quiz Screen
 const int numOfQuestionsInPracticeQuiz = 10;
+
+/// Review Answers Screen
+const double reviewAnswerCardHeight = 300;
+const double reviewAnswerCardWidth = 720;
+const Icon correctIcon = Icon(
+  Icons.check_circle,
+  size: 45.0,
+);
+const Icon incorrectIcon = Icon(
+  Icons.cancel,
+  size: 45.0,
+);
