@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
-import 'package:sight_reading_app/components/sheet_music_components/note.dart';
+
+import '../components/sheet_music_components/music_sheet.dart';
+import '../components/sheet_music_components/note.dart';
+import '../lessons_and_quizzes/question_brain.dart';
 import '../constants.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 
 ///A list containing the keys for each of the result card created by addResultBox()
 List<Key> resultCardKeys = <Key>[];

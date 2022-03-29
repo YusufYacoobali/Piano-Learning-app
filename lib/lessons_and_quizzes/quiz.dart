@@ -138,6 +138,16 @@ class _QuizState extends State<Quiz> {
     );
   }
 
+  /// Converts the correct answer if both the user answer and correct answer are the same note but different octaves
+  String convertAnswer() {
+    String correct = widget.questionBrain.getCorrectAnswerWithoutOctave();
+    String user = widget.questionBrain.getUserAnswerWithoutOctave();
+    if (correct == user && widget.questionBrain.getCorrectAnswer() != widget.questionBrain.getUserAnswer()) {
+      return widget.questionBrain.getCorrectAnswer();
+    }
+    return correct;
+  }
+
   /// Shows the pop-up when an option is selected
   void showResultAlert(String choice) {
     String alertTitle = '';
@@ -149,7 +159,7 @@ class _QuizState extends State<Quiz> {
     } else {
       alertTitle = 'Incorrect!';
       alertDesc = 'Wrong answer, the correct answer is ' +
-          widget.questionBrain.getCorrectAnswerWithoutOctave();
+          convertAnswer();
     }
 
     displayDialog(alertTitle, alertDesc);
