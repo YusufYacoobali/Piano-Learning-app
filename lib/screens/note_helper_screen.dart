@@ -141,9 +141,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     );
   }
 
-  ///NEW FEATURE:
   ///Widget for note_helper description
-  ///fixed size of text because of SizeBox
   Widget cardDescription(index) {
     return Container(
       height: 150,

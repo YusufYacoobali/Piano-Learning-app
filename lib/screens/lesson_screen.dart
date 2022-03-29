@@ -55,6 +55,7 @@ class _LessonScreenState extends State<LessonScreen> {
     }
   }
 
+  /// directs to the results screen
   void getResultsScreen(
       String title, double percentage, QuestionBrain questionBrain) {
     Navigator.pop(context);

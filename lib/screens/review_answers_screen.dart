@@ -31,6 +31,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     super.dispose();
   }
 
+  /// Returns a list of ReviewAnswer cards
   List<Widget> getAllReviewAnswerCards() {
     List<Widget> allResults = [];
     questionBrain.goBackToBeginning();
