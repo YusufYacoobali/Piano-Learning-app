@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/endless_mode_screen.dart';
-import 'package:sight_reading_app/screens/note_helper_screen.dart';
-import 'package:sight_reading_app/screens/helper_screen.dart';
+import 'package:sight_reading_app/screens/note_helper_menu_screen.dart';
 import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
-import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
@@ -38,7 +36,7 @@ class SightReadingApp extends StatelessWidget {
       child: Consumer<ThemeNotifier>(
         builder: (context, ThemeNotifier themeNotifier, child) {
           return MaterialApp(
-            title: 'SightReadingApp',
+            title: 'Read That Sheet',
             theme: themeNotifier.convertThemeToThemeData(),
             debugShowCheckedModeBanner: false,
             initialRoute: MenuScreen.id,
@@ -53,13 +51,8 @@ class SightReadingApp extends StatelessWidget {
               SettingsScreen.id: (context) => const SettingsScreen(),
               EndlessModeScreen.id: (context) => const EndlessModeScreen(),
               RandomQuizScreen.id: (context) => const RandomQuizScreen(),
-              PracticeQuizScreen.id: (context) => const PracticeQuizScreen(
-                  lessonID:
-                      0), //TODO: Find out how to make default parameter value
-
-              //helper routes
-              HelperMenuScreen.id: (context) => const HelperMenuScreen(),
-              HelperScreen.id: (context) => const HelperScreen(),
+              NoteHelperMenuScreen.id: (context) =>
+                  const NoteHelperMenuScreen(),
             },
           );
         },

@@ -1,6 +1,7 @@
 import 'package:sight_reading_app/lessons_and_quizzes/question.dart';
 import '../components/sheet_music_components/note.dart';
 
+/// A list of all of the questions in the app
 final List<Question> questions = [
   Question(
     clef: Clef.treble,
@@ -85,6 +86,8 @@ final List<Question> questions = [
     questionID: 11,
     lessonID: 1,
   ),
+
+  /// Lesson 2
   Question(
     clef: Clef.treble,
     question:
@@ -188,6 +191,8 @@ final List<Question> questions = [
     questionID: 25,
     lessonID: 2,
   ),
+
+  ///Lesson 3
   Question(
     clef: Clef.treble,
     question:
@@ -303,7 +308,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'Have you noticed that the symbol at the far left has changed? This is called the Base clef which means the notes will be played on the lower part of the piano. The positions of the notes on the staff are different from the Treble clef. This is position of C on the Base clef which is under the middle line. Now press C on the keyboard.',
+        'The clef symbol has changed! This is the Base clef and notes are played on the lower part of the piano. The positions of the notes will be different. This is C on the Base clef which is under the middle line. Now press C on the keyboard. MOVE THE KEYBOARD TO THE LEFT BEFORE ANSWERING.',
     correctAnswer: Note(name: 'C3'),
     questionID: 41,
     lessonID: 4,
@@ -403,7 +408,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G on the keyboard.',
+        'THIS LESSON IS IN BASS CLEF, MOVE THE KEYBOARD TO THE LEFT BEFORE ANSWERING.Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G on the keyboard.',
     correctAnswer: Note(name: 'G3'),
     questionID: 54,
     lessonID: 5,
@@ -411,16 +416,16 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'This name is A (La) on the Base clef. This time A is directly below the . Now press A on the keyboard.',
-    correctAnswer: Note(name: 'A2'),
+        'This name is A (La) on the Base clef. This time A is a note crossed by the top line of the staff. Now press A on the keyboard.',
+    correctAnswer: Note(name: 'A3'),
     questionID: 55,
     lessonID: 5,
   ),
   Question(
     clef: Clef.bass,
     question:
-        'This is B (Ti) on the Base clef. It is right below C on the second line from the bottom. Now press B on the keyboard.',
-    correctAnswer: Note(name: 'B2'),
+        'This is B (Ti) on the Base clef. It is on top of the first line from the staff. Now press B on the keyboard.',
+    correctAnswer: Note(name: 'B3'),
     questionID: 56,
     lessonID: 5,
   ),
@@ -430,14 +435,14 @@ final List<Question> questions = [
     clef: Clef.bass,
     question:
         'Great Job. Now you have learnt to read the basic notes on the Base clef. Try answering the rest of the questions without help. What note is this?',
-    correctAnswer: Note(name: 'A2'),
+    correctAnswer: Note(name: 'A3'),
     questionID: 57,
     lessonID: 5,
   ),
   Question(
     clef: Clef.bass,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'B2'),
+    correctAnswer: Note(name: 'B3'),
     questionID: 58,
     lessonID: 5,
   ),
@@ -486,7 +491,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'B2'),
+    correctAnswer: Note(name: 'B3'),
     questionID: 65,
     lessonID: 5,
   ),
@@ -503,7 +508,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'Notice that this note is higher than B in the previous question. Press C on the keyboard.',
+        'Notice that this note is higher than B in the previous question. MOVE THE KEYBOARD TO THE RIGHT FOR HIGH PITCH and press C on the keyboard.',
     correctAnswer: Note(name: 'C5'),
     questionID: 67,
     lessonID: 6,
@@ -513,7 +518,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'Great Job. All notes will repeat the pattern C-D-E-F-G-A-B before going back to C as you go higher up on the musical staff. For an actual keyboard/piano, you will go further to the right. Try answering the rest of the questions without help. What note is this?',
+        'Great Job. All notes will repeat the pattern C-D-E-F-G-A-B before going back to C as you go higher up the musical staff. You will go further to the right when playing higher. What note is this?',
     correctAnswer: Note(name: 'B4'),
     questionID: 68,
     lessonID: 6,
@@ -561,63 +566,64 @@ final List<Question> questions = [
     lessonID: 6,
   ),
 
-  ///sharps and flats
+  ///read lower notes
+  ///Lesson 7
   Question(
     clef: Clef.treble,
     question:
-        'This is an extra lesson on how to read sharps and flats. This # mark is a sharp. You have to press the closest key to the right (most of the time it is a black key). In this case, press the black key next to F on the right.',
-    correctAnswer: Note(name: 'F#4'),
+        'This is an extra lesson on how to lower notes. The lower the note on on 5 line staff, the lower the pitch. Tap C for this note',
+    correctAnswer: Note(name: 'C4'),
     questionID: 75,
     lessonID: 7,
   ),
   Question(
     clef: Clef.treble,
     question:
-        'Great job, now learn about flats. The b-like mark is a flat. You have to press the closest key to the left. In this case, press the black key at the left of B',
-    correctAnswer: Note(name: 'Bb4'),
+        'Notice that this note is lower than C in the previous question. MOVE THE KEYBOARD TO THE LEFT FOR LOW PITCH and press B on the keyboard.',
+    correctAnswer: Note(name: 'B3'),
     questionID: 76,
     lessonID: 7,
   ),
   Question(
     clef: Clef.treble,
     question:
-        'Great job, now try to answer this set of sharps and flats on your own. Press the keys the same way when you found a flat or a sharp on the base clef.',
-    correctAnswer: Note(name: 'F#4'),
+        'Great Job. All notes will repeat the pattern C-B-A-G-F-E-D and goes back to C as you go down the musical staff or further to the left of a keyboard/piano. What note is this?',
+    correctAnswer: Note(name: 'A3'),
     questionID: 77,
     lessonID: 7,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'G4'),
+    correctAnswer: Note(name: 'B3'),
     questionID: 78,
     lessonID: 7,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'F#4'),
+    correctAnswer: Note(name: 'A3'),
     questionID: 79,
     lessonID: 7,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'E4'),
+    correctAnswer: Note(name: 'D4'),
     questionID: 80,
     lessonID: 7,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'F#4'),
+    correctAnswer: Note(name: 'B3'),
     questionID: 81,
     lessonID: 7,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'D4'),
+    correctAnswer: Note(name: 'C4'),
     questionID: 82,
     lessonID: 7,
   ),
@@ -625,50 +631,442 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'C5'),
+    correctAnswer: Note(name: 'A3'),
     questionID: 83,
     lessonID: 7,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'Bb4'),
+    correctAnswer: Note(name: 'B3'),
     questionID: 84,
     lessonID: 7,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'A4'),
+    correctAnswer: Note(name: 'C4'),
     questionID: 85,
     lessonID: 7,
   ),
+
+  ///sharps and flats
+  ///Lesson 8
   Question(
     clef: Clef.treble,
-    question: 'What note is this?',
-    correctAnswer: Note(name: 'Bb4'),
+    question:
+        'This is an extra lesson on how to read sharps and flats. This # mark is a sharp. You have to press the closest key to the right (most of the time it is a black key). In this case, press the black key next to F on the right.',
+    correctAnswer: Note(name: 'F#4'),
     questionID: 86,
-    lessonID: 7,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'Great job, now learn about flats. The b-like mark is a flat. You have to press the closest key to the left. In this case, press the black key at the left of B',
+    correctAnswer: Note(name: 'Bb4'),
+    questionID: 87,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'Great job, now try to answer this set of sharps and flats on your own. Press the keys the same way when you found a flat or a sharp on the base clef.',
+    correctAnswer: Note(name: 'F#4'),
+    questionID: 88,
+    lessonID: 8,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: Note(name: 'G4'),
-    questionID: 87,
-    lessonID: 7,
+    questionID: 89,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'C4'),
+    questionID: 90,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'C#4'),
+    questionID: 91,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'D4'),
+    questionID: 92,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'E4'),
+    questionID: 93,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'F#4'),
+    questionID: 94,
+    lessonID: 8,
+  ),
+
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'B4'),
+    questionID: 95,
+    lessonID: 8,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: Note(name: 'Bb4'),
-    questionID: 88,
-    lessonID: 7,
+    questionID: 96,
+    lessonID: 8,
   ),
   Question(
     clef: Clef.treble,
     question: 'What note is this?',
     correctAnswer: Note(name: 'A4'),
-    questionID: 89,
-    lessonID: 7,
+    questionID: 97,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'Ab4'),
+    questionID: 98,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'A4'),
+    questionID: 99,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'Bb4'),
+    questionID: 100,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'Eb4'),
+    questionID: 101,
+    lessonID: 8,
+  ),
+  Question(
+    clef: Clef.treble,
+    question: 'What note is this?',
+    correctAnswer: Note(name: 'G#4'),
+    questionID: 102,
+    lessonID: 8,
+  ),
+
+  ///Lesson 9 : review treble clef A3 to F5
+  Question(
+    clef: Clef.treble,
+    question:
+        'This is a wrap up lesson. We are reviewing notes on treble clef and add some new notes for challenge. Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'C4'),
+    questionID: 103,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave.',
+    correctAnswer: Note(name: 'F4'),
+    questionID: 104,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave.',
+    correctAnswer: Note(name: 'F#4'),
+    questionID: 105,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'G4'),
+    questionID: 106,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave.',
+    correctAnswer: Note(name: 'C#4'),
+    questionID: 107,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave.',
+    correctAnswer: Note(name: 'D4'),
+    questionID: 108,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'A3'),
+    questionID: 109,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Bb3'),
+    questionID: 110,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'B3'),
+    questionID: 111,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'G#4'),
+    questionID: 112,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'A4'),
+    questionID: 113,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Ab4'),
+    questionID: 114,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Eb4'),
+    questionID: 115,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'F#4'),
+    questionID: 116,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Bb4'),
+    questionID: 117,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'B4'),
+    questionID: 118,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'C5'),
+    questionID: 119,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'E5'),
+    questionID: 120,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Db5'),
+    questionID: 121,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'F5'),
+    questionID: 122,
+    lessonID: 9,
+  ),
+  Question(
+    clef: Clef.treble,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'D5'),
+    questionID: 123,
+    lessonID: 9,
+  ),
+
+  ///Lesson 10: review bass clef from C3 to E4
+  Question(
+    clef: Clef.bass,
+    question:
+        'This is a wrap up lesson. We are reviewing notes on bass clef and some new notes for challenge. Remember you can swipe the keyboard left and right to change octave. REMINDER TO SWIPE LEFT FIRST ',
+    correctAnswer: Note(name: 'C3'),
+    questionID: 124,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'E3'),
+    questionID: 125,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Db3'),
+    questionID: 126,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'C#3'),
+    questionID: 127,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'A3'),
+    questionID: 128,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'C4'),
+    questionID: 129,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'G3'),
+    questionID: 130,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'F#3'),
+    questionID: 131,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'D#3'),
+    questionID: 132,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'F3'),
+    questionID: 133,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'D3'),
+    questionID: 134,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Eb3'),
+    questionID: 135,
+    lessonID: 10,
+  ),
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'B3'),
+    questionID: 136,
+    lessonID: 10,
+  ),
+
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'Bb3'),
+    questionID: 137,
+    lessonID: 10,
+  ),
+
+  Question(
+    clef: Clef.bass,
+    question:
+        'What note is this? Remember you can swipe the keyboard left and right to change octave. ',
+    correctAnswer: Note(name: 'G#3'),
+    questionID: 138,
+    lessonID: 10,
   ),
 ];

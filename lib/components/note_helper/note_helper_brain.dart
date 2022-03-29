@@ -1,35 +1,38 @@
-import 'package:sight_reading_app/components/helper/helper_list.dart';
-
 import '../sheet_music_components/note.dart';
+import 'note_helper_list.dart';
 
 /// Manages the Helper information.
-class HelperBrain {
+class NoteHelperBrain {
   /// The current helper position in the list.
   late int currentHelperListPosition;
 
   /// The list of helper informations.
-  final HelperList helpers;
+  final NoteHelperList helpers;
 
   /// Constructor.
-  HelperBrain({required this.helpers});
+  NoteHelperBrain({required this.helpers});
 
   /// Get the name of helper's note.
   String getHelperNoteName(currentHelperListPosition) {
-    return helpers.helperList[currentHelperListPosition].noteName;
+    return helpers.noteHelperList[currentHelperListPosition].noteName;
   }
 
   /// Get the image file name of helper's note.
   Note getHelperNoteImageName(currentHelperListPosition) {
-    return helpers.helperList[currentHelperListPosition].noteImageName;
+    return helpers.noteHelperList[currentHelperListPosition].noteImageName;
   }
 
   /// Get the sound file name of helper's note.
   String getHelperNoteSoundName(currentHelperListPosition) {
-    return helpers.helperList[currentHelperListPosition].noteSound;
+    return helpers.noteHelperList[currentHelperListPosition].noteSound;
+  }
+
+  String getHelperDescription(currentHelperListPosition) {
+    return helpers.noteHelperList[currentHelperListPosition].description;
   }
 
   ///Get the length of the helper's list.
   int getNumbersOfHelperNote() {
-    return helpers.helperList.length;
+    return helpers.noteHelperList.length;
   }
 }

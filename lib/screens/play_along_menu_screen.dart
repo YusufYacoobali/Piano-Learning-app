@@ -45,6 +45,7 @@ List<List<int>> trackSpeeds = <List<int>>[];
 /// There is also an AppBar containing the screen title, a back arrow and a setting icon, which when clicked takes you to the settings screen.
 class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   final StorageReaderWriter _writer = StorageReaderWriter();
+  final ScrollController _firstController = ScrollController();
 
   _PlayAlongMenuScreenState() {
     fillRecordsWithDefaults();
@@ -60,15 +61,18 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   /// Loads the records for each song
   void loadRecords() {
     _writer.loadDataFromStorage().then((value) {
-      trackRecords = [];
-      for (String track in trackNames) {
-        String key =
-            '${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score';
-        String record = _writer.read(key).toString();
-        trackRecords.add(record);
-      }
-      setState(() {});
+      updateRecords(_writer.read('difficulty').toString());
     });
+  }
+
+  void updateRecords(String difficulty) {
+    trackRecords = [];
+    for (String track in trackNames) {
+      String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+      String record = _writer.read(key).toString();
+      trackRecords.add(record);
+    }
+    setState(() {});
   }
 
   /// Gets the bpm given a difficulty
@@ -133,50 +137,55 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
         context: context, menuBuilder: PlayAlongInstructions(context: context));
 
     return Scaffold(
-      appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu),
+      appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu, onScreenDelete: updateRecords,),
       body: SafeArea(
-        child: ListView.separated(
-            //Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
-            itemBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                height: 100.0, //Fixes button height
-                child: MenuButton(
-                  buttonChild: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Text(trackNames[index], textAlign: TextAlign.left),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width /
-                              5), //Adds space between Text
-                      Text('Record: ${trackRecords[index]}%',
-                          textAlign: TextAlign.right),
-                    ],
-                  ),
-                  onPress: () {
-                    Map<int, Note> map = trackSheets[index];
-                    Clef clef = trackClefs[index];
-                    List<int> trackSpeed = trackSpeeds[0];
-                    int bpm = getSpeedFromDifficulty(trackSpeed);
+        child: Scrollbar(
+          controller: _firstController,
+          isAlwaysShown: true,
+          child: ListView.separated(
+            controller: _firstController,
+              /// Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
+              itemBuilder: (BuildContext context, int index) {
+                return SizedBox(
+                  height: 100.0, //Fixes button height
+                  child: MenuButton(
+                    buttonChild: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(trackNames[index], textAlign: TextAlign.left),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width /
+                                5), //Adds space between Text
+                        Text('Record: ${trackRecords[index]}%',
+                            textAlign: TextAlign.right),
+                      ],
+                    ),
+                    onPress: () {
+                      Map<int, Note> map = trackSheets[index];
+                      Clef clef = trackClefs[index];
+                      List<int> trackSpeed = trackSpeeds[0];
+                      int bpm = getSpeedFromDifficulty(trackSpeed);
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PlayAlongScreen(
-                              notes: map,
-                              clef: clef,
-                              bpm: bpm,
-                              songName: trackNames[index],
-                              onBackToPlayAlongMenu: loadRecords),
-                        ));
-                  },
-                  key: trackButtonKeys[index],
-                ),
-              );
-            },
-            //Adds blank spaces between each button.
-            separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(height: 10),
-            itemCount: trackSheets.length),
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PlayAlongScreen(
+                                notes: map,
+                                clef: clef,
+                                bpm: bpm,
+                                songName: trackNames[index],
+                                onBackToPlayAlongMenu: loadRecords),
+                          ));
+                    },
+                    key: trackButtonKeys[index],
+                  ),
+                );
+              },
+              //Adds blank spaces between each button.
+              separatorBuilder: (BuildContext context, int index) =>
+                  const SizedBox(height: 10),
+              itemCount: trackSheets.length),
+        ),
       ),
     );
   }

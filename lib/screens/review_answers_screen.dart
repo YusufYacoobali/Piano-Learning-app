@@ -49,7 +49,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         children: [
           Text(
             message,
-            style: const TextStyle(fontSize: 20.0),
+            style: const TextStyle(fontSize: 25.0),
           ),
         ]);
   }
@@ -76,8 +76,8 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         fit: BoxFit.contain,
         alignment: Alignment.center,
         child: Row(children: [
-          Icon(resultIcon),
-          Text(resultText, style: const TextStyle(fontSize: 30))
+          Icon(resultIcon, size: 45),
+          Text(resultText, style: const TextStyle(fontSize: 40))
         ]),
       ),
     );
@@ -97,8 +97,8 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   Widget createResultCard(int i) {
     return Center(
       child: SizedBox(
-        height: 400, //MediaQuery.of(context).size.height,
-        width: 800, //MediaQuery.of(context).size.width,
+        height: 300, //MediaQuery.of(context).size.height,
+        width: 720, //MediaQuery.of(context).size.width,
         child: Container(
           decoration: cardBackground,
           child: Column(
@@ -107,10 +107,10 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
               Column(
                 children: [
                   Text(
-                    'Question ${questionBrain.getQuestionNum()} of ${questionBrain.getTotalNumberOfQuestions()}',
-                    style: const TextStyle(fontSize: 20.0),
+                    'Question ${questionBrain.getQuestionNum()} of ${questionBrain.getNumberOfUserAnswers()}',
+                    style: const TextStyle(fontSize: 30.0),
                   ),
-                  const SizedBox(height: 10.0),
+                  const SizedBox(height: 20.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -144,11 +144,13 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     questionBrain.goBackToBeginning();
 
     for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
-      resultCardKeys.add(Key('resultCard:$i'));
-      allResults.add(createResultCard(i));
-      allResults.add(const SizedBox(
-        width: 10,
-      ));
+      if (questionBrain.getUserAnswer() != "N/A") {
+        resultCardKeys.add(Key('resultCard:$i'));
+        allResults.add(createResultCard(i));
+        allResults.add(const SizedBox(
+          width: 20,
+        ));
+      }
       questionBrain.goToNextQuestion();
     }
     return allResults;
