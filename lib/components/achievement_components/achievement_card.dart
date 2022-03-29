@@ -33,9 +33,6 @@ class AchievementCard extends StatelessWidget {
             )
           ],
         ),
-        const SizedBox(
-          height: 10,
-        ),
         //Using an external library to make it look more appealing
         Expanded(
           child: CircularPercentIndicator(
