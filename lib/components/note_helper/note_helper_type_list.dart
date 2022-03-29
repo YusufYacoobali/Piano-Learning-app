@@ -2,7 +2,7 @@ import '../sheet_music_components/note.dart';
 import 'note_helper_list.dart';
 import 'note_helper_info.dart';
 
-////// A list that contains all information about BLANK HELPER.
+/// A list that contains all information about each note type.
 
 final NoteHelperList noteTypeList =
     NoteHelperList(noteHelperID: 3, noteHelperList: [

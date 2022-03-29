@@ -4,6 +4,24 @@ import 'package:audioplayers/audioplayers.dart';
 import '../storage_reader_writer.dart';
 import '../constants.dart';
 
+class Keyboard extends StatefulWidget {
+  static const String id = 'keyboard';
+
+  /// The function to be called when a key is pressed
+  /// gets the key pressed on the keyboard
+  final Function(String) onKeyPressed;
+
+  ///sets the octave of sounds to play
+  final int octave;
+
+  //final String difficulty = StorageReaderWriter().read('difficulty').toString();
+
+  const Keyboard(this.onKeyPressed, this.octave, {Key? key}) : super(key: key);
+
+  @override
+  State<Keyboard> createState() => _KeyboardState();
+}
+
 /// Keyboard widget
 class _KeyboardState extends State<Keyboard> {
   /// Used to play note sounds
@@ -193,22 +211,4 @@ class _KeyboardState extends State<Keyboard> {
       ),
     );
   }
-}
-
-class Keyboard extends StatefulWidget {
-  static const String id = 'keyboard';
-
-  /// The function to be called when a key is pressed
-  /// gets the key pressed on the keyboard
-  final Function(String) onKeyPressed;
-
-  ///sets the octave of sounds to play
-  final int octave;
-
-  //final String difficulty = StorageReaderWriter().read('difficulty').toString();
-
-  const Keyboard(this.onKeyPressed, this.octave, {Key? key}) : super(key: key);
-
-  @override
-  State<Keyboard> createState() => _KeyboardState();
 }

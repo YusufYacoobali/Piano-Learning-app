@@ -114,7 +114,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     );
   }
 
-  /// Add the result box on top of each card
+  /// Add the result box on top of each card, the display depends on whether the userAnswer is correct or not
   Widget addResultBox() {
     String resultText = "Incorrect";
     Color resultColor = Colors.red;
@@ -125,6 +125,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
       resultColor = Colors.lightGreen;
       resultIcon = correctIcon;
     }
+
     return Container(
       margin: boxMargin,
       padding: const EdgeInsets.all(20.0),

@@ -151,7 +151,6 @@ class _ResultsScreenState extends State<ResultsScreen> {
             colors: [Color(0xff5f0a87), Color(0xffa4508b)],
           ),
         ),
-        //color: Colors.lightGreen.shade500,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
