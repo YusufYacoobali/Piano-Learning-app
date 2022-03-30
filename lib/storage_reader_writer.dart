@@ -141,12 +141,12 @@ class StorageReaderWriter {
     int endlessTrebleExpHS =
         int.parse(prefs.getString('endless-treble-expert-high-score') ?? '0');
 
-    int speedrun10HS = prefs.getInt('10_second_speedrun_record') ?? 0;
-    int speedrun20HS = prefs.getInt('20_second_speedrun_record') ?? 0;
-    int speedrun30HS = prefs.getInt('30_second_speedrun_record') ?? 0;
-    int speedrun40HS = prefs.getInt('40_second_speedrun_record') ?? 0;
-    int speedrun50HS = prefs.getInt('50_second_speedrun_record') ?? 0;
-    int speedrun60HS = prefs.getInt('60_second_speedrun_record') ?? 0;
+    int speedrun10HS = int.parse(prefs.getString('10_second_speedrun_record') ?? '0');
+    int speedrun20HS = int.parse(prefs.getString('20_second_speedrun_record') ?? '0');
+    int speedrun30HS = int.parse(prefs.getString('30_second_speedrun_record') ?? '0');
+    int speedrun40HS = int.parse(prefs.getString('40_second_speedrun_record') ?? '0');
+    int speedrun50HS = int.parse(prefs.getString('50_second_speedrun_record') ?? '0');
+    int speedrun60HS = int.parse(prefs.getString('60_second_speedrun_record') ?? '0');
 
     int playAlongOdeBeg = double.parse(
             prefs.getString('ode to joy - treble only-beginner-high-score') ??
@@ -362,7 +362,7 @@ class StorageReaderWriter {
   void _setDefaultSpeedrunRecords() {
     List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
     for (String key in _modeRecordKeys) {
-      _map[key] = 0;
+      _map[key] = '0';
     }
   }
 
@@ -370,7 +370,7 @@ class StorageReaderWriter {
   void _writeSpeedrunRecordsToStorage() {
     List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
     for (String key in _modeRecordKeys) {
-      write(key, 0);
+      write(key, '0');
     }
   }
 
@@ -476,7 +476,7 @@ class StorageReaderWriter {
     }
   }
 
-  //TODO i believe this doesnt work for some reason
+  //TODO I believe this doesn't work for some reason
   //resets all endless data related to achievements
   void _resetEndlessAchievements() async {
     final prefs = await SharedPreferences.getInstance();
