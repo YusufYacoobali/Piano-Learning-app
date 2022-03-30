@@ -84,7 +84,9 @@ class _KeyboardState extends State<Keyboard> {
         ),
         onPressed: () {
           playSound(buttonText.toLowerCase());
-          widget.onKeyPressed(buttonText + (widget.octave + 2).toString());
+          String text = buttonText + (widget.octave + 2).toString();
+          if (buttonText[0] == 'C') text = buttonText;
+          widget.onKeyPressed(text);
         },
         style: whiteKeyButtonStyle,
       ),
@@ -103,7 +105,9 @@ class _KeyboardState extends State<Keyboard> {
       ),
       onPressed: () {
         playSound(buttonText.toLowerCase());
-        widget.onKeyPressed(buttonText + (widget.octave + 2).toString());
+        String text = buttonText + (widget.octave + 2).toString();
+        if (buttonText[0] == 'C') text = buttonText;
+        widget.onKeyPressed(text);
       },
       style: blackKeyButtonStyle,
     );

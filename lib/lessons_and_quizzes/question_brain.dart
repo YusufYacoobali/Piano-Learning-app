@@ -134,6 +134,7 @@ class QuestionBrain {
     if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
       String correct = getCorrectAnswer();
       String noteWithoutOctave = userAnswer[0] + userAnswer[1];
+      print(userAnswer);
       String alt = sharpFlatEquivalence[noteWithoutOctave]!;
       alt = alt + userAnswer[userAnswer.length - 1];
       if (alt == correct) return alt;
