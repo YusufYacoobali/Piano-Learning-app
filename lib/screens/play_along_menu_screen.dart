@@ -64,7 +64,6 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     getRecordsForMode('play along').then((value) {
       setState(() {
         trackRecords = value;
-        print(trackRecords);
       });
     });
   }

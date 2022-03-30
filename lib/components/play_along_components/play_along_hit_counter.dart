@@ -48,7 +48,6 @@ class PlayAlongHitCounter {
   void getHighScore() {
     _writer.loadDataFromStorage().then((value) {
       String key = '${songName.toLowerCase()}-${_difficulty.toLowerCase()}-high-score';
-      print('hsmode: ' + key);
       Object? percentage = _writer.read(key);
       if (percentage == null) {
         highScore = 0;

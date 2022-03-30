@@ -72,6 +72,7 @@ void main() {
             500.0,
             scrollable: find.byType(Scrollable),
           );
+          await tester.pumpAndSettle();
           expect(find.byKey(quizButtonKey), findsOneWidget);
         }
       }
@@ -91,6 +92,7 @@ void main() {
             500.0,
             scrollable: find.byType(Scrollable),
           );
+          await tester.pumpAndSettle();
           expect(find.text(quizzes[i]), findsWidgets);
           expect(find.text('Record: ${quizRecords[i]}'), findsWidgets);
         }
