@@ -622,7 +622,7 @@ const endlessIterationsPerTimeUnit = 120;
 /// How fast the notes move across the screen in endless mode for each difficulty
 const int endlessBeginnerBpm = 80;
 const int endlessIntermediateBpm = 110;
-const int endlessExpertBpm = 120;
+const int endlessExpertBpm = 108;
 
 /// Maximum and minimum gaps between notes in endless mode
 const int endlessBeginnerMinTime = 4;
@@ -633,9 +633,9 @@ const int endlessExpertMinTime = 2;
 const int endlessExpertMaxTime = 4;
 
 /// How fast the notes move across the screen in play along for each difficulty
-const int playAlongBeginnerBpm = 50;
-const int playAlongIntermediateBpm = 70;
-const int playAlongExpertBpm = 90;
+const int playAlongBeginnerBpm = 52;
+const int playAlongIntermediateBpm = 72;
+const int playAlongExpertBpm = 88;
 
 /// How far apart the notes are in play along for each difficulty
 const int playAlongBeginnerNoteSpacing = 200;
@@ -733,3 +733,15 @@ const int numOfQuestionsInRandomQuiz = 10;
 
 /// Practice Quiz Screen
 const int numOfQuestionsInPracticeQuiz = 10;
+
+/// Review Answers Screen
+const double reviewAnswerCardHeight = 300;
+const double reviewAnswerCardWidth = 720;
+const Icon correctIcon = Icon(
+  Icons.check_circle,
+  size: 45.0,
+);
+const Icon incorrectIcon = Icon(
+  Icons.cancel,
+  size: 45.0,
+);

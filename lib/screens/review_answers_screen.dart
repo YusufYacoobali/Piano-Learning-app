@@ -7,6 +7,16 @@ import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 ///A list containing the keys for each of the result card created by addResultBox()
 List<Key> resultCardKeys = <Key>[];
 
+class ReviewAnswersScreen extends StatefulWidget {
+  static const String id = 'check_answers_screen';
+  final QuestionBrain questionBrain;
+  const ReviewAnswersScreen({Key? key, required this.questionBrain})
+      : super(key: key);
+
+  @override
+  _ReviewAnswersScreenState createState() => _ReviewAnswersScreenState();
+}
+
 class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   final ScrollController _checkController = ScrollController();
   late QuestionBrain questionBrain;
@@ -21,74 +31,30 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     super.dispose();
   }
 
-  ///Gets the image of the question
-  Widget addQuestionImage() {
-    NextNoteNotifier _nextNote = NextNoteNotifier();
-    _nextNote.setNextNote(questionBrain.getNote());
-    MusicSheet sheet = MusicSheet(_nextNote, questionBrain.getClef());
-    sheet.changeToRoundedBorder();
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(15.0),
-      child: SizedBox(
-        height: 200.0,
-        width: 240.0,
-        child: CustomPaint(
-          painter: sheet,
-          child: Container(),
-        ),
-      ),
-    );
-  }
+  /// Returns a list of ReviewAnswer cards
+  List<Widget> getAllReviewAnswerCards() {
+    List<Widget> allResults = [];
+    questionBrain.goBackToBeginning();
 
-  /// Adds message to each result card
-  Widget addMessageWrap(String message) {
-    return Wrap(
-        spacing: 20.0,
-        runSpacing: 20.0,
-        alignment: WrapAlignment.center,
-        children: [
-          Text(
-            message,
-            style: const TextStyle(fontSize: 25.0),
-          ),
-        ]);
-  }
-
-  /// Add the result box on top of each card
-  Widget addResultBox() {
-    String resultText = "Incorrect";
-    Color resultColor = Colors.red;
-    IconData resultIcon = Icons.cancel;
-
-    if (questionBrain.checkAnswer(questionBrain.getUserAnswer())) {
-      resultText = "Correct";
-      resultColor = Colors.lightGreen;
-      resultIcon = Icons.check_circle;
+    for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
+      if (questionBrain.getUserAnswer() != "N/A") {
+        resultCardKeys.add(Key('resultCard:$i'));
+        allResults.add(createReviewAnswerCard(i));
+        allResults.add(const SizedBox(
+          width: 20,
+        ));
+      }
+      questionBrain.goToNextQuestion();
     }
-    return Container(
-      margin: boxMargin,
-      padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-        color: resultColor,
-        borderRadius: BorderRadius.circular(boxRadii),
-      ),
-      child: FittedBox(
-        fit: BoxFit.contain,
-        alignment: Alignment.center,
-        child: Row(children: [
-          Icon(resultIcon, size: 45),
-          Text(resultText, style: const TextStyle(fontSize: 40))
-        ]),
-      ),
-    );
+    return allResults;
   }
 
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
-  Widget createResultCard(int i) {
+  Widget createReviewAnswerCard(int i) {
     return Center(
       child: SizedBox(
-        height: 300, //MediaQuery.of(context).size.height,
-        width: 720, //MediaQuery.of(context).size.width,
+        height: reviewAnswerCardHeight, //MediaQuery.of(context).size.height,
+        width: reviewAnswerCardWidth, //MediaQuery.of(context).size.width,
         child: Container(
           decoration: cardBackground,
           child: Column(
@@ -129,21 +95,67 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     );
   }
 
-  List<Widget> getAllResultCards() {
-    List<Widget> allResults = [];
-    questionBrain.goBackToBeginning();
+  ///Gets the image of the question
+  Widget addQuestionImage() {
+    NextNoteNotifier _nextNote = NextNoteNotifier();
+    _nextNote.setNextNote(questionBrain.getNote());
+    MusicSheet sheet = MusicSheet(_nextNote, questionBrain.getClef());
+    sheet.changeToRoundedBorder();
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15.0),
+      child: SizedBox(
+        height: 200.0,
+        width: 240.0,
+        child: CustomPaint(
+          painter: sheet,
+          child: Container(),
+        ),
+      ),
+    );
+  }
 
-    for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
-      if (questionBrain.getUserAnswer() != "N/A") {
-        resultCardKeys.add(Key('resultCard:$i'));
-        allResults.add(createResultCard(i));
-        allResults.add(const SizedBox(
-          width: 20,
-        ));
-      }
-      questionBrain.goToNextQuestion();
+  /// Add the result box on top of each card, the display depends on whether the userAnswer is correct or not
+  Widget addResultBox() {
+    String resultText = "Incorrect";
+    Color resultColor = Colors.red;
+    Icon resultIcon = incorrectIcon;
+
+    if (questionBrain.checkAnswer(questionBrain.getUserAnswer())) {
+      resultText = "Correct";
+      resultColor = Colors.lightGreen;
+      resultIcon = correctIcon;
     }
-    return allResults;
+
+    return Container(
+      margin: boxMargin,
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        color: resultColor,
+        borderRadius: BorderRadius.circular(boxRadii),
+      ),
+      child: FittedBox(
+        fit: BoxFit.contain,
+        alignment: Alignment.center,
+        child: Row(children: [
+          resultIcon,
+          Text(resultText, style: const TextStyle(fontSize: 40))
+        ]),
+      ),
+    );
+  }
+
+  /// Adds message to each result card
+  Widget addMessageWrap(String message) {
+    return Wrap(
+        spacing: 20.0,
+        runSpacing: 20.0,
+        alignment: WrapAlignment.center,
+        children: [
+          Text(
+            message,
+            style: const TextStyle(fontSize: 25.0),
+          ),
+        ]);
   }
 
   @override
@@ -164,21 +176,10 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: getAllResultCards(),
+                children: getAllReviewAnswerCards(),
               )),
         ),
       ),
     );
   }
-}
-
-///get the question brain
-class ReviewAnswersScreen extends StatefulWidget {
-  static const String id = 'check_answers_screen';
-  final QuestionBrain questionBrain;
-  const ReviewAnswersScreen({Key? key, required this.questionBrain})
-      : super(key: key);
-
-  @override
-  _ReviewAnswersScreenState createState() => _ReviewAnswersScreenState();
 }
