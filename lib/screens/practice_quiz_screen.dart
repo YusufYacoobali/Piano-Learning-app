@@ -165,7 +165,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
     if (score > currentRecord || currentRecord == 0) {
       await prefs.setInt(
-          '${await getRecordKeysForMode('quiz')[widget.lessonID - 1]}', score);
+          getRecordKeysForMode('quiz')[widget.lessonID - 1], score);
     }
   }
 

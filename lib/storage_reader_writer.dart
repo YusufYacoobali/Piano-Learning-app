@@ -337,7 +337,7 @@ class StorageReaderWriter {
   /// Loads quiz records from storage
   Future<void> _loadQuizRecordsFromStorage(SharedPreferences pref) async {
     List<String> _quizRecordKeys = getRecordKeysForMode('quiz');
-    String? isOnDisk = pref.getString(_quizRecordKeys[0]);
+    Object? isOnDisk = pref.get(_quizRecordKeys[0]);
     if (isOnDisk == null) {
       _setDefaultQuizRecords();
       _writeQuizRecordsToStorage();
