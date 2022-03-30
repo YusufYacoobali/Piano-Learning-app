@@ -356,14 +356,12 @@ class StorageReaderWriter {
 
   /// Sets the default settings in the map
   void _setDefaultSettings() {
-    _map['volume'] = defaultVolumeLevel;
     _map['difficulty'] = defaultDifficultyLevel;
     _map['theme'] = defaultTheme;
   }
 
   /// Writes default settings to storage
   void _writeDefaultSettingsToStorage() async {
-    write('volume', defaultVolumeLevel);
     write('difficulty', defaultDifficultyLevel);
     write('theme', defaultTheme);
   }

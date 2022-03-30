@@ -62,114 +62,89 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Consumer<ThemeNotifier>(
         builder: (context, ThemeNotifier themeNotifier, child) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Settings'),
-          leading: BackButton(onPressed: () {
-            Navigator.pop(context);
-            if (widget.onBack != null) widget.onBack!(settings.read('difficulty').toString());
-          },),
-        ),
-        body: SafeArea(
-          child: Row(
-            children: [
-              Expanded(
-                child: SettingsList(
-                  sections: [
-                    SettingsSection(
-                      title: const Text('General'),
-                      tiles: <SettingsTile>[
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Settings'),
+              leading: BackButton(onPressed: () {
+                Navigator.pop(context);
+                if (widget.onBack != null) widget.onBack!(settings.read('difficulty').toString());
+              },),
+            ),
+            body: SafeArea(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SettingsList(
+                      sections: [
+                        SettingsSection(
+                          title: const Text('General'),
+                          tiles: <SettingsTile>[
 
-                        /// Adjust volume
-                        SettingsTile(
-                          title: const Text('Volume'),
-                          leading: const Icon(Icons.volume_up),
-                          value: Column(
-                            children: [
-                              Slider(
-                                max: 100,
-                                min: 0,
-                                value: double.parse(
-                                    settings.read('volume').toString()),
-                                divisions: 20,
-                                onChanged: (vol) async => await settings
-                                    .write('volume', vol.round().toString())
-                                    .then(
-                                      (v) => setState(() => {}),
-                                    ),
-                              ),
-                              Center(
-                                child: Text(settings.read('volume').toString()),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        /// Adjust difficulty
-                        SettingsTile(
-                          leading:
+                            /// Adjust difficulty
+                            SettingsTile(
+                              leading:
                               const Icon(Icons.signal_cellular_alt_rounded),
-                          title: const Text('Difficulty'),
-                          value: DropdownButton(
-                              value: settings.read('difficulty'),
-                              key: const Key('difficulty selector'),
-                              items: constants.difficultyList.map((option) {
-                                return DropdownMenuItem(
-                                  child: Text(option.toString()),
-                                  value: option,
-                                );
-                              }).toList(),
-                              onChanged: (level) async {
-                                if (level != null) {
-                                  await settings
-                                      .write('difficulty', level)
-                                      .then((v) => setState(() => {}));
-                                }
-                              }),
-                        ),
-
-                        /// Adjust theme
-                        SettingsTile(
-                          title: const Text('Theme'),
-                          leading: const Icon(Icons.format_paint),
-                          key: const Key('theme selector'),
-                          value: DropdownButton(
-                              items: constants.themeColors.keys
-                                  .toList()
-                                  .map((option) {
-                                return DropdownMenuItem(
-                                  child: Text(option.toString()),
-                                  value: option,
-                                );
-                              }).toList(),
-                              value: settings.read('theme'),
-                              onChanged: (theme) async {
-                                if (theme != null) {
-                                  themeNotifier.theme = theme.toString();
-                                }
-                              }),
-                        ),
-
-                        /// Reset progress
-                        SettingsTile(
-                          title: Center(
-                            child: ElevatedButton(
-                              child: const Text("Reset Progress"),
-                              onPressed: () =>
-                                  _confirmReset(context, themeNotifier),
+                              title: const Text('Difficulty'),
+                              value: DropdownButton(
+                                  value: settings.read('difficulty'),
+                                  key: const Key('difficulty selector'),
+                                  items: constants.difficultyList.map((option) {
+                                    return DropdownMenuItem(
+                                      child: Text(option.toString()),
+                                      value: option,
+                                    );
+                                  }).toList(),
+                                  onChanged: (level) async {
+                                    if (level != null) {
+                                      await settings
+                                          .write('difficulty', level)
+                                          .then((v) => setState(() => {}));
+                                    }
+                                  }),
                             ),
-                          ),
+
+                            /// Adjust theme
+                            SettingsTile(
+                              title: const Text('Theme'),
+                              leading: const Icon(Icons.format_paint),
+                              key: const Key('theme selector'),
+                              value: DropdownButton(
+                                  items: constants.themeColors.keys
+                                      .toList()
+                                      .map((option) {
+                                    return DropdownMenuItem(
+                                      child: Text(option.toString()),
+                                      value: option,
+                                    );
+                                  }).toList(),
+                                  value: settings.read('theme'),
+                                  onChanged: (theme) async {
+                                    if (theme != null) {
+                                      themeNotifier.theme = theme.toString();
+                                    }
+                                  }),
+                            ),
+
+                            /// Reset progress
+                            SettingsTile(
+                              title: Center(
+                                child: ElevatedButton(
+                                  child: const Text("Reset Progress"),
+                                  onPressed: () =>
+                                      _confirmReset(context, themeNotifier),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      );
-    });
+            ),
+          );
+        });
   }
 }
 

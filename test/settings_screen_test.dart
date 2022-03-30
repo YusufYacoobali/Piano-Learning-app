@@ -16,15 +16,6 @@ void main() {
         expect(find.text('Settings'), findsOneWidget);
       });
 
-  testWidgets('Check that the volume slider displays on the screen.',
-          (WidgetTester tester) async {
-        await _goToSettingsScreen(tester);
-
-        expect(find.byIcon(Icons.volume_up), findsOneWidget);
-        expect(find.text('Volume'), findsOneWidget);
-        expect(find.byType(Slider), findsOneWidget);
-      });
-
   testWidgets('Check that the difficulty selector displays on the screen.',
           (WidgetTester tester) async {
         await _goToSettingsScreen(tester);
@@ -41,24 +32,6 @@ void main() {
         expect(find.byIcon(Icons.format_paint), findsOneWidget);
         expect(find.text('Theme'), findsOneWidget);
         expect(find.byKey(const Key('theme selector')), findsOneWidget);
-      });
-
-  testWidgets('Check that changing the volume saves the correct value to storage.',
-          (WidgetTester tester) async {
-
-        SharedPreferences.setMockInitialValues({});
-        final SharedPreferences pref = await SharedPreferences.getInstance();
-
-        await _goToSettingsScreen(tester);
-
-        expect(pref.get('volume'), '100');
-
-        await tester.drag(find.byType(Slider), const Offset(-100, 0));
-        await tester.pump();
-
-        if (pref.get('volume') == '100') {
-          fail('The volume should not be 100');
-        }
       });
 
   testWidgets('Check that changing the difficulty saves the correct value to storage.',
@@ -110,16 +83,13 @@ void main() {
         final SharedPreferences pref = await SharedPreferences.getInstance();
 
         await _goToSettingsScreen(tester);
-        
-        expect(pref.get('volume'), '100');
+
         expect(pref.get('difficulty'), 'Beginner');
         expect(pref.get('theme'), 'Dark');
 
         // Check that the initial theme of the app is dark
         expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
-        
-        await tester.drag(find.byType(Slider), const Offset(-100, 0));
-        await tester.pump();
+
         await tester.tap(find.text('Beginner'));
         await tester.pump();
         await tester.tap(find.text('Intermediate').last);
@@ -128,8 +98,7 @@ void main() {
         await tester.pump();
         await tester.tap(find.text('Light').last);
         await tester.pumpAndSettle();
-        
-        if (pref.get('volume') == '100') fail('The volume should not be 100');
+
         expect(pref.get('difficulty'), 'Intermediate');
         expect(pref.get('theme'), 'Light');
 
@@ -140,8 +109,7 @@ void main() {
         await tester.pump();
         await tester.tap(find.text('Confirm'));
         await tester.pumpAndSettle();
-        
-        expect(pref.get('volume'), '100');
+
         expect(find.text('Expert'), findsOneWidget);
         expect(pref.get('theme'), 'Dark');
 
@@ -156,16 +124,13 @@ void main() {
         final SharedPreferences pref = await SharedPreferences.getInstance();
 
         await _goToSettingsScreen(tester);
-        
-        expect(pref.get('volume'), '100');
+
         expect(pref.get('difficulty'), 'Beginner');
         expect(pref.get('theme'), 'Dark');
 
         // Check that the initial theme of the app is dark
         expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.dark);
 
-        await tester.drag(find.byType(Slider), const Offset(-100, 0));
-        await tester.pump();
         await tester.tap(find.text('Beginner'));
         await tester.pump();
         await tester.tap(find.text('Expert').last);
@@ -174,8 +139,7 @@ void main() {
         await tester.pump();
         await tester.tap(find.text('Light').last);
         await tester.pumpAndSettle();
-        
-        if (pref.get('volume') == '100') fail('The volume should not be 100');
+
         expect(pref.get('difficulty'), 'Expert');
         expect(pref.get('theme'), 'Light');
 
@@ -187,7 +151,6 @@ void main() {
         await tester.tap(find.text('Cancel'));
         await tester.pump();
 
-        if (pref.get('volume') == '100') fail('The volume should not be 100');
         expect(pref.get('difficulty'), 'Expert');
         expect(pref.get('theme'), 'Light');
 
@@ -198,20 +161,18 @@ void main() {
   testWidgets('Check that loading settings from storage displays correctly.',
           (WidgetTester tester) async {
 
-        SharedPreferences.setMockInitialValues({'volume': '50', 'difficulty': 'Intermediate', 'theme': 'Light', });
+        SharedPreferences.setMockInitialValues({'difficulty': 'Intermediate', 'theme': 'Light', });
         final SharedPreferences pref = await SharedPreferences.getInstance();
 
         await _goToSettingsScreen(tester);
         await tester.pumpAndSettle();
 
-        expect(pref.get('volume'), '50');
         expect(pref.get('difficulty'), 'Intermediate');
         expect(pref.get('theme'), 'Light');
 
         // Check that the initial theme of the app is light
         expect(Theme.of(tester.element(find.byType(Scaffold))).brightness, Brightness.light);
 
-        expect(find.text('50'), findsOneWidget);
         expect(find.text('Intermediate'), findsOneWidget);
         expect(find.text('Light'), findsOneWidget);
       });
