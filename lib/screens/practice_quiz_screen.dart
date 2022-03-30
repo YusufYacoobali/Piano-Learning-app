@@ -164,7 +164,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     //If it is the user's first time, the currentRecord will be N/A.
     //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
     if (score > currentRecord || currentRecord == 0) {
-      await prefs.setInt(
+      prefs.setInt(
           getRecordKeysForMode('quiz')[widget.lessonID - 1], score);
     }
   }
