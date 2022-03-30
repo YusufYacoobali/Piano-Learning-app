@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/helper.dart';
+//import 'package:sight_reading_app/helper.dart';
 
 import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -27,8 +29,9 @@ List<String> trackNames = <String>[
 ];
 
 ///A list containing the user's records for each of the tracks.
-List<String> trackRecords = <String>[
-];
+///
+/// It is set to some default values to prevent errors.
+List<String> trackRecords = <String>['0', '0', '0', '0', '0',];
 
 /// A list of all sheet music for each of the tracks
 List<Map<int, Note>> trackSheets = <Map<int, Note>>[];
@@ -44,27 +47,23 @@ List<List<int>> trackSpeeds = <List<int>>[];
 /// The tracks are shown as a List of clickable buttons.
 /// There is also an AppBar containing the screen title, a back arrow and a setting icon, which when clicked takes you to the settings screen.
 class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
+  /// The class used to handle any reading or writing to and from storage.
   final StorageReaderWriter _writer = StorageReaderWriter();
   final ScrollController _firstController = ScrollController();
 
-  _PlayAlongMenuScreenState() {
-    fillRecordsWithDefaults();
-    loadRecords();
-  }
-  /// Sets all of the records to a default
-  void fillRecordsWithDefaults() {
-    for (int i = 0; i < trackNames.length; ++i) {
-      trackRecords.add('0');
-    }
-  }
-
-  /// Loads the records for each song
-  void loadRecords() {
-    _writer.loadDataFromStorage().then((value) {
-      updateRecords(_writer.read('difficulty').toString());
+  /// Loads the records for the play along tracks.
+  void _loadRecords() async {
+    //Sets default values to use while the real records load.
+    trackRecords = resetRecordListForMode('play along');
+    // Once the real records are loaded, the screen is refreshed with the new values.
+    getRecordsForMode('play along').then((value) {
+      setState(() {
+        trackRecords = value;
+      });
     });
   }
 
+  /// Updates the play along records list.
   void updateRecords(String difficulty) {
     trackRecords = [];
     for (String track in trackNames) {
@@ -73,6 +72,11 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
       trackRecords.add(record);
     }
     setState(() {});
+  }
+
+  /// The constructor for the state class.
+  _PlayAlongMenuScreenState() {
+    _loadRecords();
   }
 
   /// Gets the bpm given a difficulty
@@ -87,7 +91,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     }
   }
 
-  /// Gets the music track notes
+  /// The music sheets to play along to for each track.
   List<Map<int, Note>> getMusicSheets() {
     return <Map<int, Note>>[
       treble_track1.getTrack(),
@@ -98,7 +102,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     ];
   }
 
-  /// Gets the clefs associated with the songs
+  /// The clefs for each of the play along tracks.
   List<Clef> getMusicSheetClefs() {
     return <Clef>[
       treble_track1.getClef(),
@@ -109,7 +113,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     ];
   }
 
-  /// Gets the speed associated with the songs
+  /// The speeds at which each track will be played along to.
   List<List<int>> getMusicSheetSpeeds() {
     return <List<int>>[
       treble_track1.getDifficultyBpm(),
@@ -128,7 +132,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     trackSpeeds = getMusicSheetSpeeds();
 
     trackButtonKeys = <Key>[]; //Resets the list of keys
-    ///Generates the keys for the track buttons based on track names.
+    //Generates the keys for the track buttons based on track names.
     for (String track in trackNames) {
       trackButtonKeys.add(Key('trackSelected:$track'));
     }
@@ -137,7 +141,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
         context: context, menuBuilder: PlayAlongInstructions(context: context));
 
     return Scaffold(
-      appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu, onScreenDelete: updateRecords,),
+      appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu, onScreenDelete: updateRecords),
       body: SafeArea(
         child: Scrollbar(
           controller: _firstController,
@@ -174,7 +178,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
                                 clef: clef,
                                 bpm: bpm,
                                 songName: trackNames[index],
-                                onBackToPlayAlongMenu: loadRecords),
+                                onBackToPlayAlongMenu: _loadRecords),
                           ));
                     },
                     key: trackButtonKeys[index],

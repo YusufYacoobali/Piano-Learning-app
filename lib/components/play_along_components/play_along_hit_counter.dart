@@ -34,7 +34,7 @@ class PlayAlongHitCounter {
   }
 
   /// Writes the high score to storage
-  void writeHighScore() {
+  void _writeHighScore() async {
     String key = '${songName.toLowerCase()}-${_difficulty.toLowerCase()}-high-score';
     String percentage = getScoreAsPercentage();
     highScore = double.parse(percentage);
@@ -48,7 +48,7 @@ class PlayAlongHitCounter {
       Object? percentage = _writer.read(key);
       if (percentage == null) {
         highScore = 0;
-        writeHighScore();
+        _writeHighScore();
       }
       else {
         highScore = double.parse(percentage.toString());
@@ -59,7 +59,7 @@ class PlayAlongHitCounter {
   /// Updates the score if the new one is higher
   void isNewHighScore() {
     if ((score/numNotes)*100 > highScore) {
-      writeHighScore();
+      _writeHighScore();
     }
   }
 

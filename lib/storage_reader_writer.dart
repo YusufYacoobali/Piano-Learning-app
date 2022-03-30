@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:perfect_volume_control/perfect_volume_control.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/helper.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
@@ -91,6 +92,8 @@ class StorageReaderWriter {
     await loadQuestionAnswerDataFromStorage(pref);
     await _loadEndlessRecordsFromStorage(pref);
     await _loadPlayAlongRecordsFromStorage(pref);
+    await _loadSpeedrunRecordsFromStorage(pref);
+    await _loadQuizRecordsFromStorage(pref);
   }
 
   Future<void> loadQuestionAnswerDataFromStorage(SharedPreferences pref) async {
@@ -341,7 +344,67 @@ class StorageReaderWriter {
     }
   }
 
-  /// Loads settings from storage
+  /// Loads speedrun records from storage
+  Future<void> _loadSpeedrunRecordsFromStorage(SharedPreferences pref) async {
+    Object? isOnDisk = pref.get('10_second_speedrun_record');
+    if (isOnDisk == null) {
+      _setDefaultSpeedrunRecords();
+      _writeSpeedrunRecordsToStorage();
+    } else {
+        List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
+        for (String key in _modeRecordKeys) {
+          _map[key] = pref.get(key);
+        }
+    }
+  }
+
+  /// Sets default record values for the speedrun mode
+  void _setDefaultSpeedrunRecords() {
+    List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
+    for (String key in _modeRecordKeys) {
+      _map[key] = 0;
+    }
+  }
+
+  /// Writes speedrun records to storage
+  void _writeSpeedrunRecordsToStorage() {
+    List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
+    for (String key in _modeRecordKeys) {
+      write(key, 0);
+    }
+  }
+
+  /// Loads quiz records from storage
+  Future<void> _loadQuizRecordsFromStorage(SharedPreferences pref) async {
+    List<String> _quizRecordKeys = getRecordKeysForMode('quiz');
+    Object? isOnDisk = pref.get(_quizRecordKeys[0]);
+    if (isOnDisk == null) {
+      _setDefaultQuizRecords();
+      _writeQuizRecordsToStorage();
+    } else {
+      for (String key in _quizRecordKeys) {
+          _map[key] = pref.get(key);
+      }
+    }
+  }
+
+  /// Sets the default records.
+  void _setDefaultQuizRecords() {
+    List<String> _quizRecordKeys = getRecordKeysForMode('quiz');
+    for (String key in _quizRecordKeys) {
+      _map[key] = 0;
+    }
+  }
+
+  /// Writes quiz records to storage
+  void _writeQuizRecordsToStorage() {
+    List<String> _quizRecordKeys = getRecordKeysForMode('quiz');
+    for (String key in _quizRecordKeys) {
+      write(key, 0);
+    }
+  }
+
+  /// Loads settings from storage.
   Future<void> _loadSettingsFromStorage(SharedPreferences pref) async {
     String? isOnDisk = pref.getString('difficulty');
     if (isOnDisk == null) {

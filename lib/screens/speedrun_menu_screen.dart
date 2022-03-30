@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../components/app_bar_with_settings_icon.dart';
 import '../components/pop_ups/speedrun_menu_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../screens/menu_screen.dart';
 import '../screens/speedrun_screen.dart';
-import 'menu_screen.dart';
 import 'speedrun_screen.dart';
+import 'package:sight_reading_app/helper.dart';
 
 ///A list containing the various speedrun mode options.
 List<int> modes = [10, 20, 30, 40, 50, 60];
@@ -16,32 +14,17 @@ List<int> modes = [10, 20, 30, 40, 50, 60];
 List<Key> modeButtonKeys = <Key>[];
 
 /// A list containing the user records for each of the modes.
-///
-/// This variable copies the actual list and is used for testing purposes.
-List<String> modeRecordsCopy = <String>[];
-
-///The user records for each of the available speedrun modes.
-Future<List<String>> getSpeedrunRecords() async {
-  List<String> records = <String>[];
-  final prefs = await SharedPreferences.getInstance();
-  for (int mode in modes) {
-    records.add(
-        (prefs.getInt('${mode}_second_speedrun_record') ?? 'N/A').toString());
-  }
-  return records;
-}
+List<String> modeRecords = <String>[];
 
 ///A screen that displays a scrollable list of available speedrun modes with buttons to access each mode.
 ///
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
 class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
-  ///A list containing the user records for each of the modes.
-  late Future<List<String>> modeRecords;
   final ScrollController _firstController = ScrollController();
 
   @override
   void initState() {
-    modeRecords = getSpeedrunRecords();
+    _loadRecords();
     super.initState();
   }
 
@@ -50,40 +33,30 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
     super.dispose();
   }
 
+  /// Loads the records for the speedrun mode.
+  void _loadRecords() async {
+    //Sets default values to use while the real records load.
+    modeRecords = resetRecordListForMode('speedrun');
+    // Once the real records are loaded, the screen is refreshed with the new values.
+    getRecordsForMode('speedrun').then((value) {
+        setState(() {
+          modeRecords = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     modeButtonKeys = <Key>[]; //Resets key list.
-    //Generates the keys for the quiz buttons based on quiz names, with the exception of the random mixed quiz.
+    //Generates the keys for the speedrun mode buttons based on mode name.
     for (int mode in modes) {
       modeButtonKeys.add(Key('modeSelected:$mode'));
     }
-
-    /// A default value for the records if records have not been obtained in time.
-    List<String> defaultRecords = ['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'];
-
-    /// Waits for the records to be obtained from shared preferences before building the screen.
-    return FutureBuilder(
-      future: modeRecords,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          modeRecordsCopy = defaultRecords;
-          return _getScreenWidget(
-              defaultRecords); //The widget while loading (nothing shown currently)
-        }
-        if (!snapshot.hasData) {
-          modeRecordsCopy = defaultRecords;
-          return _getScreenWidget(
-              defaultRecords); //The widget when an error happens
-        }
-        final List<String> modeRecords = snapshot.data;
-        modeRecordsCopy = modeRecords;
-        return _getScreenWidget(modeRecords);
-      },
-    );
+    return _getScreenWidget();
   }
 
   /// The widget to be displayed to the user.
-  Widget _getScreenWidget(recordData) {
+  Widget _getScreenWidget() {
     /// A pop-up screen containing the speedrun instructions.
     PopUpController menu = PopUpController(
         context: context,
@@ -111,7 +84,7 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
                         SizedBox(
                             width: MediaQuery.of(context).size.width /
                                 4), //Adds space between Text
-                        Text('Record: ${recordData[index]}',
+                        Text('Record: ${modeRecords[index]}',
                             textAlign: TextAlign.right),
                       ],
                     ),

@@ -6,7 +6,6 @@ import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   Future<void> _goToSpeedrunMenuScreen(WidgetTester tester) async {
@@ -86,10 +85,11 @@ void main() {
       // Scrolls the screen until the widget to be tested is visible on screen.
       await tester.scrollUntilVisible(find.byKey(modeButtonKeys[i]), 500.0,
           scrollable: find.byType(Scrollable));
-      expect(find.text('Record: ${modeRecordsCopy[i]}'), findsWidgets);
+	  await tester.pumpAndSettle();
+      expect(find.text('Record: ${modeRecords[i]}'), findsWidgets);
     }
   });
-
+  
   testWidgets(
       'Check that pressing a speedrun mode option navigates you to the speedrun screen with the selected mode',
       (WidgetTester tester) async {
@@ -103,43 +103,4 @@ void main() {
     // SpeedrunScreen finalScreen = tester.firstWidget(find.byType(SpeedrunScreen));
     // expect(finalScreen.timerDuration, modes[0]);
   });
-
-  testWidgets(
-      'Check that changes to user records are reflected on the menu screen',
-      (WidgetTester tester) async {
-    tester.runAsync(() async {
-      //Sets mock values for relevant shared preferences so that we do not override any existing ones.
-      SharedPreferences.setMockInitialValues({
-        '10_second_speedrun_record': 'N/A',
-        '20_second_speedrun_record': 'N/A',
-        '30_second_speedrun_record': 'N/A',
-        '40_second_speedrun_record': 'N/A',
-        '50_second_speedrun_record': 'N/A',
-        '60_second_speedrun_record': 'N/A',
-      });
-      final prefs = await SharedPreferences.getInstance();
-
-      await _goToSpeedrunMenuScreen(tester);
-      //Gets the old record for the first speedrun mode as an integer.
-      int oldRecord;
-      if (modeRecordsCopy[0] == 'N/A') {
-        oldRecord = -1;
-      } else {
-        oldRecord = int.parse(modeRecordsCopy[0]);
-      }
-
-      //Checks to make sure the records are being displayed correctly (before any changes).
-      expect(find.text('Record: ${modeRecordsCopy[0]}'), findsWidgets);
-
-      //Changes the user record for the first speedrun mode.
-      final newRecord = oldRecord + 1;
-      prefs.setInt('${modes[0]}_second_speedrun_record', newRecord);
-      await tester.runAsync(
-          () async => await Future.delayed(const Duration(milliseconds: 100)));
-      await tester.pumpAndSettle();
-
-      //Checks to make sure the change is reflected on the screen.
-      expect(find.text('Record: $newRecord'), findsOneWidget);
-    });
-  });
-}
+ }
