@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
-import 'package:sight_reading_app/components/sheet_music_components/note.dart';
+
+import '../components/sheet_music_components/music_sheet.dart';
+import '../components/sheet_music_components/note.dart';
+import '../lessons_and_quizzes/question_brain.dart';
 import '../constants.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 
 ///A list containing the keys for each of the result card created by addResultBox()
 List<Key> resultCardKeys = <Key>[];
@@ -49,6 +50,16 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
     return allResults;
   }
 
+  /// Converts the answers if both are the same note but different octaves
+  List<String> convertAnswers() {
+    String correct = questionBrain.getCorrectAnswerWithoutOctave();
+    String user = questionBrain.getUserAnswerWithoutOctave();
+    if (correct == user && questionBrain.getCorrectAnswer() != questionBrain.getUserAnswer()) {
+      return [questionBrain.getCorrectAnswer(), questionBrain.getUserAnswer()];
+    }
+    return [correct, user];
+  }
+
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
   Widget createReviewAnswerCard(int i) {
     return Center(
@@ -77,9 +88,9 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
                           addResultBox(),
                           //change method name to add text
                           addMessageWrap('Correct Answer: ' +
-                              questionBrain.getCorrectAnswerWithoutOctave()),
-                          addMessageWrap('Your Answer: ' +
-                              questionBrain.getUserAnswerWithoutOctave()),
+                                convertAnswers()[0]),
+                            addMessageWrap('Your Answer: ' +
+                                convertAnswers()[1]),
                         ],
                       ),
                     ],
