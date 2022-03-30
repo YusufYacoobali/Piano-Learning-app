@@ -53,7 +53,20 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
 
   /// The constructor for the state class.
   _PlayAlongMenuScreenState() {
-    getRecordsForMode('play along');
+    _loadRecords();
+  }
+
+  /// Loads the records for the play along tracks.
+  void _loadRecords() async {
+    //Sets default values to use while the real records load.
+    trackRecords = resetRecordListForMode('play along');
+    // Once the real records are loaded, the screen is refreshed with the new values.
+    getRecordsForMode('play along').then((value) {
+      setState(() {
+        trackRecords = value;
+        print(trackRecords);
+      });
+    });
   }
 
   /// Gets the bpm given a difficulty
@@ -70,6 +83,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     }
   }
 
+  /// The music sheets to play along to for each track.
   List<Map<int, Note>> getMusicSheets() {
     return <Map<int, Note>>[
       treble_track1.getTrack(),
@@ -80,6 +94,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     ];
   }
 
+  /// The clefs for each of the play along tracks.
   List<Clef> getMusicSheetClefs() {
     return <Clef>[
       treble_track1.getClef(),
@@ -90,6 +105,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     ];
   }
 
+  /// The speeds at which each track will be played along to.
   List<List<int>> getMusicSheetSpeeds() {
     return <List<int>>[
       treble_track1.getDifficultyBpm(),
@@ -108,7 +124,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
     trackSpeeds = getMusicSheetSpeeds();
 
     trackButtonKeys = <Key>[]; //Resets the list of keys
-    ///Generates the keys for the track buttons based on track names.
+    //Generates the keys for the track buttons based on track names.
     for (String track in trackNames) {
       trackButtonKeys.add(Key('trackSelected:$track'));
     }

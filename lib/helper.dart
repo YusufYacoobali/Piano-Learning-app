@@ -46,12 +46,14 @@ List<String> getRecordKeysForMode(String mode) {
     }
   }
   else if (mode == 'play along') {
-    final StorageReaderWriter _writer = StorageReaderWriter();
-    for (String track in trackNames) {
-      keyList.add('${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score');
-    }
+    StorageReaderWriter _writer = StorageReaderWriter();
+    _writer.loadDataFromStorage().then((value) {
+      for (String track in trackNames) {
+        keyList.add('${track.toLowerCase()}-${_writer.read('difficulty').toString().toLowerCase()}-high-score');
+      }
+    });
+
   }
-  //TODO: Move play_along and endless records retrieval into here.
   return keyList;
 }
 
