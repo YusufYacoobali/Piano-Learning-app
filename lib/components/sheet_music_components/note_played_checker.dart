@@ -12,6 +12,7 @@ class NotePlayedChecker {
   /// Function to be called when a note is hit or missed
   final Function(bool) onNotePass;
 
+  /// Whether only 1 press is allowed in the play area
   final bool onePress;
 
   NotePlayedChecker({required this.noteNotifier, required this.onNotePass, this.onePress = false});
