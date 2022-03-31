@@ -46,22 +46,11 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   /// Reads and writes from storage
   StorageReaderWriter storage = StorageReaderWriter();
 
-  /// The difficulty
-  late String difficulty;
-
   /// Updates the screen
   void updateScreen(String update) {
     setState(() {
       updater = update;
     });
-  }
-
-  /// Gets the difficulty from the storage
-  void getDifficulty() {
-    difficulty = storage.read('difficulty').toString();
-    _timer.setDifficulty(difficulty);
-    _timer.start();
-    _hitCounter.setDifficulty(difficulty);
   }
 
   /// Records if the note has been hit or not
@@ -99,7 +88,10 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
       onStop: _displayMenu,
       hitCounter: _hitCounter,
     );
-    storage.loadDataFromStorage().then((value) => getDifficulty());
+
+    _timer.setDifficulty(widget.difficulty);
+    _hitCounter.setDifficulty(widget.difficulty);
+    _timer.start();
   }
 
   @override
@@ -125,7 +117,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   Future<void> _displayMenu() async {
     _hitCounter.isNewHighScore();
     List displayNotification = await storage.displayPlayAlongNotification(
-      difficulty,
+      widget.difficulty,
       widget.songName.toString(),
       _hitCounter,
     );
@@ -193,10 +185,14 @@ class PlayAlongScreen extends StatefulWidget {
   /// When the song is restarted
   final VoidCallback onBackToPlayAlongMenu;
 
+  /// The difficulty of the track
+  final String difficulty;
+
   const PlayAlongScreen(
       {Key? key,
       required this.notes,
       required this.clef,
+      required this.difficulty,
       required this.bpm,
       required this.songName,
       required this.onBackToPlayAlongMenu})
