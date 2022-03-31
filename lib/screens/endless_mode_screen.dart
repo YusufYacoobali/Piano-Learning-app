@@ -60,7 +60,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _keyboard = PageKeyboard(playKey);
     /// Sets up the music sheet
     _currentNoteToPlay =
-        NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: stop);
+        NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: stop, onePress: true);
     _sheet = MovingMusicSheet(
         nextNote: _nextNote,
         clef: Clef.treble,
