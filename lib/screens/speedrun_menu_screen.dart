@@ -20,6 +20,7 @@ List<String> modeRecords = <String>[];
 ///
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
 class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
+  /// A controller to manage scrolling and the scrollbar.
   final ScrollController _firstController = ScrollController();
 
   @override

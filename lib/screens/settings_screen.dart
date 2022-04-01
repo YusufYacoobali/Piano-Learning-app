@@ -6,10 +6,12 @@ import '../storage_reader_writer.dart';
 import '../theme_listener.dart';
 import '../constants.dart' as constants;
 
-/// Allows settings to be changed
+/// A screen that contain the various settings that can be changed by the user.
+///
+/// There is also the option to reset a user's progress on this screen.
 class _SettingsScreenState extends State<SettingsScreen> {
 
-  /// Reads and writes the settings to storage
+  /// The object that will read and write the settings to storage.
   StorageReaderWriter settings = StorageReaderWriter();
 
   @override
@@ -23,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.dispose();
   }
 
-  /// Confirms if the settings should be reset
+  /// Confirms if the settings should be reset.
   _confirmReset(BuildContext context, ThemeNotifier themeNotifier) {
     ElevatedButton cancelButton = ElevatedButton(
       child: const Text("Cancel"),
@@ -148,6 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
+///
 class SettingsScreen extends StatefulWidget {
   static const String id = 'settings_screen';
   final Function(String)? onBack;

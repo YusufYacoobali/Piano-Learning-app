@@ -3,7 +3,13 @@ import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 
-/// Replaces all blank spaces from all strings with underscores in a list
+/// This file contains a series of helper functions used in various parts of the code.
+
+/// Replaces all blank spaces from all strings with underscores in a list.
+///
+/// '''
+/// replaceSpacesWithUnderscoresFromStrings(['Hello world', 'read that sheet']) == ['Hello_world', 'read_that_sheet']
+/// '''
 List<String> replaceSpacesWithUnderscoresFromStrings(List<String> toConvert) {
   List<String> stringsWithNoSpaces = <String>[];
   for (String string in toConvert) {
@@ -28,7 +34,6 @@ List<String> replaceSpacesWithUnderscoresFromStrings(List<String> toConvert) {
 /// - 'speedrun'
 /// - 'quiz'
 /// - 'play along'
-/// - 'endless'
 ///
 /// All other inputs return the empty list.
 List<String> getRecordKeysForMode(String mode) {
@@ -63,7 +68,6 @@ List<String> getRecordKeysForMode(String mode) {
 /// - 'speedrun'
 /// - 'quiz'
 /// - 'play along'
-/// - 'endless'
 ///
 /// All other inputs return the empty list.
 Future<List<String>> getRecordsForMode(String mode) async {

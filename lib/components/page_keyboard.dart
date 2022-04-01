@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'keyboard.dart';
 
+/// A 'page' of the full keyboard to be shown on the screen.
+///
+/// A 'page' represents an octave. By swiping left and right, you can access the other octaves available to the user.
 class PageKeyboard extends StatefulWidget {
   static const String id = 'pageKeyboard';
 
+  /// A function to be called for each keyboard 'page'
   final Function(String) callFunction;
 
+  /// The octave 'page' the keyboard starts at.
   final int startOctave;
 
   const PageKeyboard(this.callFunction, {Key? key, this.startOctave = 4}) : super(key: key);
@@ -14,6 +19,7 @@ class PageKeyboard extends StatefulWidget {
   State<PageKeyboard> createState() => _PageKeyboardState();
 }
 
+/// The state for the keyboard page.
 class _PageKeyboardState extends State<PageKeyboard> {
   late final PageController controller;
 

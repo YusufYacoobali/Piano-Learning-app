@@ -1,26 +1,29 @@
 import '../../storage_reader_writer.dart';
 
-/// Keeps the score and highest score of the endless mode
+/// Tracks the score and highest score of the inputted play along track.
 class PlayAlongHitCounter {
 
-  /// The current score
+  /// The current score.
   int score = 0;
 
-  /// The number of notes
+  /// The number of notes in the track.
   final int numNotes;
 
-  /// The high score
+  /// The high score for the track.
   late double highScore;
 
+  /// The object that will handle storage operations.
   final StorageReaderWriter _writer = StorageReaderWriter();
 
+  /// The name of the track.
   final String songName;
 
+  /// The difficulty selected by the user from settings.
   late final String _difficulty;
 
   PlayAlongHitCounter({required this.songName, required this.numNotes});
 
-  /// Sets the difficulty
+  /// Sets the difficulty by getting the difficulty value from storage, then gets the high score for the selected difficulty.
   void setDifficulty(String difficulty) {
     _difficulty = difficulty;
     getHighScore();
@@ -41,7 +44,7 @@ class PlayAlongHitCounter {
     _writer.write(key, percentage);
   }
 
-  /// Gets the high score
+  /// The high score for the track based on the current difficulty.
   void getHighScore() {
     _writer.loadDataFromStorage().then((value) {
       String key = '${songName.toLowerCase()}-${_difficulty.toLowerCase()}-high-score';
@@ -56,13 +59,14 @@ class PlayAlongHitCounter {
     });
   }
 
-  /// Updates the score if the new one is higher
+  /// Updates the high score if the new one is higher.
   void isNewHighScore() {
     if ((score/numNotes)*100 > highScore) {
       _writeHighScore();
     }
   }
 
+  /// The score in percentage form.
   String getScoreAsPercentage() {
     return ((score/numNotes) * 100).toStringAsFixed(0);
   }

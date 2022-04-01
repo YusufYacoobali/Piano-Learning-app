@@ -50,7 +50,7 @@ class AchievementMaker {
       AchievementCard('Complete 1 quiz', 1, achieveValues['completedQuizzes']),
       AchievementCard(
           'Complete 5 quizzes', 5, achieveValues['completedQuizzes']),
-      AchievementCard('Complete all quizzes', numOfquizzes,
+      AchievementCard('Complete all quizzes', numOfQuizzes,
           achieveValues['completedQuizzes']),
 
       //endless achievements

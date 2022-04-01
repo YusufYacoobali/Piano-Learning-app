@@ -7,12 +7,15 @@ import '../sheet_music_components/moving_music_sheet_timer.dart';
 import '../sheet_music_components/note.dart';
 import 'play_along_hit_counter.dart';
 
+/// A timing mechanism for the scrolling music sheet for the various play along tracks.
+///
+/// Notes to be played by the user are displayed, moved and checked for based on the timer.
 class PlayAlongSongTimer extends MovingMusicSheetTimer {
 
   /// Notes to be played
   final Map<int, Note> notes;
 
-  /// The time of the last note
+  /// The time of the last note, and by extension the end of the track.
   late final int _endTime;
 
   /// Whether the song has ended
@@ -34,6 +37,7 @@ class PlayAlongSongTimer extends MovingMusicSheetTimer {
     required this.hitCounter,
   }) : super(sheet: sheet, nextNote: nextNote, updater: updater) {
 
+    /// The speed at which notes will be played.
     this.bpm = bpm;
 
     _endTime = notes.keys.last;
@@ -46,7 +50,7 @@ class PlayAlongSongTimer extends MovingMusicSheetTimer {
     sheet.onEnd = end;
   }
 
-  /// Sets the values of the moving notes depending on the difficulty
+  /// Sets the values of the moving notes depending on the difficulty.
   void _setDifficultyValues() {
     int apparentSpacing = 100;
     if (difficulty == 'Expert') {
