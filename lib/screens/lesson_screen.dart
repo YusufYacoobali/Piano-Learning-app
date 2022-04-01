@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/notifications/in_app_notification_pop_up.dart';
-import 'package:sight_reading_app/constants.dart';
-import 'package:sight_reading_app/screens/lesson_menu_screen.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/quiz.dart';
-import 'package:sight_reading_app/screens/results_screen.dart';
-import 'package:sight_reading_app/storage_reader_writer.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
+
+import '../components/notifications/in_app_notification_pop_up.dart';
+import '../constants.dart';
+import '../screens/lesson_menu_screen.dart';
+import '../lessons_and_quizzes/quiz.dart';
+import '../screens/results_screen.dart';
+import '../storage_reader_writer.dart';
+import '../lessons_and_quizzes/question_brain.dart';
 import '../lessons_and_quizzes/question_finder.dart';
 
 /// Creates screen for a lesson.
 /// The lesson screen consists of the option buttons and components in question_skeleton
 class LessonScreen extends StatefulWidget {
   static const String id = 'lesson_screen';
+
+  /// What lesson we are displaying
   final int lessonNum;
   const LessonScreen({Key? key, required this.lessonNum}) : super(key: key);
 
@@ -55,6 +58,7 @@ class _LessonScreenState extends State<LessonScreen> {
     }
   }
 
+  /// Displays the results screen
   void getResultsScreen(
       String title, double percentage, QuestionBrain questionBrain) {
     Navigator.pop(context);

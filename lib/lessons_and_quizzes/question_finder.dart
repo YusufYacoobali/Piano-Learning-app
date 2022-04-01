@@ -39,9 +39,8 @@ class QuestionFinder {
   List<Question> getPracticeQuestionsForLesson(
       int lessonID, int numOfQuestions) {
     List<Question> practiceQuestions = [];
-    // Get a list of practice question IDs and take the first [numOfQuestions] elements from it
-    List<int> questionIDs = List.from(
-        QuestionAnswerData.getPracticeQuestionIDs().take(numOfQuestions));
+    // Get a list of practice question IDs
+    List<int> questionIDs = QuestionAnswerData.getPracticeQuestionIDs();
 
     // Get a list of questions for the lesson requested
     List<Question> lessonQuestions =
@@ -49,7 +48,8 @@ class QuestionFinder {
 
     for (int id in questionIDs) {
       for (Question question in lessonQuestions) {
-        if (question.questionID == id) {
+        if (question.questionID == id &&
+            practiceQuestions.length < numOfQuestions) {
           practiceQuestions.add(question);
         }
       }

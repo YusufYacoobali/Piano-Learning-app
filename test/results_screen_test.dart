@@ -69,12 +69,12 @@ void main() {
     await tester.pumpAndSettle();
     int numOfQuestions = QuestionFinder().getQuestionsForLesson(1).length;
     for (int i = 0; i < numOfQuestions - 1; ++i) {
-      await tester.tap(find.text('C'));
+      await tester.tap(find.text('C4'));
       await tester.pumpAndSettle();
       await tester.tap(find.byType(TextButton));
       await tester.pumpAndSettle();
     }
-    await tester.tap(find.text('C'));
+    await tester.tap(find.text('C4'));
     await tester.pumpAndSettle();
     await tester.tap(find.byType(TextButton));
     await tester.pumpAndSettle();

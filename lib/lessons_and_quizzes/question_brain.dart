@@ -82,7 +82,7 @@ class QuestionBrain {
   String getUserAnswerWithoutOctave() {
     String note = getUserAnswer();
     if (note != "N/A") {
-      // TODO: Add comments here explaining what's happening
+      // Retrieves the name of the note in user answer (sharp and flat included if any)
       String name = note[0];
       if (note.length == 3) {
         name += note[1];
@@ -116,7 +116,8 @@ class QuestionBrain {
   bool checkAnswer(String userAnswer) {
     if (userAnswer == getCorrectAnswer()) {
       return true;
-      // TODO: Add comments here explaining what's happening
+
+      // checks the answer when the correct answer or user answer has 3 characters (sharp or flat note)
     } else if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
       String correct = getCorrectAnswer();
       String noteWithoutOctave = userAnswer[0] + userAnswer[1];

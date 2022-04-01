@@ -38,7 +38,7 @@ void main() {
   testWidgets('Check that the pop-up is displayed when a key is pressed',
       (WidgetTester tester) async {
     await _goToLessonOne(tester);
-    await tester.tap(find.text('C'));
+    await tester.tap(find.text('C4'));
     await tester.pumpAndSettle();
     expect(find.byType(AlertDialog), findsOneWidget);
   });
@@ -47,7 +47,7 @@ void main() {
       'Check that the pop-up displayed has a "Next" button to go to the next question',
       (WidgetTester tester) async {
     await _goToLessonOne(tester);
-    await tester.tap(find.text('C'));
+    await tester.tap(find.text('C4'));
     await tester.pumpAndSettle();
     expect(find.byType(TextButton), findsOneWidget);
     expect(find.text('Next'), findsOneWidget);
@@ -56,7 +56,7 @@ void main() {
   testWidgets('Check that tapping the "Next" button goes to the next question',
       (WidgetTester tester) async {
     await _goToLessonOne(tester);
-    await tester.tap(find.text('C'));
+    await tester.tap(find.text('C4'));
     await tester.pumpAndSettle();
     await tester.tap(find.byType(TextButton));
     await tester.pumpAndSettle();
@@ -70,12 +70,12 @@ void main() {
     await _goToLessonOne(tester);
     int numOfQuestions = QuestionFinder().getQuestionsForLesson(1).length;
     for (int i = 0; i < numOfQuestions - 1; ++i) {
-      await tester.tap(find.text('C'));
+      await tester.tap(find.text('C4'));
       await tester.pumpAndSettle();
       await tester.tap(find.byType(TextButton));
       await tester.pumpAndSettle();
     }
-    await tester.tap(find.text('C'));
+    await tester.tap(find.text('C4'));
     await tester.pumpAndSettle();
     expect(find.byType(TextButton), findsOneWidget);
     expect(find.text('Finish'), findsOneWidget);
@@ -87,7 +87,7 @@ void main() {
     await _goToLessonOne(tester);
     int numOfQuestions = QuestionFinder().getQuestionsForLesson(1).length;
     for (int i = 0; i < numOfQuestions; ++i) {
-      await tester.tap(find.text('C'));
+      await tester.tap(find.text('C4'));
       await tester.pumpAndSettle();
       await tester.tap(find.byType(TextButton));
       await tester.pumpAndSettle();
