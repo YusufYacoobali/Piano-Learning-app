@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 /// Settings Screen
 /// List of the different difficulties
@@ -209,6 +210,7 @@ const scoreWidgetTextStyle = TextStyle(
   fontWeight: FontWeight.w200,
   fontSize: 35.0,
 );
+
 /// Results screen button styles.
 ButtonStyle navButtonDeco = ElevatedButton.styleFrom(
   primary: Colors.orange.shade700,
@@ -743,3 +745,6 @@ const Icon incorrectIcon = Icon(
   Icons.cancel,
   size: 45.0,
 );
+
+/// Notification Time (UTC)
+const Time notificationTime = Time(12, 00, 00);
