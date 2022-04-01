@@ -55,6 +55,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   void _loadRecords() {
     //Sets default values to use while the real records load.
     trackRecords = resetRecordListForMode('play along');
+    _writer.loadDataFromStorage().then((value) => updateRecords(_writer.read('difficulty').toString()));
     // Once the real records are loaded, the screen is refreshed with the new values.
     getRecordsForMode('play along').then((value) {
       setState(() {
@@ -65,6 +66,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
 
   /// Updates the play along records list.
   void updateRecords(String difficulty) {
+    _writer.write('difficulty', difficulty);
     //Sets default values to use while the real records load.
     trackRecords = resetRecordListForMode('play along');
     for (String track in trackNames) {

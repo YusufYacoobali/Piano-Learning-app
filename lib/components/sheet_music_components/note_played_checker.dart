@@ -21,25 +21,28 @@ class NotePlayedChecker {
   void checkPress(String name) {
     if (!noteNotifier.isNull() && !_noteHit) {
       Note note = noteNotifier.get();
-      if (note.name == name && !onePress) {
+      if (note.name == name) {
         _noteHit = true;
-        onNotePass(_noteHit);
-      }
-      else if (onePress) {
         onNotePass(_noteHit);
       }
       else if (name.length == 3 && note.name.length == 3) {
         String noteWithoutOctave = name[0] + name[1];
         String alt = sharpFlatEquivalence[noteWithoutOctave]!;
         alt = alt + name[name.length - 1];
-        if (note.name == alt && !onePress) {
+        if (note.name == alt) {
           _noteHit = true;
           onNotePass(_noteHit);
         }
-        else if (onePress) {
-          onNotePass(_noteHit);
+        else if (note.name != alt && onePress) {
+          onNotePass(false);
         }
       }
+      else if (note.name != name && onePress) {
+        onNotePass(false);
+      }
+    }
+    else if (!noteNotifier.isNull() && onePress) {
+      onNotePass(_noteHit);
     }
   }
 
