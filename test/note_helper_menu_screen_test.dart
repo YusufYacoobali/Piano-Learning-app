@@ -29,4 +29,11 @@ void main() {
     await _goToHelperSelectionScreen(tester);
     expect(find.text('Treble Clef Notes'), findsOneWidget);
   });
+
+  testWidgets(
+      'Check that note type note_helper button is displayed on the note_helper selection screen',
+      (WidgetTester tester) async {
+    await _goToHelperSelectionScreen(tester);
+    expect(find.text('Note Types'), findsOneWidget);
+  });
 }

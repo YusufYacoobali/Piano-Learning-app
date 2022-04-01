@@ -13,7 +13,7 @@ import 'package:audioplayers/audioplayers.dart';
 ///It contains multiple cards with note images, names and icon buttons
 
 class NoteHelperScreen extends StatefulWidget {
-  static const String id = 'helper_screen';
+  static const String id = 'note_helper_screen';
 
   /// This number is the unique id for specific note_helper
   final int helperNum;
@@ -123,7 +123,10 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
                           children: [
                             const SizedBox(height: 30.0),
                             cardText(index),
-                            const SizedBox(height: 5.0),
+                            const SizedBox(
+                              height: 5.0,
+                              width: 230.0,
+                            ),
                             if (getWidgetVisible())
                               cardPlayIcon(index)
                             else
@@ -179,6 +182,8 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     );
   }
 
+  ///A boolean method that makes specific widget visible
+  ///in the note helper card.
   bool getWidgetVisible() {
     if (widget.helperNum > 2) {
       return false;
@@ -213,7 +218,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
           Flexible(
             child: Text(
               helperBrain.getHelperDescription(index),
-              style: const TextStyle(fontSize: 20.0),
+              style: helperDescriptionTextStyle,
             ),
           ),
         ],
