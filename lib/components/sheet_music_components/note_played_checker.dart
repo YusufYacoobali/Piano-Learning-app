@@ -12,22 +12,31 @@ class NotePlayedChecker {
   /// Function to be called when a note is hit or missed
   final Function(bool) onNotePass;
 
-  NotePlayedChecker({required this.noteNotifier, required this.onNotePass});
+  /// Whether only 1 press is allowed in the play area
+  final bool onePress;
+
+  NotePlayedChecker({required this.noteNotifier, required this.onNotePass, this.onePress = false});
 
   /// Checks if the key pressed is the note
   void checkPress(String name) {
     if (!noteNotifier.isNull() && !_noteHit) {
       Note note = noteNotifier.get();
-      if (note.name == name) {
+      if (note.name == name && !onePress) {
         _noteHit = true;
+        onNotePass(_noteHit);
+      }
+      else if (onePress) {
         onNotePass(_noteHit);
       }
       else if (name.length == 3 && note.name.length == 3) {
         String noteWithoutOctave = name[0] + name[1];
         String alt = sharpFlatEquivalence[noteWithoutOctave]!;
         alt = alt + name[name.length - 1];
-        if (note.name == alt) {
+        if (note.name == alt && !onePress) {
           _noteHit = true;
+          onNotePass(_noteHit);
+        }
+        else if (onePress) {
           onNotePass(_noteHit);
         }
       }

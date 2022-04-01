@@ -52,7 +52,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   final ScrollController _firstController = ScrollController();
 
   /// Loads the records for the play along tracks.
-  void _loadRecords() async {
+  void _loadRecords() {
     //Sets default values to use while the real records load.
     trackRecords = resetRecordListForMode('play along');
     // Once the real records are loaded, the screen is refreshed with the new values.
@@ -65,7 +65,8 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
 
   /// Updates the play along records list.
   void updateRecords(String difficulty) {
-    trackRecords = [];
+    //Sets default values to use while the real records load.
+    trackRecords = resetRecordListForMode('play along');
     for (String track in trackNames) {
       String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
       String record = _writer.read(key).toString();
@@ -176,6 +177,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
                             builder: (context) => PlayAlongScreen(
                                 notes: map,
                                 clef: clef,
+                                difficulty: _writer.read('difficulty').toString(),
                                 bpm: bpm,
                                 songName: trackNames[index],
                                 onBackToPlayAlongMenu: _loadRecords),
