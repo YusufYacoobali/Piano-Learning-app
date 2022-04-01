@@ -51,6 +51,7 @@ void main() {
     await _goToRandomQuiz(tester);
     await tester.tap(find.text('C4'));
     await tester.pumpAndSettle();
+    expect(find.byType(TextButton), findsOneWidget);
     expect(find.text('Next'), findsOneWidget);
   });
 
