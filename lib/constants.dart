@@ -22,7 +22,6 @@ const Color _darkTabBarColour = Color(0xffDCD6F7);
 const Color _lightAppBarColour = Color(0xff553C8B);
 const Color _lightBackgroundColour = Color(0xffCCC1FF);
 const Color _lightScrollBarColour = Color(0xff3D2C8D);
-const Color _lightSliderColour = Color(0xffBE9FE1);
 const Color _lightSettingColour = Color(0xff664E88);
 const Color _lightSettingColour2 = Color(0xff602080);
 const Color _lightTabBarColour = Color(0xffF7E8F6);
@@ -43,28 +42,25 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
     tabBarTheme: darkTabBarTheme,
     scrollbarTheme: darkScrollBarTheme,
     elevatedButtonTheme: darkElevatedButtonTheme,
-    sliderTheme: darkSliderTheme,
     dialogTheme: darkDialogTextStyleTheme,
     textButtonTheme: darkTextButtonButtonTheme,
   ),
-  'Light': ThemeData.light().copyWith(
+  'Light': ThemeData.dark().copyWith(
     scaffoldBackgroundColor: _lightBackgroundColour,
     appBarTheme: lightAppBarTheme,
     tabBarTheme: lightTabBarTheme,
     iconTheme: iconColourTheme,
     scrollbarTheme: lightScrollBarTheme,
-    sliderTheme: lightSliderTheme,
     elevatedButtonTheme: lightElevatedButtonTheme,
     textButtonTheme: lightTextButtonButtonTheme,
   ),
-  'Pink': ThemeData.light().copyWith(
+  'Pink': ThemeData.dark().copyWith(
     backgroundColor: _whiteColour,
     appBarTheme: pinkAppBarTheme,
     tabBarTheme: pinkTabBarTheme,
     scaffoldBackgroundColor: _pinkBackgroundColour,
     iconTheme: iconColourTheme,
     scrollbarTheme: pinkScrollBarTheme,
-    sliderTheme: pinkSliderTheme,
     dialogTheme: pinkDialogTextStyleTheme,
     elevatedButtonTheme: pinkElevatedButtonTheme,
     textButtonTheme: pinkTextButtonButtonTheme,
@@ -116,23 +112,6 @@ final lightScrollBarTheme = const ScrollbarThemeData().copyWith(
 );
 final pinkScrollBarTheme = const ScrollbarThemeData().copyWith(
   thumbColor: MaterialStateProperty.all(_pinkScrollBarColour),
-);
-
-/// Different theme of sliders.
-final darkSliderTheme = const SliderThemeData().copyWith(
-  activeTrackColor: _darkSettingColour,
-  inactiveTrackColor: _darkSettingColour2,
-  thumbColor: _darkAppBarColour,
-);
-final lightSliderTheme = const SliderThemeData().copyWith(
-  activeTrackColor: _lightSettingColour2,
-  inactiveTrackColor: _lightSliderColour,
-  thumbColor: _lightAppBarColour,
-);
-final pinkSliderTheme = const SliderThemeData().copyWith(
-  activeTrackColor: _pinkSettingColour2,
-  inactiveTrackColor: _pinkSettingColour,
-  thumbColor: _pinkAppBarColour,
 );
 
 /// Text styles for dialog boxes.
