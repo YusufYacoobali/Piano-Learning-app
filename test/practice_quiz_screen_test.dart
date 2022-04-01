@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/main.dart';
-import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 
 void main() {
   Future<void> _goToPracticeQuizForLessonOne(WidgetTester tester) async {

@@ -670,6 +670,10 @@ ButtonStyle helperButtonStyle = ElevatedButton.styleFrom(
   elevation: 5.0,
 );
 
+const TextStyle helperDescriptionTextStyle = TextStyle(
+  fontSize: 20.0,
+);
+
 /// Clef symbols.
 const String trebleClef = '𝄞';
 const String bassClef = '𝄢';
