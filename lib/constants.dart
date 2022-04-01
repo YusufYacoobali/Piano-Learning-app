@@ -23,7 +23,7 @@ const Color _lightAppBarColour = Color(0xff553C8B);
 const Color _lightBackgroundColour = Color(0xffCCC1FF);
 const Color _lightScrollBarColour = Color(0xff3D2C8D);
 const Color _lightSettingColour = Color(0xff664E88);
-const Color _lightSettingColour2 = Color(0xff602080);
+//const Color _lightSettingColour2 = Color(0xff602080);
 const Color _lightTabBarColour = Color(0xffF7E8F6);
 
 const Color _pinkAppBarColour = Color(0xffE7759A);
