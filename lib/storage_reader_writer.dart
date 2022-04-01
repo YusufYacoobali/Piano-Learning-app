@@ -141,12 +141,12 @@ class StorageReaderWriter {
     int endlessTrebleExpHS =
         int.parse(prefs.getString('endless-treble-expert-high-score') ?? '0');
 
-    int speedrun10HS = int.parse(prefs.getString('10_second_speedrun_record') ?? '0');
-    int speedrun20HS = int.parse(prefs.getString('20_second_speedrun_record') ?? '0');
-    int speedrun30HS = int.parse(prefs.getString('30_second_speedrun_record') ?? '0');
-    int speedrun40HS = int.parse(prefs.getString('40_second_speedrun_record') ?? '0');
-    int speedrun50HS = int.parse(prefs.getString('50_second_speedrun_record') ?? '0');
-    int speedrun60HS = int.parse(prefs.getString('60_second_speedrun_record') ?? '0');
+    int speedrun10HS = int.parse((prefs.get('10_second_speedrun_record') ?? '0').toString());
+    int speedrun20HS = int.parse((prefs.get('20_second_speedrun_record') ?? '0').toString());
+    int speedrun30HS = int.parse((prefs.get('30_second_speedrun_record') ?? '0').toString());
+    int speedrun40HS = int.parse((prefs.get('40_second_speedrun_record') ?? '0').toString());
+    int speedrun50HS = int.parse((prefs.get('50_second_speedrun_record') ?? '0').toString());
+    int speedrun60HS = int.parse((prefs.get('60_second_speedrun_record') ?? '0').toString());
 
     int playAlongOdeBeg = double.parse(
             prefs.getString('ode to joy - treble only-beginner-high-score') ??
