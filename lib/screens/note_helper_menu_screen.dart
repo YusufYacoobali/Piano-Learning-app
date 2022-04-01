@@ -4,7 +4,7 @@ import 'package:sight_reading_app/screens/menu_screen.dart';
 
 ///This screen is the note_helper selection screen which contain buttons.
 class NoteHelperMenuScreen extends StatefulWidget {
-  static const String id = 'helper_menu_screen';
+  static const String id = 'note_helper_menu_screen';
   const NoteHelperMenuScreen({Key? key}) : super(key: key);
 
   @override
