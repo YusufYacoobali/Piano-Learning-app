@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 
 void main() {
   Future<void> _goToPracticeQuizForLessonOne(WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({});
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Practice'));
     await tester.pumpAndSettle();
@@ -23,9 +25,12 @@ void main() {
     // await tester.tap(itemFinder);
     // await tester.pump();
 
-    await tester.tap(find.byKey(quizButtonKeys[0]));
+    //print(quizButtonKeys);
+    //await tester.tap(find.byKey(quizButtonKeys[0]));
+
+    await tester.tap(find.text('Quiz 1 (Lesson 1)'));
     // Below line causes error:
-    //await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
   }
 
   testWidgets('Check that the keyboard is displayed',
