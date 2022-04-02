@@ -33,8 +33,11 @@ class QuestionSkeleton extends StatefulWidget {
   _QuestionSkeletonState createState() => _QuestionSkeletonState();
 }
 
+/// The state for the question skeleton.
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
+  /// The music sheet the question note will be placed on.
   late final MusicSheet _sheet;
+  /// A way to transition to the next question.
   late final NextNoteNotifier _nextNote;
 
   @override
@@ -60,12 +63,12 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     );
   }
 
-  /// Get the question image.
+  /// The question image.
   Widget getQuestionImage() {
     _sheet.changeClef(widget.clef);
     _nextNote.setNextNote(widget.note);
 
-    /// Makes rounded border for question images
+    // Makes rounded border for question images
     _sheet.changeToRoundedBorder();
 
     return Expanded(

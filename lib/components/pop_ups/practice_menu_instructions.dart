@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
 
+/// A set of instructions the user can view to figure out what to do.
+///
+/// This is shown in the practice main menu screen as a (?) icon in the AppBar.
 class PracticeMenuInstructions extends PopUpContentBuilder {
-
   final BuildContext context;
 
   PracticeMenuInstructions({required this.context});

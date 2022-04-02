@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-
 import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
 import '../../screens/menu_screen.dart';
 
+/// A pause menu
+///
+/// The user can pause the play of certain modes, and is presented a menu with a few options:
+/// - A button to go back to the main menu (a quit button)
+/// - A button to resume play
+/// - A button to go back to the previous menu (a quit button that dozen;t take you back to the main app menu)
 class PauseMenu extends PopUpContentBuilder {
+  /// Context data to pass into the class.
   final BuildContext context;
+  /// A callback to resume play once the resume button is pressed.
   final VoidCallback continueOnPressed;
-
+  /// The name of the 'previous menu' screen.
   final String name;
-
+  /// The ID of the 'previous menu' screen.
   final String backToID;
 
   PauseMenu(
@@ -17,9 +24,6 @@ class PauseMenu extends PopUpContentBuilder {
       required this.name,
       required this.backToID,
       required this.continueOnPressed});
-// =======
-//   PauseMenu({required this.context, required this.continueOnPressed});
-// >>>>>>> main
 
   /// Sets up the start menu
   @override
