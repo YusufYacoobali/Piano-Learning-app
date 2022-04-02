@@ -3,9 +3,6 @@ import 'note_helper_list.dart';
 
 /// Manages the Helper information.
 class NoteHelperBrain {
-  /// The current helper position in the list.
-  late int _currentHelperListPosition;
-
   /// The list of helper informations.
   final NoteHelperList helpers;
 

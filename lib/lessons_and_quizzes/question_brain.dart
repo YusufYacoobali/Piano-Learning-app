@@ -95,7 +95,7 @@ class QuestionBrain {
   /// The user answer for the current question.
   void setAnswer({required userAnswer, int? timeTaken}) {
     // Add map entry
-    _userAnswerMap[_questionNum] = convertToAlt(userAnswer);
+    _userAnswerMap[_questionNum] = _convertToAlt(userAnswer);
     // Checks if the user answer was correct and if so, increments the score
     if (checkAnswer(userAnswer)) {
       ++_score;
@@ -131,7 +131,7 @@ class QuestionBrain {
   }
 
   /// Coverts the answer to its sharp equal if needed.
-  String convertToAlt(String userAnswer) {
+  String _convertToAlt(String userAnswer) {
     if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
       String correct = getCorrectAnswer();
       String noteWithoutOctave = userAnswer[0] + userAnswer[1];

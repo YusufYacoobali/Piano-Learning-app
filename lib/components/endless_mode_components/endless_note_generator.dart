@@ -40,8 +40,9 @@ class EndlessNoteGenerator extends MovingMusicSheetTimer {
     if (difficulty == 'Expert') {
       bpm = constants.endlessExpertBpm;
       _availableNotes = constants.endlessExpertTrebleNotes;
-      if (_clef == Clef.bass)
+      if (_clef == Clef.bass) {
         _availableNotes = constants.endlessExpertBassNotes;
+      }
       _minTime = constants.endlessExpertMinTime;
       _maxTime = constants.endlessExpertMaxTime;
     }
@@ -50,8 +51,9 @@ class EndlessNoteGenerator extends MovingMusicSheetTimer {
     else if (difficulty == 'Intermediate') {
       bpm = constants.endlessIntermediateBpm;
       _availableNotes = constants.endlessIntermediateTrebleNotes;
-      if (_clef == Clef.bass)
+      if (_clef == Clef.bass) {
         _availableNotes = constants.endlessIntermediateBassNotes;
+      }
       _minTime = constants.endlessIntermediateMinTime;
       _maxTime = constants.endlessIntermediateMaxTime;
     }
@@ -60,8 +62,9 @@ class EndlessNoteGenerator extends MovingMusicSheetTimer {
     else {
       bpm = constants.endlessBeginnerBpm;
       _availableNotes = constants.endlessBeginnerTrebleNotes;
-      if (_clef == Clef.bass)
+      if (_clef == Clef.bass) {
         _availableNotes = constants.endlessBeginnerBassNotes;
+      }
       _minTime = constants.endlessBeginnerMinTime;
       _maxTime = constants.endlessBeginnerMaxTime;
     }
