@@ -3,6 +3,14 @@ import 'package:sight_reading_app/screens/note_helper_screen.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 
 ///This screen is the note_helper selection screen which contain buttons.
+class NoteHelperMenuScreen extends StatefulWidget {
+  static const String id = 'note_helper_menu_screen';
+  const NoteHelperMenuScreen({Key? key}) : super(key: key);
+
+  @override
+  _NoteHelperMenuScreenState createState() => _NoteHelperMenuScreenState();
+}
+
 class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   @override
   void initState() {
@@ -90,12 +98,4 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
       },
     );
   }
-}
-
-class NoteHelperMenuScreen extends StatefulWidget {
-  static const String id = 'helper_menu_screen';
-  const NoteHelperMenuScreen({Key? key}) : super(key: key);
-
-  @override
-  _NoteHelperMenuScreenState createState() => _NoteHelperMenuScreenState();
 }

@@ -11,17 +11,13 @@ import '../lessons_and_quizzes/question_finder.dart';
 import '../lessons_and_quizzes/question_brain.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Screen for speedrun mode
-
 /// Screen that displays and runs the speedrun mode.
 ///
 /// The user's selection on the speedrun menu screen determines the time duration.
-/// Once time is up a results screen is shown with the user's score.
+/// Once time is up a results screen is shown with the user's score, and records are updated if necessary.
 class SpeedrunScreen extends StatefulWidget {
   /// The duration of the speedrun
   final int timerDuration;
-
-  /// Constructor
 
   /// ID of the screen
   static const String id = 'speedrun_screen';
@@ -41,13 +37,14 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   /// Displays the questions
   late Widget screenWidget;
 
+  /// The object that will handle any Shared Preference interactions for this screen.
   StorageReaderWriter storage = StorageReaderWriter();
 
   @override
   void initState() {
     super.initState();
 
-    /// Gets all of the questions in a random order
+    /// Gets all of the questions in a random order.
     questionBrain =
         QuestionBrain(questions: QuestionFinder().getRandomListOfQuestions());
     setScreenWidget();
@@ -75,7 +72,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-  /// The results screen
+  /// The result values, as well as the text to pass into the results screen.
   Future<void> getResults() async {
     // Calculates the percentage achieved by the user
     double percentage = 0;
@@ -98,7 +95,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     }
   }
 
-  /// Gets the results screen
+  /// The results screen.
   void getResultsScreen(String title, double percentage) {
     // Stops the user from swiping back to the quiz
     Navigator.pop(context);
@@ -113,22 +110,19 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-  //TODO: Move into note_helper file
+  //TODO: Move into note_helper file?
   ///Checks if the user's score is a new record for the selected mode, and updates shared preferences if it is.
   Future<void> _updateRecords() async {
     int score = questionBrain.getScore();
     final prefs = await SharedPreferences.getInstance();
-    final int currentRecord =
-        prefs.getInt('${widget.timerDuration}_second_speedrun_record') ?? 0;
-    //If it is the user's first time, the currentRecord will be N/A.
-    //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
-    if (score > currentRecord || currentRecord == 0) {
+    final int currentRecord = int.parse((prefs.get('${widget.timerDuration}_second_speedrun_record') ?? '0').toString());
+    if (score > currentRecord) {
       await prefs.setInt(
           '${widget.timerDuration}_second_speedrun_record', score);
     }
   }
 
-  /// Gets the countdown timer displayed in the top-right
+  /// The countdown timer displayed in the top-right of the screen.
   Widget getCountdownTimer() {
     return CircularCountDownTimer(
       width: heightAndWidthOfStopWatch,
@@ -153,8 +147,8 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     );
   }
 
-  /// Gets the key pressed on the keyboard
-  void answer(String text) {
+  /// The key pressed on the keyboard by the user.
+  void getAnswer(String text) {
     questionBrain.setAnswer(userAnswer: text);
     setState(() {
       //if questions have run out, it automatically takes user to results screen
@@ -181,7 +175,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
                 // Question
                 screenWidget,
                 Expanded(
-                  child: PageKeyboard(answer),
+                  child: PageKeyboard(getAnswer),
                 ),
               ],
             ),

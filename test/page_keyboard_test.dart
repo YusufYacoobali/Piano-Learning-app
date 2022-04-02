@@ -41,9 +41,9 @@ void main() {
     expect(find.byType(ElevatedButton), findsNWidgets(12));
   });
 
-  testWidgets('Check that there is a C key', (WidgetTester tester) async {
+  testWidgets('Check that there is a C4 key', (WidgetTester tester) async {
     await _navigateToAKeyboard(tester);
-    expect(find.text('C'), findsOneWidget);
+    expect(find.text('C4'), findsOneWidget);
   });
 
   testWidgets('Check that there is a Db key', (WidgetTester tester) async {
@@ -101,10 +101,10 @@ void main() {
     expect(find.text('B'), findsOneWidget);
   });
 
-  testWidgets('Check that pressing C makes a sound',
+  testWidgets('Check that pressing C4 makes a sound',
       (WidgetTester tester) async {
     await _navigateToAKeyboard(tester);
-    await _checkKeyboardPressMakesSound(tester, 'C');
+    await _checkKeyboardPressMakesSound(tester, 'C4');
   });
 
   testWidgets('Check that pressing Db makes a sound',
@@ -177,7 +177,7 @@ void main() {
       'Check that all key names appear on keyboard in beginner difficulty',
       (WidgetTester tester) async {
     await _navigateToAKeyboard(tester);
-    expect(find.text('C'), findsOneWidget);
+    expect(find.text('C4'), findsOneWidget);
     expect(find.text('D'), findsOneWidget);
     expect(find.text('E'), findsOneWidget);
     expect(find.text('F'), findsOneWidget);
@@ -198,7 +198,7 @@ void main() {
       (WidgetTester tester) async {
     SharedPreferences.setMockInitialValues({'difficulty': 'Intermediate'});
     await _navigateToAKeyboard(tester);
-    expect(find.text('C'), findsNothing);
+    expect(find.text('C4'), findsNothing);
     expect(find.text('D'), findsNothing);
     expect(find.text('E'), findsNothing);
     expect(find.text('F'), findsNothing);
@@ -217,7 +217,7 @@ void main() {
       (WidgetTester tester) async {
     SharedPreferences.setMockInitialValues({'difficulty': 'Expert'});
     await _navigateToAKeyboard(tester);
-    expect(find.text('C'), findsNothing);
+    expect(find.text('C4'), findsNothing);
     expect(find.text('D'), findsNothing);
     expect(find.text('E'), findsNothing);
     expect(find.text('F'), findsNothing);

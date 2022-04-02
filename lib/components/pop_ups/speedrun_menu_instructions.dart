@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
 
+/// A set of instructions to be run before starting the speedrun mode.
+///
+/// This is a pop-up that tells the user what to do.
+/// This is shown in the speedrun mode selection menu, as a (?) icon in the AppBar.
 class SpeedrunMenuInstructions extends PopUpContentBuilder {
 
   final BuildContext context;

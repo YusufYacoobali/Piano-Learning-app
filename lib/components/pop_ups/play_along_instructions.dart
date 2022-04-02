@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
 
+/// A set of instructions to be run before starting the play along mode.
+///
+/// This is a pop-up that tells the user what to do.
 class PlayAlongInstructions extends PopUpContentBuilder {
 
+  /// Context data to pass into the class.
   final BuildContext context;
 
   PlayAlongInstructions({required this.context});

@@ -3,8 +3,11 @@ import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart'
 import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 import 'question.dart';
 
+/// A finder to get the correct set of questions depending on the mode.
+///
+/// Different finders are implemented for lessons and quizzes.
 class QuestionFinder {
-  /// Return the list of questions for a specific lesson
+  /// The list of questions for a specific lesson.
   List<Question> getQuestionsForLesson(int lessonID) {
     List<Question> lessonQuestions = [];
     for (Question question in questions) {
@@ -15,7 +18,7 @@ class QuestionFinder {
     return lessonQuestions;
   }
 
-  /// Return a list of randomly selected questions
+  /// The list of randomly selected questions.
   List<Question> getRandomListOfQuestions({int? numOfQuestions}) {
     List<Question> questionsToPickFrom = questions;
     if (numOfQuestions != null) {
@@ -34,14 +37,14 @@ class QuestionFinder {
     }
   }
 
-  /// Return an ordered list of practice questions
-  /// The first question is the question that was answered incorrectly the most number of times
+  /// An ordered list of practice questions.
+  ///
+  /// The first question is the question that was answered incorrectly the most number of times.
   List<Question> getPracticeQuestionsForLesson(
       int lessonID, int numOfQuestions) {
     List<Question> practiceQuestions = [];
-    // Get a list of practice question IDs and take the first [numOfQuestions] elements from it
-    List<int> questionIDs = List.from(
-        QuestionAnswerData.getPracticeQuestionIDs().take(numOfQuestions));
+    // Get a list of practice question IDs
+    List<int> questionIDs = QuestionAnswerData.getPracticeQuestionIDs();
 
     // Get a list of questions for the lesson requested
     List<Question> lessonQuestions =
@@ -49,7 +52,8 @@ class QuestionFinder {
 
     for (int id in questionIDs) {
       for (Question question in lessonQuestions) {
-        if (question.questionID == id) {
+        if (question.questionID == id &&
+            practiceQuestions.length < numOfQuestions) {
           practiceQuestions.add(question);
         }
       }

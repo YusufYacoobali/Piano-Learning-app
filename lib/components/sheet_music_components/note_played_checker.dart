@@ -12,7 +12,10 @@ class NotePlayedChecker {
   /// Function to be called when a note is hit or missed
   final Function(bool) onNotePass;
 
-  NotePlayedChecker({required this.noteNotifier, required this.onNotePass});
+  /// Whether only 1 press is allowed in the play area
+  final bool onePress;
+
+  NotePlayedChecker({required this.noteNotifier, required this.onNotePass, this.onePress = false});
 
   /// Checks if the key pressed is the note
   void checkPress(String name) {
@@ -30,7 +33,16 @@ class NotePlayedChecker {
           _noteHit = true;
           onNotePass(_noteHit);
         }
+        else if (note.name != alt && onePress) {
+          onNotePass(false);
+        }
       }
+      else if (note.name != name && onePress) {
+        onNotePass(false);
+      }
+    }
+    else if (!noteNotifier.isNull() && onePress) {
+      onNotePass(_noteHit);
     }
   }
 

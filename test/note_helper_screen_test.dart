@@ -38,94 +38,100 @@ void main() {
       await _goToClefHelperScreen(tester);
       expect(find.byType(NoteHelperScreen), findsOneWidget);
     });
+
+    testWidgets('Note type screen is displayed', (WidgetTester tester) async {
+      await _goToNoteTypesHelperScreen(tester);
+      expect(find.byType(NoteHelperScreen), findsOneWidget);
+    });
   });
 
   group('Check that note_helper cards are correctly displayed:', () {
+    const cardKey = Key('card');
     testWidgets('Bass clef note card is displayed',
         (WidgetTester tester) async {
-      const cardKey = Key('card');
       await _goToBassHelperScreen(tester);
       expect(find.byKey(cardKey), findsWidgets);
     });
 
     testWidgets('Treble clef note card is displayed',
         (WidgetTester tester) async {
-      const cardKey = Key('card');
       await _goToClefHelperScreen(tester);
+      expect(find.byKey(cardKey), findsWidgets);
+    });
+
+    testWidgets('Note type card is displayed', (WidgetTester tester) async {
+      await _goToNoteTypesHelperScreen(tester);
       expect(find.byKey(cardKey), findsWidgets);
     });
   });
 
-  group(
-      'Check that Bass clef note_helper card component is correctly displayed:',
-      () {
-    testWidgets('Bass clef note name is displayed',
-        (WidgetTester tester) async {
-      const nameKey = Key('card text: 0');
-      await _goToBassHelperScreen(tester);
-      expect(find.byKey(nameKey), findsWidgets);
+  group('Check all helper card funtions: ', () {
+    const nameKey = Key('card text: 0');
+    const imageKey = Key('card image');
+    const buttonKey = Key('card button');
+    const descriptionKey = Key('card description: 0');
+    group(
+        'Check that Bass clef note_helper card component is correctly displayed:',
+        () {
+      testWidgets('Bass clef note name is displayed',
+          (WidgetTester tester) async {
+        await _goToBassHelperScreen(tester);
+        expect(find.byKey(nameKey), findsWidgets);
+      });
+
+      testWidgets('Bass clef note image is displayed',
+          (WidgetTester tester) async {
+        await _goToBassHelperScreen(tester);
+        expect(find.byKey(imageKey), findsWidgets);
+      });
+
+      testWidgets('Bass clef note button is displayed',
+          (WidgetTester tester) async {
+        await _goToBassHelperScreen(tester);
+        expect(find.byKey(buttonKey), findsWidgets);
+      });
     });
 
-    testWidgets('Bass clef note image is displayed',
-        (WidgetTester tester) async {
-      const imageKey = Key('card image');
-      await _goToBassHelperScreen(tester);
-      expect(find.byKey(imageKey), findsWidgets);
+    group(
+        'Check that Treble clef note_helper card component is correctly displayed:',
+        () {
+      testWidgets('Treble clef note name is displayed',
+          (WidgetTester tester) async {
+        await _goToClefHelperScreen(tester);
+        expect(find.byKey(nameKey), findsWidgets);
+      });
+
+      testWidgets('Treble clef note image is displayed',
+          (WidgetTester tester) async {
+        await _goToClefHelperScreen(tester);
+        expect(find.byKey(imageKey), findsWidgets);
+      });
+
+      testWidgets('Treble clef note button is displayed',
+          (WidgetTester tester) async {
+        await _goToClefHelperScreen(tester);
+        expect(find.byKey(buttonKey), findsWidgets);
+      });
     });
 
-    testWidgets('Bass clef note button is displayed',
-        (WidgetTester tester) async {
-      const buttonKey = Key('card button');
-      await _goToBassHelperScreen(tester);
-      expect(find.byKey(buttonKey), findsWidgets);
-    });
-  });
+    group(
+        'Check that Note types note_helper card component is correctly displayed:',
+        () {
+      testWidgets('Note types name is displayed', (WidgetTester tester) async {
+        await _goToNoteTypesHelperScreen(tester);
+        expect(find.byKey(nameKey), findsWidgets);
+      });
 
-  group(
-      'Check that Treble clef note_helper card component is correctly displayed:',
-      () {
-    testWidgets('Treble clef note name is displayed',
-        (WidgetTester tester) async {
-      const nameKey = Key('card text: 0');
-      await _goToClefHelperScreen(tester);
-      expect(find.byKey(nameKey), findsWidgets);
-    });
-
-    testWidgets('Treble clef note image is displayed',
-        (WidgetTester tester) async {
-      const imageKey = Key('card image');
-      await _goToClefHelperScreen(tester);
-      expect(find.byKey(imageKey), findsWidgets);
-    });
-
-    testWidgets('Treble clef note button is displayed',
-        (WidgetTester tester) async {
-      const buttonKey = Key('card button');
-      await _goToClefHelperScreen(tester);
-      expect(find.byKey(buttonKey), findsWidgets);
-    });
-  });
-
-  group(
-      'Check that Note types note_helper card component is correctly displayed:',
-      () {
-    testWidgets('Note types name is displayed', (WidgetTester tester) async {
-      const nameKey = Key('card text: 0');
-      await _goToNoteTypesHelperScreen(tester);
-      expect(find.byKey(nameKey), findsWidgets);
-    });
-
-    testWidgets('Note types note image is displayed',
-        (WidgetTester tester) async {
-      const imageKey = Key('card image');
-      await _goToNoteTypesHelperScreen(tester);
-      expect(find.byKey(imageKey), findsWidgets);
-    });
-    testWidgets('Note types note description is displayed',
-        (WidgetTester tester) async {
-      const descriptionKey = Key('card description: 0');
-      await _goToNoteTypesHelperScreen(tester);
-      expect(find.byKey(descriptionKey), findsWidgets);
+      testWidgets('Note types note image is displayed',
+          (WidgetTester tester) async {
+        await _goToNoteTypesHelperScreen(tester);
+        expect(find.byKey(imageKey), findsWidgets);
+      });
+      testWidgets('Note types note description is displayed',
+          (WidgetTester tester) async {
+        await _goToNoteTypesHelperScreen(tester);
+        expect(find.byKey(descriptionKey), findsWidgets);
+      });
     });
   });
 }

@@ -5,7 +5,7 @@ import 'package:sight_reading_app/main.dart';
 
 void main() {
   testWidgets(
-      'Check that the achivement page is displayed when the button is pressed.',
+      'Check that the achievement page is displayed when the button is pressed.',
       (WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Achievements'));
@@ -27,7 +27,7 @@ void main() {
   });
 
   testWidgets(
-      'Check that no completed achivements are shown when non are complete.',
+      'Check that no completed achievements are shown when non are complete.',
       (WidgetTester tester) async {
     SharedPreferences.setMockInitialValues({});
 

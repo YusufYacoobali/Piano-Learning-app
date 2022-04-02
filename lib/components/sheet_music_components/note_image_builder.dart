@@ -50,7 +50,7 @@ class NoteImageBuilder {
     _drawTail(note);
 
     Paint accent = Paint()
-      ..color = Colors.black
+      ..color = constants.staveNoteColour
       ..strokeWidth = 4
       ..strokeCap = StrokeCap.round;
 
@@ -118,7 +118,7 @@ class NoteImageBuilder {
         textScaleFactor: 1,
         text: TextSpan(
             text: symbol,
-            style: TextStyle(fontSize: font, color: Colors.black)),
+            style: TextStyle(fontSize: font, color: constants.staveNoteColour)),
         textDirection: TextDirection.ltr)
       ..layout();
 
@@ -131,7 +131,7 @@ class NoteImageBuilder {
   /// Draws a tail
   void _drawTail(NoteOnStave note) {
     Paint paint = Paint()
-      ..color = Colors.black
+      ..color = constants.staveNoteColour
       ..strokeWidth = 4
       ..strokeCap = StrokeCap.round;
 
@@ -157,7 +157,7 @@ class NoteImageBuilder {
 
   _drawLines(NoteOnStave note) {
     Paint paint = Paint()
-      ..color = Colors.black
+      ..color = constants.staveNoteColour
       ..strokeWidth = 3
       ..strokeCap = StrokeCap.round;
 
@@ -190,7 +190,7 @@ class NoteImageBuilder {
   void _drawCircle(NoteOnStave note,
       {PaintingStyle style = PaintingStyle.fill}) {
     Paint paint = Paint()
-      ..color = Colors.black
+      ..color = constants.staveNoteColour
       ..strokeWidth = 4
       ..strokeCap = StrokeCap.round
       ..style = style;
@@ -209,28 +209,33 @@ class NoteImageBuilder {
   /// Draws the note on the screen
   void drawNote(NoteOnStave note) {
     if (note.note.duration == 0.5) {
-      // Quaver
+      /// Quaver
       _drawQuaver(note);
+
     } else if (note.note.duration == 1) {
-      // Crotchet
+      /// Crotchet
       _drawCircle(note);
       _drawTail(note);
+
     } else if (note.note.duration == 1.5) {
-      // Dotted crotchet
+      /// Dotted crotchet
       _drawCircle(note);
       _drawTail(note);
       _drawDot(note);
+
     } else if (note.note.duration == 2) {
-      // Minim
+      /// Minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
+
     } else if (note.note.duration == 3) {
-      // Dotted minim
+      /// Dotted minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
       _drawDot(note);
+
     } else if (note.note.duration == 4) {
-      // Semibreve
+      /// Semibreve
       _drawCircle(note, style: PaintingStyle.stroke);
     }
   }

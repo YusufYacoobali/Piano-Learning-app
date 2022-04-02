@@ -4,6 +4,8 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
+import '../../constants.dart';
+
 //This file will give out a daily notification at a set time
 //Purpose is to encourage the user practice every day to learn and complete achievements
 
@@ -22,7 +24,7 @@ class NotificationAPI {
         title,
         body,
         //This is when notification will pop up
-        _scheduleDaily(const Time(12, 23, 00)),
+        _scheduleDaily(notificationTime),
         await _notificationDetails(),
         payload: payload,
         androidAllowWhileIdle: true,

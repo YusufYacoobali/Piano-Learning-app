@@ -6,7 +6,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'We are going to learn how to read notes. All music notes will be on the lines or spaces of the musical staff. The far left symbol is called the Treble clef. This is our first note. The name is C (Do). The middle C is a circle with a short line across it. Press C on the keyboard.',
+        'We are going to learn how to read notes. All music notes will be on the lines or spaces of the musical stave. The far left symbol is called the Treble clef. This is our first note. The name is C (Do). The middle C is a circle with a short line across it. Press C on the keyboard.',
     correctAnswer: Note(name: 'C4'),
     questionID: 1,
     lessonID: 1,
@@ -22,13 +22,11 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This is our third note. The name is E (Mi). The circle is across the lowest line of the 5 line staff. Now press E on the keyboard.',
+        'This is our third note. The name is E (Mi). The circle is across the lowest line of the 5 line stave. Now press E on the keyboard.',
     correctAnswer: Note(name: 'E4'),
     questionID: 3,
     lessonID: 1,
   ),
-
-  ///start questions
   Question(
     clef: Clef.treble,
     question:
@@ -91,7 +89,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This lesson will teach you 2 more notes. This note is call F (Fa). It is between the 2 lowest lines of the staff. Now press F on the keyboard.',
+        'This lesson will teach you 2 more notes. This note is call F (Fa). It is between the 2 lowest lines of the stave. Now press F on the keyboard.',
     correctAnswer: Note(name: 'F4'),
     questionID: 12,
     lessonID: 2,
@@ -99,13 +97,11 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This note is call G (Sol). The circle is on the second from lowest line of the staff. Now press G on the keyboard.',
+        'This note is call G (Sol). The circle is on the second from lowest line of the stave. Now press G on the keyboard.',
     correctAnswer: Note(name: 'G4'),
     questionID: 13,
     lessonID: 2,
   ),
-
-  ///Lesson questions
   Question(
     clef: Clef.treble,
     question:
@@ -196,7 +192,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This lesson will teach you the last 2 notes. This note is call A (La). It is located below the middle line of the staff. Now press A on the keyboard.',
+        'This lesson will teach you the last 2 notes. This note is call A (La). It is located below the middle line of the stave. Now press A on the keyboard.',
     correctAnswer: Note(name: 'A4'),
     questionID: 26,
     lessonID: 3,
@@ -204,13 +200,11 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This note is call B (Ti). It is located at the middle line of the staff. Now press B on the keyboard.',
+        'This note is call B (Ti). It is located at the middle line of the stave. Now press B on the keyboard.',
     correctAnswer: Note(name: 'B4'),
     questionID: 27,
     lessonID: 3,
   ),
-
-  ///Lesson questions
   Question(
     clef: Clef.treble,
     question:
@@ -308,7 +302,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'The clef symbol has changed! This is the Base clef and notes are played on the lower part of the piano. The positions of the notes will be different. This is C on the Base clef which is under the middle line. Now press C on the keyboard. MOVE THE KEYBOARD TO THE LEFT BEFORE ANSWERING.',
+        'The clef symbol has changed! This is the Bass clef and notes are played on the lower part of the piano. The positions of the notes will be different. This is C on the Bass clef which is under the middle line. Now press C on the keyboard. ** Move the keyboard to the left before answering **.',
     correctAnswer: Note(name: 'C3'),
     questionID: 41,
     lessonID: 4,
@@ -316,7 +310,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'This name is D (Re) on the Base clef. It is on the middle line of the staff. Now press D on the keyboard.',
+        'This name is D (Re) on the Bass clef. It is on the middle line of the stave. Now press D on the keyboard.',
     correctAnswer: Note(name: 'D3'),
     questionID: 42,
     lessonID: 4,
@@ -324,7 +318,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'This is E (Mi) on the Base clef. It is between the second and third lines from top of the staff and is above D. Now press E on the keyboard.',
+        'This is E (Mi) on the Bass clef. It is between the second and third lines from top of the stave and is above D. Now press E on the keyboard.',
     correctAnswer: Note(name: 'E3'),
     questionID: 43,
     lessonID: 4,
@@ -332,17 +326,15 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'This is F (Fa) on the Base clef. It is one the second from top line of the staff. Now press F on the keyboard.',
+        'This is F (Fa) on the Bass clef. It is one the second from top line of the stave. Now press F on the keyboard.',
     correctAnswer: Note(name: 'F3'),
     questionID: 44,
     lessonID: 4,
   ),
-
-  ///start questions
   Question(
     clef: Clef.bass,
     question:
-        'Great Job. Now you have learnt the first four notes on the Base clef. Try answering the rest of the questions without help. What note is this?',
+        'Great Job. Now you have learnt the first four notes on the Bass clef. Try answering the rest of the questions without help. What note is this?',
     correctAnswer: Note(name: 'E3'),
     questionID: 45,
     lessonID: 4,
@@ -408,7 +400,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'THIS LESSON IS IN BASS CLEF, MOVE THE KEYBOARD TO THE LEFT BEFORE ANSWERING.Lets learn G A B on the Base clef. This is position of G on the Base clef which is below the top line of the staff. Now press G on the keyboard.',
+        '** This lesson is in bass clef, swipe the keyboard to the left first. ** Lets learn G A B on the Bass clef. This is position of G on the Bass clef which is below the top line of the stave. Now press G on the keyboard.',
     correctAnswer: Note(name: 'G3'),
     questionID: 54,
     lessonID: 5,
@@ -416,7 +408,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'This name is A (La) on the Base clef. This time A is a note crossed by the top line of the staff. Now press A on the keyboard.',
+        'This name is A (La) on the Bass clef. This time A is a note crossed by the top line of the stave. Now press A on the keyboard.',
     correctAnswer: Note(name: 'A3'),
     questionID: 55,
     lessonID: 5,
@@ -424,17 +416,15 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question:
-        'This is B (Ti) on the Base clef. It is on top of the first line from the staff. Now press B on the keyboard.',
+        'This is B (Ti) on the Bass clef. It is on top of the first line from the stave. Now press B on the keyboard.',
     correctAnswer: Note(name: 'B3'),
     questionID: 56,
     lessonID: 5,
   ),
-
-  ///start questions
   Question(
     clef: Clef.bass,
     question:
-        'Great Job. Now you have learnt to read the basic notes on the Base clef. Try answering the rest of the questions without help. What note is this?',
+        'Great Job. Now you have learnt to read the basic notes on the Bass clef. Try answering the rest of the questions without help. What note is this?',
     correctAnswer: Note(name: 'A3'),
     questionID: 57,
     lessonID: 5,
@@ -470,14 +460,14 @@ final List<Question> questions = [
   Question(
     clef: Clef.bass,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'E3'),
+    correctAnswer: Note(name: 'F3'),
     questionID: 62,
     lessonID: 5,
   ),
   Question(
     clef: Clef.bass,
     question: 'What note is this?',
-    correctAnswer: Note(name: 'F3'),
+    correctAnswer: Note(name: 'A3'),
     questionID: 63,
     lessonID: 5,
   ),
@@ -500,7 +490,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'We are going to read higher notes on the treble clef. The higher the note on on 5 line staff, the higher the pitch. Tap B for this note',
+        'We are going to read higher notes on the Treble clef. The higher the note on on 5 line stave, the higher the pitch. Tap B for this note',
     correctAnswer: Note(name: 'B4'),
     questionID: 66,
     lessonID: 6,
@@ -513,12 +503,10 @@ final List<Question> questions = [
     questionID: 67,
     lessonID: 6,
   ),
-
-  ///Start questions
   Question(
     clef: Clef.treble,
     question:
-        'Great Job. All notes will repeat the pattern C-D-E-F-G-A-B before going back to C as you go higher up the musical staff. You will go further to the right when playing higher. What note is this?',
+        'Great Job. All notes will repeat the pattern C-D-E-F-G-A-B before going back to C as you go higher up the musical stave. You will go further to the right when playing higher. What note is this?',
     correctAnswer: Note(name: 'B4'),
     questionID: 68,
     lessonID: 6,
@@ -566,12 +554,11 @@ final List<Question> questions = [
     lessonID: 6,
   ),
 
-  ///read lower notes
   ///Lesson 7
   Question(
     clef: Clef.treble,
     question:
-        'This is an extra lesson on how to lower notes. The lower the note on on 5 line staff, the lower the pitch. Tap C for this note',
+        'This is an extra lesson on how to lower notes. The lower the note on on 5 line stave, the lower the pitch. Tap C for this note',
     correctAnswer: Note(name: 'C4'),
     questionID: 75,
     lessonID: 7,
@@ -587,7 +574,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'Great Job. All notes will repeat the pattern C-B-A-G-F-E-D and goes back to C as you go down the musical staff or further to the left of a keyboard/piano. What note is this?',
+        'Great Job. All notes will repeat the pattern C-B-A-G-F-E-D and goes back to C as you go down the musical stave or further to the left of a keyboard/piano. What note is this?',
     correctAnswer: Note(name: 'A3'),
     questionID: 77,
     lessonID: 7,
@@ -650,7 +637,6 @@ final List<Question> questions = [
     lessonID: 7,
   ),
 
-  ///sharps and flats
   ///Lesson 8
   Question(
     clef: Clef.treble,
@@ -671,7 +657,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'Great job, now try to answer this set of sharps and flats on your own. Press the keys the same way when you found a flat or a sharp on the base clef.',
+        'Great job, now try to answer this set of sharps and flats on your own. Press the keys the same way when you found a flat or a sharp on the bass clef.',
     correctAnswer: Note(name: 'F#4'),
     questionID: 88,
     lessonID: 8,
@@ -776,11 +762,11 @@ final List<Question> questions = [
     lessonID: 8,
   ),
 
-  ///Lesson 9 : review treble clef A3 to F5
+  ///Lesson 9
   Question(
     clef: Clef.treble,
     question:
-        'This is a wrap up lesson. We are reviewing notes on treble clef and add some new notes for challenge. Remember you can swipe the keyboard left and right to change octave. ',
+        'This is a wrap up lesson. We are reviewing notes on Treble clef and add some new notes for challenge. Remember you can swipe the keyboard left and right to change octave. ',
     correctAnswer: Note(name: 'C4'),
     questionID: 103,
     lessonID: 9,
@@ -946,7 +932,7 @@ final List<Question> questions = [
     lessonID: 9,
   ),
 
-  ///Lesson 10: review bass clef from C3 to E4
+  ///Lesson 10
   Question(
     clef: Clef.bass,
     question:

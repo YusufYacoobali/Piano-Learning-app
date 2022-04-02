@@ -12,6 +12,18 @@ import 'package:audioplayers/audioplayers.dart';
 ///This screen creates note_helper screen
 ///It contains multiple cards with note images, names and icon buttons
 
+class NoteHelperScreen extends StatefulWidget {
+  static const String id = 'note_helper_screen';
+
+  /// This number is the unique id for specific note_helper
+  final int helperNum;
+
+  const NoteHelperScreen({Key? key, this.helperNum = 1}) : super(key: key);
+
+  @override
+  _NoteHelperScreenState createState() => _NoteHelperScreenState();
+}
+
 class _NoteHelperScreenState extends State<NoteHelperScreen> {
   final ScrollController _helperController = ScrollController();
 
@@ -19,8 +31,8 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
 
   final playSound = AudioCache();
 
-  /// Make widget visiable or not.
-  late bool isVisiable;
+  /// Make widget visible or not.
+  late bool isVisible;
 
   /// This number is representing the current position of the note_helper list
   late int index;
@@ -75,7 +87,16 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     );
   }
 
-  ///Create a card that holds note images, names and sound.
+  /// Returns a list of Card widgets to display.
+  List<Widget> getAllHelperCards() {
+    List<Widget> allHelperCards = [];
+    for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); ++i) {
+      allHelperCards.add(cardHelper(i));
+    }
+    return allHelperCards;
+  }
+
+  ///Creates a card that holds note images, names and sound.
   Widget cardHelper(index) {
     return Center(
       child: Card(
@@ -102,7 +123,10 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
                           children: [
                             const SizedBox(height: 30.0),
                             cardText(index),
-                            const SizedBox(height: 5.0),
+                            const SizedBox(
+                              height: 5.0,
+                              width: 230.0,
+                            ),
                             if (getWidgetVisible())
                               cardPlayIcon(index)
                             else
@@ -121,13 +145,30 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     );
   }
 
-  /// List of Card widgets to display.
-  List<Widget> getAllHelperCards() {
-    List<Widget> allHelperCards = [];
-    for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); ++i) {
-      allHelperCards.add(cardHelper(i));
+  ///A widget that holds the image of the note.
+  Widget cardNoteImage(index) {
+    // sets the clef of the image
+    Clef clef = Clef.treble;
+    if (widget.helperNum == 1) {
+      clef = Clef.bass;
     }
-    return allHelperCards;
+
+    NextNoteNotifier noteNotifier = NextNoteNotifier();
+    noteNotifier.setNextNote(helperBrain.getHelperNoteImageName(index));
+    MusicSheet sheet = MusicSheet(noteNotifier, clef);
+
+    // Makes rounded border for note_helper images
+    sheet.changeToRoundedBorder();
+
+    return SizedBox(
+      key: const Key('card image'),
+      height: 200.0,
+      width: 260.0,
+      child: CustomPaint(
+        painter: sheet,
+        child: Container(),
+      ),
+    );
   }
 
   ///A widget that holds the name of the note.
@@ -141,52 +182,14 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     );
   }
 
-  ///NEW FEATURE:
-  ///Widget for note_helper description
-  ///fixed size of text because of SizeBox
-  Widget cardDescription(index) {
-    return Container(
-      height: 150,
-      padding: const EdgeInsets.fromLTRB(20, 15, 15, 10),
-      width: 250,
-      key: Key('card description: $index'),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            child: Text(
-              helperBrain.getHelperDescription(index),
-              style: const TextStyle(fontSize: 20.0),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  ///A widget that holds the image of the note.
-  Widget cardNoteImage(index) {
-    Clef clef = Clef.treble;
-    if (widget.helperNum == 1) {
-      clef = Clef.bass;
+  ///A boolean method that makes specific widget visible
+  ///in the note helper card.
+  bool getWidgetVisible() {
+    if (widget.helperNum > 2) {
+      return false;
+    } else {
+      return true;
     }
-
-    NextNoteNotifier noteNotifier = NextNoteNotifier();
-    noteNotifier.setNextNote(helperBrain.getHelperNoteImageName(index));
-    MusicSheet sheet = MusicSheet(noteNotifier, clef);
-
-    /// Makes rounded border for note_helper images
-    sheet.changeToRoundedBorder();
-
-    return SizedBox(
-      key: const Key('card image'),
-      height: 200.0,
-      width: 260.0,
-      child: CustomPaint(
-        painter: sheet,
-        child: Container(),
-      ),
-    );
   }
 
   ///A widget that holds the icon button which can play note sound when pressed.
@@ -202,23 +205,24 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     );
   }
 
-  bool getWidgetVisible() {
-    if (widget.helperNum > 2) {
-      return false;
-    } else {
-      return true;
-    }
+  ///Widget for note_helper description
+  Widget cardDescription(index) {
+    return Container(
+      height: 150,
+      width: 250,
+      padding: const EdgeInsets.fromLTRB(20, 15, 15, 10),
+      key: Key('card description: $index'),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Text(
+              helperBrain.getHelperDescription(index),
+              style: helperDescriptionTextStyle,
+            ),
+          ),
+        ],
+      ),
+    );
   }
-}
-
-class NoteHelperScreen extends StatefulWidget {
-  static const String id = 'helper_screen';
-
-  /// This number is the unique id for specific note_helper
-  final int helperNum;
-
-  const NoteHelperScreen({Key? key, this.helperNum = 1}) : super(key: key);
-
-  @override
-  _NoteHelperScreenState createState() => _NoteHelperScreenState();
 }

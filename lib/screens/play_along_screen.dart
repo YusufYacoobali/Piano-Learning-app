@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sight_reading_app/storage_reader_writer.dart';
 
 import '../components/notifications/in_app_notification_pop_up.dart';
+import '../storage_reader_writer.dart';
 import '../components/page_keyboard.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/pop_ups/play_along_ending_pop_up.dart';
@@ -16,41 +15,45 @@ import '../components/play_along_components/play_along_song_timer.dart';
 ///
 /// The track is selected by the user, then passed in to this screen.
 class _PlayAlongScreenState extends State<PlayAlongScreen> {
+
+  /// The music sheet
   late final MovingMusicSheet _sheet;
+
+  /// The timer that controls the song movement and note display
   late final PlayAlongSongTimer _timer;
 
+  /// Keeps the score of number of notes hit
   late final PlayAlongHitCounter _hitCounter;
 
+  /// Displays the next note on the screen
   final NextNoteNotifier _nextNote = NextNoteNotifier();
+
+  /// The next note in the play area
   final NextNoteNotifier _noteToPlay = NextNoteNotifier();
+
+  /// Checks if the note is played when a key is pressed
   late final NotePlayedChecker _currentNoteToPlay;
 
-  String hit = '';
-
+  /// The text that updates the screen
   String updater = '';
 
+  /// Whether the song has stopped
   bool exit = false;
 
+  /// The end menu
   late PopUpController _endMenu;
 
+  /// Reads and writes from storage
   StorageReaderWriter storage = StorageReaderWriter();
 
-  late String difficulty;
-
+  /// Updates the screen
   void updateScreen(String update) {
     setState(() {
       updater = update;
     });
   }
 
-  void getDifficulty() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    difficulty = pref.get('difficulty')!.toString();
-    _timer.setDifficulty(difficulty);
-    _timer.start();
-    _hitCounter.setDifficulty(difficulty);
-  }
-
+  /// Records if the note has been hit or not
   void recordHitMiss(bool hasPlayed) {
     if (hasPlayed) _hitCounter.increment();
   }
@@ -59,13 +62,17 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   void initState() {
     super.initState();
     _hitCounter = PlayAlongHitCounter(
-        songName: widget.songName.toString(), numNotes: widget.notes.length);
+        songName: widget.songName, numNotes: widget.notes.length);
+
+    /// Sets up the end menu
     PlayAlongEndingInstructions endMenuBuilder = PlayAlongEndingInstructions(
         context: context,
         restart: reset,
         hitCounter: _hitCounter,
         onBack: widget.onBackToPlayAlongMenu);
     _endMenu = PopUpController(context: context, menuBuilder: endMenuBuilder);
+
+    /// Sets up the music sheet
     _currentNoteToPlay =
         NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: recordHitMiss);
     _sheet = MovingMusicSheet(
@@ -81,7 +88,10 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
       onStop: _displayMenu,
       hitCounter: _hitCounter,
     );
-    getDifficulty();
+
+    _timer.setDifficulty(widget.difficulty);
+    _hitCounter.setDifficulty(widget.difficulty);
+    _timer.start();
   }
 
   @override
@@ -107,7 +117,7 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
   Future<void> _displayMenu() async {
     _hitCounter.isNewHighScore();
     List displayNotification = await storage.displayPlayAlongNotification(
-      difficulty,
+      widget.difficulty,
       widget.songName.toString(),
       _hitCounter,
     );
@@ -126,6 +136,8 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    /// Sets the default keyboard octave
     int octave = 4;
     if (widget.clef == Clef.bass) {
       octave = 3;
@@ -157,17 +169,30 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
 class PlayAlongScreen extends StatefulWidget {
   static const String id = 'play_along_screen';
+
+  /// The song notes that are to be played
   final Map<int, Note> notes;
+
+  /// The clef of the song
   final Clef clef;
+
+  /// How fast the song moves
   final int bpm;
+
+  /// The song name
   final String songName;
 
+  /// When the song is restarted
   final VoidCallback onBackToPlayAlongMenu;
+
+  /// The difficulty of the track
+  final String difficulty;
 
   const PlayAlongScreen(
       {Key? key,
       required this.notes,
       required this.clef,
+      required this.difficulty,
       required this.bpm,
       required this.songName,
       required this.onBackToPlayAlongMenu})

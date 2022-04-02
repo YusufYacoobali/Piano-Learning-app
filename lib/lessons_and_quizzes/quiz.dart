@@ -7,12 +7,21 @@ import '../components/question_skeleton.dart';
 import '../components/sheet_music_components/note.dart';
 import 'question_brain.dart';
 
-/// Quiz format questions
+/// A quiz a user can take.
+///
+/// Each quiz contains a set of questions, after which the results are tallied and shown to the user through the results screen.
+/// The quiz tracks how long it takes for a user to answer the question in addition to whether the answer was correct or not.
+/// Although this is called 'quiz' the same functionality is also used for lessons and the speedrun mode.
 class Quiz extends StatefulWidget {
+  /// A unique id for the quiz.
   final String id;
+  /// The name of the quiz.
   final String name;
+  /// The set of questions the quiz contains.
   final QuestionBrain questionBrain;
+  /// A function to be called once the quiz is completed.
   final Function getResults;
+  /// A flag for whether or not this quiz is actually a lesson, in which case more detailed explanation text is shown.
   final bool useQuestionText;
 
   /// Constructor for Quiz
@@ -29,6 +38,7 @@ class Quiz extends StatefulWidget {
   _QuizState createState() => _QuizState();
 }
 
+/// The state class for the quiz.
 class _QuizState extends State<Quiz> {
   Stopwatch stopwatch = Stopwatch();
   late Widget screenWidget;
@@ -65,7 +75,7 @@ class _QuizState extends State<Quiz> {
     );
   }
 
-  /// Gets the pause button displayed in the top right
+  /// The pause button displayed in the top right.
   Widget getPauseButton() {
     return IconButton(
       key: const Key('Pause Icon'),
@@ -81,15 +91,14 @@ class _QuizState extends State<Quiz> {
     );
   }
 
-  /// Creates text for next button
+  /// Text for the 'next' button on the pop-up displaying if the answer was correct or not.
   String getNextButtonText() {
     return widget.questionBrain.isLastQuestion() ? "Finish" : "Next";
   }
 
-  /// Creates a next button
+  /// A 'next' button for the pop-up displaying if the answer the user selected was correct or not.
   ///
-  /// Either takes user to the next question or the result screen
-  /// if the current question is the last question.
+  /// Either takes user to the next question or the result screen if the current question is the last question.
   Widget getNextButton() {
     return TextButton(
       child: Text(getNextButtonText()),
@@ -122,7 +131,7 @@ class _QuizState extends State<Quiz> {
     );
   }
 
-  /// Gets the results screen
+  /// The results screen
   void getResultsScreen(title, percentage, questionBrain) {
     // Stops the user from swiping back to the quiz
     Navigator.pop(context);
@@ -138,6 +147,16 @@ class _QuizState extends State<Quiz> {
     );
   }
 
+  /// Converts the correct answer if both the user answer and correct answer are the same note but different octaves
+  String convertAnswer() {
+    String correct = widget.questionBrain.getCorrectAnswerWithoutOctave();
+    String user = widget.questionBrain.getUserAnswerWithoutOctave();
+    if (correct == user && widget.questionBrain.getCorrectAnswer() != widget.questionBrain.getUserAnswer()) {
+      return widget.questionBrain.getCorrectAnswer();
+    }
+    return correct;
+  }
+
   /// Shows the pop-up when an option is selected
   void showResultAlert(String choice) {
     String alertTitle = '';
@@ -149,7 +168,7 @@ class _QuizState extends State<Quiz> {
     } else {
       alertTitle = 'Incorrect!';
       alertDesc = 'Wrong answer, the correct answer is ' +
-          widget.questionBrain.getCorrectAnswerWithoutOctave();
+          convertAnswer();
     }
 
     displayDialog(alertTitle, alertDesc);
@@ -158,9 +177,7 @@ class _QuizState extends State<Quiz> {
   /// Set information for an alert message.
   ///
   /// The alert is displayed each time the user answers a question.
-  /// Shows if the answer is correct and provides a  button to go to the next question.
-  ///
-  /// Displays the alert with result.
+  /// Shows if the answer is correct and provides a button to go to the next question.
   void displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
