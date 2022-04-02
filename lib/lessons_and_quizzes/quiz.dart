@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
-import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/page_keyboard.dart';
 import '../components/pop_ups/pause_menu.dart';
 import '../components/question_skeleton.dart';
