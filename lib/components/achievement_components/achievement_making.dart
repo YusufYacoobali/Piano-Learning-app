@@ -57,30 +57,30 @@ class AchievementMaker {
       AchievementCard(
           'Score 10 or higher on endless (treble in beginner difficulty)',
           10,
-          achieveValues['endlessTrebleBegHS']),
+          achieveValues['endless-treble-beginner-high-score']),
       AchievementCard(
           'Score 20 or higher on endless (treble in intermediate difficulty)',
           20,
-          achieveValues['endlessTrebleInterHS']),
+          achieveValues['endless-treble-intermediate-high-score']),
       AchievementCard(
           'Score 30 or higher on endless (treble in expert difficulty)',
           30,
-          achieveValues['endlessTrebleExpHS']),
+          achieveValues['endless-treble-expert-high-score']),
 
       AchievementCard(
           'Score 10 or higher on endless (bass in beginner difficulty)',
           10,
-          achieveValues['endlessBassBegHS']),
+          achieveValues['endless-bass-beginner-high-score']),
 
       AchievementCard(
           'Score 20 or higher on endless (bass in intermediate difficulty)',
           20,
-          achieveValues['endlessBassInterHS']),
+          achieveValues['endless-bass-intermediate-high-score']),
 
       AchievementCard(
           'Score 30 or higher on endless (bass in expert difficulty)',
           30,
-          achieveValues['endlessBassExpHS']),
+          achieveValues['endless-bass-expert-high-score']),
 
       //speedrun achievements
       AchievementCard('Score 5 or higher on the 10 second speedrun', 5,
@@ -98,35 +98,39 @@ class AchievementMaker {
 
       //play along achievements
       AchievementCard('Complete Ode to Joy play along in beginner', 100,
-          achieveValues['playAlongOdeBeg']),
+          achieveValues['ode to joy-beginner-high-score']),
       AchievementCard('Complete Ode to Joy play along in intermediate', 100,
-          achieveValues['playAlongOdeInter']),
+          achieveValues['ode to joy-intermediate-high-score']),
       AchievementCard('Complete Ode to Joy play along in expert', 100,
-          achieveValues['playAlongOdeExp']),
+          achieveValues['ode to joy-expert-high-score']),
+
       AchievementCard('Complete Simple bass melody play along in beginner', 100,
-          achieveValues['playAlongSimpBeg']),
+          achieveValues['a simple bass melody-beginner-high-score']),
       AchievementCard('Complete Simple bass melody play along in intermediate',
-          100, achieveValues['playAlongSimpInter']),
+          100, achieveValues['a simple bass melody-intermediate-high-score']),
       AchievementCard('Complete Simple bass melody play along in expert', 100,
-          achieveValues['playAlongSimpExp']),
+          achieveValues['a simple bass melody-expert-high-score']),
+
       AchievementCard('Complete Old Macdonald play along in beginner', 100,
-          achieveValues['playAlongMcBeg']),
+          achieveValues['old macdonald-beginner-high-score']),
       AchievementCard('Complete Old Macdonald play along in intermediate', 100,
-          achieveValues['playAlongMcInter']),
+          achieveValues['old macdonald-intermediate-high-score']),
       AchievementCard('Complete Old Macdonald play along in expert', 100,
-          achieveValues['playAlongMcExp']),
+          achieveValues['old macdonald-expert-high-score']),
+
       AchievementCard('Complete Faded - Alan Walker play along in beginner',
-          100, achieveValues['playAlongFadeBeg']),
+          100, achieveValues['faded - alan walker-beginner-high-score']),
       AchievementCard('Complete Faded - Alan Walker play along in intermediate',
-          100, achieveValues['playAlongFadeInter']),
+          100, achieveValues['faded - alan walker-intermediate-high-score']),
       AchievementCard('Complete Faded - Alan Walker play along in expert', 100,
-          achieveValues['playAlongFadeExp']),
+          achieveValues['faded - alan walker-expert-high-score']),
+
       AchievementCard('Complete Swaying Melody play along in beginner', 100,
-          achieveValues['playAlongSwayBeg']),
+          achieveValues['swaying melody-beginner-high-score']),
       AchievementCard('Complete Swaying Melody play along in intermediate', 100,
-          achieveValues['playAlongSwayInter']),
+          achieveValues['swaying melody-intermediate-high-score']),
       AchievementCard('Complete Swaying Melody play along in expert', 100,
-          achieveValues['playAlongSwayExp']),
+          achieveValues['swaying melody-expert-high-score']),
     ];
     return achievements;
   }
