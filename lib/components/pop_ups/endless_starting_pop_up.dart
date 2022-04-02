@@ -4,8 +4,12 @@ import '../../constants.dart';
 import '../sheet_music_components/note.dart';
 import '../../components/pop_up_components/pop_up_content_builder.dart';
 
+/// A set of instructions to be run before starting the endless mode.
+///
+/// This is a pop-up that tells the user what to do.
 class EndlessStartingInstructions extends PopUpContentBuilder {
 
+  /// Context data passed into this class.
   final BuildContext context;
 
   /// The function that gets called when the start menu is done

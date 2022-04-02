@@ -4,7 +4,7 @@ import '../components/sheet_music_components/note.dart';
 import '../constants.dart';
 import 'question_answer_data.dart';
 
-/// Manages the questions in lessons/quizzes
+/// Manages the questions in lessons/quizzes and the speedrun mode.
 class QuestionBrain {
   /// The current question number
   int _questionNum = 0;
@@ -24,61 +24,61 @@ class QuestionBrain {
     required this.questions,
   });
 
-  /// Accessor for the note of the current question
+  /// The note of the current question.
   Note getNote() {
     return questions[_questionNum].correctAnswer;
   }
 
-  /// Accessor for the clef of the current question
+  /// The clef of the current question.
   Clef getClef() {
     return questions[_questionNum].clef;
   }
 
-  /// Gets the question text for the current question
+  /// The question text for the current question.
   String getQuestionText() {
     return questions[_questionNum].question;
   }
 
-  /// Gets the correct answer of the current question without the octave
+  /// The correct answer of the current question without the octave.
   String getCorrectAnswerWithoutOctave() {
     return Note.getNameWithoutOctave(
         questions[_questionNum].correctAnswer.name);
   }
 
-  /// Gets the correct answer of the current question
+  /// The correct answer of the current question.
   String getCorrectAnswer() {
     return questions[_questionNum].correctAnswer.name;
   }
 
-  /// Moves to the next question if there is a next question
+  /// Moves to the next question if there is a next question.
   void goToNextQuestion() {
     if (!isLastQuestion()) {
       ++_questionNum;
     }
   }
 
-  /// Gets the real question number of the current question (starting from 1)
+  /// The real question number of the current question (starting from 1)
   int getQuestionNum() {
     return (_questionNum + 1);
   }
 
-  /// Gets the total number of questions in the question list
+  /// The total number of questions in the question list.
   int getTotalNumberOfQuestions() {
     return questions.length;
   }
 
-  /// Gets the user's answer for the current question
+  /// The user's answer for the current question.
   String getUserAnswer() {
     // Return "N/A" if question has not been answered
     return _userAnswerMap[_questionNum] ?? "N/A";
   }
 
-  /// Gets the number of user answers (essential in speedrun mode)
+  /// The number of user answers (essential in speedrun mode)
   int getNumberOfUserAnswers() {
     return _userAnswerMap.length;
   }
 
-  /// Gets the correct answer of the current question without the octave
+  /// The correct answer of the current question without the octave.
   String getUserAnswerWithoutOctave() {
     String note = getUserAnswer();
     if (note != "N/A") {
@@ -92,7 +92,7 @@ class QuestionBrain {
     return note;
   }
 
-  /// Sets the user answer for the current question
+  /// The user answer for the current question.
   void setAnswer({required userAnswer, int? timeTaken}) {
     // Add map entry
     _userAnswerMap[_questionNum] = convertToAlt(userAnswer);
@@ -107,12 +107,12 @@ class QuestionBrain {
     }
   }
 
-  /// Gets the current score
+  /// The current score.
   int getScore() {
     return _score;
   }
 
-  /// Checks if the user answer is correct
+  /// Checks if the user answer is correct.
   bool checkAnswer(String userAnswer) {
     if (userAnswer == getCorrectAnswer()) {
       return true;
@@ -130,7 +130,7 @@ class QuestionBrain {
     return false;
   }
 
-  /// Coverts the answer to its sharp equal if needed
+  /// Coverts the answer to its sharp equal if needed.
   String convertToAlt(String userAnswer) {
     if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
       String correct = getCorrectAnswer();
@@ -145,12 +145,12 @@ class QuestionBrain {
     return userAnswer;
   }
 
-  /// Checks if the current question is the last question
+  /// Checks if the current question is the last question.
   bool isLastQuestion() {
     return _questionNum == questions.length - 1;
   }
 
-  /// Resets the current question to the first question in [questions]
+  /// Resets the current question to the first question in [questions].
   void goBackToBeginning() {
     _questionNum = 0;
   }
