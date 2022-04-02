@@ -7,7 +7,6 @@ import '../sheet_music_components/moving_music_sheet_timer.dart';
 
 /// Generates random notes on a moving screen
 class EndlessNoteGenerator extends MovingMusicSheetTimer {
-
   /// Random number generator
   final Random _random = Random();
 
@@ -23,11 +22,8 @@ class EndlessNoteGenerator extends MovingMusicSheetTimer {
   /// The clef of the mode
   late final Clef _clef;
 
-  EndlessNoteGenerator({
-    required sheet,
-    required nextNote,
-    required updater
-  }) : super(sheet: sheet, nextNote: nextNote, updater: updater) {
+  EndlessNoteGenerator({required sheet, required nextNote, required updater})
+      : super(sheet: sheet, nextNote: nextNote, updater: updater) {
     iterationsPerTimeUnit = constants.endlessIterationsPerTimeUnit;
   }
 
@@ -44,31 +40,37 @@ class EndlessNoteGenerator extends MovingMusicSheetTimer {
     if (difficulty == 'Expert') {
       bpm = constants.endlessExpertBpm;
       _availableNotes = constants.endlessExpertTrebleNotes;
-      if (_clef == Clef.bass) _availableNotes = constants.endlessExpertBassNotes;
+      if (_clef == Clef.bass)
+        _availableNotes = constants.endlessExpertBassNotes;
       _minTime = constants.endlessExpertMinTime;
       _maxTime = constants.endlessExpertMaxTime;
     }
+
     /// Intermediate mode values
     else if (difficulty == 'Intermediate') {
       bpm = constants.endlessIntermediateBpm;
       _availableNotes = constants.endlessIntermediateTrebleNotes;
-      if (_clef == Clef.bass) _availableNotes = constants.endlessIntermediateBassNotes;
+      if (_clef == Clef.bass)
+        _availableNotes = constants.endlessIntermediateBassNotes;
       _minTime = constants.endlessIntermediateMinTime;
       _maxTime = constants.endlessIntermediateMaxTime;
     }
+
     /// Beginner mode values
     else {
       bpm = constants.endlessBeginnerBpm;
       _availableNotes = constants.endlessBeginnerTrebleNotes;
-      if (_clef == Clef.bass) _availableNotes = constants.endlessBeginnerBassNotes;
+      if (_clef == Clef.bass)
+        _availableNotes = constants.endlessBeginnerBassNotes;
       _minTime = constants.endlessBeginnerMinTime;
       _maxTime = constants.endlessBeginnerMaxTime;
     }
-    timeBetweenMovements = ((1 / ((bpm / 60) * iterationsPerTimeUnit)) * 1000).round();
+    timeBetweenMovements =
+        ((1 / ((bpm / 60) * iterationsPerTimeUnit)) * 1000).round();
   }
 
   /// Gets a new random note to be displayed
-  getRandomNote() {
+  void getRandomNote() {
     String name = _availableNotes[_random.nextInt(_availableNotes.length)];
     nextNote.setNextNote(Note(name: name, duration: 1));
   }
@@ -89,15 +91,13 @@ class EndlessNoteGenerator extends MovingMusicSheetTimer {
       } else {
         if (index == 0) {
           increment();
-        }
-        else {
+        } else {
           sheet.move();
         }
-        index = (index+1) % iterationsPerTimeUnit;
+        index = (index + 1) % iterationsPerTimeUnit;
         updater(index.toString());
       }
-    }
-    );
+    });
   }
 
   /// Stops the timer

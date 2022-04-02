@@ -5,6 +5,7 @@ import '../../screens/achievements_screen.dart';
 
 ///This is what is shown when a user completes an achievement
 
+// TODO: Add return type and types of parameters
 inAppNotification(context, text, {VoidCallback? onBack}) {
   // Checks whether the notification has been closed
   bool hasEnded = false;

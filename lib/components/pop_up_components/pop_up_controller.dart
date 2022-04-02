@@ -5,7 +5,6 @@ import 'pop_up_content.dart';
 
 /// Controller to display an intermediate menu
 class PopUpController {
-
   /// Makes the menu display over another screen
   late final OverlayEntry _menu;
 
@@ -23,12 +22,12 @@ class PopUpController {
   void _build() {
     if (!menuBuilder.isBuilt) {
       menuBuilder.isBuilt = true;
-      menuBuilder.removeMenu = remove;
+      menuBuilder.removeMenu = _remove;
       menuBuilder.buildMenu();
       _intermediateMenu = PopUpContent(
         text: menuBuilder.text,
         options: menuBuilder.options,
-        removeMenu: remove,
+        removeMenu: _remove,
       );
       _menu = OverlayEntry(
         builder: (context) => _intermediateMenu,
@@ -37,7 +36,7 @@ class PopUpController {
   }
 
   /// Removes the menu from the screen
-  void remove() {
+  void _remove() {
     if (menuBuilder.isBuilt && _menu.mounted) {
       _menu.remove();
     }
@@ -58,5 +57,4 @@ class PopUpController {
       _menu.remove();
     }
   }
-
 }
