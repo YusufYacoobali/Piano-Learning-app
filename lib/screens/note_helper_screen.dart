@@ -11,6 +11,18 @@ import 'package:audioplayers/audioplayers.dart';
 
 ///This screen creates note_helper screen
 ///It contains multiple cards with note images, names and icon buttons
+List<Key> cardKeys = <Key>[];
+List<Key> buttonKeys = <Key>[];
+List<Key> textKeys = <Key>[];
+List<Key> imageKeys = <Key>[];
+List<Key> descriptionKeys = <Key>[];
+
+///List of note_helper list available
+List<NoteHelperList> helperList = [
+  bassNoteImageNameList,
+  clefNoteImageNameList,
+  noteTypeList
+];
 
 class NoteHelperScreen extends StatefulWidget {
   static const String id = 'note_helper_screen';
@@ -37,13 +49,6 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   /// This number is representing the current position of the note_helper list
   late int index;
 
-  ///List of note_helper list available
-  List<NoteHelperList> helperList = [
-    bassNoteImageNameList,
-    clefNoteImageNameList,
-    noteTypeList
-  ];
-
   ///helperBrain provides the unique number for helping locate the list we need.
   @override
   void initState() {
@@ -63,6 +68,20 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   ///Inside the note_helper card, it contains images, names and icon buttons.
   @override
   Widget build(BuildContext context) {
+    cardKeys = <Key>[]; //list of card keys
+    textKeys = <Key>[]; //list of text keys
+    imageKeys = <Key>[]; //list of image keys
+    buttonKeys = <Key>[]; //list of button keys
+    descriptionKeys = <Key>[]; //list of description keys
+    for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); i++) {
+      cardKeys.add(Key('card:${helperBrain.getHelperNoteName(i)}'));
+      textKeys.add(Key('card text:${helperBrain.getHelperNoteName(i)}'));
+      imageKeys.add(Key('card image:$i'));
+      buttonKeys
+          .add(Key('card button:${helperBrain.getHelperNoteSoundName(i)}'));
+      descriptionKeys
+          .add(Key('card description:${helperBrain.getHelperDescription(i)}'));
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Note Helper'),
@@ -90,6 +109,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   /// Returns a list of Card widgets to display.
   List<Widget> getAllHelperCards() {
     List<Widget> allHelperCards = [];
+
     for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); ++i) {
       allHelperCards.add(cardHelper(i));
     }
@@ -100,7 +120,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   Widget cardHelper(index) {
     return Center(
       child: Card(
-        key: const Key('card'),
+        key: cardKeys[index],
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         child: FittedBox(
           child: Container(
@@ -161,7 +181,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     sheet.changeToRoundedBorder();
 
     return SizedBox(
-      key: const Key('card image'),
+      key: imageKeys[index],
       height: 200.0,
       width: 260.0,
       child: CustomPaint(
@@ -174,7 +194,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   ///A widget that holds the name of the note.
   Widget cardText(index) {
     return FittedBox(
-      key: Key('card text: $index'),
+      key: textKeys[index],
       child: Text(
         helperBrain.getHelperNoteName(index),
         style: helperTextStyle,
@@ -195,7 +215,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   ///A widget that holds the icon button which can play note sound when pressed.
   Widget cardPlayIcon(index) {
     return ElevatedButton.icon(
-      key: const Key('card button'),
+      key: buttonKeys[index],
       icon: helpPlayButtonStyle,
       label: const Text('Play'),
       style: helperButtonStyle,
@@ -211,7 +231,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
       height: 150,
       width: 250,
       padding: const EdgeInsets.fromLTRB(20, 15, 15, 10),
-      key: Key('card description: $index'),
+      key: descriptionKeys[index],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

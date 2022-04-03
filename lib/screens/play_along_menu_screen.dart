@@ -68,7 +68,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   void updateRecords(String difficulty) {
     _writer.write('difficulty', difficulty);
     //Sets default values to use while the real records load.
-    trackRecords = resetRecordListForMode('play along');
+    trackRecords = [];
     for (String track in trackNames) {
       String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
       String record = _writer.read(key).toString();
