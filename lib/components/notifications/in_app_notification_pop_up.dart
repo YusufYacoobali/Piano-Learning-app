@@ -5,10 +5,9 @@ import '../../screens/achievements_screen.dart';
 
 ///This is what is shown when a user completes an achievement
 
-inAppNotification(context, text, {VoidCallback? onBack}) {
-  // Checks whether the notification has been closed
-  bool hasEnded = false;
-
+// TODO: Add return type and types of parameters
+Future inAppNotification(BuildContext context, String text,
+    {VoidCallback? onBack}) {
   return showModalBottomSheet(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -34,7 +33,6 @@ inAppNotification(context, text, {VoidCallback? onBack}) {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    hasEnded = true;
                     Navigator.pop(context);
                     if (onBack != null) {
                       onBack();
@@ -45,7 +43,6 @@ inAppNotification(context, text, {VoidCallback? onBack}) {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    hasEnded = true;
                     if (onBack != null) {
                       Navigator.pop(context);
                     }
@@ -64,7 +61,5 @@ inAppNotification(context, text, {VoidCallback? onBack}) {
             )
           ],
         );
-      }).whenComplete(() {
-    if (!hasEnded) Navigator.pop(context);
-  });
+      });
 }

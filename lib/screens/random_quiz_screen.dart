@@ -34,7 +34,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
     super.dispose();
   }
 
-  void getResultsScreen(
+  void _getResultsScreen(
       String title, double percentage, QuestionBrain questionBrain) {
     Navigator.pop(context);
     Navigator.push(
@@ -49,7 +49,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
     );
   }
 
-  void getResults() {
+  void _getResults() {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
@@ -58,7 +58,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
     } else {
       title = "Congratulations!";
     }
-    getResultsScreen(title, percentage, questionBrain);
+    _getResultsScreen(title, percentage, questionBrain);
   }
 
   @override
@@ -67,7 +67,7 @@ class _RandomQuizScreenState extends State<RandomQuizScreen> {
       name: 'Quizzes',
       id: QuizSelectionScreen.id,
       questionBrain: questionBrain,
-      getResults: getResults,
+      getResults: _getResults,
       useQuestionText: false,
     );
   }

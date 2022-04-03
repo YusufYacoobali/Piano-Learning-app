@@ -6,7 +6,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'We are going to learn how to read notes. All music notes will be on the lines or spaces of the musical stave. The far left symbol is called the Treble clef. This is our first note. The name is C (Do). The middle C is a circle with a short line across it. Press C on the keyboard.',
+        'We are going to learn how to read notes. All music notes are on the lines or spaces of the musical stave. The far left symbol is called the Treble clef. This is our first note. The name is C (Do). The middle C is a circle with a short line across it. Press C on the keyboard.',
     correctAnswer: Note(name: 'C4'),
     questionID: 1,
     lessonID: 1,
@@ -22,7 +22,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This is our third note. The name is E (Mi). The circle is across the lowest line of the 5 line stave. Now press E on the keyboard.',
+        'This is our third note. The name is E (Mi). The circle is on the lowest line of the 5 line stave. Now press E on the keyboard.',
     correctAnswer: Note(name: 'E4'),
     questionID: 3,
     lessonID: 1,
@@ -89,7 +89,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This lesson will teach you 2 more notes. This note is call F (Fa). It is between the 2 lowest lines of the stave. Now press F on the keyboard.',
+        'This lesson will teach you 2 more notes. This note is F (Fa). It is between the 2 lowest lines of the stave. Now press F on the keyboard.',
     correctAnswer: Note(name: 'F4'),
     questionID: 12,
     lessonID: 2,
@@ -97,7 +97,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This note is call G (Sol). The circle is on the second from lowest line of the stave. Now press G on the keyboard.',
+        'This note is G (Sol). The circle is on the second from lowest line of the stave. Now press G on the keyboard.',
     correctAnswer: Note(name: 'G4'),
     questionID: 13,
     lessonID: 2,
@@ -192,7 +192,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This lesson will teach you the last 2 notes. This note is call A (La). It is located below the middle line of the stave. Now press A on the keyboard.',
+        'This lesson will teach you the last 2 notes. This note is A (La). It is located below the middle line of the stave. Now press A on the keyboard.',
     correctAnswer: Note(name: 'A4'),
     questionID: 26,
     lessonID: 3,
@@ -200,7 +200,7 @@ final List<Question> questions = [
   Question(
     clef: Clef.treble,
     question:
-        'This note is call B (Ti). It is located at the middle line of the stave. Now press B on the keyboard.',
+        'This note is B (Ti). It is located at the middle line of the stave. Now press B on the keyboard.',
     correctAnswer: Note(name: 'B4'),
     questionID: 27,
     lessonID: 3,

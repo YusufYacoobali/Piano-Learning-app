@@ -31,7 +31,13 @@ List<String> trackNames = <String>[
 ///A list containing the user's records for each of the tracks.
 ///
 /// It is set to some default values to prevent errors.
-List<String> trackRecords = <String>['0', '0', '0', '0', '0',];
+List<String> trackRecords = <String>[
+  '0',
+  '0',
+  '0',
+  '0',
+  '0',
+];
 
 /// A list of all sheet music for each of the tracks
 List<Map<int, Note>> trackSheets = <Map<int, Note>>[];
@@ -55,7 +61,9 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   void _loadRecords() {
     //Sets default values to use while the real records load.
     trackRecords = resetRecordListForMode('play along');
-    _writer.loadDataFromStorage().then((value) => updateRecords(_writer.read('difficulty').toString()));
+    _writer
+        .loadDataFromStorage()
+        .then((value) => _updateRecords(_writer.read('difficulty').toString()));
     // Once the real records are loaded, the screen is refreshed with the new values.
     getRecordsForMode('play along').then((value) {
       setState(() {
@@ -65,12 +73,13 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   }
 
   /// Updates the play along records list.
-  void updateRecords(String difficulty) {
+  void _updateRecords(String difficulty) {
     _writer.write('difficulty', difficulty);
     //Sets default values to use while the real records load.
-    trackRecords = resetRecordListForMode('play along');
+    trackRecords = [];
     for (String track in trackNames) {
-      String key = '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+      String key =
+          '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
       String record = _writer.read(key).toString();
       trackRecords.add(record);
     }
@@ -83,7 +92,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   }
 
   /// Gets the bpm given a difficulty
-  int getSpeedFromDifficulty(List<int> bpm) {
+  int _getSpeedFromDifficulty(List<int> bpm) {
     String difficulty = _writer.read('difficulty').toString();
     if (difficulty == 'Expert') {
       return bpm[2];
@@ -95,7 +104,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   }
 
   /// The music sheets to play along to for each track.
-  List<Map<int, Note>> getMusicSheets() {
+  List<Map<int, Note>> _getMusicSheets() {
     return <Map<int, Note>>[
       treble_track1.getTrack(),
       bass_track1.getTrack(),
@@ -106,7 +115,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   }
 
   /// The clefs for each of the play along tracks.
-  List<Clef> getMusicSheetClefs() {
+  List<Clef> _getMusicSheetClefs() {
     return <Clef>[
       treble_track1.getClef(),
       bass_track1.getClef(),
@@ -117,7 +126,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   }
 
   /// The speeds at which each track will be played along to.
-  List<List<int>> getMusicSheetSpeeds() {
+  List<List<int>> _getMusicSheetSpeeds() {
     return <List<int>>[
       treble_track1.getDifficultyBpm(),
       bass_track1.getDifficultyBpm(),
@@ -130,9 +139,9 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
   @override
   Widget build(BuildContext context) {
     trackNames = trackNames;
-    trackSheets = getMusicSheets();
-    trackClefs = getMusicSheetClefs();
-    trackSpeeds = getMusicSheetSpeeds();
+    trackSheets = _getMusicSheets();
+    trackClefs = _getMusicSheetClefs();
+    trackSpeeds = _getMusicSheetSpeeds();
 
     trackButtonKeys = <Key>[]; //Resets the list of keys
     //Generates the keys for the track buttons based on track names.
@@ -144,13 +153,15 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
         context: context, menuBuilder: PlayAlongInstructions(context: context));
 
     return Scaffold(
-      appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu, onScreenDelete: updateRecords),
+      appBar: AppBarWithSettingsIcon(const Text('Select a track:'), menu,
+          onScreenDelete: _updateRecords),
       body: SafeArea(
         child: Scrollbar(
           controller: _firstController,
           isAlwaysShown: true,
           child: ListView.separated(
-            controller: _firstController,
+              controller: _firstController,
+
               /// Uses an itemBuilder to generate a button for each track, using the names, records and keys generated earlier.
               itemBuilder: (BuildContext context, int index) {
                 return SizedBox(
@@ -171,7 +182,7 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
                       Map<int, Note> map = trackSheets[index];
                       Clef clef = trackClefs[index];
                       List<int> trackSpeed = trackSpeeds[0];
-                      int bpm = getSpeedFromDifficulty(trackSpeed);
+                      int bpm = _getSpeedFromDifficulty(trackSpeed);
 
                       Navigator.push(
                           context,
@@ -179,7 +190,8 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
                             builder: (context) => PlayAlongScreen(
                                 notes: map,
                                 clef: clef,
-                                difficulty: _writer.read('difficulty').toString(),
+                                difficulty:
+                                    _writer.read('difficulty').toString(),
                                 bpm: bpm,
                                 songName: trackNames[index],
                                 onBackToPlayAlongMenu: _loadRecords),

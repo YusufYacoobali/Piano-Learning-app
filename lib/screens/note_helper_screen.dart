@@ -11,6 +11,18 @@ import 'package:audioplayers/audioplayers.dart';
 
 ///This screen creates note_helper screen
 ///It contains multiple cards with note images, names and icon buttons
+List<Key> cardKeys = <Key>[];
+List<Key> buttonKeys = <Key>[];
+List<Key> textKeys = <Key>[];
+List<Key> imageKeys = <Key>[];
+List<Key> descriptionKeys = <Key>[];
+
+///List of note_helper list available
+List<NoteHelperList> helperList = [
+  bassNoteImageNameList,
+  clefNoteImageNameList,
+  noteTypeList
+];
 
 class NoteHelperScreen extends StatefulWidget {
   static const String id = 'note_helper_screen';
@@ -37,13 +49,6 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   /// This number is representing the current position of the note_helper list
   late int index;
 
-  ///List of note_helper list available
-  List<NoteHelperList> helperList = [
-    bassNoteImageNameList,
-    clefNoteImageNameList,
-    noteTypeList
-  ];
-
   ///helperBrain provides the unique number for helping locate the list we need.
   @override
   void initState() {
@@ -63,6 +68,20 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   ///Inside the note_helper card, it contains images, names and icon buttons.
   @override
   Widget build(BuildContext context) {
+    cardKeys = <Key>[]; //list of card keys
+    textKeys = <Key>[]; //list of text keys
+    imageKeys = <Key>[]; //list of image keys
+    buttonKeys = <Key>[]; //list of button keys
+    descriptionKeys = <Key>[]; //list of description keys
+    for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); i++) {
+      cardKeys.add(Key('card:${helperBrain.getHelperNoteName(i)}'));
+      textKeys.add(Key('card text:${helperBrain.getHelperNoteName(i)}'));
+      imageKeys.add(Key('card image:$i'));
+      buttonKeys
+          .add(Key('card button:${helperBrain.getHelperNoteSoundName(i)}'));
+      descriptionKeys
+          .add(Key('card description:${helperBrain.getHelperDescription(i)}'));
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Note Helper'),
@@ -79,7 +98,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: getAllHelperCards(),
+              children: _getAllHelperCards(),
             ),
           ),
         ),
@@ -88,19 +107,20 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   /// Returns a list of Card widgets to display.
-  List<Widget> getAllHelperCards() {
+  List<Widget> _getAllHelperCards() {
     List<Widget> allHelperCards = [];
+
     for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); ++i) {
-      allHelperCards.add(cardHelper(i));
+      allHelperCards.add(_createCardHelper(i));
     }
     return allHelperCards;
   }
 
   ///Creates a card that holds note images, names and sound.
-  Widget cardHelper(index) {
+  Widget _createCardHelper(index) {
     return Center(
       child: Card(
-        key: const Key('card'),
+        key: cardKeys[index],
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         child: FittedBox(
           child: Container(
@@ -117,20 +137,20 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
                       direction: Axis.horizontal,
                       alignment: WrapAlignment.center,
                       children: [
-                        cardNoteImage(index),
+                        _getCardNoteImage(index),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             const SizedBox(height: 30.0),
-                            cardText(index),
+                            _getCardText(index),
                             const SizedBox(
                               height: 5.0,
                               width: 230.0,
                             ),
-                            if (getWidgetVisible())
-                              cardPlayIcon(index)
+                            if (_getWidgetVisible())
+                              _getCardPlayIcon(index)
                             else
-                              cardDescription(index),
+                              _getCardDescription(index),
                           ],
                         ),
                       ],
@@ -146,7 +166,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   ///A widget that holds the image of the note.
-  Widget cardNoteImage(index) {
+  Widget _getCardNoteImage(index) {
     // sets the clef of the image
     Clef clef = Clef.treble;
     if (widget.helperNum == 1) {
@@ -161,7 +181,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     sheet.changeToRoundedBorder();
 
     return SizedBox(
-      key: const Key('card image'),
+      key: imageKeys[index],
       height: 200.0,
       width: 260.0,
       child: CustomPaint(
@@ -172,9 +192,9 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   ///A widget that holds the name of the note.
-  Widget cardText(index) {
+  Widget _getCardText(index) {
     return FittedBox(
-      key: Key('card text: $index'),
+      key: textKeys[index],
       child: Text(
         helperBrain.getHelperNoteName(index),
         style: helperTextStyle,
@@ -184,7 +204,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
 
   ///A boolean method that makes specific widget visible
   ///in the note helper card.
-  bool getWidgetVisible() {
+  bool _getWidgetVisible() {
     if (widget.helperNum > 2) {
       return false;
     } else {
@@ -193,9 +213,9 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   ///A widget that holds the icon button which can play note sound when pressed.
-  Widget cardPlayIcon(index) {
+  Widget _getCardPlayIcon(index) {
     return ElevatedButton.icon(
-      key: const Key('card button'),
+      key: buttonKeys[index],
       icon: helpPlayButtonStyle,
       label: const Text('Play'),
       style: helperButtonStyle,
@@ -206,12 +226,12 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   ///Widget for note_helper description
-  Widget cardDescription(index) {
+  Widget _getCardDescription(index) {
     return Container(
       height: 150,
       width: 250,
       padding: const EdgeInsets.fromLTRB(20, 15, 15, 10),
-      key: Key('card description: $index'),
+      key: descriptionKeys[index],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

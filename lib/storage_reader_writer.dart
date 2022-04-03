@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:perfect_volume_control/perfect_volume_control.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/helper.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
@@ -532,7 +532,7 @@ class StorageReaderWriter {
     final prefs = await SharedPreferences.getInstance();
 
     String level = difficulty.toString().toLowerCase();
-    // prefs.setBool('endless-$clef-$level-achievement', false);
+
     bool achieved =
         (prefs.getBool('endless-$clef-$level-achievement') ?? false);
 
@@ -543,21 +543,21 @@ class StorageReaderWriter {
       toDisplay = false;
     } else {
       if (level == 'beginner') {
-        if (score >= 10) {
+        if (score >= bgnrScore) {
           text = "You scored 10 or more in this endless mode";
           prefs.setBool('endless-$clef-$level-achievement', true);
         } else {
           toDisplay = false;
         }
       } else if (level == 'intermediate') {
-        if (score >= 20) {
+        if (score >= interScore) {
           text = "You scored 20 or more in this endless mode";
           prefs.setBool('endless-$clef-$level-achievement', true);
         } else {
           toDisplay = false;
         }
       } else if (level == 'expert') {
-        if (score >= 30) {
+        if (score >= expertScore) {
           text = "You scored 30 or more in this endless mode";
           prefs.setBool('endless-$clef-$level-achievement', true);
         } else {
@@ -592,9 +592,9 @@ class StorageReaderWriter {
     if (achieved) {
       toDisplay = false;
     } else {
-      if (percentage == '100') {
+      if (percentage == playAlongScore) {
         prefs.setBool('${track}_${difficulty}_play_along_achievement', true);
-        text = "You got 100% in this play along, good job";
+        text = "You got 100% in this play along, good job!";
       } else {
         toDisplay = false;
       }

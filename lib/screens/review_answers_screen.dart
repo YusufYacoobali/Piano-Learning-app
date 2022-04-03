@@ -33,14 +33,14 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   }
 
   /// Returns a list of ReviewAnswer cards
-  List<Widget> getAllReviewAnswerCards() {
+  List<Widget> _getAllReviewAnswerCards() {
     List<Widget> allResults = [];
     questionBrain.goBackToBeginning();
 
     for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
       if (questionBrain.getUserAnswer() != "N/A") {
         resultCardKeys.add(Key('resultCard:$i'));
-        allResults.add(createReviewAnswerCard(i));
+        allResults.add(_createReviewAnswerCard(i));
         allResults.add(const SizedBox(
           width: 20,
         ));
@@ -51,17 +51,18 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   }
 
   /// Converts the answers if both are the same note but different octaves
-  List<String> convertAnswers() {
+  List<String> _convertAnswers() {
     String correct = questionBrain.getCorrectAnswerWithoutOctave();
     String user = questionBrain.getUserAnswerWithoutOctave();
-    if (correct == user && questionBrain.getCorrectAnswer() != questionBrain.getUserAnswer()) {
+    if (correct == user &&
+        questionBrain.getCorrectAnswer() != questionBrain.getUserAnswer()) {
       return [questionBrain.getCorrectAnswer(), questionBrain.getUserAnswer()];
     }
     return [correct, user];
   }
 
   /// Creates a card that show the question picture, correct answer and the answer that the user picked
-  Widget createReviewAnswerCard(int i) {
+  Widget _createReviewAnswerCard(int i) {
     return Center(
       child: SizedBox(
         height: reviewAnswerCardHeight, //MediaQuery.of(context).size.height,
@@ -81,16 +82,16 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      addQuestionImage(),
+                      _addQuestionImage(),
                       Column(
                         children: [
                           //change to display result
-                          addResultBox(),
+                          _addResultBox(),
                           //change method name to add text
-                          addMessageWrap('Correct Answer: ' +
-                                convertAnswers()[0]),
-                            addMessageWrap('Your Answer: ' +
-                                convertAnswers()[1]),
+                          _addMessageWrap(
+                              'Correct Answer: ' + _convertAnswers()[0]),
+                          _addMessageWrap(
+                              'Your Answer: ' + _convertAnswers()[1]),
                         ],
                       ),
                     ],
@@ -107,7 +108,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   }
 
   ///Gets the image of the question
-  Widget addQuestionImage() {
+  Widget _addQuestionImage() {
     NextNoteNotifier _nextNote = NextNoteNotifier();
     _nextNote.setNextNote(questionBrain.getNote());
     MusicSheet sheet = MusicSheet(_nextNote, questionBrain.getClef());
@@ -126,7 +127,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   }
 
   /// Add the result box on top of each card, the display depends on whether the userAnswer is correct or not
-  Widget addResultBox() {
+  Widget _addResultBox() {
     String resultText = "Incorrect";
     Color resultColor = Colors.red;
     Icon resultIcon = incorrectIcon;
@@ -156,7 +157,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   }
 
   /// Adds message to each result card
-  Widget addMessageWrap(String message) {
+  Widget _addMessageWrap(String message) {
     return Wrap(
         spacing: 20.0,
         runSpacing: 20.0,
@@ -187,7 +188,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: getAllReviewAnswerCards(),
+                children: _getAllReviewAnswerCards(),
               )),
         ),
       ),
