@@ -7,6 +7,7 @@ import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
+import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 
@@ -124,10 +125,10 @@ void main() {
   testWidgets(
       'Check that clicking the random quiz button navigates you to a random quiz screen.',
       (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({});
     await _goToQuizSelectionScreen(tester);
     await tester.tap(find.byKey(randomQuizSelectedKey));
     await tester.pumpAndSettle();
-    //TODO: Fix.
-    // expect(find.byType(RandomQuizScreen), findsOneWidget);
+    expect(find.byType(RandomQuizScreen), findsOneWidget);
   });
 }
