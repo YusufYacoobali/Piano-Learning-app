@@ -543,21 +543,21 @@ class StorageReaderWriter {
       toDisplay = false;
     } else {
       if (level == 'beginner') {
-        if (score >= 10) {
+        if (score >= bgnrScore) {
           text = "You scored 10 or more in this endless mode";
           prefs.setBool('endless-$clef-$level-achievement', true);
         } else {
           toDisplay = false;
         }
       } else if (level == 'intermediate') {
-        if (score >= 20) {
+        if (score >= interScore) {
           text = "You scored 20 or more in this endless mode";
           prefs.setBool('endless-$clef-$level-achievement', true);
         } else {
           toDisplay = false;
         }
       } else if (level == 'expert') {
-        if (score >= 30) {
+        if (score >= expertScore) {
           text = "You scored 30 or more in this endless mode";
           prefs.setBool('endless-$clef-$level-achievement', true);
         } else {
@@ -592,9 +592,9 @@ class StorageReaderWriter {
     if (achieved) {
       toDisplay = false;
     } else {
-      if (percentage == '100') {
+      if (percentage == playAlongScore) {
         prefs.setBool('${track}_${difficulty}_play_along_achievement', true);
-        text = "You got 100% in this play along, good job";
+        text = "You got 100% in this play along, good job!";
       } else {
         toDisplay = false;
       }
