@@ -6,7 +6,6 @@ import '../../constants.dart';
 /// This file reads the values from storage and makes the achievement cards which is used for both tabs
 
 class AchievementMaker {
-
   final List<AchievementCard> _achieved = [];
   final List<AchievementCard> _inProgress = [];
 

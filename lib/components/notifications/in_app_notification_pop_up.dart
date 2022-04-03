@@ -6,7 +6,8 @@ import '../../screens/achievements_screen.dart';
 ///This is what is shown when a user completes an achievement
 
 // TODO: Add return type and types of parameters
-Future inAppNotification(BuildContext context, String text, {VoidCallback? onBack}) {
+Future inAppNotification(BuildContext context, String text,
+    {VoidCallback? onBack}) {
   return showModalBottomSheet(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
