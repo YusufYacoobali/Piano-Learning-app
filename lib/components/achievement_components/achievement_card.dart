@@ -6,14 +6,14 @@ import '../../constants.dart';
 ///The design for an achievement card
 
 class AchievementCard extends StatelessWidget {
-  final String text;
+  final String _text;
   final int complete;
   final int target;
-  late final bool achieved;
+  late final bool _achieved;
 
-  AchievementCard(this.text, this.target, this.complete, {Key? key})
+  AchievementCard(this._text, this.target, this.complete, {Key? key})
       : super(key: key) {
-    achieved = (complete / target >= 1) ? true : false;
+    _achieved = (complete / target >= 1) ? true : false;
   }
 
   @override
@@ -29,7 +29,7 @@ class AchievementCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
-              child: Text(text, style: achievementTitleTextStyle),
+              child: Text(_text, style: achievementTitleTextStyle),
             )
           ],
         ),
@@ -39,8 +39,8 @@ class AchievementCard extends StatelessWidget {
             radius: circularIndicatorRadius,
             lineWidth: indicatorLineWidth,
             animation: true,
-            percent: (achieved == true) ? 1 : complete / target,
-            center: (achieved == true)
+            percent: (_achieved == true) ? 1 : complete / target,
+            center: (_achieved == true)
                 ? (Text(
                     '$target/$target',
                     style: achievementTextStyle,

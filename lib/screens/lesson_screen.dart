@@ -8,6 +8,7 @@ import '../screens/results_screen.dart';
 import '../storage_reader_writer.dart';
 import '../lessons_and_quizzes/question_brain.dart';
 import '../lessons_and_quizzes/question_finder.dart';
+import 'menu_screen.dart';
 
 /// Creates screen for a lesson.
 /// The lesson screen consists of the option buttons and components in question_skeleton
@@ -61,7 +62,8 @@ class _LessonScreenState extends State<LessonScreen> {
   /// Displays the results screen
   void getResultsScreen(
       String title, double percentage, QuestionBrain questionBrain) {
-    Navigator.pop(context);
+    Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
+    Navigator.pushNamed(context, LessonMenuScreen.id);
     Navigator.push(
       context,
       MaterialPageRoute(

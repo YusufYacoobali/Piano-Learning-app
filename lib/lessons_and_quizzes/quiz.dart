@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/pop_up_components/pop_up_controller.dart';
-import 'package:sight_reading_app/screens/results_screen.dart';
 import '../components/page_keyboard.dart';
 import '../components/pop_ups/pause_menu.dart';
 import '../components/question_skeleton.dart';
@@ -15,12 +14,16 @@ import 'question_brain.dart';
 class Quiz extends StatefulWidget {
   /// A unique id for the quiz.
   final String id;
+
   /// The name of the quiz.
   final String name;
+
   /// The set of questions the quiz contains.
   final QuestionBrain questionBrain;
+
   /// A function to be called once the quiz is completed.
   final Function getResults;
+
   /// A flag for whether or not this quiz is actually a lesson, in which case more detailed explanation text is shown.
   final bool useQuestionText;
 
@@ -40,23 +43,23 @@ class Quiz extends StatefulWidget {
 
 /// The state class for the quiz.
 class _QuizState extends State<Quiz> {
-  Stopwatch stopwatch = Stopwatch();
-  late Widget screenWidget;
+  final Stopwatch _stopwatch = Stopwatch();
+  late Widget _screenWidget;
   late final PopUpController _pauseMenu;
 
   /// Gets the key pressed on the keyboard
-  void answer(String text) {
-    stopwatch.stop();
+  void _answer(String text) {
+    _stopwatch.stop();
     widget.questionBrain.setAnswer(
       userAnswer: text,
-      timeTaken: stopwatch.elapsedMilliseconds,
+      timeTaken: _stopwatch.elapsedMilliseconds,
     );
-    stopwatch.reset();
-    showResultAlert(text);
+    _stopwatch.reset();
+    _showResultAlert(text);
   }
 
   /// Sets the widget showing the question displayed on screen
-  void setScreenWidget() {
+  void _setScreenWidget() {
     Note note = widget.questionBrain.getNote();
     Clef clef = widget.questionBrain.getClef();
     // Question text is not displayed in speedrun/random quiz/practice quiz
@@ -66,7 +69,7 @@ class _QuizState extends State<Quiz> {
     int questionNum = widget.questionBrain.getQuestionNum();
     int totalNumOfQuestions = widget.questionBrain.getTotalNumberOfQuestions();
 
-    screenWidget = QuestionSkeleton(
+    _screenWidget = QuestionSkeleton(
       note: note,
       clef: clef,
       questionText: questionText,
@@ -76,7 +79,7 @@ class _QuizState extends State<Quiz> {
   }
 
   /// The pause button displayed in the top right.
-  Widget getPauseButton() {
+  Widget _getPauseButton() {
     return IconButton(
       key: const Key('Pause Icon'),
       icon: const Icon(
@@ -85,23 +88,23 @@ class _QuizState extends State<Quiz> {
         size: 35.0,
       ),
       onPressed: () {
-        stopwatch.stop();
+        _stopwatch.stop();
         _pauseMenu.show();
       },
     );
   }
 
   /// Text for the 'next' button on the pop-up displaying if the answer was correct or not.
-  String getNextButtonText() {
+  String _getNextButtonText() {
     return widget.questionBrain.isLastQuestion() ? "Finish" : "Next";
   }
 
   /// A 'next' button for the pop-up displaying if the answer the user selected was correct or not.
   ///
   /// Either takes user to the next question or the result screen if the current question is the last question.
-  Widget getNextButton() {
+  Widget _getNextButton() {
     return TextButton(
-      child: Text(getNextButtonText()),
+      child: Text(_getNextButtonText()),
       onPressed: () {
         Navigator.pop(context, 'OK');
 
@@ -110,8 +113,8 @@ class _QuizState extends State<Quiz> {
           // Update the screen
           setState(() {
             widget.questionBrain.goToNextQuestion();
-            setScreenWidget();
-            stopwatch.start();
+            _setScreenWidget();
+            _stopwatch.start();
           });
         } else {
           widget.getResults();
@@ -121,44 +124,30 @@ class _QuizState extends State<Quiz> {
   }
 
   /// Creates the template for alert with title, description and next button
-  AlertDialog createResultAlert(String alertTitle, String alertDesc) {
+  AlertDialog _createResultAlert(String alertTitle, String alertDesc) {
     return AlertDialog(
       title: Text(alertTitle),
       content: Text(alertDesc),
       actions: <Widget>[
-        getNextButton(),
+        _getNextButton(),
       ],
     );
   }
 
-  /// The results screen
-  void getResultsScreen(title, percentage, questionBrain) {
-    // Stops the user from swiping back to the quiz
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ResultsScreen(
-          score: percentage,
-          title: title,
-          questionBrain: questionBrain,
-        ),
-      ),
-    );
-  }
-
   /// Converts the correct answer if both the user answer and correct answer are the same note but different octaves
-  String convertAnswer() {
+  String _convertAnswer() {
     String correct = widget.questionBrain.getCorrectAnswerWithoutOctave();
     String user = widget.questionBrain.getUserAnswerWithoutOctave();
-    if (correct == user && widget.questionBrain.getCorrectAnswer() != widget.questionBrain.getUserAnswer()) {
+    if (correct == user &&
+        widget.questionBrain.getCorrectAnswer() !=
+            widget.questionBrain.getUserAnswer()) {
       return widget.questionBrain.getCorrectAnswer();
     }
     return correct;
   }
 
   /// Shows the pop-up when an option is selected
-  void showResultAlert(String choice) {
+  void _showResultAlert(String choice) {
     String alertTitle = '';
     String alertDesc = '';
 
@@ -167,24 +156,23 @@ class _QuizState extends State<Quiz> {
       alertDesc = 'You got the correct answer!';
     } else {
       alertTitle = 'Incorrect!';
-      alertDesc = 'Wrong answer, the correct answer is ' +
-          convertAnswer();
+      alertDesc = 'Wrong answer, the correct answer is ' + _convertAnswer();
     }
 
-    displayDialog(alertTitle, alertDesc);
+    _displayDialog(alertTitle, alertDesc);
   }
 
   /// Set information for an alert message.
   ///
   /// The alert is displayed each time the user answers a question.
   /// Shows if the answer is correct and provides a button to go to the next question.
-  void displayDialog(String alertTitle, String alertDesc) {
+  void _displayDialog(String alertTitle, String alertDesc) {
     showDialog<String>(
       context: context,
       // Stops the user from tapping outside of the pop-up
       barrierDismissible: false,
       builder: (context) {
-        return createResultAlert(alertTitle, alertDesc);
+        return _createResultAlert(alertTitle, alertDesc);
       },
     );
   }
@@ -192,23 +180,23 @@ class _QuizState extends State<Quiz> {
   @override
   void initState() {
     super.initState();
-    setScreenWidget();
+    _setScreenWidget();
     PauseMenu pauseMenuBuilder = PauseMenu(
         context: context,
         name: widget.name,
         backToID: widget.id,
-        continueOnPressed: () => stopwatch.start());
+        continueOnPressed: () => _stopwatch.start());
     _pauseMenu =
         PopUpController(context: context, menuBuilder: pauseMenuBuilder);
-    stopwatch.start();
+    _stopwatch.start();
   }
 
   @override
   void dispose() {
     super.dispose();
     _pauseMenu.delete();
-    stopwatch.stop();
-    stopwatch.reset();
+    _stopwatch.stop();
+    _stopwatch.reset();
   }
 
   @override
@@ -218,13 +206,13 @@ class _QuizState extends State<Quiz> {
         child: Stack(children: [
           Align(
             alignment: Alignment.topRight,
-            child: getPauseButton(),
+            child: _getPauseButton(),
           ),
           Column(
             children: [
-              screenWidget,
+              _screenWidget,
               Expanded(
-                child: PageKeyboard(answer),
+                child: PageKeyboard(_answer),
               ),
             ],
           ),

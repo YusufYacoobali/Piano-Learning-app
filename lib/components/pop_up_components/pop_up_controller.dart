@@ -5,7 +5,6 @@ import 'pop_up_content.dart';
 
 /// Controller to display an intermediate menu
 class PopUpController {
-
   /// Makes the menu display over another screen
   late final OverlayEntry _menu;
 
@@ -17,18 +16,20 @@ class PopUpController {
   /// Builds the menu
   PopUpContentBuilder menuBuilder;
 
+  bool _isShown = false;
+
   PopUpController({required this.context, required this.menuBuilder});
 
   /// Builds the contents of the menu
   void _build() {
     if (!menuBuilder.isBuilt) {
       menuBuilder.isBuilt = true;
-      menuBuilder.removeMenu = remove;
+      menuBuilder.removeMenu = _remove;
       menuBuilder.buildMenu();
       _intermediateMenu = PopUpContent(
         text: menuBuilder.text,
         options: menuBuilder.options,
-        removeMenu: remove,
+        removeMenu: _remove,
       );
       _menu = OverlayEntry(
         builder: (context) => _intermediateMenu,
@@ -37,7 +38,7 @@ class PopUpController {
   }
 
   /// Removes the menu from the screen
-  void remove() {
+  void _remove() {
     if (menuBuilder.isBuilt && _menu.mounted) {
       _menu.remove();
     }
@@ -45,10 +46,13 @@ class PopUpController {
 
   /// Shows the menu
   void show() {
-    _build();
-    if (!_menu.mounted) {
-      final overlay = Overlay.of(context)!;
-      overlay.insert(_menu);
+    if (!_isShown) {
+      _isShown = true;
+      _build();
+      if (!_menu.mounted) {
+        final overlay = Overlay.of(context)!;
+        overlay.insert(_menu);
+      }
     }
   }
 
@@ -56,7 +60,7 @@ class PopUpController {
   void delete() {
     if (menuBuilder.isBuilt && _menu.mounted) {
       _menu.remove();
+      _isShown = false;
     }
   }
-
 }

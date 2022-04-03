@@ -8,35 +8,35 @@ import '../../constants.dart';
 class AchievementMaker {
   //StorageReaderWriter storage = StorageReaderWriter();
 
-  List<AchievementCard> achieved = [];
-  List<AchievementCard> inProgress = [];
+  final List<AchievementCard> _achieved = [];
+  final List<AchievementCard> _inProgress = [];
 
   void makeLists(allValues) {
     //print(achieveValues);
-    List<AchievementCard> achieveObjects = makeAchievements(allValues);
+    List<AchievementCard> achieveObjects = _makeAchievements(allValues);
     //print(achieveObjects);
 
     //deciding where each card will go
     if (achieveObjects.isNotEmpty) {
       for (AchievementCard card in achieveObjects) {
         if (card.complete >= card.target) {
-          achieved.add(card);
+          _achieved.add(card);
         } else {
-          inProgress.add(card);
+          _inProgress.add(card);
         }
       }
     }
   }
 
   List<AchievementCard> getAchieved() {
-    return achieved;
+    return _achieved;
   }
 
   List<AchievementCard> getInProgress() {
-    return inProgress;
+    return _inProgress;
   }
 
-  List<AchievementCard> makeAchievements(achieveValues) {
+  List<AchievementCard> _makeAchievements(achieveValues) {
     //lesson achievements
     List<AchievementCard> achievements = [
       AchievementCard(

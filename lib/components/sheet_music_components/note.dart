@@ -1,3 +1,5 @@
+import '../../constants.dart';
+
 class Note {
 
   /// The note
@@ -31,31 +33,10 @@ class Note {
 
   /// Gets whether note1 is higher on the keyboard than note2
   static bool greaterOrEqualTo(Note note1, Note note2) {
-    Map<String, int> noteValues = <String, int>{
-      'C': 0,
-      'C#': 1,
-      'Db': 1,
-      'D': 2,
-      'D#': 3,
-      'Eb': 3,
-      'E': 4,
-      'F': 5,
-      'F#': 6,
-      'Gb': 6,
-      'G': 7,
-      'G#': 8,
-      'Ab': 8,
-      'A': 9,
-      'A#': 10,
-      'Bb': 10,
-      'B': 11,
-    };
-
     // Checks if the notes octaves are different
     int noteLevel1 = note1.getOctaveNumAsInt();
     int noteLevel2 = note2.getOctaveNumAsInt();
-    if (noteLevel1 > noteLevel2) return true;
-    if (noteLevel2 > noteLevel1) return false;
+    if (noteLevel1 != noteLevel2) return noteLevel1 > noteLevel2;
 
     // Checks if the notes are the same
     if (note1.getNameWithoutSymbol() == note2.getNameWithoutSymbol()) return true;

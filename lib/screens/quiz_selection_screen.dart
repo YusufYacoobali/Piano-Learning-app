@@ -14,7 +14,7 @@ List<String> quizzes = <String>[
   'Quiz 3 (Lesson 3)',
   'Quiz 4 (Lesson 4)',
   'Quiz 5 (Lesson 5)',
-  'Quiz 6 (Lesson 6)'
+  'Quiz 6 (Lesson 6)',
   'Quiz 7 (Lesson 7)',
   'Quiz 8 (Lesson 8)',
   'Quiz 9 (Lesson 9)',
