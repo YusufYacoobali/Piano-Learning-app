@@ -6,6 +6,7 @@ import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
+import 'package:sight_reading_app/screens/speedrun_screen.dart';
 
 void main() {
   Future<void> _goToSpeedrunMenuScreen(WidgetTester tester) async {
@@ -85,11 +86,11 @@ void main() {
       // Scrolls the screen until the widget to be tested is visible on screen.
       await tester.scrollUntilVisible(find.byKey(modeButtonKeys[i]), 500.0,
           scrollable: find.byType(Scrollable));
-	  await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
       expect(find.text('Record: ${modeRecords[i]}'), findsWidgets);
     }
   });
-  
+
   testWidgets(
       'Check that pressing a speedrun mode option navigates you to the speedrun screen with the selected mode',
       (WidgetTester tester) async {
@@ -97,10 +98,9 @@ void main() {
     // Navigates to the speedrun screen.
     await tester.tap(find.byKey(modeButtonKeys[0]));
     await tester.pumpAndSettle();
-
-    //TODO: Fix.
-    // expect(find.byType(SpeedrunScreen), findsOneWidget);
-    // SpeedrunScreen finalScreen = tester.firstWidget(find.byType(SpeedrunScreen));
-    // expect(finalScreen.timerDuration, modes[0]);
+    expect(find.byType(SpeedrunScreen), findsOneWidget);
+    SpeedrunScreen finalScreen =
+        tester.firstWidget(find.byType(SpeedrunScreen));
+    expect(finalScreen.timerDuration, modes[0]);
   });
- }
+}

@@ -39,9 +39,9 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
           mainAxisSpacing: 5,
           crossAxisCount: 2,
           children: <Widget>[
-            bassClefNoteHelperbutton(),
-            trebleClefNoteHelperbutton(),
-            noteTypesHelperButton(),
+            _bassClefNoteHelperbutton(),
+            _trebleClefNoteHelperbutton(),
+            _noteTypesHelperButton(),
           ],
         ),
       ),
@@ -49,7 +49,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   }
 
   ///A button that will be route to specific screen of bass note_helper.
-  Widget bassClefNoteHelperbutton() {
+  Widget _bassClefNoteHelperbutton() {
     return MenuButton(
       buttonChild: const ButtonText(buttonText: 'Bass Clef Notes'),
       onPress: () {
@@ -66,7 +66,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   }
 
   ///A button that will be route to specific screen of clef note_helper.
-  Widget trebleClefNoteHelperbutton() {
+  Widget _trebleClefNoteHelperbutton() {
     return MenuButton(
       buttonChild: const ButtonText(buttonText: 'Treble Clef Notes'),
       onPress: () {
@@ -83,7 +83,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   }
 
   /// A button that will be routed to a specific screen of the note types note_helper.
-  Widget noteTypesHelperButton() {
+  Widget _noteTypesHelperButton() {
     return MenuButton(
       buttonChild: const ButtonText(buttonText: 'Note Types'),
       onPress: () {

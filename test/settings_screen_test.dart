@@ -76,7 +76,7 @@ void main() {
 
     // Check that the theme has changed
     expect(Theme.of(tester.element(find.byType(Scaffold))).brightness,
-        Brightness.dark);
+        Brightness.light);
   });
 
   testWidgets('Check that resetting the settings sets their values to default.',
@@ -107,7 +107,7 @@ void main() {
 
     // Check that the theme changes
     expect(Theme.of(tester.element(find.byType(Scaffold))).brightness,
-        Brightness.dark);
+        Brightness.light);
 
     await tester.tap(find.text('Reset Progress'));
     await tester.pump();
@@ -150,7 +150,7 @@ void main() {
 
     // Check that the theme changes
     expect(Theme.of(tester.element(find.byType(Scaffold))).brightness,
-        Brightness.dark);
+        Brightness.light);
 
     await tester.tap(find.text('Reset Progress'));
     await tester.pump();
@@ -162,7 +162,7 @@ void main() {
 
     // Check that the theme stays the same
     expect(Theme.of(tester.element(find.byType(Scaffold))).brightness,
-        Brightness.dark);
+        Brightness.light);
   });
 
   testWidgets('Check that loading settings from storage displays correctly.',
@@ -181,7 +181,7 @@ void main() {
 
     // Check that the initial theme of the app is light
     expect(Theme.of(tester.element(find.byType(Scaffold))).brightness,
-        Brightness.dark);
+        Brightness.light);
 
     expect(find.text('Intermediate'), findsOneWidget);
     expect(find.text('Light'), findsOneWidget);

@@ -39,6 +39,7 @@ class PopUpController {
 
   /// Removes the menu from the screen
   void _remove() {
+    _isShown = false;
     if (menuBuilder.isBuilt && _menu.mounted) {
       _menu.remove();
     }
@@ -60,7 +61,6 @@ class PopUpController {
   void delete() {
     if (menuBuilder.isBuilt && _menu.mounted) {
       _menu.remove();
-      _isShown = false;
     }
   }
 }

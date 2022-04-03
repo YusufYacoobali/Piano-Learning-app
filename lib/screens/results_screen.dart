@@ -34,7 +34,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   /// Gets the widget displaying the title
-  Widget getTitleWidget() {
+  Widget _getTitleWidget() {
     return Expanded(
       flex: 1,
       child: FittedBox(
@@ -52,7 +52,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   /// Gets the widget displaying the user's score
-  Widget getScoreWidget() {
+  Widget _getScoreWidget() {
     return Expanded(
       flex: 1,
       child: FittedBox(
@@ -60,7 +60,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
           child: Text(
-            'You got ${getPercentage()}',
+            'You got ${_getPercentage()}',
             textAlign: TextAlign.center,
             style: scoreWidgetTextStyle,
           ),
@@ -70,19 +70,19 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   /// Formats and returns the percentage
-  String getPercentage() {
+  String _getPercentage() {
     double unroundedPercentage = widget.score * 100;
     return '${unroundedPercentage.toStringAsFixed(0)}%';
   }
 
   /// Gets the widget displaying the icon in the centre of the screen
-  Widget getIconWidget() {
+  Widget _getIconWidget() {
     return Expanded(
       flex: 2,
       child: FittedBox(
         fit: BoxFit.contain,
         child: Icon(
-          getIcon(),
+          _getIcon(),
           size: 150.0,
         ),
       ),
@@ -90,7 +90,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   /// Gets the correct icon depending on the user's score
-  IconData getIcon() {
+  IconData _getIcon() {
     if (widget.score < passThreshold) {
       return Icons.cancel;
     } else {
@@ -99,7 +99,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   /// Gets the "Exit" button displayed at the bottom of the screen
-  Widget getExitButton() {
+  Widget _getExitButton() {
     return ElevatedButton(
       onPressed: () {
         Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
@@ -110,7 +110,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   /// Gets the "Review Answers" button displayed at the bottom of the screen
-  Widget getReviewAnswersButton() {
+  Widget _getReviewAnswersButton() {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
@@ -126,7 +126,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   /// Gets the buttons at the bottom of the screen
-  Widget getNavigationButtons() {
+  Widget _getNavigationButtons() {
     return Expanded(
       flex: 1,
       child: Padding(
@@ -134,8 +134,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            getExitButton(),
-            getReviewAnswersButton(),
+            _getExitButton(),
+            _getReviewAnswersButton(),
           ],
         ),
       ),
@@ -155,10 +155,10 @@ class _ResultsScreenState extends State<ResultsScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            getTitleWidget(),
-            getIconWidget(),
-            getScoreWidget(),
-            getNavigationButtons(),
+            _getTitleWidget(),
+            _getIconWidget(),
+            _getScoreWidget(),
+            _getNavigationButtons(),
           ],
         ),
       ),

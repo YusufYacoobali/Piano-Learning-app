@@ -13,7 +13,6 @@ import '../storage_reader_writer.dart';
 import '../components/page_keyboard.dart';
 
 class _EndlessModeScreenState extends State<EndlessModeScreen> {
-
   /// Music sheet that moves
   late final MovingMusicSheet _sheet;
 
@@ -51,25 +50,29 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The keyboard
   late PageKeyboard _keyboard;
 
+  /// Updates the keyboard depending on the clef
+  String _setClef = 'update';
+
   @override
   void initState() {
     super.initState();
-    _keyboard = PageKeyboard(playKey);
+    _keyboard = PageKeyboard(_playKey);
+
     /// Sets up the music sheet
-    _currentNoteToPlay =
-        NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: stop, onePress: true);
+    _currentNoteToPlay = NotePlayedChecker(
+        noteNotifier: _noteToPlay, onNotePass: stop, onePress: true);
     _sheet = MovingMusicSheet(
         nextNote: _nextNote,
         clef: Clef.treble,
         notePlayedChecker: _currentNoteToPlay);
     _generator = EndlessNoteGenerator(
-        sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
+        sheet: _sheet, nextNote: _nextNote, updater: _updateScreen);
 
-    getDifficulty();
+    _getDifficulty();
 
     /// Builds the menus
     EndlessStartingInstructions startMenuBuilder =
-        EndlessStartingInstructions(context: context, onStart: startGame);
+        EndlessStartingInstructions(context: context, onStart: _startGame);
     EndlessEndingInstructions endMenuBuilder =
         EndlessEndingInstructions(context: context, counter: _counter);
     _startMenu =
@@ -89,7 +92,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// Gets the difficulty level from storage
-  void getDifficulty() {
+  void _getDifficulty() {
     storage.loadDataFromStorage().then((value) {
       _difficulty = storage.read('difficulty').toString();
       _generator.setDifficulty(_difficulty);
@@ -97,7 +100,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// Updates the screen
-  void updateScreen(String update) {
+  void _updateScreen(String update) {
     setState(() {
       updater = update;
     });
@@ -111,11 +114,10 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
       _hasEnded = true;
       if (!isWrong) {
         setState(() {
-        updater += '1';
+          updater += '1';
         });
-      }
-      else {
-        updater+='1';
+      } else {
+        updater += '1';
       }
     } else {
       _counter.score++;
@@ -123,10 +125,10 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// Starts the endless mode game
-  void startGame(Clef clef) {
+  void _startGame(Clef clef) {
     if (clef == Clef.bass) {
-      _keyboard = PageKeyboard(playKey, startOctave: 3);
-      updater+='1';
+      _keyboard = PageKeyboard(_playKey, startOctave: 3);
+      _setClef = _setClef + '1';
     }
     _counter.getHighScore(clef, _difficulty);
     _generator.setClef(clef);
@@ -135,25 +137,26 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// Gets the key pressed on the keyboard
-  void playKey(String text) {
+  void _playKey(String text) {
     _currentNoteToPlay.checkPress(text);
   }
 
-  void end() async {
+  void _end() async {
     List displayNotification = await storage.displayEndlessNotification(
         _difficulty, _counter.score, _sheet.clef);
     if (displayNotification[0]) {
-      inAppNotification(context, displayNotification[1], onBack: () => _endMenu.show());
-    }
-    else {
-       _endMenu.show();
+      Navigator.pop(context);
+      inAppNotification(context, displayNotification[1],
+          onBack: () => _endMenu.show());
+    } else {
+      _endMenu.show();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => {if (_hasEnded) end()});
+        ?.addPostFrameCallback((_) => {if (_hasEnded) _end()});
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -170,6 +173,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
               ),
             ),
             Expanded(
+              key: Key(_setClef),
               flex: 3,
               child: _keyboard,
             ),

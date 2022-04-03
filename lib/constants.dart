@@ -45,7 +45,7 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
     dialogTheme: darkDialogTextStyleTheme,
     textButtonTheme: darkTextButtonButtonTheme,
   ),
-  'Light': ThemeData.dark().copyWith(
+  'Light': ThemeData.light().copyWith(
     scaffoldBackgroundColor: _lightBackgroundColour,
     appBarTheme: lightAppBarTheme,
     tabBarTheme: lightTabBarTheme,
@@ -54,7 +54,7 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
     elevatedButtonTheme: lightElevatedButtonTheme,
     textButtonTheme: lightTextButtonButtonTheme,
   ),
-  'Pink': ThemeData.dark().copyWith(
+  'Pink': ThemeData.light().copyWith(
     backgroundColor: _whiteColour,
     appBarTheme: pinkAppBarTheme,
     tabBarTheme: pinkTabBarTheme,

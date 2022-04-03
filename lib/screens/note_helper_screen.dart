@@ -98,7 +98,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: getAllHelperCards(),
+              children: _getAllHelperCards(),
             ),
           ),
         ),
@@ -107,17 +107,17 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   /// Returns a list of Card widgets to display.
-  List<Widget> getAllHelperCards() {
+  List<Widget> _getAllHelperCards() {
     List<Widget> allHelperCards = [];
 
     for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); ++i) {
-      allHelperCards.add(cardHelper(i));
+      allHelperCards.add(_createCardHelper(i));
     }
     return allHelperCards;
   }
 
   ///Creates a card that holds note images, names and sound.
-  Widget cardHelper(index) {
+  Widget _createCardHelper(index) {
     return Center(
       child: Card(
         key: cardKeys[index],
@@ -137,20 +137,20 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
                       direction: Axis.horizontal,
                       alignment: WrapAlignment.center,
                       children: [
-                        cardNoteImage(index),
+                        _getCardNoteImage(index),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             const SizedBox(height: 30.0),
-                            cardText(index),
+                            _getCardText(index),
                             const SizedBox(
                               height: 5.0,
                               width: 230.0,
                             ),
-                            if (getWidgetVisible())
-                              cardPlayIcon(index)
+                            if (_getWidgetVisible())
+                              _getCardPlayIcon(index)
                             else
-                              cardDescription(index),
+                              _getCardDescription(index),
                           ],
                         ),
                       ],
@@ -166,7 +166,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   ///A widget that holds the image of the note.
-  Widget cardNoteImage(index) {
+  Widget _getCardNoteImage(index) {
     // sets the clef of the image
     Clef clef = Clef.treble;
     if (widget.helperNum == 1) {
@@ -192,7 +192,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   ///A widget that holds the name of the note.
-  Widget cardText(index) {
+  Widget _getCardText(index) {
     return FittedBox(
       key: textKeys[index],
       child: Text(
@@ -204,7 +204,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
 
   ///A boolean method that makes specific widget visible
   ///in the note helper card.
-  bool getWidgetVisible() {
+  bool _getWidgetVisible() {
     if (widget.helperNum > 2) {
       return false;
     } else {
@@ -213,7 +213,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   ///A widget that holds the icon button which can play note sound when pressed.
-  Widget cardPlayIcon(index) {
+  Widget _getCardPlayIcon(index) {
     return ElevatedButton.icon(
       key: buttonKeys[index],
       icon: helpPlayButtonStyle,
@@ -226,7 +226,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   }
 
   ///Widget for note_helper description
-  Widget cardDescription(index) {
+  Widget _getCardDescription(index) {
     return Container(
       height: 150,
       width: 250,

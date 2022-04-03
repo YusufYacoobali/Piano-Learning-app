@@ -40,18 +40,18 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  void getResults() async {
+  void _getResults() async {
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
-      getResultsScreen(title, percentage, questionBrain);
+      _getResultsScreen(title, percentage, questionBrain);
     } else {
       title = "Congratulations!";
       storage.saveCompletedLesson(widget.lessonNum - 1);
       List displayNotification = await storage.displayLessonNotification();
-      getResultsScreen(title, percentage, questionBrain);
+      _getResultsScreen(title, percentage, questionBrain);
       //only displays notification if achievement is completed
       if (displayNotification[0]) {
         inAppNotification(context, displayNotification[1]);
@@ -60,7 +60,7 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   /// Displays the results screen
-  void getResultsScreen(
+  void _getResultsScreen(
       String title, double percentage, QuestionBrain questionBrain) {
     Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
     Navigator.pushNamed(context, LessonMenuScreen.id);
@@ -82,7 +82,7 @@ class _LessonScreenState extends State<LessonScreen> {
       name: 'Lessons',
       id: LessonMenuScreen.id,
       questionBrain: questionBrain,
-      getResults: getResults,
+      getResults: _getResults,
       useQuestionText: true,
     );
   }
