@@ -49,8 +49,9 @@ class NotePlayedChecker {
         onNotePass(false, false);
       }
     }
-    else if (!noteNotifier.isNull() && onePress) {
+    else if (!_noteHit && !noteNotifier.isNull() && onePress) {
       onNotePass(false, false);
+      _noteHit = true;
     }
   }
 
