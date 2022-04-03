@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
+import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
@@ -82,17 +84,15 @@ void main() {
     }
   });
 
-  //TODO: Fix
-  // testWidgets(
-  //     'Check that clicking a quiz button navigates you to the quiz screen.',
-  //     (WidgetTester tester) async {
-  //       await _goToQuizSelectionScreen(tester);
-  //       await tester.tap(find.byKey(quizButtonKeys[0]));
-  //       await tester.pumpAndSettle();
-  //       //TODO: Fix
-  //       //expect(find.byType(PracticeQuizScreen), findsOneWidget);
-  //     }
-  // );
+  testWidgets(
+      'Check that clicking a quiz button navigates you to the quiz screen.',
+      (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await _goToQuizSelectionScreen(tester);
+    await tester.tap(find.byKey(quizButtonKeys[0]));
+    await tester.pumpAndSettle();
+    expect(find.byType(PracticeQuizScreen), findsOneWidget);
+  });
 
   testWidgets('Check that the ${"random quiz button"} is displayed on screen.',
       (WidgetTester tester) async {
