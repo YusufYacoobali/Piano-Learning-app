@@ -13,7 +13,6 @@ import '../storage_reader_writer.dart';
 import '../components/page_keyboard.dart';
 
 class _EndlessModeScreenState extends State<EndlessModeScreen> {
-
   /// Music sheet that moves
   late final MovingMusicSheet _sheet;
 
@@ -58,9 +57,10 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   void initState() {
     super.initState();
     _keyboard = PageKeyboard(playKey);
+
     /// Sets up the music sheet
-    _currentNoteToPlay =
-        NotePlayedChecker(noteNotifier: _noteToPlay, onNotePass: stop, onePress: true);
+    _currentNoteToPlay = NotePlayedChecker(
+        noteNotifier: _noteToPlay, onNotePass: stop, onePress: true);
     _sheet = MovingMusicSheet(
         nextNote: _nextNote,
         clef: Clef.treble,
@@ -107,11 +107,18 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// The function to be called on each note moving out of the target area
-  void stop(bool hasPlayed) {
+  void stop(bool hasPlayed, bool isWrong) {
     if (!hasPlayed) {
       _generator.stop();
-      _hasEnded = true;
       _counter.isNewHighScore(_sheet.clef, _difficulty);
+      _hasEnded = true;
+      if (!isWrong) {
+        setState(() {
+          updater += '1';
+        });
+      } else {
+        updater += '1';
+      }
     } else {
       _counter.score++;
     }
@@ -134,14 +141,15 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _currentNoteToPlay.checkPress(text);
   }
 
-  end() async {
+  void end() async {
     List displayNotification = await storage.displayEndlessNotification(
         _difficulty, _counter.score, _sheet.clef);
     if (displayNotification[0]) {
-      inAppNotification(context, displayNotification[1], onBack: () => _endMenu.show());
-    }
-    else {
-       _endMenu.show();
+      Navigator.pop(context);
+      inAppNotification(context, displayNotification[1],
+          onBack: () => _endMenu.show());
+    } else {
+      _endMenu.show();
     }
   }
 

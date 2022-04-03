@@ -9,6 +9,7 @@ import 'package:sight_reading_app/lessons_and_quizzes/question_brain.dart';
 import '../helper.dart';
 import '../lessons_and_quizzes/question_finder.dart';
 import '../lessons_and_quizzes/quiz.dart';
+import 'menu_screen.dart';
 
 /// Creates screen for the practice quiz.
 ///
@@ -44,8 +45,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     //If it is the user's first time, the currentRecord will be N/A.
     //We want to change N/A to 0 to show an attempt was made (even if they got nothing right).
     if (score > currentRecord || currentRecord == 0) {
-      prefs.setInt(
-          getRecordKeysForMode('quiz')[widget.lessonID - 1], score);
+      prefs.setInt(getRecordKeysForMode('quiz')[widget.lessonID - 1], score);
     }
   }
 
@@ -72,7 +72,8 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
 
   void getResultsScreen(
       String title, double percentage, QuestionBrain questionBrain) {
-    Navigator.pop(context);
+    Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
+    Navigator.pushNamed(context, QuizSelectionScreen.id);
     Navigator.push(
       context,
       MaterialPageRoute(

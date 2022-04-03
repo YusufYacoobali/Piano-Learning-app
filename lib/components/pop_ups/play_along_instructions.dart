@@ -20,7 +20,7 @@ class PlayAlongInstructions extends PopUpContentBuilder {
         children: const [
           Text('Play Along Mode', style: pauseMenuTextStyle),
           SizedBox(height: 20.0),
-          Text('Play the melody along with your chosen backing track.'),
+          Text('Play along with a selection of songs'),
           SizedBox(height: 10.0),
           Text('Have fun!'),
           SizedBox(height: 30.0),

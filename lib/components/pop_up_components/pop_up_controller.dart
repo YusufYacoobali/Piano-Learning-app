@@ -16,6 +16,8 @@ class PopUpController {
   /// Builds the menu
   PopUpContentBuilder menuBuilder;
 
+  bool _isShown = false;
+
   PopUpController({required this.context, required this.menuBuilder});
 
   /// Builds the contents of the menu
@@ -37,6 +39,7 @@ class PopUpController {
 
   /// Removes the menu from the screen
   void _remove() {
+    _isShown = false;
     if (menuBuilder.isBuilt && _menu.mounted) {
       _menu.remove();
     }
@@ -44,10 +47,13 @@ class PopUpController {
 
   /// Shows the menu
   void show() {
-    _build();
-    if (!_menu.mounted) {
-      final overlay = Overlay.of(context)!;
-      overlay.insert(_menu);
+    if (!_isShown) {
+      _isShown = true;
+      _build();
+      if (!_menu.mounted) {
+        final overlay = Overlay.of(context)!;
+        overlay.insert(_menu);
+      }
     }
   }
 
