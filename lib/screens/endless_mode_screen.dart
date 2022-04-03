@@ -51,6 +51,9 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The keyboard
   late PageKeyboard _keyboard;
 
+  /// Updates the keyboard depending on the clef
+  String _setClef = 'update';
+
   @override
   void initState() {
     super.initState();
@@ -126,7 +129,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   void startGame(Clef clef) {
     if (clef == Clef.bass) {
       _keyboard = PageKeyboard(playKey, startOctave: 3);
-      updater+='1';
+      _setClef = _setClef + '1';
     }
     _counter.getHighScore(clef, _difficulty);
     _generator.setClef(clef);
@@ -170,6 +173,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
               ),
             ),
             Expanded(
+              key: Key(_setClef),
               flex: 3,
               child: _keyboard,
             ),
