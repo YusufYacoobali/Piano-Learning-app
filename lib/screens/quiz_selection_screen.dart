@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import '../components/app_bar_with_settings_icon.dart';
@@ -105,7 +106,7 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
                               SizedBox(
                                   width: MediaQuery.of(context).size.width /
                                       4), //Adds space between Text
-                              Text('Record: ${quizRecords[index]}',
+                              Text('Record: ${quizRecords[index]} / $numOfQuestionsInPracticeQuiz',
                                   textAlign: TextAlign.right),
                             ],
                           ),
