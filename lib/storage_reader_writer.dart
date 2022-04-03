@@ -126,6 +126,8 @@ class StorageReaderWriter {
   Future<Map<String, int>> loadAchievementValues() async {
     final prefs = await SharedPreferences.getInstance();
 
+    Map<String, int> values = {};
+
     int lessonsPassed = 0;
     //gets the number of lessons passed.
     for (int x = 0; x < numOfLessons; x++) {
@@ -133,115 +135,31 @@ class StorageReaderWriter {
       if (value) lessonsPassed += 1;
     }
 
-    int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
-    int endlessBassBegHS =
-        int.parse(prefs.getString('endless-bass-beginner-high-score') ?? '0');
-    int endlessBassInterHS = int.parse(
-        prefs.getString('endless-bass-intermediate-high-score') ?? '0');
-    int endlessBassExpHS =
-        int.parse(prefs.getString('endless-bass-expert-high-score') ?? '0');
+    values['completedLessons'] = lessonsPassed;
 
-    int endlessTrebleBegHS =
-        int.parse(prefs.getString('endless-treble-beginner-high-score') ?? '0');
-    int endlessTrebleInterHS = int.parse(
-        prefs.getString('endless-treble-intermediate-high-score') ?? '0');
-    int endlessTrebleExpHS =
-        int.parse(prefs.getString('endless-treble-expert-high-score') ?? '0');
+    values['completedQuizzes'] = (prefs.getInt('completed_quizzes') ?? 0);
 
-    int speedrun10HS = int.parse((prefs.get('10_second_speedrun_record') ?? '0').toString());
-    int speedrun20HS = int.parse((prefs.get('20_second_speedrun_record') ?? '0').toString());
-    int speedrun30HS = int.parse((prefs.get('30_second_speedrun_record') ?? '0').toString());
-    int speedrun40HS = int.parse((prefs.get('40_second_speedrun_record') ?? '0').toString());
-    int speedrun50HS = int.parse((prefs.get('50_second_speedrun_record') ?? '0').toString());
-    int speedrun60HS = int.parse((prefs.get('60_second_speedrun_record') ?? '0').toString());
+    for (String clef in <String>['treble', 'bass']) {
+      for (Object difficulty in difficultyList) {
+        String key =
+            'endless-$clef-${difficulty.toString().toLowerCase()}-high-score';
+        values[key] = int.parse(prefs.getString(key) ?? '0');
+      }
+    }
 
-    int playAlongOdeBeg = double.parse(
-            prefs.getString('ode to joy - treble only-beginner-high-score') ??
-                '0')
-        .toInt();
+    for (int x = 10; x < 70; x += 10) {
+      values['speedrun${x}HS'] = int.parse(
+          (prefs.get('${x}_second_speedrun_record') ?? '0').toString());
+    }
 
-    int playAlongOdeInter = double.parse(prefs.getString(
-                'ode to joy - treble only-intermediate-high-score') ??
-            '0')
-        .toInt();
-    int playAlongOdeExp = double.parse(
-            prefs.getString('ode to joy - treble only-expert-high-score') ??
-                '0')
-        .toInt();
+    for (String track in trackNames) {
+      for (Object difficulty in difficultyList) {
+        String key =
+            '${track.toLowerCase()}-${difficulty.toString().toLowerCase()}-high-score';
+        values[key] = double.parse(prefs.getString(key) ?? '0').toInt();
+      }
+    }
 
-    int playAlongSimpBeg = double.parse(
-            prefs.getString('a simple bass melody-beginner-high-score') ?? '0')
-        .toInt();
-    int playAlongSimpInter = double.parse(
-            prefs.getString('a simple bass melody-intermediate-high-score') ??
-                '0')
-        .toInt();
-    int playAlongSimpExp = double.parse(
-            prefs.getString('a simple bass melody-expert-high-score') ?? '0')
-        .toInt();
-    int playAlongSMcBeg = double.parse(
-            prefs.getString('old macdonald-beginner-high-score') ?? '0')
-        .toInt();
-    int playAlongMcInter = double.parse(
-            prefs.getString('old macdonald-intermediate-high-score') ?? '0')
-        .toInt();
-    int playAlongMcExp =
-        double.parse(prefs.getString('old macdonald-expert-high-score') ?? '0')
-            .toInt();
-
-    int playAlongFadeBeg = double.parse(
-            prefs.getString('faded - alan walker-beginner-high-score') ?? '0')
-        .toInt();
-    int playAlongFadeInter = double.parse(
-            prefs.getString('faded - alan walker-intermediate-high-score') ??
-                '0')
-        .toInt();
-    int playAlongFadeExp = double.parse(
-            prefs.getString('faded - alan walker-expert-high-score') ?? '0')
-        .toInt();
-
-    int playAlongSwayBeg = double.parse(
-            prefs.getString('swaying melody-beginner-high-score') ?? '0')
-        .toInt();
-    int playAlongSwayInter = double.parse(
-            prefs.getString('swaying melody-intermediate-high-score') ?? '0')
-        .toInt();
-    int playAlongSwayExp =
-        double.parse(prefs.getString('swaying melody-expert-high-score') ?? '0')
-            .toInt();
-
-    // This map is given to achievement screen so cards can be made.
-    Map<String, int> values = {
-      'completedLessons': lessonsPassed,
-      'completedQuizzes': completedQuizzes,
-      'endlessBassBegHS': endlessBassBegHS,
-      'endlessBassInterHS': endlessBassInterHS,
-      'endlessBassExpHS': endlessBassExpHS,
-      'endlessTrebleBegHS': endlessTrebleBegHS,
-      'endlessTrebleInterHS': endlessTrebleInterHS,
-      'endlessTrebleExpHS': endlessTrebleExpHS,
-      'speedrun10HS': speedrun10HS,
-      'speedrun20HS': speedrun20HS,
-      'speedrun30HS': speedrun30HS,
-      'speedrun40HS': speedrun40HS,
-      'speedrun50HS': speedrun50HS,
-      'speedrun60HS': speedrun60HS,
-      'playAlongOdeBeg': playAlongOdeBeg,
-      'playAlongOdeInter': playAlongOdeInter,
-      'playAlongOdeExp': playAlongOdeExp,
-      'playAlongSimpBeg': playAlongSimpBeg,
-      'playAlongSimpInter': playAlongSimpInter,
-      'playAlongSimpExp': playAlongSimpExp,
-      'playAlongMcBeg': playAlongSMcBeg,
-      'playAlongMcInter': playAlongMcInter,
-      'playAlongMcExp': playAlongMcExp,
-      'playAlongFadeBeg': playAlongFadeBeg,
-      'playAlongFadeInter': playAlongFadeInter,
-      'playAlongFadeExp': playAlongFadeExp,
-      'playAlongSwayBeg': playAlongSwayBeg,
-      'playAlongSwayInter': playAlongSwayInter,
-      'playAlongSwayExp': playAlongSwayExp,
-    };
     return values;
   }
 
@@ -320,8 +238,8 @@ class StorageReaderWriter {
   ///
   /// If there are no records in storage, the default values are loaded and written to storage.
   Future<void> _loadPlayAlongRecordsFromStorage(SharedPreferences pref) async {
-    String? isOnDisk =
-        pref.getString('${trackNames[0].toLowerCase()}-${defaultDifficultyLevel.toLowerCase()}-high-score');
+    String? isOnDisk = pref.getString(
+        '${trackNames[0].toLowerCase()}-${defaultDifficultyLevel.toLowerCase()}-high-score');
     if (isOnDisk == null) {
       _setDefaultPlayAlongRecords();
       _writePlayAlongRecordsToStorage();
@@ -369,10 +287,10 @@ class StorageReaderWriter {
       _setDefaultSpeedrunRecords();
       _writeSpeedrunRecordsToStorage();
     } else {
-        List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
-        for (String key in _modeRecordKeys) {
-          _map[key] = pref.get(key);
-        }
+      List<String> _modeRecordKeys = getRecordKeysForMode('speedrun');
+      for (String key in _modeRecordKeys) {
+        _map[key] = pref.get(key);
+      }
     }
   }
 
@@ -405,7 +323,7 @@ class StorageReaderWriter {
       _writeQuizRecordsToStorage();
     } else {
       for (String key in _quizRecordKeys) {
-          _map[key] = pref.get(key);
+        _map[key] = pref.get(key);
       }
     }
   }
@@ -513,7 +431,6 @@ class StorageReaderWriter {
     }
   }
 
-  //TODO I believe this doesn't work for some reason
   /// Resets all endless data related to achievements.
   void _resetEndlessAchievements() async {
     final prefs = await SharedPreferences.getInstance();
@@ -525,8 +442,6 @@ class StorageReaderWriter {
         prefs.setBool('endless-Clef.$clef-$level-achievement', false);
       }
     }
-    // endless-Clef.treble-beginner-achievement
-    //   endless-Clef.treble-beginner-achievement
   }
 
   /// Decides whether a lesson achievement needs to be shown.

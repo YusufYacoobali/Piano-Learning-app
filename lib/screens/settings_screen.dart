@@ -96,11 +96,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       value: option,
                                     );
                                   }).toList(),
-                                  onChanged: (level) async {
+                                  onChanged: (level) {
                                     if (level != null) {
-                                      await settings
-                                          .write('difficulty', level)
-                                          .then((v) => setState(() => {}));
+                                      settings.write('difficulty', level).then((v) => setState(() => {}));
                                     }
                                   }),
                             ),
@@ -111,6 +109,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               leading: const Icon(Icons.format_paint),
                               key: const Key('theme selector'),
                               value: DropdownButton(
+                                  value: settings.read('theme'),
                                   items: constants.themeColors.keys
                                       .toList()
                                       .map((option) {
@@ -119,9 +118,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       value: option,
                                     );
                                   }).toList(),
-                                  value: settings.read('theme'),
-                                  onChanged: (theme) async {
+                                  onChanged: (theme) {
                                     if (theme != null) {
+                                      settings.write('theme', theme).then((v) => setState(() => {}));
                                       themeNotifier.theme = theme.toString();
                                     }
                                   }),
