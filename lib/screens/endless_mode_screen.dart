@@ -56,7 +56,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   @override
   void initState() {
     super.initState();
-    _keyboard = PageKeyboard(playKey);
+    _keyboard = PageKeyboard(_playKey);
 
     /// Sets up the music sheet
     _currentNoteToPlay = NotePlayedChecker(
@@ -66,13 +66,13 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
         clef: Clef.treble,
         notePlayedChecker: _currentNoteToPlay);
     _generator = EndlessNoteGenerator(
-        sheet: _sheet, nextNote: _nextNote, updater: updateScreen);
+        sheet: _sheet, nextNote: _nextNote, updater: _updateScreen);
 
-    getDifficulty();
+    _getDifficulty();
 
     /// Builds the menus
     EndlessStartingInstructions startMenuBuilder =
-        EndlessStartingInstructions(context: context, onStart: startGame);
+        EndlessStartingInstructions(context: context, onStart: _startGame);
     EndlessEndingInstructions endMenuBuilder =
         EndlessEndingInstructions(context: context, counter: _counter);
     _startMenu =
@@ -92,7 +92,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// Gets the difficulty level from storage
-  void getDifficulty() {
+  void _getDifficulty() {
     storage.loadDataFromStorage().then((value) {
       _difficulty = storage.read('difficulty').toString();
       _generator.setDifficulty(_difficulty);
@@ -100,7 +100,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// Updates the screen
-  void updateScreen(String update) {
+  void _updateScreen(String update) {
     setState(() {
       updater = update;
     });
@@ -125,9 +125,9 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// Starts the endless mode game
-  void startGame(Clef clef) {
+  void _startGame(Clef clef) {
     if (clef == Clef.bass) {
-      _keyboard = PageKeyboard(playKey, startOctave: 3);
+      _keyboard = PageKeyboard(_playKey, startOctave: 3);
       _setClef = _setClef + '1';
     }
     _counter.getHighScore(clef, _difficulty);
@@ -137,11 +137,11 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// Gets the key pressed on the keyboard
-  void playKey(String text) {
+  void _playKey(String text) {
     _currentNoteToPlay.checkPress(text);
   }
 
-  void end() async {
+  void _end() async {
     List displayNotification = await storage.displayEndlessNotification(
         _difficulty, _counter.score, _sheet.clef);
     if (displayNotification[0]) {
@@ -156,7 +156,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => {if (_hasEnded) end()});
+        ?.addPostFrameCallback((_) => {if (_hasEnded) _end()});
     return Scaffold(
       body: SafeArea(
         child: Column(
