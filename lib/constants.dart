@@ -405,7 +405,7 @@ const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 ///Achievement screen constants.
 const double cardWidth = 270;
 const double cardHeight = 270;
-const double circularIndicatorRadius = 68;
+const double circularIndicatorRadius = 58;
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
 const Color indicatorGoodProgress = Colors.green;
