@@ -50,19 +50,19 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
   }
 
   /// Create result screen which displays after the user finishes all questions
-  void getResults() async {
+  void _getResults() async {
     _updateRecords();
     String title = '';
     double percentage =
         questionBrain.getScore() / questionBrain.getTotalNumberOfQuestions();
     if (percentage < passThreshold) {
       title = "Aww, better luck next time!";
-      getResultsScreen(title, percentage, questionBrain);
+      _getResultsScreen(title, percentage, questionBrain);
     } else {
       title = "Congratulations!";
       storage.saveCompletedQuiz();
       List displayNotification = await storage.displayQuizNotification();
-      getResultsScreen(title, percentage, questionBrain);
+      _getResultsScreen(title, percentage, questionBrain);
       //only displays notification if achievement is completed
       if (displayNotification[0]) {
         inAppNotification(context, displayNotification[1]);
@@ -70,7 +70,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     }
   }
 
-  void getResultsScreen(
+  void _getResultsScreen(
       String title, double percentage, QuestionBrain questionBrain) {
     Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
     Navigator.pushNamed(context, QuizSelectionScreen.id);
@@ -91,7 +91,7 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
       id: QuizSelectionScreen.id,
       name: 'Quizzes',
       questionBrain: questionBrain,
-      getResults: getResults,
+      getResults: _getResults,
       useQuestionText: false,
     );
   }
