@@ -94,7 +94,7 @@ final NoteHelperList bassNoteImageNameList = NoteHelperList(
     NoteHelperInfo(
         noteImageName: Note(name: 'C3', duration: 4),
         noteName: 'Bass C',
-        noteSound: 'note_low_c',
+        noteSound: 'note_low_c3',
         description: ''),
   ],
 );

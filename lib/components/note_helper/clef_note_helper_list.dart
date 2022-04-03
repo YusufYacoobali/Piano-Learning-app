@@ -94,7 +94,7 @@ final NoteHelperList clefNoteImageNameList = NoteHelperList(
     NoteHelperInfo(
         noteImageName: Note(name: 'C5', duration: 4),
         noteName: 'Clef High C',
-        noteSound: 'note_high_c',
+        noteSound: 'note_high_c5',
         description: ''),
   ],
 );
