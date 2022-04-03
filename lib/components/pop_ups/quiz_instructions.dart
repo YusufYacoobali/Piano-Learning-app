@@ -16,7 +16,7 @@ class QuizInstructions extends PopUpContentBuilder {
         children: const [
           Text('Quiz Mode', style: pauseMenuTextStyle),
           SizedBox(height: 20.0),
-          Text('Practice the notes like in the lessons for each lesson'),
+          Text('Practice the notes like in each of the lessons'),
           SizedBox(height: 10),
           Text('or choose ''\'Random mixed quiz\' to practice questions from all the lessons.'),
           SizedBox(height: 20.0),

@@ -14,7 +14,7 @@ class SpeedrunMenuInstructions extends PopUpContentBuilder {
   void buildMenu() {
     text = Column(
         children: const [
-          Text('Speed-run Mode', style: pauseMenuTextStyle),
+          Text('Speedrun Mode', style: pauseMenuTextStyle),
           SizedBox(height: 20.0),
           Text('Get as many questions correct as you can in the chosen duration!'),
           SizedBox(height: 20.0),

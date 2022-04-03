@@ -15,11 +15,11 @@ class PlayAlongInstructions extends PopUpContentBuilder {
     text = Column(
         children: const [
           Text('Play Along Mode', style: pauseMenuTextStyle),
-          SizedBox(height: 20.0),
-          Text('Play the melody along with your chosen backing track.'),
-          SizedBox(height: 10.0),
+          SizedBox(height: 15.0),
+          Text('Choose the melody you would like to learn, and follow along with it by playing the note when it is in the green section.'),
+          SizedBox(height: 15.0),
           Text('Have fun!'),
-          SizedBox(height: 30.0),
+          SizedBox(height: 15.0),
         ]
     );
 
