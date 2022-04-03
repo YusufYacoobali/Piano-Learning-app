@@ -51,9 +51,6 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// The keyboard
   late PageKeyboard _keyboard;
 
-  /// Updates the keyboard depending on the clef
-  String _setClef = 'update';
-
   @override
   void initState() {
     super.initState();
@@ -107,11 +104,19 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   }
 
   /// The function to be called on each note moving out of the target area
-  void stop(bool hasPlayed) {
+  void stop(bool hasPlayed, bool isWrong) {
     if (!hasPlayed) {
       _generator.stop();
-      _hasEnded = true;
       _counter.isNewHighScore(_sheet.clef, _difficulty);
+      _hasEnded = true;
+      if (!isWrong) {
+        setState(() {
+        updater += '1';
+        });
+      }
+      else {
+        updater+='1';
+      }
     } else {
       _counter.score++;
     }
@@ -121,7 +126,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
   void startGame(Clef clef) {
     if (clef == Clef.bass) {
       _keyboard = PageKeyboard(playKey, startOctave: 3);
-      _setClef = _setClef + '1';
+      updater+='1';
     }
     _counter.getHighScore(clef, _difficulty);
     _generator.setClef(clef);
@@ -134,7 +139,7 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _currentNoteToPlay.checkPress(text);
   }
 
-  end() async {
+  void end() async {
     List displayNotification = await storage.displayEndlessNotification(
         _difficulty, _counter.score, _sheet.clef);
     if (displayNotification[0]) {
@@ -165,7 +170,6 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
               ),
             ),
             Expanded(
-              key: Key(_setClef),
               flex: 3,
               child: _keyboard,
             ),
