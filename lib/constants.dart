@@ -731,3 +731,11 @@ const Icon incorrectIcon = Icon(
 
 /// Notification Time (UTC)
 const Time notificationTime = Time(12, 00, 00);
+
+//endless achievement scores
+const int bgnrScore = 10;
+const int interScore = 20;
+const int expertScore = 30;
+
+//play along achievement score
+const String playAlongScore = '100';
