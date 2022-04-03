@@ -63,6 +63,7 @@ class _LessonScreenState extends State<LessonScreen> {
   void getResultsScreen(
       String title, double percentage, QuestionBrain questionBrain) {
     Navigator.popUntil(context, ModalRoute.withName(MenuScreen.id));
+    Navigator.pushNamed(context, LessonMenuScreen.id);
     Navigator.push(
       context,
       MaterialPageRoute(
