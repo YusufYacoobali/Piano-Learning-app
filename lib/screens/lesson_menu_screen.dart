@@ -71,7 +71,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
             controller: _firstController,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: makeLessonButtons(),
+              children: _makeLessonButtons(),
             ),
           ),
         ),
@@ -80,7 +80,7 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
   }
 
   /// creates the individual lesson buttons for each lesson
-  Widget lessonButton(lessonText, lessonNum) {
+  Widget _lessonButton(lessonText, lessonNum) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -110,18 +110,18 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
     );
   }
 
-  List<Widget> makeLessonButtons() {
+  List<Widget> _makeLessonButtons() {
     return [
-      lessonButton('Lesson 1', 1), // GestureDetector
-      lessonButton('Lesson 2', 2), // GestureDetector
-      lessonButton('Lesson 3', 3), // GestureDetector
-      lessonButton('Lesson 4', 4), // GestureDetector
-      lessonButton('Lesson 5', 5), // GestureDetector
-      lessonButton('Lesson 6', 6),
-      lessonButton('Lesson 7', 7),
-      lessonButton('Lesson 8', 8),
-      lessonButton('Lesson 9', 9),
-      lessonButton('Lesson 10', 10)
+      _lessonButton('Lesson 1', 1), // GestureDetector
+      _lessonButton('Lesson 2', 2), // GestureDetector
+      _lessonButton('Lesson 3', 3), // GestureDetector
+      _lessonButton('Lesson 4', 4), // GestureDetector
+      _lessonButton('Lesson 5', 5), // GestureDetector
+      _lessonButton('Lesson 6', 6),
+      _lessonButton('Lesson 7', 7),
+      _lessonButton('Lesson 8', 8),
+      _lessonButton('Lesson 9', 9),
+      _lessonButton('Lesson 10', 10)
     ]; // Gesture Detector
   }
 }

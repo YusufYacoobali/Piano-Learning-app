@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 /// Settings Screen
 /// List of the different difficulties
@@ -21,9 +22,8 @@ const Color _darkTabBarColour = Color(0xffDCD6F7);
 const Color _lightAppBarColour = Color(0xff553C8B);
 const Color _lightBackgroundColour = Color(0xffCCC1FF);
 const Color _lightScrollBarColour = Color(0xff3D2C8D);
-const Color _lightSliderColour = Color(0xffBE9FE1);
 const Color _lightSettingColour = Color(0xff664E88);
-const Color _lightSettingColour2 = Color(0xff602080);
+//const Color _lightSettingColour2 = Color(0xff602080);
 const Color _lightTabBarColour = Color(0xffF7E8F6);
 
 const Color _pinkAppBarColour = Color(0xffE7759A);
@@ -34,7 +34,7 @@ const Color _pinkSettingColour = Color(0xffFF96AD);
 const Color _pinkSettingColour2 = Color(0xffEB596E);
 const Color _pinkTabBarColour = Color(0xffF1C6E7);
 
-/// The themes and the theme data associated with it
+/// The themes and the theme data associated with it.
 final Map<String, ThemeData> themeColors = <String, ThemeData>{
   'Dark': ThemeData.dark().copyWith(
     scaffoldBackgroundColor: _darkBackgroundColour,
@@ -42,7 +42,6 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
     tabBarTheme: darkTabBarTheme,
     scrollbarTheme: darkScrollBarTheme,
     elevatedButtonTheme: darkElevatedButtonTheme,
-    sliderTheme: darkSliderTheme,
     dialogTheme: darkDialogTextStyleTheme,
     textButtonTheme: darkTextButtonButtonTheme,
   ),
@@ -52,7 +51,6 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
     tabBarTheme: lightTabBarTheme,
     iconTheme: iconColourTheme,
     scrollbarTheme: lightScrollBarTheme,
-    sliderTheme: lightSliderTheme,
     elevatedButtonTheme: lightElevatedButtonTheme,
     textButtonTheme: lightTextButtonButtonTheme,
   ),
@@ -63,14 +61,14 @@ final Map<String, ThemeData> themeColors = <String, ThemeData>{
     scaffoldBackgroundColor: _pinkBackgroundColour,
     iconTheme: iconColourTheme,
     scrollbarTheme: pinkScrollBarTheme,
-    sliderTheme: pinkSliderTheme,
     dialogTheme: pinkDialogTextStyleTheme,
     elevatedButtonTheme: pinkElevatedButtonTheme,
     textButtonTheme: pinkTextButtonButtonTheme,
   ),
 };
 
-/// Theme data
+/// Theme data.
+///
 /// Different theme of App bars.
 const darkAppBarTheme = AppBarTheme(
   color: _darkAppBarColour,
@@ -116,29 +114,12 @@ final pinkScrollBarTheme = const ScrollbarThemeData().copyWith(
   thumbColor: MaterialStateProperty.all(_pinkScrollBarColour),
 );
 
-/// Different theme of sliders.
-final darkSliderTheme = const SliderThemeData().copyWith(
-  activeTrackColor: _darkSettingColour,
-  inactiveTrackColor: _darkSettingColour2,
-  thumbColor: _darkAppBarColour,
-);
-final lightSliderTheme = const SliderThemeData().copyWith(
-  activeTrackColor: _lightSettingColour2,
-  inactiveTrackColor: _lightSliderColour,
-  thumbColor: _lightAppBarColour,
-);
-final pinkSliderTheme = const SliderThemeData().copyWith(
-  activeTrackColor: _pinkSettingColour2,
-  inactiveTrackColor: _pinkSettingColour,
-  thumbColor: _pinkAppBarColour,
-);
-
+/// Text styles for dialog boxes.
 const alertDialogTextStyle = TextStyle(
   color: _whiteColour,
   fontWeight: FontWeight.bold,
   fontSize: 20.0,
 );
-
 const contentDialogTextStyle = TextStyle(
   color: _whiteColour,
   fontSize: 16.0,
@@ -199,17 +180,17 @@ ButtonStyle pinkTextButtonStyle = TextButton.styleFrom(
   primary: _pinkSettingColour2,
 );
 
-/// Results Screen
+/// Results Screen text styles.
 const titleWidgetTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 50.0,
 );
-
 const scoreWidgetTextStyle = TextStyle(
   fontWeight: FontWeight.w200,
   fontSize: 35.0,
 );
 
+/// Results screen button styles.
 ButtonStyle navButtonDeco = ElevatedButton.styleFrom(
   primary: Colors.orange.shade700,
   shape: RoundedRectangleBorder(
@@ -218,7 +199,7 @@ ButtonStyle navButtonDeco = ElevatedButton.styleFrom(
   elevation: 15.0,
 );
 
-// Menu Screen
+/// Menu Screen style information.
 const String formattedAppName = 'Read\n That\n Sheet';
 final Color buttonBoxColour = Colors.indigo.shade400;
 const EdgeInsets boxMargin = EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
@@ -243,7 +224,6 @@ const Icon settingsIcon = Icon(
   //size: 75.0,
   //color: Color(0xff5f0a87),
 );
-
 BoxDecoration menuButtonDeco = BoxDecoration(
   borderRadius: BorderRadius.circular(boxRadii),
   gradient: const LinearGradient(
@@ -251,32 +231,29 @@ BoxDecoration menuButtonDeco = BoxDecoration(
   ),
 );
 
-/// Keyboard Screen
+/// Keyboard Screen styling.
 final whiteKeyButtonStyle = ElevatedButton.styleFrom(
   primary: Colors.white,
   minimumSize: const Size(double.infinity, double.infinity),
   padding: const EdgeInsets.all(20.0),
 );
-
 const whiteKeyTextStyle = TextStyle(
   color: Colors.black,
   fontWeight: FontWeight.bold,
   fontSize: 30.0,
 );
-
 final blackKeyButtonStyle = ElevatedButton.styleFrom(
   primary: Colors.black,
   minimumSize: const Size(double.infinity, double.infinity),
   padding: const EdgeInsets.all(10.0),
 );
-
 const blackKeyTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
   fontSize: 30.0,
 );
 
-//Lesson Menu Screen
+/// Lesson Menu Screen styling.
 BoxDecoration lessonButtonDeco = BoxDecoration(
   shape: BoxShape.circle,
   color: buttonBoxColour,
@@ -285,7 +262,6 @@ BoxDecoration lessonButtonDeco = BoxDecoration(
     colors: [Color(0xff5f0a87), Color(0xffa4508b)],
   ),
 );
-
 BoxDecoration completeLessonButtonDeco = BoxDecoration(
   shape: BoxShape.circle,
   color: buttonBoxColour,
@@ -295,8 +271,7 @@ BoxDecoration completeLessonButtonDeco = BoxDecoration(
   ),
 );
 
-// Stave Colours
-
+/// Stave Colours
 /// The colour of the stave background
 const Color staveBackgroundColour = Colors.white;
 
@@ -309,7 +284,7 @@ const Color staveNoteColour = Colors.black;
 /// The colour of the stave play area
 const Color stavePlayAreaColour = Color.fromARGB(100, 0, 255, 0);
 
-// Lesson Screen
+/// Lesson Screen styling.
 const Color optionButtonColour = Colors.purple;
 const TextStyle optionButtonTextStyle =
     TextStyle(fontSize: 20, color: Colors.white);
@@ -427,25 +402,20 @@ const double heightAndWidthOfStopWatch = 60;
 const List<String> whiteKeyNames = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 const List<String> blackKeyNames = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
 
-//Achievement screen
+///Achievement screen constants.
 const double cardWidth = 270;
 const double cardHeight = 270;
-
-const double circularIndicatorRadius = 68;
-
+const double circularIndicatorRadius = 58;
 const double indicatorLineWidth = 16;
 const Color indicatorBackground = Colors.red;
 const Color indicatorGoodProgress = Colors.green;
 const Color indicatorBadProgress = Colors.orange;
-
 const Icon playLessonIcon = Icon(
   Icons.circle_outlined,
   size: 30.0,
 );
-
 const TextStyle achievementTitleTextStyle =
     TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
-
 const TextStyle achievementTextStyle =
     TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
 const int animationDuration = 1200;
@@ -456,20 +426,18 @@ final Decoration achievementCardDecoration = BoxDecoration(
   ),
 );
 
-//achievement making
+/// Constants used for achievement making
 const int numOfLessons = 10;
-const int numOfquizzes = 6;
+const int numOfQuizzes = 10;
 
-//pause menu
+/// Pause menu styling.
 const double menuLength = 80.0;
 const double menuWidth = 30.0;
-
 const TextStyle pauseMenuTextStyle = TextStyle(
   fontSize: 40.0,
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
-
 ButtonStyle pauseMenuButtonStyle = ElevatedButton.styleFrom(
   primary: const Color.fromARGB(255, 192, 94, 163),
   onPrimary: Colors.grey.shade300,
@@ -479,22 +447,20 @@ ButtonStyle pauseMenuButtonStyle = ElevatedButton.styleFrom(
   fixedSize: const Size(180.0, 30.0),
   elevation: 5.0,
 );
-
 const Icon pauseMenuHomeIcon = Icon(
   Icons.home,
   size: 20.0,
 );
-
 const Icon pauseMenuPlayIcon = Icon(
   Icons.play_arrow,
   size: 20.0,
 );
-
 const Icon pauseMenuSelectionIcon = Icon(
   Icons.auto_stories_outlined,
   size: 20.0,
 );
 
+/// Styling for the 'cards'.
 BoxDecoration cardBackground = BoxDecoration(
   borderRadius: BorderRadius.circular(10),
   gradient: LinearGradient(colors: [
@@ -503,7 +469,7 @@ BoxDecoration cardBackground = BoxDecoration(
   ], begin: Alignment.topLeft, end: Alignment.bottomRight),
 );
 
-/// Which sharps are the same as which flats
+/// Which sharps are the same as which flats.
 const Map<String, String> sharpFlatEquivalence = <String, String>{
   'Db': 'C#',
   'Eb': 'D#',
@@ -512,7 +478,7 @@ const Map<String, String> sharpFlatEquivalence = <String, String>{
   'Bb': 'A#',
 };
 
-/// The nodes that can be played in beginner mode for the treble clef in endless mode
+/// The nodes that can be played in beginner mode for the treble clef in endless mode.
 const List<String> endlessBeginnerTrebleNotes = [
   'C4',
   'D4',
@@ -524,7 +490,7 @@ const List<String> endlessBeginnerTrebleNotes = [
   'C5'
 ];
 
-/// The nodes that can be played in beginner mode for the bass clef in endless mode
+/// The nodes that can be played in beginner mode for the bass clef in endless mode.
 const List<String> endlessBeginnerBassNotes = [
   'C4',
   'B3',
@@ -536,7 +502,7 @@ const List<String> endlessBeginnerBassNotes = [
   'C3'
 ];
 
-/// The nodes that can be played in intermediate mode for the treble clef in endless mode
+/// The nodes that can be played in intermediate mode for the treble clef in endless mode.
 const List<String> endlessIntermediateTrebleNotes = [
   'B3',
   'C4',
@@ -556,7 +522,7 @@ const List<String> endlessIntermediateTrebleNotes = [
   'E5',
 ];
 
-/// The nodes that can be played in intermediate mode for the bass clef in endless mode
+/// The nodes that can be played in intermediate mode for the bass clef in endless mode.
 const List<String> endlessIntermediateBassNotes = [
   'C3',
   'Db3',
@@ -574,7 +540,7 @@ const List<String> endlessIntermediateBassNotes = [
   'D4',
 ];
 
-/// The nodes that can be played in expert mode for the treble clef in endless mode
+/// The nodes that can be played in expert mode for the treble clef in endless mode.
 const List<String> endlessExpertTrebleNotes = [
   'Bb3',
   'B3',
@@ -605,7 +571,7 @@ const List<String> endlessExpertTrebleNotes = [
   'F5',
 ];
 
-/// The nodes that can be played in expert mode for the bass clef in endless mode
+/// The nodes that can be played in expert mode for the bass clef in endless mode.
 const List<String> endlessExpertBassNotes = [
   'C3',
   'C#3',
@@ -627,15 +593,15 @@ const List<String> endlessExpertBassNotes = [
   'C4',
 ];
 
-/// How far a note has to go to count for one time unit in endless mode
+/// How far a note has to go to count for one time unit in endless mode.
 const endlessIterationsPerTimeUnit = 120;
 
-/// How fast the notes move across the screen in endless mode for each difficulty
+/// How fast the notes move across the screen in endless mode for each difficulty.
 const int endlessBeginnerBpm = 80;
 const int endlessIntermediateBpm = 110;
 const int endlessExpertBpm = 108;
 
-/// Maximum and minimum gaps between notes in endless mode
+/// Maximum and minimum gaps between notes in endless mode.
 const int endlessBeginnerMinTime = 4;
 const int endlessBeginnerMaxTime = 7;
 const int endlessIntermediateMinTime = 3;
@@ -643,34 +609,32 @@ const int endlessIntermediateMaxTime = 5;
 const int endlessExpertMinTime = 2;
 const int endlessExpertMaxTime = 4;
 
-/// How fast the notes move across the screen in play along for each difficulty
+/// How fast the notes move across the screen in play along for each difficulty.
 const int playAlongBeginnerBpm = 52;
 const int playAlongIntermediateBpm = 72;
 const int playAlongExpertBpm = 88;
 
-/// How far apart the notes are in play along for each difficulty
+/// How far apart the notes are in play along for each difficulty.
 const int playAlongBeginnerNoteSpacing = 200;
 const int playAlongIntermediateNoteSpacing = 150;
 const int playAlongExpertNoteSpacing = 130;
 
-/// How far each note should move per iteration
+/// How far each note should move per iteration.
 const double noteMovement = 1;
 
+/// Styling for the helper screens.
 const Icon helperButton = Icon(
   Icons.help,
 );
-
 const Icon helpPlayButtonStyle = Icon(
   Icons.play_arrow,
   size: 40.0,
 );
-
 const TextStyle helperTextStyle = TextStyle(
   fontSize: 40.0,
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
-
 ButtonStyle helperButtonStyle = ElevatedButton.styleFrom(
   primary: const Color.fromARGB(255, 192, 94, 163),
   onPrimary: Colors.grey.shade300,
@@ -685,67 +649,75 @@ ButtonStyle helperButtonStyle = ElevatedButton.styleFrom(
   elevation: 5.0,
 );
 
-/// Clef symbols
+const TextStyle helperDescriptionTextStyle = TextStyle(
+  fontSize: 20.0,
+);
+
+/// Clef symbols.
 const String trebleClef = '𝄞';
 const String bassClef = '𝄢';
 
-/// Android clef fonts
+/// Android clef fonts.
 const double androidTrebleClefFontSize = 70;
 const double androidBassClefFontSize = 83;
 
-/// Android clef offset positions
+/// Android clef offset positions.
 const double androidTrebleClefOffset = 80;
 const double androidBassClefOffset = 93;
 
-/// IOS clef fonts
-/// Change these to change the clef size
+/// IOS clef fonts.
+///
+/// Change these to change the clef size.
 const double iosTrebleClefFontSize = 190;
 const double iosBassClefFontSize = 100;
 
-/// IOS clef offsets
-/// Change these to change the clef position on screen
+/// IOS clef offsets.
+///
+/// Change these to change the clef position on screen.
 const double iosTrebleClefOffset = 118;
 const double iosBassClefOffset = 85;
 
-/// black note symbols
+/// black note symbols.
 const String sharp = '♯';
 const String flat = '♭';
 
-/// Android symbol fonts
+/// Android symbol fonts.
 const double androidSharpFontSize = 30;
 const double androidFlatFontSize = 45;
 
-/// Android symbol offset positions
+/// Android symbol offset positions.
 const double androidSharpOffset = 20;
 const double androidFlatOffset = 35;
 
-/// IOS symbol fonts
-/// Change these to change the symbol size
+/// IOS symbol fonts.
+///
+/// Change these to change the symbol size.
 const double iosSharpFontSize = 40;
 const double iosFlatFontSize = 60;
 
-/// IOS symbol offsets
-/// Change these to change the symbol position on screen
+/// IOS symbol offsets.
+///
+/// Change these to change the symbol position on screen.
 const double iosSharpOffset = 20;
 const double iosFlatOffset = 30;
 
-/// QuestionAnswerData
+/// QuestionAnswerData.
 const int timeThreshold = 500;
 const int correctAnswerIncrease = 5;
 const int maxTimeReduction = 5;
 const int incorrectAnswerReduction = 10;
 
-/// In app notification
+/// In app notification.
 const TextStyle title = TextStyle(fontSize: 30);
 const TextStyle achievedText = TextStyle(fontSize: 22);
 
-/// Random Quiz Screen
+/// Random Quiz Screen information.
 const int numOfQuestionsInRandomQuiz = 10;
 
-/// Practice Quiz Screen
+/// Practice Quiz Screen information.
 const int numOfQuestionsInPracticeQuiz = 10;
 
-/// Review Answers Screen
+/// Review Answers Screen information.
 const double reviewAnswerCardHeight = 300;
 const double reviewAnswerCardWidth = 720;
 const Icon correctIcon = Icon(
@@ -756,3 +728,35 @@ const Icon incorrectIcon = Icon(
   Icons.cancel,
   size: 45.0,
 );
+
+/// Notification Time (UTC)
+const Time notificationTime = Time(12, 00, 00);
+
+//endless achievement scores
+const int bgnrScore = 10;
+const int interScore = 20;
+const int expertScore = 30;
+
+//play along achievement score
+const String playAlongScore = '100';
+
+/// The ordering and weighting of all the notes
+const Map<String, int> noteValues = <String, int>{
+  'C': 0,
+  'C#': 1,
+  'Db': 1,
+  'D': 2,
+  'D#': 3,
+  'Eb': 3,
+  'E': 4,
+  'F': 5,
+  'F#': 6,
+  'Gb': 6,
+  'G': 7,
+  'G#': 8,
+  'Ab': 8,
+  'A': 9,
+  'A#': 10,
+  'Bb': 10,
+  'B': 11,
+};

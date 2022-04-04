@@ -6,10 +6,12 @@ import '../storage_reader_writer.dart';
 import '../theme_listener.dart';
 import '../constants.dart' as constants;
 
-/// Allows settings to be changed
+/// A screen that contain the various settings that can be changed by the user.
+///
+/// There is also the option to reset a user's progress on this screen.
 class _SettingsScreenState extends State<SettingsScreen> {
 
-  /// Reads and writes the settings to storage
+  /// The object that will read and write the settings to storage.
   StorageReaderWriter settings = StorageReaderWriter();
 
   @override
@@ -23,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.dispose();
   }
 
-  /// Confirms if the settings should be reset
+  /// Confirms if the settings should be reset.
   _confirmReset(BuildContext context, ThemeNotifier themeNotifier) {
     ElevatedButton cancelButton = ElevatedButton(
       child: const Text("Cancel"),
@@ -94,11 +96,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       value: option,
                                     );
                                   }).toList(),
-                                  onChanged: (level) async {
+                                  onChanged: (level) {
                                     if (level != null) {
-                                      await settings
-                                          .write('difficulty', level)
-                                          .then((v) => setState(() => {}));
+                                      settings.write('difficulty', level).then((v) => setState(() => {}));
                                     }
                                   }),
                             ),
@@ -109,6 +109,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               leading: const Icon(Icons.format_paint),
                               key: const Key('theme selector'),
                               value: DropdownButton(
+                                  value: settings.read('theme'),
                                   items: constants.themeColors.keys
                                       .toList()
                                       .map((option) {
@@ -117,9 +118,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       value: option,
                                     );
                                   }).toList(),
-                                  value: settings.read('theme'),
-                                  onChanged: (theme) async {
+                                  onChanged: (theme) {
                                     if (theme != null) {
+                                      settings.write('theme', theme).then((v) => setState(() => {}));
                                       themeNotifier.theme = theme.toString();
                                     }
                                   }),

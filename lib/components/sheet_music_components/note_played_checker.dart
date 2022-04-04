@@ -10,9 +10,12 @@ class NotePlayedChecker {
   bool _noteHit = false;
 
   /// Function to be called when a note is hit or missed
-  final Function(bool) onNotePass;
+  final Function onNotePass;
 
-  NotePlayedChecker({required this.noteNotifier, required this.onNotePass});
+  /// Whether only 1 press is allowed in the play area
+  final bool onePress;
+
+  NotePlayedChecker({required this.noteNotifier, required this.onNotePass, this.onePress = false});
 
   /// Checks if the key pressed is the note
   void checkPress(String name) {
@@ -20,7 +23,11 @@ class NotePlayedChecker {
       Note note = noteNotifier.get();
       if (note.name == name) {
         _noteHit = true;
-        onNotePass(_noteHit);
+        if (onePress) {
+          onNotePass(_noteHit, false);
+        } else {
+          onNotePass(_noteHit);
+        }
       }
       else if (name.length == 3 && note.name.length == 3) {
         String noteWithoutOctave = name[0] + name[1];
@@ -28,9 +35,23 @@ class NotePlayedChecker {
         alt = alt + name[name.length - 1];
         if (note.name == alt) {
           _noteHit = true;
-          onNotePass(_noteHit);
+          if (onePress) {
+            onNotePass(_noteHit, false);
+          } else {
+            onNotePass(_noteHit);
+          }
+        }
+        else if (note.name != alt && onePress) {
+          onNotePass(false, false);
         }
       }
+      else if (note.name != name && onePress) {
+        onNotePass(false, false);
+      }
+    }
+    else if (!_noteHit && !noteNotifier.isNull() && onePress) {
+      onNotePass(false, false);
+      _noteHit = true;
     }
   }
 
@@ -42,6 +63,12 @@ class NotePlayedChecker {
 
   /// Removes the note from the play area
   void removeNote() {
-    if (!_noteHit) onNotePass(_noteHit);
+    if (!_noteHit) {
+      if (onePress) {
+        onNotePass(_noteHit, true);
+      } else {
+        onNotePass(_noteHit);
+      }
+    }
   }
 }
