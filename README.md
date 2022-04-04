@@ -10,7 +10,7 @@ The app also includes features to encourage and motivate the user to learn. This
 
 ## Getting Started
 ---
-Note: The loading of the sound files on Appetize can sometimes be slow, for the best experience please allow the app a few moments to load the sounds before trying the keyboard.
+Note: The loading of the sound files on Appetize can sometimes be slow, for the best experience please allow the app a few tries to load the sounds when using the keyboard.
 
 ### How to use:
 
