@@ -48,7 +48,6 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         questionBrain.goToNextQuestion();
       }
     } else {
-      //If the user didn't answer any questions
       Widget noAnswersFromUser = Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,6 +55,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
           children: const [
             Text(
               'You did not answer any questions',
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 30.0),
             ),
           ],
@@ -203,7 +203,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
               controller: _checkController,
               scrollDirection: Axis.horizontal,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: _getAllReviewAnswerCards(),
               )),
