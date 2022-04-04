@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../components/app_bar_with_settings_icon.dart';
 import '../components/pop_ups/practice_menu_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
@@ -29,7 +28,9 @@ class PracticeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PopUpController menu = PopUpController(context: context, menuBuilder: PracticeMenuInstructions(context: context));
+    PopUpController menu = PopUpController(
+        context: context,
+        menuBuilder: PracticeMenuInstructions(context: context));
 
     return Scaffold(
       appBar: AppBarWithSettingsIcon(const Text('Practice your skills!'), menu),
@@ -53,10 +54,7 @@ class PracticeScreen extends StatelessWidget {
               buttonChild:
                   const Center(child: ButtonText(buttonText: 'Play along')),
               onPress: () {
-                Navigator.pushNamed(
-                    context,
-                    PlayAlongMenuScreen
-                        .id); //TODO: Replace with play along screen route
+                Navigator.pushNamed(context, PlayAlongMenuScreen.id);
               },
               key: navigateToPlayAlongMenuButtonKey,
             ),
@@ -81,8 +79,7 @@ class PracticeScreen extends StatelessWidget {
               buttonChild:
                   const Center(child: ButtonText(buttonText: 'Endless')),
               onPress: () {
-                Navigator.pushNamed(
-                    context, EndlessModeScreen.id); //TODO: Replace screen name
+                Navigator.pushNamed(context, EndlessModeScreen.id);
               },
               key: navigateToEndlessModeButtonKey,
             )

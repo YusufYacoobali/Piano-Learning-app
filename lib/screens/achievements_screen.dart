@@ -60,7 +60,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
             ],
           ),
         ),
-        // Tab bar which displays these two widgets, each tab bar recieves its corresponding achievements
+        // Tab bar which displays these two widgets, each tab bar receives its corresponding achievements
         body: TabBarView(children: [
           AchievementsInProgress(cards: maker.getInProgress()),
           AchievementsCompleted(cards: maker.getAchieved())

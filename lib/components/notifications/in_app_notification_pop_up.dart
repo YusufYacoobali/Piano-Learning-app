@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/constants.dart';
-
 import '../../screens/achievements_screen.dart';
 
 ///This is what is shown when a user completes an achievement
 
-// TODO: Add return type and types of parameters
 Future inAppNotification(BuildContext context, String text,
     {VoidCallback? onBack}) {
   return showModalBottomSheet(
       isDismissible: false,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(60), topRight: Radius.circular(60))),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(60),
+          topRight: Radius.circular(60),
+        ),
+      ),
       context: context,
       builder: (context) {
         return Column(
-          //mainAxisSize: MainAxisSize.min,
           children: [
             const Padding(
               padding: EdgeInsets.all(20.0),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/helper.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
-
 import 'constants.dart';
 
 /// A class that handles anything related to stored Shared Preferences.
@@ -41,11 +39,6 @@ class StorageReaderWriter {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     _map[key] = value.toString();
     await pref.setString(key, value.toString());
-    if (key == 'volume') {
-      // TODO: Figure out why this doesn't work.
-      // PerfectVolumeControl.setVolume(
-      //     double.parse(value.toString()) / 100); //Needs values from 0 to 1
-    }
   }
 
   /// Resets the StorageWriter back to the defaults.
@@ -71,18 +64,12 @@ class StorageReaderWriter {
 
   /// Puts default values into the map.
   void _setDefaultValues() {
-    // _map['volume'] = constants.defaultVolumeLevel;
-    // _map['difficulty'] = constants.defaultDifficultyLevel;
-
     _setDefaultEndlessRecords();
     _setDefaultPlayAlongRecords();
   }
 
   /// Writes the default StorageWriter values to Shared Preferences.
   Future<void> _writeDefaultsToStorage() async {
-    //final SharedPreferences pref = await SharedPreferences.getInstance();
-    // pref.setInt('volume', constants.defaultVolumeLevel);
-    // pref.setString('difficulty', constants.defaultDifficultyLevel);
     _writeEndlessRecordsToStorage();
     _writePlayAlongRecordsToStorage();
   }
@@ -180,7 +167,6 @@ class StorageReaderWriter {
   Future<void> saveCompletedLesson(lessonNum) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('lesson-num-$lessonNum', true);
-    //print("lesson $lessonNum set to pass");
   }
 
   /// Saves a quiz as completed.
@@ -188,7 +174,6 @@ class StorageReaderWriter {
     final prefs = await SharedPreferences.getInstance();
     int completedQuizzes = (prefs.getInt('completed_quizzes') ?? 0);
     prefs.setInt('completed_quizzes', completedQuizzes + 1);
-    //print("quiz passed and saved");
   }
 
   /// Loads endless records from storage.
@@ -438,7 +423,6 @@ class StorageReaderWriter {
     for (String clef in <String>['treble', 'bass']) {
       for (Object difficulty in difficultyList) {
         String level = difficulty.toString().toLowerCase();
-        //print('endless-Clef.$clef-$level-achievement');
         prefs.setBool('endless-Clef.$clef-$level-achievement', false);
       }
     }
@@ -543,14 +527,14 @@ class StorageReaderWriter {
       toDisplay = false;
     } else {
       if (level == 'beginner') {
-        if (score >= bgnrScore) {
+        if (score >= beginnerScore) {
           text = "You scored 10 or more in this endless mode";
           prefs.setBool('endless-$clef-$level-achievement', true);
         } else {
           toDisplay = false;
         }
       } else if (level == 'intermediate') {
-        if (score >= interScore) {
+        if (score >= intermediateScore) {
           text = "You scored 20 or more in this endless mode";
           prefs.setBool('endless-$clef-$level-achievement', true);
         } else {

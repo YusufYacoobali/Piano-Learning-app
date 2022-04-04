@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../components/sheet_music_components/music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 import '../lessons_and_quizzes/question_brain.dart';
@@ -82,8 +81,8 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   Widget _createReviewAnswerCard(int i) {
     return Center(
       child: SizedBox(
-        height: reviewAnswerCardHeight, //MediaQuery.of(context).size.height,
-        width: reviewAnswerCardWidth, //MediaQuery.of(context).size.width,
+        height: reviewAnswerCardHeight,
+        width: reviewAnswerCardWidth,
         child: Container(
           decoration: cardBackground,
           child: Column(
@@ -102,9 +101,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
                       _addQuestionImage(),
                       Column(
                         children: [
-                          //change to display result
                           _addResultBox(),
-                          //change method name to add text
                           _addMessageWrap(
                               'Correct Answer: ' + _convertAnswers()[0]),
                           _addMessageWrap(
@@ -200,13 +197,14 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
           radius: const Radius.circular(10),
           thickness: 5.0,
           child: SingleChildScrollView(
-              controller: _checkController,
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: _getAllReviewAnswerCards(),
-              )),
+            controller: _checkController,
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: _getAllReviewAnswerCards(),
+            ),
+          ),
         ),
       ),
     );

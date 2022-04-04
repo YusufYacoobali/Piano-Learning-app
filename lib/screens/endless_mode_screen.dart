@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../components/notifications/in_app_notification_pop_up.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
@@ -11,6 +10,15 @@ import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
 import '../storage_reader_writer.dart';
 import '../components/page_keyboard.dart';
+
+class EndlessModeScreen extends StatefulWidget {
+  static const String id = 'endless_mode_screen';
+
+  const EndlessModeScreen({Key? key}) : super(key: key);
+
+  @override
+  _EndlessModeScreenState createState() => _EndlessModeScreenState();
+}
 
 class _EndlessModeScreenState extends State<EndlessModeScreen> {
   /// Music sheet that moves
@@ -182,13 +190,4 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
       ),
     );
   }
-}
-
-class EndlessModeScreen extends StatefulWidget {
-  static const String id = 'endless_mode_screen';
-
-  const EndlessModeScreen({Key? key}) : super(key: key);
-
-  @override
-  _EndlessModeScreenState createState() => _EndlessModeScreenState();
 }

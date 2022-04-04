@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'note_on_stave.dart';
 import 'note_played_checker.dart';
 import 'stave_builder.dart';
@@ -8,7 +7,6 @@ import 'music_sheet.dart';
 
 /// A music sheet that can move
 class MovingMusicSheet extends MusicSheet {
-
   /// Checks if a note is played or not
   final NotePlayedChecker notePlayedChecker;
 

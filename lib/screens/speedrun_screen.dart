@@ -102,20 +102,22 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => ResultsScreen(
-                score: percentage,
-                title: title,
-                questionBrain: questionBrain,
-              )),
+        builder: (context) => ResultsScreen(
+          score: percentage,
+          title: title,
+          questionBrain: questionBrain,
+        ),
+      ),
     );
   }
 
-  //TODO: Move into note_helper file?
   ///Checks if the user's score is a new record for the selected mode, and updates shared preferences if it is.
   Future<void> _updateRecords() async {
     int score = questionBrain.getScore();
     final prefs = await SharedPreferences.getInstance();
-    final int currentRecord = int.parse((prefs.get('${widget.timerDuration}_second_speedrun_record') ?? '0').toString());
+    final int currentRecord = int.parse(
+        (prefs.get('${widget.timerDuration}_second_speedrun_record') ?? '0')
+            .toString());
     if (score > currentRecord) {
       await prefs.setInt(
           '${widget.timerDuration}_second_speedrun_record', score);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../endless_mode_components/endless_score_counter.dart';
 import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
@@ -11,9 +10,9 @@ import '../../screens/menu_screen.dart';
 /// An instance is 'finished' once the user makes a mistake.
 /// This is an endless mode specific results screen that also shows the current high score.
 class EndlessEndingInstructions extends PopUpContentBuilder {
-
   /// The counter to get the players score
   final EndlessScoreCounter counter;
+
   /// Gets context data from the endless mode instance.
   final BuildContext context;
 
@@ -25,16 +24,14 @@ class EndlessEndingInstructions extends PopUpContentBuilder {
     String title = 'Aww, better luck next time';
     if (counter.score > counter.highScore) title = 'Well Done!';
 
-    text = Column(
-        children: [
-          Text(title, style: pauseMenuTextStyle),
-          const SizedBox(height: 10.0),
-          Text('Your score: ${counter.score.toString()}'),
-          const SizedBox(height: 10.0),
-          Text('High Score: ${counter.highScore.toString()}'),
-          const SizedBox(height: 50.0),
-        ]
-    );
+    text = Column(children: [
+      Text(title, style: pauseMenuTextStyle),
+      const SizedBox(height: 10.0),
+      Text('Your score: ${counter.score.toString()}'),
+      const SizedBox(height: 10.0),
+      Text('High Score: ${counter.highScore.toString()}'),
+      const SizedBox(height: 50.0),
+    ]);
 
     options = [
       ElevatedButton(

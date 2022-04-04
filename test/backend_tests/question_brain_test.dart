@@ -119,7 +119,6 @@ void main() {
     List<Question> fakeQuestions = getFakeQuestions();
     QuestionBrain qb = QuestionBrain(questions: fakeQuestions);
     int beforeScore = qb.getScore();
-    //qb.setAnswer(userAnswer: fakeQuestions[0].correctAnswer);
     qb.setAnswer(userAnswer: fakeQuestions[0].correctAnswer.name);
     int afterScore = qb.getScore();
     expect(afterScore, beforeScore + 1);

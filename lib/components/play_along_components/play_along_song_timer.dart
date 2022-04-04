@@ -1,7 +1,5 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
 import '../../constants.dart' as constants;
 import '../sheet_music_components/moving_music_sheet_timer.dart';
 import '../sheet_music_components/note.dart';
@@ -11,7 +9,6 @@ import 'play_along_hit_counter.dart';
 ///
 /// Notes to be played by the user are displayed, moved and checked for based on the timer.
 class PlayAlongSongTimer extends MovingMusicSheetTimer {
-
   /// Notes to be played
   final Map<int, Note> notes;
 
@@ -36,7 +33,6 @@ class PlayAlongSongTimer extends MovingMusicSheetTimer {
     required this.onStop,
     required this.hitCounter,
   }) : super(sheet: sheet, nextNote: nextNote, updater: updater) {
-
     /// The speed at which notes will be played.
     this.bpm = bpm;
 
@@ -56,16 +52,15 @@ class PlayAlongSongTimer extends MovingMusicSheetTimer {
     if (difficulty == 'Expert') {
       iterationsPerTimeUnit = constants.playAlongExpertNoteSpacing;
       apparentSpacing = iterationsPerTimeUnit - 20;
-    }
-    else if (difficulty == 'Intermediate') {
+    } else if (difficulty == 'Intermediate') {
       iterationsPerTimeUnit = constants.playAlongIntermediateNoteSpacing;
       apparentSpacing = iterationsPerTimeUnit - 60;
-    }
-    else {
+    } else {
       iterationsPerTimeUnit = constants.playAlongBeginnerNoteSpacing;
       apparentSpacing = 80;
     }
-    timeBetweenMovements = ((1 / ((bpm / 60) * apparentSpacing)) * 1000).round();
+    timeBetweenMovements =
+        ((1 / ((bpm / 60) * apparentSpacing)) * 1000).round();
   }
 
   /// Sets the difficulty of the song
@@ -82,8 +77,7 @@ class PlayAlongSongTimer extends MovingMusicSheetTimer {
     Timer.periodic(Duration(milliseconds: timeBetweenMovements), (Timer t) {
       if (!isOn) {
         t.cancel();
-      }
-      else {
+      } else {
         if (time > _endTime) {
           if (!_hasEnded) {
             _hasEnded = true;
@@ -92,15 +86,13 @@ class PlayAlongSongTimer extends MovingMusicSheetTimer {
         }
         if (index == 0) {
           increment();
-        }
-        else {
+        } else {
           sheet.move();
         }
-        index = (index+1) % iterationsPerTimeUnit;
+        index = (index + 1) % iterationsPerTimeUnit;
         updater(index.toString());
       }
-    }
-    );
+    });
   }
 
   /// Stops the timer and displays the end pop up

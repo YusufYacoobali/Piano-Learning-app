@@ -31,9 +31,9 @@ class SightReadingApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // Changes the theme
     StorageReaderWriter().loadDataFromStorage();
     return ChangeNotifierProvider(
+      // Changes the theme
       create: (_) => ThemeNotifier(),
       child: Consumer<ThemeNotifier>(
         builder: (context, ThemeNotifier themeNotifier, child) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../components/pop_up_components/pop_up_controller.dart';
 import '../../screens/settings_screen.dart';
 
@@ -11,7 +10,8 @@ const double appBarHeight = 60.0;
 /// It contains the relevant screen's title text as a parameter to the class,
 /// as well as a back arrow that comes as standard and a settings icon,
 /// which when clicked on takes you to the settings screen.
-class AppBarWithSettingsIcon extends StatefulWidget implements PreferredSizeWidget {
+class AppBarWithSettingsIcon extends StatefulWidget
+    implements PreferredSizeWidget {
   /// An id used to identify the AppBar.
   static const id = 'app_bar_with_settings_icon';
 
@@ -29,7 +29,8 @@ class AppBarWithSettingsIcon extends StatefulWidget implements PreferredSizeWidg
 
   ///The constructor.
   const AppBarWithSettingsIcon(this.titleText, this.instructionScreen,
-      {Key? key, this.onScreenDelete}) : super(key: key);
+      {Key? key, this.onScreenDelete})
+      : super(key: key);
 
   @override
   _AppBarWithSettingsIconState createState() => _AppBarWithSettingsIconState();
@@ -40,7 +41,6 @@ class AppBarWithSettingsIcon extends StatefulWidget implements PreferredSizeWidg
 }
 
 class _AppBarWithSettingsIconState extends State<AppBarWithSettingsIcon> {
-
   ///Builds the AppBar onto the screen it is being used in.
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,10 @@ class _AppBarWithSettingsIconState extends State<AppBarWithSettingsIcon> {
       centerTitle: true,
       actions: <Widget>[
         IconButton(
-            icon: const Icon(Icons.help_outline),
-            onPressed: () {
-              widget.instructionScreen.show();
-            },
+          icon: const Icon(Icons.help_outline),
+          onPressed: () {
+            widget.instructionScreen.show();
+          },
         ),
         IconButton(
           icon: const Icon(Icons.settings_outlined),
@@ -62,11 +62,10 @@ class _AppBarWithSettingsIconState extends State<AppBarWithSettingsIcon> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SettingsScreen(
-                        onBack: widget.onScreenDelete,
+                      onBack: widget.onScreenDelete,
                     ),
                   ));
-            }
-            else {
+            } else {
               Navigator.pushNamed(
                   context, SettingsScreen.id); //Replace screen name
             }

@@ -31,8 +31,7 @@ void main() {
   testWidgets('Check that the instruction text is displayed.',
       (WidgetTester tester) async {
     await _goToQuizSelectionScreen(tester);
-    expect(find.text('Choose a quiz:'),
-        findsOneWidget); //TODO: Would need to re-write to support multiple languages
+    expect(find.text('Choose a quiz:'), findsOneWidget);
   });
 
   testWidgets(

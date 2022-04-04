@@ -24,6 +24,7 @@ class NoteHelperBrain {
     return helpers.noteHelperList[currentHelperListPosition].noteSound;
   }
 
+  ///Get the description of helper's note.
   String getHelperDescription(currentHelperListPosition) {
     return helpers.noteHelperList[currentHelperListPosition].description;
   }

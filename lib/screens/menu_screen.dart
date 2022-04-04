@@ -9,18 +9,25 @@ import 'settings_screen.dart';
 
 const navigateToPracticeMainMenuButtonKey = Key('navigateToPracticeMainMenu');
 
+class MenuScreen extends StatefulWidget {
+  static const String id = 'menu_screen';
+
+  const MenuScreen({Key? key}) : super(key: key);
+
+  @override
+  _MenuScreenState createState() => _MenuScreenState();
+}
+
 /// Main menu screen
 class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     super.initState();
     NotificationAPI.init(initScheduled: true);
-    //ListenNotifications();
     NotificationAPI.showScheduledNotification(
       title: 'Read That Sheet',
       body: 'Hey! Why don\'t you learn some more notes today?',
       payload: 'extra info',
-      //scheduledDate: DateTime.now().add(const Duration(seconds: 10)),
     );
   }
 
@@ -109,15 +116,6 @@ class _MenuScreenState extends State<MenuScreen> {
       ),
     );
   }
-}
-
-class MenuScreen extends StatefulWidget {
-  static const String id = 'menu_screen';
-
-  const MenuScreen({Key? key}) : super(key: key);
-
-  @override
-  _MenuScreenState createState() => _MenuScreenState();
 }
 
 class AppNameBox extends StatelessWidget {

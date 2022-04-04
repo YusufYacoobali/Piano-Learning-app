@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'pop_up_content_builder.dart';
 import 'pop_up_content.dart';
 

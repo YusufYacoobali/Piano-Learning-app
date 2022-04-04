@@ -1,8 +1,6 @@
 import 'dart:ui';
 import 'dart:io' show Platform;
-
 import 'package:flutter/material.dart';
-
 import 'note.dart';
 import 'note_on_stave.dart';
 import '../../constants.dart' as constants;
@@ -211,29 +209,24 @@ class NoteImageBuilder {
     if (note.note.duration == 0.5) {
       /// Quaver
       _drawQuaver(note);
-
     } else if (note.note.duration == 1) {
       /// Crotchet
       _drawCircle(note);
       _drawTail(note);
-
     } else if (note.note.duration == 1.5) {
       /// Dotted crotchet
       _drawCircle(note);
       _drawTail(note);
       _drawDot(note);
-
     } else if (note.note.duration == 2) {
       /// Minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
-
     } else if (note.note.duration == 3) {
       /// Dotted minim
       _drawCircle(note, style: PaintingStyle.stroke);
       _drawTail(note);
       _drawDot(note);
-
     } else if (note.note.duration == 4) {
       /// Semibreve
       _drawCircle(note, style: PaintingStyle.stroke);

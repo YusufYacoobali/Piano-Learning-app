@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-// import 'package:flutter/services.dart';
-
 import '../storage_reader_writer.dart';
 import '../constants.dart';
 
@@ -144,6 +142,7 @@ class _KeyboardState extends State<Keyboard> {
     List<String> notes = whiteKeyNames;
     for (int i = 0; i < notes.length; ++i) {
       String keyName = notes[i];
+
       ///assigns the key names to the right octave
       if (notes[i] == 'C') {
         if (widget.octave == 1) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/components/achievement_components/achievement_card.dart';
-
 import '../../constants.dart';
 
 /// Achievements in progress is the default tab which is shown
