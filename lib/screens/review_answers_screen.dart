@@ -35,34 +35,16 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   List<Widget> _getAllReviewAnswerCards() {
     List<Widget> allResults = [];
     questionBrain.goBackToBeginning();
-    if (questionBrain.getNumberOfUserAnswers() > 0) {
-      for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
-        if (questionBrain.getUserAnswer() != "N/A") {
-          resultCardKeys.add(Key('resultCard:$i'));
-          allResults.add(_createReviewAnswerCard(i));
-          allResults.add(const SizedBox(
-            width: 20,
-          ));
-        }
-        questionBrain.goToNextQuestion();
+    for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
+      if (questionBrain.getUserAnswer() != "N/A") {
+        resultCardKeys.add(Key('resultCard:$i'));
+        allResults.add(_createReviewAnswerCard(i));
+        allResults.add(const SizedBox(
+          width: 20,
+        ));
       }
-    } else {
-      Widget noAnswersFromUser = Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Text(
-              'You did not answer any questions',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 30.0),
-            ),
-          ],
-        ),
-      );
-      allResults.add(noAnswersFromUser);
+      questionBrain.goToNextQuestion();
     }
-
     return allResults;
   }
 
@@ -191,21 +173,30 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
         title: const Text('Review Answers'),
       ),
       body: SafeArea(
-        child: Scrollbar(
-          isAlwaysShown: true,
-          controller: _checkController,
-          radius: const Radius.circular(10),
-          thickness: 5.0,
-          child: SingleChildScrollView(
-            controller: _checkController,
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: _getAllReviewAnswerCards(),
-            ),
-          ),
-        ),
+        //shows special message if user did not answer any questions
+        child: (questionBrain.getNumberOfUserAnswers() <= 0)
+            ? const Center(
+                child: Text(
+                  'You did not answer any questions',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30.0),
+                ),
+              )
+            //otherwise create review answers cards if the user answer at least 1 question
+            : Scrollbar(
+                isAlwaysShown: true,
+                controller: _checkController,
+                radius: const Radius.circular(10),
+                thickness: 5.0,
+                child: SingleChildScrollView(
+                    controller: _checkController,
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: _getAllReviewAnswerCards(),
+                    )),
+              ),
       ),
     );
   }
