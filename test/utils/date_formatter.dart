@@ -1,5 +1,7 @@
 import 'package:timezone/timezone.dart' as tz;
 
+// got method from this repository: https://github.com/MaikuB/flutter_local_notifications
+
 String convertDateToISO8601String(tz.TZDateTime dateTime) {
   String _twoDigits(int n) {
     if (n >= 10) {
