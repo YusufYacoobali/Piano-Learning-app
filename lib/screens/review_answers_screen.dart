@@ -36,17 +36,34 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
   List<Widget> _getAllReviewAnswerCards() {
     List<Widget> allResults = [];
     questionBrain.goBackToBeginning();
-
-    for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
-      if (questionBrain.getUserAnswer() != "N/A") {
-        resultCardKeys.add(Key('resultCard:$i'));
-        allResults.add(_createReviewAnswerCard(i));
-        allResults.add(const SizedBox(
-          width: 20,
-        ));
+    if (questionBrain.getNumberOfUserAnswers() > 0) {
+      for (int i = 0; i < questionBrain.getTotalNumberOfQuestions(); ++i) {
+        if (questionBrain.getUserAnswer() != "N/A") {
+          resultCardKeys.add(Key('resultCard:$i'));
+          allResults.add(_createReviewAnswerCard(i));
+          allResults.add(const SizedBox(
+            width: 20,
+          ));
+        }
+        questionBrain.goToNextQuestion();
       }
-      questionBrain.goToNextQuestion();
+    } else {
+      //If the user didn't answer any questions
+      Widget noAnswersFromUser = Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Text(
+              'You did not answer any questions',
+              style: TextStyle(fontSize: 30.0),
+            ),
+          ],
+        ),
+      );
+      allResults.add(noAnswersFromUser);
     }
+
     return allResults;
   }
 
@@ -186,7 +203,7 @@ class _ReviewAnswersScreenState extends State<ReviewAnswersScreen> {
               controller: _checkController,
               scrollDirection: Axis.horizontal,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: _getAllReviewAnswerCards(),
               )),
