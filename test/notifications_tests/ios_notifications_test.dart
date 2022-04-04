@@ -5,7 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-import 'utils/date_formatter.dart';
+import '../utils/date_formatter.dart';
 
 // Only testing group could find for local notifications
 // repository is: https://github.com/MaikuB/flutter_local_notifications
