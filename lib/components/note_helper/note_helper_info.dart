@@ -9,6 +9,7 @@ class NoteHelperInfo {
   ///description for new note_helper
   final String description;
 
+  /// Constructor
   NoteHelperInfo({
     required this.noteImageName,
     required this.noteName,
