@@ -7,7 +7,7 @@ import 'package:sight_reading_app/screens/results_screen.dart';
 import 'package:sight_reading_app/screens/review_answers_screen.dart';
 
 void main() {
-  QuestionBrain setQuestionBrain() {
+  QuestionBrain _setQuestionBrainWithoutAnswers() {
     List<Question> mockQuestions = [
       Question(
         clef: Clef.treble,
@@ -25,6 +25,11 @@ void main() {
       ),
     ];
     QuestionBrain mockQuestionBrain = QuestionBrain(questions: mockQuestions);
+    return mockQuestionBrain;
+  }
+
+  QuestionBrain _setQuestionBrain() {
+    QuestionBrain mockQuestionBrain = _setQuestionBrainWithoutAnswers();
     mockQuestionBrain.goBackToBeginning();
     mockQuestionBrain.setAnswer(userAnswer: 'C4');
     mockQuestionBrain.goToNextQuestion();
@@ -34,7 +39,7 @@ void main() {
 
   testWidgets('Check that the review answers screen is being displayed',
       (WidgetTester tester) async {
-    QuestionBrain testQuestionBrain = setQuestionBrain();
+    QuestionBrain testQuestionBrain = _setQuestionBrain();
     await tester.pumpWidget(
       MaterialApp(
         home: ResultsScreen(
@@ -50,7 +55,7 @@ void main() {
 
   testWidgets('Check that all result cards are generated',
       (WidgetTester tester) async {
-    QuestionBrain testQuestionBrain = setQuestionBrain();
+    QuestionBrain testQuestionBrain = _setQuestionBrain();
     await tester.pumpWidget(
       MaterialApp(
         home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
@@ -72,7 +77,7 @@ void main() {
 
   testWidgets('Check that a result card has question number accurate',
       (WidgetTester tester) async {
-    QuestionBrain testQuestionBrain = setQuestionBrain();
+    QuestionBrain testQuestionBrain = _setQuestionBrain();
     await tester.pumpWidget(
       MaterialApp(
         home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
@@ -95,7 +100,7 @@ void main() {
   testWidgets(
       'Check that result box will display correct if a user answers correctly',
       (WidgetTester tester) async {
-    QuestionBrain testQuestionBrain = setQuestionBrain();
+    QuestionBrain testQuestionBrain = _setQuestionBrain();
     await tester.pumpWidget(
       MaterialApp(
         home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
@@ -113,7 +118,7 @@ void main() {
   testWidgets(
       'Check that result box will display incorrect if a user answers incorrectly',
       (WidgetTester tester) async {
-    QuestionBrain testQuestionBrain = setQuestionBrain();
+    QuestionBrain testQuestionBrain = _setQuestionBrain();
     await tester.pumpWidget(
       MaterialApp(
         home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
@@ -130,7 +135,7 @@ void main() {
 
   testWidgets('Check that question number on result card is shown correctly',
       (WidgetTester tester) async {
-    QuestionBrain testQuestionBrain = setQuestionBrain();
+    QuestionBrain testQuestionBrain = _setQuestionBrain();
     await tester.pumpWidget(
       MaterialApp(
         home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
@@ -151,7 +156,7 @@ void main() {
 
   testWidgets('Check that correct answer is shown correctly',
       (WidgetTester tester) async {
-    QuestionBrain testQuestionBrain = setQuestionBrain();
+    QuestionBrain testQuestionBrain = _setQuestionBrain();
     await tester.pumpWidget(
       MaterialApp(
         home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
@@ -170,7 +175,7 @@ void main() {
 
   testWidgets('Check that user answer is shown correctly',
       (WidgetTester tester) async {
-    QuestionBrain testQuestionBrain = setQuestionBrain();
+    QuestionBrain testQuestionBrain = _setQuestionBrain();
     await tester.pumpWidget(
       MaterialApp(
         home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
@@ -183,5 +188,18 @@ void main() {
       scrollable: find.byType(Scrollable),
     );
     expect(find.text('Your Answer: C'), findsOneWidget);
+  });
+
+  testWidgets(
+      'Check that message is display in case that user did not answer any questions',
+      (WidgetTester tester) async {
+    QuestionBrain testQuestionBrain = _setQuestionBrainWithoutAnswers();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('You did not answer any questions'), findsOneWidget);
   });
 }

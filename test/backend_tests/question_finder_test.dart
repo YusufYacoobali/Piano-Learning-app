@@ -6,7 +6,7 @@ import 'package:sight_reading_app/lessons_and_quizzes/question.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
 
 void main() {
-  void setMockQuestionStatistics() {
+  void _setMockQuestionStatistics() {
     List<Question> allQuestions = questions;
     QuestionAnswerData.createDefaultMap();
     int changeBy = -4;
@@ -56,7 +56,7 @@ void main() {
       () {
     SharedPreferences.setMockInitialValues({});
     List<Question> allQuestions = questions;
-    setMockQuestionStatistics();
+    _setMockQuestionStatistics();
     int lessonID = 1;
     List<Question> expectedQuestionsInOrder = List.from(
         allQuestions.reversed.where((element) => element.lessonID == lessonID));
