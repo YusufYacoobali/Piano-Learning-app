@@ -20,9 +20,9 @@ The three octaves of the piano can be accessed via the swipeable on-screen keybo
 \
 The app also contains a 'Helper' section. This section holds summary cards for all notes introduced in the lessons and a guide to the note lengths. The 'Play along' mode uses different types of notes, which are not taught in the lessons therefore the users can use the summary cards to learn what they mean.
 
-To practice these lessons, the user can engage in the different modes of practice available by clicking on the Practice button.\
+To practice these lessons, the user can engage in the different modes of practice available by clicking on the Practice button.
 
-The Practice mode consists of four different types of gameplay: Play along, Speedrun, Take a Quiz and Endless.\
+The Practice mode consists of four different types of gameplay: Play along, Speedrun, Take a Quiz and Endless.
 
  The practice modes are designed for a fun game-like experience, where the user can place as they like, hence the user's speed and accuracy at reading the notes are not tracked, except in the 'Take a Quiz' mode. This is because the quizzes are a revision of all the lessons, and the user metrics allow a more guided practice that focuses on the notes the user is weakest in identifying.
 
@@ -30,7 +30,8 @@ The 'Play Along' mode contains a list of tracks the user can select from that to
 
 The 'Speedrun' mode aims to improve the player's sight-reading speed. This mode contains a list of different amounts of time they want to play for, and the user has to answer the questions on screen as quickly as they can in the chosen amount of time.
 
-The 'Endless' mode aims to improve the player's accuracy at reading notes. As in 'Play along' the notes move across the screen and the player must click the correct note when it reaches the green section. The difference, however, is that the notes are randomised and clicking any wrong note will end the game.\
+The 'Endless' mode aims to improve the player's accuracy at reading notes. As in 'Play along' the notes move across the screen and the player must click the correct note when it reaches the green section. The difference, however, is that the notes are randomised and clicking any wrong note will end the game.
+
 The last mode of Practice is the 'Take a Quiz', this is the only practice mode that tracks the user's answers to customise their practice. The quizzes are a collection of all the questions in the lessons. The user can decide to either practice notes from a specific lesson or do a random quiz with questions from all the lessons.\
 The order of questions for this is determined by the player's strength in identifying the notes. If a user is slow or incorrect in identifying the note, then that note will appear more frequently in the quizzes.
 
