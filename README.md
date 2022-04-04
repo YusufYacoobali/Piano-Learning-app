@@ -38,7 +38,7 @@ To motivate the users to learn, the app also contains achievements. This can be 
 
 Another feature to motivate the user is with a daily notification. The user will be notified with daily reminder at 12:00 pm UTC to learn and practice their notes.
 
-The app also contains a settings menu where the user can change the difficulty of the app. Increasing the difficulty will increase the speed in all the modes and remove the labels from the keyboard keys. The user can also change the theme on the app between light, dark and pink mode. The settings menu also has a 'Reset Progress' button which the user can use to reset any saved data about their progress. This button will clear any activity the user has done in the lessons, achievements, any records/ high scores and any customised settings.
+The app also contains a settings menu where the user can change the difficulty of the app. Increasing the difficulty will increase the speed in all the modes and remove the labels from the keyboard keys. The user can also change the theme on the app between light, dark and pink mode. The settings menu also has a 'Reset Progress' button which the user can use to reset any saved data about their progress. This button will clear any activity the user has done in the lessons, achievements, any records/high scores and any customised settings.
 
 
 ## Built with
