@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
@@ -72,5 +73,18 @@ void main() {
       expect(find.text('Record: ${trackRecords[i]}%'), findsWidgets);
     }
   });
-  //TODO: Create tests to make sure correct context data is passed in for each quiz button
+
+  testWidgets('Check going back from settings goes back to menu',
+          (WidgetTester tester) async {
+    await _goToPlayAlongMenuScreen(tester);
+    await tester.tap(find.byKey(AppBarWithSettingsIcon.navigateToSettingsButtonKey));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Beginner'));
+    await tester.pump();
+    await tester.tap(find.text('Expert').last);
+    await tester.pump();
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
+    expect(find.text(trackNames[0]), findsWidgets);
+  });
 }

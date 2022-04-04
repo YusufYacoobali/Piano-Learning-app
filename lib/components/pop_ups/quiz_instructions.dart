@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
 
+/// A set of instructions to be run before starting a quiz.
+///
+/// This is a pop-up that tells the user what to do.
+/// This is shown in the quiz menu, as a (?) icon in the AppBar.
 class QuizInstructions extends PopUpContentBuilder {
 
   final BuildContext context;

@@ -15,6 +15,7 @@ import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
 import 'package:sight_reading_app/screens/speedrun_menu_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 
+/// Runs the app after performing some checks.
 void main() {
   // Starting the app in landscape orientation
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,7 @@ void main() {
       .then((value) => runApp(const SightReadingApp()));
 }
 
+/// The main root of the app.
 class SightReadingApp extends StatelessWidget {
   const SightReadingApp({Key? key}) : super(key: key);
 

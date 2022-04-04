@@ -6,8 +6,13 @@ import '../../components/pop_up_components/pop_up_content_builder.dart';
 import '../../constants.dart';
 import '../../screens/menu_screen.dart';
 
+/// A set of instructions to be executed when the play along mode instance ends.
+///
+/// An instance is 'finished' once the last note in the track is played.
+/// This is a play along specific pop-up results screen.
 class PlayAlongEndingInstructions extends PopUpContentBuilder {
 
+  /// Context data to pass into this class.
   final BuildContext context;
 
   /// Plays the song again
@@ -16,6 +21,7 @@ class PlayAlongEndingInstructions extends PopUpContentBuilder {
   /// Counts whether the notes where hit or missed
   final PlayAlongHitCounter hitCounter;
 
+  /// A callback that takes you to the play along meu screen.
   final VoidCallback onBack;
 
   PlayAlongEndingInstructions({

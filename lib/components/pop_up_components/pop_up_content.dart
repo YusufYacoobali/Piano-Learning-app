@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 
 class _PopUpContentState extends State<PopUpContent> {
-
   /// Combines the text and the options
-  List<Widget> getDisplay() {
+  List<Widget> _getDisplay() {
     List<Widget> display = [];
     display.add(widget.text);
-    display.add(const SizedBox(height: 10,));
+    display.add(const SizedBox(
+      height: 10,
+    ));
     for (Widget option in widget.options) {
       display.add(option);
-      display.add(const SizedBox(height: 5,));
+      display.add(const SizedBox(
+        height: 5,
+      ));
     }
     return display;
   }
@@ -20,14 +23,14 @@ class _PopUpContentState extends State<PopUpContent> {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      child:Stack(
+      child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             color: Colors.black.withOpacity(0.8),
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Container(
               decoration: cardBackground,
               child: Padding(
@@ -36,7 +39,7 @@ class _PopUpContentState extends State<PopUpContent> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
-                  children: getDisplay(),
+                  children: _getDisplay(),
                 ),
               ),
             ),

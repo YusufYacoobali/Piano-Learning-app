@@ -3,12 +3,26 @@ import 'package:sight_reading_app/components/sheet_music_components/music_sheet.
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
 
+/// A skeleton for every question to be based on.
+///
+/// Questions are used in lessons, the quizzes and the speedrun mode.
 class QuestionSkeleton extends StatefulWidget {
+  /// The id for the question skeleton.
   static String id = 'question_skeleton';
+
+  /// The note which will be the answer for the question.
   final Note note;
+
+  /// The clef used in the question.
   final Clef clef;
+
+  /// The question text to be displayed on the screen.
   final String questionText;
+
+  /// The number of the question.
   final int questionNum;
+
+  /// The total number of questions.
   final int totalNumOfQuestions;
 
   const QuestionSkeleton({
@@ -24,8 +38,12 @@ class QuestionSkeleton extends StatefulWidget {
   _QuestionSkeletonState createState() => _QuestionSkeletonState();
 }
 
+/// The state for the question skeleton.
 class _QuestionSkeletonState extends State<QuestionSkeleton> {
+  /// The music sheet the question note will be placed on.
   late final MusicSheet _sheet;
+
+  /// A way to transition to the next question.
   late final NextNoteNotifier _nextNote;
 
   @override
@@ -41,7 +59,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   }
 
   /// A text of the current question number of total question.
-  Widget getQuestionNumberTrackerWidget() {
+  Widget _getQuestionNumberTrackerWidget() {
     return Expanded(
       key: const Key('question number'),
       child: Text(
@@ -51,12 +69,12 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
     );
   }
 
-  /// Get the question image.
-  Widget getQuestionImage() {
+  /// The question image.
+  Widget _getQuestionImage() {
     _sheet.changeClef(widget.clef);
     _nextNote.setNextNote(widget.note);
 
-    /// Makes rounded border for question images
+    // Makes rounded border for question images
     _sheet.changeToRoundedBorder();
 
     return Expanded(
@@ -74,7 +92,7 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
   }
 
   /// A sentence of the question.
-  Widget getQuestionText() {
+  Widget _getQuestionText() {
     return Expanded(
       flex: 1,
       key: const Key('question text'),
@@ -97,14 +115,14 @@ class _QuestionSkeletonState extends State<QuestionSkeleton> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            getQuestionNumberTrackerWidget(),
+            _getQuestionNumberTrackerWidget(),
             Expanded(
               flex: 8,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  getQuestionImage(),
-                  getQuestionText(),
+                  _getQuestionImage(),
+                  _getQuestionText(),
                 ],
               ),
             ),

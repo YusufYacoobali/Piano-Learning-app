@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sight_reading_app/helper.dart';
+import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
+import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/practice_screen.dart';
 import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
+import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import 'package:sight_reading_app/screens/settings_screen.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 
@@ -60,6 +62,7 @@ void main() {
         500.0,
         scrollable: find.byType(Scrollable),
       );
+      await tester.pumpAndSettle();
       expect(find.byKey(quizButtonKey), findsOneWidget);
     }
   });
@@ -73,22 +76,24 @@ void main() {
         500.0,
         scrollable: find.byType(Scrollable),
       );
+      await tester.pumpAndSettle();
       expect(find.text(quizzes[i]), findsWidgets);
-      expect(find.text('Record: ${quizRecordsCopy[i]}'), findsWidgets);
+      expect(
+          find.text(
+              'Record: ${quizRecords[i]} / $numOfQuestionsInPracticeQuiz'),
+          findsWidgets);
     }
   });
 
-  //TODO: Fix
-  // testWidgets(
-  //     'Check that clicking a quiz button navigates you to the quiz screen.',
-  //     (WidgetTester tester) async {
-  //       await _goToQuizSelectionScreen(tester);
-  //       await tester.tap(find.byKey(quizButtonKeys[0]));
-  //       await tester.pumpAndSettle();
-  //       //TODO: Fix
-  //       //expect(find.byType(PracticeQuizScreen), findsOneWidget);
-  //     }
-  // );
+  testWidgets(
+      'Check that clicking a quiz button navigates you to the quiz screen.',
+      (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await _goToQuizSelectionScreen(tester);
+    await tester.tap(find.byKey(quizButtonKeys[0]));
+    await tester.pumpAndSettle();
+    expect(find.byType(PracticeQuizScreen), findsOneWidget);
+  });
 
   testWidgets('Check that the ${"random quiz button"} is displayed on screen.',
       (WidgetTester tester) async {
@@ -120,53 +125,10 @@ void main() {
   testWidgets(
       'Check that clicking the random quiz button navigates you to a random quiz screen.',
       (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({});
     await _goToQuizSelectionScreen(tester);
     await tester.tap(find.byKey(randomQuizSelectedKey));
     await tester.pumpAndSettle();
-    //TODO: Fix.
-    // expect(find.byType(RandomQuizScreen), findsOneWidget);
-  });
-
-  testWidgets(
-      'Check that changes to user records are reflected on the menu screen',
-      (WidgetTester tester) async {
-    tester.runAsync(() async {
-      //Sets mock values for relevant shared preferences so that we do not override any existing ones.
-      List<String> tempQuizRecordKeys =
-          replaceSpacesWithUnderscoresFromStrings(quizzes);
-      Map<String, Object> mockValues = {};
-      for (String key in tempQuizRecordKeys) {
-        mockValues[key] = 'N/A';
-      }
-      SharedPreferences.setMockInitialValues(mockValues);
-      final prefs = await SharedPreferences.getInstance();
-
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: QuizSelectionScreen(),
-        ),
-      );
-
-      //Gets the old record for the first speedrun mode as an integer.
-      int oldRecord;
-      if (quizRecordsCopy[0] == 'N/A') {
-        oldRecord = -1;
-      } else {
-        oldRecord = int.parse(quizRecordsCopy[0]);
-      }
-
-      //Checks to make sure the records are being displayed correctly (before any changes).
-      expect(find.text('Record: ${quizRecordsCopy[0]}'), findsWidgets);
-
-      //Changes the user record for the first speedrun mode.
-      final newRecord = oldRecord + 1;
-      prefs.setInt(tempQuizRecordKeys[0], newRecord);
-      await tester.runAsync(
-          () async => await Future.delayed(const Duration(milliseconds: 100)));
-      await tester.pumpAndSettle();
-
-      //Checks to make sure the change is reflected on the screen.
-      expect(find.text('Record: $newRecord'), findsOneWidget);
-    });
+    expect(find.byType(RandomQuizScreen), findsOneWidget);
   });
 }

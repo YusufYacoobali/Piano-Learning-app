@@ -6,11 +6,15 @@ import '../../constants.dart';
 import '../../screens/endless_mode_screen.dart';
 import '../../screens/menu_screen.dart';
 
+/// A set of instructions to be run once an endless mode instance is finished.
+///
+/// An instance is 'finished' once the user makes a mistake.
+/// This is an endless mode specific results screen that also shows the current high score.
 class EndlessEndingInstructions extends PopUpContentBuilder {
 
-  /// The counter to get the high score and players score
+  /// The counter to get the players score
   final EndlessScoreCounter counter;
-
+  /// Gets context data from the endless mode instance.
   final BuildContext context;
 
   EndlessEndingInstructions({required this.context, required this.counter});
