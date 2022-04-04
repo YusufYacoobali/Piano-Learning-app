@@ -1,24 +1,41 @@
 # Sight reading app.
 ---
 
-This is a self-contained, cross-platform app that is designed and developed with to support piano students in sight reading.\
+This is a self-contained, cross-platform app that is designed and developed to support piano students in sight reading.\
 It allows the students to practice identifying individual notes on a staff with a bass or treble clef and tracks the time taken to identify the notes and whether they do this correctly.\
 The notes are taught gradually, starting from a few basic notes to slowly increasing their range. The current range of notes being introduced covers three octaves from C3 to C5, where C4 is middle C.\
 The app tracks the notes the user struggles to identify quickly or accurately and those which they can. This data is then utilised for a more personalised experience that focuses on the notes the user needs more practice on, providing a more optimised approach to their learning (this process is detailed in the 'Practice Guided by User' document).\
 To allow the user to relate the notes to the keys on the piano, the app incorporates a virtual keyboard that the user can click on.\
-The app also includes features to encourage and motivate the user to learn. This includes the gamification in the practice section, the daily at 12:23 UTC, achievements and other features.
+The app also includes features to encourage and motivate the user to learn. This includes the gamification in the practice section, the daily at 12:00 pm UTC, achievements and other features.
 
 ## Getting Started
 ---
-INSTRUCTIONS TO COPY AND RUN PROJECT ON LOCAL MACHINE
-
-
-
-### Prerequisites
-THINGS NEEDED TO USE THE APP AND HOW TO INSTALL THEM
+Note: The loading of the sound files on Appetize can sometimes be slow depending on the network connection, for the best experience please allow the app a few moments to load the sounds before trying the keyboard.
 
 ### How to use:
-STEP GUIDE TO USE APP FEATURES
+
+The app contains multiple features which are all easy to access and use.\
+The app has lessons that can be found by clicking on the lessons button from the menu screen.  The lessons menu contains ten different lessons that gradually increase in difficulty. These teach the user to read notes from C3 to C5, including the sharps and flats. Lessons 9 and 10 are recap lessons for the treble and bass clef respectively.\
+The three octaves of the piano can be accessed via the swipeable on-screen keyboard, a right swipe for the lower octave (C3) and a left swipe for the higher octave (C5), the keyboard always starts with the middle C (C3).\
+\
+The app also contains a 'Helper' section. This section holds summary cards for all notes introduced in the lessons and a guide to the note lengths. The 'Play along' mode uses different types of notes, which are not taught in the lessons therefore the users can use the summary cards to learn what they mean.\
+
+To practice these lessons, the user can engage in the different modes of practice available by clicking on the Practice button.\
+The Practice mode consists of four different types of gameplay: Play along, Speedrun, Quiz and Endless.\
+ The practice modes are designed for a fun game-like experience, where the user can place as they like, hence the user's speed and accuracy at reading the notes are not tracked, except in the 'Take a Quiz' mode. This is because the quizzes are a revision of all the lessons, and the user metrics allow a more guided practice that focuses on the notes the user is weakest in.\
+The 'Play Along' mode contains a list of tracks the user can select from that to learn to play. The notes of the melody will move across the screen and the user is to play it when it reaches the green zone on the left side of the screen. Pressing the wrong notes in play along will not make a difference to the score as long as the correct note is played when the note reaches the green area, this ensures a smooth experiece when learning a specific song.\
+
+The 'Speedrun' mode aims to improve the player's sight-reading speed. This mode contains a list of different amounts of time they want to play for, and the user has to answer the questions on screen as quickly as they can in the chosen amount of time.\
+
+The 'Endless' mode aims to improve the player's accuracy at reading notes. As in 'Play along' the notes move across the screen and the player must click the correct note when it reaches the green section. The difference, however, is that the notes are randomised and clicking any wrong note will end the game.\
+The last mode of Practice is the 'Take a Quiz', this is the only practice mode that tracks the user's answers to customise their practice. The quizzes are a collection of all the questions in the lessons. The user can decide to either practice notes from a specific lesson or do a random quiz with questions from all the lessons.\
+The order of questions for this is determined by the player's strength in identifying the notes. If a user is slow or incorrect in identifying the note, then that note will appear more frequently in the quizzes.\
+\
+To motivate the users to learn, the app also contains achievements. This can be found from the achievements button on the main menu screen. The app contains over 30 different achievements that the user can complete. The achievements screen contains two tabs, all Achievements start in the 'To do' tab and as the user completes them, they are moved to the 'Completed' tab.\
+\
+Another feature to motivate the user is the daily notifications. The user will be notified with daily reminder at 12:00 pm UTC to learn and practice their notes.\
+
+
 
 
 ## Built with
@@ -45,4 +62,4 @@ STEP GUIDE TO USE APP FEATURES
   - Yusuf Yacoobali
 
 ## LICENSE
-ADD STUFF ABOUT THE LICENSE
+MIT Lisence
