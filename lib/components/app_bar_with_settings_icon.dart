@@ -11,7 +11,7 @@ const double appBarHeight = 60.0;
 /// It contains the relevant screen's title text as a parameter to the class,
 /// as well as a back arrow that comes as standard and a settings icon,
 /// which when clicked on takes you to the settings screen.
-class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWidget{
+class AppBarWithSettingsIcon extends StatefulWidget implements PreferredSizeWidget {
   /// An id used to identify the AppBar.
   static const id = 'app_bar_with_settings_icon';
 
@@ -28,34 +28,41 @@ class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWid
   final Function(String)? onScreenDelete;
 
   ///The constructor.
-  const AppBarWithSettingsIcon(this.titleText, this.instructionScreen, {Key? key, this.onScreenDelete}) : super(key: key);
+  const AppBarWithSettingsIcon(this.titleText, this.instructionScreen,
+      {Key? key, this.onScreenDelete}) : super(key: key);
+
+  @override
+  _AppBarWithSettingsIconState createState() => _AppBarWithSettingsIconState();
 
   ///The "default" height of the AppBar.
   @override
   Size get preferredSize => const Size.fromHeight(appBarHeight);
+}
+
+class _AppBarWithSettingsIconState extends State<AppBarWithSettingsIcon> {
 
   ///Builds the AppBar onto the screen it is being used in.
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: titleText,
+      title: widget.titleText,
       centerTitle: true,
       actions: <Widget>[
         IconButton(
             icon: const Icon(Icons.help_outline),
             onPressed: () {
-              instructionScreen.show();
+              widget.instructionScreen.show();
             },
         ),
         IconButton(
           icon: const Icon(Icons.settings_outlined),
           onPressed: () {
-            if (onScreenDelete != null) {
+            if (widget.onScreenDelete != null) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => SettingsScreen(
-                        onBack: onScreenDelete,
+                        onBack: widget.onScreenDelete,
                     ),
                   ));
             }
@@ -64,9 +71,15 @@ class AppBarWithSettingsIcon extends StatelessWidget implements PreferredSizeWid
                   context, SettingsScreen.id); //Replace screen name
             }
           },
-          key: navigateToSettingsButtonKey,
+          key: AppBarWithSettingsIcon.navigateToSettingsButtonKey,
         )
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.instructionScreen.delete();
   }
 }

@@ -9,6 +9,7 @@ import '../../screens/achievements_screen.dart';
 Future inAppNotification(BuildContext context, String text,
     {VoidCallback? onBack}) {
   return showModalBottomSheet(
+      isDismissible: false,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(60), topRight: Radius.circular(60))),

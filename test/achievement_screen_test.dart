@@ -72,8 +72,6 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester.pumpWidget(const SightReadingApp());
-    // prefs.setInt('completed_lessons', 3);
-    // prefs.setInt('completed_quizzes', 1);
     await tester.tap(find.text('Achievements'));
     await tester.pumpAndSettle();
 

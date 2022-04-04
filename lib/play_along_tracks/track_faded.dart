@@ -8,7 +8,7 @@ import '../components/sheet_music_components/note.dart';
 const Clef _clef = Clef.treble;
 
 /// bpm in each difficulty
-const List<int> _difficultyBpm = [65,75,90];
+const List<int> _difficultyBpm = [80,90,110];
 
 final Map<int, Note> _map = {
   1: Note(name: 'D4', duration: 0.5), // b.1

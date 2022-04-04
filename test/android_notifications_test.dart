@@ -8,8 +8,10 @@ import 'package:flutter_local_notifications/src/platform_specifics/android/enums
 import 'package:flutter_test/flutter_test.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-
 import 'utils/date_formatter.dart';
+
+// Only testing group could find for local notifications
+// repository is: https://github.com/MaikuB/flutter_local_notifications
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
