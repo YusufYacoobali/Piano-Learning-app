@@ -43,7 +43,6 @@ void main() {
     expect(find.text('G'), findsOneWidget);
   });
 
-//  TODO: unsure of how to make it wait for 10 seconds so timer finishes
   // testWidgets('Check that the results screen appears when timer is finished',
   //     (WidgetTester tester) async {
   //   await tester.pumpWidget(
@@ -68,8 +67,6 @@ void main() {
   //   expect(find.text('Exit'), findsOneWidget);
   // });
 
-  //TODO: Update the following tests once it is figured out how to wait 10 seconds
-
   // testWidgets(
   //   'Check that user records are updated with a new record',
   //   (WidgetTester tester) {
@@ -83,7 +80,7 @@ void main() {
   //           home: SpeedrunScreen(timerDuration: 10),
   //         ),
   //       );
-  //       // TODO: Add 10 second timer + a way of answering 1 question correctly here
+  //
   //       await tester.pump(); //Let completion process happen.
   //       SharedPreferences prefs = await SharedPreferences.getInstance();
   //       expect(prefs.getInt('10_second_speedrun_record'), 1);
@@ -104,7 +101,7 @@ void main() {
   //           home: SpeedrunScreen(timerDuration: 10),
   //         ),
   //       );
-  //       // TODO: Add 10 second timer
+  //
   //       await tester.pump(); //Let completion process happen.
   //       SharedPreferences prefs = await SharedPreferences.getInstance();
   //       expect(prefs.getInt('10_second_speedrun_record'), 1);
@@ -125,7 +122,7 @@ void main() {
   //           home: SpeedrunScreen(timerDuration: 10),
   //         ),
   //       );
-  //       // TODO: Add 10 second timer
+  //
   //       await tester.pump(); //Let completion process happen.
   //       SharedPreferences prefs = await SharedPreferences.getInstance();
   //       expect(prefs.getInt('10_second_speedrun_record'), 0);

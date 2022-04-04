@@ -1,7 +1,3 @@
-// TODO: Add tests for music sheet to play
-
-// TODO: Add tests where keys are pressed
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,7 +6,6 @@ import 'package:sight_reading_app/main.dart';
 
 void main() {
   // Moves the tester to the keyboard screen page
-  // TODO: Change method once keyboard screen is properly linked up
   Future<void> _navigateToAKeyboard(WidgetTester tester) async {
     await tester.pumpWidget(const SightReadingApp());
     await tester.tap(find.text('Lessons'));
