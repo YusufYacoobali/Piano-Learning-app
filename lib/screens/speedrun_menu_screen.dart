@@ -16,6 +16,17 @@ List<Key> modeButtonKeys = <Key>[];
 /// A list containing the user records for each of the modes.
 List<String> modeRecords = <String>[];
 
+///The state for the speedrun menu screen.
+class SpeedrunMenuScreen extends StatefulWidget {
+  ///The id used to identify the screen.
+  static const String id = 'speedrun_menu_screen';
+
+  const SpeedrunMenuScreen({Key? key}) : super(key: key);
+
+  @override
+  _SpeedrunMenuScreenState createState() => _SpeedrunMenuScreenState();
+}
+
 ///A screen that displays a scrollable list of available speedrun modes with buttons to access each mode.
 ///
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
@@ -40,8 +51,8 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
     modeRecords = resetRecordListForMode('speedrun');
     // Once the real records are loaded, the screen is refreshed with the new values.
     getRecordsForMode('speedrun').then((value) {
-        setState(() {
-          modeRecords = value;
+      setState(() {
+        modeRecords = value;
       });
     });
   }
@@ -111,15 +122,4 @@ class _SpeedrunMenuScreenState extends State<SpeedrunMenuScreen> {
           ),
         ));
   }
-}
-
-///The state for the speedrun menu screen.
-class SpeedrunMenuScreen extends StatefulWidget {
-  ///The id used to identify the screen.
-  static const String id = 'speedrun_menu_screen';
-
-  const SpeedrunMenuScreen({Key? key}) : super(key: key);
-
-  @override
-  _SpeedrunMenuScreenState createState() => _SpeedrunMenuScreenState();
 }

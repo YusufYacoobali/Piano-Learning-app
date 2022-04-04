@@ -186,8 +186,6 @@ void main() {
     expect(find.text('Bb'), findsOneWidget);
   });
 
-  //giving pump and settle time out error
-
   testWidgets(
       'Check that black key names do not appear on keyboard in intermediate difficulty',
       (WidgetTester tester) async {

@@ -221,8 +221,6 @@ final TextStyle buttonTextStyle = TextStyle(
 );
 const Icon settingsIcon = Icon(
   Icons.settings,
-  //size: 75.0,
-  //color: Color(0xff5f0a87),
 );
 BoxDecoration menuButtonDeco = BoxDecoration(
   borderRadius: BorderRadius.circular(boxRadii),
@@ -257,7 +255,6 @@ const blackKeyTextStyle = TextStyle(
 BoxDecoration lessonButtonDeco = BoxDecoration(
   shape: BoxShape.circle,
   color: buttonBoxColour,
-  //borderRadius: BorderRadius.circular(boxRadii),
   gradient: const LinearGradient(
     colors: [Color(0xff5f0a87), Color(0xffa4508b)],
   ),
@@ -265,7 +262,6 @@ BoxDecoration lessonButtonDeco = BoxDecoration(
 BoxDecoration completeLessonButtonDeco = BoxDecoration(
   shape: BoxShape.circle,
   color: buttonBoxColour,
-  //borderRadius: BorderRadius.circular(boxRadii),
   gradient: const LinearGradient(
     colors: [Color(0xff00b712), Color(0xff5aff15)],
   ),
@@ -732,12 +728,12 @@ const Icon incorrectIcon = Icon(
 /// Notification Time (UTC)
 const Time notificationTime = Time(12, 00, 00);
 
-//endless achievement scores
-const int bgnrScore = 10;
-const int interScore = 20;
+/// Endless achievement scores
+const int beginnerScore = 10;
+const int intermediateScore = 20;
 const int expertScore = 30;
 
-//play along achievement score
+/// Play along achievement score
 const String playAlongScore = '100';
 
 /// The ordering and weighting of all the notes

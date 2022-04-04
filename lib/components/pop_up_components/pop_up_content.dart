@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
-
 import '../../constants.dart';
+
+class PopUpContent extends StatefulWidget {
+  static const String id = 'intermediate_menu';
+
+  /// The text of the menu
+  final Widget text;
+
+  /// The options that can be made from the menu
+  final List<Widget> options;
+
+  /// The function that removes the menu
+  final Function removeMenu;
+
+  const PopUpContent({
+    Key? key,
+    required this.text,
+    required this.options,
+    required this.removeMenu,
+  }) : super(key: key);
+
+  @override
+  _PopUpContentState createState() => _PopUpContentState();
+}
 
 class _PopUpContentState extends State<PopUpContent> {
   /// Combines the text and the options
@@ -48,27 +70,4 @@ class _PopUpContentState extends State<PopUpContent> {
       ),
     );
   }
-}
-
-class PopUpContent extends StatefulWidget {
-  static const String id = 'intermediate_menu';
-
-  /// The text of the menu
-  final Widget text;
-
-  /// The options that can be made from the menu
-  final List<Widget> options;
-
-  /// The function that removes the menu
-  final Function removeMenu;
-
-  const PopUpContent({
-    Key? key,
-    required this.text,
-    required this.options,
-    required this.removeMenu,
-  }) : super(key: key);
-
-  @override
-  _PopUpContentState createState() => _PopUpContentState();
 }

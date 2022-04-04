@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-
 import '../../constants.dart' as constants;
 import '../sheet_music_components/note.dart';
 import '../sheet_music_components/moving_music_sheet_timer.dart';

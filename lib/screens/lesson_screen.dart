@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../components/notifications/in_app_notification_pop_up.dart';
 import '../constants.dart';
 import '../screens/lesson_menu_screen.dart';

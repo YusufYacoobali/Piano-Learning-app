@@ -31,6 +31,17 @@ List<String> quizRecords = <String>[];
 ///The key for the button that confirms the selection of a random quiz.
 const randomQuizSelectedKey = Key('quizSelected:Random');
 
+///The state class for the quiz selection screen.
+class QuizSelectionScreen extends StatefulWidget {
+  ///The id used to identify the screen.
+  static const String id = 'quiz_selection_screen';
+
+  const QuizSelectionScreen({Key? key}) : super(key: key);
+
+  @override
+  _QuizSelectionScreenState createState() => _QuizSelectionScreenState();
+}
+
 /// A screen that displays a scrollable list of available quizzes with buttons to access each quiz.
 ///
 /// An app bar is present at the top of the screen, which contains the screen's title text, a back arrow and a clickable settings icon that takes you to the settings screen.
@@ -106,7 +117,8 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
                               SizedBox(
                                   width: MediaQuery.of(context).size.width /
                                       4), //Adds space between Text
-                              Text('Record: ${quizRecords[index]} / $numOfQuestionsInPracticeQuiz',
+                              Text(
+                                  'Record: ${quizRecords[index]} / $numOfQuestionsInPracticeQuiz',
                                   textAlign: TextAlign.right),
                             ],
                           ),
@@ -151,15 +163,4 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
       ),
     );
   }
-}
-
-///The state class for the quiz selection screen.
-class QuizSelectionScreen extends StatefulWidget {
-  ///The id used to identify the screen.
-  static const String id = 'quiz_selection_screen';
-
-  const QuizSelectionScreen({Key? key}) : super(key: key);
-
-  @override
-  _QuizSelectionScreenState createState() => _QuizSelectionScreenState();
 }

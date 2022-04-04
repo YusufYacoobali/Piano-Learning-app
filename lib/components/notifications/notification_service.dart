@@ -3,11 +3,10 @@ import 'package:rxdart/subjects.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-
 import '../../constants.dart';
 
 //This file will give out a daily notification at a set time
-//Purpose is to encourage the user practice every day to learn and complete achievements
+//Purpose is to encourage the user practise every day to learn and complete achievements
 
 class NotificationAPI {
   static final _notifications = FlutterLocalNotificationsPlugin();

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../constants.dart';
 import '../sheet_music_components/note.dart';
 import '../../components/pop_up_components/pop_up_content_builder.dart';
@@ -8,7 +7,6 @@ import '../../components/pop_up_components/pop_up_content_builder.dart';
 ///
 /// This is a pop-up that tells the user what to do.
 class EndlessStartingInstructions extends PopUpContentBuilder {
-
   /// Context data passed into this class.
   final BuildContext context;
 
@@ -24,12 +22,14 @@ class EndlessStartingInstructions extends PopUpContentBuilder {
       children: const [
         Text('Endless Mode', style: pauseMenuTextStyle),
         SizedBox(height: 10.0),
-        Text('Get as many questions correct as you can before your lives run out!'),
+        Text(
+            'Get as many questions correct as you can before your lives run out!'),
         SizedBox(height: 10.0),
         Text('Change the difficulty in settings to change the speed of notes.'),
         SizedBox(height: 40.0),
         Text('Select The Clef', style: pauseMenuTextStyle),
-      ],);
+      ],
+    );
 
     options = [
       ElevatedButton(

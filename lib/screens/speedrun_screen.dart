@@ -102,11 +102,12 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => ResultsScreen(
-                score: percentage,
-                title: title,
-                questionBrain: questionBrain,
-              )),
+        builder: (context) => ResultsScreen(
+          score: percentage,
+          title: title,
+          questionBrain: questionBrain,
+        ),
+      ),
     );
   }
 

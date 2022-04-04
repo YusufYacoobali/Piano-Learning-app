@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'note.dart';
 import 'note_image_builder.dart';
 import 'note_on_stave.dart';

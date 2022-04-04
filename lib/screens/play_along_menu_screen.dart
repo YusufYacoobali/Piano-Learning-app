@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/helper.dart';
-//import 'package:sight_reading_app/helper.dart';
-
 import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/pop_ups/play_along_instructions.dart';
@@ -47,6 +45,17 @@ List<Clef> trackClefs = <Clef>[];
 
 /// A list of all sheet sheets speed for each difficulty for each of the tracks
 List<List<int>> trackSpeeds = <List<int>>[];
+
+///The class for the play along menu screen.
+class PlayAlongMenuScreen extends StatefulWidget {
+  ///The id used to identify the screen.
+  static const String id = 'play_along_menu_screen';
+
+  const PlayAlongMenuScreen({Key? key}) : super(key: key);
+
+  @override
+  _PlayAlongMenuScreenState createState() => _PlayAlongMenuScreenState();
+}
 
 /// A screen containing a menu of the various tracks the user can play along to.
 ///
@@ -209,15 +218,4 @@ class _PlayAlongMenuScreenState extends State<PlayAlongMenuScreen> {
       ),
     );
   }
-}
-
-///The state for the speedrun menu screen.
-class PlayAlongMenuScreen extends StatefulWidget {
-  ///The id used to identify the screen.
-  static const String id = 'play_along_menu_screen';
-
-  const PlayAlongMenuScreen({Key? key}) : super(key: key);
-
-  @override
-  _PlayAlongMenuScreenState createState() => _PlayAlongMenuScreenState();
 }

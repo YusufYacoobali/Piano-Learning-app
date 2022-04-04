@@ -6,6 +6,15 @@ import '../constants.dart';
 /// This file creates the screen where the user can select the lesson
 /// they want to learn from those available.
 
+class LessonMenuScreen extends StatefulWidget {
+  static const String id = 'lesson_menu_screen';
+
+  const LessonMenuScreen({Key? key}) : super(key: key);
+
+  @override
+  _LessonMenuScreenState createState() => _LessonMenuScreenState();
+}
+
 class _LessonMenuScreenState extends State<LessonMenuScreen> {
   final ScrollController _firstController = ScrollController();
   StorageReaderWriter storage = StorageReaderWriter();
@@ -124,13 +133,4 @@ class _LessonMenuScreenState extends State<LessonMenuScreen> {
       _lessonButton('Lesson 10', 10)
     ]; // Gesture Detector
   }
-}
-
-class LessonMenuScreen extends StatefulWidget {
-  static const String id = 'lesson_menu_screen';
-
-  const LessonMenuScreen({Key? key}) : super(key: key);
-
-  @override
-  _LessonMenuScreenState createState() => _LessonMenuScreenState();
 }

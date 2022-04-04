@@ -11,6 +11,20 @@ import '../lessons_and_quizzes/question_finder.dart';
 import '../lessons_and_quizzes/quiz.dart';
 import 'menu_screen.dart';
 
+class PracticeQuizScreen extends StatefulWidget {
+  /// The id used to identify the screen
+  static const String id = 'practice_quiz_screen';
+
+  /// The lesson the quiz is getting questions from.
+  final int lessonID;
+
+  const PracticeQuizScreen({Key? key, required this.lessonID})
+      : super(key: key);
+
+  @override
+  _PracticeQuizScreenState createState() => _PracticeQuizScreenState();
+}
+
 /// Creates screen for the practice quiz.
 ///
 /// This screen consists of the option buttons and components in question_skeleton
@@ -77,11 +91,12 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => ResultsScreen(
-                score: percentage,
-                title: title,
-                questionBrain: questionBrain,
-              )),
+        builder: (context) => ResultsScreen(
+          score: percentage,
+          title: title,
+          questionBrain: questionBrain,
+        ),
+      ),
     );
   }
 
@@ -95,18 +110,4 @@ class _PracticeQuizScreenState extends State<PracticeQuizScreen> {
       useQuestionText: false,
     );
   }
-}
-
-class PracticeQuizScreen extends StatefulWidget {
-  /// The id used to identify the screen
-  static const String id = 'practice_quiz_screen';
-
-  /// The lesson the quiz is getting questions from.
-  final int lessonID;
-
-  const PracticeQuizScreen({Key? key, required this.lessonID})
-      : super(key: key);
-
-  @override
-  _PracticeQuizScreenState createState() => _PracticeQuizScreenState();
 }

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/storage_reader_writer.dart';
 
 /// A class that handles theme changes.
 class ThemeNotifier extends ChangeNotifier {
-
   /// The default theme.
   String _theme = defaultTheme;
+
   /// Handles theme changes and theme selection storage in Shared Preferences.
   final StorageReaderWriter _writer = StorageReaderWriter();
 
@@ -26,8 +25,8 @@ class ThemeNotifier extends ChangeNotifier {
   _getTheme() {
     _writer.loadDataFromStorage().then((value) {
       String theme = _writer.read('theme').toString();
-     _theme = theme;
-     notifyListeners();
+      _theme = theme;
+      notifyListeners();
     });
   }
 
@@ -39,7 +38,6 @@ class ThemeNotifier extends ChangeNotifier {
   /// Gets and updates the theme.
   getPreferences() {
     _getTheme();
-
   }
 
   /// Converts the theme to a actual usable theme profile.

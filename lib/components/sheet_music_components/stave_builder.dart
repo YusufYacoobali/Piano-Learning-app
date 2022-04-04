@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'dart:io' show Platform;
-
 import '../../constants.dart' as constants;
 
 /// Builds the stave for the music sheet
 class StaveBuilder {
-
   /// Draws the white background
   static void makeBackground(Canvas canvas, Size size, double start, double end,
       bool isRoundedBorder) {
@@ -82,7 +79,9 @@ class StaveBuilder {
     TextPainter textPainter = TextPainter(
         textScaleFactor: 1,
         text: TextSpan(
-            text: clef, style: TextStyle(fontSize: font, color: constants.staveStaveColour)),
+            text: clef,
+            style:
+                TextStyle(fontSize: font, color: constants.staveStaveColour)),
         textDirection: TextDirection.ltr)
       ..layout();
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../components/notifications/in_app_notification_pop_up.dart';
 import '../storage_reader_writer.dart';
 import '../components/page_keyboard.dart';
@@ -11,11 +10,45 @@ import '../components/sheet_music_components/note.dart';
 import '../components/play_along_components/play_along_hit_counter.dart';
 import '../components/play_along_components/play_along_song_timer.dart';
 
+class PlayAlongScreen extends StatefulWidget {
+  static const String id = 'play_along_screen';
+
+  /// The song notes that are to be played
+  final Map<int, Note> notes;
+
+  /// The clef of the song
+  final Clef clef;
+
+  /// How fast the song moves
+  final int bpm;
+
+  /// The song name
+  final String songName;
+
+  /// When the song is restarted
+  final VoidCallback onBackToPlayAlongMenu;
+
+  /// The difficulty of the track
+  final String difficulty;
+
+  const PlayAlongScreen(
+      {Key? key,
+      required this.notes,
+      required this.clef,
+      required this.difficulty,
+      required this.bpm,
+      required this.songName,
+      required this.onBackToPlayAlongMenu})
+      : super(key: key);
+
+  @override
+  _PlayAlongScreenState createState() => _PlayAlongScreenState();
+}
+
 /// The screen that runs the "play along" practice mode with a given track.
 ///
 /// The track is selected by the user, then passed in to this screen.
 class _PlayAlongScreenState extends State<PlayAlongScreen> {
-
   /// The music sheet
   late final MovingMusicSheet _sheet;
 
@@ -122,9 +155,9 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
       _hitCounter,
     );
     if (displayNotification[0]) {
-      inAppNotification(context, displayNotification[1], onBack: () => _endMenu.show());
-    }
-    else {
+      inAppNotification(context, displayNotification[1],
+          onBack: () => _endMenu.show());
+    } else {
       _endMenu.show();
     }
   }
@@ -136,7 +169,6 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     /// Sets the default keyboard octave
     int octave = 4;
     if (widget.clef == Clef.bass) {
@@ -165,39 +197,4 @@ class _PlayAlongScreenState extends State<PlayAlongScreen> {
       ),
     );
   }
-}
-
-class PlayAlongScreen extends StatefulWidget {
-  static const String id = 'play_along_screen';
-
-  /// The song notes that are to be played
-  final Map<int, Note> notes;
-
-  /// The clef of the song
-  final Clef clef;
-
-  /// How fast the song moves
-  final int bpm;
-
-  /// The song name
-  final String songName;
-
-  /// When the song is restarted
-  final VoidCallback onBackToPlayAlongMenu;
-
-  /// The difficulty of the track
-  final String difficulty;
-
-  const PlayAlongScreen(
-      {Key? key,
-      required this.notes,
-      required this.clef,
-      required this.difficulty,
-      required this.bpm,
-      required this.songName,
-      required this.onBackToPlayAlongMenu})
-      : super(key: key);
-
-  @override
-  _PlayAlongScreenState createState() => _PlayAlongScreenState();
 }

@@ -1,6 +1,4 @@
 import 'package:sight_reading_app/components/achievement_components/achievement_card.dart';
-//import 'package:sight_reading_app/storage_reader_writer.dart';
-
 import '../../constants.dart';
 
 /// This file reads the values from storage and makes the achievement cards which is used for both tabs

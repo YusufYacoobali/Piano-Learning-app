@@ -61,7 +61,7 @@ void main() {
     await _openPausedMenu(tester);
   }
 
-  /// shortcut for paused menu in lesson 5 screen.
+  /// shortcut for paused menu in lesson 6 screen.
   _goToLesson6PauseMenu(WidgetTester tester) async {
     await _goToLessonsScreen(tester);
     await tester.ensureVisible(find.text('Lesson 6'));

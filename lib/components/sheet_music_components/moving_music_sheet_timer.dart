@@ -1,4 +1,3 @@
-
 import 'moving_music_sheet.dart';
 import 'note.dart';
 
@@ -46,5 +45,4 @@ abstract class MovingMusicSheetTimer {
   void increment();
 
   void setDifficulty(String difficulty);
-
 }
