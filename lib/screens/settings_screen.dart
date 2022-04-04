@@ -78,8 +78,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           leading: BackButton(
             onPressed: () {
               Navigator.pop(context);
-              if (widget.onBack != null)
+              if (widget.onBack != null) {
                 widget.onBack!(settings.read('difficulty').toString());
+              }
             },
           ),
         ),
