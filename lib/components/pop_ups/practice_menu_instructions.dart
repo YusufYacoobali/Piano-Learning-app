@@ -16,7 +16,7 @@ class PracticeMenuInstructions extends PopUpContentBuilder {
   void buildMenu() {
     text = Column(
         children: const [
-          Text('Practice Your Skills', style: pauseMenuTextStyle),
+          Text('Practice Your Skills!', style: pauseMenuTextStyle),
           SizedBox(height: 20.0),
           Text('Choose one of the four game modes to practice what you have learnt.'),
           SizedBox(height: 30.0),

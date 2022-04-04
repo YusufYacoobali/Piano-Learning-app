@@ -594,7 +594,7 @@ class StorageReaderWriter {
     } else {
       if (percentage == playAlongScore) {
         prefs.setBool('${track}_${difficulty}_play_along_achievement', true);
-        text = "You got 100% in this play along, good job!";
+        text = "You got 100% in this play along! Good job!";
       } else {
         toDisplay = false;
       }
