@@ -11,10 +11,21 @@ import 'package:audioplayers/audioplayers.dart';
 
 ///This screen creates note_helper screen
 ///It contains multiple cards with note images, names and icon buttons
+///Some cards will have note images, names and description of the notes.
+
+/// A list containing the keys for each of the helper cards.
 List<Key> cardKeys = <Key>[];
+
+/// A list containing the keys for each of the helper buttons.
 List<Key> buttonKeys = <Key>[];
+
+/// A list containing the keys for each of the helper names.
 List<Key> textKeys = <Key>[];
+
+/// A list containing the keys for each of the helper image.
 List<Key> imageKeys = <Key>[];
+
+/// A list containing the keys for each of the helper description.
 List<Key> descriptionKeys = <Key>[];
 
 ///List of note_helper list available
@@ -68,11 +79,21 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
   ///Inside the note_helper card, it contains images, names and icon buttons.
   @override
   Widget build(BuildContext context) {
-    cardKeys = <Key>[]; //list of card keys
-    textKeys = <Key>[]; //list of text keys
-    imageKeys = <Key>[]; //list of image keys
-    buttonKeys = <Key>[]; //list of button keys
-    descriptionKeys = <Key>[]; //list of description keys
+    ///list of card keys.
+    cardKeys = <Key>[];
+
+    ///list of text keys.
+    textKeys = <Key>[];
+
+    ///list of image keys.
+    imageKeys = <Key>[];
+
+    ///list of button keys.
+    buttonKeys = <Key>[];
+
+    ///list of description keys.
+    descriptionKeys = <Key>[];
+
     for (int i = 0; i < helperBrain.getNumbersOfHelperNote(); i++) {
       cardKeys.add(Key('card:${helperBrain.getHelperNoteName(i)}'));
       textKeys.add(Key('card text:${helperBrain.getHelperNoteName(i)}'));
@@ -116,7 +137,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     return allHelperCards;
   }
 
-  ///Creates a card that holds note images, names and sound.
+  ///Creates a card that holds note images, names, buttons or descriptions.
   Widget _createCardHelper(index) {
     return Center(
       child: Card(
@@ -225,7 +246,7 @@ class _NoteHelperScreenState extends State<NoteHelperScreen> {
     );
   }
 
-  ///Widget for note_helper description
+  ///Widget for note_helper description.
   Widget _getCardDescription(index) {
     return Container(
       height: 150,
