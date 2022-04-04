@@ -149,7 +149,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-///
 class SettingsScreen extends StatefulWidget {
   static const String id = 'settings_screen';
   final Function(String)? onBack;
