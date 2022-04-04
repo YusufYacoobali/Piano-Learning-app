@@ -53,6 +53,19 @@ void main() {
     expect(find.text('Review Answers'), findsOneWidget);
   });
 
+  testWidgets(
+      'Check that a message is displayed when user did not answer any questions',
+      (WidgetTester tester) async {
+    QuestionBrain testQuestionBrain = _setQuestionBrainWithoutAnswers();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('You did not answer any questions'), findsOneWidget);
+  });
+
   testWidgets('Check that all result cards are generated',
       (WidgetTester tester) async {
     QuestionBrain testQuestionBrain = _setQuestionBrain();
@@ -188,18 +201,5 @@ void main() {
       scrollable: find.byType(Scrollable),
     );
     expect(find.text('Your Answer: C'), findsOneWidget);
-  });
-
-  testWidgets(
-      'Check that message is display in case that user did not answer any questions',
-      (WidgetTester tester) async {
-    QuestionBrain testQuestionBrain = _setQuestionBrainWithoutAnswers();
-    await tester.pumpWidget(
-      MaterialApp(
-        home: ReviewAnswersScreen(questionBrain: testQuestionBrain),
-      ),
-    );
-    await tester.pumpAndSettle();
-    expect(find.text('You did not answer any questions'), findsOneWidget);
   });
 }

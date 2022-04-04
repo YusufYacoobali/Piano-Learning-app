@@ -47,7 +47,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     /// Gets all of the questions in a random order.
     questionBrain =
         QuestionBrain(questions: QuestionFinder().getRandomListOfQuestions());
-    setScreenWidget();
+    _setScreenWidget();
   }
 
   @override
@@ -56,7 +56,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   }
 
   /// The widget to appear on screen.
-  void setScreenWidget() {
+  void _setScreenWidget() {
     Note note = questionBrain.getNote();
     Clef clef = questionBrain.getClef();
     String questionText = 'What note is this?';
@@ -73,7 +73,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   }
 
   /// The result values, as well as the text to pass into the results screen.
-  Future<void> getResults() async {
+  Future<void> _getResults() async {
     // Calculates the percentage achieved by the user
     double percentage = 0;
     if (questionBrain.getQuestionNum() > 1) {
@@ -88,7 +88,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
     List displayNotification =
         await storage.displaySpeedrunNotification(widget.timerDuration, score);
 
-    getResultsScreen(title, percentage);
+    _getResultsScreen(title, percentage);
 
     if (displayNotification[0]) {
       inAppNotification(context, displayNotification[1]);
@@ -96,7 +96,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   }
 
   /// The results screen.
-  void getResultsScreen(String title, double percentage) {
+  void _getResultsScreen(String title, double percentage) {
     // Stops the user from swiping back to the quiz
     Navigator.pop(context);
     Navigator.push(
@@ -125,7 +125,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
   }
 
   /// The countdown timer displayed in the top-right of the screen.
-  Widget getCountdownTimer() {
+  Widget _getCountdownTimer() {
     return CircularCountDownTimer(
       width: heightAndWidthOfStopWatch,
       height: heightAndWidthOfStopWatch,
@@ -144,22 +144,22 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
       onComplete: () {
         // When timer finishes, go to results screen and update records if needed
         _updateRecords();
-        getResults();
+        _getResults();
       },
     );
   }
 
   /// The key pressed on the keyboard by the user.
-  void getAnswer(String text) {
+  void _getAnswer(String text) {
     questionBrain.setAnswer(userAnswer: text);
     setState(() {
       //if questions have run out, it automatically takes user to results screen
       if (questionBrain.isLastQuestion()) {
-        getResults();
+        _getResults();
       } else {
         questionBrain.goToNextQuestion();
         // Re-render the screen with new question
-        setScreenWidget();
+        _setScreenWidget();
       }
     });
   }
@@ -177,7 +177,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
                 // Question
                 screenWidget,
                 Expanded(
-                  child: PageKeyboard(getAnswer),
+                  child: PageKeyboard(_getAnswer),
                 ),
               ],
             ),
@@ -185,7 +185,7 @@ class _SpeedrunScreenState extends State<SpeedrunScreen> {
               padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
               child: Align(
                 alignment: Alignment.topRight,
-                child: getCountdownTimer(),
+                child: _getCountdownTimer(),
               ),
             ),
           ],
