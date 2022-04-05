@@ -1,5 +1,4 @@
 # Sight reading app.
----
 
 This is a self-contained, cross-platform app that is designed and developed to support piano students in sight reading.\
 It allows the students to practice identifying individual notes on a staff with a bass or treble clef and tracks the time taken to identify the notes and whether they do this correctly.\
@@ -9,8 +8,8 @@ To allow the user to relate the notes to the keys on the piano, the app incorpor
 The app also includes features to encourage and motivate the user to learn. This includes the gamification in the practice section, the daily notifications at 12:00 pm UTC, achievements and other features.
 
 ## Getting Started
----
 Note: The loading of the sound files on Appetize and the simulator/emulator can sometimes be slow, for the best experience, please allow the app a few tries to load the sounds when using the keyboard.
+---
 
 ### How to use:
 
@@ -43,7 +42,6 @@ The app also contains a settings menu where the user can change the difficulty o
 
 
 ## Built with
----
   - Dart  - The programming language used
   - Flutter packages:
     - Setting screen: settings_ui (version 2.0.2)
@@ -54,9 +52,9 @@ The app also contains a settings menu where the user can change the difficulty o
     - Getting local timezones: flutter_native_timezone (version 2.0.0)
     - Notifications: rxdart (version 0.27.3)
     - animated circular countdown: circular_countdown_timer (version 0.2.0)
+---
 
 ## Authors
----
   - Aaron Gomes
   - Yingtong (Kiley) Hu
   - Nannaphat (Minnie) Keamanuchet
