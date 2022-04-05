@@ -1,12 +1,12 @@
-# Sight reading app.
+# Read That Sheet
 
-This is a self-contained, cross-platform app that is designed and developed to support piano students in sight reading.
+This is a self-contained, cross-platform app designed for mobile phones. The app will run on tablets, however, some scaling issues are to be expected. This app is developed to support piano students on their sight reading journey.
 
-It allows the students to practice identifying individual notes on a staff with a bass or treble clef and tracks the time taken to identify the notes and whether they do this correctly.
+It allows the students to practice identifying individual notes on a staff within the bass and treble clef. The app tracks the time taken by the user to identify the notes and whether they do this correctly, to provide the user with a more personalised experience.
 
 The notes are taught gradually, starting from a few basic notes to slowly increasing their range. The current range of notes being introduced covers three octaves from C3 to C5, where C4 is middle C.
 
-The app tracks the notes the user struggles to identify quickly or accurately and those which they can. This data is then utilised for a more personalised experience that focuses on the notes the user needs more practice on, providing a more optimised approach to their learning (this process is detailed in the 'Practice Guided by User's Performance' document).
+The app tracks the notes the user struggles to identify quickly or accurately and those which they can. This data is then utilised to create practice quizzes that focus on the notes the user needs more practice on, providing a more optimised approach to their learning (this process is detailed in the 'Practice Guided by User's Performance' document).
 
 To allow the user to relate the notes to the keys on the piano, the app incorporates a virtual keyboard that the user can click on.
 
