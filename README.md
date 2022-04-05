@@ -9,6 +9,7 @@ The app also includes features to encourage and motivate the user to learn. This
 
 ## Getting Started
 Note: The loading of the sound files on Appetize and the simulator/emulator can sometimes be slow, for the best experience, please allow the app a few tries to load the sounds when using the keyboard.
+
 ---
 
 ### How to use:
@@ -52,7 +53,7 @@ The app also contains a settings menu where the user can change the difficulty o
     - Getting local timezones: flutter_native_timezone (version 2.0.0)
     - Notifications: rxdart (version 0.27.3)
     - animated circular countdown: circular_countdown_timer (version 0.2.0)
----
+
 
 ## Authors
   - Aaron Gomes
