@@ -9,7 +9,7 @@ The app also includes features to encourage and motivate the user to learn. This
 
 ## Getting Started
 
-### Deployment Links\
+### Deployment Links
 All of these links can be used to access the app. As Appetize.io has limited amount of minutes for testing the app online, if any of these links are not working as expected please use another one.
 
   - Link 1: <https://appetize.io/app/nw66eb72c5wqyp55v3nrvb6ge0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
