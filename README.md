@@ -12,13 +12,13 @@ The app also includes features to encourage and motivate the user to learn. This
 #Deployment Links
 All of these links can be used to access the app. As Appetize.io has limited amount of minutes for testing the app online, if any of these links are not working as expected please use another one.
 
-    <https://appetize.io/app/nw66eb72c5wqyp55v3nrvb6ge0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
-    Link 2: <https://appetize.io/app/kdt7g2w9dzjmrq2e6vt1r50et0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
-    - Link 3: <https://appetize.io/app/65h48c9ffd4dzdn4zt3rd1pjbw?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
-    - Link 4: <https://appetize.io/app/24b145fxh3e5dy3ctef4q8rx9r?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
-    - Link 5: <https://appetize.io/app/2adc3br7rtwxrwhp59gt01pvnm?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
-    - Link 6: <https://appetize.io/app/7wjmmrg8rhangnwx0v11e7xjc0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
-    - Link 7: <https://appetize.io/app/mf9wjkv5wg08u0k6ffh35em5mm?device=pixel4&osVersion=11.0&scale=100&orientation=landscape&audio=true>
+  - <https://appetize.io/app/nw66eb72c5wqyp55v3nrvb6ge0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 2: <https://appetize.io/app/kdt7g2w9dzjmrq2e6vt1r50et0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 3: <https://appetize.io/app/65h48c9ffd4dzdn4zt3rd1pjbw?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 4: <https://appetize.io/app/24b145fxh3e5dy3ctef4q8rx9r?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 5: <https://appetize.io/app/2adc3br7rtwxrwhp59gt01pvnm?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 6: <https://appetize.io/app/7wjmmrg8rhangnwx0v11e7xjc0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 7: <https://appetize.io/app/mf9wjkv5wg08u0k6ffh35em5mm?device=pixel4&osVersion=11.0&scale=100&orientation=landscape&audio=true>
 
 
 Note: The loading of the sound files on Appetize and the simulator/emulator can sometimes be slow, for the best experience, please allow the app a few tries to load the sounds when using the keyboard.
