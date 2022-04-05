@@ -7,6 +7,7 @@ import '../components/pop_ups/play_along_ending_pop_up.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
+import '../components/sheet_music_components/note_notifier.dart';
 import '../components/play_along_components/play_along_hit_counter.dart';
 import '../components/play_along_components/play_along_song_timer.dart';
 

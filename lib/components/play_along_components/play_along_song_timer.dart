@@ -1,9 +1,10 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../constants.dart' as constants;
+import 'dart:async';
+
+import 'play_along_hit_counter.dart';
 import '../sheet_music_components/moving_music_sheet_timer.dart';
 import '../sheet_music_components/note.dart';
-import 'play_along_hit_counter.dart';
+import '../../constants.dart' as constants;
 
 /// A timing mechanism for the scrolling music sheet for the various play along tracks.
 ///

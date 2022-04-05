@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
-import 'package:sight_reading_app/constants.dart';
+import 'package:sight_reading_app/components/sheet_music_components/note_notifier.dart';
 import 'package:sight_reading_app/components/sheet_music_components/note.dart';
+import 'package:sight_reading_app/constants.dart';
 
 /// A skeleton for every question to be based on.
 ///

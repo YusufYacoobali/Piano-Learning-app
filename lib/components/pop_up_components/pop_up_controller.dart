@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+
 import 'pop_up_content_builder.dart';
 import 'pop_up_content.dart';
 
 /// Controller to display an intermediate menu
 class PopUpController {
-  /// Makes the menu display over another screen
-  late final OverlayEntry _menu;
 
   final BuildContext context;
+
+  /// Makes the menu display over another screen
+  late final OverlayEntry _menu;
 
   /// The menu to be displayed
   late final PopUpContent _intermediateMenu;
@@ -15,6 +17,7 @@ class PopUpController {
   /// Builds the menu
   PopUpContentBuilder menuBuilder;
 
+  /// Whether the pop up is being shown
   bool _isShown = false;
 
   PopUpController({required this.context, required this.menuBuilder});

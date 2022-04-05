@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/sheet_music_components/music_sheet.dart';
-import '../components/sheet_music_components/note.dart';
+import '../components/sheet_music_components/note_notifier.dart';
 import '../lessons_and_quizzes/question_brain.dart';
 import '../constants.dart';
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'note.dart';
 import 'note_image_builder.dart';
+import 'note_notifier.dart';
 import 'note_on_stave.dart';
 import 'stave_builder.dart';
 import '../../constants.dart';
