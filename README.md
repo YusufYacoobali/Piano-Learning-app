@@ -12,7 +12,7 @@ The app also includes features to encourage and motivate the user to learn. This
 #Deployment Links
 All of these links can be used to access the app. As Appetize.io has limited amount of minutes for testing the app online, if any of these links are not working as expected please use another one.
 
-  - <https://appetize.io/app/nw66eb72c5wqyp55v3nrvb6ge0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 1: <https://appetize.io/app/nw66eb72c5wqyp55v3nrvb6ge0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
   - Link 2: <https://appetize.io/app/kdt7g2w9dzjmrq2e6vt1r50et0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
   - Link 3: <https://appetize.io/app/65h48c9ffd4dzdn4zt3rd1pjbw?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
   - Link 4: <https://appetize.io/app/24b145fxh3e5dy3ctef4q8rx9r?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
