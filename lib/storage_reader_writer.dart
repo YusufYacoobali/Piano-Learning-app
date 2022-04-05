@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/helper.dart';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/questions_list.dart';
 import 'package:sight_reading_app/screens/play_along_menu_screen.dart';
 import 'constants.dart';
 

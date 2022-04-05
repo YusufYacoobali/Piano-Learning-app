@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:sight_reading_app/lessons_and_quizzes/question_answer_data.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/questions_list.dart';
 import 'question.dart';
 
 /// A finder to get the correct set of questions depending on the mode.
