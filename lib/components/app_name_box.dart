@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
+/// A box used to display the name of the app.
 class AppNameBox extends StatelessWidget {
   const AppNameBox({Key? key}) : super(key: key);
 

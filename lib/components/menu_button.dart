@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
+/// Styling for the buttons that appear on menu screens.
 class MenuButton extends StatelessWidget {
+  /// The text to be displayed on the button, which may be wrapped in a formatting widget.
   final Widget buttonChild;
+  /// A function to be called when the button is pressed.
   final VoidCallback onPress;
 
+  /// The constructor for this class.
   const MenuButton({
     Key? key,
     required this.buttonChild,
