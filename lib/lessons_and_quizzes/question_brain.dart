@@ -130,7 +130,7 @@ class QuestionBrain {
     return false;
   }
 
-  /// Coverts the answer to its sharp equal if needed.
+  /// Converts the answer to its sharp equal if needed.
   String _convertToAlt(String userAnswer) {
     if (getCorrectAnswer().length == 3 && userAnswer.length == 3) {
       String correct = getCorrectAnswer();
