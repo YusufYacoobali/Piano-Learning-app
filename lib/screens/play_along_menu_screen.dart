@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/helper.dart';
+import '../components/menu_button.dart';
 import '../storage_reader_writer.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/pop_ups/play_along_instructions.dart';
 import '../components/sheet_music_components/note.dart';
 import '../components/app_bar_with_settings_icon.dart';
 import 'play_along_screen.dart';
-import 'menu_screen.dart';
 import 'package:sight_reading_app/components/app_bar_with_settings_icon.dart';
 import '../play_along_tracks/treble_track_one.dart' as treble_track1;
 import '../play_along_tracks/bass_track_one.dart' as bass_track1;

@@ -6,6 +6,9 @@ import 'note_helper_menu_screen.dart';
 import 'lesson_menu_screen.dart';
 import 'practice_screen.dart';
 import 'settings_screen.dart';
+import 'package:sight_reading_app/components/app_name_box.dart';
+import 'package:sight_reading_app/components/menu_button.dart';
+import 'package:sight_reading_app/components/menu_button_text.dart';
 
 const navigateToPracticeMainMenuButtonKey = Key('navigateToPracticeMainMenu');
 
@@ -51,7 +54,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   Expanded(
                     // 'Lessons' button
                     child: MenuButton(
-                      buttonChild: const ButtonText(buttonText: 'Lessons'),
+                      buttonChild: const MenuButtonText(buttonText: 'Lessons'),
                       onPress: () {
                         Navigator.pushNamed(context, LessonMenuScreen.id);
                       },
@@ -60,7 +63,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   Expanded(
                     // 'Practice' button
                     child: MenuButton(
-                      buttonChild: const ButtonText(buttonText: 'Practice'),
+                      buttonChild: const MenuButtonText(buttonText: 'Practice'),
                       onPress: () {
                         Navigator.pushNamed(context, PracticeScreen.id);
                       },
@@ -70,7 +73,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   Expanded(
                     // 'Achievements' button
                     child: MenuButton(
-                      buttonChild: const ButtonText(buttonText: 'Achievements'),
+                      buttonChild:
+                          const MenuButtonText(buttonText: 'Achievements'),
                       onPress: () {
                         Navigator.pushNamed(context, AchievementsScreen.id);
                       },
@@ -114,74 +118,6 @@ class _MenuScreenState extends State<MenuScreen> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class AppNameBox extends StatelessWidget {
-  const AppNameBox({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      margin: boxMargin,
-      padding: const EdgeInsets.all(20.0),
-      decoration: menuButtonDeco,
-      child: FittedBox(
-        fit: BoxFit.contain,
-        alignment: Alignment.center,
-        child: Text(
-          formattedAppName,
-          style: appNameTextStyle,
-        ),
-      ),
-    );
-  }
-}
-
-class MenuButton extends StatelessWidget {
-  final Widget buttonChild;
-  final VoidCallback onPress;
-
-  const MenuButton({
-    Key? key,
-    required this.buttonChild,
-    required this.onPress,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPress,
-      child: Container(
-        height: double.infinity,
-        width: double.infinity,
-        padding: const EdgeInsets.all(20.0),
-        margin: boxMargin,
-        decoration: menuButtonDeco,
-        child: FittedBox(
-          fit: BoxFit.contain,
-          alignment: Alignment.center,
-          child: buttonChild,
-        ),
-      ),
-    );
-  }
-}
-
-class ButtonText extends StatelessWidget {
-  final String buttonText;
-
-  const ButtonText({Key? key, required this.buttonText}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      buttonText,
-      textAlign: TextAlign.center,
-      style: buttonTextStyle,
     );
   }
 }
