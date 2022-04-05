@@ -3,10 +3,11 @@ import 'package:sight_reading_app/constants.dart';
 import 'package:sight_reading_app/screens/practice_quiz_screen.dart';
 import 'package:sight_reading_app/screens/random_quiz_screen.dart';
 import '../components/app_bar_with_settings_icon.dart';
+import '../components/menu_button.dart';
 import '../components/pop_ups/quiz_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
 import '../helper.dart';
-import 'menu_screen.dart'; //For MenuButton widget
+//For MenuButton widget
 
 /// A list containing the names of each quiz, apart from the "random mixed quiz" which has no record.
 List<String> quizzes = <String>[

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../components/app_bar_with_settings_icon.dart';
+import '../components/menu_button.dart';
+import '../components/menu_button_text.dart';
 import '../components/pop_ups/practice_menu_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
-import 'menu_screen.dart';
 import 'endless_mode_screen.dart';
 import 'play_along_menu_screen.dart';
 import 'speedrun_menu_screen.dart';
@@ -52,7 +53,7 @@ class PracticeScreen extends StatelessWidget {
           children: <Widget>[
             MenuButton(
               buttonChild:
-                  const Center(child: ButtonText(buttonText: 'Play along')),
+                  const Center(child: MenuButtonText(buttonText: 'Play along')),
               onPress: () {
                 Navigator.pushNamed(context, PlayAlongMenuScreen.id);
               },
@@ -60,15 +61,15 @@ class PracticeScreen extends StatelessWidget {
             ),
             MenuButton(
               buttonChild:
-                  const Center(child: ButtonText(buttonText: 'Speedrun')),
+                  const Center(child: MenuButtonText(buttonText: 'Speedrun')),
               onPress: () {
                 Navigator.pushNamed(context, SpeedrunMenuScreen.id);
               },
               key: navigateToSpeedrunMenuButtonKey,
             ),
             MenuButton(
-              buttonChild:
-                  const Center(child: ButtonText(buttonText: 'Take a Quiz')),
+              buttonChild: const Center(
+                  child: MenuButtonText(buttonText: 'Take a Quiz')),
               onPress: () {
                 Navigator.pushNamed(
                     context, QuizSelectionScreen.id); //Replace screen name
@@ -77,7 +78,7 @@ class PracticeScreen extends StatelessWidget {
             ),
             MenuButton(
               buttonChild:
-                  const Center(child: ButtonText(buttonText: 'Endless')),
+                  const Center(child: MenuButtonText(buttonText: 'Endless')),
               onPress: () {
                 Navigator.pushNamed(context, EndlessModeScreen.id);
               },

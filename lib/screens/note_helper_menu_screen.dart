@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sight_reading_app/screens/note_helper_screen.dart';
-import 'package:sight_reading_app/screens/menu_screen.dart';
+import 'package:sight_reading_app/components/menu_button.dart';
+import '../components/menu_button_text.dart';
 
 ///This screen is the note_helper selection screen which contain buttons.
 class NoteHelperMenuScreen extends StatefulWidget {
@@ -51,7 +52,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   ///A button that will be route to specific screen of bass note_helper.
   Widget _bassClefNoteHelperbutton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Bass Clef Notes'),
+      buttonChild: const MenuButtonText(buttonText: 'Bass Clef Notes'),
       onPress: () {
         Navigator.push(
           context,
@@ -68,7 +69,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   ///A button that will be route to specific screen of clef note_helper.
   Widget _trebleClefNoteHelperbutton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Treble Clef Notes'),
+      buttonChild: const MenuButtonText(buttonText: 'Treble Clef Notes'),
       onPress: () {
         Navigator.push(
           context,
@@ -85,7 +86,7 @@ class _NoteHelperMenuScreenState extends State<NoteHelperMenuScreen> {
   /// A button that will be routed to a specific screen of the note types note_helper.
   Widget _noteTypesHelperButton() {
     return MenuButton(
-      buttonChild: const ButtonText(buttonText: 'Note Types'),
+      buttonChild: const MenuButtonText(buttonText: 'Note Types'),
       onPress: () {
         Navigator.push(
           context,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../components/app_bar_with_settings_icon.dart';
+import '../components/menu_button.dart';
 import '../components/pop_ups/speedrun_menu_instructions.dart';
 import '../components/pop_up_components/pop_up_controller.dart';
-import '../screens/menu_screen.dart';
 import '../screens/speedrun_screen.dart';
 import 'speedrun_screen.dart';
 import 'package:sight_reading_app/helper.dart';
