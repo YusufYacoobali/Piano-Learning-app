@@ -9,6 +9,14 @@ import 'settings_screen.dart';
 
 const navigateToPracticeMainMenuButtonKey = Key('navigateToPracticeMainMenu');
 
+/// The main menu of the application.
+///
+/// The menu shows the title, as well as various buttons to access the features of the app:
+/// "Lessons" - takes you to the lesson menu screen.
+/// "Practice" - access various practice modes.
+/// "Achievements" - see the various achievements you have obtained and have yet to obtained.
+/// "Settings" - Adjust various settings, or reset your progress
+/// "Helper" - See a guide to explain various notes.
 class MenuScreen extends StatefulWidget {
   static const String id = 'menu_screen';
 
@@ -18,7 +26,7 @@ class MenuScreen extends StatefulWidget {
   _MenuScreenState createState() => _MenuScreenState();
 }
 
-/// Main menu screen
+/// Main menu screen state
 class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
