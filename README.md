@@ -1,16 +1,34 @@
 # Sight reading app.
----
 
-This is a self-contained, cross-platform app that is designed and developed to support piano students in sight reading.\
-It allows the students to practice identifying individual notes on a staff with a bass or treble clef and tracks the time taken to identify the notes and whether they do this correctly.\
-The notes are taught gradually, starting from a few basic notes to slowly increasing their range. The current range of notes being introduced covers three octaves from C3 to C5, where C4 is middle C.\
-The app tracks the notes the user struggles to identify quickly or accurately and those which they can. This data is then utilised for a more personalised experience that focuses on the notes the user needs more practice on, providing a more optimised approach to their learning (this process is detailed in the 'Practice Guided by User's Performance' document).\
-To allow the user to relate the notes to the keys on the piano, the app incorporates a virtual keyboard that the user can click on.\
+This is a self-contained, cross-platform app that is designed and developed to support piano students in sight reading.
+
+It allows the students to practice identifying individual notes on a staff with a bass or treble clef and tracks the time taken to identify the notes and whether they do this correctly.
+
+The notes are taught gradually, starting from a few basic notes to slowly increasing their range. The current range of notes being introduced covers three octaves from C3 to C5, where C4 is middle C.
+
+The app tracks the notes the user struggles to identify quickly or accurately and those which they can. This data is then utilised for a more personalised experience that focuses on the notes the user needs more practice on, providing a more optimised approach to their learning (this process is detailed in the 'Practice Guided by User's Performance' document).
+
+To allow the user to relate the notes to the keys on the piano, the app incorporates a virtual keyboard that the user can click on.
+
 The app also includes features to encourage and motivate the user to learn. This includes the gamification in the practice section, the daily notifications at 12:00 pm UTC, achievements and other features.
 
 ## Getting Started
----
+
+### Deployment Links
+All of these links can be used to access the app. As Appetize.io has limited amount of minutes for testing the app online, if any of these links are not working as expected please use another one.
+
+  - Link 1: <https://appetize.io/app/nw66eb72c5wqyp55v3nrvb6ge0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 2: <https://appetize.io/app/kdt7g2w9dzjmrq2e6vt1r50et0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 3: <https://appetize.io/app/65h48c9ffd4dzdn4zt3rd1pjbw?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 4: <https://appetize.io/app/24b145fxh3e5dy3ctef4q8rx9r?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 5: <https://appetize.io/app/2adc3br7rtwxrwhp59gt01pvnm?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 6: <https://appetize.io/app/7wjmmrg8rhangnwx0v11e7xjc0?device=pixel4&osVersion=11.0&scale=75&orientation=landscape&audio=true>
+  - Link 7: <https://appetize.io/app/mf9wjkv5wg08u0k6ffh35em5mm?device=pixel4&osVersion=11.0&scale=100&orientation=landscape&audio=true>
+
+
 Note: The loading of the sound files on Appetize and the simulator/emulator can sometimes be slow, for the best experience, please allow the app a few tries to load the sounds when using the keyboard.
+
+---
 
 ### How to use:
 
@@ -43,7 +61,6 @@ The app also contains a settings menu where the user can change the difficulty o
 
 
 ## Built with
----
   - Dart  - The programming language used
   - Flutter packages:
     - Setting screen: settings_ui (version 2.0.2)
@@ -55,8 +72,8 @@ The app also contains a settings menu where the user can change the difficulty o
     - Notifications: rxdart (version 0.27.3)
     - animated circular countdown: circular_countdown_timer (version 0.2.0)
 
+
 ## Authors
----
   - Aaron Gomes
   - Yingtong (Kiley) Hu
   - Nannaphat (Minnie) Keamanuchet

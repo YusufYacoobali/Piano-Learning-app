@@ -6,7 +6,7 @@ import 'package:sight_reading_app/lessons_and_quizzes/question_finder.dart';
 import 'package:sight_reading_app/main.dart';
 import 'package:sight_reading_app/screens/menu_screen.dart';
 import 'package:sight_reading_app/screens/results_screen.dart';
-import 'package:sight_reading_app/lessons_and_quizzes/questions.dart';
+import 'package:sight_reading_app/lessons_and_quizzes/questions_list.dart';
 import 'package:sight_reading_app/screens/review_answers_screen.dart';
 
 void main() {
