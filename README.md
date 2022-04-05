@@ -19,7 +19,7 @@ The app has lessons that can be found by clicking on the lessons button from the
 The three octaves of the piano can be accessed via the swipeable on-screen keyboard, a right swipe for the lower octave (C3) and a left swipe for the higher octave (C5); the keyboard always starts with the middle C (C3).\
 \
 The app also contains a 'Helper' section. This section holds summary cards for all notes introduced in the lessons and a guide to the note lengths. The 'Play along' mode uses different types of notes, which are not taught in the lessons therefore the users can use the summary cards to learn what they mean.\
-Although the app uses notes of varied lengths, the app does not support holding a key for an extended period of time. In the play along mode, regardless of the note type displayed, the user should tap the key as usual. The different note types are taught in the note help mode to familiarise the user with what to expect when they see real sheet music.\
+Although the app uses notes of varied lengths, the app does not support holding a key for an extended period of time. In the play along mode, regardless of the note type displayed, the user should tap the key as usual. The different note types are taught in the note help mode to familiarise the user with what to expect when they see real sheet music.
 
 To practice these lessons, the user can engage in the different modes of practice available by clicking on the Practice button.\
 The Practice mode consists of four different types of gameplay: Play along, Speedrun, Take a Quiz and Endless.
