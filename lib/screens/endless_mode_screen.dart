@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+
 import '../components/notifications/in_app_notification_pop_up.dart';
-import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/endless_mode_components/endless_score_counter.dart';
 import '../components/endless_mode_components/endless_note_generator.dart';
+import '../components/pop_up_components/pop_up_controller.dart';
 import '../components/pop_ups/endless_ending_pop_up.dart';
 import '../components/pop_ups/endless_starting_pop_up.dart';
 import '../components/sheet_music_components/note_played_checker.dart';
 import '../components/sheet_music_components/moving_music_sheet.dart';
 import '../components/sheet_music_components/note.dart';
-import '../storage_reader_writer.dart';
+import '../components/sheet_music_components/note_notifier.dart';
+import '../components/sheet_music_components/one_press_checker.dart';
 import '../components/page_keyboard.dart';
+import '../storage_reader_writer.dart';
 
 class EndlessModeScreen extends StatefulWidget {
   static const String id = 'endless_mode_screen';
@@ -67,8 +70,8 @@ class _EndlessModeScreenState extends State<EndlessModeScreen> {
     _keyboard = PageKeyboard(_playKey);
 
     /// Sets up the music sheet
-    _currentNoteToPlay = NotePlayedChecker(
-        noteNotifier: _noteToPlay, onNotePass: stop, onePress: true);
+    _currentNoteToPlay = OnePressChecker(
+        noteNotifier: _noteToPlay, onNotePass: stop);
     _sheet = MovingMusicSheet(
         nextNote: _nextNote,
         clef: Clef.treble,

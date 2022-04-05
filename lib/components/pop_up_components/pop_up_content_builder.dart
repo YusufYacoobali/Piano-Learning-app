@@ -14,5 +14,6 @@ abstract class PopUpContentBuilder {
   /// The function that removes the menu
   late final VoidCallback removeMenu;
 
+  /// Build the pop up text and options
   void buildMenu();
 }

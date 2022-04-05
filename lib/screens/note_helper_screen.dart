@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sight_reading_app/components/sheet_music_components/music_sheet.dart';
-import 'package:sight_reading_app/components/sheet_music_components/note.dart';
+import '../components/sheet_music_components/music_sheet.dart';
+import '../components/sheet_music_components/note.dart';
+import '../components/sheet_music_components/note_notifier.dart';
 import '../components/note_helper/bass_note_list_helper.dart';
 import '../components/note_helper/clef_note_helper_list.dart';
 import '../components/note_helper/note_helper_brain.dart';

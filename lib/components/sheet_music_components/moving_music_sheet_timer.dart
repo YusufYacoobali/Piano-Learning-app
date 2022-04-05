@@ -1,5 +1,5 @@
 import 'moving_music_sheet.dart';
-import 'note.dart';
+import 'note_notifier.dart';
 
 abstract class MovingMusicSheetTimer {
   /// The music sheet

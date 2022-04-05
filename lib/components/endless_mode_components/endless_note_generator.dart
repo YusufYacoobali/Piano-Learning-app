@@ -30,49 +30,59 @@ class EndlessNoteGenerator extends MovingMusicSheetTimer {
   void setClef(Clef clef) {
     _clef = clef;
     _setClefAndValues();
-    getRandomNote();
+    _generateRandomNote();
   }
 
   /// Sets the values and available notes depending on the difficulty
   void _setClefAndValues() {
-    /// Expert mode values
     if (difficulty == 'Expert') {
-      bpm = constants.endlessExpertBpm;
-      _availableNotes = constants.endlessExpertTrebleNotes;
-      if (_clef == Clef.bass) {
-        _availableNotes = constants.endlessExpertBassNotes;
-      }
-      _minTime = constants.endlessExpertMinTime;
-      _maxTime = constants.endlessExpertMaxTime;
+      _setExpertDifficulty();
     }
-
-    /// Intermediate mode values
     else if (difficulty == 'Intermediate') {
-      bpm = constants.endlessIntermediateBpm;
-      _availableNotes = constants.endlessIntermediateTrebleNotes;
-      if (_clef == Clef.bass) {
-        _availableNotes = constants.endlessIntermediateBassNotes;
-      }
-      _minTime = constants.endlessIntermediateMinTime;
-      _maxTime = constants.endlessIntermediateMaxTime;
+      _setIntermediateDifficulty();
     }
-
-    /// Beginner mode values
     else {
-      bpm = constants.endlessBeginnerBpm;
-      _availableNotes = constants.endlessBeginnerTrebleNotes;
-      if (_clef == Clef.bass) {
-        _availableNotes = constants.endlessBeginnerBassNotes;
-      }
-      _minTime = constants.endlessBeginnerMinTime;
-      _maxTime = constants.endlessBeginnerMaxTime;
+      _setBeginnerDifficulty();
     }
     timeBetweenMovements =
         ((1 / ((bpm / 60) * iterationsPerTimeUnit)) * 1000).round();
   }
 
+  /// Sets the beginner difficulty values
+  void _setBeginnerDifficulty() {
+    bpm = constants.endlessBeginnerBpm;
+    _availableNotes = constants.endlessBeginnerTrebleNotes;
+    if (_clef == Clef.bass) {
+      _availableNotes = constants.endlessBeginnerBassNotes;
+    }
+    _minTime = constants.endlessBeginnerMinTime;
+    _maxTime = constants.endlessBeginnerMaxTime;
+  }
+
+  /// Sets the intermediate difficulty values
+  void _setIntermediateDifficulty() {
+    bpm = constants.endlessIntermediateBpm;
+    _availableNotes = constants.endlessIntermediateTrebleNotes;
+    if (_clef == Clef.bass) {
+      _availableNotes = constants.endlessIntermediateBassNotes;
+    }
+    _minTime = constants.endlessIntermediateMinTime;
+    _maxTime = constants.endlessIntermediateMaxTime;
+  }
+
+  /// Sets the expert difficulty values
+  void _setExpertDifficulty() {
+    bpm = constants.endlessExpertBpm;
+    _availableNotes = constants.endlessExpertTrebleNotes;
+    if (_clef == Clef.bass) {
+      _availableNotes = constants.endlessExpertBassNotes;
+    }
+    _minTime = constants.endlessExpertMinTime;
+    _maxTime = constants.endlessExpertMaxTime;
+  }
+
   /// Gets a new random note to be displayed
-  void getRandomNote() {
+  void _generateRandomNote() {
     String name = _availableNotes[_random.nextInt(_availableNotes.length)];
     nextNote.setNextNote(Note(name: name, duration: 1));
   }
@@ -113,7 +123,7 @@ class EndlessNoteGenerator extends MovingMusicSheetTimer {
   void increment() {
     sheet.move();
     if (time == 0) {
-      getRandomNote();
+      _generateRandomNote();
       time = _minTime + _random.nextInt(_maxTime - _minTime);
     }
     time--;

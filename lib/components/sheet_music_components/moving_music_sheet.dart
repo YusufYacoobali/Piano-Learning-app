@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'note_notifier.dart';
 import 'note_on_stave.dart';
 import 'note_played_checker.dart';
 import 'stave_builder.dart';
