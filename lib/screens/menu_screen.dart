@@ -59,78 +59,94 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Row(
+        child: Column(
           children: [
-            const Expanded(
-              child: AppNameBox(),
-            ),
             Expanded(
-              child: Column(
+              child: Row(
                 children: [
-                  Expanded(
-                    // 'Lessons' button
-                    child: MenuButton(
-                      buttonChild: const MenuButtonText(buttonText: 'Lessons'),
-                      onPress: () {
-                        Navigator.pushNamed(context, LessonMenuScreen.id);
-                      },
-                    ),
+                  const Expanded(
+                    child: AppNameBox(),
                   ),
                   Expanded(
-                    // 'Practice' button
-                    child: MenuButton(
-                      buttonChild: const MenuButtonText(buttonText: 'Practice'),
-                      onPress: () {
-                        Navigator.pushNamed(context, PracticeScreen.id);
-                      },
-                      key: navigateToPracticeMainMenuButtonKey,
-                    ),
-                  ),
-                  Expanded(
-                    // 'Achievements' button
-                    child: MenuButton(
-                      buttonChild:
-                          const MenuButtonText(buttonText: 'Achievements'),
-                      onPress: () {
-                        Navigator.pushNamed(context, AchievementsScreen.id);
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: Row(
+                    child: Column(
                       children: [
-                        //helper button
                         Expanded(
-                          flex: 2,
+                          // 'Lessons' button
                           child: MenuButton(
-                            buttonChild: const Align(
-                              alignment: Alignment.center,
-                              child: helperButton,
-                            ),
+                            buttonChild:
+                                const MenuButtonText(buttonText: 'Lessons'),
+                            onPress: () {
+                              Navigator.pushNamed(context, LessonMenuScreen.id);
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          // 'Practice' button
+                          child: MenuButton(
+                            buttonChild:
+                                const MenuButtonText(buttonText: 'Practice'),
+                            onPress: () {
+                              Navigator.pushNamed(context, PracticeScreen.id);
+                            },
+                            key: navigateToPracticeMainMenuButtonKey,
+                          ),
+                        ),
+                        Expanded(
+                          // 'Achievements' button
+                          child: MenuButton(
+                            buttonChild: const MenuButtonText(
+                                buttonText: 'Achievements'),
                             onPress: () {
                               Navigator.pushNamed(
-                                  context, NoteHelperMenuScreen.id);
+                                  context, AchievementsScreen.id);
                             },
                           ),
                         ),
                         Expanded(
-                          flex: 2,
-                          child: MenuButton(
-                            buttonChild: const Align(
-                              alignment: Alignment.center,
-                              child: settingsIcon,
-                            ),
-                            onPress: () {
-                              Navigator.pushNamed(context, SettingsScreen.id);
-                            },
+                          child: Row(
+                            children: [
+                              //helper button
+                              Expanded(
+                                flex: 2,
+                                child: MenuButton(
+                                  buttonChild: const Align(
+                                    alignment: Alignment.center,
+                                    child: helperButton,
+                                  ),
+                                  onPress: () {
+                                    Navigator.pushNamed(
+                                        context, NoteHelperMenuScreen.id);
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: MenuButton(
+                                  buttonChild: const Align(
+                                    alignment: Alignment.center,
+                                    child: settingsIcon,
+                                  ),
+                                  onPress: () {
+                                    Navigator.pushNamed(
+                                        context, SettingsScreen.id);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
+                        )
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
+            Container(
+              alignment: Alignment.center,
+              child: AdWidget(ad: myBanner),
+              width: myBanner.size.width.toDouble(),
+              height: myBanner.size.height.toDouble(),
+            )
           ],
         ),
       ),
