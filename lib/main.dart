@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sight_reading_app/screens/achievements_screen.dart';
 import 'package:sight_reading_app/screens/endless_mode_screen.dart';
 import 'package:sight_reading_app/screens/note_helper_menu_screen.dart';
@@ -19,6 +20,7 @@ import 'package:sight_reading_app/screens/quiz_selection_screen.dart';
 void main() {
   // Starting the app in landscape orientation
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft])
       .then((value) => runApp(const SightReadingApp()));

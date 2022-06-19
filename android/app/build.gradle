@@ -43,10 +43,11 @@ android {
 
     defaultConfig {
         applicationId "com.McSoftware.sight_reading_app"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {

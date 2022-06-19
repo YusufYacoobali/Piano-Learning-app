@@ -9,6 +9,7 @@ import 'settings_screen.dart';
 import 'package:sight_reading_app/components/app_name_box.dart';
 import 'package:sight_reading_app/components/menu_button.dart';
 import 'package:sight_reading_app/components/menu_button_text.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 const navigateToPracticeMainMenuButtonKey = Key('navigateToPracticeMainMenu');
 
@@ -34,6 +35,7 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     super.initState();
+    myBanner.load();
     NotificationAPI.init(initScheduled: true);
     NotificationAPI.showScheduledNotification(
       title: 'Read That Sheet',
@@ -46,6 +48,12 @@ class _MenuScreenState extends State<MenuScreen> {
   void dispose() {
     super.dispose();
   }
+
+  final myBanner = BannerAd(
+      size: AdSize.banner,
+      adUnitId: "ca-app-pub-3940256099942544/6300978111",
+      listener: const BannerAdListener(),
+      request: const AdRequest());
 
   @override
   Widget build(BuildContext context) {
