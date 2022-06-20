@@ -51,7 +51,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
   final myBanner = BannerAd(
       size: AdSize.banner,
-      adUnitId: "ca-app-pub-3940256099942544/6300978111",
+      adUnitId: "ca-app-pub-9044800884563025/8636929888",
       listener: const BannerAdListener(),
       request: const AdRequest());
 
