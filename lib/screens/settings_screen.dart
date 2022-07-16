@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../storage_reader_writer.dart';
 import '../theme_listener.dart';
 import '../constants.dart' as constants;
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const String id = 'settings_screen';
@@ -21,6 +22,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   /// The object that will read and write the settings to storage.
   StorageReaderWriter settings = StorageReaderWriter();
+  final Uri _url = Uri.parse(
+      'https://readthatsheetprivacypolicy.blogspot.com/2022/07/read-that-sheet-privacy-policy.html');
 
   @override
   void initState() {
@@ -66,6 +69,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return alert;
       },
     );
+  }
+
+  void _launchUrl() async {
+    if (!await launchUrl(_url)) throw 'Could not launch $_url';
   }
 
   @override
@@ -151,6 +158,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                         ),
+                        SettingsTile(
+                            title: Center(
+                          child: ElevatedButton(
+                              onPressed: _launchUrl,
+                              child: const Text("Privacy policy")),
+                        )),
                       ],
                     ),
                   ],
